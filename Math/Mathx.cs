@@ -5,6 +5,8 @@ namespace Common.Mathematics
 {
 	public static class Mathx
 	{
+		private const float EPS = 1e-7f;
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int IncrIndex(int i, int count, int offset = 1)
 		{
