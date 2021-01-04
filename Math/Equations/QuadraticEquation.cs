@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
-using Unity.Mathematics;
+using UnityEngine;
 
-namespace CommonECS.Mathematics
+namespace Common.Mathematics
 {
 	/// <summary> Equation in form of: y = a * x * x + b * x + c </summary>
 	[Serializable]
@@ -40,11 +40,11 @@ namespace CommonECS.Mathematics
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool IsValid()
 		{
-			return a != 0.0f && b != 0.0f;
+			return !Mathx.IsZero(a) && !Mathx.IsZero(b);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static QuadraticEquation FromPoints(float2 A, float2 B, float2 C)
+		public static QuadraticEquation FromPoints(Vector2 A, Vector2 B, Vector2 C)
 		{
 			var Ea = new Equation3(A.x * A.x, A.x, 1.0f, A.y);
 			var Eb = new Equation3(B.x * B.x, B.x, 1.0f, B.y);
@@ -69,7 +69,10 @@ namespace CommonECS.Mathematics
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool Equals(QuadraticEquation other)
 		{
-			return this.a == other.a && this.b == other.b && this.c == other.c;
+			return
+				Mathx.AreEqual(this.a, other.a) &&
+				Mathx.AreEqual(this.b, other.b) &&
+				Mathx.AreEqual(this.c, other.c);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]

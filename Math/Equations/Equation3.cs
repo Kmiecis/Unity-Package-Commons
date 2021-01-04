@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace CommonECS.Mathematics
+namespace Common.Mathematics
 {
 	/// <summary> Equation in form of: x * a + y * b + z * c = w </summary>
 	[Serializable]
@@ -76,7 +76,7 @@ namespace CommonECS.Mathematics
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool IsValid()
 		{
-			return x != 0.0f || y != 0.0f || z != 0.0f;
+			return !Mathx.IsZero(x) || !Mathx.IsZero(y) || !Mathx.IsZero(z);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -124,7 +124,10 @@ namespace CommonECS.Mathematics
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool Equals(Equation3 other)
 		{
-			return this.x == other.x && this.y == other.y && this.z == other.z && this.w == other.w;
+			return Mathx.AreEqual(this.x, other.x) &&
+				Mathx.AreEqual(this.y, other.y) &&
+				Mathx.AreEqual(this.z, other.z) &&
+				Mathx.AreEqual(this.w, other.w);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]

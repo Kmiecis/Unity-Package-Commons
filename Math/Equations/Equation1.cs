@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace CommonECS.Mathematics
+namespace Common.Mathematics
 {
 	/// <summary> Equation in form of: x * a = y </summary>
 	[Serializable]
@@ -38,7 +38,7 @@ namespace CommonECS.Mathematics
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool IsValid()
 		{
-			return x != 0.0f;
+			return !Mathx.IsZero(x);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -68,7 +68,7 @@ namespace CommonECS.Mathematics
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool Equals(Equation1 other)
 		{
-			return this.x == other.x && this.y == other.y;
+			return Mathx.AreEqual(this.x, other.x) && Mathx.AreEqual(this.y, other.y);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]

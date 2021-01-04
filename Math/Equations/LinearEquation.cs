@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Common.Mathematics;
+using System;
 using System.Runtime.CompilerServices;
-using Unity.Mathematics;
+using UnityEngine;
 
 namespace CommonECS.Mathematics
 {
@@ -39,13 +40,13 @@ namespace CommonECS.Mathematics
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool IsValid()
 		{
-			return a != 0.0f;
+			return !Mathx.IsZero(a);
 		}
 		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static LinearEquation FromPoints(float2 A, float2 B)
+		public static LinearEquation FromPoints(Vector2 A, Vector2 B)
 		{
-			if (A.x == 0.0f && B.x == 0.0f)
+			if (Mathx.IsZero(A.x) && Mathx.IsZero(B.x))
 			{
 				return invalid;
 			}
@@ -58,7 +59,7 @@ namespace CommonECS.Mathematics
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool Equals(LinearEquation other)
 		{
-			return this.a == other.a && this.b == other.b;
+			return Mathx.AreEqual(this.a, other.a) && Mathx.AreEqual(this.b, other.b);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
