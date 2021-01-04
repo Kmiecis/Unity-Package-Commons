@@ -16,13 +16,13 @@ namespace Common.Mathematics
 			this.z = z;
 		}
 
-		public Bool3(bool v) :
-			this(v, v, v)
+		public Bool3(bool b) :
+			this(b, b, b)
 		{
 		}
 
-		public Bool3(Bool3 o) :
-			this(o.x, o.y, o.z)
+		public Bool3(Bool3 b) :
+			this(b.x, b.y, b.z)
 		{
 		}
 
@@ -50,6 +50,26 @@ namespace Common.Mathematics
 						throw new IndexOutOfRangeException($"Invalid Bool3 index {index}");
 				}
 			}
+		}
+
+		public bool Equals(Bool3 other)
+		{
+			return this.x == other.x && this.y == other.y && this.z == other.z;
+		}
+
+		public override bool Equals(object obj)
+		{
+			return obj is Bool3 && Equals((Bool3)obj);
+		}
+
+		public override int GetHashCode()
+		{
+			return x.GetHashCode() ^ y.GetHashCode() ^ z.GetHashCode();
+		}
+
+		public override string ToString()
+		{
+			return string.Format("[{0}, {1}, {2}]", x, y, z);
 		}
 	}
 }
