@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Common.Mathematics
@@ -6,6 +7,102 @@ namespace Common.Mathematics
 	public static class Mathx
 	{
 		private const float EPS = 1e-7f;
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsZero(float f)
+		{
+			return Math.Abs(f) < EPS;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsZero(Vector2 v)
+		{
+			return IsZero(v.x) && IsZero(v.y);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsZero(Vector3 v)
+		{
+			return IsZero(v.x) && IsZero(v.y) && IsZero(v.z);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsZero(Vector4 v)
+		{
+			return IsZero(v.x) && IsZero(v.y) && IsZero(v.z) && IsZero(v.w);
+		}
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsOne(float f)
+		{
+			return IsZero(f - 1.0f);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsOne(Vector2 v)
+		{
+			return IsOne(v.x) && IsOne(v.y);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsOne(Vector3 v)
+		{
+			return IsOne(v.x) && IsOne(v.y) && IsOne(v.z);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsOne(Vector4 v)
+		{
+			return IsOne(v.x) && IsOne(v.y) && IsOne(v.z) && IsOne(v.w);
+		}
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool AreEqual(float a, float b)
+		{
+			return IsZero(a - b);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool AreEqual(Vector2 a, Vector2 b)
+		{
+			return IsZero(a.x - b.x) && IsZero(a.y - b.y);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool AreEqual(Vector3 a, Vector3 b)
+		{
+			return IsZero(a.x - b.x) && IsZero(a.y - b.y) && IsZero(a.z - b.z);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool AreEqual(Vector4 a, Vector4 b)
+		{
+			return IsZero(a.x - b.x) && IsZero(a.y - b.y) && IsZero(a.z - b.z) && IsZero(a.w - b.w);
+		}
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool AreEqual(Vector2Int a, Vector2Int b)
+		{
+			return a.x == b.x && a.y == b.y;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool AreEqual(Vector3Int a, Vector3Int b)
+		{
+			return a.x == b.x && a.y == b.y && a.z == b.z;
+		}
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static float Square(float f)
+		{
+			return f * f;
+		}
+
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int IncrIndex(int i, int count, int offset = 1)
