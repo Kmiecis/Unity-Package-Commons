@@ -1,9 +1,8 @@
-﻿using Common.Mathematics;
-using System;
+﻿using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace CommonECS.Mathematics
+namespace Common.Mathematics
 {
 	/// <summary> Equation in form of: y = a * x + b </summary>
 	[Serializable]

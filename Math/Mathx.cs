@@ -8,6 +8,8 @@ namespace Common.Mathematics
 	{
 		private const float EPS = 1e-7f;
 
+		public const float ROOT_3 = 1.73205080757f;
+		public const float ROOT_2 = 1.41421356237f;
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool IsZero(float f)
@@ -105,13 +107,13 @@ namespace Common.Mathematics
 
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static int IncrIndex(int i, int count, int offset = 1)
+		public static int NextIndex(int i, int count, int offset = 1)
 		{
 			return (i + offset) % count;
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static int DecrIndex(int i, int count, int offset = 1)
+		public static int PrevIndex(int i, int count, int offset = 1)
 		{
 			return (i - offset + count) % count;
 		}
@@ -149,6 +151,37 @@ namespace Common.Mathematics
 
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2Int RoundToInt(Vector2 v)
+		{
+			return new Vector2Int(
+				Mathf.RoundToInt(v.x),
+				Mathf.RoundToInt(v.y)
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3Int RoundToInt(Vector3 v)
+		{
+			return new Vector3Int(
+				Mathf.RoundToInt(v.x),
+				Mathf.RoundToInt(v.y),
+				Mathf.RoundToInt(v.z)
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4Int RoundToInt(Vector4 v)
+		{
+			return new Vector4Int(
+				Mathf.RoundToInt(v.x),
+				Mathf.RoundToInt(v.y),
+				Mathf.RoundToInt(v.z),
+				Mathf.RoundToInt(v.w)
+			);
+		}
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector2 Floor(Vector2 v)
 		{
 			return new Vector2(
@@ -180,6 +213,37 @@ namespace Common.Mathematics
 
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2Int FloorToInt(Vector2 v)
+		{
+			return new Vector2Int(
+				Mathf.FloorToInt(v.x),
+				Mathf.FloorToInt(v.y)
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3Int FloorToInt(Vector3 v)
+		{
+			return new Vector3Int(
+				Mathf.FloorToInt(v.x),
+				Mathf.FloorToInt(v.y),
+				Mathf.FloorToInt(v.z)
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4Int FloorToInt(Vector4 v)
+		{
+			return new Vector4Int(
+				Mathf.FloorToInt(v.x),
+				Mathf.FloorToInt(v.y),
+				Mathf.FloorToInt(v.z),
+				Mathf.FloorToInt(v.w)
+			);
+		}
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector2 Ceil(Vector2 v)
 		{
 			return new Vector2(
@@ -206,6 +270,37 @@ namespace Common.Mathematics
 				Mathf.Ceil(v.y),
 				Mathf.Ceil(v.z),
 				Mathf.Ceil(v.w)
+			);
+		}
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2Int CeilToInt(Vector2 v)
+		{
+			return new Vector2Int(
+				Mathf.CeilToInt(v.x),
+				Mathf.CeilToInt(v.y)
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3Int CeilToInt(Vector3 v)
+		{
+			return new Vector3Int(
+				Mathf.CeilToInt(v.x),
+				Mathf.CeilToInt(v.y),
+				Mathf.CeilToInt(v.z)
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4Int CeilToInt(Vector4 v)
+		{
+			return new Vector4Int(
+				Mathf.CeilToInt(v.x),
+				Mathf.CeilToInt(v.y),
+				Mathf.CeilToInt(v.z),
+				Mathf.CeilToInt(v.w)
 			);
 		}
 
@@ -262,92 +357,130 @@ namespace Common.Mathematics
 
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2 Multiply(Vector2 l, Vector2 r)
+		public static Vector2 Multiply(Vector2 a, Vector2 b)
 		{
 			return new Vector2(
-				l.x * r.x,
-				l.y * r.y
+				a.x * b.x,
+				a.y * b.y
 			);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector3 Multiply(Vector3 l, Vector3 r)
+		public static Vector3 Multiply(Vector3 a, Vector3 b)
 		{
 			return new Vector3(
-				l.x * r.x,
-				l.y * r.y,
-				l.z * r.z
+				a.x * b.x,
+				a.y * b.y,
+				a.z * b.z
 			);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector4 Multiply(Vector4 l, Vector4 r)
+		public static Vector4 Multiply(Vector4 a, Vector4 b)
 		{
 			return new Vector4(
-				l.x * r.x,
-				l.y * r.y,
-				l.z * r.z,
-				l.w * r.w
+				a.x * b.x,
+				a.y * b.y,
+				a.z * b.z,
+				a.w * b.w
 			);
 		}
 
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2 Multiply(Vector2 l, Vector2Int r)
+		public static Vector2 Multiply(Vector2Int v, float f)
 		{
 			return new Vector2(
-				l.x * r.x,
-				l.y * r.y
+				v.x * f,
+				v.y * f
 			);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector3 Multiply(Vector3 l, Vector3Int r)
-		{
-			return new Vector3(
-				l.x * r.x,
-				l.y * r.y,
-				l.z * r.z
-			);
-		}
-
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2 Multiply(Vector2Int l, Vector2 r)
+		public static Vector2 Multiply(Vector2Int a, Vector2 b)
 		{
 			return new Vector2(
-				l.x * r.x,
-				l.y * r.y
+				a.x * b.x,
+				a.y * b.y
 			);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector3 Multiply(Vector3Int l, Vector3 r)
+		public static Vector3 Multiply(Vector3Int v, float f)
 		{
 			return new Vector3(
-				l.x * r.x,
-				l.y * r.y,
-				l.z * r.z
+				v.x * f,
+				v.y * f,
+				v.z * f
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Multiply(Vector3Int a, Vector3 b)
+		{
+			return new Vector3(
+				a.x * b.x,
+				a.y * b.y,
+				a.z * b.z
 			);
 		}
 
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2Int Multiply(Vector2Int l, Vector2Int r)
+		public static Vector2 Multiply(float f, Vector2Int v)
+		{
+			return new Vector2(
+				f * v.x,
+				f * v.y
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Multiply(Vector2 a, Vector2Int b)
+		{
+			return new Vector2(
+				a.x * b.x,
+				a.y * b.y
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Multiply(float f, Vector3Int v)
+		{
+			return new Vector3(
+				f * v.x,
+				f * v.y,
+				f * v.z
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Multiply(Vector3 a, Vector3Int b)
+		{
+			return new Vector3(
+				a.x * b.x,
+				a.y * b.y,
+				a.z * b.z
+			);
+		}
+		
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2Int Multiply(Vector2Int a, Vector2Int b)
 		{
 			return new Vector2Int(
-				l.x * r.x,
-				l.y * r.y
+				a.x * b.x,
+				a.y * b.y
 			);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector3Int Multiply(Vector3Int l, Vector3Int r)
+		public static Vector3Int Multiply(Vector3Int a, Vector3Int b)
 		{
 			return new Vector3Int(
-				l.x * r.x,
-				l.y * r.y,
-				l.z * r.z
+				a.x * b.x,
+				a.y * b.y,
+				a.z * b.z
 			);
 		}
 	}
