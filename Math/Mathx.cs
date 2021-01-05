@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -142,6 +142,25 @@ namespace Common.Mathematics
 
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Lerp(Vector2 a, Vector2 b, Vector2 v)
+		{
+			return a + Multiply(v, (b - a));
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Lerp(Vector3 a, Vector3 b, Vector3 v)
+		{
+			return a + Multiply(v, b - a);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 Lerp(Vector4 a, Vector4 b, Vector4 v)
+		{
+			return a + Multiply(v, b - a);
+		}
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float Unlerp(float a, float b, float v)
 		{
 			return (v - a) / (b - a);
@@ -185,13 +204,30 @@ namespace Common.Mathematics
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static float Saturate(float f)
+		public static Vector2 Square(Vector2 f)
 		{
-			return f < 0.0f ? 0.0f
-				: f > 1.0f ? 1.0f
-				: f;
+			return Multiply(f, f);
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Square(Vector3 f)
+		{
+			return Multiply(f, f);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 Square(Vector4 f)
+		{
+			return Multiply(f, f);
+		}
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static float Saturate(float f)
+		{
+			return Mathf.Clamp01(f);
+		}
+		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float SmoothStep(float f)
 		{
@@ -220,10 +256,29 @@ namespace Common.Mathematics
 			return SmootherStep(Unlerp(a, b, t));
 		}
 
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static float Remap(float v, float fromMin, float fromMax, float toMin, float toMax)
+		public static float Remap(float fromMin, float fromMax, float toMin, float toMax, float v)
 		{
-			return (v - fromMin) / (fromMax - fromMin) * (toMax - toMin) + toMin;
+			return Mathf.Lerp(toMin, toMax, Unlerp(fromMin, fromMax, v));
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Remap(Vector2 fromMin, Vector2 fromMax, Vector2 toMin, Vector2 toMax, Vector2 v)
+		{
+			return Lerp(toMin, toMax, Unlerp(fromMin, fromMax, v));
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Remap(Vector3 fromMin, Vector3 fromMax, Vector3 toMin, Vector3 toMax, Vector3 v)
+		{
+			return Lerp(toMin, toMax, Unlerp(fromMin, fromMax, v));
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 Remap(Vector4 fromMin, Vector4 fromMax, Vector4 toMin, Vector4 toMax, Vector4 v)
+		{
+			return Lerp(toMin, toMax, Unlerp(fromMin, fromMax, v));
 		}
 
 
@@ -265,14 +320,30 @@ namespace Common.Mathematics
 		}
 
 
+		/// <summary> Calculates next index wrapped around by 'count' </summary>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static int NextIndex(int i, int count, int offset = 1)
+		public static int NextIndex(int i, int count)
+		{
+			return (i + 1) % count;
+		}
+
+		/// <summary> Calculates incremented index by 'offset' and wrapped around by 'count' </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static int IncrIndex(int i, int count, int offset)
 		{
 			return (i + offset) % count;
 		}
 
+		/// <summary> Calculates previous index wrapped around by 'count' </summary>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static int PrevIndex(int i, int count, int offset = 1)
+		public static int PrevIndex(int i, int count)
+		{
+			return (i - 1 + count) % count;
+		}
+
+		/// <summary> Calculates decremented index by 'offset' and wrapped around by 'count' </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static int DecrIndex(int i, int count, int offset)
 		{
 			return (i - offset + count) % count;
 		}
@@ -308,6 +379,31 @@ namespace Common.Mathematics
 			var x = Vector3.Dot(ax, p);
 			var y = Vector3.Dot(ay, p);
 			return new Vector2(x, y);
+		}
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static float Reciprocal(float f)
+		{
+			return 1.0f / f;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Reciprocal(Vector2 f)
+		{
+			return Divide(1.0f, f);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Reciprocal(Vector3 f)
+		{
+			return Divide(1.0f, f);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 Reciprocal(Vector4 f)
+		{
+			return Divide(1.0f, f);
 		}
 
 
@@ -509,7 +605,7 @@ namespace Common.Mathematics
 			);
 		}
 
-		
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector2 Multiply(Vector2 a, Vector2 b)
 		{
@@ -541,30 +637,11 @@ namespace Common.Mathematics
 		}
 		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2 Multiply(Vector2Int v, float f)
-		{
-			return new Vector2(
-				v.x * f,
-				v.y * f
-			);
-		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector2 Multiply(Vector2Int a, Vector2 b)
 		{
 			return new Vector2(
 				a.x * b.x,
 				a.y * b.y
-			);
-		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector3 Multiply(Vector3Int v, float f)
-		{
-			return new Vector3(
-				v.x * f,
-				v.y * f,
-				v.z * f
 			);
 		}
 
@@ -577,6 +654,25 @@ namespace Common.Mathematics
 				a.z * b.z
 			);
 		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Multiply(Vector2Int v, float f)
+		{
+			return new Vector2(
+				v.x * f,
+				v.y * f
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Multiply(Vector3Int v, float f)
+		{
+			return new Vector3(
+				v.x * f,
+				v.y * f,
+				v.z * f
+			);
+		}
 		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector2 Multiply(float f, Vector2Int v)
@@ -584,15 +680,6 @@ namespace Common.Mathematics
 			return new Vector2(
 				f * v.x,
 				f * v.y
-			);
-		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2 Multiply(Vector2 a, Vector2Int b)
-		{
-			return new Vector2(
-				a.x * b.x,
-				a.y * b.y
 			);
 		}
 
@@ -607,28 +694,18 @@ namespace Common.Mathematics
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector3 Multiply(Vector3 a, Vector3Int b)
+		public static Vector2 Multiply(Vector2 a, Vector2Int b)
 		{
-			return new Vector3(
-				a.x * b.x,
-				a.y * b.y,
-				a.z * b.z
-			);
-		}
-		
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2Int Multiply(Vector2Int a, Vector2Int b)
-		{
-			return new Vector2Int(
+			return new Vector2(
 				a.x * b.x,
 				a.y * b.y
 			);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector3Int Multiply(Vector3Int a, Vector3Int b)
+		public static Vector3 Multiply(Vector3 a, Vector3Int b)
 		{
-			return new Vector3Int(
+			return new Vector3(
 				a.x * b.x,
 				a.y * b.y,
 				a.z * b.z
@@ -667,30 +744,11 @@ namespace Common.Mathematics
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2 Divide(Vector2Int v, float f)
-		{
-			return new Vector2(
-				v.x / f,
-				v.y / f
-			);
-		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector2 Divide(Vector2Int a, Vector2 b)
 		{
 			return new Vector2(
 				a.x / b.x,
 				a.y / b.y
-			);
-		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector3 Divide(Vector3Int v, float f)
-		{
-			return new Vector3(
-				v.x / f,
-				v.y / f,
-				v.z / f
 			);
 		}
 
@@ -705,30 +763,11 @@ namespace Common.Mathematics
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2 Divide(float f, Vector2Int v)
-		{
-			return new Vector2(
-				f / v.x,
-				f / v.y
-			);
-		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector2 Divide(Vector2 a, Vector2Int b)
 		{
 			return new Vector2(
 				a.x / b.x,
 				a.y / b.y
-			);
-		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector3 Divide(float f, Vector3Int v)
-		{
-			return new Vector3(
-				f / v.x,
-				f / v.y,
-				f / v.z
 			);
 		}
 
@@ -742,6 +781,104 @@ namespace Common.Mathematics
 			);
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Divide(Vector2 v, float f)
+		{
+			return new Vector2(
+				v.x / f,
+				v.y / f
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Divide(Vector3 v, float f)
+		{
+			return new Vector3(
+				v.x / f,
+				v.y / f,
+				v.z / f
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 Divide(Vector4 v, float f)
+		{
+			return new Vector4(
+				v.x / f,
+				v.y / f,
+				v.z / f,
+				v.w / f
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Divide(float f, Vector2 v)
+		{
+			return new Vector2(
+				f / v.x,
+				f / v.y
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Divide(float f, Vector3 v)
+		{
+			return new Vector3(
+				f / v.x,
+				f / v.y,
+				f / v.z
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 Divide(float f, Vector4 v)
+		{
+			return new Vector4(
+				v.x / f,
+				v.y / f,
+				v.z / f,
+				v.w / f
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Divide(Vector2Int v, float f)
+		{
+			return new Vector2(
+				v.x / f,
+				v.y / f
+			);
+		}
+		
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Divide(Vector3Int v, float f)
+		{
+			return new Vector3(
+				v.x / f,
+				v.y / f,
+				v.z / f
+			);
+		}
+		
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Divide(float f, Vector2Int v)
+		{
+			return new Vector2(
+				f / v.x,
+				f / v.y
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Divide(float f, Vector3Int v)
+		{
+			return new Vector3(
+				f / v.x,
+				f / v.y,
+				f / v.z
+			);
+		}
+		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector2Int Divide(Vector2Int a, Vector2Int b)
 		{

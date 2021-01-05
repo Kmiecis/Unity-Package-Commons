@@ -14,7 +14,7 @@ namespace Common
 			return new Vector2(v.x, v.z);
 		}
 
-		public static Vector3 YZ(this Vector3 v)
+		public static Vector2 YZ(this Vector3 v)
 		{
 			return new Vector2(v.y, v.z);
 		}

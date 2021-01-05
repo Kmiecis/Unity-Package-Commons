@@ -15,10 +15,10 @@ namespace Common.Mathematics
 			var map = new float[extents.x, extents.y];
 			var random = new Random(seed);
 
-			Vector2 randomOffset = new Vector2(random.NextFloat(-99999.0f, +99999.0f), random.NextFloat(-99999.0f, +99999.0f));
-			Vector2 middleOffset = Mathx.Multiply(extents, 0.5f);
-			Vector2 revertedExtents = new Vector2(1.0f / extents.x, 1.0f / extents.y);
-			Vector2 revertedScale = new Vector2(1.0f / Mathf.Max(scale.x, 1e-5f), 1.0f / Mathf.Max(scale.y, 1e-5f));
+			var randomOffset = new Vector2(random.NextFloat(-99999.0f, +99999.0f), random.NextFloat(-99999.0f, +99999.0f));
+			var middleOffset = Mathx.Multiply(extents, 0.5f);
+			var reciprocalExtents = Mathx.Reciprocal(extents);
+			var reciprocalScale = Mathx.Reciprocal(Vector2.Max(scale, new Vector2(1e-5f, 1e-5f)));
 
 			for (int y = 0; y < extents.y; ++y)
 			{
@@ -30,8 +30,8 @@ namespace Common.Mathematics
 
 					for (int i = 0; i < octaves; ++i)
 					{
-						float sampleX = ((x - middleOffset.x + offset.x) * revertedScale.x * revertedExtents.x) * frequency + randomOffset.x;
-						float sampleY = ((y - middleOffset.y + offset.y) * revertedScale.y * revertedExtents.y) * frequency + randomOffset.y;
+						float sampleX = ((x - middleOffset.x + offset.x) * reciprocalScale.x * reciprocalExtents.x) * frequency + randomOffset.x;
+						float sampleY = ((y - middleOffset.y + offset.y) * reciprocalScale.y * reciprocalExtents.y) * frequency + randomOffset.y;
 
 						float perlinValue = Mathf.PerlinNoise(sampleX, sampleY);
 						value += perlinValue * amplitude;
@@ -57,7 +57,7 @@ namespace Common.Mathematics
 			var map = new float[extents.x, extents.y];
 			var random = new Random(seed);
 
-			Vector2 noiseHeightMinMax = new Vector2(0.0f, 1.0f);
+			var noiseHeightMinMax = new Vector2(0.0f, 1.0f);
 			for (int i = 1; i < octaves; ++i)
 			{
 				float persistanceAffection = Mathf.Pow(persistance, i);
@@ -65,10 +65,10 @@ namespace Common.Mathematics
 				noiseHeightMinMax.y += persistanceAffection * 0.75f;
 			}
 
-			Vector2 randomOffset = new Vector2(random.NextFloat(-99999.0f, +99999.0f), random.NextFloat(-99999.0f, +99999.0f));
-			Vector2 middleOffset = Mathx.Multiply(extents, 0.5f);
-			Vector2 revertedExtents = new Vector2(1.0f / extents.x, 1.0f / extents.y);
-			Vector2 revertedScale = new Vector2(1.0f / Mathf.Max(scale.x, 1e-4f), 1.0f / Mathf.Max(scale.y, 1e-4f));
+			var randomOffset = new Vector2(random.NextFloat(-99999.0f, +99999.0f), random.NextFloat(-99999.0f, +99999.0f));
+			var middleOffset = Mathx.Multiply(extents, 0.5f);
+			var revertedExtents = Mathx.Reciprocal(extents);
+			var revertedScale = Mathx.Reciprocal(Vector2.Max(scale, new Vector2(1e-5f, 1e-5f)));
 
 			for (int y = 0; y < extents.y; ++y)
 			{
