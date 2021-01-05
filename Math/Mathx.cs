@@ -20,19 +20,31 @@ namespace Common.Mathematics
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool IsZero(Vector2 v)
 		{
-			return IsZero(v.x) && IsZero(v.y);
+			return (
+				IsZero(v.x) &&
+				IsZero(v.y)
+			);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool IsZero(Vector3 v)
 		{
-			return IsZero(v.x) && IsZero(v.y) && IsZero(v.z);
+			return (
+				IsZero(v.x) &&
+				IsZero(v.y) &&
+				IsZero(v.z)
+			);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool IsZero(Vector4 v)
 		{
-			return IsZero(v.x) && IsZero(v.y) && IsZero(v.z) && IsZero(v.w);
+			return (
+				IsZero(v.x) &&
+				IsZero(v.y) &&
+				IsZero(v.z) &&
+				IsZero(v.w)
+			);
 		}
 
 
@@ -45,19 +57,31 @@ namespace Common.Mathematics
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool IsOne(Vector2 v)
 		{
-			return IsOne(v.x) && IsOne(v.y);
+			return (
+				IsOne(v.x) &&
+				IsOne(v.y)
+			);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool IsOne(Vector3 v)
 		{
-			return IsOne(v.x) && IsOne(v.y) && IsOne(v.z);
+			return (
+				IsOne(v.x) &&
+				IsOne(v.y) &&
+				IsOne(v.z)
+			);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool IsOne(Vector4 v)
 		{
-			return IsOne(v.x) && IsOne(v.y) && IsOne(v.z) && IsOne(v.w);
+			return (
+				IsOne(v.x) &&
+				IsOne(v.y) &&
+				IsOne(v.z) &&
+				IsOne(v.w)
+			);
 		}
 
 
@@ -70,31 +94,87 @@ namespace Common.Mathematics
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool AreEqual(Vector2 a, Vector2 b)
 		{
-			return IsZero(a.x - b.x) && IsZero(a.y - b.y);
+			return (
+				IsZero(a.x - b.x) &&
+				IsZero(a.y - b.y)
+			);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool AreEqual(Vector3 a, Vector3 b)
 		{
-			return IsZero(a.x - b.x) && IsZero(a.y - b.y) && IsZero(a.z - b.z);
+			return (
+				IsZero(a.x - b.x) &&
+				IsZero(a.y - b.y) &&
+				IsZero(a.z - b.z)
+			);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool AreEqual(Vector4 a, Vector4 b)
 		{
-			return IsZero(a.x - b.x) && IsZero(a.y - b.y) && IsZero(a.z - b.z) && IsZero(a.w - b.w);
+			return (
+				IsZero(a.x - b.x) &&
+				IsZero(a.y - b.y) &&
+				IsZero(a.z - b.z) &&
+				IsZero(a.w - b.w)
+			);
 		}
 		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool AreEqual(Vector2Int a, Vector2Int b)
 		{
-			return a.x == b.x && a.y == b.y;
+			return (
+				a.x == b.x &&
+				a.y == b.y
+			);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool AreEqual(Vector3Int a, Vector3Int b)
 		{
-			return a.x == b.x && a.y == b.y && a.z == b.z;
+			return (
+				a.x == b.x &&
+				a.y == b.y &&
+				a.z == b.z
+			);
+		}
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static float Unlerp(float a, float b, float v)
+		{
+			return (v - a) / (b - a);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Unlerp(Vector2 a, Vector2 b, Vector2 v)
+		{
+			return new Vector2(
+				Unlerp(a.x, b.x, v.x),
+				Unlerp(a.y, b.y, v.y)
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Unlerp(Vector3 a, Vector3 b, Vector3 v)
+		{
+			return new Vector3(
+				Unlerp(a.x, b.x, v.x),
+				Unlerp(a.y, b.y, v.y),
+				Unlerp(a.z, b.z, v.z)
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 Unlerp(Vector4 a, Vector4 b, Vector4 v)
+		{
+			return new Vector4(
+				Unlerp(a.x, b.x, v.x),
+				Unlerp(a.y, b.y, v.y),
+				Unlerp(a.z, b.z, v.z),
+				Unlerp(a.w, b.w, v.w)
+			);
 		}
 
 
@@ -107,17 +187,39 @@ namespace Common.Mathematics
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float Saturate(float f)
 		{
-			return f < 0.0f ? 0.0f : f > 1.0f ? 1.0f : f;
+			return f < 0.0f ? 0.0f
+				: f > 1.0f ? 1.0f
+				: f;
 		}
-		
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static float SmoothStep(float f)
+		{
+			return f <= 0.0f ? 0.0f
+				: f >= 1.0f ? 1.0f
+				: f * f * (3 - 2 * f);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static float SmootherStep(float f)
+		{
+			return f <= 0.0f ? 0.0f
+				: f >= 1.0f ? 1.0f
+				: f * f * f * (f * (f * 6 - 15) + 10);
+		}
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float SmoothStep(float a, float b, float t)
 		{
-			t = Saturate(t);
-			t = -2.0f * t * t * t + 3.0f * t * t;
-			return b * t + a * (1.0f - t);
+			return SmoothStep(Unlerp(a, b, t));
 		}
-		
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static float SmootherStep(float a, float b, float t)
+		{
+			return SmootherStep(Unlerp(a, b, t));
+		}
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float Remap(float v, float fromMin, float fromMax, float toMin, float toMax)
 		{
@@ -173,43 +275,6 @@ namespace Common.Mathematics
 		public static int PrevIndex(int i, int count, int offset = 1)
 		{
 			return (i - offset + count) % count;
-		}
-
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static float Unlerp(float a, float b, float v)
-		{
-			return (v - a) / (b - a);
-		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2 Unlerp(Vector2 a, Vector2 b, Vector2 v)
-		{
-			return new Vector2(
-				Unlerp(a.x, b.x, v.x),
-				Unlerp(a.y, b.y, v.y)
-			);
-		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector3 Unlerp(Vector3 a, Vector3 b, Vector3 v)
-		{
-			return new Vector3(
-				Unlerp(a.x, b.x, v.x),
-				Unlerp(a.y, b.y, v.y),
-				Unlerp(a.z, b.z, v.z)
-			);
-		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector4 Unlerp(Vector4 a, Vector4 b, Vector4 v)
-		{
-			return new Vector4(
-				Unlerp(a.x, b.x, v.x),
-				Unlerp(a.y, b.y, v.y),
-				Unlerp(a.z, b.z, v.z),
-				Unlerp(a.w, b.w, v.w)
-			);
 		}
 		
 
