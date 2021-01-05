@@ -23,8 +23,8 @@ namespace Common.Mathematics
 		{
 		}
 
-		public Vector4Int(Vector4Int o) :
-			this(o.x, o.y, o.z, o.w)
+		public Vector4Int(Vector4Int v) :
+			this(v.x, v.y, v.z, v.w)
 		{
 		}
 
@@ -54,6 +54,31 @@ namespace Common.Mathematics
 						throw new IndexOutOfRangeException($"Invalid Vector4Int index {index}");
 				}
 			}
+		}
+
+		public bool Equals(Vector4Int other)
+		{
+			return (
+				this.x == other.x &&
+				this.y == other.y &&
+				this.z == other.z &&
+				this.w == other.w
+			);
+		}
+
+		public override bool Equals(object obj)
+		{
+			return obj is Vector4Int && Equals((Vector4Int)obj);
+		}
+
+		public override int GetHashCode()
+		{
+			return x.GetHashCode() ^ y.GetHashCode() ^ z.GetHashCode() ^ w.GetHashCode();
+		}
+
+		public override string ToString()
+		{
+			return string.Format("[{0}, {1}, {2}, {3}]", x, y, z, w);
 		}
 	}
 }
