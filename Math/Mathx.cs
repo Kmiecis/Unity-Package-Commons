@@ -227,18 +227,7 @@ namespace Common.Mathematics
 				Mathf.RoundToInt(v.z)
 			);
 		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector4Int RoundToInt(Vector4 v)
-		{
-			return new Vector4Int(
-				Mathf.RoundToInt(v.x),
-				Mathf.RoundToInt(v.y),
-				Mathf.RoundToInt(v.z),
-				Mathf.RoundToInt(v.w)
-			);
-		}
-
+		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector2Int FloorToInt(Vector2 v)
 		{
@@ -255,17 +244,6 @@ namespace Common.Mathematics
 				Mathf.FloorToInt(v.x),
 				Mathf.FloorToInt(v.y),
 				Mathf.FloorToInt(v.z)
-			);
-		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector4Int FloorToInt(Vector4 v)
-		{
-			return new Vector4Int(
-				Mathf.FloorToInt(v.x),
-				Mathf.FloorToInt(v.y),
-				Mathf.FloorToInt(v.z),
-				Mathf.FloorToInt(v.w)
 			);
 		}
 
@@ -287,18 +265,7 @@ namespace Common.Mathematics
 				Mathf.CeilToInt(v.z)
 			);
 		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector4Int CeilToInt(Vector4 v)
-		{
-			return new Vector4Int(
-				Mathf.CeilToInt(v.x),
-				Mathf.CeilToInt(v.y),
-				Mathf.CeilToInt(v.z),
-				Mathf.CeilToInt(v.w)
-			);
-		}
-
+		
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector2 Abs(Vector2 v)
