@@ -276,7 +276,40 @@ namespace Common.Mathematics
 		{
 			return (i - offset + count) % count;
 		}
-		
+
+
+		/// <summary> Calculates circle direction from single value of range [0, 1] </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Direction(float u)
+		{
+			var angle = 2 * Mathf.PI * u;
+			var x = Mathf.Cos(angle);
+			var y = Mathf.Sin(angle);
+			return new Vector2(x, y);
+		}
+
+		/// <summary> Calculates sphere direction from two values of range [0, 1] </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Direction(float u, float v)
+		{
+			var omega = 2 * Mathf.PI * u;
+			var theta = Mathf.Acos(2 * v - 1);
+			var x = Mathf.Sin(theta) * Mathf.Cos(omega);
+			var y = Mathf.Sin(theta) * Mathf.Sin(omega);
+			var z = Mathf.Cos(theta);
+			return new Vector3(x, y, z);
+		}
+
+
+		/// <summary> Projects point 'p' to plane defined by two axes 'ax' and 'ay' </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Project(Vector3 p, Vector3 ax, Vector3 ay)
+		{
+			var x = Vector3.Dot(ax, p);
+			var y = Vector3.Dot(ay, p);
+			return new Vector2(x, y);
+		}
+
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector2 Round(Vector2 v)
