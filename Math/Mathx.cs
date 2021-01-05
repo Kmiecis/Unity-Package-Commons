@@ -104,6 +104,64 @@ namespace Common.Mathematics
 			return f * f;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static float Saturate(float f)
+		{
+			return f < 0.0f ? 0.0f : f > 1.0f ? 1.0f : f;
+		}
+		
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static float SmoothStep(float a, float b, float t)
+		{
+			t = Saturate(t);
+			t = -2.0f * t * t * t + 3.0f * t * t;
+			return b * t + a * (1.0f - t);
+		}
+		
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static float Remap(float v, float fromMin, float fromMax, float toMin, float toMax)
+		{
+			return (v - fromMin) / (fromMax - fromMin) * (toMax - toMin) + toMin;
+		}
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsInRange(int v, int min, int max)
+		{
+			return min <= v && v <= max;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsNotInRange(int v, int min, int max)
+		{
+			return min > v || v > max;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsInRange(float v, float min, float max)
+		{
+			return min <= v && v <= max;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsNotInRange(float v, float min, float max)
+		{
+			return min > v || v > max;
+		}
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsEven(int i)
+		{
+			return (i % 2) == 0;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsOdd(int i)
+		{
+			return (i % 2) == 1;
+		}
+
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static int NextIndex(int i, int count, int offset = 1)
@@ -117,6 +175,43 @@ namespace Common.Mathematics
 			return (i - offset + count) % count;
 		}
 
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static float Unlerp(float a, float b, float v)
+		{
+			return (v - a) / (b - a);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Unlerp(Vector2 a, Vector2 b, Vector2 v)
+		{
+			return new Vector2(
+				Unlerp(a.x, b.x, v.x),
+				Unlerp(a.y, b.y, v.y)
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Unlerp(Vector3 a, Vector3 b, Vector3 v)
+		{
+			return new Vector3(
+				Unlerp(a.x, b.x, v.x),
+				Unlerp(a.y, b.y, v.y),
+				Unlerp(a.z, b.z, v.z)
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 Unlerp(Vector4 a, Vector4 b, Vector4 v)
+		{
+			return new Vector4(
+				Unlerp(a.x, b.x, v.x),
+				Unlerp(a.y, b.y, v.y),
+				Unlerp(a.z, b.z, v.z),
+				Unlerp(a.w, b.w, v.w)
+			);
+		}
+		
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector2 Round(Vector2 v)
@@ -316,7 +411,7 @@ namespace Common.Mathematics
 			);
 		}
 
-
+		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector2 Multiply(Vector2 a, Vector2 b)
 		{
