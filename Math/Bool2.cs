@@ -60,7 +60,7 @@ namespace Common.Mathematics
 
 		public override int GetHashCode()
 		{
-			return x.GetHashCode() ^ y.GetHashCode();
+			return x.GetHashCode() | (y.GetHashCode() << 1);
 		}
 
 		public override string ToString()
