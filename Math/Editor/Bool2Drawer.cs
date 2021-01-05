@@ -7,6 +7,6 @@ namespace Common.MathematicsEditor
 	[CustomPropertyDrawer(typeof(Bool2))]
 	public class Bool2Drawer : RepeatedPropertyDrawer
 	{
-		protected override int FieldCount => 3;
+		protected override int FieldCount => 2;
 	}
 }
