@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Common
 {
-	public class FlatMeshBuilder
+	public class FlatMeshBuilder : IMeshBuilder
 	{
 		private List<Vector3> m_Vertices = new List<Vector3>();
 		private List<int> m_Triangles = new List<int>();

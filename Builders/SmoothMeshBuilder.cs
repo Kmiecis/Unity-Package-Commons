@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Common
 {
-	public class SmoothMeshBuilder
+	public class SmoothMeshBuilder : IMeshBuilder
 	{
 		private List<Vector3> m_Vertices = new List<Vector3>();
 		private List<int> m_Triangles = new List<int>();
