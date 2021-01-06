@@ -349,7 +349,7 @@ namespace Common.Mathematics
 		}
 
 
-		/// <summary> Calculates circle direction from single value of range [0, 1] </summary>
+		/// <summary> Calculates direction vector from single value of range [0, 1] </summary>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector2 Direction(float u)
 		{
@@ -359,7 +359,7 @@ namespace Common.Mathematics
 			return new Vector2(x, y);
 		}
 
-		/// <summary> Calculates sphere direction from two values of range [0, 1] </summary>
+		/// <summary> Calculates direction vector from two values of range [0, 1] </summary>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector3 Direction(float u, float v)
 		{
@@ -404,6 +404,31 @@ namespace Common.Mathematics
 		public static Vector4 Reciprocal(Vector4 f)
 		{
 			return Divide(1.0f, f);
+		}
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static float ReciprocalSafe(float f)
+		{
+			return Reciprocal(Mathf.Max(f, EPS));
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 ReciprocalSafe(Vector2 f)
+		{
+			return Reciprocal(Vector2.Max(f, new Vector2(EPS, EPS)));
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 ReciprocalSafe(Vector3 f)
+		{
+			return Reciprocal(Vector3.Max(f, new Vector3(EPS, EPS, EPS)));
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 ReciprocalSafe(Vector4 f)
+		{
+			return Reciprocal(Vector4.Max(f, new Vector4(EPS, EPS, EPS, EPS)));
 		}
 
 
