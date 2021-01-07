@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace Common.Mathematics
+namespace Common
 {
 	/// <summary> Equation in form of: x * a + y * b = z </summary>
 	[Serializable]

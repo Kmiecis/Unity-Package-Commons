@@ -1,8 +1,8 @@
-﻿ using System;
+﻿using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common.Mathematics
+namespace Common
 {
 	public static class Mathx
 	{
@@ -249,6 +249,25 @@ namespace Common.Mathematics
 				Mathf.Clamp(v.y, min.y, max.y),
 				Mathf.Clamp(v.z, min.z, max.z),
 				Mathf.Clamp(v.w, min.w, max.w)
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2Int Clamp(Vector2Int v, Vector2Int min, Vector2Int max)
+		{
+			return new Vector2Int(
+				Mathf.Clamp(v.x, min.x, max.x),
+				Mathf.Clamp(v.y, min.y, max.y)
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3Int Clamp(Vector3Int v, Vector3Int min, Vector3Int max)
+		{
+			return new Vector3Int(
+				Mathf.Clamp(v.x, min.x, max.x),
+				Mathf.Clamp(v.y, min.y, max.y),
+				Mathf.Clamp(v.z, min.z, max.z)
 			);
 		}
 

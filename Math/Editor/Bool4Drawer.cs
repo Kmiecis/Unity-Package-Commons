@@ -1,8 +1,7 @@
-﻿using Common.Mathematics;
-using CommonEditor;
+﻿using Common;
 using UnityEditor;
 
-namespace Common.MathematicsEditor
+namespace CommonEditor
 {
 	[CustomPropertyDrawer(typeof(Bool4))]
 	public class Bool4Drawer : RepeatedPropertyDrawer

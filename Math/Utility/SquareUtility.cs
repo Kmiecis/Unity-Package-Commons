@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Common.Mathematics
+namespace Common
 {
 	public static class SquareUtility
 	{

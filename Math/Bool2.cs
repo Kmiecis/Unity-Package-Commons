@@ -1,6 +1,6 @@
 using System;
 
-namespace Common.Mathematics
+namespace Common
 {
 	[Serializable]
 	public struct Bool2
