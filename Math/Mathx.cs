@@ -632,6 +632,400 @@ namespace Common.Mathematics
 
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Add(Vector2 v, float f)
+		{
+			return new Vector2(
+				v.x + f,
+				v.y + f
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Add(Vector3 v, float f)
+		{
+			return new Vector3(
+				v.x + f,
+				v.y + f,
+				v.z + f
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 Add(Vector4 v, float f)
+		{
+			return new Vector4(
+				v.x + f,
+				v.y + f,
+				v.z + f,
+				v.w + f
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Add(float f, Vector2 v)
+		{
+			return new Vector2(
+				 f + v.x,
+				 f + v.y
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Add(float f, Vector3 v)
+		{
+			return new Vector3(
+				 f + v.x,
+				 f + v.y,
+				 f + v.z
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 Add(float f, Vector4 v)
+		{
+			return new Vector4(
+				 f + v.x,
+				 f + v.y,
+				 f + v.z,
+				 f + v.w
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Add(Vector2 v, int i)
+		{
+			return new Vector2(
+				v.x + i,
+				v.y + i
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Add(Vector3 v, int i)
+		{
+			return new Vector3(
+				v.x + i,
+				v.y + i,
+				v.z + i
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 Add(Vector4 v, int i)
+		{
+			return new Vector4(
+				v.x + i,
+				v.y + i,
+				v.z + i,
+				v.w + i
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Add(int i, Vector2 v)
+		{
+			return new Vector2(
+				 i + v.x,
+				 i + v.y
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Add(int i, Vector3 v)
+		{
+			return new Vector3(
+				 i + v.x,
+				 i + v.y,
+				 i + v.z
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 Add(int i, Vector4 v)
+		{
+			return new Vector4(
+				 i + v.x,
+				 i + v.y,
+				 i + v.z,
+				 i + v.w
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Add(Vector2Int v, float f)
+		{
+			return new Vector2(
+				v.x + f,
+				v.y + f
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Add(Vector3Int v, float f)
+		{
+			return new Vector3(
+				v.x + f,
+				v.y + f,
+				v.z + f
+			);
+		}
+		
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Add(float f, Vector2Int v)
+		{
+			return new Vector2(
+				 f + v.x,
+				 f + v.y
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Add(float f, Vector3Int v)
+		{
+			return new Vector3(
+				 f + v.x,
+				 f + v.y,
+				 f + v.z
+			);
+		}
+		
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2Int Add(Vector2Int v, int i)
+		{
+			return new Vector2Int(
+				v.x + i,
+				v.y + i
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3Int Add(Vector3Int v, int i)
+		{
+			return new Vector3Int(
+				v.x + i,
+				v.y + i,
+				v.z + i
+			);
+		}
+		
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2Int Add(int i, Vector2Int v)
+		{
+			return new Vector2Int(
+				 i + v.x,
+				 i + v.y
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3Int Add(int i, Vector3Int v)
+		{
+			return new Vector3Int(
+				 i + v.x,
+				 i + v.y,
+				 i + v.z
+			);
+		}
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Subtract(Vector2 v, float f)
+		{
+			return new Vector2(
+				v.x - f,
+				v.y - f
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Subtract(Vector3 v, float f)
+		{
+			return new Vector3(
+				v.x - f,
+				v.y - f,
+				v.z - f
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 Subtract(Vector4 v, float f)
+		{
+			return new Vector4(
+				v.x - f,
+				v.y - f,
+				v.z - f,
+				v.w - f
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Subtract(float f, Vector2 v)
+		{
+			return new Vector2(
+				 f - v.x,
+				 f - v.y
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Subtract(float f, Vector3 v)
+		{
+			return new Vector3(
+				 f - v.x,
+				 f - v.y,
+				 f - v.z
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 Subtract(float f, Vector4 v)
+		{
+			return new Vector4(
+				 f - v.x,
+				 f - v.y,
+				 f - v.z,
+				 f - v.w
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Subtract(Vector2 v, int i)
+		{
+			return new Vector2(
+				v.x - i,
+				v.y - i
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Subtract(Vector3 v, int i)
+		{
+			return new Vector3(
+				v.x - i,
+				v.y - i,
+				v.z - i
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 Subtract(Vector4 v, int i)
+		{
+			return new Vector4(
+				v.x - i,
+				v.y - i,
+				v.z - i,
+				v.w - i
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Subtract(int i, Vector2 v)
+		{
+			return new Vector2(
+				 i - v.x,
+				 i - v.y
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Subtract(int i, Vector3 v)
+		{
+			return new Vector3(
+				 i - v.x,
+				 i - v.y,
+				 i - v.z
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 Subtract(int i, Vector4 v)
+		{
+			return new Vector4(
+				 i - v.x,
+				 i - v.y,
+				 i - v.z,
+				 i - v.w
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Subtract(Vector2Int v, float f)
+		{
+			return new Vector2(
+				v.x - f,
+				v.y - f
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Subtract(Vector3Int v, float f)
+		{
+			return new Vector3(
+				v.x - f,
+				v.y - f,
+				v.z - f
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Subtract(float f, Vector2Int v)
+		{
+			return new Vector2(
+				 f - v.x,
+				 f - v.y
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Subtract(float f, Vector3Int v)
+		{
+			return new Vector3(
+				 f - v.x,
+				 f - v.y,
+				 f - v.z
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2Int Subtract(Vector2Int v, int i)
+		{
+			return new Vector2Int(
+				v.x - i,
+				v.y - i
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3Int Subtract(Vector3Int v, int i)
+		{
+			return new Vector3Int(
+				v.x - i,
+				v.y - i,
+				v.z - i
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2Int Subtract(int i, Vector2Int v)
+		{
+			return new Vector2Int(
+				 i - v.x,
+				 i - v.y
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3Int Subtract(int i, Vector3Int v)
+		{
+			return new Vector3Int(
+				 i - v.x,
+				 i - v.y,
+				 i - v.z
+			);
+		}
+
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector2 Multiply(Vector2 a, Vector2 b)
 		{
 			return new Vector2(

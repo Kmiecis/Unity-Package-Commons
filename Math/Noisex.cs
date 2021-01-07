@@ -98,9 +98,9 @@ namespace Common.Mathematics
 		}
 
 		/// <summary> Noise Map generator smoothed to [0 .. 1] values </summary>
-		public static int[,] RandomMap(Vector2Int extents, float fill = 0.5f, int smooths = 5, int seed = 0)
+		public static bool[,] RandomMap(Vector2Int extents, float fill = 0.5f, int smooths = 5, int seed = 0)
 		{
-			var map = new int[extents.x, extents.y];
+			var map = new bool[extents.x, extents.y];
 			var random = new Random(seed);
 
 			for (int y = 0; y < extents.y; ++y)
@@ -108,12 +108,11 @@ namespace Common.Mathematics
 				for (int x = 0; x < extents.x; ++x)
 				{
 					var randomValue = random.NextFloat();
-					var value = randomValue < fill ? 1 : 0;
-					map[x, y] = value;
+					map[x, y] = randomValue < fill;
 				}
 			}
 
-			var smoothMap = new int[extents.x, extents.y];
+			var smoothMap = new bool[extents.x, extents.y];
 			for (int i = 0; i < smooths; ++i)
 			{
 				for (int y = 0; y < extents.y; ++y)
@@ -135,18 +134,14 @@ namespace Common.Mathematics
 									continue;
 								}
 
-								counter += map[dx, dy];
+								if (map[dx, dy])
+								{
+									counter += 1;
+								}
 							}
 						}
 
-						if (counter > 4)
-						{
-							smoothMap[x, y] = 1;
-						}
-						else if (counter < 4)
-						{
-							smoothMap[x, y] = 0;
-						}
+						smoothMap[x, y] = counter > 4;
 					}
 				}
 
