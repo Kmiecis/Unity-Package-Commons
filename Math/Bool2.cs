@@ -50,7 +50,10 @@ namespace Common.Mathematics
 
 		public bool Equals(Bool3 other)
 		{
-			return this.x == other.x && this.y == other.y;
+			return (
+				this.x == other.x &&
+				this.y == other.y
+			);
 		}
 
 		public override bool Equals(object obj)
