@@ -47,6 +47,31 @@ namespace Common
 			);
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsZero(int i)
+		{
+			return i == 0;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsZero(Vector2Int v)
+		{
+			return (
+				IsZero(v.x) &&
+				IsZero(v.y)
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsZero(Vector3Int v)
+		{
+			return (
+				IsZero(v.x) &&
+				IsZero(v.y) &&
+				IsZero(v.z)
+			);
+		}
+
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool IsOne(float f)
@@ -81,6 +106,31 @@ namespace Common
 				IsOne(v.y) &&
 				IsOne(v.z) &&
 				IsOne(v.w)
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsOne(int i)
+		{
+			return i == 1;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsOne(Vector2Int v)
+		{
+			return (
+				IsOne(v.x) &&
+				IsOne(v.y)
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsOne(Vector3Int v)
+		{
+			return (
+				IsOne(v.x) &&
+				IsOne(v.y) &&
+				IsOne(v.z)
 			);
 		}
 
@@ -204,21 +254,39 @@ namespace Common
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2 Square(Vector2 f)
+		public static Vector2 Square(Vector2 v)
 		{
-			return Multiply(f, f);
+			return Multiply(v, v);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector3 Square(Vector3 f)
+		public static Vector3 Square(Vector3 v)
 		{
-			return Multiply(f, f);
+			return Multiply(v, v);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector4 Square(Vector4 f)
+		public static Vector4 Square(Vector4 v)
 		{
-			return Multiply(f, f);
+			return Multiply(v, v);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static int Square(int i)
+		{
+			return i * i;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2Int Square(Vector2Int v)
+		{
+			return Multiply(v, v);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3Int Square(Vector3Int v)
+		{
+			return Multiply(v, v);
 		}
 
 
@@ -322,30 +390,6 @@ namespace Common
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static float SmootherStep(float f)
-		{
-			return f * f * f * (f * (f * 6 - 15) + 10);
-		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2 SmootherStep(Vector2 f)
-		{
-			return Multiply(f, Multiply(f, Multiply(f, Add(Multiply(f, Subtract(Multiply(f, 6), 15)), 10))));
-		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector3 SmootherStep(Vector3 f)
-		{
-			return Multiply(f, Multiply(f, Multiply(f, Add(Multiply(f, Subtract(Multiply(f, 6), 15)), 10))));
-		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector4 SmootherStep(Vector4 f)
-		{
-			return Multiply(f, Multiply(f, Multiply(f, Add(Multiply(f, Subtract(Multiply(f, 6), 15)), 10))));
-		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float SmoothStep(float a, float b, float t)
 		{
 			return SmoothStep(Unlerp(a, b, t));
@@ -369,6 +413,31 @@ namespace Common
 			return SmoothStep(Unlerp(a, b, t));
 		}
 
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static float SmootherStep(float f)
+		{
+			return f * f * f * (f * (f * 6 - 15) + 10);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 SmootherStep(Vector2 f)
+		{
+			return Multiply(f, Multiply(f, Multiply(f, Add(Multiply(f, Subtract(Multiply(f, 6), 15)), 10))));
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 SmootherStep(Vector3 f)
+		{
+			return Multiply(f, Multiply(f, Multiply(f, Add(Multiply(f, Subtract(Multiply(f, 6), 15)), 10))));
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 SmootherStep(Vector4 f)
+		{
+			return Multiply(f, Multiply(f, Multiply(f, Add(Multiply(f, Subtract(Multiply(f, 6), 15)), 10))));
+		}
+		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float SmootherStep(float a, float b, float t)
 		{
@@ -426,17 +495,17 @@ namespace Common
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static bool IsNotInRange(int v, int min, int max)
-		{
-			return min > v || v > max;
-		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool IsInRange(float v, float min, float max)
 		{
 			return min <= v && v <= max;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool IsNotInRange(int v, int min, int max)
+		{
+			return min > v || v > max;
+		}
+		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool IsNotInRange(float v, float min, float max)
 		{
@@ -767,10 +836,41 @@ namespace Common
 			);
 		}
 
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float Select(float a, float b, bool c)
 		{
 			return c ? b : a;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Select(Vector2 a, Vector2 b, Bool2 c)
+		{
+			return new Vector2(
+				Select(a.x, b.x, c.x),
+				Select(a.y, b.y, c.y)
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Select(Vector3 a, Vector3 b, Bool3 c)
+		{
+			return new Vector3(
+				Select(a.x, b.x, c.x),
+				Select(a.y, b.y, c.y),
+				Select(a.z, b.z, c.z)
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 Select(Vector4 a, Vector4 b, Bool4 c)
+		{
+			return new Vector4(
+				Select(a.x, b.x, c.x),
+				Select(a.y, b.y, c.y),
+				Select(a.z, b.z, c.z),
+				Select(a.w, b.w, c.w)
+			);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -791,33 +891,6 @@ namespace Common
 			return c ? b : a;
 		}
 
-		public static Vector2 Select(Vector2 a, Vector2 b, Bool2 c)
-		{
-			return new Vector2(
-				c.x ? b.x : a.x,
-				c.y ? b.y : a.y
-			);
-		}
-
-		public static Vector3 Select(Vector3 a, Vector3 b, Bool3 c)
-		{
-			return new Vector3(
-				c.x ? b.x : a.x,
-				c.y ? b.y : a.y,
-				c.z ? b.z : a.z
-			);
-		}
-
-		public static Vector4 Select(Vector4 a, Vector4 b, Bool4 c)
-		{
-			return new Vector4(
-				c.x ? b.x : a.x,
-				c.y ? b.y : a.y,
-				c.z ? b.z : a.z,
-				c.w ? b.w : a.w
-			);
-		}
-
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float Step(float a, float b)
@@ -829,8 +902,8 @@ namespace Common
 		public static Vector2 Step(Vector2 a, Vector2 b)
 		{
 			return Select(
-				new Vector2(0.0f, 0.0f),
-				new Vector2(1.0f, 1.0f),
+				Vector2.zero,
+				Vector2.one,
 				new Bool2(b.x >= a.x, b.y >= a.y)
 			);
 		}
@@ -839,8 +912,8 @@ namespace Common
 		public static Vector3 Step(Vector3 a, Vector3 b)
 		{
 			return Select(
-				new Vector3(0.0f, 0.0f, 0.0f),
-				new Vector3(1.0f, 1.0f, 1.0f),
+				Vector3.zero,
+				Vector3.one,
 				new Bool3(b.x >= a.x, b.y >= a.y, b.z >= a.z)
 			);
 		}
@@ -849,8 +922,8 @@ namespace Common
 		public static Vector4 Step(Vector4 a, Vector4 b)
 		{
 			return Select(
-				new Vector4(0.0f, 0.0f, 0.0f, 0.0f),
-				new Vector4(1.0f, 1.0f, 1.0f, 1.0f),
+				Vector4.zero,
+				Vector4.one,
 				new Bool4(b.x >= a.x, b.y >= a.y, b.z >= a.z, b.w >= a.w)
 			);
 		}
