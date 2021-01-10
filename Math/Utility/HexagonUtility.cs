@@ -5,7 +5,7 @@ namespace Common
 	public static class HexagonUtility
 	{
 		public const int VCOUNT = 6;
-		public const float CENTER_TO_SIDE = 1.0f;
+		public const float CENTER_TO_SIDE = 0.5f;
 		public const float CENTER_TO_VERTEX = CENTER_TO_SIDE * (2.0f / Mathx.ROOT_3);
 
 		public static readonly Vector2[] V2 = new Vector2[]
