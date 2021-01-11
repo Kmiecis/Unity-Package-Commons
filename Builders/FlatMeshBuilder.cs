@@ -7,9 +7,10 @@ namespace Common
 	{
 		private List<Vector3> m_Vertices = new List<Vector3>();
 		private List<int> m_Triangles = new List<int>();
-		private List<Vector2> m_UVs = new List<Vector2>();
-
 		private List<Vector3> m_Normals = new List<Vector3>();
+
+		private List<Vector2> m_UVs = new List<Vector2>();
+		private List<Color32> m_Colors = new List<Color32>();
 
 		public void AddTriangle(Vector3 v0, Vector3 v1, Vector3 v2)
 		{
@@ -33,6 +34,13 @@ namespace Common
 			m_UVs.Add(uv2);
 		}
 
+		public void AddColors(Color32 c0, Color32 c1, Color32 c2)
+		{
+			m_Colors.Add(c0);
+			m_Colors.Add(c1);
+			m_Colors.Add(c2);
+		}
+
 		public void Overwrite(Mesh mesh)
 		{
 			mesh.Clear();
@@ -42,6 +50,9 @@ namespace Common
 
 			if (m_UVs.Count > 0)
 				mesh.SetUVs(0, m_UVs);
+
+			if (m_Colors.Count > 0)
+				mesh.SetColors(m_Colors);
 
 			mesh.SetNormals(m_Normals);
 		}
@@ -57,9 +68,10 @@ namespace Common
 		{
 			m_Vertices.Clear();
 			m_Triangles.Clear();
-			m_UVs.Clear();
-
 			m_Normals.Clear();
+
+			m_UVs.Clear();
+			m_Colors.Clear();
 		}
 	}
 }
