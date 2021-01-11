@@ -29,6 +29,16 @@ namespace Common
 			new int[] { 1, 5, 6, 1, 6, 2, -1 }
 		};
 
+		public static readonly Vector3[] DIRECTIONS = new Vector3[]
+		{
+			Vector3.back,
+			Vector3.forward,
+			Vector3.left,
+			Vector3.right,
+			Vector3.down,
+			Vector3.up
+		};
+
 		public enum Direction
 		{
 			Back,
