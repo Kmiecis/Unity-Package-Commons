@@ -19,5 +19,15 @@ namespace Common
 			a = b;
 			b = t;
 		}
+
+		public static bool TryUpdate<T>(ref T value, T item)
+		{
+			if (!value.Equals(item))
+			{
+				value = item;
+				return true;
+			}
+			return false;
+		}
 	}
 }
