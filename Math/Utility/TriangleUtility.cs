@@ -5,6 +5,8 @@ namespace Common
 {
 	public static class TriangleUtility
 	{
+		public const int VCOUNT = 3;
+
 		/// <summary> Calculates area of a triangle defined by three vertices 'v0', 'v1' and 'v2' </summary>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float Area(Vector2 v0, Vector2 v1, Vector2 v2)

@@ -72,6 +72,31 @@ namespace Common
             }
         }
 
+		public static string GetAssetExtension(Material material)
+		{
+			return GetAssetExtension(EAssetType.Material);
+		}
+
+		public static string GetAssetExtension(Cubemap cubemap)
+		{
+			return GetAssetExtension(EAssetType.Cubemap);
+		}
+
+		public static string GetAssetExtension(GUISkin GUISkin)
+		{
+			return GetAssetExtension(EAssetType.GUISkin);
+		}
+
+		public static string GetAssetExtension(Animation animation)
+		{
+			return GetAssetExtension(EAssetType.Animation);
+		}
+
+		public static string GetAssetExtension(Object obj)
+		{
+			return GetAssetExtension(EAssetType.Other);
+		}
+
         public static string ConstructPathToAsset(string path, string name, EAssetType type)
         {
             return string.Format(GENERAL_PATH_FORMAT, path, name, GetAssetExtension(type));
