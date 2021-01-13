@@ -192,57 +192,57 @@ namespace Common
 
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2 Lerp(Vector2 a, Vector2 b, Vector2 v)
+		public static Vector2 Lerp(Vector2 a, Vector2 b, Vector2 t)
 		{
-			return a + Multiply(v, (b - a));
+			return a + Multiply(t, (b - a));
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector3 Lerp(Vector3 a, Vector3 b, Vector3 v)
+		public static Vector3 Lerp(Vector3 a, Vector3 b, Vector3 t)
 		{
-			return a + Multiply(v, b - a);
+			return a + Multiply(t, b - a);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector4 Lerp(Vector4 a, Vector4 b, Vector4 v)
+		public static Vector4 Lerp(Vector4 a, Vector4 b, Vector4 t)
 		{
-			return a + Multiply(v, b - a);
+			return a + Multiply(t, b - a);
 		}
 
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static float Unlerp(float a, float b, float v)
+		public static float Unlerp(float a, float b, float t)
 		{
-			return (v - a) / (b - a);
+			return (t - a) / (b - a);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2 Unlerp(Vector2 a, Vector2 b, Vector2 v)
+		public static Vector2 Unlerp(Vector2 a, Vector2 b, Vector2 t)
 		{
 			return new Vector2(
-				Unlerp(a.x, b.x, v.x),
-				Unlerp(a.y, b.y, v.y)
+				Unlerp(a.x, b.x, t.x),
+				Unlerp(a.y, b.y, t.y)
 			);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector3 Unlerp(Vector3 a, Vector3 b, Vector3 v)
+		public static Vector3 Unlerp(Vector3 a, Vector3 b, Vector3 t)
 		{
 			return new Vector3(
-				Unlerp(a.x, b.x, v.x),
-				Unlerp(a.y, b.y, v.y),
-				Unlerp(a.z, b.z, v.z)
+				Unlerp(a.x, b.x, t.x),
+				Unlerp(a.y, b.y, t.y),
+				Unlerp(a.z, b.z, t.z)
 			);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector4 Unlerp(Vector4 a, Vector4 b, Vector4 v)
+		public static Vector4 Unlerp(Vector4 a, Vector4 b, Vector4 t)
 		{
 			return new Vector4(
-				Unlerp(a.x, b.x, v.x),
-				Unlerp(a.y, b.y, v.y),
-				Unlerp(a.z, b.z, v.z),
-				Unlerp(a.w, b.w, v.w)
+				Unlerp(a.x, b.x, t.x),
+				Unlerp(a.y, b.y, t.y),
+				Unlerp(a.z, b.z, t.z),
+				Unlerp(a.w, b.w, t.w)
 			);
 		}
 
@@ -421,21 +421,21 @@ namespace Common
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2 SmootherStep(Vector2 f)
+		public static Vector2 SmootherStep(Vector2 v)
 		{
-			return Multiply(f, Multiply(f, Multiply(f, Add(Multiply(f, Subtract(Multiply(f, 6), 15)), 10))));
+			return Multiply(v, Multiply(v, Multiply(v, Add(Multiply(v, Subtract(Multiply(v, 6), 15)), 10))));
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector3 SmootherStep(Vector3 f)
+		public static Vector3 SmootherStep(Vector3 v)
 		{
-			return Multiply(f, Multiply(f, Multiply(f, Add(Multiply(f, Subtract(Multiply(f, 6), 15)), 10))));
+			return Multiply(v, Multiply(v, Multiply(v, Add(Multiply(v, Subtract(Multiply(v, 6), 15)), 10))));
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector4 SmootherStep(Vector4 f)
+		public static Vector4 SmootherStep(Vector4 v)
 		{
-			return Multiply(f, Multiply(f, Multiply(f, Add(Multiply(f, Subtract(Multiply(f, 6), 15)), 10))));
+			return Multiply(v, Multiply(v, Multiply(v, Add(Multiply(v, Subtract(Multiply(v, 6), 15)), 10))));
 		}
 		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -595,21 +595,21 @@ namespace Common
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2 Reciprocal(Vector2 f)
+		public static Vector2 Reciprocal(Vector2 v)
 		{
-			return Divide(1.0f, f);
+			return Divide(1.0f, v);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector3 Reciprocal(Vector3 f)
+		public static Vector3 Reciprocal(Vector3 v)
 		{
-			return Divide(1.0f, f);
+			return Divide(1.0f, v);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector4 Reciprocal(Vector4 f)
+		public static Vector4 Reciprocal(Vector4 v)
 		{
-			return Divide(1.0f, f);
+			return Divide(1.0f, v);
 		}
 
 
@@ -620,21 +620,21 @@ namespace Common
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2 ReciprocalSafe(Vector2 f)
+		public static Vector2 ReciprocalSafe(Vector2 v)
 		{
-			return Reciprocal(Vector2.Max(f, new Vector2(EPS, EPS)));
+			return Reciprocal(Vector2.Max(v, new Vector2(EPS, EPS)));
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector3 ReciprocalSafe(Vector3 f)
+		public static Vector3 ReciprocalSafe(Vector3 v)
 		{
-			return Reciprocal(Vector3.Max(f, new Vector3(EPS, EPS, EPS)));
+			return Reciprocal(Vector3.Max(v, new Vector3(EPS, EPS, EPS)));
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector4 ReciprocalSafe(Vector4 f)
+		public static Vector4 ReciprocalSafe(Vector4 v)
 		{
-			return Reciprocal(Vector4.Max(f, new Vector4(EPS, EPS, EPS, EPS)));
+			return Reciprocal(Vector4.Max(v, new Vector4(EPS, EPS, EPS, EPS)));
 		}
 
 
@@ -1041,6 +1041,116 @@ namespace Common
 		public static Vector4 Permute(Vector4 v, float p, float m)
 		{
 			return Mod(Multiply(Add(Multiply(p, v), 1.0f), v), m);
+		}
+
+
+		/// <summary> Computes the componentwise minimum of two Vector2 vectors </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Min(Vector2 a, Vector2 b)
+		{
+			return new Vector2(
+				Mathf.Min(a.x, b.x),
+				Mathf.Min(a.y, b.y)
+			);
+		}
+
+		/// <summary> Computes the componentwise minimum of two Vector3 vectors </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Min(Vector3 a, Vector3 b)
+		{
+			return new Vector3(
+				Mathf.Min(a.x, b.x),
+				Mathf.Min(a.y, b.y),
+				Mathf.Min(a.z, b.z)
+			);
+		}
+
+		/// <summary> Computes the componentwise minimum of two Vector4 vectors </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 Min(Vector4 a, Vector4 b)
+		{
+			return new Vector4(
+				Mathf.Min(a.x, b.x),
+				Mathf.Min(a.y, b.y),
+				Mathf.Min(a.z, b.z),
+				Mathf.Min(a.w, b.w)
+			);
+		}
+
+		/// <summary> Computes the componentwise minimum of two Vector2Int vectors </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2Int Min(Vector2Int a, Vector2Int b)
+		{
+			return new Vector2Int(
+				Mathf.Min(a.x, b.x),
+				Mathf.Min(a.y, b.y)
+			);
+		}
+
+		/// <summary> Computes the componentwise minimum of two Vector3Int vectors </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3Int Min(Vector3Int a, Vector3Int b)
+		{
+			return new Vector3Int(
+				Mathf.Min(a.x, b.x),
+				Mathf.Min(a.y, b.y),
+				Mathf.Min(a.z, b.z)
+			);
+		}
+
+
+		/// <summary> Computes the componentwise maximum of two Vector2 vectors </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Max(Vector2 a, Vector2 b)
+		{
+			return new Vector2(
+				Mathf.Max(a.x, b.x),
+				Mathf.Max(a.y, b.y)
+			);
+		}
+
+		/// <summary> Computes the componentwise maximum of two Vector3 vectors </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Max(Vector3 a, Vector3 b)
+		{
+			return new Vector3(
+				Mathf.Max(a.x, b.x),
+				Mathf.Max(a.y, b.y),
+				Mathf.Max(a.z, b.z)
+			);
+		}
+
+		/// <summary> Computes the componentwise maximum of two Vector4 vectors </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector4 Max(Vector4 a, Vector4 b)
+		{
+			return new Vector4(
+				Mathf.Max(a.x, b.x),
+				Mathf.Max(a.y, b.y),
+				Mathf.Max(a.z, b.z),
+				Mathf.Max(a.w, b.w)
+			);
+		}
+
+		/// <summary> Computes the componentwise maximum of two Vector2Int vectors </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2Int Max(Vector2Int a, Vector2Int b)
+		{
+			return new Vector2Int(
+				Mathf.Max(a.x, b.x),
+				Mathf.Max(a.y, b.y)
+			);
+		}
+
+		/// <summary> Computes the componentwise maximum of two Vector3Int vectors </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3Int Max(Vector3Int a, Vector3Int b)
+		{
+			return new Vector3Int(
+				Mathf.Max(a.x, b.x),
+				Mathf.Max(a.y, b.y),
+				Mathf.Max(a.z, b.z)
+			);
 		}
 
 
