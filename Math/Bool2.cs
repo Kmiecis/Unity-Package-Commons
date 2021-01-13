@@ -1,12 +1,16 @@
 using System;
+using System.Runtime.CompilerServices;
 
 namespace Common
 {
 	[Serializable]
-	public struct Bool2
+	public struct Bool2 : IEquatable<Bool2>
 	{
 		public bool x;
 		public bool y;
+
+		public static readonly Bool2 False = new Bool2(false, false);
+		public static readonly Bool2 True = new Bool2(true, true);
 
 		public Bool2(bool x, bool y)
 		{
@@ -48,7 +52,25 @@ namespace Common
 			}
 		}
 
-		public bool Equals(Bool3 other)
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public bool Any()
+		{
+			return (
+				this.x ||
+				this.y
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public bool All()
+		{
+			return (
+				this.x &&
+				this.y
+			);
+		}
+
+		public bool Equals(Bool2 other)
 		{
 			return (
 				this.x == other.x &&
@@ -68,7 +90,7 @@ namespace Common
 
 		public override string ToString()
 		{
-			return string.Format("[{0}, {1}]", x, y);
+			return string.Format("Bool2({0}, {1})", x, y);
 		}
 	}
 }

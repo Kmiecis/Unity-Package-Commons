@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace Common
 {
 	[Serializable]
-	public struct Bool3
+	public struct Bool3 : IEquatable<Bool3>
 	{
 		public bool x;
 		public bool y;
 		public bool z;
+
+		public static readonly Bool3 False = new Bool3(false, false, false);
+		public static readonly Bool3 True = new Bool3(true, true, true);
 
 		public Bool3(bool x, bool y, bool z)
 		{
@@ -52,6 +56,26 @@ namespace Common
 			}
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public bool Any()
+		{
+			return (
+				this.x ||
+				this.y ||
+				this.z
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public bool All()
+		{
+			return (
+				this.x &&
+				this.y &&
+				this.z
+			);
+		}
+
 		public bool Equals(Bool3 other)
 		{
 			return (
@@ -73,7 +97,7 @@ namespace Common
 
 		public override string ToString()
 		{
-			return string.Format("[{0}, {1}, {2}]", x, y, z);
+			return string.Format("Bool3({0}, {1}, {2})", x, y, z);
 		}
 	}
 }

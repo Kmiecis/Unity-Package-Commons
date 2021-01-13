@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace Common
 {
 	[Serializable]
-	public struct Bool4
+	public struct Bool4 : IEquatable<Bool4>
 	{
 		public bool x;
 		public bool y;
 		public bool z;
 		public bool w;
+
+		public static readonly Bool4 False = new Bool4(false, false, false, false);
+		public static readonly Bool4 True = new Bool4(true, true, true, true);
 
 		public Bool4(bool x, bool y, bool z, bool w)
 		{
@@ -39,7 +43,7 @@ namespace Common
 					case 2: return z;
 					case 3: return w;
 					default:
-						throw new IndexOutOfRangeException($"Invalid Bool3 index {index}");
+						throw new IndexOutOfRangeException($"Invalid Bool4 index {index}");
 				}
 			}
 			set
@@ -51,9 +55,31 @@ namespace Common
 					case 2: z = value; break;
 					case 3: w = value; break;
 					default:
-						throw new IndexOutOfRangeException($"Invalid Bool3 index {index}");
+						throw new IndexOutOfRangeException($"Invalid Bool4 index {index}");
 				}
 			}
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public bool Any()
+		{
+			return (
+				this.x ||
+				this.y ||
+				this.z ||
+				this.w
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public bool All()
+		{
+			return (
+				this.x &&
+				this.y &&
+				this.z &&
+				this.w
+			);
 		}
 
 		public bool Equals(Bool4 other)
@@ -78,7 +104,7 @@ namespace Common
 
 		public override string ToString()
 		{
-			return string.Format("[{0}, {1}, {2}, {3}]", x, y, z, w);
+			return string.Format("Bool4({0}, {1}, {2}, {3})", x, y, z, w);
 		}
 	}
 }
