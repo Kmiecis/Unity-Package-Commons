@@ -27,6 +27,12 @@ namespace Common
 			return list[list.Count - 1];
 		}
 
+		public static bool TryGetIndex<T>(this List<T> list, T item, out int index)
+		{
+			index = list.IndexOf(item);
+			return index != -1;
+		}
+
 		public static void RemoveLast<T>(this List<T> list)
 		{
 			list.RemoveAt(list.Count - 1);

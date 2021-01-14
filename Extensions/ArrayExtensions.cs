@@ -31,6 +31,12 @@ namespace Common
 			return arr[arr.Length - 1];
 		}
 
+		public static bool TryGetIndex<T>(this T[] arr, T value, out int index)
+		{
+			index = Array.IndexOf(arr, value);
+			return index != -1;
+		}
+
 		public static T[] Populate<T>(this T[] arr, T value)
 		{
 			for (int i = 0; i < arr.Length; ++i)
