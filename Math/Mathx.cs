@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Common
 {
-	public static class Mathx
+	public static partial class Mathx
 	{
 		private const float EPS = 1e-7f;
 
