@@ -9,8 +9,8 @@ namespace Common
 		public bool x;
 		public bool y;
 
-		public static readonly Bool2 False = new Bool2(false, false);
-		public static readonly Bool2 True = new Bool2(true, true);
+		public static readonly Bool2 False = new Bool2(false);
+		public static readonly Bool2 True = new Bool2(true);
 
 		public Bool2(bool x, bool y)
 		{
@@ -26,6 +26,66 @@ namespace Common
 		public Bool2(Bool2 b) :
 			this(b.x, b.y)
 		{
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static implicit operator Bool2(bool b)
+		{
+			return new Bool2(b);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Bool2 operator ==(Bool2 left, Bool2 right)
+		{
+			return new Bool2(
+				left.x == right.x,
+				left.y == right.y
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Bool2 operator ==(Bool2 left, bool right)
+		{
+			return new Bool2(
+				left.x == right,
+				left.y == right
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Bool2 operator ==(bool left, Bool2 right)
+		{
+			return new Bool2(
+				left == right.x,
+				left == right.y
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Bool2 operator !=(Bool2 left, Bool2 right)
+		{
+			return new Bool2(
+				left.x != right.x,
+				left.y != right.y
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Bool2 operator !=(Bool2 left, bool right)
+		{
+			return new Bool2(
+				left.x != right,
+				left.y != right
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Bool2 operator !=(bool left, Bool2 right)
+		{
+			return new Bool2(
+				left != right.x,
+				left != right.y
+			);
 		}
 
 		public bool this[int index]

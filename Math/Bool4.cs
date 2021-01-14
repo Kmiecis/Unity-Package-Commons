@@ -11,8 +11,8 @@ namespace Common
 		public bool z;
 		public bool w;
 
-		public static readonly Bool4 False = new Bool4(false, false, false, false);
-		public static readonly Bool4 True = new Bool4(true, true, true, true);
+		public static readonly Bool4 False = new Bool4(false);
+		public static readonly Bool4 True = new Bool4(true);
 
 		public Bool4(bool x, bool y, bool z, bool w)
 		{
@@ -30,6 +30,78 @@ namespace Common
 		public Bool4(Bool4 b) :
 			this(b.x, b.y, b.z, b.w)
 		{
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static implicit operator Bool4(bool b)
+		{
+			return new Bool4(b);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Bool4 operator ==(Bool4 left, Bool4 right)
+		{
+			return new Bool4(
+				left.x == right.x,
+				left.y == right.y,
+				left.z == right.z,
+				left.w == right.w
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Bool4 operator ==(Bool4 left, bool right)
+		{
+			return new Bool4(
+				left.x == right,
+				left.y == right,
+				left.z == right,
+				left.w == right
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Bool4 operator ==(bool left, Bool4 right)
+		{
+			return new Bool4(
+				left == right.x,
+				left == right.y,
+				left == right.z,
+				left == right.w
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Bool4 operator !=(Bool4 left, Bool4 right)
+		{
+			return new Bool4(
+				left.x != right.x,
+				left.y != right.y,
+				left.z != right.z,
+				left.w != right.w
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Bool4 operator !=(Bool4 left, bool right)
+		{
+			return new Bool4(
+				left.x != right,
+				left.y != right,
+				left.z != right,
+				left.w != right
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Bool4 operator !=(bool left, Bool4 right)
+		{
+			return new Bool4(
+				left != right.x,
+				left != right.y,
+				left != right.z,
+				left != right.w
+			);
 		}
 
 		public bool this[int index]
