@@ -12,17 +12,20 @@ namespace Common
 		public static readonly Bool2 False = new Bool2(false);
 		public static readonly Bool2 True = new Bool2(true);
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public Bool2(bool x, bool y)
 		{
 			this.x = x;
 			this.y = y;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public Bool2(bool b) :
 			this(b, b)
 		{
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public Bool2(Bool2 b) :
 			this(b.x, b.y)
 		{

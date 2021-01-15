@@ -14,6 +14,7 @@ namespace Common
 		public static readonly Bool4 False = new Bool4(false);
 		public static readonly Bool4 True = new Bool4(true);
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public Bool4(bool x, bool y, bool z, bool w)
 		{
 			this.x = x;
@@ -22,11 +23,13 @@ namespace Common
 			this.w = w;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public Bool4(bool b) :
 			this(b, b, b, b)
 		{
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public Bool4(Bool4 b) :
 			this(b.x, b.y, b.z, b.w)
 		{

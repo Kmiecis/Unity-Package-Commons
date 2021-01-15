@@ -13,6 +13,7 @@ namespace Common
 		public static readonly Bool3 False = new Bool3(false);
 		public static readonly Bool3 True = new Bool3(true);
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public Bool3(bool x, bool y, bool z)
 		{
 			this.x = x;
@@ -20,11 +21,13 @@ namespace Common
 			this.z = z;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public Bool3(bool b) :
 			this(b, b, b)
 		{
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public Bool3(Bool3 b) :
 			this(b.x, b.y, b.z)
 		{
