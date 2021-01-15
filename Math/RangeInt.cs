@@ -9,8 +9,12 @@ namespace Common
 		public int min;
 		public int max;
 
-		public static readonly RangeInt Max = new RangeInt(int.MinValue, int.MaxValue);
+		public static readonly RangeInt Max = new RangeInt(
+			int.MinValue,
+			int.MaxValue
+		);
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public RangeInt(int min, int max)
 		{
 			this.min = min;

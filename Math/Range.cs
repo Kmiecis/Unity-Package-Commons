@@ -9,8 +9,12 @@ namespace Common
 		public float min;
 		public float max;
 
-		public static readonly Range Max = new Range(float.MinValue, float.MaxValue);
+		public static readonly Range Max = new Range(
+			float.MinValue,
+			float.MaxValue
+		);
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public Range(float min, float max)
 		{
 			this.min = min;
