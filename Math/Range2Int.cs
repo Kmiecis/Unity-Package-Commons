@@ -10,8 +10,12 @@ namespace Common
 		public Vector2Int min;
 		public Vector2Int max;
 
-		public static readonly Range2Int Max = new Range2Int(Vector2Int.one * int.MinValue, Vector2Int.one * int.MaxValue);
+		public static readonly Range2Int Max = new Range2Int(
+			Vector2Int.one * int.MinValue,
+			Vector2Int.one * int.MaxValue
+		);
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public Range2Int(Vector2Int min, Vector2Int max)
 		{
 			this.min = min;
@@ -28,8 +32,8 @@ namespace Common
 		public bool Contains(Vector2Int v)
 		{
 			return (
-				Mathx.IsLesserOrEqual(min, v).All() &&
-				Mathx.IsLesserOrEqual(v, max).All()
+				Mathx.AreLesserOrEqual(min, v) &&
+				Mathx.AreLesserOrEqual(v, max)
 			);
 		}
 
@@ -37,8 +41,8 @@ namespace Common
 		public bool Contains(Range2Int other)
 		{
 			return (
-				Mathx.IsLesserOrEqual(min, other.min).All() &&
-				Mathx.IsLesserOrEqual(other.max, max).All()
+				Mathx.AreLesserOrEqual(min, other.min) &&
+				Mathx.AreLesserOrEqual(other.max, max)
 			);
 		}
 
@@ -46,8 +50,8 @@ namespace Common
 		public bool Overlaps(Range2Int other)
 		{
 			return (
-				Mathx.IsLesserOrEqual(min, other.max).All() &&
-				Mathx.IsLesserOrEqual(other.min, max).All()
+				Mathx.AreLesserOrEqual(min, other.max) &&
+				Mathx.AreLesserOrEqual(other.min, max)
 			);
 		}
 
