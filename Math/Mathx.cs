@@ -788,12 +788,39 @@ namespace Common
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static int Select(int a, int b, bool c)
+		{
+			return c ? b : a;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector2 Select(Vector2 a, Vector2 b, Bool2 c)
 		{
 			return new Vector2(
 				Select(a.x, b.x, c.x),
 				Select(a.y, b.y, c.y)
 			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2 Select(Vector2 a, Vector2 b, bool c)
+		{
+			return c ? b : a;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2Int Select(Vector2Int a, Vector2Int b, Bool2 c)
+		{
+			return new Vector2Int(
+				Select(a.x, b.x, c.x),
+				Select(a.y, b.y, c.y)
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector2Int Select(Vector2Int a, Vector2Int b, bool c)
+		{
+			return c ? b : a;
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -807,6 +834,28 @@ namespace Common
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Select(Vector3 a, Vector3 b, bool c)
+		{
+			return c ? b : a;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3Int Select(Vector3Int a, Vector3Int b, Bool3 c)
+		{
+			return new Vector3Int(
+				Select(a.x, b.x, c.x),
+				Select(a.y, b.y, c.y),
+				Select(a.z, b.z, c.z)
+			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3Int Select(Vector3Int a, Vector3Int b, bool c)
+		{
+			return c ? b : a;
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector4 Select(Vector4 a, Vector4 b, Bool4 c)
 		{
 			return new Vector4(
@@ -816,19 +865,7 @@ namespace Common
 				Select(a.w, b.w, c.w)
 			);
 		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector2 Select(Vector2 a, Vector2 b, bool c)
-		{
-			return c ? b : a;
-		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public static Vector3 Select(Vector3 a, Vector3 b, bool c)
-		{
-			return c ? b : a;
-		}
-
+		
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector4 Select(Vector4 a, Vector4 b, bool c)
 		{
