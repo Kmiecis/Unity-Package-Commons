@@ -13,20 +13,36 @@ namespace Common
 			target = value;
 		}
 
+		public static bool EqualsSafely(object left, object right)
+		{
+			return left != null && right != null && left.Equals(right);
+		}
+
 		public static void Swap<T>(ref T a, ref T b)
 		{
 			T t = a;
 			a = b;
 			b = t;
 		}
-
+		
 		public static bool TryUpdate<T>(ref T value, T item)
 		{
-			if (!value.Equals(item))
+			if (!EqualsSafely(value, item))
 			{
 				value = item;
 				return true;
 			}
+			return false;
+		}
+
+		public static bool TryCast<T>(object obj, T cast)
+		{
+			if (obj is T)
+			{
+				cast = (T)obj;
+				return true;
+			}
+			cast = default;
 			return false;
 		}
 	}
