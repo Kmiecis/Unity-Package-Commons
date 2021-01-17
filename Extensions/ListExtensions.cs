@@ -33,6 +33,12 @@ namespace Common
 			return index != -1;
 		}
 
+		public static void AddUnique<T>(this List<T> list, T item)
+		{
+			if (!list.Contains(item))
+				list.Add(item);
+		}
+
 		public static void RemoveLast<T>(this List<T> list)
 		{
 			list.RemoveAt(list.Count - 1);
