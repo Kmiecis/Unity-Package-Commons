@@ -33,10 +33,14 @@ namespace Common
 			return index != -1;
 		}
 
-		public static void AddUnique<T>(this List<T> list, T item)
+		public static bool AddUnique<T>(this List<T> list, T item)
 		{
 			if (!list.Contains(item))
+			{
 				list.Add(item);
+				return true;
+			}
+			return false;
 		}
 
 		public static void RemoveLast<T>(this List<T> list)
