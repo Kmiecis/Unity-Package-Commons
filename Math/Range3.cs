@@ -22,6 +22,12 @@ namespace Common
 			this.max = max;
 		}
 
+		public Vector3 Center
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			get { return (max + min) * 0.5f; }
+		}
+
 		public Vector3 Extents
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]

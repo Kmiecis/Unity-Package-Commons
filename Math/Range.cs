@@ -21,6 +21,12 @@ namespace Common
 			this.max = max;
 		}
 
+		public float Center
+		{
+			[MethodImpl(MethodImplOptions.AggressiveInlining)]
+			get { return (max + min) * 0.5f; }
+		}
+
 		public float Length
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
