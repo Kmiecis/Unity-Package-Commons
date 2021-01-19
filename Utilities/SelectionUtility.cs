@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿#if UNITY_EDITOR
+using System.IO;
 using UnityEditor;
 
 namespace Common
@@ -34,3 +35,4 @@ namespace Common
 		}
 	}
 }
+#endif
