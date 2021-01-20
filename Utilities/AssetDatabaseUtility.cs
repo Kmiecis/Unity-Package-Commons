@@ -65,11 +65,11 @@ namespace Common
         {
             switch (assetType)
             {
-                case EAssetType.Material: return ".mat";
-                case EAssetType.Cubemap: return ".cubemap";
-                case EAssetType.GUISkin: return ".GUISkin";
-                case EAssetType.Animation: return ".anim";
-                default: return ".asset";
+                case EAssetType.Material: return "mat";
+                case EAssetType.Cubemap: return "cubemap";
+                case EAssetType.GUISkin: return "GUISkin";
+                case EAssetType.Animation: return "anim";
+                default: return "asset";
             }
         }
 

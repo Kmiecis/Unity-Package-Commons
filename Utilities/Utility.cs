@@ -35,7 +35,7 @@ namespace Common
 			return false;
 		}
 
-		public static bool TryCast<T>(object obj, T cast)
+		public static bool TryCast<T>(object obj, out T cast)
 		{
 			if (obj is T)
 			{
