@@ -32,11 +32,16 @@ namespace Common
 			this.m_Pixels = new Color32[width * height];
 		}
 
+		public void Overwrite(Texture2D texture)
+		{
+			texture.SetPixels32(m_Pixels);
+			texture.Apply();
+		}
+
 		public Texture2D Build()
 		{
 			var texture = new Texture2D(m_Width, m_Height);
-			texture.SetPixels32(m_Pixels);
-			texture.Apply();
+			Overwrite(texture);
 			return texture;
 		}
 	}
