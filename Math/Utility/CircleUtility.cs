@@ -41,6 +41,16 @@ namespace Common
 			return d.x * d.x + d.y * d.y < r * r;
 		}
 
+		/// <summary> Returns whether circle 'a' with center in 'ac' and radius 'ar' collides with circle 'b' with center in 'bc' and radius 'br' </summary>
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static bool Collides(Vector2 ac, float ar, Vector2 bc, float br)
+		{
+			var dx = bc.x - ac.x;
+			var dy = bc.y - ac.y;
+			var sr = ar + br;
+			return dx * dx + dy * dy <= sr * sr;
+		}
+
 		/// <summary> Calculates circle with center in 'c' and radius 'r' from points 'v0', 'v1' and 'v2' </summary>
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static bool Create(Vector2 v0, Vector2 v1, Vector2 v2, out Vector2 c, out float r)
