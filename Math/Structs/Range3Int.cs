@@ -10,6 +10,8 @@ namespace Common
 		public Vector3Int min;
 		public Vector3Int max;
 
+		public static readonly Range3Int Zero;
+
 		public static readonly Range3Int Max = new Range3Int(
 			Vector3Int.one * int.MinValue,
 			Vector3Int.one * int.MaxValue

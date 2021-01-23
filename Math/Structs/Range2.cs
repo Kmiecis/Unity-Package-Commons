@@ -10,6 +10,8 @@ namespace Common
 		public Vector2 min;
 		public Vector2 max;
 
+		public static readonly Range2 Zero;
+
 		public static readonly Range2 Max = new Range2(
 			Vector2.one * float.MinValue,
 			Vector2.one * float.MaxValue

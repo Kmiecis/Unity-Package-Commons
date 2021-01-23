@@ -9,6 +9,8 @@ namespace Common
 		public float min;
 		public float max;
 
+		public static readonly Range Zero;
+
 		public static readonly Range Max = new Range(
 			float.MinValue,
 			float.MaxValue

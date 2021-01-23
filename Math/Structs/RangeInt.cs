@@ -9,6 +9,8 @@ namespace Common
 		public int min;
 		public int max;
 
+		public static readonly RangeInt Zero;
+
 		public static readonly RangeInt Max = new RangeInt(
 			int.MinValue,
 			int.MaxValue

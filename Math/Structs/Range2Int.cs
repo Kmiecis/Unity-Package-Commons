@@ -10,6 +10,8 @@ namespace Common
 		public Vector2Int min;
 		public Vector2Int max;
 
+		public static readonly Range2Int Zero;
+
 		public static readonly Range2Int Max = new Range2Int(
 			Vector2Int.one * int.MinValue,
 			Vector2Int.one * int.MaxValue
