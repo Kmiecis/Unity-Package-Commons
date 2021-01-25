@@ -5,6 +5,23 @@ namespace Common
 {
 	public static class RectUtility
 	{
+		public enum Directions
+		{
+			Left,
+			Up,
+			Right,
+			Down,
+			Count
+		}
+
+		public static readonly Vector2Int[] DIRECTIONS = new Vector2Int[]
+		{
+			Vector2Int.left,
+			Vector2Int.up,
+			Vector2Int.right,
+			Vector2Int.down
+		};
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static Vector3[] GetRect3D(Vector3 center, Vector3 normal, Vector2 size)
 		{
