@@ -95,22 +95,23 @@ namespace Common
 
 		/// <summary> Noise Map generator </summary>
 		public static float[,] Map(
-			Vector2Int extents, Vector2Int offset = default,
+			int width, int height, int dx = 0, int dy = 0,
 			int octaves = 1, float persistance = 0.5f, float lacunarity = 2.0f,
-			Vector2 scale = default, int seed = 0
+			float sx = 1.0f, float sy = 1.0f, int seed = 0
 		)
 		{
-			var map = new float[extents.x, extents.y];
+			var map = new float[width, height];
 			var random = new Random(seed);
 
-			var randomOffset = new Vector2(random.NextFloat(-99999.0f, +99999.0f), random.NextFloat(-99999.0f, +99999.0f));
-			var middleOffset = Mathx.Multiply(extents, 0.5f);
-			var reciprocalExtents = Mathx.Reciprocal(extents);
-			var reciprocalScale = Mathx.Reciprocal(Vector2.Max(scale, new Vector2(1e-5f, 1e-5f)));
+			var rdx = random.NextFloat(-99999.0f, +99999.0f);
+			var rdy = random.NextFloat(-99999.0f, +99999.0f);
 
-			for (int y = 0; y < extents.y; ++y)
+			var fx = 1.0f / (sx * width);
+			var fy = 1.0f / (sy * height);
+
+			for (int y = 0; y < height; ++y)
 			{
-				for (int x = 0; x < extents.x; ++x)
+				for (int x = 0; x < width; ++x)
 				{
 					float amplitude = 1.0f;
 					float frequency = 1.0f;
@@ -118,11 +119,11 @@ namespace Common
 
 					for (int i = 0; i < octaves; ++i)
 					{
-						float sampleX = ((x - middleOffset.x + offset.x) * reciprocalScale.x * reciprocalExtents.x) * frequency + randomOffset.x;
-						float sampleY = ((y - middleOffset.y + offset.y) * reciprocalScale.y * reciprocalExtents.y) * frequency + randomOffset.y;
+						float sampleX = ((x - dx) * fx) * frequency + rdx;
+						float sampleY = ((y - dy) * fy) * frequency + rdy;
 
-						float perlinValue = Mathf.PerlinNoise(sampleX, sampleY);
-						value += perlinValue * amplitude;
+						float pv = Mathf.PerlinNoise(sampleX, sampleY);
+						value += pv * amplitude;
 
 						amplitude *= persistance;
 						frequency *= lacunarity;
@@ -137,12 +138,12 @@ namespace Common
 
 		/// <summary> Noise Map generator smoothed to [0 .. 1] values </summary>
 		public static float[,] SmoothMap(
-			Vector2Int extents, Vector2Int offset = default,
+			int width, int height, int dx = 0, int dy = 0,
 			int octaves = 1, float persistance = 0.5f, float lacunarity = 2.0f,
-			Vector2 scale = default, int seed = 0
+			float sx = 1.0f, float sy = 1.0f, int seed = 0
 		)
 		{
-			var map = new float[extents.x, extents.y];
+			var map = new float[width, height];
 			var random = new Random(seed);
 
 			var noiseHeightMinMax = new Vector2(0.0f, 1.0f);
@@ -153,14 +154,15 @@ namespace Common
 				noiseHeightMinMax.y += persistanceAffection * 0.75f;
 			}
 
-			var randomOffset = new Vector2(random.NextFloat(-99999.0f, +99999.0f), random.NextFloat(-99999.0f, +99999.0f));
-			var middleOffset = Mathx.Multiply(extents, 0.5f);
-			var revertedExtents = Mathx.Reciprocal(extents);
-			var revertedScale = Mathx.Reciprocal(Vector2.Max(scale, new Vector2(1e-5f, 1e-5f)));
+			var rdx = random.NextFloat(-99999.0f, +99999.0f);
+			var rdy = random.NextFloat(-99999.0f, +99999.0f);
 
-			for (int y = 0; y < extents.y; ++y)
+			var fx = 1.0f / (sx * width);
+			var fy = 1.0f / (sy * height);
+
+			for (int y = 0; y < height; ++y)
 			{
-				for (int x = 0; x < extents.x; ++x)
+				for (int x = 0; x < width; ++x)
 				{
 					float amplitude = 1.0f;
 					float frequency = 1.0f;
@@ -168,11 +170,11 @@ namespace Common
 
 					for (int i = 0; i < octaves; ++i)
 					{
-						float sampleX = ((x - middleOffset.x + offset.x) * revertedScale.x * revertedExtents.x) * frequency + randomOffset.x;
-						float sampleY = ((y - middleOffset.y + offset.y) * revertedScale.y * revertedExtents.y) * frequency + randomOffset.y;
+						float sampleX = ((x - dx) * fx) * frequency + rdx;
+						float sampleY = ((y - dy) * fy) * frequency + rdy;
 
-						float perlinValue = Mathf.PerlinNoise(sampleX, sampleY);
-						value += perlinValue * amplitude;
+						float pv = Mathf.PerlinNoise(sampleX, sampleY);
+						value += pv * amplitude;
 
 						amplitude *= persistance;
 						frequency *= lacunarity;
@@ -186,35 +188,35 @@ namespace Common
 		}
 
 		/// <summary> Noise Map generator smoothed to [0 .. 1] values </summary>
-		public static bool[,] RandomMap(Vector2Int extents, float fill = 0.5f, int smooths = 5, int seed = 0)
+		public static bool[,] RandomMap(int width, int height, float fill = 0.5f, int smooths = 5, int seed = 0)
 		{
-			var map = new bool[extents.x, extents.y];
+			var map = new bool[width, height];
 			var random = new Random(seed);
 
-			for (int y = 0; y < extents.y; ++y)
+			for (int y = 0; y < height; ++y)
 			{
-				for (int x = 0; x < extents.x; ++x)
+				for (int x = 0; x < width; ++x)
 				{
 					var randomValue = random.NextFloat();
 					map[x, y] = randomValue < fill;
 				}
 			}
 
-			var smoothMap = new bool[extents.x, extents.y];
+			var smoothMap = new bool[width, height];
 			for (int i = 0; i < smooths; ++i)
 			{
-				for (int y = 0; y < extents.y; ++y)
+				for (int y = 0; y < height; ++y)
 				{
-					for (int x = 0; x < extents.x; ++x)
+					for (int x = 0; x < width; ++x)
 					{
 						int counter = 0;
 
 						int dyMin = Mathf.Max(y - 1, 0);
-						int dyMax = Mathf.Min(y + 1, extents.y - 1);
+						int dyMax = Mathf.Min(y + 1, height - 1);
 						for (int dy = dyMin; dy <= dyMax; ++dy)
 						{
 							int dxMin = Mathf.Max(x - 1, 0);
-							int dxMax = Mathf.Min(x + 1, extents.x - 1);
+							int dxMax = Mathf.Min(x + 1, width - 1);
 							for (int dx = dxMin; dx <= dxMax; ++dx)
 							{
 								if (dx == x && dy == y)
