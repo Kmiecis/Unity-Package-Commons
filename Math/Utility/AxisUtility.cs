@@ -6,9 +6,9 @@ namespace Common
 	{
 		public static readonly Vector3Int[] AXES = new Vector3Int[]
 		{
-			Vector3Int.right,
-			Vector3Int.up,
-			Vector3Int.forward
+			new Vector3Int(1, 0, 0),
+			new Vector3Int(0, 1, 0),
+			new Vector3Int(0, 0, 1)
 		};
 
 		public enum Axes

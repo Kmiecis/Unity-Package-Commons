@@ -22,12 +22,12 @@ namespace Common
 		public const int DCOUNT = 6;
 		public static readonly Vector3Int[] DIRECTIONS = new Vector3Int[]
 		{
-			Vector3Int.back,
-			Vector3Int.forward,
-			Vector3Int.left,
-			Vector3Int.right,
-			Vector3Int.down,
-			Vector3Int.up
+			new Vector3Int(0, 0, -1),
+			new Vector3Int(0, 0, +1),
+			new Vector3Int(-1, 0, 0),
+			new Vector3Int(+1, 0, 0),
+			new Vector3Int(0, -1, 0),
+			new Vector3Int(0, +1, 0)
 		};
 
 		public static readonly int[][] TRIANGLES = new int[][]

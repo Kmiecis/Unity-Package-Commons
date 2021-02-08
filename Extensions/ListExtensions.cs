@@ -75,6 +75,13 @@ namespace Common
 			return last;
 		}
 
+		public static void Swap<T>(this List<T> list, int i, int j)
+		{
+			var t = list[i];
+			list[i] = list[j];
+			list[j] = t;
+		}
+
 		public static void Shuffle<T>(this List<T> list, int seed = default)
 		{
 			var random = new Random(seed);
@@ -82,9 +89,7 @@ namespace Common
 			while (n-- > 1)
 			{
 				int k = random.Next(0, n);
-				T value = list[k];
-				list[k] = list[n];
-				list[n] = value;
+				list.Swap(k, n);
 			}
 		}
 

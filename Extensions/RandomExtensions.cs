@@ -18,5 +18,10 @@ namespace Common
 		{
 			return min + NextFloat(random) * (max - min);
 		}
+
+		public static bool NextBool(this Random random)
+		{
+			return random.Next(2) == 1;
+		}
 	}
 }
