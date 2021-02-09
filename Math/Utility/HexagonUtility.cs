@@ -8,7 +8,7 @@ namespace Common
 		public const float CENTER_TO_SIDE = 0.5f;
 		public const float CENTER_TO_VERTEX = CENTER_TO_SIDE * (2.0f / Mathx.ROOT_3);
 
-		public static readonly Vector2[] V2 = new Vector2[]
+		public static readonly Vector2[] Vertices2D = new Vector2[]
 		{
 			new Vector2(0.0f, +CENTER_TO_VERTEX),
 			new Vector2(+CENTER_TO_SIDE, +CENTER_TO_VERTEX * 0.5f),
@@ -18,7 +18,7 @@ namespace Common
 			new Vector2(-CENTER_TO_SIDE, +CENTER_TO_VERTEX * 0.5f),
 		};
 
-		public static readonly Vector3[] V3 = new Vector3[]
+		public static readonly Vector3[] Vertices3D = new Vector3[]
 		{
 			new Vector3(0.0f, 0.0f, +CENTER_TO_VERTEX),
 			new Vector3(+CENTER_TO_SIDE, 0.0f, +CENTER_TO_VERTEX * 0.5f),
@@ -28,7 +28,7 @@ namespace Common
 			new Vector3(-CENTER_TO_SIDE, 0.0f, +CENTER_TO_VERTEX * 0.5f),
 		};
 
-		public static readonly Vector2Int[] T2 = new Vector2Int[]
+		public static readonly Vector2Int[] Directions2D = new Vector2Int[]
 		{
 			new Vector2Int() { x = +0, y = +1 },
 			new Vector2Int() { x = +1, y = +0 },

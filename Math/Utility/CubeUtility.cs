@@ -4,10 +4,10 @@ namespace Common
 {
 	public static class CubeUtility
 	{
+		public const int VCOUNT = 6;
 		public const float CENTER_TO_SIDE = 0.5f;
 
-		public const int VCOUNT = 8;
-		public static readonly Vector3[] VERTICES = new Vector3[]
+		public static readonly Vector3[] Vertices = new Vector3[]
 		{
 			new Vector3(-CENTER_TO_SIDE, -CENTER_TO_SIDE, -CENTER_TO_SIDE),
 			new Vector3(-CENTER_TO_SIDE, +CENTER_TO_SIDE, -CENTER_TO_SIDE),
@@ -19,36 +19,14 @@ namespace Common
 			new Vector3(+CENTER_TO_SIDE, -CENTER_TO_SIDE, +CENTER_TO_SIDE)
 		};
 		
-		public const int DCOUNT = 6;
-		public static readonly Vector3Int[] DIRECTIONS = new Vector3Int[]
+		public static readonly int[][] Triangles = new int[][]
 		{
-			new Vector3Int(0, 0, -1),
-			new Vector3Int(0, 0, +1),
-			new Vector3Int(-1, 0, 0),
-			new Vector3Int(+1, 0, 0),
-			new Vector3Int(0, -1, 0),
-			new Vector3Int(0, +1, 0)
-		};
-
-		public static readonly int[][] TRIANGLES = new int[][]
-		{
-			new int[] { 0, 1, 2, 0, 2, 3, -1 },
-			new int[] { 7, 6, 5, 7, 5, 4, -1 },
 			new int[] { 4, 5, 1, 4, 1, 0, -1 },
 			new int[] { 3, 2, 6, 3, 6, 7, -1 },
 			new int[] { 4, 0, 3, 4, 3, 7, -1 },
-			new int[] { 1, 5, 6, 1, 6, 2, -1 }
+			new int[] { 1, 5, 6, 1, 6, 2, -1 },
+			new int[] { 0, 1, 2, 0, 2, 3, -1 },
+			new int[] { 7, 6, 5, 7, 5, 4, -1 }
 		};
-
-		public enum Direction
-		{
-			Back,
-			Forward,
-			Left,
-			Right,
-			Down,
-			Up,
-			Count
-		}
 	}
 }
