@@ -24,6 +24,12 @@ namespace Common
 			this.max = max;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public Range2(float minX, float minY, float maxX, float maxY) :
+			this(new Vector2(minX, minY), new Vector2(maxX, maxY))
+		{
+		}
+
 		public Vector2 Center
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]

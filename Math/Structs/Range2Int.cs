@@ -24,6 +24,12 @@ namespace Common
 			this.max = max;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public Range2Int(int minX, int minY, int maxX, int maxY) :
+			this(new Vector2Int(minX, minY), new Vector2Int(maxX, maxY))
+		{
+		}
+
 		public Vector2 Center
 		{
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
