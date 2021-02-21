@@ -25,9 +25,10 @@ namespace Common
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public Range3Int(int minX, int minY, int minZ, int maxX, int maxY, int maxZ) :
-			this(new Vector3Int(minX, minY, minZ), new Vector3Int(maxX, maxY, maxZ))
+		public Range3Int(int minX, int minY, int minZ, int maxX, int maxY, int maxZ)
 		{
+			this.min = new Vector3Int(minX, minY, minZ);
+			this.max = new Vector3Int(maxX, maxY, maxZ);
 		}
 
 		public Vector3 Center

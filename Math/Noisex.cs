@@ -202,7 +202,6 @@ namespace Common
 				}
 			}
 
-			var smoothMap = new bool[width, height];
 			for (int i = 0; i < smooths; ++i)
 			{
 				for (int y = 0; y < height; ++y)
@@ -231,11 +230,12 @@ namespace Common
 							}
 						}
 
-						smoothMap[x, y] = counter > 4;
+						if (counter != 4)
+						{
+							map[x, y] = counter > 4;
+						}
 					}
 				}
-
-				Utility.Swap(ref map, ref smoothMap);
 			}
 
 			return map;
