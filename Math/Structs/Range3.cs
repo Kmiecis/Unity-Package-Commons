@@ -44,12 +44,22 @@ namespace Common
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public bool Contains(Vector3 v)
+		public bool Contains(float x, float y, float z)
 		{
 			return (
-				Mathx.AreLesserOrEqual(min, v) &&
-				Mathx.AreLesserOrEqual(v, max)
+				min.x <= x &&
+				min.y <= y &&
+				min.z <= z &&
+				x <= max.x &&
+				y <= max.y &&
+				z <= max.z
 			);
+		}
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public bool Contains(Vector3 v)
+		{
+			return Contains(v.x, v.y, v.z);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]

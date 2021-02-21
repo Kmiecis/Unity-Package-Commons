@@ -42,14 +42,22 @@ namespace Common
 			[MethodImpl(MethodImplOptions.AggressiveInlining)]
 			get { return max - min; }
 		}
-		
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public bool Contains(int x, int y)
+		{
+			return (
+				min.x <= x &&
+				min.y <= y &&
+				x <= max.x &&
+				y <= max.y
+			);
+		}
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool Contains(Vector2Int v)
 		{
-			return (
-				Mathx.AreLesserOrEqual(min, v) &&
-				Mathx.AreLesserOrEqual(v, max)
-			);
+			return Contains(v.x, v.y);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
