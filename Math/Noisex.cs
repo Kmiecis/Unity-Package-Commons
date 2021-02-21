@@ -187,8 +187,8 @@ namespace Common
 			return map;
 		}
 
-		/// <summary> Noise Map generator smoothed to [0 .. 1] values </summary>
-		public static bool[,] RandomMap(int width, int height, float fill = 0.5f, int smooths = 5, int seed = 0)
+		/// <summary> Random Map generated as [true/false] values </summary>
+		public static bool[,] GenerateRandomMap(int width, int height, float fill = 0.5f, int seed = 0)
 		{
 			var map = new bool[width, height];
 			var random = new Random(seed);
@@ -202,31 +202,34 @@ namespace Common
 				}
 			}
 
-			for (int i = 0; i < smooths; ++i)
+			return map;
+		}
+
+		/// <summary> Random Map smoothing algorithm implemented as Cellular Automata </summary>
+		public static void SmoothRandomMap(bool[,] map, int iterations = 5)
+		{
+			int width = map.GetLength(0);
+			int height = map.GetLength(1);
+
+			var mapRange = new Range2Int(0, 0, width - 1, height - 1);
+
+			for (int i = 0; i < iterations; i++)
 			{
-				for (int y = 0; y < height; ++y)
+				for (int y = 0; y < height; y++)
 				{
-					for (int x = 0; x < width; ++x)
+					for (int x = 0; x < width; x++)
 					{
 						int counter = 0;
 
-						int dyMin = Mathf.Max(y - 1, 0);
-						int dyMax = Mathf.Min(y + 1, height - 1);
-						for (int dy = dyMin; dy <= dyMax; ++dy)
+						for (int dy = y - 1; dy <= y + 1; dy++)
 						{
-							int dxMin = Mathf.Max(x - 1, 0);
-							int dxMax = Mathf.Min(x + 1, width - 1);
-							for (int dx = dxMin; dx <= dxMax; ++dx)
+							for (int dx = x - 1; dx <= x + 1; dx++)
 							{
 								if (dx == x && dy == y)
-								{
 									continue;
-								}
 
-								if (map[dx, dy])
-								{
+								if (!mapRange.Contains(dx, dy) || map[dx, dy])
 									counter += 1;
-								}
 							}
 						}
 
@@ -237,8 +240,6 @@ namespace Common
 					}
 				}
 			}
-
-			return map;
 		}
 	}
 }
