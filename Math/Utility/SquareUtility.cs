@@ -4,24 +4,26 @@ namespace Common
 {
 	public static class SquareUtility
 	{
-		public const int VCOUNT = 4;
-		public const float CENTER_TO_SIDE = 0.5f;
-		public const float CENTER_TO_VERTEX = Mathx.ROOT_2 * 0.5f;
+		public const int VERTEX_COUNT = 4;
+		public const float SIDE_LENGTH = 1.0f;
+		public const float CENTER_TO_SIDE = SIDE_LENGTH * 0.5f;
+		public const float CENTER_TO_VERTEX = Mathx.ROOT_2 * CENTER_TO_SIDE;
 
-		public static readonly Vector2[] Vertices2D = new Vector2[]
+		/*
+		 __ __ __ __
+		1           2
+		|           |
+		|           |
+		|           |
+		0__ __ __ __3
+		*/
+
+		public static readonly Vector2[] Vertices = new Vector2[]
 		{
 			new Vector2(-CENTER_TO_SIDE, -CENTER_TO_SIDE),
 			new Vector2(-CENTER_TO_SIDE, +CENTER_TO_SIDE),
 			new Vector2(+CENTER_TO_SIDE, +CENTER_TO_SIDE),
 			new Vector2(+CENTER_TO_SIDE, -CENTER_TO_SIDE)
-		};
-
-		public static readonly Vector3[] Vertices3D = new Vector3[]
-		{
-			new Vector3(-CENTER_TO_SIDE, 0.0f, -CENTER_TO_SIDE),
-			new Vector3(-CENTER_TO_SIDE, 0.0f, +CENTER_TO_SIDE),
-			new Vector3(+CENTER_TO_SIDE, 0.0f, +CENTER_TO_SIDE),
-			new Vector3(+CENTER_TO_SIDE, 0.0f, -CENTER_TO_SIDE)
 		};
 	}
 }

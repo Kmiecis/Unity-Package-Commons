@@ -4,8 +4,9 @@ namespace Common
 {
 	public static class CubeUtility
 	{
-		public const int VCOUNT = 6;
-		public const float CENTER_TO_SIDE = 0.5f;
+		public const int VERTEX_COUNT = 6;
+		public const float SIDE_LENGTH = 1.0f;
+		public const float CENTER_TO_SIDE = SIDE_LENGTH * 0.5f;
 
 		public static readonly Vector3[] Vertices = new Vector3[]
 		{
