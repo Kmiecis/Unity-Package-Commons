@@ -4,7 +4,6 @@ namespace Common
 {
 	public static class CubeUtility
 	{
-		public const int VERTEX_COUNT = 6;
 		public const float SIDE_LENGTH = 1.0f;
 		public const float CENTER_TO_SIDE = SIDE_LENGTH * 0.5f;
 

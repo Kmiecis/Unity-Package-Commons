@@ -4,13 +4,11 @@ namespace Common
 {
 	public static class SquareUtility
 	{
-		public const int VERTEX_COUNT = 4;
 		public const float SIDE_LENGTH = 1.0f;
 		public const float CENTER_TO_SIDE = SIDE_LENGTH * 0.5f;
 		public const float CENTER_TO_VERTEX = Mathx.ROOT_2 * CENTER_TO_SIDE;
 
-		/*
-		 __ __ __ __
+		/*_ __ __ __
 		1           2
 		|           |
 		|           |
