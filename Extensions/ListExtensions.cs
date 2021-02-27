@@ -27,7 +27,7 @@ namespace Common
 			return list[list.Count - 1];
 		}
 
-		public static bool TryGetIndex<T>(this List<T> list, T item, out int index)
+		public static bool TryGetIndexOf<T>(this List<T> list, T item, out int index)
 		{
 			index = list.IndexOf(item);
 			return index != -1;
@@ -42,7 +42,7 @@ namespace Common
 			}
 			return false;
 		}
-
+		
 		public static void RemoveLast<T>(this List<T> list)
 		{
 			list.RemoveAt(list.Count - 1);
@@ -80,6 +80,11 @@ namespace Common
 			var t = list[i];
 			list[i] = list[j];
 			list[j] = t;
+		}
+
+		public static void SwapLast<T>(this List<T> list, int index)
+		{
+			list.Swap(index, list.Count - 1);
 		}
 
 		public static void Shuffle<T>(this List<T> list, int seed = default)
