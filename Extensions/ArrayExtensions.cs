@@ -31,7 +31,7 @@ namespace Common
 			return arr[arr.Length - 1];
 		}
 
-		public static bool TryGetIndex<T>(this T[] arr, T value, out int index)
+		public static bool TryIndexOf<T>(this T[] arr, T value, out int index)
 		{
 			index = Array.IndexOf(arr, value);
 			return index != -1;

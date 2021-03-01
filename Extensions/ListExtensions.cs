@@ -27,7 +27,7 @@ namespace Common
 			return list[list.Count - 1];
 		}
 
-		public static bool TryGetIndexOf<T>(this List<T> list, T item, out int index)
+		public static bool TryIndexOf<T>(this List<T> list, T item, out int index)
 		{
 			index = list.IndexOf(item);
 			return index != -1;
