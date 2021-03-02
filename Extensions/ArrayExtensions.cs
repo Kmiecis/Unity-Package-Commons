@@ -16,9 +16,18 @@ namespace Common
 
 		public static int GetLengthSafely<T>(this T[] arr)
 		{
-			if (arr == null)
-				return 0;
-			return arr.Length;
+			return arr == null ? 0 : arr.Length;
+		}
+
+		public static bool TryGet<T>(this T[] arr, int index, out T item)
+		{
+			if (0 > index || index > arr.Length - 1)
+			{
+				item = default;
+				return false;
+			}
+			item = arr[index];
+			return true;
 		}
 
 		public static T First<T>(this T[] arr)
@@ -26,9 +35,19 @@ namespace Common
 			return arr[0];
 		}
 
+		public static bool TryGetFirst<T>(this T[] arr, out T item)
+		{
+			return arr.TryGet(0, out item);
+		}
+
 		public static T Last<T>(this T[] arr)
 		{
 			return arr[arr.Length - 1];
+		}
+
+		public static bool TryGetLast<T>(this T[] arr, out T item)
+		{
+			return arr.TryGet(arr.Length - 1, out item);
 		}
 
 		public static bool TryIndexOf<T>(this T[] arr, T value, out int index)

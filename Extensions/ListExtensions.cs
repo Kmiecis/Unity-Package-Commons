@@ -17,14 +17,35 @@ namespace Common
 			return list.Count;
 		}
 
+		public static bool TryGet<T>(this List<T> list, int index, out T item)
+		{
+			if (0 > index || index > list.Count - 1)
+			{
+				item = default;
+				return false;
+			}
+			item = list[index];
+			return true;
+		}
+
 		public static T First<T>(this List<T> list)
 		{
 			return list[0];
 		}
 
+		public static bool TryGetFirst<T>(this List<T> list, out T item)
+		{
+			return list.TryGet(0, out item);
+		}
+
 		public static T Last<T>(this List<T> list)
 		{
 			return list[list.Count - 1];
+		}
+
+		public static bool TryGetLast<T>(this List<T> list, out T item)
+		{
+			return list.TryGet(list.Count - 1, out item);
 		}
 
 		public static bool TryIndexOf<T>(this List<T> list, T item, out int index)
