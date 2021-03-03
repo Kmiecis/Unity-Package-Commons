@@ -3,24 +3,24 @@ using UnityEngine;
 
 namespace Common
 {
-    public static class StringExtensions
-    {
-        public static Color32 HexToColorRGB(this string value)
-        {
-            byte r = Convert.ToByte(value.Substring(0, 2), 16);
-            byte g = Convert.ToByte(value.Substring(2, 2), 16);
-            byte b = Convert.ToByte(value.Substring(4, 2), 16);
-            return new Color32(r, g, b, 255);
-        }
+	public static class StringExtensions
+	{
+		public static Color32 HexToColorRGB(this string value)
+		{
+			byte r = Convert.ToByte(value.Substring(0, 2), 16);
+			byte g = Convert.ToByte(value.Substring(2, 2), 16);
+			byte b = Convert.ToByte(value.Substring(4, 2), 16);
+			return new Color32(r, g, b, 255);
+		}
 
-        public static Color32 HexToColorRGBA(this string value)
-        {
-            byte r = Convert.ToByte(value.Substring(0, 2), 16);
-            byte g = Convert.ToByte(value.Substring(2, 2), 16);
-            byte b = Convert.ToByte(value.Substring(4, 2), 16);
-            byte a = Convert.ToByte(value.Substring(6, 2), 16);
-            return new Color32(r, g, b, a);
-        }
+		public static Color32 HexToColorRGBA(this string value)
+		{
+			byte r = Convert.ToByte(value.Substring(0, 2), 16);
+			byte g = Convert.ToByte(value.Substring(2, 2), 16);
+			byte b = Convert.ToByte(value.Substring(4, 2), 16);
+			byte a = Convert.ToByte(value.Substring(6, 2), 16);
+			return new Color32(r, g, b, a);
+		}
 
 		public static string Capitalize(this string value)
 		{
@@ -77,5 +77,5 @@ namespace Common
 				return value.Substring(0, value.Length - suffix.Length);
 			return value;
 		}
-    }
+	}
 }

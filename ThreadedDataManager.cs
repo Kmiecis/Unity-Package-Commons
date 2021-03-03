@@ -5,45 +5,45 @@ using UnityEngine;
 
 namespace Common
 {
-    public class ThreadedDataManager : MonoBehaviour
-    {
-        private static Queue<IThreadInfo> m_DataQueue = new Queue<IThreadInfo>();
+	public class ThreadedDataManager : MonoBehaviour
+	{
+		private static Queue<IThreadInfo> m_DataQueue = new Queue<IThreadInfo>();
 
-        private void Awake()
-        {
-            DontDestroyOnLoad(this);
-        }
+		private void Awake()
+		{
+			DontDestroyOnLoad(this);
+		}
 
-        private void Update()
-        {
-            if (m_DataQueue.Count > 0)
-            {
-                for (int i = 0; i < m_DataQueue.Count; i++)
-                {
+		private void Update()
+		{
+			if (m_DataQueue.Count > 0)
+			{
+				for (int i = 0; i < m_DataQueue.Count; i++)
+				{
 					IThreadInfo threadInfo = m_DataQueue.Dequeue();
 					threadInfo.OnReady();
-                }
-            }
-        }
+				}
+			}
+		}
 
-        public static void RequestData<T>(Func<T> generator, Action<T> callback)
-        {
-            ThreadStart threadStart = delegate
-            {
-                ProcessData(generator, callback);
-            };
+		public static void RequestData<T>(Func<T> generator, Action<T> callback)
+		{
+			ThreadStart threadStart = delegate
+			{
+				ProcessData(generator, callback);
+			};
 
-            new Thread(threadStart).Start();
-        }
+			new Thread(threadStart).Start();
+		}
 
-        private static void ProcessData<T>(Func<T> generator, Action<T> callback)
-        {
-            T data = generator();
-            lock (m_DataQueue)
-            {
-                m_DataQueue.Enqueue(new ThreadInfo<T>(callback, data));
-            }
-        }
+		private static void ProcessData<T>(Func<T> generator, Action<T> callback)
+		{
+			T data = generator();
+			lock (m_DataQueue)
+			{
+				m_DataQueue.Enqueue(new ThreadInfo<T>(callback, data));
+			}
+		}
 
 		interface IThreadInfo
 		{
@@ -67,16 +67,16 @@ namespace Common
 			}
 		}
 		
-        #region Singleton
+		#region Singleton
 
-        private static ThreadedDataManager m_Instance;
+		private static ThreadedDataManager m_Instance;
 
-        static ThreadedDataManager()
-        {
-            m_Instance = new GameObject(typeof(ThreadedDataManager).Name)
-                .AddComponent<ThreadedDataManager>();
-        }
+		static ThreadedDataManager()
+		{
+			m_Instance = new GameObject(typeof(ThreadedDataManager).Name)
+				.AddComponent<ThreadedDataManager>();
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

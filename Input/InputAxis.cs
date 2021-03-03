@@ -1,8 +1,8 @@
 ﻿namespace Common
 {
-    public enum InputAxis
-    {
-        Horizontal,
-        Vertical
-    }
+	public enum InputAxis
+	{
+		Horizontal,
+		Vertical
+	}
 }
