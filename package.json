@@ -1,0 +1,10 @@
+{
+  "name": "com.kmiecis.unity.common",
+  "displayName": "Unity-Common",
+  "version": "1.0.0",
+  "unity": "2019.4",
+  "description": "Unity Common assemblies",
+  "keywords": [ "config", "file", "data" ],
+  "category": "Scripts",
+  "dependencies": { }
+}
