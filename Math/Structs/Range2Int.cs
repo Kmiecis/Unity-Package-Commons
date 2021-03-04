@@ -10,13 +10,8 @@ namespace Common
 		public Vector2Int min;
 		public Vector2Int max;
 
-		public static readonly Range2Int Zero;
-
-		public static readonly Range2Int Max = new Range2Int(
-			Vector2Int.one * int.MinValue,
-			Vector2Int.one * int.MaxValue
-		);
-
+		public static readonly Range2Int zero;
+        
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public Range2Int(Vector2Int min, Vector2Int max)
 		{
@@ -43,7 +38,36 @@ namespace Common
 			get { return max - min; }
 		}
 
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Include(int x, int y)
+        {
+            min.x = Math.Min(min.x, x);
+            min.y = Math.Min(min.y, y);
+
+            max.x = Math.Max(max.x, x);
+            max.y = Math.Max(max.y, y);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Include(Vector2Int v)
+        {
+            Include(v.x, v.y);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Include(Vector2Int otherMin, Vector2Int otherMax)
+        {
+            min = Mathx.Min(min, otherMin);
+            max = Mathx.Max(max, otherMax);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Include(Range2Int other)
+        {
+            Include(other.min, other.max);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool Contains(int x, int y)
 		{
 			return (
@@ -60,13 +84,19 @@ namespace Common
 			return Contains(v.x, v.y);
 		}
 
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Contains(Vector2Int otherMin, Vector2Int otherMax)
+        {
+            return (
+                Mathx.AreLesserOrEqual(min, otherMin) &&
+                Mathx.AreLesserOrEqual(otherMax, max)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool Contains(Range2Int other)
 		{
-			return (
-				Mathx.AreLesserOrEqual(min, other.min) &&
-				Mathx.AreLesserOrEqual(other.max, max)
-			);
+			return Contains(other.min, other.max);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]

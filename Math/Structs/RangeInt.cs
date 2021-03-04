@@ -9,13 +9,8 @@ namespace Common
 		public int min;
 		public int max;
 
-		public static readonly RangeInt Zero;
-
-		public static readonly RangeInt Max = new RangeInt(
-			int.MinValue,
-			int.MaxValue
-		);
-
+		public static readonly RangeInt zero;
+        
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public RangeInt(int min, int max)
 		{
@@ -35,19 +30,45 @@ namespace Common
 			get { return max - min; }
 		}
 
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Include(int i)
+        {
+            min = Math.Min(min, i);
+            max = Math.Max(max, i);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Include(int otherMin, int otherMax)
+        {
+            min = Math.Min(min, otherMin);
+            max = Math.Max(max, otherMax);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Include(RangeInt other)
+        {
+            Include(other.min, other.max);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool Contains(int i)
 		{
 			return min <= i && i <= max;
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public bool Contains(RangeInt other)
+		public bool Contains(int otherMin, int otherMax)
 		{
-			return min <= other.min && other.max <= max;
+			return min <= otherMin && otherMax <= max;
 		}
 
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Contains(RangeInt other)
+        {
+            return Contains(other.min, other.max);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool Overlaps(RangeInt other)
 		{
 			return min <= other.max && other.min <= max;

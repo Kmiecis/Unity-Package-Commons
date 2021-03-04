@@ -10,13 +10,8 @@ namespace Common
 		public Vector3 min;
 		public Vector3 max;
 
-		public static readonly Range3 Zero;
-
-		public static readonly Range3 Max = new Range3(
-			Vector3.one * float.MinValue,
-			Vector3.one * float.MaxValue
-		);
-
+		public static readonly Range3 zero;
+        
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public Range3(Vector3 min, Vector3 max)
 		{
@@ -43,6 +38,37 @@ namespace Common
 			get { return max - min; }
 		}
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Include(float x, float y, float z)
+        {
+            min.x = Math.Min(min.x, x);
+            min.y = Math.Min(min.y, y);
+            min.z = Math.Min(min.z, z);
+
+            max.x = Math.Max(max.x, x);
+            max.y = Math.Max(max.y, y);
+            max.z = Math.Max(max.z, z);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Include(Vector3 v)
+        {
+            Include(v.x, v.y, v.z);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Include(Vector3 otherMin, Vector3 otherMax)
+        {
+            min = Mathx.Min(min, otherMin);
+            max = Mathx.Max(max, otherMax);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Include(Range3 other)
+        {
+            Include(other.min, other.max);
+        }
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool Contains(float x, float y, float z)
 		{
@@ -62,13 +88,18 @@ namespace Common
 			return Contains(v.x, v.y, v.z);
 		}
 
+        public bool Contains(Vector3 otherMin, Vector3 otherMax)
+        {
+            return (
+                Mathx.AreLesserOrEqual(min, otherMin) &&
+                Mathx.AreLesserOrEqual(otherMax, max)
+            );
+        }
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool Contains(Range3 other)
 		{
-			return (
-				Mathx.AreLesserOrEqual(min, other.min) &&
-				Mathx.AreLesserOrEqual(other.max, max)
-			);
+			return Contains(other.min, other.max);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]

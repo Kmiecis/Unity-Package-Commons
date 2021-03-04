@@ -9,12 +9,7 @@ namespace Common
 		public float min;
 		public float max;
 
-		public static readonly Range Zero;
-
-		public static readonly Range Max = new Range(
-			float.MinValue,
-			float.MaxValue
-		);
+		public static readonly Range zero;
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public Range(float min, float max)
@@ -35,16 +30,42 @@ namespace Common
 			get { return max - min; }
 		}
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Include(float f)
+        {
+            min = Math.Min(min, f);
+            max = Math.Max(max, f);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Include(float otherMin, float otherMax)
+        {
+            min = Math.Min(min, otherMin);
+            max = Math.Max(max, otherMax);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Include(Range other)
+        {
+            Include(other.min, other.max);
+        }
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool Contains(float f)
 		{
 			return min <= f && f <= max;
 		}
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Contains(float otherMin, float otherMax)
+        {
+            return min <= otherMin && otherMax <= max;
+        }
+
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public bool Contains(Range other)
 		{
-			return min <= other.min && other.max <= max;
+            return Contains(other.min, other.max);
 		}
 
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
