@@ -42,7 +42,24 @@ namespace Common
 				yield return null;
 			}
 
-			consumer(1.0f);
+			consumer(duration);
 		}
+
+        public static IEnumerator InvokeOverTimeNormalized(Action<float> consumer, float duration, bool unscaled = false)
+        {
+            float t = 0.0f;
+            float n = 1.0f / duration;
+
+            while (t < 1.0f)
+            {
+                consumer(t);
+
+                t += n * (unscaled ? Time.unscaledDeltaTime : Time.deltaTime);
+
+                yield return null;
+            }
+
+            consumer(1.0f);
+        }
 	}
 }
