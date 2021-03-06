@@ -17,6 +17,16 @@ namespace Common
 			return list.Count;
 		}
 
+		public static T First<T>(this List<T> list)
+		{
+			return list[0];
+		}
+
+		public static T Last<T>(this List<T> list)
+		{
+			return list[list.Count - 1];
+		}
+
 		public static bool TryGet<T>(this List<T> list, int index, out T item)
 		{
 			if (0 > index || index > list.Count - 1)
@@ -28,19 +38,9 @@ namespace Common
 			return true;
 		}
 
-		public static T First<T>(this List<T> list)
-		{
-			return list[0];
-		}
-
 		public static bool TryGetFirst<T>(this List<T> list, out T item)
 		{
 			return list.TryGet(0, out item);
-		}
-
-		public static T Last<T>(this List<T> list)
-		{
-			return list[list.Count - 1];
 		}
 
 		public static bool TryGetLast<T>(this List<T> list, out T item)
@@ -54,6 +54,12 @@ namespace Common
 			return index != -1;
 		}
 
+		public static bool TryFind<T>(this List<T> list, Predicate<T> match, out T value)
+		{
+			value = list.Find(match);
+			return value != default;
+		}
+
 		public static bool AddUnique<T>(this List<T> list, T item)
 		{
 			if (!list.Contains(item))
@@ -63,7 +69,7 @@ namespace Common
 			}
 			return false;
 		}
-		
+
 		public static void RemoveLast<T>(this List<T> list)
 		{
 			list.RemoveAt(list.Count - 1);

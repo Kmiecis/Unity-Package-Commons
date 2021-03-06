@@ -19,6 +19,16 @@ namespace Common
 			return arr == null ? 0 : arr.Length;
 		}
 
+		public static T First<T>(this T[] arr)
+		{
+			return arr[0];
+		}
+
+		public static T Last<T>(this T[] arr)
+		{
+			return arr[arr.Length - 1];
+		}
+
 		public static bool TryGet<T>(this T[] arr, int index, out T item)
 		{
 			if (0 > index || index > arr.Length - 1)
@@ -30,19 +40,9 @@ namespace Common
 			return true;
 		}
 
-		public static T First<T>(this T[] arr)
-		{
-			return arr[0];
-		}
-
 		public static bool TryGetFirst<T>(this T[] arr, out T item)
 		{
 			return arr.TryGet(0, out item);
-		}
-
-		public static T Last<T>(this T[] arr)
-		{
-			return arr[arr.Length - 1];
 		}
 
 		public static bool TryGetLast<T>(this T[] arr, out T item)
@@ -54,6 +54,12 @@ namespace Common
 		{
 			index = Array.IndexOf(arr, value);
 			return index != -1;
+		}
+
+		public static bool TryFind<T>(this T[] arr, Predicate<T> match, out T value)
+		{
+			value = Array.Find(arr, match);
+			return value != default;
 		}
 
 		public static T[] Populate<T>(this T[] arr, T value)
