@@ -2,7 +2,7 @@
 
 namespace Common
 {
-	public class ShiftFieldAttribute : PropertyAttribute
-	{
-	}
+    public class ShiftFieldAttribute : PropertyAttribute
+    {
+    }
 }

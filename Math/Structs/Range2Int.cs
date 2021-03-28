@@ -4,39 +4,39 @@ using UnityEngine;
 
 namespace Common
 {
-	[Serializable]
-	public struct Range2Int : IEquatable<Range2Int>
-	{
-		public Vector2Int min;
-		public Vector2Int max;
+    [Serializable]
+    public struct Range2Int : IEquatable<Range2Int>
+    {
+        public Vector2Int min;
+        public Vector2Int max;
 
-		public static readonly Range2Int zero;
+        public static readonly Range2Int zero;
         
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public Range2Int(Vector2Int min, Vector2Int max)
-		{
-			this.min = min;
-			this.max = max;
-		}
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Range2Int(Vector2Int min, Vector2Int max)
+        {
+            this.min = min;
+            this.max = max;
+        }
 
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public Range2Int(int minX, int minY, int maxX, int maxY)
-		{
-			this.min = new Vector2Int(minX, minY);
-			this.max = new Vector2Int(maxX, maxY);
-		}
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Range2Int(int minX, int minY, int maxX, int maxY)
+        {
+            this.min = new Vector2Int(minX, minY);
+            this.max = new Vector2Int(maxX, maxY);
+        }
 
-		public Vector2 Center
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			get { return Mathx.Multiply((max + min), 0.5f); }
-		}
+        public Vector2 Center
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get { return Mathx.Multiply((max + min), 0.5f); }
+        }
 
-		public Vector2Int Size
-		{
-			[MethodImpl(MethodImplOptions.AggressiveInlining)]
-			get { return max - min; }
-		}
+        public Vector2Int Size
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get { return max - min; }
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Include(int x, int y)
@@ -68,21 +68,21 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public bool Contains(int x, int y)
-		{
-			return (
-				min.x <= x &&
-				min.y <= y &&
-				x <= max.x &&
-				y <= max.y
-			);
-		}
+        public bool Contains(int x, int y)
+        {
+            return (
+                min.x <= x &&
+                min.y <= y &&
+                x <= max.x &&
+                y <= max.y
+            );
+        }
 
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public bool Contains(Vector2Int v)
-		{
-			return Contains(v.x, v.y);
-		}
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Contains(Vector2Int v)
+        {
+            return Contains(v.x, v.y);
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Contains(Vector2Int otherMin, Vector2Int otherMax)
@@ -94,50 +94,50 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public bool Contains(Range2Int other)
-		{
-			return Contains(other.min, other.max);
-		}
+        public bool Contains(Range2Int other)
+        {
+            return Contains(other.min, other.max);
+        }
 
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public bool Overlaps(Range2Int other)
-		{
-			return (
-				Mathx.AreLesserOrEqual(min, other.max) &&
-				Mathx.AreLesserOrEqual(other.min, max)
-			);
-		}
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Overlaps(Range2Int other)
+        {
+            return (
+                Mathx.AreLesserOrEqual(min, other.max) &&
+                Mathx.AreLesserOrEqual(other.min, max)
+            );
+        }
 
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public Range2Int Intersection(Range2Int other)
-		{
-			return new Range2Int(
-				Mathx.Max(min, other.min),
-				Mathx.Min(max, other.max)
-			);
-		}
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public Range2Int Intersection(Range2Int other)
+        {
+            return new Range2Int(
+                Mathx.Max(min, other.min),
+                Mathx.Min(max, other.max)
+            );
+        }
 
-		public bool Equals(Range2Int other)
-		{
-			return (
-				Mathx.AreEqual(min, other.min) &&
-				Mathx.AreEqual(max, other.max)
-			);
-		}
+        public bool Equals(Range2Int other)
+        {
+            return (
+                Mathx.AreEqual(min, other.min) &&
+                Mathx.AreEqual(max, other.max)
+            );
+        }
 
-		public override bool Equals(object obj)
-		{
-			return obj is Range2Int && Equals((Range2Int)obj);
-		}
+        public override bool Equals(object obj)
+        {
+            return obj is Range2Int && Equals((Range2Int)obj);
+        }
 
-		public override int GetHashCode()
-		{
-			return min.GetHashCode() ^ (max.GetHashCode() << 2);
-		}
+        public override int GetHashCode()
+        {
+            return min.GetHashCode() ^ (max.GetHashCode() << 2);
+        }
 
-		public override string ToString()
-		{
-			return string.Format("Range2Int({0}, {1})", min, max);
-		}
-	}
+        public override string ToString()
+        {
+            return string.Format("Range2Int({0}, {1})", min, max);
+        }
+    }
 }

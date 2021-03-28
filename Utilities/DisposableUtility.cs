@@ -2,23 +2,23 @@
 
 namespace Common
 {
-	public static class DisposableUtility
-	{
-		public static void Dispose<T>(T arg)
-			where T : IDisposable
-		{
-			if (arg == null)
-				return;
+    public static class DisposableUtility
+    {
+        public static void Dispose<T>(T arg)
+            where T : IDisposable
+        {
+            if (arg == null)
+                return;
 
-			arg.Dispose();
-		}
+            arg.Dispose();
+        }
 
-		public static void Dispose<T>(ref T arg)
-			where T : IDisposable
-		{
-			Dispose(arg);
+        public static void Dispose<T>(ref T arg)
+            where T : IDisposable
+        {
+            Dispose(arg);
 
-			arg = default;
-		}
-	}
+            arg = default;
+        }
+    }
 }

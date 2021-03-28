@@ -2,7 +2,7 @@
 
 namespace Common
 {
-	public class LogFieldAttribute : PropertyAttribute
-	{
-	}
+    public class LogFieldAttribute : PropertyAttribute
+    {
+    }
 }
