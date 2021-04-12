@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#define UNIFORM_INPUT
+using UnityEngine;
 
 namespace Common
 {
@@ -8,7 +9,9 @@ namespace Common
 
         public CrossPlatformInput()
         {
-#if MOBILE_INPUT
+#if UNIFORM_INPUT
+            m_Input = new UniformInput();
+#elif MOBILE_INPUT
             m_Input = new MobileInput();
 #else
             m_Input = new StandardInput();
@@ -59,17 +62,7 @@ namespace Common
         {
             Input.SetAxisRawVertical(value);
         }
-
-        public static Vector3 GetMousePosition()
-        {
-            return Input.GetMousePosition();
-        }
-
-        public static void SetMousePosition(Vector3 position)
-        {
-            Input.SetMousePosition(position);
-        }
-
+        
         public static bool GetKey(KeyCode key)
         {
             return Input.GetKey(key);
@@ -94,7 +87,42 @@ namespace Common
         {
             Input.SetKeyUp(key);
         }
-        
+
+        public static bool GetButton(string buttonName)
+        {
+            return Input.GetButton(buttonName);
+        }
+
+        public static bool GetButtonDown(string buttonName)
+        {
+            return Input.GetButtonDown(buttonName);
+        }
+
+        public static void SetButtonDown(string buttonName)
+        {
+            Input.SetButtonDown(buttonName);
+        }
+
+        public static bool GetButtonUp(string buttonName)
+        {
+            return Input.GetButtonUp(buttonName);
+        }
+
+        public static void SetButtonUp(string buttonName)
+        {
+            Input.SetButtonUp(buttonName);
+        }
+
+        public static Vector3 GetMousePosition()
+        {
+            return Input.GetMousePosition();
+        }
+
+        public static void SetMousePosition(Vector3 position)
+        {
+            Input.SetMousePosition(position);
+        }
+
 #region Singleton
         static CrossPlatformInput()
         {

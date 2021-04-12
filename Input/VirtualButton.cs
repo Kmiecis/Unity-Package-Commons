@@ -20,20 +20,9 @@ namespace Common
             m_ReleasedFrame = Time.frameCount;
         }
 
-        public bool GetButton()
-        {
-            return m_Pressed;
-        }
-
-        public bool GetButtonDown()
-        {
-            return m_PressedFrame == Time.frameCount - 1;
-        }
-
-
-        public bool GetButtonUp()
-        {
-            return m_ReleasedFrame == Time.frameCount - 1;
-        }
+        public bool IsPressed => m_Pressed;
+        public bool IsDown => m_PressedFrame == Time.frameCount - 1;
+        public bool IsUp => m_ReleasedFrame == Time.frameCount - 1;
+        public bool IsValid => m_Pressed || m_ReleasedFrame >= Time.frameCount - 1;
     }
 }
