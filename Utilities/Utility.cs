@@ -15,7 +15,7 @@ namespace Common
 
         public static bool EqualsSafely(object left, object right)
         {
-            return left != null && right != null && left.Equals(right);
+            return left != null ? left.Equals(right) : right != null ? right.Equals(left) : true;
         }
 
         public static void Swap<T>(ref T a, ref T b)

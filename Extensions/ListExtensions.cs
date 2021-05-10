@@ -70,6 +70,20 @@ namespace Common
             return false;
         }
 
+        public static int RemoveWhere<T>(this List<T> list, Predicate<T> predicate)
+        {
+            int result = 0;
+            for (int i = list.Count - 1; i > -1; --i)
+            {
+                if (predicate(list[i]))
+                {
+                    list.RemoveAt(i);
+                    ++result;
+                }
+            }
+            return result;
+        }
+
         public static void RemoveLast<T>(this List<T> list)
         {
             list.RemoveAt(list.Count - 1);
