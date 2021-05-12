@@ -26,7 +26,7 @@ namespace Common
 
             public void Remove(object target)
             {
-                this.RemoveWhere(listener => listener.target == target);
+                this.RemoveAll(listener => listener.target == target);
             }
         }
 

@@ -6,9 +6,9 @@ namespace Common
     {
         public readonly string callback;
 
-        public Dependant(string invoke = null)
+        public Dependant(string callback = null)
         {
-            this.callback = invoke;
+            this.callback = callback;
         }
     }
 }

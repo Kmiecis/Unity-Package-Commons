@@ -22,9 +22,19 @@ namespace Common
             return list[0];
         }
 
+        public static T FirstOrNull<T>(this List<T> list)
+        {
+            return list.IsNullOrEmpty() ? default : list.First();
+        }
+
         public static T Last<T>(this List<T> list)
         {
             return list[list.Count - 1];
+        }
+
+        public static T LastOrNull<T>(this List<T> list)
+        {
+            return list.IsNullOrEmpty() ? default : list.Last();
         }
 
         public static bool TryGet<T>(this List<T> list, int index, out T item)
@@ -69,21 +79,7 @@ namespace Common
             }
             return false;
         }
-
-        public static int RemoveWhere<T>(this List<T> list, Predicate<T> predicate)
-        {
-            int result = 0;
-            for (int i = list.Count - 1; i > -1; --i)
-            {
-                if (predicate(list[i]))
-                {
-                    list.RemoveAt(i);
-                    ++result;
-                }
-            }
-            return result;
-        }
-
+        
         public static void RemoveLast<T>(this List<T> list)
         {
             list.RemoveAt(list.Count - 1);
