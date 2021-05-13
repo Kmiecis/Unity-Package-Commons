@@ -2,11 +2,11 @@
 
 namespace Common
 {
-    public class Dependant : Attribute
+    public class Install : Attribute
     {
         public readonly string callback;
 
-        public Dependant(string callback = null)
+        public Install(string callback = null)
         {
             this.callback = callback;
         }

@@ -16,12 +16,12 @@ namespace Common
             public object target;
             public Action<object> callback;
         }
-
-        private class ListenerList : List<Listener>
+        
+        private class ListenerList : LockList<Listener>
         {
-            public void Call(object target)
+            public void Call(object dependency)
             {
-                ForEach(listener => listener.callback.Invoke(target));
+                this.ForEach(listener => listener.callback.Invoke(dependency));
             }
 
             public void Remove(object target)
@@ -60,7 +60,7 @@ namespace Common
             var listeners = GetListeners(type);
             listeners.Add(new Listener { target = target, callback = callback });
         }
-
+        
         private static void RemoveListeners(Type type, object target)
         {
             var listeners = GetListeners(type);
@@ -88,26 +88,42 @@ namespace Common
             if (dependencies.Remove(target))
             {
                 var listeners = GetListeners(type);
-                var dependency = GetDependency(type);
+                var dependency = dependencies.LastOrNull();
                 listeners.Call(dependency);
             }
         }
 
         private static object GetDependency(Type type)
         {
-            var dependencies = GetDependencies(type);
-            if (dependencies.Count > 0)
-                return dependencies[0];
-            return null;
-        }
-        
-        private static bool TryGetDependency(Type type, out object dependency)
-        {
-            dependency = GetDependency(type);
-            return dependency != null;
+            return GetDependencies(type)
+                .LastOrNull();
         }
 
-        private static void InstallNew(FieldInfo field, DependencyNew attribute)
+        private static void Install(Type type, FieldInfo field, object target, Install attribute)
+        {
+            void Update(object value)
+            {
+                if (attribute.callback != null)
+                {
+                    var method = type.GetMethod(attribute.callback, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                    if (method != null)
+                    {
+                        method.Invoke(target, new object[] { value });
+                    }
+                }
+
+                field.SetValue(target, value);
+            }
+
+            var fieldType = field.FieldType;
+            AddListener(fieldType, Update, target);
+
+            var dependencies = GetDependencies(fieldType);
+            var dependency = dependencies.LastOrNull();
+            Update(dependency);
+        }
+
+        private static void InstantiateNew(FieldInfo field, DependencyNew attribute)
         {
             var type = attribute.type ?? field.FieldType;
             var args = attribute.args;
@@ -116,7 +132,7 @@ namespace Common
             AddDependency(type, instance);
         }
 
-        private static void InstallFromPrefab(FieldInfo field, object target, DependencyFromPrefab attribute)
+        private static void InstantiateFromPrefab(FieldInfo field, object target, DependencyFromPrefab attribute)
         {
             var type = attribute.type ?? field.FieldType;
             var prefab = field.GetValue(target) as MonoBehaviour;
@@ -125,7 +141,7 @@ namespace Common
             AddDependency(type, instance);
         }
 
-        private static void InstallFromScene(FieldInfo field, DependencyFromScene attribute)
+        private static void InstantiateFromScene(FieldInfo field, DependencyFromScene attribute)
         {
             var type = attribute.type ?? field.FieldType;
             var instance = UnityEngine.Object.FindObjectOfType(type);
@@ -133,55 +149,12 @@ namespace Common
             AddDependency(type, instance);
         }
 
-        private static void InstallFromScriptableObject(FieldInfo field, object target, DependencyFromScriptableObject attribute)
+        private static void InstantiateFromScriptableObject(FieldInfo field, object target, DependencyFromScriptableObject attribute)
         {
             var type = attribute.type ?? field.FieldType;
             var instance = field.GetValue(target);
 
             AddDependency(type, instance);
-        }
-
-        public static void Install(Type type, object target)
-        {
-            var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-            foreach (var field in fields)
-            {
-                if (field.TryGetCustomAttribute<DependencyNew>(out var dependencyNew))
-                {
-                    InstallNew(field, dependencyNew);
-                }
-                else if (field.TryGetCustomAttribute<DependencyFromPrefab>(out var dependencyFromPrefab))
-                {
-                    InstallFromPrefab(field, target, dependencyFromPrefab);
-                }
-                else if (field.TryGetCustomAttribute<DependencyFromScene>(out var dependencyFromScene))
-                {
-                    InstallFromScene(field, dependencyFromScene);
-                }
-                else if (field.TryGetCustomAttribute<DependencyFromScriptableObject>(out var dependencyFromScriptableObject))
-                {
-                    InstallFromScriptableObject(field, target, dependencyFromScriptableObject);
-                }
-            }
-        }
-
-        public static void Install(object target)
-        {
-            var type = target.GetType();
-
-            Install(type, target);
-        }
-
-        public static void Uninstall(object target)
-        {
-            var type = target.GetType();
-
-            Uninstall(type, target);
-        }
-
-        public static void Uninstall(Type type, object target)
-        {
-            RemoveDependency(type, target);
         }
         
         public static void Bind(Type type, object target)
@@ -189,30 +162,25 @@ namespace Common
             var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             foreach (var field in fields)
             {
-                if (field.TryGetCustomAttribute<Dependant>(out var attribute))
+                if (field.TryGetCustomAttribute<Install>(out var install))
                 {
-                    var tempType = type;
-                    void Update(object value)
-                    {
-                        if (attribute.callback != null)
-                        {
-                            var method = tempType.GetMethod(attribute.callback, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-                            if (method != null)
-                            {
-                                method.Invoke(target, new object[] { value });
-                            }
-                        }
-
-                        field.SetValue(target, value);
-                    }
-
-                    var fieldType = field.FieldType;
-                    AddListener(fieldType, Update, target);
-
-                    if (TryGetDependency(fieldType, out var dependency))
-                    {
-                        Update(dependency);
-                    }
+                    Install(type, field, target, install);
+                }
+                else if (field.TryGetCustomAttribute<DependencyNew>(out var dependencyNew))
+                {
+                    InstantiateNew(field, dependencyNew);
+                }
+                else if (field.TryGetCustomAttribute<DependencyFromPrefab>(out var dependencyFromPrefab))
+                {
+                    InstantiateFromPrefab(field, target, dependencyFromPrefab);
+                }
+                else if (field.TryGetCustomAttribute<DependencyFromScene>(out var dependencyFromScene))
+                {
+                    InstantiateFromScene(field, dependencyFromScene);
+                }
+                else if (field.TryGetCustomAttribute<DependencyFromScriptableObject>(out var dependencyFromScriptableObject))
+                {
+                    InstantiateFromScriptableObject(field, target, dependencyFromScriptableObject);
                 }
             }
         }
@@ -223,17 +191,12 @@ namespace Common
 
             Bind(type, target);
         }
-
-        public static void Unbind(object target)
-        {
-            var type = target.GetType();
-
-            Unbind(type, target);
-        }
-
+        
         public static void Unbind(Type type, object target)
         {
-            RemoveListeners(type, target);
+            // TODO:
+            // RemoveListeners(type, target);
+            // RemoveDependency(type, target);
         }
 
 #if UNITY_EDITOR
