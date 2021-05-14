@@ -24,9 +24,19 @@ namespace Common
             return arr[0];
         }
 
+        public static T FirstOrNull<T>(this T[] arr)
+        {
+            return arr.IsNullOrEmpty() ? default : arr.First();
+        }
+
         public static T Last<T>(this T[] arr)
         {
             return arr[arr.Length - 1];
+        }
+
+        public static T LastOrNull<T>(this T[] arr)
+        {
+            return arr.IsNullOrEmpty() ? default : arr.Last();
         }
 
         public static bool TryGet<T>(this T[] arr, int index, out T item)
