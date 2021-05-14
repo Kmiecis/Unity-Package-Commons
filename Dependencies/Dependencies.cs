@@ -99,7 +99,7 @@ namespace Common
 
             void Update(object value)
             {
-                if (attribute.callback != null)
+                if (attribute.callback != null && value != null)
                 {
                     var targetType = target.GetType();
                     var method = targetType.GetMethod(attribute.callback, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
