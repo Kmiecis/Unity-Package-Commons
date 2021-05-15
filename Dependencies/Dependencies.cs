@@ -34,9 +34,9 @@ namespace Common
         {
         }
 
-        private static void DebugLog(string message)
+        private static void DebugWarning(string message)
         {
-            Debug.Log($"[{typeof(Dependencies).Name}] {message}");
+            Debug.LogWarning($"[{typeof(Dependencies).Name}] {message}");
         }
         
         private static Dictionary<Type, ListenerList> s_ListenerLists = new Dictionary<Type, ListenerList>();
@@ -107,6 +107,10 @@ namespace Common
                     {
                         method.Invoke(target, new object[] { value });
                     }
+                    else
+                    {
+                        DebugWarning($"Couldn't find method {target.GetType().Name}.{attribute.callback} to invoke");
+                    }
                 }
 
                 field.SetValue(target, value);
@@ -143,7 +147,7 @@ namespace Common
             }
             else
             {
-                if (type.IsAssignableFrom(typeof(Component)))
+                if (type.IsSubclassOf(typeof(Component)))
                 {
                     dependency = UnityEngine.Object.FindObjectOfType(type);
                 }
@@ -157,6 +161,10 @@ namespace Common
             if (dependency != null)
             {
                 AddDependency(type, dependency);
+            }
+            else
+            {
+                DebugWarning($"Couldn't install dependency from {target.GetType().Name}.{field.FieldType.Name}");
             }
 
             field.SetValue(target, dependency);
