@@ -1,4 +1,5 @@
-﻿using Common;
+﻿#if UNITY_EDITOR
+using Common;
 using UnityEditor;
 using UnityEngine;
 
@@ -43,3 +44,4 @@ namespace CommonEditor
         }
     }
 }
+#endif

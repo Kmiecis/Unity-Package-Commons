@@ -1,4 +1,5 @@
-﻿using Common;
+﻿#if UNITY_EDITOR
+using Common;
 using System;
 using System.Linq;
 using UnityEditor;
@@ -30,3 +31,4 @@ namespace CommonEditor
         }
     }
 }
+#endif

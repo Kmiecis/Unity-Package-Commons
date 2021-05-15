@@ -1,4 +1,5 @@
-﻿using Common;
+﻿#if UNITY_EDITOR
+using Common;
 using UnityEditor;
 
 namespace CommonEditor
@@ -9,3 +10,4 @@ namespace CommonEditor
         protected override int FieldCount => 2;
     }
 }
+#endif
