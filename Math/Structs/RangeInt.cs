@@ -9,7 +9,7 @@ namespace Common
         public int min;
         public int max;
 
-        public static readonly RangeInt zero;
+        public static readonly RangeInt Zero;
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RangeInt(int min, int max)
@@ -83,6 +83,7 @@ namespace Common
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(RangeInt other)
         {
             return (
@@ -91,16 +92,19 @@ namespace Common
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
-            return obj is RangeInt && Equals((RangeInt)obj);
+            return obj is RangeInt converted && Equals(converted);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode()
         {
             return min.GetHashCode() ^ (max.GetHashCode() << 2);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString()
         {
             return string.Format("RangeInt({0}, {1})", min, max);

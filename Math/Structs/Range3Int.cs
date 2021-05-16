@@ -10,7 +10,7 @@ namespace Common
         public Vector3Int min;
         public Vector3Int max;
 
-        public static readonly Range3Int zero;
+        public static readonly Range3Int Zero;
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Range3Int(Vector3Int min, Vector3Int max)
@@ -121,6 +121,7 @@ namespace Common
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Range3Int other)
         {
             return (
@@ -129,16 +130,19 @@ namespace Common
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
-            return obj is Range3Int && Equals((Range3Int)obj);
+            return obj is Range3Int converted && Equals(converted);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode()
         {
             return min.GetHashCode() ^ (max.GetHashCode() << 2);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString()
         {
             return string.Format("Range3Int({0}, {1})", min, max);

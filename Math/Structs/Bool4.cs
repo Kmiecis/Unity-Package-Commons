@@ -107,31 +107,46 @@ namespace Common
             );
         }
 
+#if UNSAFE
+        unsafe
+#endif
         public bool this[int index]
         {
             get
             {
+#if UNSAFE
+                fixed (Bool4* array = &this)
+                {
+                    return ((bool*)array)[index];
+                }
+#else
                 switch (index)
                 {
                     case 0: return x;
                     case 1: return y;
                     case 2: return z;
                     case 3: return w;
-                    default:
-                        throw new IndexOutOfRangeException($"Invalid Bool4 index {index}");
                 }
+                throw new IndexOutOfRangeException($"Invalid Bool4 index {index}");
+#endif
             }
             set
             {
+#if UNSAFE
+                fixed (bool* array = &x)
+                {
+                    array[index] = value;
+                }
+#else
                 switch (index)
                 {
                     case 0: x = value; break;
                     case 1: y = value; break;
                     case 2: z = value; break;
                     case 3: w = value; break;
-                    default:
-                        throw new IndexOutOfRangeException($"Invalid Bool4 index {index}");
                 }
+                throw new IndexOutOfRangeException($"Invalid Bool4 index {index}");
+#endif
             }
         }
 
@@ -157,6 +172,7 @@ namespace Common
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Bool4 other)
         {
             return (
@@ -167,16 +183,19 @@ namespace Common
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
-            return obj is Bool4 && Equals((Bool4)obj);
+            return obj is Bool4 converted && Equals(converted);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode()
         {
             return x.GetHashCode() | (y.GetHashCode() << 1) | (z.GetHashCode() << 2) | (w.GetHashCode() << 3);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString()
         {
             return string.Format("Bool4({0}, {1}, {2}, {3})", x, y, z, w);

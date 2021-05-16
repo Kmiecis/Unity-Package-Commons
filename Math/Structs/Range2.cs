@@ -10,7 +10,7 @@ namespace Common
         public Vector2 min;
         public Vector2 max;
 
-        public static readonly Range2 zero;
+        public static readonly Range2 Zero;
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Range2(Vector2 min, Vector2 max)
@@ -117,6 +117,7 @@ namespace Common
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Range2 other)
         {
             return (
@@ -125,16 +126,19 @@ namespace Common
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
-            return obj is Range2 && Equals((Range2)obj);
+            return obj is Range2 converted && Equals(converted);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode()
         {
             return min.GetHashCode() ^ (max.GetHashCode() << 2);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString()
         {
             return string.Format("Range2({0}, {1})", min, max);

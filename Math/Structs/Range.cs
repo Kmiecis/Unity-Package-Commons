@@ -9,7 +9,7 @@ namespace Common
         public float min;
         public float max;
 
-        public static readonly Range zero;
+        public static readonly Range Zero;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Range(float min, float max)
@@ -83,6 +83,7 @@ namespace Common
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Range other)
         {
             return (
@@ -91,16 +92,19 @@ namespace Common
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
-            return obj is Range && Equals((Range)obj);
+            return obj is Range converted && Equals(converted);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode()
         {
             return min.GetHashCode() ^ (max.GetHashCode() << 2);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString()
         {
             return string.Format("Range({0}, {1})", min, max);

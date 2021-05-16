@@ -10,7 +10,7 @@ namespace Common
         {
             var ts = new List<int>();
 
-            var normal = Vector3.up;
+            var normal = Vector3.back;
             for (int i = 0; i < points.Count; ++i)
             {
                 var iPoint = points[i];
@@ -23,7 +23,7 @@ namespace Common
                     {
                         var kPoint = points[k];
 
-                        if (CircleUtility.Create(iPoint, jPoint, kPoint, out Vector2 c, out float r))
+                        if (Circle.TryCreate(iPoint, jPoint, kPoint, out var circle))
                         {
                             bool contains = false;
                             for (int l = 0; !contains && l < points.Count; ++l)
@@ -33,15 +33,14 @@ namespace Common
                                     continue;
                                 }
 
-                                contains = CircleUtility.Contains(c, r, points[l]);
+                                contains = circle.Contains(points[l]);
                             }
-
+                            
                             if (!contains)
                             {
-                                var dij = jPoint - iPoint;
-                                var djk = kPoint - jPoint;
+                                var triangle = new Triangle { v0 = iPoint, v1 = jPoint, v2 = kPoint };
+                                var triangleNormal = triangle.Normal;
 
-                                var triangleNormal = Vector3.Cross(dij.X_Y(), djk.X_Y());
                                 if (Vector3.Dot(triangleNormal, normal) > 0)
                                 {
                                     ts.Add(i);

@@ -91,27 +91,42 @@ namespace Common
             );
         }
 
+#if UNSAFE
+        unsafe
+#endif
         public bool this[int index]
         {
             get
             {
+#if UNSAFE
+                fixed (Bool2* array = &this)
+                {
+                    return ((bool*)array)[index];
+                }
+#else
                 switch (index)
                 {
                     case 0: return x;
                     case 1: return y;
-                    default:
-                        throw new IndexOutOfRangeException($"Invalid Bool2 index {index}");
                 }
+                throw new IndexOutOfRangeException($"Invalid Bool2 index {index}");
+#endif
             }
             set
             {
+#if UNSAFE
+                fixed (bool* array = &x)
+                {
+                    array[index] = value;
+                }
+#else
                 switch (index)
                 {
                     case 0: x = value; break;
                     case 1: y = value; break;
-                    default:
-                        throw new IndexOutOfRangeException($"Invalid Bool2 index {index}");
                 }
+                throw new IndexOutOfRangeException($"Invalid Bool2 index {index}");
+#endif
             }
         }
 
@@ -133,6 +148,7 @@ namespace Common
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Bool2 other)
         {
             return (
@@ -141,16 +157,19 @@ namespace Common
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
-            return obj is Bool2 && Equals((Bool2)obj);
+            return obj is Bool2 converted && Equals(converted);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode()
         {
             return x.GetHashCode() | (y.GetHashCode() << 1);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString()
         {
             return string.Format("Bool2({0}, {1})", x, y);
