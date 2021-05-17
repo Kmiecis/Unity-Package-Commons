@@ -3,10 +3,8 @@ using UnityEngine;
 
 namespace Common
 {
-    public static class TriangleUtility
+    public static class Triangles
     {
-        public const int VCOUNT = 3;
-
         /// <summary> Calculates area of a triangle defined by three vertices 'v0', 'v1' and 'v2' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Area(Vector2 v0, Vector2 v1, Vector2 v2)
@@ -14,11 +12,36 @@ namespace Common
             return 0.5f * (-v1.y * v0.x + v2.y * (v0.x - v1.x) + v2.x * (v1.y - v0.y) + v1.x * v0.y);
         }
 
+        /// <summary> Calculates area of a triangle defined by three vertices 'v0', 'v1' and 'v2' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Area(Vector3 v0, Vector3 v1, Vector3 v2)
+        {
+            var a = Vector3.Distance(v0, v1);
+            var b = Vector3.Distance(v1, v2);
+            var c = Vector3.Distance(v2, v0);
+            var s = (a + b + c) * 0.5f;
+            return Mathf.Sqrt(s * (s - a) * (s - b) * (s - c));
+        }
+
         /// <summary> Calculates perimeter of a triangle defined by three vertices 'v0', 'v1' and 'v2' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Perimeter(Vector2 v0, Vector2 v1, Vector2 v2)
         {
-            return Vector2.Distance(v1, v0) + Vector2.Distance(v2, v1) + Vector2.Distance(v0, v2); ;
+            return Vector2.Distance(v1, v0) + Vector2.Distance(v2, v1) + Vector2.Distance(v0, v2);
+        }
+
+        /// <summary> Calculates perimeter of a triangle defined by three vertices 'v0', 'v1' and 'v2' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Perimeter(Vector3 v0, Vector3 v1, Vector3 v2)
+        {
+            return Vector3.Distance(v1, v0) + Vector3.Distance(v2, v1) + Vector3.Distance(v0, v2);
+        }
+
+        /// <summary> Calculates unnormalized normal vector of a triangle defined by three vertices 'v0', 'v1' and 'v2' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Normal(Vector3 v0, Vector3 v1, Vector3 v2)
+        {
+            return Vector3.Cross(v1 - v0, v2 - v1);
         }
 
         /// <summary> Returns whether triangle defined by three vertices 'v0', 'v1' and 'v2' contains point 'p' </summary>
@@ -36,6 +59,18 @@ namespace Common
             return A < 0 ?
                     (s <= 0 && s + t >= A) :
                     (s >= 0 && s + t <= A);
+        }
+
+        /// <summary> Returns whether triangle defined by three vertices 'v0', 'v1' and 'v2' contains point 'p' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Contains(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 p)
+        {
+            var weights = Weights(v0, v1, v2, p);
+            return
+                Mathx.AreEqual(weights.x + weights.y + weights.z, 1.0f) &&
+                0.0f <= weights.x && weights.x <= 1.0f &&
+                0.0f <= weights.y && weights.y <= 1.0f &&
+                0.0f <= weights.z && weights.z <= 1.0f;
         }
 
         /// <summary> Calculates weights of a point 'p' on a triangle defined by three vertices 'v0', 'v1' and 'v2' </summary>

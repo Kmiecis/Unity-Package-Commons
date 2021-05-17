@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Common
 {
-    public static class PolygonUtility
+    public static class Polygons
     {
         /// <summary> Calculates distance to point 'p' from nearest point on polygon defined by vertices 'vs' </summary>
         public static float Distance(Vector2 p, params Vector2[] vs)

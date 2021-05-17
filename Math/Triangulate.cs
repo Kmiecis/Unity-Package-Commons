@@ -23,7 +23,7 @@ namespace Common
                     {
                         var kPoint = points[k];
 
-                        if (Circle.TryCreate(iPoint, jPoint, kPoint, out var circle))
+                        if (Circles.TryCreate(iPoint, jPoint, kPoint, out var c, out var r))
                         {
                             bool contains = false;
                             for (int l = 0; !contains && l < points.Count; ++l)
@@ -33,13 +33,12 @@ namespace Common
                                     continue;
                                 }
 
-                                contains = circle.Contains(points[l]);
+                                contains = Circles.Contains(c, r, points[l]);
                             }
                             
                             if (!contains)
                             {
-                                var triangle = new Triangle { v0 = iPoint, v1 = jPoint, v2 = kPoint };
-                                var triangleNormal = triangle.Normal;
+                                var triangleNormal = Triangles.Normal(iPoint, jPoint, kPoint);
 
                                 if (Vector3.Dot(triangleNormal, normal) > 0)
                                 {

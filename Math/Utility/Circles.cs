@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Common
 {
-    public static class CircleUtility
+    public static class Circles
     {
         /// <summary> Calculates diameter of a circle with radius 'r' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -23,7 +23,7 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Circumference(float r)
         {
-            return 2 * Mathf.PI * r;
+            return 2.0f * Mathf.PI * r;
         }
 
         /// <summary> Calculates distance from nearest point of circle with center in 'c' and radius 'r' to point 'p' </summary>
@@ -53,7 +53,7 @@ namespace Common
 
         /// <summary> Calculates circle with center in 'c' and radius 'r' from points 'v0', 'v1' and 'v2' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool Create(Vector2 v0, Vector2 v1, Vector2 v2, out Vector2 c, out float r)
+        public static bool TryCreate(Vector2 v0, Vector2 v1, Vector2 v2, out Vector2 c, out float r)
         {
             c = default;
             r = default;
