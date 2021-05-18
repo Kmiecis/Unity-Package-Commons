@@ -5,16 +5,24 @@ namespace Common
 {
     public static class ListExtensions
     {
+        public static bool IsNull<T>(this List<T> list)
+        {
+            return list == null;
+        }
+
+        public static bool IsEmpty<T>(this List<T> list)
+        {
+            return list.Count == 0;
+        }
+
         public static bool IsNullOrEmpty<T>(this List<T> list)
         {
-            return list == null || list.Count == 0;
+            return list.IsNull() || list.IsEmpty();
         }
 
         public static int GetCountSafely<T>(this List<T> list)
         {
-            if (list == null)
-                return 0;
-            return list.Count;
+            return list.IsNull() ? 0 : list.Count;
         }
 
         public static T First<T>(this List<T> list)

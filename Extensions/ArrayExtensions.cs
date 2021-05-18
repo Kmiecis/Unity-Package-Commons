@@ -4,19 +4,24 @@ namespace Common
 {
     public static class ArrayExtensions
     {
+        public static bool IsNull<T>(this T[] arr)
+        {
+            return arr == null;
+        }
+
+        public static bool IsEmpty<T>(this T[] arr)
+        {
+            return arr.Length == 0;
+        }
+
         public static bool IsNullOrEmpty<T>(this T[] arr)
         {
-            return arr == null || arr.Length == 0;
+            return arr.IsNull() || arr.IsEmpty();
         }
-
-        public static bool IsNullOrEmpty<T>(this T[,] arr)
-        {
-            return arr == null || arr.Length == 0;
-        }
-
+        
         public static int GetLengthSafely<T>(this T[] arr)
         {
-            return arr == null ? 0 : arr.Length;
+            return arr.IsNull() ? 0 : arr.Length;
         }
 
         public static T First<T>(this T[] arr)
