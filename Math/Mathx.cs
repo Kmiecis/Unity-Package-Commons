@@ -11,6 +11,11 @@ namespace Common
         public const float ROOT_3 = 1.73205080757f;
         public const float ROOT_2 = 1.41421356237f;
 
+        public const float PI_DOUBLE = Mathf.PI * 2.0f;
+        public const float PI_HALF = Mathf.PI * 0.5f;
+        public const float PI_QUARTER = Mathf.PI * 0.25f;
+        public const float PI_INV = 1.0f / Mathf.PI;
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsZero(float f)
         {
@@ -496,29 +501,6 @@ namespace Common
         public static int DecrIndex(int i, int count, int offset)
         {
             return (i - offset + count) % count;
-        }
-
-
-        /// <summary> Calculates direction vector from single value of range [0, 1] </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Direction(float u)
-        {
-            var angle = 2 * Mathf.PI * u;
-            var x = Mathf.Cos(angle);
-            var y = Mathf.Sin(angle);
-            return new Vector2(x, y);
-        }
-
-        /// <summary> Calculates direction vector from two values of range [0, 1] </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Direction(float u, float v)
-        {
-            var omega = 2 * Mathf.PI * u;
-            var theta = Mathf.Acos(2 * v - 1);
-            var x = Mathf.Sin(theta) * Mathf.Cos(omega);
-            var y = Mathf.Sin(theta) * Mathf.Sin(omega);
-            var z = Mathf.Cos(theta);
-            return new Vector3(x, y, z);
         }
 
 

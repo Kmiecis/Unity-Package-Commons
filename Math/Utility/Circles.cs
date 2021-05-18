@@ -33,6 +33,15 @@ namespace Common
             return Vector2.Distance(c, p) - r;
         }
 
+        /// <summary> Calculates normalized direction vector from an angle 'a' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Direction(float a)
+        {
+            var x = Mathf.Cos(a);
+            var y = Mathf.Sin(a);
+            return new Vector2(x, y);
+        }
+
         /// <summary> Returns whether circle with center in 'c' and radius 'r' contains point 'p' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Contains(Vector2 c, float r, Vector2 p)
