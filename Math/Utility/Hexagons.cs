@@ -30,8 +30,8 @@ namespace Common
         public static Vector2 Vertex(Vector2 c, float r, int i)
         {
             const int VERTEX_COUNT = (int)Direction.Count;
-            var u = (i % VERTEX_COUNT) / (1.0f * VERTEX_COUNT);
-            return c + Mathx.Direction(u) * r;
+            var a = (i % VERTEX_COUNT) * Mathx.PI_DOUBLE / (1.0f * VERTEX_COUNT);
+            return c + Circles.Direction(a) * r;
         }
 
         /// <summary> Calculates vertex at index 'i' of a hexagon defined by circumradius 'r' </summary>
@@ -39,8 +39,8 @@ namespace Common
         public static Vector2 Vertex(float r, int i)
         {
             const int VERTEX_COUNT = (int)Direction.Count;
-            var u = (i % VERTEX_COUNT) / (1.0f * VERTEX_COUNT);
-            return Mathx.Direction(u) * r;
+            var a = (i % VERTEX_COUNT) * Mathx.PI_DOUBLE / (1.0f * VERTEX_COUNT);
+            return Circles.Direction(a) * r;
         }
 
         /// <summary> Calculates vertices of a hexagon defined by center 'c' and circumradius 'r' </summary>
