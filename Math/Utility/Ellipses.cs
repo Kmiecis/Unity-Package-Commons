@@ -5,7 +5,7 @@ namespace Common
 {
     public static class Ellipses
     {
-        /// <summary> Calculates radius of an ellipse defined by width 'a' and height 'b' at angle 'a' </summary>
+        /// <summary> Calculates radius of an ellipse defined by width 'e' and height 'f' at angle 'a' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Radius(float e, float f, float a)
         {

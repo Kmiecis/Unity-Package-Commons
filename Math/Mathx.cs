@@ -502,17 +502,7 @@ namespace Common
         {
             return (i - offset + count) % count;
         }
-
-
-        /// <summary> Projects point 'p' to plane defined by two axes 'ax' and 'ay' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Project(Vector3 p, Vector3 ax, Vector3 ay)
-        {
-            var x = Vector3.Dot(ax, p);
-            var y = Vector3.Dot(ay, p);
-            return new Vector2(x, y);
-        }
-
+        
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Reciprocal(float f)

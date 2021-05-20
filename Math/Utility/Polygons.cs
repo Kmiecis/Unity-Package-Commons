@@ -1,9 +1,30 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Common
 {
     public static class Polygons
     {
+        /// <summary> Calculates centroid point of vertices 'vs' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Centroid(params Vector2[] vs)
+        {
+            var c = Vector2.zero;
+            for (int i = 0; i < vs.Length; ++i)
+                c += vs[i];
+            return c * (1.0f / vs.Length);
+        }
+
+        /// <summary> Calculates centroid point of vertices 'vs' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Centroid(params Vector3[] vs)
+        {
+            var c = Vector3.zero;
+            for (int i = 0; i < vs.Length; ++i)
+                c += vs[i];
+            return c * (1.0f / vs.Length);
+        }
+
         /// <summary> Calculates distance to point 'p' from nearest point on polygon defined by vertices 'vs' </summary>
         public static float Distance(Vector2 p, params Vector2[] vs)
         {
