@@ -10,7 +10,9 @@ namespace Common
         public int max;
 
         public static readonly RangeInt Zero;
-        
+        public static readonly RangeInt Full = new RangeInt(int.MinValue, int.MaxValue);
+        public static readonly RangeInt Empty = new RangeInt(int.MaxValue, int.MinValue);
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RangeInt(int min, int max)
         {

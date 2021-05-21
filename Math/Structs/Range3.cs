@@ -11,6 +11,8 @@ namespace Common
         public Vector3 max;
 
         public static readonly Range3 Zero;
+        public static readonly Range3 Full = new Range3(Vector3.one * float.MinValue, Vector3.one * float.MaxValue);
+        public static readonly Range3 Empty = new Range3(Vector3.one * float.MaxValue, Vector3.one * float.MinValue);
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Range3(Vector3 min, Vector3 max)

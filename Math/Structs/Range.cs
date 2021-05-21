@@ -10,6 +10,8 @@ namespace Common
         public float max;
 
         public static readonly Range Zero;
+        public static readonly Range Full = new Range(float.MinValue, float.MaxValue);
+        public static readonly Range Empty = new Range(float.MaxValue, float.MinValue);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Range(float min, float max)
