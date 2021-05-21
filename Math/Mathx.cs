@@ -474,6 +474,17 @@ namespace Common
             return (i % 2) == 1;
         }
 
+        
+        public static Vector2 Rotate(Vector2 p, float a)
+        {
+            var sin = Mathf.Sin(a);
+            var cos = Mathf.Cos(a);
+            return new Vector2(
+                (cos * p.x) - (sin * p.y),
+                (sin * p.x) + (cos * p.y)
+            );
+        }
+
 
         /// <summary> Calculates next index wrapped around by 'count' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
