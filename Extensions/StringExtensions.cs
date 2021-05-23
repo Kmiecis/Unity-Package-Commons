@@ -5,6 +5,11 @@ namespace Common
 {
     public static class StringExtensions
     {
+        public static string[] GetLines(this string value)
+        {
+            return value.Split(new []{ "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+        }
+
         public static Color32 HexToColorRGB(this string value)
         {
             byte r = Convert.ToByte(value.Substring(0, 2), 16);
