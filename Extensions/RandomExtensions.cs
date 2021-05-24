@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
+using Random = System.Random;
 
 namespace Common
 {
@@ -22,7 +24,7 @@ namespace Common
 
         public static float NextFloat(this Random random, float max)
         {
-            return (float)random.NextDouble() * max;
+            return random.NextFloat() * max;
         }
 
         public static float NextFloat(this Random random, float min, float max)
@@ -32,7 +34,7 @@ namespace Common
 
         public static bool NextBool(this Random random)
         {
-            return random.Next(2) == 1;
+            return random.NextDouble() > 0.5;
         }
 
         public static byte NextByte(this Random random)
@@ -40,14 +42,45 @@ namespace Common
             return (byte)random.Next(256);
         }
 
-        public static byte NextByte(this Random random, int max)
+        public static byte NextByte(this Random random, byte max)
         {
             return (byte)random.Next(max);
         }
 
-        public static byte NextByte(this Random random, int min, int max)
+        public static byte NextByte(this Random random, byte min, byte max)
         {
             return (byte)random.Next(min, max);
+        }
+
+        public static Vector2 NextVector2(this Random random)
+        {
+            var angle = random.NextFloat() * Mathx.PI_HALF;
+            return new Vector2(
+                Mathf.Cos(angle),
+                Mathf.Sin(angle)
+            );
+        }
+
+        public static Vector3 NextVector3(this Random random)
+        {
+            var theta = random.NextFloat() * Mathx.PI_HALF;
+            var omega = random.NextFloat() * Mathx.PI_HALF;
+            var t = Mathf.Acos(omega * Mathx.PI_INV - 1.0f);
+            return new Vector3(
+                Mathf.Sin(t) * Mathf.Cos(theta),
+                Mathf.Sin(t) * Mathf.Sin(theta),
+                Mathf.Cos(t)
+            );
+        }
+
+        public static Color32 NextColor(this Random random)
+        {
+            return new Color32(
+                random.NextByte(),
+                random.NextByte(),
+                random.NextByte(),
+                random.NextByte()
+            );
         }
 
         public static TEnum NextEnum<TEnum>(this Random random)
