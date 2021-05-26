@@ -89,8 +89,8 @@ namespace Common
         public bool Equals(Range other)
         {
             return (
-                Mathx.AreEqual(min, other.min) &&
-                Mathx.AreEqual(max, other.max)
+                Mathx.IsEqual(min, other.min) &&
+                Mathx.IsEqual(max, other.max)
             );
         }
 

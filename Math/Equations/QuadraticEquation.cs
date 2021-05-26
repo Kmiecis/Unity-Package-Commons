@@ -70,9 +70,9 @@ namespace Common
         public bool Equals(QuadraticEquation other)
         {
             return
-                Mathx.AreEqual(this.a, other.a) &&
-                Mathx.AreEqual(this.b, other.b) &&
-                Mathx.AreEqual(this.c, other.c);
+                Mathx.IsEqual(this.a, other.a) &&
+                Mathx.IsEqual(this.b, other.b) &&
+                Mathx.IsEqual(this.c, other.c);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

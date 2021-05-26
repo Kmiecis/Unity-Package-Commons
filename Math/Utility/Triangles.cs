@@ -67,7 +67,7 @@ namespace Common
         {
             var weights = Weights(v0, v1, v2, p);
             return
-                Mathx.AreEqual(weights.x + weights.y + weights.z, 1.0f) &&
+                Mathx.IsEqual(weights.x + weights.y + weights.z, 1.0f) &&
                 0.0f <= weights.x && weights.x <= 1.0f &&
                 0.0f <= weights.y && weights.y <= 1.0f &&
                 0.0f <= weights.z && weights.z <= 1.0f;

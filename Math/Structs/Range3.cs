@@ -93,8 +93,8 @@ namespace Common
         public bool Contains(Vector3 otherMin, Vector3 otherMax)
         {
             return (
-                Mathx.AreLesserOrEqual(min, otherMin) &&
-                Mathx.AreLesserOrEqual(otherMax, max)
+                Mathx.IsLesserOrEqual(min, otherMin) &&
+                Mathx.IsLesserOrEqual(otherMax, max)
             );
         }
 
@@ -108,8 +108,8 @@ namespace Common
         public bool Overlaps(Range3 other)
         {
             return (
-                Mathx.AreLesserOrEqual(min, other.max) &&
-                Mathx.AreLesserOrEqual(other.min, max)
+                Mathx.IsLesserOrEqual(min, other.max) &&
+                Mathx.IsLesserOrEqual(other.min, max)
             );
         }
 
@@ -126,8 +126,8 @@ namespace Common
         public bool Equals(Range3 other)
         {
             return (
-                Mathx.AreEqual(min, other.min) &&
-                Mathx.AreEqual(max, other.max)
+                Mathx.IsEqual(min, other.min) &&
+                Mathx.IsEqual(max, other.max)
             );
         }
 

@@ -58,7 +58,7 @@ namespace Common
             float dv0v1 = (v1 - v0).sqrMagnitude;
             float dv0p = (p - v0).sqrMagnitude;
             float dpv1 = (v1 - p).sqrMagnitude;
-            return Mathx.AreEqual(dv0v1, dv0p + dpv1);
+            return Mathx.IsEqual(dv0v1, dv0p + dpv1);
         }
     }
 }

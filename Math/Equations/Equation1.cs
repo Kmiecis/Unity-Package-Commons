@@ -68,7 +68,7 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Equation1 other)
         {
-            return Mathx.AreEqual(this.x, other.x) && Mathx.AreEqual(this.y, other.y);
+            return Mathx.IsEqual(this.x, other.x) && Mathx.IsEqual(this.y, other.y);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

@@ -36,10 +36,10 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(CosEquation other)
         {
-            return Mathx.AreEqual(this.dx, other.dx) &&
-                Mathx.AreEqual(this.sx, other.sx) &&
-                Mathx.AreEqual(this.dy, other.dy) &&
-                Mathx.AreEqual(this.sy, other.sy);
+            return Mathx.IsEqual(this.dx, other.dx) &&
+                Mathx.IsEqual(this.sx, other.sx) &&
+                Mathx.IsEqual(this.dy, other.dy) &&
+                Mathx.IsEqual(this.sy, other.sy);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

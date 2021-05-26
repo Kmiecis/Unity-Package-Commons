@@ -993,9 +993,9 @@ namespace Common
         }
         #endregion
 
-        #region IS_EQUAL
+        #region ARE_EQUAL
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsEqual(Vector2 a, Vector2 b)
+        public static Bool2 AreEqual(Vector2 a, Vector2 b)
         {
             return new Bool2(
                 IsZero(a.x - b.x),
@@ -1004,7 +1004,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsEqual(Vector2 v, float f)
+        public static Bool2 AreEqual(Vector2 v, float f)
         {
             return new Bool2(
                 IsZero(v.x - f),
@@ -1013,7 +1013,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsEqual(float f, Vector2 v)
+        public static Bool2 AreEqual(float f, Vector2 v)
         {
             return new Bool2(
                 IsZero(f - v.x),
@@ -1022,7 +1022,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsEqual(Vector2 v, int i)
+        public static Bool2 AreEqual(Vector2 v, int i)
         {
             return new Bool2(
                 IsZero(v.x - i),
@@ -1031,7 +1031,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsEqual(int i, Vector2 v)
+        public static Bool2 AreEqual(int i, Vector2 v)
         {
             return new Bool2(
                 IsZero(i - v.x),
@@ -1040,7 +1040,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsEqual(Vector2Int a, Vector2Int b)
+        public static Bool2 AreEqual(Vector2Int a, Vector2Int b)
         {
             return new Bool2(
                 a.x == b.x,
@@ -1049,7 +1049,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsEqual(Vector2Int v, float f)
+        public static Bool2 AreEqual(Vector2Int v, float f)
         {
             return new Bool2(
                 IsZero(v.x - f),
@@ -1058,7 +1058,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsEqual(float f, Vector2Int v)
+        public static Bool2 AreEqual(float f, Vector2Int v)
         {
             return new Bool2(
                 IsZero(f - v.x),
@@ -1067,7 +1067,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsEqual(Vector2Int v, int i)
+        public static Bool2 AreEqual(Vector2Int v, int i)
         {
             return new Bool2(
                 v.x == i,
@@ -1076,7 +1076,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsEqual(int i, Vector2Int v)
+        public static Bool2 AreEqual(int i, Vector2Int v)
         {
             return new Bool2(
                 i == v.x,
@@ -1085,7 +1085,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsEqual(Vector3 a, Vector3 b)
+        public static Bool3 AreEqual(Vector3 a, Vector3 b)
         {
             return new Bool3(
                 IsZero(a.x - b.x),
@@ -1095,7 +1095,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsEqual(Vector3 v, float f)
+        public static Bool3 AreEqual(Vector3 v, float f)
         {
             return new Bool3(
                 IsZero(v.x - f),
@@ -1105,7 +1105,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsEqual(float f, Vector3 v)
+        public static Bool3 AreEqual(float f, Vector3 v)
         {
             return new Bool3(
                 IsZero(f - v.x),
@@ -1115,7 +1115,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsEqual(Vector3 v, int i)
+        public static Bool3 AreEqual(Vector3 v, int i)
         {
             return new Bool3(
                 IsZero(v.x - i),
@@ -1125,7 +1125,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsEqual(int i, Vector3 v)
+        public static Bool3 AreEqual(int i, Vector3 v)
         {
             return new Bool3(
                 IsZero(i - v.x),
@@ -1135,7 +1135,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsEqual(Vector3Int a, Vector3Int b)
+        public static Bool3 AreEqual(Vector3Int a, Vector3Int b)
         {
             return new Bool3(
                 a.x == b.x,
@@ -1145,7 +1145,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsEqual(Vector3Int v, float f)
+        public static Bool3 AreEqual(Vector3Int v, float f)
         {
             return new Bool3(
                 IsZero(v.x - f),
@@ -1155,7 +1155,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsEqual(float f, Vector3Int v)
+        public static Bool3 AreEqual(float f, Vector3Int v)
         {
             return new Bool3(
                 IsZero(f - v.x),
@@ -1165,7 +1165,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsEqual(Vector3Int v, int i)
+        public static Bool3 AreEqual(Vector3Int v, int i)
         {
             return new Bool3(
                 v.x == i,
@@ -1175,7 +1175,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsEqual(int i, Vector3Int v)
+        public static Bool3 AreEqual(int i, Vector3Int v)
         {
             return new Bool3(
                 i == v.x,
@@ -1185,7 +1185,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsEqual(Vector4 a, Vector4 b)
+        public static Bool4 AreEqual(Vector4 a, Vector4 b)
         {
             return new Bool4(
                 IsZero(a.x - b.x),
@@ -1196,7 +1196,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsEqual(Vector4 v, float f)
+        public static Bool4 AreEqual(Vector4 v, float f)
         {
             return new Bool4(
                 IsZero(v.x - f),
@@ -1207,7 +1207,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsEqual(float f, Vector4 v)
+        public static Bool4 AreEqual(float f, Vector4 v)
         {
             return new Bool4(
                 IsZero(f - v.x),
@@ -1218,7 +1218,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsEqual(Vector4 v, int i)
+        public static Bool4 AreEqual(Vector4 v, int i)
         {
             return new Bool4(
                 IsZero(v.x - i),
@@ -1229,7 +1229,7 @@ namespace Common
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsEqual(int i, Vector4 v)
+        public static Bool4 AreEqual(int i, Vector4 v)
         {
             return new Bool4(
                 IsZero(i - v.x),
@@ -1240,9 +1240,9 @@ namespace Common
         }
         #endregion
 
-        #region IS_GREATER
+        #region ARE_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsGreater(Vector2 a, Vector2 b)
+        public static Bool2 AreGreater(Vector2 a, Vector2 b)
         {
             return new Bool2(
                 a.x > b.x,
@@ -1251,7 +1251,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsGreater(Vector2 v, float f)
+        public static Bool2 AreGreater(Vector2 v, float f)
         {
             return new Bool2(
                 v.x > f,
@@ -1260,7 +1260,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsGreater(float f, Vector2 v)
+        public static Bool2 AreGreater(float f, Vector2 v)
         {
             return new Bool2(
                 f > v.x,
@@ -1269,7 +1269,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsGreater(Vector2 v, int i)
+        public static Bool2 AreGreater(Vector2 v, int i)
         {
             return new Bool2(
                 v.x > i,
@@ -1278,7 +1278,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsGreater(int i, Vector2 v)
+        public static Bool2 AreGreater(int i, Vector2 v)
         {
             return new Bool2(
                 i > v.x,
@@ -1287,7 +1287,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsGreater(Vector2Int a, Vector2Int b)
+        public static Bool2 AreGreater(Vector2Int a, Vector2Int b)
         {
             return new Bool2(
                 a.x > b.x,
@@ -1296,7 +1296,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsGreater(Vector2Int v, float f)
+        public static Bool2 AreGreater(Vector2Int v, float f)
         {
             return new Bool2(
                 v.x > f,
@@ -1305,7 +1305,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsGreater(float f, Vector2Int v)
+        public static Bool2 AreGreater(float f, Vector2Int v)
         {
             return new Bool2(
                 f > v.x,
@@ -1314,7 +1314,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsGreater(Vector2Int v, int i)
+        public static Bool2 AreGreater(Vector2Int v, int i)
         {
             return new Bool2(
                 v.x > i,
@@ -1323,7 +1323,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsGreater(int i, Vector2Int v)
+        public static Bool2 AreGreater(int i, Vector2Int v)
         {
             return new Bool2(
                 i > v.x,
@@ -1332,7 +1332,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsGreater(Vector3 a, Vector3 b)
+        public static Bool3 AreGreater(Vector3 a, Vector3 b)
         {
             return new Bool3(
                 a.x > b.x,
@@ -1342,7 +1342,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsGreater(Vector3 v, float f)
+        public static Bool3 AreGreater(Vector3 v, float f)
         {
             return new Bool3(
                 v.x > f,
@@ -1352,7 +1352,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsGreater(float f, Vector3 v)
+        public static Bool3 AreGreater(float f, Vector3 v)
         {
             return new Bool3(
                 f > v.x,
@@ -1362,7 +1362,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsGreater(Vector3 v, int i)
+        public static Bool3 AreGreater(Vector3 v, int i)
         {
             return new Bool3(
                 v.x > i,
@@ -1372,7 +1372,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsGreater(int i, Vector3 v)
+        public static Bool3 AreGreater(int i, Vector3 v)
         {
             return new Bool3(
                 i > v.x,
@@ -1382,7 +1382,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsGreater(Vector3Int a, Vector3Int b)
+        public static Bool3 AreGreater(Vector3Int a, Vector3Int b)
         {
             return new Bool3(
                 a.x > b.x,
@@ -1392,7 +1392,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsGreater(Vector3Int v, float f)
+        public static Bool3 AreGreater(Vector3Int v, float f)
         {
             return new Bool3(
                 v.x > f,
@@ -1402,7 +1402,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsGreater(float f, Vector3Int v)
+        public static Bool3 AreGreater(float f, Vector3Int v)
         {
             return new Bool3(
                 f > v.x,
@@ -1412,7 +1412,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsGreater(Vector3Int v, int i)
+        public static Bool3 AreGreater(Vector3Int v, int i)
         {
             return new Bool3(
                 v.x > i,
@@ -1422,7 +1422,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsGreater(int i, Vector3Int v)
+        public static Bool3 AreGreater(int i, Vector3Int v)
         {
             return new Bool3(
                 i > v.x,
@@ -1432,7 +1432,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsGreater(Vector4 a, Vector4 b)
+        public static Bool4 AreGreater(Vector4 a, Vector4 b)
         {
             return new Bool4(
                 a.x > b.x,
@@ -1443,7 +1443,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsGreater(Vector4 v, float f)
+        public static Bool4 AreGreater(Vector4 v, float f)
         {
             return new Bool4(
                 v.x > f,
@@ -1454,7 +1454,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsGreater(float f, Vector4 v)
+        public static Bool4 AreGreater(float f, Vector4 v)
         {
             return new Bool4(
                 f > v.x,
@@ -1465,7 +1465,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsGreater(Vector4 v, int i)
+        public static Bool4 AreGreater(Vector4 v, int i)
         {
             return new Bool4(
                 v.x > i,
@@ -1476,7 +1476,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsGreater(int i, Vector4 v)
+        public static Bool4 AreGreater(int i, Vector4 v)
         {
             return new Bool4(
                 i > v.x,
@@ -1487,9 +1487,9 @@ namespace Common
         }
         #endregion
 
-        #region IS_GREATER_OR_EQUAL
+        #region ARE_GREATER_OR_EQUAL
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsGreaterOrEqual(Vector2 a, Vector2 b)
+        public static Bool2 AreGreaterOrEqual(Vector2 a, Vector2 b)
         {
             return new Bool2(
                 a.x >= b.x,
@@ -1498,7 +1498,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsGreaterOrEqual(Vector2 v, float f)
+        public static Bool2 AreGreaterOrEqual(Vector2 v, float f)
         {
             return new Bool2(
                 v.x >= f,
@@ -1507,7 +1507,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsGreaterOrEqual(float f, Vector2 v)
+        public static Bool2 AreGreaterOrEqual(float f, Vector2 v)
         {
             return new Bool2(
                 f >= v.x,
@@ -1516,7 +1516,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsGreaterOrEqual(Vector2 v, int i)
+        public static Bool2 AreGreaterOrEqual(Vector2 v, int i)
         {
             return new Bool2(
                 v.x >= i,
@@ -1525,7 +1525,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsGreaterOrEqual(int i, Vector2 v)
+        public static Bool2 AreGreaterOrEqual(int i, Vector2 v)
         {
             return new Bool2(
                 i >= v.x,
@@ -1534,7 +1534,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsGreaterOrEqual(Vector2Int a, Vector2Int b)
+        public static Bool2 AreGreaterOrEqual(Vector2Int a, Vector2Int b)
         {
             return new Bool2(
                 a.x >= b.x,
@@ -1543,7 +1543,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsGreaterOrEqual(Vector2Int v, float f)
+        public static Bool2 AreGreaterOrEqual(Vector2Int v, float f)
         {
             return new Bool2(
                 v.x >= f,
@@ -1552,7 +1552,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsGreaterOrEqual(float f, Vector2Int v)
+        public static Bool2 AreGreaterOrEqual(float f, Vector2Int v)
         {
             return new Bool2(
                 f >= v.x,
@@ -1561,7 +1561,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsGreaterOrEqual(Vector2Int v, int i)
+        public static Bool2 AreGreaterOrEqual(Vector2Int v, int i)
         {
             return new Bool2(
                 v.x >= i,
@@ -1570,7 +1570,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsGreaterOrEqual(int i, Vector2Int v)
+        public static Bool2 AreGreaterOrEqual(int i, Vector2Int v)
         {
             return new Bool2(
                 i >= v.x,
@@ -1579,7 +1579,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsGreaterOrEqual(Vector3 a, Vector3 b)
+        public static Bool3 AreGreaterOrEqual(Vector3 a, Vector3 b)
         {
             return new Bool3(
                 a.x >= b.x,
@@ -1589,7 +1589,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsGreaterOrEqual(Vector3 v, float f)
+        public static Bool3 AreGreaterOrEqual(Vector3 v, float f)
         {
             return new Bool3(
                 v.x >= f,
@@ -1599,7 +1599,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsGreaterOrEqual(float f, Vector3 v)
+        public static Bool3 AreGreaterOrEqual(float f, Vector3 v)
         {
             return new Bool3(
                 f >= v.x,
@@ -1609,7 +1609,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsGreaterOrEqual(Vector3 v, int i)
+        public static Bool3 AreGreaterOrEqual(Vector3 v, int i)
         {
             return new Bool3(
                 v.x >= i,
@@ -1619,7 +1619,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsGreaterOrEqual(int i, Vector3 v)
+        public static Bool3 AreGreaterOrEqual(int i, Vector3 v)
         {
             return new Bool3(
                 i >= v.x,
@@ -1629,7 +1629,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsGreaterOrEqual(Vector3Int a, Vector3Int b)
+        public static Bool3 AreGreaterOrEqual(Vector3Int a, Vector3Int b)
         {
             return new Bool3(
                 a.x >= b.x,
@@ -1639,7 +1639,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsGreaterOrEqual(Vector3Int v, float f)
+        public static Bool3 AreGreaterOrEqual(Vector3Int v, float f)
         {
             return new Bool3(
                 v.x >= f,
@@ -1649,7 +1649,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsGreaterOrEqual(float f, Vector3Int v)
+        public static Bool3 AreGreaterOrEqual(float f, Vector3Int v)
         {
             return new Bool3(
                 f >= v.x,
@@ -1659,7 +1659,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsGreaterOrEqual(Vector3Int v, int i)
+        public static Bool3 AreGreaterOrEqual(Vector3Int v, int i)
         {
             return new Bool3(
                 v.x >= i,
@@ -1669,7 +1669,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsGreaterOrEqual(int i, Vector3Int v)
+        public static Bool3 AreGreaterOrEqual(int i, Vector3Int v)
         {
             return new Bool3(
                 i >= v.x,
@@ -1679,7 +1679,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsGreaterOrEqual(Vector4 a, Vector4 b)
+        public static Bool4 AreGreaterOrEqual(Vector4 a, Vector4 b)
         {
             return new Bool4(
                 a.x >= b.x,
@@ -1690,7 +1690,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsGreaterOrEqual(Vector4 v, float f)
+        public static Bool4 AreGreaterOrEqual(Vector4 v, float f)
         {
             return new Bool4(
                 v.x >= f,
@@ -1701,7 +1701,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsGreaterOrEqual(float f, Vector4 v)
+        public static Bool4 AreGreaterOrEqual(float f, Vector4 v)
         {
             return new Bool4(
                 f >= v.x,
@@ -1712,7 +1712,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsGreaterOrEqual(Vector4 v, int i)
+        public static Bool4 AreGreaterOrEqual(Vector4 v, int i)
         {
             return new Bool4(
                 v.x >= i,
@@ -1723,7 +1723,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsGreaterOrEqual(int i, Vector4 v)
+        public static Bool4 AreGreaterOrEqual(int i, Vector4 v)
         {
             return new Bool4(
                 i >= v.x,
@@ -1734,9 +1734,9 @@ namespace Common
         }
         #endregion
 
-        #region IS_LESSER
+        #region ARE_LESSER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsLesser(Vector2 a, Vector2 b)
+        public static Bool2 AreLesser(Vector2 a, Vector2 b)
         {
             return new Bool2(
                 a.x < b.x,
@@ -1745,7 +1745,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsLesser(Vector2 v, float f)
+        public static Bool2 AreLesser(Vector2 v, float f)
         {
             return new Bool2(
                 v.x < f,
@@ -1754,7 +1754,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsLesser(float f, Vector2 v)
+        public static Bool2 AreLesser(float f, Vector2 v)
         {
             return new Bool2(
                 f < v.x,
@@ -1763,7 +1763,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsLesser(Vector2 v, int i)
+        public static Bool2 AreLesser(Vector2 v, int i)
         {
             return new Bool2(
                 v.x < i,
@@ -1772,7 +1772,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsLesser(int i, Vector2 v)
+        public static Bool2 AreLesser(int i, Vector2 v)
         {
             return new Bool2(
                 i < v.x,
@@ -1781,7 +1781,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsLesser(Vector2Int a, Vector2Int b)
+        public static Bool2 AreLesser(Vector2Int a, Vector2Int b)
         {
             return new Bool2(
                 a.x < b.x,
@@ -1790,7 +1790,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsLesser(Vector2Int v, float f)
+        public static Bool2 AreLesser(Vector2Int v, float f)
         {
             return new Bool2(
                 v.x < f,
@@ -1799,7 +1799,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsLesser(float f, Vector2Int v)
+        public static Bool2 AreLesser(float f, Vector2Int v)
         {
             return new Bool2(
                 f < v.x,
@@ -1808,7 +1808,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsLesser(Vector2Int v, int i)
+        public static Bool2 AreLesser(Vector2Int v, int i)
         {
             return new Bool2(
                 v.x < i,
@@ -1817,7 +1817,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsLesser(int i, Vector2Int v)
+        public static Bool2 AreLesser(int i, Vector2Int v)
         {
             return new Bool2(
                 i < v.x,
@@ -1826,7 +1826,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsLesser(Vector3 a, Vector3 b)
+        public static Bool3 AreLesser(Vector3 a, Vector3 b)
         {
             return new Bool3(
                 a.x < b.x,
@@ -1836,7 +1836,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsLesser(Vector3 v, float f)
+        public static Bool3 AreLesser(Vector3 v, float f)
         {
             return new Bool3(
                 v.x < f,
@@ -1846,7 +1846,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsLesser(float f, Vector3 v)
+        public static Bool3 AreLesser(float f, Vector3 v)
         {
             return new Bool3(
                 f < v.x,
@@ -1856,7 +1856,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsLesser(Vector3 v, int i)
+        public static Bool3 AreLesser(Vector3 v, int i)
         {
             return new Bool3(
                 v.x < i,
@@ -1866,7 +1866,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsLesser(int i, Vector3 v)
+        public static Bool3 AreLesser(int i, Vector3 v)
         {
             return new Bool3(
                 i < v.x,
@@ -1876,7 +1876,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsLesser(Vector3Int a, Vector3Int b)
+        public static Bool3 AreLesser(Vector3Int a, Vector3Int b)
         {
             return new Bool3(
                 a.x < b.x,
@@ -1886,7 +1886,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsLesser(Vector3Int v, float f)
+        public static Bool3 AreLesser(Vector3Int v, float f)
         {
             return new Bool3(
                 v.x < f,
@@ -1896,7 +1896,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsLesser(float f, Vector3Int v)
+        public static Bool3 AreLesser(float f, Vector3Int v)
         {
             return new Bool3(
                 f < v.x,
@@ -1906,7 +1906,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsLesser(Vector3Int v, int i)
+        public static Bool3 AreLesser(Vector3Int v, int i)
         {
             return new Bool3(
                 v.x < i,
@@ -1916,7 +1916,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsLesser(int i, Vector3Int v)
+        public static Bool3 AreLesser(int i, Vector3Int v)
         {
             return new Bool3(
                 i < v.x,
@@ -1926,7 +1926,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsLesser(Vector4 a, Vector4 b)
+        public static Bool4 AreLesser(Vector4 a, Vector4 b)
         {
             return new Bool4(
                 a.x < b.x,
@@ -1937,7 +1937,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsLesser(Vector4 v, float f)
+        public static Bool4 AreLesser(Vector4 v, float f)
         {
             return new Bool4(
                 v.x < f,
@@ -1948,7 +1948,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsLesser(float f, Vector4 v)
+        public static Bool4 AreLesser(float f, Vector4 v)
         {
             return new Bool4(
                 f < v.x,
@@ -1959,7 +1959,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsLesser(Vector4 v, int i)
+        public static Bool4 AreLesser(Vector4 v, int i)
         {
             return new Bool4(
                 v.x < i,
@@ -1970,7 +1970,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsLesser(int i, Vector4 v)
+        public static Bool4 AreLesser(int i, Vector4 v)
         {
             return new Bool4(
                 i < v.x,
@@ -1981,9 +1981,9 @@ namespace Common
         }
         #endregion
 
-        #region IS_LESSER_OR_EQUAL
+        #region ARE_LESSER_OR_EQUAL
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsLesserOrEqual(Vector2 a, Vector2 b)
+        public static Bool2 AreLesserOrEqual(Vector2 a, Vector2 b)
         {
             return new Bool2(
                 a.x <= b.x,
@@ -1992,7 +1992,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsLesserOrEqual(Vector2 v, float f)
+        public static Bool2 AreLesserOrEqual(Vector2 v, float f)
         {
             return new Bool2(
                 v.x <= f,
@@ -2001,7 +2001,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsLesserOrEqual(float f, Vector2 v)
+        public static Bool2 AreLesserOrEqual(float f, Vector2 v)
         {
             return new Bool2(
                 f <= v.x,
@@ -2010,7 +2010,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsLesserOrEqual(Vector2 v, int i)
+        public static Bool2 AreLesserOrEqual(Vector2 v, int i)
         {
             return new Bool2(
                 v.x <= i,
@@ -2019,7 +2019,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsLesserOrEqual(int i, Vector2 v)
+        public static Bool2 AreLesserOrEqual(int i, Vector2 v)
         {
             return new Bool2(
                 i <= v.x,
@@ -2028,7 +2028,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsLesserOrEqual(Vector2Int a, Vector2Int b)
+        public static Bool2 AreLesserOrEqual(Vector2Int a, Vector2Int b)
         {
             return new Bool2(
                 a.x <= b.x,
@@ -2037,7 +2037,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsLesserOrEqual(Vector2Int v, float f)
+        public static Bool2 AreLesserOrEqual(Vector2Int v, float f)
         {
             return new Bool2(
                 v.x <= f,
@@ -2046,7 +2046,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsLesserOrEqual(float f, Vector2Int v)
+        public static Bool2 AreLesserOrEqual(float f, Vector2Int v)
         {
             return new Bool2(
                 f <= v.x,
@@ -2055,7 +2055,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsLesserOrEqual(Vector2Int v, int i)
+        public static Bool2 AreLesserOrEqual(Vector2Int v, int i)
         {
             return new Bool2(
                 v.x <= i,
@@ -2064,7 +2064,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 IsLesserOrEqual(int i, Vector2Int v)
+        public static Bool2 AreLesserOrEqual(int i, Vector2Int v)
         {
             return new Bool2(
                 i <= v.x,
@@ -2073,7 +2073,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsLesserOrEqual(Vector3 a, Vector3 b)
+        public static Bool3 AreLesserOrEqual(Vector3 a, Vector3 b)
         {
             return new Bool3(
                 a.x <= b.x,
@@ -2083,7 +2083,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsLesserOrEqual(Vector3 v, float f)
+        public static Bool3 AreLesserOrEqual(Vector3 v, float f)
         {
             return new Bool3(
                 v.x <= f,
@@ -2093,7 +2093,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsLesserOrEqual(float f, Vector3 v)
+        public static Bool3 AreLesserOrEqual(float f, Vector3 v)
         {
             return new Bool3(
                 f <= v.x,
@@ -2103,7 +2103,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsLesserOrEqual(Vector3 v, int i)
+        public static Bool3 AreLesserOrEqual(Vector3 v, int i)
         {
             return new Bool3(
                 v.x <= i,
@@ -2113,7 +2113,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsLesserOrEqual(int i, Vector3 v)
+        public static Bool3 AreLesserOrEqual(int i, Vector3 v)
         {
             return new Bool3(
                 i <= v.x,
@@ -2123,7 +2123,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsLesserOrEqual(Vector3Int a, Vector3Int b)
+        public static Bool3 AreLesserOrEqual(Vector3Int a, Vector3Int b)
         {
             return new Bool3(
                 a.x <= b.x,
@@ -2133,7 +2133,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsLesserOrEqual(Vector3Int v, float f)
+        public static Bool3 AreLesserOrEqual(Vector3Int v, float f)
         {
             return new Bool3(
                 v.x <= f,
@@ -2143,7 +2143,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsLesserOrEqual(float f, Vector3Int v)
+        public static Bool3 AreLesserOrEqual(float f, Vector3Int v)
         {
             return new Bool3(
                 f <= v.x,
@@ -2153,7 +2153,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsLesserOrEqual(Vector3Int v, int i)
+        public static Bool3 AreLesserOrEqual(Vector3Int v, int i)
         {
             return new Bool3(
                 v.x <= i,
@@ -2163,7 +2163,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 IsLesserOrEqual(int i, Vector3Int v)
+        public static Bool3 AreLesserOrEqual(int i, Vector3Int v)
         {
             return new Bool3(
                 i <= v.x,
@@ -2173,7 +2173,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsLesserOrEqual(Vector4 a, Vector4 b)
+        public static Bool4 AreLesserOrEqual(Vector4 a, Vector4 b)
         {
             return new Bool4(
                 a.x <= b.x,
@@ -2184,7 +2184,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsLesserOrEqual(Vector4 v, float f)
+        public static Bool4 AreLesserOrEqual(Vector4 v, float f)
         {
             return new Bool4(
                 v.x <= f,
@@ -2195,7 +2195,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsLesserOrEqual(float f, Vector4 v)
+        public static Bool4 AreLesserOrEqual(float f, Vector4 v)
         {
             return new Bool4(
                 f <= v.x,
@@ -2206,7 +2206,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsLesserOrEqual(Vector4 v, int i)
+        public static Bool4 AreLesserOrEqual(Vector4 v, int i)
         {
             return new Bool4(
                 v.x <= i,
@@ -2217,7 +2217,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 IsLesserOrEqual(int i, Vector4 v)
+        public static Bool4 AreLesserOrEqual(int i, Vector4 v)
         {
             return new Bool4(
                 i <= v.x,
@@ -2228,15 +2228,15 @@ namespace Common
         }
         #endregion
 
-        #region ARE_EQUAL
+        #region IS_EQUAL
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(float a, float b)
+        public static bool IsEqual(float a, float b)
         {
             return IsZero(a - b);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(Vector2 a, Vector2 b)
+        public static bool IsEqual(Vector2 a, Vector2 b)
         {
             return (
                 IsZero(a.x - b.x) &&
@@ -2245,7 +2245,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(Vector2 v, float f)
+        public static bool IsEqual(Vector2 v, float f)
         {
             return (
                 IsZero(v.x - f) &&
@@ -2254,7 +2254,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(float f, Vector2 v)
+        public static bool IsEqual(float f, Vector2 v)
         {
             return (
                 IsZero(f - v.x) &&
@@ -2263,7 +2263,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(Vector2 v, int i)
+        public static bool IsEqual(Vector2 v, int i)
         {
             return (
                 IsZero(v.x - i) &&
@@ -2272,7 +2272,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(int i, Vector2 v)
+        public static bool IsEqual(int i, Vector2 v)
         {
             return (
                 IsZero(i - v.x) &&
@@ -2281,7 +2281,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(Vector2Int a, Vector2Int b)
+        public static bool IsEqual(Vector2Int a, Vector2Int b)
         {
             return (
                 a.x == b.x &&
@@ -2290,7 +2290,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(Vector2Int v, float f)
+        public static bool IsEqual(Vector2Int v, float f)
         {
             return (
                 IsZero(v.x - f) &&
@@ -2299,7 +2299,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(float f, Vector2Int v)
+        public static bool IsEqual(float f, Vector2Int v)
         {
             return (
                 IsZero(f - v.x) &&
@@ -2308,7 +2308,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(Vector2Int v, int i)
+        public static bool IsEqual(Vector2Int v, int i)
         {
             return (
                 v.x == i &&
@@ -2317,7 +2317,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(int i, Vector2Int v)
+        public static bool IsEqual(int i, Vector2Int v)
         {
             return (
                 i == v.x &&
@@ -2326,7 +2326,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(Vector3 a, Vector3 b)
+        public static bool IsEqual(Vector3 a, Vector3 b)
         {
             return (
                 IsZero(a.x - b.x) &&
@@ -2336,7 +2336,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(Vector3 v, float f)
+        public static bool IsEqual(Vector3 v, float f)
         {
             return (
                 IsZero(v.x - f) &&
@@ -2346,7 +2346,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(float f, Vector3 v)
+        public static bool IsEqual(float f, Vector3 v)
         {
             return (
                 IsZero(f - v.x) &&
@@ -2356,7 +2356,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(Vector3 v, int i)
+        public static bool IsEqual(Vector3 v, int i)
         {
             return (
                 IsZero(v.x - i) &&
@@ -2366,7 +2366,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(int i, Vector3 v)
+        public static bool IsEqual(int i, Vector3 v)
         {
             return (
                 IsZero(i - v.x) &&
@@ -2376,7 +2376,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(Vector3Int a, Vector3Int b)
+        public static bool IsEqual(Vector3Int a, Vector3Int b)
         {
             return (
                 a.x == b.x &&
@@ -2386,7 +2386,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(Vector3Int v, float f)
+        public static bool IsEqual(Vector3Int v, float f)
         {
             return (
                 IsZero(v.x - f) &&
@@ -2396,7 +2396,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(float f, Vector3Int v)
+        public static bool IsEqual(float f, Vector3Int v)
         {
             return (
                 IsZero(f - v.x) &&
@@ -2406,7 +2406,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(Vector3Int v, int i)
+        public static bool IsEqual(Vector3Int v, int i)
         {
             return (
                 v.x == i &&
@@ -2416,7 +2416,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(int i, Vector3Int v)
+        public static bool IsEqual(int i, Vector3Int v)
         {
             return (
                 i == v.x &&
@@ -2426,7 +2426,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(Vector4 a, Vector4 b)
+        public static bool IsEqual(Vector4 a, Vector4 b)
         {
             return (
                 IsZero(a.x - b.x) &&
@@ -2437,7 +2437,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(Vector4 v, float f)
+        public static bool IsEqual(Vector4 v, float f)
         {
             return (
                 IsZero(v.x - f) &&
@@ -2448,7 +2448,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(float f, Vector4 v)
+        public static bool IsEqual(float f, Vector4 v)
         {
             return (
                 IsZero(f - v.x) &&
@@ -2459,7 +2459,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(Vector4 v, int i)
+        public static bool IsEqual(Vector4 v, int i)
         {
             return (
                 IsZero(v.x - i) &&
@@ -2470,7 +2470,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreEqual(int i, Vector4 v)
+        public static bool IsEqual(int i, Vector4 v)
         {
             return (
                 IsZero(i - v.x) &&
@@ -2481,9 +2481,9 @@ namespace Common
         }
         #endregion
 
-        #region ARE_GREATER
+        #region IS_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(Vector2 a, Vector2 b)
+        public static bool IsGreater(Vector2 a, Vector2 b)
         {
             return (
                 a.x > b.x &&
@@ -2492,7 +2492,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(Vector2 v, float f)
+        public static bool IsGreater(Vector2 v, float f)
         {
             return (
                 v.x > f &&
@@ -2501,7 +2501,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(float f, Vector2 v)
+        public static bool IsGreater(float f, Vector2 v)
         {
             return (
                 f > v.x &&
@@ -2510,7 +2510,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(Vector2 v, int i)
+        public static bool IsGreater(Vector2 v, int i)
         {
             return (
                 v.x > i &&
@@ -2519,7 +2519,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(int i, Vector2 v)
+        public static bool IsGreater(int i, Vector2 v)
         {
             return (
                 i > v.x &&
@@ -2528,7 +2528,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(Vector2Int a, Vector2Int b)
+        public static bool IsGreater(Vector2Int a, Vector2Int b)
         {
             return (
                 a.x > b.x &&
@@ -2537,7 +2537,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(Vector2Int v, float f)
+        public static bool IsGreater(Vector2Int v, float f)
         {
             return (
                 v.x > f &&
@@ -2546,7 +2546,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(float f, Vector2Int v)
+        public static bool IsGreater(float f, Vector2Int v)
         {
             return (
                 f > v.x &&
@@ -2555,7 +2555,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(Vector2Int v, int i)
+        public static bool IsGreater(Vector2Int v, int i)
         {
             return (
                 v.x > i &&
@@ -2564,7 +2564,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(int i, Vector2Int v)
+        public static bool IsGreater(int i, Vector2Int v)
         {
             return (
                 i > v.x &&
@@ -2573,7 +2573,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(Vector3 a, Vector3 b)
+        public static bool IsGreater(Vector3 a, Vector3 b)
         {
             return (
                 a.x > b.x &&
@@ -2583,7 +2583,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(Vector3 v, float f)
+        public static bool IsGreater(Vector3 v, float f)
         {
             return (
                 v.x > f &&
@@ -2593,7 +2593,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(float f, Vector3 v)
+        public static bool IsGreater(float f, Vector3 v)
         {
             return (
                 f > v.x &&
@@ -2603,7 +2603,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(Vector3 v, int i)
+        public static bool IsGreater(Vector3 v, int i)
         {
             return (
                 v.x > i &&
@@ -2613,7 +2613,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(int i, Vector3 v)
+        public static bool IsGreater(int i, Vector3 v)
         {
             return (
                 i > v.x &&
@@ -2623,7 +2623,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(Vector3Int a, Vector3Int b)
+        public static bool IsGreater(Vector3Int a, Vector3Int b)
         {
             return (
                 a.x > b.x &&
@@ -2633,7 +2633,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(Vector3Int v, float f)
+        public static bool IsGreater(Vector3Int v, float f)
         {
             return (
                 v.x > f &&
@@ -2643,7 +2643,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(float f, Vector3Int v)
+        public static bool IsGreater(float f, Vector3Int v)
         {
             return (
                 f > v.x &&
@@ -2653,7 +2653,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(Vector3Int v, int i)
+        public static bool IsGreater(Vector3Int v, int i)
         {
             return (
                 v.x > i &&
@@ -2663,7 +2663,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(int i, Vector3Int v)
+        public static bool IsGreater(int i, Vector3Int v)
         {
             return (
                 i > v.x &&
@@ -2673,7 +2673,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(Vector4 a, Vector4 b)
+        public static bool IsGreater(Vector4 a, Vector4 b)
         {
             return (
                 a.x > b.x &&
@@ -2684,7 +2684,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(Vector4 v, float f)
+        public static bool IsGreater(Vector4 v, float f)
         {
             return (
                 v.x > f &&
@@ -2695,7 +2695,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(float f, Vector4 v)
+        public static bool IsGreater(float f, Vector4 v)
         {
             return (
                 f > v.x &&
@@ -2706,7 +2706,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(Vector4 v, int i)
+        public static bool IsGreater(Vector4 v, int i)
         {
             return (
                 v.x > i &&
@@ -2717,7 +2717,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreater(int i, Vector4 v)
+        public static bool IsGreater(int i, Vector4 v)
         {
             return (
                 i > v.x &&
@@ -2728,9 +2728,9 @@ namespace Common
         }
         #endregion
 
-        #region ARE_GREATER_OR_EQUAL
+        #region IS_GREATER_OR_EQUAL
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(Vector2 a, Vector2 b)
+        public static bool IsGreaterOrEqual(Vector2 a, Vector2 b)
         {
             return (
                 a.x >= b.x &&
@@ -2739,7 +2739,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(Vector2 v, float f)
+        public static bool IsGreaterOrEqual(Vector2 v, float f)
         {
             return (
                 v.x >= f &&
@@ -2748,7 +2748,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(float f, Vector2 v)
+        public static bool IsGreaterOrEqual(float f, Vector2 v)
         {
             return (
                 f >= v.x &&
@@ -2757,7 +2757,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(Vector2 v, int i)
+        public static bool IsGreaterOrEqual(Vector2 v, int i)
         {
             return (
                 v.x >= i &&
@@ -2766,7 +2766,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(int i, Vector2 v)
+        public static bool IsGreaterOrEqual(int i, Vector2 v)
         {
             return (
                 i >= v.x &&
@@ -2775,7 +2775,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(Vector2Int a, Vector2Int b)
+        public static bool IsGreaterOrEqual(Vector2Int a, Vector2Int b)
         {
             return (
                 a.x >= b.x &&
@@ -2784,7 +2784,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(Vector2Int v, float f)
+        public static bool IsGreaterOrEqual(Vector2Int v, float f)
         {
             return (
                 v.x >= f &&
@@ -2793,7 +2793,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(float f, Vector2Int v)
+        public static bool IsGreaterOrEqual(float f, Vector2Int v)
         {
             return (
                 f >= v.x &&
@@ -2802,7 +2802,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(Vector2Int v, int i)
+        public static bool IsGreaterOrEqual(Vector2Int v, int i)
         {
             return (
                 v.x >= i &&
@@ -2811,7 +2811,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(int i, Vector2Int v)
+        public static bool IsGreaterOrEqual(int i, Vector2Int v)
         {
             return (
                 i >= v.x &&
@@ -2820,7 +2820,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(Vector3 a, Vector3 b)
+        public static bool IsGreaterOrEqual(Vector3 a, Vector3 b)
         {
             return (
                 a.x >= b.x &&
@@ -2830,7 +2830,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(Vector3 v, float f)
+        public static bool IsGreaterOrEqual(Vector3 v, float f)
         {
             return (
                 v.x >= f &&
@@ -2840,7 +2840,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(float f, Vector3 v)
+        public static bool IsGreaterOrEqual(float f, Vector3 v)
         {
             return (
                 f >= v.x &&
@@ -2850,7 +2850,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(Vector3 v, int i)
+        public static bool IsGreaterOrEqual(Vector3 v, int i)
         {
             return (
                 v.x >= i &&
@@ -2860,7 +2860,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(int i, Vector3 v)
+        public static bool IsGreaterOrEqual(int i, Vector3 v)
         {
             return (
                 i >= v.x &&
@@ -2870,7 +2870,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(Vector3Int a, Vector3Int b)
+        public static bool IsGreaterOrEqual(Vector3Int a, Vector3Int b)
         {
             return (
                 a.x >= b.x &&
@@ -2880,7 +2880,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(Vector3Int v, float f)
+        public static bool IsGreaterOrEqual(Vector3Int v, float f)
         {
             return (
                 v.x >= f &&
@@ -2890,7 +2890,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(float f, Vector3Int v)
+        public static bool IsGreaterOrEqual(float f, Vector3Int v)
         {
             return (
                 f >= v.x &&
@@ -2900,7 +2900,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(Vector3Int v, int i)
+        public static bool IsGreaterOrEqual(Vector3Int v, int i)
         {
             return (
                 v.x >= i &&
@@ -2910,7 +2910,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(int i, Vector3Int v)
+        public static bool IsGreaterOrEqual(int i, Vector3Int v)
         {
             return (
                 i >= v.x &&
@@ -2920,7 +2920,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(Vector4 a, Vector4 b)
+        public static bool IsGreaterOrEqual(Vector4 a, Vector4 b)
         {
             return (
                 a.x >= b.x &&
@@ -2931,7 +2931,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(Vector4 v, float f)
+        public static bool IsGreaterOrEqual(Vector4 v, float f)
         {
             return (
                 v.x >= f &&
@@ -2942,7 +2942,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(float f, Vector4 v)
+        public static bool IsGreaterOrEqual(float f, Vector4 v)
         {
             return (
                 f >= v.x &&
@@ -2953,7 +2953,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(Vector4 v, int i)
+        public static bool IsGreaterOrEqual(Vector4 v, int i)
         {
             return (
                 v.x >= i &&
@@ -2964,7 +2964,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreGreaterOrEqual(int i, Vector4 v)
+        public static bool IsGreaterOrEqual(int i, Vector4 v)
         {
             return (
                 i >= v.x &&
@@ -2975,9 +2975,9 @@ namespace Common
         }
         #endregion
 
-        #region ARE_LESSER
+        #region IS_LESSER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(Vector2 a, Vector2 b)
+        public static bool IsLesser(Vector2 a, Vector2 b)
         {
             return (
                 a.x < b.x &&
@@ -2986,7 +2986,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(Vector2 v, float f)
+        public static bool IsLesser(Vector2 v, float f)
         {
             return (
                 v.x < f &&
@@ -2995,7 +2995,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(float f, Vector2 v)
+        public static bool IsLesser(float f, Vector2 v)
         {
             return (
                 f < v.x &&
@@ -3004,7 +3004,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(Vector2 v, int i)
+        public static bool IsLesser(Vector2 v, int i)
         {
             return (
                 v.x < i &&
@@ -3013,7 +3013,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(int i, Vector2 v)
+        public static bool IsLesser(int i, Vector2 v)
         {
             return (
                 i < v.x &&
@@ -3022,7 +3022,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(Vector2Int a, Vector2Int b)
+        public static bool IsLesser(Vector2Int a, Vector2Int b)
         {
             return (
                 a.x < b.x &&
@@ -3031,7 +3031,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(Vector2Int v, float f)
+        public static bool IsLesser(Vector2Int v, float f)
         {
             return (
                 v.x < f &&
@@ -3040,7 +3040,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(float f, Vector2Int v)
+        public static bool IsLesser(float f, Vector2Int v)
         {
             return (
                 f < v.x &&
@@ -3049,7 +3049,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(Vector2Int v, int i)
+        public static bool IsLesser(Vector2Int v, int i)
         {
             return (
                 v.x < i &&
@@ -3058,7 +3058,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(int i, Vector2Int v)
+        public static bool IsLesser(int i, Vector2Int v)
         {
             return (
                 i < v.x &&
@@ -3067,7 +3067,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(Vector3 a, Vector3 b)
+        public static bool IsLesser(Vector3 a, Vector3 b)
         {
             return (
                 a.x < b.x &&
@@ -3077,7 +3077,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(Vector3 v, float f)
+        public static bool IsLesser(Vector3 v, float f)
         {
             return (
                 v.x < f &&
@@ -3087,7 +3087,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(float f, Vector3 v)
+        public static bool IsLesser(float f, Vector3 v)
         {
             return (
                 f < v.x &&
@@ -3097,7 +3097,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(Vector3 v, int i)
+        public static bool IsLesser(Vector3 v, int i)
         {
             return (
                 v.x < i &&
@@ -3107,7 +3107,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(int i, Vector3 v)
+        public static bool IsLesser(int i, Vector3 v)
         {
             return (
                 i < v.x &&
@@ -3117,7 +3117,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(Vector3Int a, Vector3Int b)
+        public static bool IsLesser(Vector3Int a, Vector3Int b)
         {
             return (
                 a.x < b.x &&
@@ -3127,7 +3127,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(Vector3Int v, float f)
+        public static bool IsLesser(Vector3Int v, float f)
         {
             return (
                 v.x < f &&
@@ -3137,7 +3137,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(float f, Vector3Int v)
+        public static bool IsLesser(float f, Vector3Int v)
         {
             return (
                 f < v.x &&
@@ -3147,7 +3147,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(Vector3Int v, int i)
+        public static bool IsLesser(Vector3Int v, int i)
         {
             return (
                 v.x < i &&
@@ -3157,7 +3157,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(int i, Vector3Int v)
+        public static bool IsLesser(int i, Vector3Int v)
         {
             return (
                 i < v.x &&
@@ -3167,7 +3167,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(Vector4 a, Vector4 b)
+        public static bool IsLesser(Vector4 a, Vector4 b)
         {
             return (
                 a.x < b.x &&
@@ -3178,7 +3178,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(Vector4 v, float f)
+        public static bool IsLesser(Vector4 v, float f)
         {
             return (
                 v.x < f &&
@@ -3189,7 +3189,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(float f, Vector4 v)
+        public static bool IsLesser(float f, Vector4 v)
         {
             return (
                 f < v.x &&
@@ -3200,7 +3200,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(Vector4 v, int i)
+        public static bool IsLesser(Vector4 v, int i)
         {
             return (
                 v.x < i &&
@@ -3211,7 +3211,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesser(int i, Vector4 v)
+        public static bool IsLesser(int i, Vector4 v)
         {
             return (
                 i < v.x &&
@@ -3222,9 +3222,9 @@ namespace Common
         }
         #endregion
 
-        #region ARE_LESSER_OR_EQUAL
+        #region IS_LESSER_OR_EQUAL
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(Vector2 a, Vector2 b)
+        public static bool IsLesserOrEqual(Vector2 a, Vector2 b)
         {
             return (
                 a.x <= b.x &&
@@ -3233,7 +3233,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(Vector2 v, float f)
+        public static bool IsLesserOrEqual(Vector2 v, float f)
         {
             return (
                 v.x <= f &&
@@ -3242,7 +3242,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(float f, Vector2 v)
+        public static bool IsLesserOrEqual(float f, Vector2 v)
         {
             return (
                 f <= v.x &&
@@ -3251,7 +3251,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(Vector2 v, int i)
+        public static bool IsLesserOrEqual(Vector2 v, int i)
         {
             return (
                 v.x <= i &&
@@ -3260,7 +3260,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(int i, Vector2 v)
+        public static bool IsLesserOrEqual(int i, Vector2 v)
         {
             return (
                 i <= v.x &&
@@ -3269,7 +3269,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(Vector2Int a, Vector2Int b)
+        public static bool IsLesserOrEqual(Vector2Int a, Vector2Int b)
         {
             return (
                 a.x <= b.x &&
@@ -3278,7 +3278,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(Vector2Int v, float f)
+        public static bool IsLesserOrEqual(Vector2Int v, float f)
         {
             return (
                 v.x <= f &&
@@ -3287,7 +3287,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(float f, Vector2Int v)
+        public static bool IsLesserOrEqual(float f, Vector2Int v)
         {
             return (
                 f <= v.x &&
@@ -3296,7 +3296,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(Vector2Int v, int i)
+        public static bool IsLesserOrEqual(Vector2Int v, int i)
         {
             return (
                 v.x <= i &&
@@ -3305,7 +3305,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(int i, Vector2Int v)
+        public static bool IsLesserOrEqual(int i, Vector2Int v)
         {
             return (
                 i <= v.x &&
@@ -3314,7 +3314,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(Vector3 a, Vector3 b)
+        public static bool IsLesserOrEqual(Vector3 a, Vector3 b)
         {
             return (
                 a.x <= b.x &&
@@ -3324,7 +3324,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(Vector3 v, float f)
+        public static bool IsLesserOrEqual(Vector3 v, float f)
         {
             return (
                 v.x <= f &&
@@ -3334,7 +3334,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(float f, Vector3 v)
+        public static bool IsLesserOrEqual(float f, Vector3 v)
         {
             return (
                 f <= v.x &&
@@ -3344,7 +3344,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(Vector3 v, int i)
+        public static bool IsLesserOrEqual(Vector3 v, int i)
         {
             return (
                 v.x <= i &&
@@ -3354,7 +3354,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(int i, Vector3 v)
+        public static bool IsLesserOrEqual(int i, Vector3 v)
         {
             return (
                 i <= v.x &&
@@ -3364,7 +3364,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(Vector3Int a, Vector3Int b)
+        public static bool IsLesserOrEqual(Vector3Int a, Vector3Int b)
         {
             return (
                 a.x <= b.x &&
@@ -3374,7 +3374,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(Vector3Int v, float f)
+        public static bool IsLesserOrEqual(Vector3Int v, float f)
         {
             return (
                 v.x <= f &&
@@ -3384,7 +3384,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(float f, Vector3Int v)
+        public static bool IsLesserOrEqual(float f, Vector3Int v)
         {
             return (
                 f <= v.x &&
@@ -3394,7 +3394,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(Vector3Int v, int i)
+        public static bool IsLesserOrEqual(Vector3Int v, int i)
         {
             return (
                 v.x <= i &&
@@ -3404,7 +3404,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(int i, Vector3Int v)
+        public static bool IsLesserOrEqual(int i, Vector3Int v)
         {
             return (
                 i <= v.x &&
@@ -3414,7 +3414,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(Vector4 a, Vector4 b)
+        public static bool IsLesserOrEqual(Vector4 a, Vector4 b)
         {
             return (
                 a.x <= b.x &&
@@ -3425,7 +3425,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(Vector4 v, float f)
+        public static bool IsLesserOrEqual(Vector4 v, float f)
         {
             return (
                 v.x <= f &&
@@ -3436,7 +3436,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(float f, Vector4 v)
+        public static bool IsLesserOrEqual(float f, Vector4 v)
         {
             return (
                 f <= v.x &&
@@ -3447,7 +3447,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(Vector4 v, int i)
+        public static bool IsLesserOrEqual(Vector4 v, int i)
         {
             return (
                 v.x <= i &&
@@ -3458,7 +3458,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool AreLesserOrEqual(int i, Vector4 v)
+        public static bool IsLesserOrEqual(int i, Vector4 v)
         {
             return (
                 i <= v.x &&
