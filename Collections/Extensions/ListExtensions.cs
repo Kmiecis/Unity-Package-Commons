@@ -1,142 +1,155 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Common
 {
     public static class ListExtensions
     {
-        public static bool IsNull<T>(this List<T> self)
+        public static bool IsNull<T>(this List<T> list)
         {
-            return self == null;
+            return list == null;
         }
 
-        public static bool IsEmpty<T>(this List<T> self)
+        public static bool IsEmpty<T>(this List<T> list)
         {
-            return self.Count == 0;
+            return list.Count == 0;
         }
 
-        public static bool IsNullOrEmpty<T>(this List<T> self)
+        public static bool IsNullOrEmpty<T>(this List<T> list)
         {
-            return self.IsNull() || self.IsEmpty();
+            return list.IsNull() || list.IsEmpty();
         }
 
-        public static int GetCountSafely<T>(this List<T> self)
+        public static int GetCountSafely<T>(this List<T> list)
         {
-            return self.IsNull() ? 0 : self.Count;
+            return list.IsNull() ? 0 : list.Count;
         }
 
-        public static T First<T>(this List<T> self)
+        public static T First<T>(this List<T> list)
         {
-            return self[0];
+            return list[0];
         }
 
-        public static T FirstOrNull<T>(this List<T> self)
+        public static T FirstOrNull<T>(this List<T> list)
         {
-            return self.IsNullOrEmpty() ? default : self.First();
+            return list.IsNullOrEmpty() ? default : list.First();
         }
 
-        public static T Last<T>(this List<T> self)
+        public static T Last<T>(this List<T> list)
         {
-            return self[self.Count - 1];
+            return list[list.Count - 1];
         }
 
-        public static T LastOrNull<T>(this List<T> self)
+        public static T LastOrNull<T>(this List<T> list)
         {
-            return self.IsNullOrEmpty() ? default : self.Last();
+            return list.IsNullOrEmpty() ? default : list.Last();
         }
 
-        public static bool TryGet<T>(this List<T> self, int index, out T item)
+        public static bool TryGet<T>(this List<T> list, int index, out T item)
         {
-            if (0 > index || index > self.Count - 1)
+            if (0 > index || index > list.Count - 1)
             {
                 item = default;
                 return false;
             }
-            item = self[index];
+            item = list[index];
             return true;
         }
 
-        public static bool TryGetFirst<T>(this List<T> self, out T item)
+        public static bool TryGetFirst<T>(this List<T> list, out T item)
         {
-            return self.TryGet(0, out item);
+            return list.TryGet(0, out item);
         }
 
-        public static bool TryGetLast<T>(this List<T> self, out T item)
+        public static bool TryGetLast<T>(this List<T> list, out T item)
         {
-            return self.TryGet(self.Count - 1, out item);
+            return list.TryGet(list.Count - 1, out item);
         }
 
-        public static bool TryIndexOf<T>(this List<T> self, T item, out int index)
+        public static bool TryIndexOf<T>(this List<T> list, T item, out int index)
         {
-            index = self.IndexOf(item);
+            index = list.IndexOf(item);
             return index != -1;
         }
 
-        public static bool TryFind<T>(this List<T> self, Predicate<T> match, out T value)
+        public static bool TryFind<T>(this List<T> list, Predicate<T> match, out T value)
         {
-            value = self.Find(match);
+            value = list.Find(match);
             return value != default;
         }
 
-        public static void Swap<T>(this List<T> self, int i, int j)
+        public static void Swap<T>(this List<T> list, int i, int j)
         {
-            var t = self[i];
-            self[i] = self[j];
-            self[j] = t;
+            var t = list[i];
+            list[i] = list[j];
+            list[j] = t;
         }
 
-        public static void SwapLast<T>(this List<T> self, int index)
+        public static void SwapLast<T>(this List<T> list, int index)
         {
-            self.Swap(index, self.Count - 1);
+            list.Swap(index, list.Count - 1);
         }
 
-        public static List<T> Populate<T>(this List<T> self, T value)
+        public static List<T> Populate<T>(this List<T> list, T value)
         {
-            for (int i = 0; i < self.Count; ++i)
-                self[i] = value;
-            return self;
+            return list.Populate(value, list.Capacity);
         }
 
-        public static bool AddUnique<T>(this List<T> self, T item)
+        public static List<T> Populate<T>(this List<T> list, T value, int count)
         {
-            if (!self.Contains(item))
+            for (int i = 0; i < count; ++i)
+                list.Add(value);
+            return list;
+        }
+
+        public static bool AddUnique<T>(this List<T> list, T item)
+        {
+            if (!list.Contains(item))
             {
-                self.Add(item);
+                list.Add(item);
                 return true;
             }
             return false;
         }
         
-        public static void RemoveLast<T>(this List<T> self)
+        public static void RemoveLast<T>(this List<T> list)
         {
-            self.RemoveAt(self.Count - 1);
+            list.RemoveAt(list.Count - 1);
         }
 
-        public static void RemoveLast<T>(this List<T> self, int count)
+        public static void RemoveLast<T>(this List<T> list, int count)
         {
-            self.RemoveRange(self.Count - 1 - count, count);
+            list.RemoveRange(list.Count - 1 - count, count);
         }
 
-        public static T Revoke<T>(this List<T> self, int index)
+        public static T Revoke<T>(this List<T> list, int index)
         {
-            var result = self[index];
-            self.RemoveAt(index);
+            var result = list[index];
+            list.RemoveAt(index);
             return result;
         }
 
-        public static T RevokeLast<T>(this List<T> self)
+        public static T RevokeLast<T>(this List<T> list)
         {
-            var last = self.Last();
-            self.RemoveLast();
+            var last = list.Last();
+            list.RemoveLast();
             return last;
         }
 
-        public static T[] RevokeLast<T>(this List<T> self, int count)
+        public static T[] RevokeLast<T>(this List<T> list, int count)
         {
             var last = new T[count];
-            self.CopyTo(self.Count - 1 - count, last, 0, count);
-            self.RemoveLast(count);
+            list.CopyTo(list.Count - 1 - count, last, 0, count);
+            list.RemoveLast(count);
             return last;
+        }
+
+        public static T[] GetArray<T>(this List<T> list)
+        {
+            var type = list.GetType();
+            var field = type.GetField("_items", BindingFlags.Instance | BindingFlags.NonPublic);
+            return (T[])field.GetValue(list);
         }
     }
 }
