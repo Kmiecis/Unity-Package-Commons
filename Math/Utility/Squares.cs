@@ -19,45 +19,25 @@ namespace Common
             0, 1, 2, 0, 2, 3, -1
         };
 
-        /// <summary> Calculates vertices of a square defined by center 'c', extents 'e' and angle 'a' </summary>
-        public static Vector2[] Vertices(Vector2 c, Vector2 e, float a)
+        /// <summary> Calculates vertices of a unit square into array </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Vertices(Vector2[] vs)
         {
-            var he = e * 0.5f;
-            return new Vector2[]
-            {
-                c + Mathx.Rotate(new Vector2(-he.x, -he.y), a),
-                c + Mathx.Rotate(new Vector2(-he.x, +he.y), a),
-                c + Mathx.Rotate(new Vector2(+he.x, +he.y), a),
-                c + Mathx.Rotate(new Vector2(+he.x, -he.y), a)
-            };
+            vs[0] = new Vector2(-0.5f, -0.5f);
+            vs[1] = new Vector2(-0.5f, +0.5f);
+            vs[2] = new Vector2(+0.5f, +0.5f);
+            vs[3] = new Vector2(+0.5f, -0.5f);
         }
 
-        /// <summary> Calculates vertices of a square defined by center 'c' and extents 'e' </summary>
-        public static Vector2[] Vertices(Vector2 c, Vector2 e)
+        /// <summary> Calculates vertices of a unit square into array </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2[] Vertices()
         {
-            var he = e * 0.5f;
-            return new Vector2[]
-            {
-                c + new Vector2(-he.x, -he.y),
-                c + new Vector2(-he.x, +he.y),
-                c + new Vector2(+he.x, +he.y),
-                c + new Vector2(+he.x, -he.y)
-            };
+            var vs = new Vector2[4];
+            Vertices(vs);
+            return vs;
         }
-
-        /// <summary> Calculates vertices of a square defined by extents 'e' </summary>
-        public static Vector2[] Vertices(Vector2 e)
-        {
-            var he = e * 0.5f;
-            return new Vector2[]
-            {
-                new Vector2(-he.x, -he.y),
-                new Vector2(-he.x, +he.y),
-                new Vector2(+he.x, +he.y),
-                new Vector2(+he.x, -he.y)
-            };
-        }
-
+        
         /// <summary> Calculates area of a square defined by extents 'e' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Area(Vector2 e)

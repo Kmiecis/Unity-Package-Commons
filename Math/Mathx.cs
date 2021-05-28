@@ -474,15 +474,23 @@ namespace Common
             return (i % 2) == 1;
         }
 
-        
-        public static Vector2 Rotate(Vector2 p, float a)
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Rotate(Vector2 v, float a)
         {
             var sin = Mathf.Sin(a);
             var cos = Mathf.Cos(a);
             return new Vector2(
-                (cos * p.x) - (sin * p.y),
-                (sin * p.x) + (cos * p.y)
+                (cos * v.x) - (sin * v.y),
+                (sin * v.x) + (cos * v.y)
             );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Rotate(Vector3 v, float r, float p, float y)
+        {
+            var q = Quaternion.Euler(r, p, y);
+            return q * v;
         }
 
 

@@ -16,61 +16,9 @@ namespace Common
         /// <summary> Triangles of a hexagon </summary>
         public static readonly int[] Triangles = new int[]
         {
-            0, 1, 2,
-            0, 2, 3,
-            0, 3, 4,
-            0, 4, 5,
-            0, 5, 6,
-            0, 6, 7,
-            -1
+            0, 1, 2, 0, 2, 3, 0, 3, 4, 0, 4, 5, -1
         };
 
-        /// <summary> Calculates vertex at index 'i' of a hexagon defined by center 'c' and circumradius 'r' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Vertex(Vector2 c, float r, int i)
-        {
-            const int VERTEX_COUNT = (int)Direction.Count;
-            var a = (i % VERTEX_COUNT) * Mathx.PI_DOUBLE / (1.0f * VERTEX_COUNT);
-            return c + Circles.Direction(a) * r;
-        }
-
-        /// <summary> Calculates vertex at index 'i' of a hexagon defined by circumradius 'r' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Vertex(float r, int i)
-        {
-            const int VERTEX_COUNT = (int)Direction.Count;
-            var a = (i % VERTEX_COUNT) * Mathx.PI_DOUBLE / (1.0f * VERTEX_COUNT);
-            return Circles.Direction(a) * r;
-        }
-
-        /// <summary> Calculates vertices of a hexagon defined by center 'c' and circumradius 'r' </summary>
-        public static Vector2[] Vertices(Vector2 c, float r)
-        {
-            return new Vector2[]
-            {
-                Vertex(c, r, 0),
-                Vertex(c, r, 1),
-                Vertex(c, r, 2),
-                Vertex(c, r, 3),
-                Vertex(c, r, 4),
-                Vertex(c, r, 5)
-            };
-        }
-
-        /// <summary> Calculates vertices of a hexagon defined by center 'c' and circumradius 'r' </summary>
-        public static Vector2[] Vertices(float r)
-        {
-            return new Vector2[]
-            {
-                Vertex(r, 0),
-                Vertex(r, 1),
-                Vertex(r, 2),
-                Vertex(r, 3),
-                Vertex(r, 4),
-                Vertex(r, 5)
-            };
-        }
-        
         public static readonly Vector2Int[] Translations = new Vector2Int[]
         {
             new Vector2Int() { x = +0, y = +1 },
@@ -81,6 +29,30 @@ namespace Common
             new Vector2Int() { x = -1, y = +1 }
         };
 
+        /// <summary> Calculates vertices of a unit hexagon into array </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Vertices(Vector2[] vs)
+        {
+            const float INNER_RADIUS = 0.5f;
+            const float OUTER_RADIUS = INNER_RADIUS * INNER_TO_OUTER_RADIUS;
+
+            vs[0] = new Vector2(0.0f, OUTER_RADIUS);
+            vs[1] = new Vector2(INNER_RADIUS, OUTER_RADIUS * 0.5f);
+            vs[2] = new Vector2(INNER_RADIUS, -OUTER_RADIUS * 0.5f);
+            vs[3] = new Vector2(0.0f, -OUTER_RADIUS);
+            vs[4] = new Vector2(-INNER_RADIUS, -OUTER_RADIUS * 0.5f);
+            vs[5] = new Vector2(-INNER_RADIUS, OUTER_RADIUS * 0.5f);
+        }
+
+        /// <summary> Calculates vertices of a unit hexagon </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2[] Vertices()
+        {
+            var vs = new Vector2[6];
+            Vertices(vs);
+            return vs;
+        }
+        
         /// <summary> Convers position defined in hex coordinates 'v' of a hexagon defined by circumradius 'r' to world position </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Convert(Vector2Int v, float r)

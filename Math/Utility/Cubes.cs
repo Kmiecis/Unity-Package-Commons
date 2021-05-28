@@ -16,36 +16,27 @@ namespace Common
             new int[] { 7, 6, 5, 7, 5, 4, -1 }  // +z
         };
 
-        /// <summary> Calculates vertices of a cube defined by center 'c' and extents 'e' </summary>
-        public static Vector3[] Vertices(Vector3 c, Vector3 e)
+        /// <summary> Calculates vertices of a unit cube into array </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Vertices(Vector3[] vs)
         {
-            return new Vector3[]
-            {
-                c + new Vector3(-e.x, -e.y, -e.z) * 0.5f,
-                c + new Vector3(-e.x, +e.y, -e.z) * 0.5f,
-                c + new Vector3(+e.x, +e.y, -e.z) * 0.5f,
-                c + new Vector3(+e.x, -e.y, -e.z) * 0.5f,
-                c + new Vector3(-e.x, -e.y, +e.z) * 0.5f,
-                c + new Vector3(-e.x, +e.y, +e.z) * 0.5f,
-                c + new Vector3(+e.x, +e.y, +e.z) * 0.5f,
-                c + new Vector3(+e.x, -e.y, +e.z) * 0.5f
-            };
+            vs[0] = new Vector3(-0.5f, -0.5f, -0.5f);
+            vs[1] = new Vector3(-0.5f, +0.5f, -0.5f);
+            vs[2] = new Vector3(+0.5f, +0.5f, -0.5f);
+            vs[3] = new Vector3(+0.5f, -0.5f, -0.5f);
+            vs[4] = new Vector3(-0.5f, -0.5f, +0.5f);
+            vs[5] = new Vector3(-0.5f, +0.5f, +0.5f);
+            vs[6] = new Vector3(+0.5f, +0.5f, +0.5f);
+            vs[7] = new Vector3(+0.5f, -0.5f, +0.5f);
         }
 
-        /// <summary> Calculates vertices of a cube defined by extents 'e' </summary>
-        public static Vector3[] Vertices(Vector3 e)
+        /// <summary> Calculates vertices of a unit cube </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3[] Vertices()
         {
-            return new Vector3[]
-            {
-                new Vector3(-e.x, -e.y, -e.z) * 0.5f,
-                new Vector3(-e.x, +e.y, -e.z) * 0.5f,
-                new Vector3(+e.x, +e.y, -e.z) * 0.5f,
-                new Vector3(+e.x, -e.y, -e.z) * 0.5f,
-                new Vector3(-e.x, -e.y, +e.z) * 0.5f,
-                new Vector3(-e.x, +e.y, +e.z) * 0.5f,
-                new Vector3(+e.x, +e.y, +e.z) * 0.5f,
-                new Vector3(+e.x, -e.y, +e.z) * 0.5f
-            };
+            var vs = new Vector3[8];
+            Vertices(vs);
+            return vs;
         }
         
         /// <summary> Calculates area of a cube defined by extents 'e' </summary>
