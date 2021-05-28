@@ -1,23 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Runtime.CompilerServices;
+using UnityEngine;
 
 namespace Common
 {
     public static class MarchingSquares
     {
-        public const float SIDE_LENGTH = 1.0f;
-
-        public static readonly Vector2[] Vertices = new Vector2[]
-        {
-            new Vector2(0.0f, 0.0f),
-            new Vector2(0.0f, SIDE_LENGTH),
-            new Vector2(SIDE_LENGTH, SIDE_LENGTH),
-            new Vector2(SIDE_LENGTH, 0.0f),
-            new Vector2(0.0f, SIDE_LENGTH * 0.5f),
-            new Vector2(SIDE_LENGTH * 0.5f, SIDE_LENGTH),
-            new Vector2(SIDE_LENGTH, SIDE_LENGTH * 0.5f),
-            new Vector2(SIDE_LENGTH * 0.5f, 0.0f)
-        };
-
         /*
          __ __ 5 __ __
         1             2
@@ -46,7 +33,32 @@ namespace Common
             new int[]{  1,  2,  3,  1,  3,  7,  1,  7,  4, -1, -1, -1, -1 }, // 14 = 2 + 4 + 8
             new int[]{  0,  1,  2,  0,  2,  3, -1, -1, -1, -1, -1, -1, -1 }  // 15 = 1 + 2 + 4 + 8
         };
-        
+
+        /// <summary> Calculates vertices of a unit marching square into array </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Vertices(Vector2[] vs)
+        {
+            vs[0] = new Vector2(0.0f, 0.0f);
+            vs[1] = new Vector2(0.0f, 1.0f);
+            vs[2] = new Vector2(1.0f, 1.0f);
+            vs[3] = new Vector2(1.0f, 0.0f);
+            vs[4] = new Vector2(0.0f, 0.5f);
+            vs[5] = new Vector2(0.5f, 1.0f);
+            vs[6] = new Vector2(1.0f, 0.5f);
+            vs[7] = new Vector2(0.5f, 0.0f);
+        }
+
+        /// <summary> Calculates vertices of a unit marching square </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2[] Vertices()
+        {
+            var vs = new Vector2[8];
+            Vertices(vs);
+            return vs;
+        }
+
+        /// <summary> Returns configuration of vertices for a marching square </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetConfiguration(bool isActive0, bool isActive1, bool isActive2, bool isActive3)
         {
             return
