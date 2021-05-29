@@ -5,6 +5,8 @@ namespace Common
 {
     public static class MarchingSquares
     {
+        public const int VERTEX_COUNT = 8;
+
         /*
          __ __ 5 __ __
         1             2
@@ -52,7 +54,7 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2[] Vertices()
         {
-            var vs = new Vector2[8];
+            var vs = new Vector2[VERTEX_COUNT];
             Vertices(vs);
             return vs;
         }

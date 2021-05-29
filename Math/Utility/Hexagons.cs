@@ -5,6 +5,8 @@ namespace Common
 {
     public static class Hexagons
     {
+        public const int VERTEX_COUNT = 6;
+
         public enum Direction
         {
             NE, E, SE, SW, W, NW, Count
@@ -48,7 +50,7 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2[] Vertices()
         {
-            var vs = new Vector2[6];
+            var vs = new Vector2[VERTEX_COUNT];
             Vertices(vs);
             return vs;
         }

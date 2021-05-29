@@ -5,6 +5,8 @@ namespace Common
 {
     public static class Cubes
     {
+        public const int VERTEX_COUNT = 8;
+
         /// <summary> Triangles of a cube </summary>
         public static readonly int[][] Triangles = new int[][]
         {
@@ -34,7 +36,7 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3[] Vertices()
         {
-            var vs = new Vector3[8];
+            var vs = new Vector3[VERTEX_COUNT];
             Vertices(vs);
             return vs;
         }

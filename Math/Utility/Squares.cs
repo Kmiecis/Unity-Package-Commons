@@ -5,6 +5,8 @@ namespace Common
 {
     public static class Squares
     {
+        public const int VERTEX_COUNT = 4;
+
         /*_ __ __ __
         1           2
         |           |
@@ -33,7 +35,7 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2[] Vertices()
         {
-            var vs = new Vector2[4];
+            var vs = new Vector2[VERTEX_COUNT];
             Vertices(vs);
             return vs;
         }
