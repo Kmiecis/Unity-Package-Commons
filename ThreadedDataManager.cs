@@ -8,12 +8,7 @@ namespace Common
     public class ThreadedDataManager : MonoBehaviour
     {
         private static Queue<IThreadInfo> m_DataQueue = new Queue<IThreadInfo>();
-
-        private void Awake()
-        {
-            DontDestroyOnLoad(this);
-        }
-
+        
         private void Update()
         {
             if (m_DataQueue.Count > 0)
@@ -66,17 +61,5 @@ namespace Common
                 this.callback(this.data);
             }
         }
-        
-        #region Singleton
-
-        private static ThreadedDataManager m_Instance;
-
-        static ThreadedDataManager()
-        {
-            m_Instance = new GameObject(typeof(ThreadedDataManager).Name)
-                .AddComponent<ThreadedDataManager>();
-        }
-
-        #endregion
     }
 }
