@@ -2,6 +2,7 @@
 
 namespace Common
 {
+    [AttributeUsage(AttributeTargets.Field)]
     public class DependencyInstall : Attribute
     {
         public readonly Type type;

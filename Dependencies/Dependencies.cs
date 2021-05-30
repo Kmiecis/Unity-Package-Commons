@@ -150,6 +150,12 @@ namespace Common
                 if (type.IsSubclassOf(typeof(Component)))
                 {
                     dependency = UnityEngine.Object.FindObjectOfType(type);
+
+                    if (dependency == null)
+                    {
+                        var gameObject = new GameObject(type.Name);
+                        dependency = gameObject.AddComponent(type);
+                    }
                 }
                 else
                 {
