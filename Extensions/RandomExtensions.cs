@@ -52,24 +52,75 @@ namespace Common
             return (byte)random.Next(min, max);
         }
 
-        public static Vector2 NextVector2(this Random random)
+        public static Vector2 NextUnitVector2(this Random random)
         {
-            var angle = random.NextFloat() * Mathx.PI_HALF;
+            var angle = random.NextFloat() * Mathx.PI_DOUBLE;
             return new Vector2(
                 Mathf.Cos(angle),
                 Mathf.Sin(angle)
             );
         }
 
-        public static Vector3 NextVector3(this Random random)
+        public static Vector2 NextVector2(this Random random)
         {
-            var theta = random.NextFloat() * Mathx.PI_HALF;
-            var omega = random.NextFloat() * Mathx.PI_HALF;
+            return new Vector2(
+                random.NextFloat(),
+                random.NextFloat()
+            );
+        }
+
+        public static Vector2 NextVector2(this Random random, Vector2 max)
+        {
+            return new Vector2(
+                random.NextFloat(max.x),
+                random.NextFloat(max.y)
+            );
+        }
+
+        public static Vector2 NextVector2(this Random random, Vector2 min, Vector2 max)
+        {
+            return new Vector2(
+                random.NextFloat(min.x, max.x),
+                random.NextFloat(min.y, max.y)
+            );
+        }
+
+        public static Vector3 NextUnitVector3(this Random random)
+        {
+            var theta = random.NextFloat() * Mathx.PI_DOUBLE;
+            var omega = random.NextFloat() * Mathx.PI_DOUBLE;
             var t = Mathf.Acos(omega * Mathx.PI_INV - 1.0f);
             return new Vector3(
                 Mathf.Sin(t) * Mathf.Cos(theta),
                 Mathf.Sin(t) * Mathf.Sin(theta),
                 Mathf.Cos(t)
+            );
+        }
+
+        public static Vector3 NextVector3(this Random random)
+        {
+            return new Vector3(
+                random.NextFloat(),
+                random.NextFloat(),
+                random.NextFloat()
+            );
+        }
+
+        public static Vector3 NextVector3(this Random random, Vector3 max)
+        {
+            return new Vector3(
+                random.NextFloat(max.x),
+                random.NextFloat(max.y),
+                random.NextFloat(max.z)
+            );
+        }
+
+        public static Vector3 NextVector3(this Random random, Vector3 min, Vector3 max)
+        {
+            return new Vector3(
+                random.NextFloat(min.x, max.x),
+                random.NextFloat(min.y, max.y),
+                random.NextFloat(min.z, max.z)
             );
         }
 
