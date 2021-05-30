@@ -288,6 +288,58 @@ namespace Common
             );
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Wrap(float f, float min, float max)
+        {
+            var delta = max - min;
+            return Mod((Mod(f - min, delta) + delta), delta) + min;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Wrap(Vector2 v, Vector2 min, Vector2 max)
+        {
+            return new Vector2(
+                Wrap(v.x, min.x, max.x),
+                Wrap(v.y, min.y, max.y)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Wrap(Vector3 v, Vector3 min, Vector3 max)
+        {
+            return new Vector3(
+                Wrap(v.x, min.x, max.x),
+                Wrap(v.y, min.y, max.y),
+                Wrap(v.z, min.z, max.z)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Wrap(int i, int min, int max)
+        {
+            var delta = max - min + 1;
+            return (((i - min) % delta) + delta) % delta + min;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2Int Wrap(Vector2Int v, Vector2Int min, Vector2Int max)
+        {
+            return new Vector2Int(
+                Wrap(v.x, min.x, max.x),
+                Wrap(v.y, min.y, max.y)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int Wrap(Vector3Int v, Vector3Int min, Vector3Int max)
+        {
+            return new Vector3Int(
+                Wrap(v.x, min.x, max.x),
+                Wrap(v.y, min.y, max.y),
+                Wrap(v.z, min.z, max.z)
+            );
+        }
+
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Saturate(float f)
@@ -958,7 +1010,7 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Mod(float f, float m)
         {
-            return f - Mathf.Floor(f * (1.0f / m)) * m;
+            return f - m * Mathf.Floor(f / m);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
