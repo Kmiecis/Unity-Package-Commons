@@ -291,7 +291,7 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Wrap(float f, float min, float max)
         {
-            var delta = max - min;
+            float delta = max - min;
             return Mod((Mod(f - min, delta) + delta), delta) + min;
         }
 
@@ -317,7 +317,7 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Wrap(int i, int min, int max)
         {
-            var delta = max - min + 1;
+            int delta = max - min;
             return (((i - min) % delta) + delta) % delta + min;
         }
 
@@ -530,8 +530,8 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Rotate(Vector2 v, float a)
         {
-            var sin = Mathf.Sin(a);
-            var cos = Mathf.Cos(a);
+            float sin = Mathf.Sin(a);
+            float cos = Mathf.Cos(a);
             return new Vector2(
                 (cos * v.x) - (sin * v.y),
                 (sin * v.x) + (cos * v.y)
@@ -541,8 +541,7 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Rotate(Vector3 v, float r, float p, float y)
         {
-            var q = Quaternion.Euler(r, p, y);
-            return q * v;
+            return Quaternion.Euler(r, p, y) * v;
         }
 
 
