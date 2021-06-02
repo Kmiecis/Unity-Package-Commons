@@ -11,6 +11,7 @@ namespace Common
         public Vector2 max;
 
         public static readonly Range2 Zero;
+        public static readonly Range2 One = new Range2(Vector2.zero, Vector2.one);
         public static readonly Range2 Full = new Range2(Vector2.one * float.MinValue, Vector2.one * float.MaxValue);
         public static readonly Range2 Empty = new Range2(Vector2.one * float.MaxValue, Vector2.one * float.MinValue);
         

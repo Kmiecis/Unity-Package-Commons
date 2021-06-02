@@ -11,6 +11,7 @@ namespace Common
         public Vector3Int max;
 
         public static readonly Range3Int Zero;
+        public static readonly Range3Int One = new Range3Int(Vector3Int.zero, Vector3Int.one);
         public static readonly Range3Int Full = new Range3Int(Vector3Int.one * int.MinValue, Vector3Int.one * int.MaxValue);
         public static readonly Range3Int Empty = new Range3Int(Vector3Int.one * int.MaxValue, Vector3Int.one * int.MinValue);
 

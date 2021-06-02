@@ -11,6 +11,7 @@ namespace Common
         public Vector2Int max;
 
         public static readonly Range2Int Zero;
+        public static readonly Range2Int One = new Range2Int(Vector2Int.zero, Vector2Int.one);
         public static readonly Range2Int Full = new Range2Int(Vector2Int.one * int.MinValue, Vector2Int.one * int.MaxValue);
         public static readonly Range2Int Empty = new Range2Int(Vector2Int.one * int.MaxValue, Vector2Int.one * int.MinValue);
 

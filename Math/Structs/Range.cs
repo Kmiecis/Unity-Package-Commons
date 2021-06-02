@@ -10,6 +10,7 @@ namespace Common
         public float max;
 
         public static readonly Range Zero;
+        public static readonly Range One = new Range(0.0f, 1.0f);
         public static readonly Range Full = new Range(float.MinValue, float.MaxValue);
         public static readonly Range Empty = new Range(float.MaxValue, float.MinValue);
 
