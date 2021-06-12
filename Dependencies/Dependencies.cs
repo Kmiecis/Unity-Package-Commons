@@ -88,7 +88,7 @@ namespace Common
             if (dependencies.Remove(target))
             {
                 var listeners = GetListeners(type);
-                var dependency = dependencies.LastOrNull();
+                var dependency = dependencies.LastOrDefault();
                 listeners.Call(dependency);
             }
         }
@@ -119,7 +119,7 @@ namespace Common
             AddListener(type, Update, target);
 
             var dependencies = GetDependencies(type);
-            var dependency = dependencies.LastOrNull();
+            var dependency = dependencies.LastOrDefault();
             Update(dependency);
         }
 
