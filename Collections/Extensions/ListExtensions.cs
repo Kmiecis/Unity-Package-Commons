@@ -31,9 +31,9 @@ namespace Common
             return list[0];
         }
 
-        public static T FirstOrNull<T>(this List<T> list)
+        public static T FirstOrDefault<T>(this List<T> list, T value = default)
         {
-            return list.IsNullOrEmpty() ? default : list.First();
+            return list.IsNullOrEmpty() ? value : list.First();
         }
 
         public static T Last<T>(this List<T> list)
@@ -41,9 +41,9 @@ namespace Common
             return list[list.Count - 1];
         }
 
-        public static T LastOrNull<T>(this List<T> list)
+        public static T LastOrDefault<T>(this List<T> list, T value = default)
         {
-            return list.IsNullOrEmpty() ? default : list.Last();
+            return list.IsNullOrEmpty() ? value : list.Last();
         }
 
         public static bool TryGet<T>(this List<T> list, int index, out T item)
@@ -73,10 +73,70 @@ namespace Common
             return index != -1;
         }
 
+        public static bool TryIndexOf<T>(this List<T> list, T item, int startIndex, out int index)
+        {
+            index = list.IndexOf(item, startIndex);
+            return index != -1;
+        }
+
+        public static bool TryIndexOf<T>(this List<T> list, T item, int startIndex, int count, out int index)
+        {
+            index = list.IndexOf(item, startIndex, count);
+            return index != -1;
+        }
+
         public static bool TryFind<T>(this List<T> list, Predicate<T> match, out T value)
         {
             value = list.Find(match);
             return value != default;
+        }
+
+        public static bool TryFindLast<T>(this List<T> list, Predicate<T> match, out T value)
+        {
+            value = list.FindLast(match);
+            return value != default;
+        }
+
+        public static bool TryFindAll<T>(this List<T> list, Predicate<T> match, out List<T> value)
+        {
+            value = list.FindAll(match);
+            return value != default;
+        }
+
+        public static bool TryFindIndex<T>(this List<T> list, Predicate<T> match, out int index)
+        {
+            index = list.FindIndex(match);
+            return index != -1;
+        }
+
+        public static bool TryFindIndex<T>(this List<T> list, int startIndex, Predicate<T> match, out int index)
+        {
+            index = list.FindIndex(startIndex, match);
+            return index != -1;
+        }
+
+        public static bool TryFindIndex<T>(this List<T> list, int startIndex, int count, Predicate<T> match, out int index)
+        {
+            index = list.FindIndex(startIndex, count, match);
+            return index != -1;
+        }
+
+        public static bool TryFindLastIndex<T>(this List<T> list, Predicate<T> match, out int index)
+        {
+            index = list.FindLastIndex(match);
+            return index != -1;
+        }
+
+        public static bool TryFindLastIndex<T>(this List<T> list, int startIndex, Predicate<T> match, out int index)
+        {
+            index = list.FindLastIndex(startIndex, match);
+            return index != -1;
+        }
+
+        public static bool TryFindLastIndex<T>(this List<T> list, int startIndex, int count, Predicate<T> match, out int index)
+        {
+            index = list.FindLastIndex(startIndex, count, match);
+            return index != -1;
         }
 
         public static void Swap<T>(this List<T> list, int i, int j)

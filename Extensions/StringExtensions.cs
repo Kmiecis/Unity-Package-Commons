@@ -5,6 +5,150 @@ namespace Common
 {
     public static class StringExtensions
     {
+        public static bool TryIndexOf(this string self, char value, out int index)
+        {
+            index = self.IndexOf(value);
+            return index != -1;
+        }
+
+        public static bool TryIndexOf(this string self, char value, int startIndex, out int index)
+        {
+            index = self.IndexOf(value, startIndex);
+            return index != -1;
+        }
+
+        public static bool TryIndexOf(this string self, char value, int startIndex, int count, out int index)
+        {
+            index = self.IndexOf(value, startIndex, count);
+            return index != -1;
+        }
+
+        public static bool TryIndexOf(this string self, string value, out int index)
+        {
+            index = self.IndexOf(value);
+            return index != -1;
+        }
+
+        public static bool TryIndexOf(this string self, string value, int startIndex, out int index)
+        {
+            index = self.IndexOf(value, startIndex);
+            return index != -1;
+        }
+
+        public static bool TryIndexOf(this string self, string value, int startIndex, int count, out int index)
+        {
+            index = self.IndexOf(value, startIndex, count);
+            return index != -1;
+        }
+
+        public static bool TryIndexOf(this string self, string value, StringComparison comparisonType, out int index)
+        {
+            index = self.IndexOf(value, comparisonType);
+            return index != -1;
+        }
+
+        public static bool TryIndexOf(this string self, string value, int startIndex, StringComparison comparisonType, out int index)
+        {
+            index = self.IndexOf(value, startIndex, comparisonType);
+            return index != -1;
+        }
+
+        public static bool TryIndexOf(this string self, string value, int startIndex, int count, StringComparison comparisonType, out int index)
+        {
+            index = self.IndexOf(value, startIndex, count, comparisonType);
+            return index != -1;
+        }
+
+        public static bool TryIndexOfAny(this string self, char[] anyOf, out int index)
+        {
+            index = self.IndexOfAny(anyOf);
+            return index != -1;
+        }
+
+        public static bool TryIndexOfAny(this string self, char[] anyOf, int startIndex, out int index)
+        {
+            index = self.IndexOfAny(anyOf, startIndex);
+            return index != -1;
+        }
+
+        public static bool TryIndexOfAny(this string self, char[] anyOf, int startIndex, int count, out int index)
+        {
+            index = self.IndexOfAny(anyOf, startIndex, count);
+            return index != -1;
+        }
+
+        public static bool TryLastIndexOf(this string self, char value, out int index)
+        {
+            index = self.LastIndexOf(value);
+            return index != -1;
+        }
+
+        public static bool TryLastIndexOf(this string self, char value, int startIndex, out int index)
+        {
+            index = self.LastIndexOf(value, startIndex);
+            return index != -1;
+        }
+
+        public static bool TryLastIndexOf(this string self, char value, int startIndex, int count, out int index)
+        {
+            index = self.LastIndexOf(value, startIndex, count);
+            return index != -1;
+        }
+
+        public static bool TryLastIndexOf(this string self, string value, out int index)
+        {
+            index = self.LastIndexOf(value);
+            return index != -1;
+        }
+
+        public static bool TryLastIndexOf(this string self, string value, int startIndex, out int index)
+        {
+            index = self.LastIndexOf(value, startIndex);
+            return index != -1;
+        }
+
+        public static bool TryLastIndexOf(this string self, string value, int startIndex, int count, out int index)
+        {
+            index = self.LastIndexOf(value, startIndex, count);
+            return index != -1;
+        }
+
+        public static bool TryLastIndexOf(this string self, string value, StringComparison comparisonType, out int index)
+        {
+            index = self.LastIndexOf(value, comparisonType);
+            return index != -1;
+        }
+
+        public static bool TryLastIndexOf(this string self, string value, int startIndex, StringComparison comparisonType, out int index)
+        {
+            index = self.LastIndexOf(value, startIndex, comparisonType);
+            return index != -1;
+        }
+
+        public static bool TryLastIndexOf(this string self, string value, int startIndex, int count, StringComparison comparisonType, out int index)
+        {
+            index = self.LastIndexOf(value, startIndex, count, comparisonType);
+            return index != -1;
+        }
+
+        public static bool TryLastIndexOfAny(this string self, char[] anyOf, out int index)
+        {
+            index = self.LastIndexOfAny(anyOf);
+            return index != -1;
+        }
+
+        public static bool TryLastIndexOfAny(this string self, char[] anyOf, int startIndex, out int index)
+        {
+            index = self.LastIndexOfAny(anyOf, startIndex);
+            return index != -1;
+        }
+
+        public static bool TryLastIndexOfAny(this string self, char[] anyOf, int startIndex, int count, out int index)
+        {
+            index = self.LastIndexOfAny(anyOf, startIndex, count);
+            return index != -1;
+        }
+
         public static string[] GetLines(this string value)
         {
             return value.Split(new []{ "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
