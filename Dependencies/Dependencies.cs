@@ -139,10 +139,12 @@ namespace Common
             var dependency = field.GetValue(target);
             if (dependency != null)
             {
-                if (dependency is Component)
+                if (
+                    dependency is Component component &&
+                    component.gameObject.IsPrefab()
+                )
                 {
-                    var prefab = dependency as Component;
-                    dependency = UnityEngine.Object.Instantiate(prefab);
+                    dependency = UnityEngine.Object.Instantiate(component);
                 }
             }
             else
