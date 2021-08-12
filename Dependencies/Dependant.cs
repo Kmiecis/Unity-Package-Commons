@@ -1,6 +1,6 @@
 ﻿namespace Common
 {
-    public class ADependant : IDependant
+    public class Dependant : IDependant
     {
         public void Bind()
         {
