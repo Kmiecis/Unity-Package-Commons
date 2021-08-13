@@ -1,10 +1,7 @@
-using System.Collections.Generic;
-
 namespace Common.BehaviourTree
 {
-    public class ParallelNode : AParentNode
+    public class ParallelNode : ACompositeNode
     {
-        protected List<ANode> _nodes = new List<ANode>();
         protected int _successThreshold;
         protected int _failThreshold;
 
@@ -46,12 +43,6 @@ namespace Common.BehaviourTree
             }
 
             return ENodeState.Running;
-        }
-
-        public override AParentNode Add(ANode node)
-        {
-            _nodes.Add(node);
-            return this;
         }
     }
 }
