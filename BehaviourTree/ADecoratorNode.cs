@@ -1,10 +1,12 @@
 namespace Common.BehaviourTree
 {
-    public abstract class ADecoratorNode : ANode
+    public abstract class ADecoratorNode : INode
     {
-        protected ANode _node;
+        protected INode _node;
 
-        public virtual ADecoratorNode Set(ANode node)
+        public abstract ENodeState Evaluate();
+
+        public virtual ADecoratorNode Set(INode node)
         {
             _node = node;
             return this;

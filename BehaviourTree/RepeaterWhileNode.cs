@@ -11,11 +11,12 @@ namespace Common.BehaviourTree
 
         public override ENodeState Evaluate()
         {
-            if (_node.Evaluate() == _status)
+            var status = _node.Evaluate();
+            if (status == _status)
             {
                 return ENodeState.Running;
             }
-            return ENodeState.Success;
+            return status;
         }
     }
 }
