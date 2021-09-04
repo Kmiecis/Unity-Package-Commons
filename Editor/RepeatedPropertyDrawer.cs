@@ -16,7 +16,6 @@ namespace CommonEditor
             position.height -= VERTICAL_SPACING;
 
             label = EditorGUI.BeginProperty(position, label, property);
-
             position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
 
             var copy = property.Copy();

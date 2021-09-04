@@ -26,7 +26,7 @@ namespace CommonEditor
                     break;
 
                 default:
-                    EditorGUI.LabelField(position, label.text, "Use UnsignedField with values that can be unsigned.");
+                    EditorGUI.LabelField(position, label.text, $"Use {nameof(MinFieldDrawer)} with values that can be min.");
                     break;
             }
         }
