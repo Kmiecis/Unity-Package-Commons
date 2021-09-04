@@ -1,19 +1,10 @@
 namespace Common.BehaviourTree
 {
-    public class RepeaterNode : ADecoratorNode
+    public class RepeaterNode : StatusNode
     {
-        protected int _repeats;
-
-        public RepeaterNode(int repeats)
+        public RepeaterNode() :
+            base(ENodeState.Running)
         {
-            _repeats = repeats;
-        }
-
-        public override ENodeState Evaluate()
-        {
-            _node.Evaluate();
-            _repeats--;
-            return _repeats > 0 ? ENodeState.Running : ENodeState.Success;
         }
     }
 }
