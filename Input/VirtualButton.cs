@@ -23,6 +23,5 @@ namespace Common
         public bool IsPressed => m_Pressed;
         public bool IsDown => m_PressedFrame == Time.frameCount - 1;
         public bool IsUp => m_ReleasedFrame == Time.frameCount - 1;
-        public bool IsValid => m_Pressed || m_ReleasedFrame >= Time.frameCount - 1;
     }
 }

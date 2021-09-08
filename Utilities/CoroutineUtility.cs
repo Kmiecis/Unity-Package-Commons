@@ -12,6 +12,15 @@ namespace Common
             callback.Invoke();
         }
 
+        public static IEnumerator InvokeEachFrame(Action callback)
+        {
+            while (true)
+            {
+                yield return null;
+                callback.Invoke();
+            }
+        }
+
         public static IEnumerator InvokeDelayed(Action callback, float delay, bool unscaled = false)
         {
             if (unscaled)
