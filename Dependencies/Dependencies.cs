@@ -99,17 +99,14 @@ namespace Common
 
             void Update(object value)
             {
-                if (attribute.callback != null && value != null)
+                var callback = $"On{type.Name}Inject";
+                if (value != null)
                 {
                     var targetType = target.GetType();
-                    var method = targetType.GetMethod(attribute.callback, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                    var method = targetType.GetMethod(callback, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
                     if (method != null)
                     {
                         method.Invoke(target, new object[] { value });
-                    }
-                    else
-                    {
-                        DebugWarning($"Couldn't find method {target.GetType().Name}.{attribute.callback} to invoke");
                     }
                 }
 
@@ -155,7 +152,7 @@ namespace Common
 
                     if (dependency == null)
                     {
-                        var gameObject = new GameObject(type.Name);
+                        var gameObject = new GameObject($"{type.Name}(Clone)");
                         dependency = gameObject.AddComponent(type);
                     }
                 }
