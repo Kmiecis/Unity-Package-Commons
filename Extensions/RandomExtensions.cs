@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Common
+namespace Common.Extensions
 {
     public static class RandomExtensions
     {

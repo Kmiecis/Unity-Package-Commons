@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Common
+namespace Common.Extensions
 {
     public static class ComponentExtensions
     {
@@ -15,7 +15,9 @@ namespace Common
         {
             var component = self.GetComponent<T>();
             if (component != null)
+            {
                 Object.Destroy(component);
+            }
         }
     }
 }

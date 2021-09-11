@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
 
-namespace Common
+namespace Common.Extensions
 {
     public static class BinaryReaderExtensions
     {

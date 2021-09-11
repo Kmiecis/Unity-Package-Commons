@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common
+namespace Common.Extensions
 {
     public static class Vector2Extensions
     {

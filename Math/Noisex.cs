@@ -1,3 +1,4 @@
+using Common.Extensions;
 using UnityEngine;
 using Random = System.Random;
 
