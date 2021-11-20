@@ -17,6 +17,16 @@ namespace Common.Extensions
             return arr.IsNull() || arr.IsEmpty();
         }
 
+        public static int GetWidth<T>(this T[,] self)
+        {
+            return self.GetLength(0);
+        }
+
+        public static int GetHeight<T>(this T[,] self)
+        {
+            return self.GetLength(1);
+        }
+
         public static int GetLengthSafely<T>(this T[,] arr, int dimension)
         {
             return arr.IsNull() ? 0 : arr.GetLength(dimension);

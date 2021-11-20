@@ -144,11 +144,12 @@ namespace Common.Extensions
             self[j] = t;
         }
         
-        public static T[] Populate<T>(this T[] self, T value)
+        public static void Populate<T>(this T[] self, T value)
         {
             for (int i = 0; i < self.Length; ++i)
+            {
                 self[i] = value;
-            return self;
+            }
         }
         
         public static bool Contains<T>(this T[] self, T value)

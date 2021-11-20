@@ -20,11 +20,24 @@ namespace Common.Extensions
             return self.IsNull() || self.IsEmpty();
         }
 
-        public static TValue GetOrCompute<TKey, TValue>(this Dictionary<TKey, TValue> self, TKey key, Func<TKey, TValue> computor)
+        public static TValue GetOrDefault<TKey, TValue>(this Dictionary<TKey, TValue> self, TKey key, TValue value = default)
         {
-            if (!self.ContainsKey(key))
-                self.Add(key, computor(key));
-            return self[key];
+            if (self.TryGetValue(key, out var result))
+            {
+                return result;
+            }
+            return value;
+        }
+
+        public static TValue GetOrCompute<TKey, TValue>(this Dictionary<TKey, TValue> self, TKey key, Func<TValue> computor)
+        {
+            if (self.TryGetValue(key, out var result))
+            {
+                return result;
+            }
+            var value = computor();
+            self.Add(key, value);
+            return value;
         }
     }
 }
