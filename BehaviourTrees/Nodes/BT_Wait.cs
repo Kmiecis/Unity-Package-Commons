@@ -27,6 +27,8 @@ namespace Common.BehaviourTrees
         
         protected override void OnStart()
         {
+            base.OnStart();
+
             var nowTime = Time.time;
             var newDeviation = _random.NextFloat(-_deviation, +_deviation);
             _timestamp = nowTime + _duration + newDeviation;

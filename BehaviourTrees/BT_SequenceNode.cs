@@ -11,31 +11,36 @@
 
         protected override void OnStart()
         {
+            base.OnStart();
+
             _current = 0;
         }
 
         protected override BT_EStatus OnUpdate()
         {
-            for (int i = _current; i < _nodes.Length; ++i)
+            for (; _current < _nodes.Length; ++_current)
             {
-                var result = _nodes[i].WrappedExecute();
+                var result = _nodes[_current].DecoratedExecute();
 
-                switch (result)
+                if (result != BT_EStatus.Success)
                 {
-                    case BT_EStatus.Failure:
-                        return BT_EStatus.Failure;
-
-                    case BT_EStatus.Success:
-                        // Skip to next
-                        break;
-
-                    case BT_EStatus.Running:
-                        _current = i;
-                        return BT_EStatus.Running;
+                    return result;
                 }
             }
 
             return BT_EStatus.Success;
+        }
+
+        private void AbortCurrentNode()
+        {
+            _nodes[_current].Abort();
+        }
+
+        public override void Abort()
+        {
+            base.Abort();
+
+            AbortCurrentNode();
         }
     }
 }

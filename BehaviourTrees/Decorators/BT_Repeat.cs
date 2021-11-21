@@ -15,12 +15,14 @@
 
         protected override void OnStart()
         {
+            base.OnStart();
+
             _remaining = _repeats;
         }
-
+        
         protected override BT_EStatus OnUpdate(BT_ITask node)
         {
-            var result = node.Execute();
+            var result = base.OnUpdate(node);
 
             if (result == BT_EStatus.Success)
             {

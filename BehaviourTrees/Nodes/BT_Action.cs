@@ -12,10 +12,10 @@ namespace Common.BehaviourTrees
             _action = action;
         }
 
-        protected override BT_EStatus OnUpdate()
+        protected override void OnStart()
         {
+            base.OnStart();
             _action();
-            return BT_EStatus.Success;
         }
     }
 }

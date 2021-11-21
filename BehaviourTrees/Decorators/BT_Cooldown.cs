@@ -32,11 +32,13 @@ namespace Common.BehaviourTrees
                 return BT_EStatus.Failure;
             }
 
-            return node.Execute();
+            return base.OnUpdate(node);
         }
 
         protected override void OnFinish(BT_EStatus result)
         {
+            base.OnFinish(result);
+
             if (result != BT_EStatus.Failure)
             {
                 var nowTime = Time.time;

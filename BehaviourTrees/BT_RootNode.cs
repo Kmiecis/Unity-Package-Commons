@@ -9,15 +9,22 @@
         {
         }
 
-        protected override BT_EStatus OnUpdate()
-        {
-            return _node.WrappedExecute();
-        }
-
         public BT_ITask Node
         {
             get => _node;
             set => _node = value;
+        }
+
+        protected override BT_EStatus OnUpdate()
+        {
+            return _node.DecoratedExecute();
+        }
+
+        public override void Abort()
+        {
+            base.Abort();
+
+            _node.Abort();
         }
     }
 }

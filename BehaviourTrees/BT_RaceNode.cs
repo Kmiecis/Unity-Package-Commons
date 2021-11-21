@@ -1,12 +1,12 @@
 ﻿namespace Common.BehaviourTrees
 {
-    public class BT_ParallelNode : BT_ACompositeNode
+    public class BT_RaceNode : BT_ACompositeNode
     {
         private int _current;
         private bool _ran;
 
-        public BT_ParallelNode() :
-            base("Parallel")
+        public BT_RaceNode() :
+            base("Race")
         {
         }
 
@@ -20,7 +20,7 @@
 
         protected override BT_EStatus OnUpdate()
         {
-            var status = BT_EStatus.Success;
+            var status = BT_EStatus.Failure;
 
             for (int i = _current; i < _nodes.Length; ++i)
             {
@@ -35,18 +35,18 @@
                     switch (result)
                     {
                         case BT_EStatus.Failure:
-                            status = BT_EStatus.Failure;
-                            break;
-
-                        case BT_EStatus.Success:
                             if (_current == i)
                             {
                                 _current += 1;
                             }
                             break;
 
+                        case BT_EStatus.Success:
+                            status = BT_EStatus.Success;
+                            break;
+
                         case BT_EStatus.Running:
-                            if (status != BT_EStatus.Failure)
+                            if (status != BT_EStatus.Success)
                             {
                                 status = BT_EStatus.Running;
                             }
@@ -57,7 +57,7 @@
 
             _ran = true;
 
-            if (status == BT_EStatus.Failure)
+            if (status == BT_EStatus.Success)
             {
                 AbortRunningNodes();
             }
@@ -76,7 +76,7 @@
                 }
             }
         }
-        
+
         public override void Abort()
         {
             base.Abort();
