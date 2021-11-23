@@ -17,7 +17,7 @@
 
         protected override BT_EStatus OnUpdate()
         {
-            return _node.DecoratedExecute();
+            return _node.WrappedExecute();
         }
 
         public override void Abort()

@@ -2,25 +2,16 @@
 {
     public class BT_SelectorNode : BT_ACompositeNode
     {
-        private int _current;
-
         public BT_SelectorNode() :
             base("Selector")
         {
-        }
-
-        protected override void OnStart()
-        {
-            base.OnStart();
-
-            _current = 0;
         }
 
         protected override BT_EStatus OnUpdate()
         {
             for (; _current < _nodes.Length; ++_current)
             {
-                var result = _nodes[_current].DecoratedExecute();
+                var result = _nodes[_current].WrappedExecute();
 
                 if (result != BT_EStatus.Failure)
                 {
@@ -28,19 +19,31 @@
                 }
             }
 
+            _current -= 1;
             return BT_EStatus.Failure;
         }
 
-        private void AbortCurrentNode()
+        protected override void OnFinish(BT_EStatus status)
         {
-            _nodes[_current].Abort();
+            base.OnFinish(status);
+
+            AbortRunningTask();
+        }
+
+        private void AbortRunningTask()
+        {
+            var current = _nodes[_current];
+            if (current.Status == BT_EStatus.Running)
+            {
+                current.Abort();
+            }
         }
 
         public override void Abort()
         {
             base.Abort();
 
-            AbortCurrentNode();
+            AbortRunningTask();
         }
     }
 }

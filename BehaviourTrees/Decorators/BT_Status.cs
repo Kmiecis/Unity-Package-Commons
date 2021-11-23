@@ -1,11 +1,11 @@
 ﻿namespace Common.BehaviourTrees
 {
-    public class BT_ForceStatus : BT_ADecorator
+    public class BT_Status : BT_ADecorator
     {
         private readonly BT_EStatus _forced;
 
-        public BT_ForceStatus(BT_EStatus forced) :
-            base("ForceStatus")
+        public BT_Status(BT_EStatus forced) :
+            base("Status")
         {
             _forced = forced;
         }

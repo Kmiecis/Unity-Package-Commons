@@ -2,7 +2,6 @@
 {
     public class BT_ParallelNode : BT_ACompositeNode
     {
-        private int _current;
         private bool _ran;
 
         public BT_ParallelNode() :
@@ -14,7 +13,6 @@
         {
             base.OnStart();
 
-            _current = 0;
             _ran = false;
         }
 
@@ -30,7 +28,7 @@
                     !_ran
                 )
                 {
-                    var result = current.DecoratedExecute();
+                    var result = current.WrappedExecute();
 
                     switch (result)
                     {
@@ -57,15 +55,17 @@
 
             _ran = true;
 
-            if (status == BT_EStatus.Failure)
-            {
-                AbortRunningNodes();
-            }
-
             return status;
         }
 
-        private void AbortRunningNodes()
+        protected override void OnFinish(BT_EStatus status)
+        {
+            base.OnFinish(status);
+
+            AbortRunningTasks();
+        }
+
+        private void AbortRunningTasks()
         {
             for (int i = _current; i < _nodes.Length; ++i)
             {
@@ -81,7 +81,7 @@
         {
             base.Abort();
 
-            AbortRunningNodes();
+            AbortRunningTasks();
         }
     }
 }

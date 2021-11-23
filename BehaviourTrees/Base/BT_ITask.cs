@@ -13,12 +13,20 @@
 
     public static class BT_ITaskExtensions
     {
-        public static BT_EStatus DecoratedExecute(this BT_ITask node)
+        public static BT_EStatus WrappedExecute(this BT_ITask node)
         {
             var decorator = node.Decorator;
             if (decorator != null)
             {
-                return decorator.Execute(node);
+                var result = decorator.Execute(node);
+                if (
+                    result != BT_EStatus.Running &&
+                    node.Status == BT_EStatus.Running
+                )
+                {
+                    node.Abort();
+                }
+                return result;
             }
             return node.Execute();
         }
