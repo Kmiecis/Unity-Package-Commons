@@ -3,7 +3,7 @@ using Random = System.Random;
 
 namespace Common.BehaviourTrees
 {
-    public class BT_CooldownFrames : BT_ADecorator
+    public class BT_CooldownFrames : BT_AConditional
     {
         private readonly Random _random = new Random();
         private readonly int _cooldown;
@@ -23,14 +23,9 @@ namespace Common.BehaviourTrees
             get => _cooldown - (Time.frameCount - _framestamp);
         }
 
-        protected override BT_EStatus OnUpdate(BT_ITask node)
+        protected override bool CanExecute()
         {
-            if (Remaining > 0)
-            {
-                return BT_EStatus.Failure;
-            }
-
-            return base.OnUpdate(node);
+            return Remaining <= 0;
         }
 
         protected override void OnFinish(BT_EStatus result)

@@ -4,7 +4,7 @@
     {
         protected string _name;
         protected BT_EStatus _status;
-        protected BT_IDecorator _decorator;
+        protected BT_IDecizer _decizer;
 
         public BT_ATask(string name = null)
         {
@@ -21,10 +21,10 @@
             get => _status;
         }
 
-        public virtual BT_IDecorator Decorator
+        public virtual BT_IDecizer Decizer
         {
-            get => _decorator;
-            set => _decorator = value;
+            get => _decizer;
+            set => _decizer = value;
         }
 
         public BT_EStatus Execute()
@@ -49,10 +49,7 @@
             _status = BT_EStatus.Running;
         }
 
-        protected virtual BT_EStatus OnUpdate()
-        {
-            return BT_EStatus.Success;
-        }
+        protected abstract BT_EStatus OnUpdate();
 
         protected virtual void OnFinish(BT_EStatus status)
         {

@@ -4,7 +4,7 @@ using Random = System.Random;
 
 namespace Common.BehaviourTrees
 {
-    public class BT_Limit : BT_ADecorator
+    public class BT_Limit : BT_AConditional
     {
         private readonly Random _random = new Random();
         private readonly float _limit;
@@ -31,20 +31,16 @@ namespace Common.BehaviourTrees
             get => _timestamp - Nowstamp;
         }
 
+        protected override bool CanExecute()
+        {
+            return Remaining > 0.0f;
+        }
+
         protected override void OnStart()
         {
             base.OnStart();
 
             _timestamp = Nowstamp + _limit + _random.NextFloat(-_deviation, +_deviation);
-        }
-
-        protected override BT_EStatus OnUpdate(BT_ITask node)
-        {
-            if (Remaining > 0.0f)
-            {
-                return base.OnUpdate(node);
-            }
-            return BT_EStatus.Failure;
         }
     }
 }

@@ -4,7 +4,7 @@
     {
         BT_EStatus Status { get; }
 
-        BT_IDecorator Decorator { get; }
+        BT_IDecizer Decizer { get; }
 
         BT_EStatus Execute();
 
@@ -15,10 +15,10 @@
     {
         public static BT_EStatus WrappedExecute(this BT_ITask node)
         {
-            var decorator = node.Decorator;
-            if (decorator != null)
+            var decizer = node.Decizer;
+            if (decizer != null)
             {
-                var result = decorator.Execute(node);
+                var result = decizer.Execute(node);
                 if (
                     result != BT_EStatus.Running &&
                     node.Status == BT_EStatus.Running

@@ -7,11 +7,9 @@
         {
         }
 
-        protected override BT_EStatus OnUpdate(BT_ITask node)
+        protected override BT_EStatus Decorate(BT_EStatus status)
         {
-            var result = base.OnUpdate(node);
-
-            switch (result)
+            switch (status)
             {
                 case BT_EStatus.Failure:
                     return BT_EStatus.Success;
@@ -20,7 +18,7 @@
                     return BT_EStatus.Failure;
             }
 
-            return result;
+            return status;
         }
     }
 }

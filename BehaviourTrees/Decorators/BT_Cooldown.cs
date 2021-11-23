@@ -4,7 +4,7 @@ using Random = System.Random;
 
 namespace Common.BehaviourTrees
 {
-    public class BT_Cooldown : BT_ADecorator
+    public class BT_Cooldown : BT_AConditional
     {
         private readonly Random _random = new Random();
         private readonly float _cooldown;
@@ -31,14 +31,9 @@ namespace Common.BehaviourTrees
             get => _cooldown - (Nowstamp - _timestamp);
         }
 
-        protected override BT_EStatus OnUpdate(BT_ITask node)
+        protected override bool CanExecute()
         {
-            if (Remaining > 0.0f)
-            {
-                return BT_EStatus.Failure;
-            }
-
-            return base.OnUpdate(node);
+            return Remaining <= 0.0f;
         }
 
         protected override void OnFinish(BT_EStatus result)

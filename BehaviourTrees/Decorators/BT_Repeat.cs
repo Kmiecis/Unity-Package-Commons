@@ -13,18 +13,9 @@
             _remaining = repeats;
         }
 
-        protected override void OnStart()
+        protected override BT_EStatus Decorate(BT_EStatus status)
         {
-            base.OnStart();
-
-            _remaining = _repeats;
-        }
-        
-        protected override BT_EStatus OnUpdate(BT_ITask node)
-        {
-            var result = base.OnUpdate(node);
-
-            if (result == BT_EStatus.Success)
+            if (status == BT_EStatus.Success)
             {
                 _remaining -= 1;
                 if (_remaining == 0)
@@ -34,7 +25,14 @@
                 return BT_EStatus.Running;
             }
 
-            return result;
+            return status;
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            _remaining = _repeats;
         }
     }
 }

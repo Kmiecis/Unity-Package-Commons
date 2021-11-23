@@ -17,5 +17,10 @@ namespace Common.BehaviourTrees
             base.OnStart();
             _action();
         }
+
+        protected override BT_EStatus OnUpdate()
+        {
+            return BT_EStatus.Success;
+        }
     }
 }

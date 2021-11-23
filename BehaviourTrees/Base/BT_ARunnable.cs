@@ -2,8 +2,6 @@
 {
     public abstract class BT_ARunnable : BT_IRunnable
     {
-        private bool _started;
-
         protected string _name;
 
         public BT_ARunnable(string name = null)

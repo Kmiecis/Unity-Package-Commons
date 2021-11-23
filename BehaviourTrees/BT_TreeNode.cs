@@ -1,11 +1,11 @@
 ﻿namespace Common.BehaviourTrees
 {
-    public class BT_RootNode : BT_ATask
+    public class BT_TreeNode : BT_ATask
     {
         private BT_ITask _node;
 
-        public BT_RootNode() :
-            base("Root")
+        public BT_TreeNode(string name = "Root") :
+            base(name)
         {
         }
 

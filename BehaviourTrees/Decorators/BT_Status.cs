@@ -2,18 +2,17 @@
 {
     public class BT_Status : BT_ADecorator
     {
-        private readonly BT_EStatus _forced;
+        private readonly BT_EStatus _status;
 
-        public BT_Status(BT_EStatus forced) :
+        public BT_Status(BT_EStatus status) :
             base("Status")
         {
-            _forced = forced;
+            _status = status;
         }
 
-        protected override BT_EStatus OnUpdate(BT_ITask node)
+        protected override BT_EStatus Decorate(BT_EStatus status)
         {
-            base.OnUpdate(node);
-            return _forced;
+            return _status;
         }
     }
 }
