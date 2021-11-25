@@ -7,15 +7,9 @@
         {
         }
 
-        protected abstract bool CanExecute();
-
-        protected override BT_EStatus OnUpdate(BT_ITask node)
+        protected override BT_EStatus Decorate(BT_EStatus status)
         {
-            if (CanExecute())
-            {
-                return base.OnUpdate(node);
-            }
-            return BT_EStatus.Failure;
+            return status;
         }
     }
 }

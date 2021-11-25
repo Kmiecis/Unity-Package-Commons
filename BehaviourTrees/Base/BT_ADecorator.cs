@@ -7,12 +7,9 @@
         {
         }
 
-        protected abstract BT_EStatus Decorate(BT_EStatus status);
-
-        protected override BT_EStatus OnUpdate(BT_ITask node)
+        protected override bool CanExecute()
         {
-            var result = base.OnUpdate(node);
-            return Decorate(result);
+            return true;
         }
     }
 }

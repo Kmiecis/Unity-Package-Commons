@@ -18,15 +18,7 @@
             var decizer = node.Decizer;
             if (decizer != null)
             {
-                var result = decizer.Execute(node);
-                if (
-                    result != BT_EStatus.Running &&
-                    node.Status == BT_EStatus.Running
-                )
-                {
-                    node.Abort();
-                }
-                return result;
+                return decizer.Execute(node);
             }
             return node.Execute();
         }
