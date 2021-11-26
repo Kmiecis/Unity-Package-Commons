@@ -3,7 +3,7 @@
     public abstract class BT_ACompositeNode : BT_ATask
     {
         protected int _current;
-        protected BT_ITask[] _nodes;
+        protected BT_ITask[] _tasks;
 
         public BT_ACompositeNode(string name = null) :
             base(name)
@@ -12,7 +12,7 @@
 
         public BT_ITask CurrentTask
         {
-            get => _nodes[_current];
+            get => _tasks[_current];
         }
 
         protected override void OnStart()
@@ -22,10 +22,14 @@
             _current = 0;
         }
 
-        public virtual BT_ITask[] Nodes
+        public virtual BT_ITask[] Tasks
         {
-            get => _nodes;
-            set => _nodes = value;
+            set => _tasks = value;
+        }
+
+        public virtual BT_ITask Task
+        {
+            set => _tasks = new BT_ITask[] { value };
         }
     }
 }

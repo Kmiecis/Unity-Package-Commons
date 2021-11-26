@@ -156,5 +156,13 @@ namespace Common.Extensions
         {
             return Array.IndexOf(self, value) != -1;
         }
+
+        public static void ForEach<T>(this T[] self, Action<T> action)
+        {
+            for (int i = 0; i < self.Length; ++i)
+            {
+                action(self[i]);
+            }
+        }
     }
 }

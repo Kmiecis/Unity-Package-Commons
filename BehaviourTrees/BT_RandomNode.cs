@@ -16,13 +16,13 @@ namespace Common.BehaviourTrees
         {
             base.OnStart();
 
-            _current = _random.Next(0, _nodes.Length);
+            _current = _random.Next(0, _tasks.Length);
         }
 
         protected override BT_EStatus OnUpdate()
         {
             var current = CurrentTask;
-            return current.WrappedExecute();
+            return current.Execute();
         }
 
         protected override void OnFinish(BT_EStatus status)
@@ -39,13 +39,6 @@ namespace Common.BehaviourTrees
             {
                 current.Abort();
             }
-        }
-
-        public override void Abort()
-        {
-            base.Abort();
-
-            AbortRunningTask();
         }
     }
 }

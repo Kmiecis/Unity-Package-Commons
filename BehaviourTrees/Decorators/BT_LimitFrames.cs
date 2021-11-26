@@ -23,7 +23,7 @@ namespace Common.BehaviourTrees
             get => _framestamp - Time.frameCount;
         }
 
-        protected override bool CanExecute()
+        public override bool CanExecute()
         {
             return Remaining > 0;
         }

@@ -31,7 +31,7 @@ namespace Common.BehaviourTrees
             get => _timestamp - Nowstamp;
         }
 
-        protected override bool CanExecute()
+        public override bool CanExecute()
         {
             return Remaining > 0.0f;
         }

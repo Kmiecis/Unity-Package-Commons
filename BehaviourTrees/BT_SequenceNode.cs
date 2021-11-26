@@ -9,9 +9,9 @@
 
         protected override BT_EStatus OnUpdate()
         {
-            for (; _current < _nodes.Length; ++_current)
+            for (; _current < _tasks.Length; ++_current)
             {
-                var result = _nodes[_current].WrappedExecute();
+                var result = _tasks[_current].Execute();
 
                 if (result != BT_EStatus.Success)
                 {
@@ -37,13 +37,6 @@
             {
                 current.Abort();
             }
-        }
-
-        public override void Abort()
-        {
-            base.Abort();
-
-            AbortRunningTask();
         }
     }
 }

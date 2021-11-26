@@ -13,7 +13,7 @@
             _remaining = repeats;
         }
 
-        protected override BT_EStatus Decorate(BT_EStatus status)
+        public override BT_EStatus Decorate(BT_EStatus status)
         {
             if (status == BT_EStatus.Success)
             {

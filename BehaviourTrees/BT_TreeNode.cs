@@ -17,14 +17,17 @@
 
         protected override BT_EStatus OnUpdate()
         {
-            return _node.WrappedExecute();
+            return _node.Execute();
         }
 
-        public override void Abort()
+        protected override void OnFinish(BT_EStatus status)
         {
-            base.Abort();
+            base.OnFinish(status);
 
-            _node.Abort();
+            if (_node.Status == BT_EStatus.Running)
+            {
+                _node.Abort();
+            }
         }
     }
 }

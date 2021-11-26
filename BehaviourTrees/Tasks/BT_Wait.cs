@@ -34,7 +34,6 @@ namespace Common.BehaviourTrees
         protected override void OnStart()
         {
             base.OnStart();
-
             _timestamp = Nowstamp + _duration + _random.NextFloat(-_deviation, +_deviation);
         }
 

@@ -20,15 +20,15 @@
         {
             var status = BT_EStatus.Success;
 
-            for (int i = _current; i < _nodes.Length; ++i)
+            for (int i = _current; i < _tasks.Length; ++i)
             {
-                var current = _nodes[i];
+                var current = _tasks[i];
                 if (
                     current.Status == BT_EStatus.Running ||
                     !_ran
                 )
                 {
-                    var result = current.WrappedExecute();
+                    var result = current.Execute();
 
                     switch (result)
                     {
@@ -67,21 +67,14 @@
 
         private void AbortRunningTasks()
         {
-            for (int i = _current; i < _nodes.Length; ++i)
+            for (int i = _current; i < _tasks.Length; ++i)
             {
-                var current = _nodes[i];
+                var current = _tasks[i];
                 if (current.Status == BT_EStatus.Running)
                 {
                     current.Abort();
                 }
             }
-        }
-        
-        public override void Abort()
-        {
-            base.Abort();
-
-            AbortRunningTasks();
         }
     }
 }
