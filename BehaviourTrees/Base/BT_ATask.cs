@@ -69,7 +69,7 @@ namespace Common.BehaviourTrees
             {
                 if (!(_conditionals?.All(c => c.CanExecute())).GetValueOrDefault(true))
                 {
-                    OnFinish(BT_EStatus.Aborted);
+                    OnFinish(BT_EStatus.Failure);
 
                     return _status;
                 }
@@ -85,7 +85,7 @@ namespace Common.BehaviourTrees
                 decorated != BT_EStatus.Running
             )
             {
-                result = BT_EStatus.Aborted;
+                result = BT_EStatus.Failure;
             }
 
             if (result != BT_EStatus.Running)
@@ -113,7 +113,7 @@ namespace Common.BehaviourTrees
 
         public void Abort()
         {
-            OnFinish(BT_EStatus.Aborted);
+            OnFinish(BT_EStatus.Failure);
         }
 
         public override string ToString()

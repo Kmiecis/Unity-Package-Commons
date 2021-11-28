@@ -4,7 +4,6 @@
     {
         Failure,
         Success,
-        Running,
-        Aborted
+        Running
     }
 }
