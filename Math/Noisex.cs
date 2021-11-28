@@ -6,16 +6,17 @@ namespace Common
 {
     public static class Noisex
     {
-        public static float PerlinNoise(Vector3 p)
+        public static float PerlinNoise(float x, float y, float z)
         {
             const float MOD = 289.0f;
             const float PERMUTE = 34.0f;
 
-            Vector3 Pi0 = Mathx.Floor(p); // Integer part for indexing
+            Vector3 P = new Vector3(x, y, z);
+            Vector3 Pi0 = Mathx.Floor(P); // Integer part for indexing
             Vector3 Pi1 = Pi0 + Vector3.one; // Integer part + 1
             Pi0 = Mathx.Mod(Pi0, MOD);
             Pi1 = Mathx.Mod(Pi1, MOD);
-            Vector3 Pf0 = Mathx.Frac(p); // Fractional part for interpolation
+            Vector3 Pf0 = Mathx.Frac(P); // Fractional part for interpolation
             Vector3 Pf1 = Pf0 - Vector3.one; // Fractional part - 1.0
             Vector4 ix = new Vector4(Pi0.x, Pi1.x, Pi0.x, Pi1.x);
             Vector4 iy = new Vector4(Pi0.y, Pi0.y, Pi1.y, Pi1.y);
@@ -95,13 +96,14 @@ namespace Common
         }
 
         /// <summary> Noise Map generator </summary>
-        public static float[,] Map(
-            int width, int height, int dx = 0, int dy = 0,
+        public static void FillNoiseMap(float[,] map, int dx = 0, int dy = 0,
             int octaves = 1, float persistance = 0.5f, float lacunarity = 2.0f,
             float sx = 1.0f, float sy = 1.0f, int seed = 0
         )
         {
-            var map = new float[width, height];
+            var width = map.GetWidth();
+            var height = map.GetHeight();
+
             var random = new Random(seed);
 
             var rdx = random.NextFloat(-99999.0f, +99999.0f);
@@ -133,18 +135,17 @@ namespace Common
                     map[x, y] = value;
                 }
             }
-
-            return map;
         }
 
         /// <summary> Noise Map generator smoothed to [0 .. 1] values </summary>
-        public static float[,] SmoothMap(
-            int width, int height, int dx = 0, int dy = 0,
+        public static void FillNoiseSmoothMap(float[,] map, int dx = 0, int dy = 0,
             int octaves = 1, float persistance = 0.5f, float lacunarity = 2.0f,
             float sx = 1.0f, float sy = 1.0f, int seed = 0
         )
         {
-            var map = new float[width, height];
+            var width = map.GetWidth();
+            var height = map.GetHeight();
+
             var random = new Random(seed);
 
             var noiseHeightMinMax = new Vector2(0.0f, 1.0f);
@@ -184,14 +185,14 @@ namespace Common
                     map[x, y] = Mathf.SmoothStep(noiseHeightMinMax.x, noiseHeightMinMax.y, value);
                 }
             }
-
-            return map;
         }
 
         /// <summary> Random Map generated as [true/false] values </summary>
-        public static bool[,] GenerateRandomMap(int width, int height, float fill = 0.5f, int seed = 0)
+        public static void FillRandomMap(bool[,] map, float fill = 0.5f, int seed = 0)
         {
-            var map = new bool[width, height];
+            var width = map.GetWidth();
+            var height = map.GetHeight();
+
             var random = new Random(seed);
 
             for (int y = 0; y < height; ++y)
@@ -202,15 +203,13 @@ namespace Common
                     map[x, y] = randomValue < fill;
                 }
             }
-
-            return map;
         }
 
         /// <summary> Random Map smoothing algorithm implemented as Cellular Automata </summary>
         public static void SmoothRandomMap(bool[,] map, int iterations = 5)
         {
-            int width = map.GetLength(0);
-            int height = map.GetLength(1);
+            int width = map.GetWidth();
+            int height = map.GetHeight();
 
             var mapRange = new Range2Int(0, 0, width - 1, height - 1);
 
