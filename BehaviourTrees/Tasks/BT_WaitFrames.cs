@@ -3,7 +3,7 @@ using Random = System.Random;
 
 namespace Common.BehaviourTrees
 {
-    public class BT_WaitFrames : BT_ATask
+    public sealed class BT_WaitFrames : BT_ATask
     {
         private readonly Random _random;
         private readonly int _count;

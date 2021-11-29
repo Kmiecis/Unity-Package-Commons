@@ -1,6 +1,6 @@
 ﻿namespace Common.BehaviourTrees
 {
-    public class BT_Repeat : BT_ADecorator
+    public sealed class BT_Repeat : BT_ADecorator
     {
         private readonly int _repeats;
 

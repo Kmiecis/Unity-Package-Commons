@@ -15,8 +15,6 @@
             get => _name;
         }
 
-        public abstract BT_EStatus Decorate(BT_EStatus status);
-
         public void Start()
         {
             if (!_started)
@@ -25,6 +23,8 @@
                 _started = true;
             }
         }
+
+        public abstract BT_EStatus Decorate(BT_EStatus status);
 
         public void Finish(BT_EStatus status)
         {
@@ -46,6 +46,17 @@
         public override string ToString()
         {
             return _name;
+        }
+    }
+
+    public abstract class BT_ADecorator<T> : BT_ADecorator
+    {
+        protected readonly T _context;
+
+        public BT_ADecorator(T context, string name = null) :
+            base(name)
+        {
+            _context = context;
         }
     }
 }

@@ -2,9 +2,18 @@
 {
     public class BT_SequenceNode : BT_ACompositeNode
     {
-        public BT_SequenceNode() :
-            base("Sequence")
+        public BT_SequenceNode(string name = "Sequence") :
+            base(name)
         {
+        }
+
+        private void AbortRunningTask()
+        {
+            var current = CurrentTask;
+            if (current.Status == BT_EStatus.Running)
+            {
+                current.Abort();
+            }
         }
 
         protected override BT_EStatus OnUpdate()
@@ -28,15 +37,6 @@
             base.OnFinish(status);
 
             AbortRunningTask();
-        }
-
-        private void AbortRunningTask()
-        {
-            var current = CurrentTask;
-            if (current.Status == BT_EStatus.Running)
-            {
-                current.Abort();
-            }
         }
     }
 }

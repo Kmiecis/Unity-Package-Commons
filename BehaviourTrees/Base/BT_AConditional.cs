@@ -15,8 +15,6 @@
             get => _name;
         }
 
-        public abstract bool CanExecute();
-
         public void Start()
         {
             if (!_started)
@@ -25,6 +23,8 @@
                 _started = true;
             }
         }
+
+        public abstract bool CanExecute();
 
         public void Finish(BT_EStatus status)
         {
@@ -46,6 +46,17 @@
         public override string ToString()
         {
             return _name;
+        }
+    }
+
+    public abstract class BT_AConditional<T> : BT_AConditional
+    {
+        protected readonly T _context;
+
+        public BT_AConditional(T context, string name = null) :
+            base(name)
+        {
+            _context = context;
         }
     }
 }

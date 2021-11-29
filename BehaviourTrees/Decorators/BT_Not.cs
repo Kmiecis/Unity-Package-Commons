@@ -1,6 +1,6 @@
 ﻿namespace Common.BehaviourTrees
 {
-    public class BT_Not : BT_ADecorator
+    public sealed class BT_Not : BT_ADecorator
     {
         public BT_Not() :
             base("Not")

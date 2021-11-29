@@ -15,13 +15,6 @@
             get => _tasks[_current];
         }
 
-        protected override void OnStart()
-        {
-            base.OnStart();
-
-            _current = 0;
-        }
-
         public virtual BT_ITask[] Tasks
         {
             set => _tasks = value;
@@ -30,6 +23,13 @@
         public virtual BT_ITask Task
         {
             set => _tasks = new BT_ITask[] { value };
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            _current = 0;
         }
     }
 }

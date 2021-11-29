@@ -4,7 +4,7 @@ using Random = System.Random;
 
 namespace Common.BehaviourTrees
 {
-    public class BT_Wait : BT_ATask
+    public sealed class BT_Wait : BT_ATask
     {
         private readonly Random _random = new Random();
         private readonly float _duration;

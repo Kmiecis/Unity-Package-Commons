@@ -3,7 +3,7 @@ using Random = System.Random;
 
 namespace Common.BehaviourTrees
 {
-    public class BT_LimitFrames : BT_AConditional
+    public sealed class BT_LimitFrames : BT_AConditional
     {
         private readonly Random _random = new Random();
         private readonly int _limit;

@@ -121,4 +121,15 @@ namespace Common.BehaviourTrees
             return _name;
         }
     }
+
+    public abstract class BT_ATask<T> : BT_ATask
+    {
+        protected readonly T _context;
+
+        public BT_ATask(T context, string name = null) :
+            base(name)
+        {
+            _context = context;
+        }
+    }
 }

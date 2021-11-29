@@ -1,6 +1,6 @@
 ﻿namespace Common.BehaviourTrees
 {
-    public class BT_Status : BT_ADecorator
+    public sealed class BT_Status : BT_ADecorator
     {
         private readonly BT_EStatus _status;
 

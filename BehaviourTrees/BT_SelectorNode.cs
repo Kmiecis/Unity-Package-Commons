@@ -2,9 +2,18 @@
 {
     public class BT_SelectorNode : BT_ACompositeNode
     {
-        public BT_SelectorNode() :
-            base("Selector")
+        public BT_SelectorNode(string name = "Selector") :
+            base(name)
         {
+        }
+
+        private void AbortRunningTask()
+        {
+            var current = _tasks[_current];
+            if (current.Status == BT_EStatus.Running)
+            {
+                current.Abort();
+            }
         }
 
         protected override BT_EStatus OnUpdate()
@@ -28,15 +37,6 @@
             base.OnFinish(status);
 
             AbortRunningTask();
-        }
-
-        private void AbortRunningTask()
-        {
-            var current = _tasks[_current];
-            if (current.Status == BT_EStatus.Running)
-            {
-                current.Abort();
-            }
         }
     }
 }
