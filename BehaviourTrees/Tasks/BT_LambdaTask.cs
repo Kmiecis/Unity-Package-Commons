@@ -13,17 +13,17 @@ namespace Common.BehaviourTrees
         {
         }
 
-        public Action CallOnStart
+        public Action OnStartCall
         {
             set => _onStart = value;
         }
 
-        public Func<BT_EStatus> CallOnUpdate
+        public Func<BT_EStatus> OnUpdateCall
         {
             set => _onUpdate = value;
         }
 
-        public Action<BT_EStatus> CallOnFinish
+        public Action<BT_EStatus> OnFinishCall
         {
             set => _onFinish = value;
         }

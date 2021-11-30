@@ -2,7 +2,7 @@
 
 namespace Common.BehaviourTrees
 {
-    public class BT_RandomNode : BT_ACompositeNode
+    public sealed class BT_RandomNode : BT_ACompositeNode
     {
         private readonly Random _random;
 

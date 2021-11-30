@@ -6,7 +6,7 @@ namespace Common.BehaviourTrees
     {
         private Func<bool> _canExecute;
 
-        public Func<bool> CallCanExecute
+        public Func<bool> CanExecuteCall
         {
             set => _canExecute = value;
         }

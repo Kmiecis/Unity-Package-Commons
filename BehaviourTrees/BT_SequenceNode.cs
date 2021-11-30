@@ -1,6 +1,6 @@
 ﻿namespace Common.BehaviourTrees
 {
-    public class BT_SequenceNode : BT_ACompositeNode
+    public sealed class BT_SequenceNode : BT_ACompositeNode
     {
         public BT_SequenceNode(string name = "Sequence") :
             base(name)

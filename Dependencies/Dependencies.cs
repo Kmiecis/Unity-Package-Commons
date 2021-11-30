@@ -170,7 +170,7 @@ namespace Common
             }
             else
             {
-                DebugWarning($"Couldn't install dependency from {target.GetType().Name}.{field.FieldType.Name}");
+                DebugWarning($"Couldn't install dependency from {target.GetType().Name}.{field.Name}");
             }
 
             field.SetValue(target, dependency);

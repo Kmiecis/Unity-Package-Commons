@@ -1,6 +1,6 @@
 ﻿namespace Common.BehaviourTrees
 {
-    public class BT_SelectorNode : BT_ACompositeNode
+    public sealed class BT_SelectorNode : BT_ACompositeNode
     {
         public BT_SelectorNode(string name = "Selector") :
             base(name)

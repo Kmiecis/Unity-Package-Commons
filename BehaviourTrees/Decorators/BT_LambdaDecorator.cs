@@ -6,7 +6,7 @@ namespace Common.BehaviourTrees
     {
         private Func<BT_EStatus, BT_EStatus> _decorate;
 
-        public Func<BT_EStatus, BT_EStatus> CallDecorate
+        public Func<BT_EStatus, BT_EStatus> DecorateCall
         {
             set => _decorate = value;
         }

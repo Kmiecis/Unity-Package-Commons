@@ -1,6 +1,6 @@
 ﻿namespace Common.BehaviourTrees
 {
-    public class BT_TreeNode : BT_ATask
+    public sealed class BT_TreeNode : BT_ATask
     {
         private BT_ITask _task;
 

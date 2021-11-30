@@ -1,6 +1,6 @@
 ﻿namespace Common.BehaviourTrees
 {
-    public class BT_ParallelNode : BT_ACompositeNode
+    public sealed class BT_ParallelNode : BT_ACompositeNode
     {
         private bool _ran;
 
