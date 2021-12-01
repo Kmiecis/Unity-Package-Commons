@@ -3,6 +3,7 @@ using System;
 namespace Common.StateMachines
 {
     public class SM_LambdaTransition<T> : SM_ATransition<T>
+        where T : SM_IState
     {
         protected Func<bool> _canTransit;
 
