@@ -8,9 +8,9 @@ using UnityEditor.Callbacks;
 #endif
 using UnityEngine;
 
-namespace Common
+namespace Common.Dependencies
 {
-    public static class Dependencies
+    public static class DI_Manager
     {
         private class Listener
         {
@@ -37,9 +37,9 @@ namespace Common
 
         private static void DebugWarning(string message)
         {
-            Debug.LogWarning($"[{typeof(Dependencies).Name}] {message}");
+            Debug.LogWarning($"[{nameof(DI_Manager)}] {message}");
         }
-        
+
         private static Dictionary<Type, ListenerList> s_ListenerLists = new Dictionary<Type, ListenerList>();
         private static Dictionary<Type, DependencyList> s_DependencyLists = new Dictionary<Type, DependencyList>();
 
@@ -55,13 +55,13 @@ namespace Common
                 s_ListenerLists[type] = result = new ListenerList();
             return result;
         }
-        
+
         private static void AddListener(Type type, Action<object> callback, object target)
         {
             var listeners = GetListeners(type);
             listeners.Add(new Listener { target = target, callback = callback });
         }
-        
+
         private static void RemoveListeners(Type type, object target)
         {
             var listeners = GetListeners(type);
@@ -94,7 +94,7 @@ namespace Common
             }
         }
 
-        private static void Inject(FieldInfo field, object target, DependencyInject attribute)
+        private static void Inject(FieldInfo field, object target, DI_Inject attribute)
         {
             var type = attribute.type ?? field.FieldType;
 
@@ -113,7 +113,7 @@ namespace Common
 
                 field.SetValue(target, value);
             }
-            
+
             AddListener(type, Update, target);
 
             var dependencies = GetDependencies(type);
@@ -121,7 +121,7 @@ namespace Common
             Update(dependency);
         }
 
-        private static void Uninject(FieldInfo field, object target, DependencyInject attribute)
+        private static void Uninject(FieldInfo field, object target, DI_Inject attribute)
         {
             var type = attribute.type ?? field.FieldType;
 
@@ -130,7 +130,7 @@ namespace Common
             field.SetValue(target, null);
         }
 
-        private static void Install(FieldInfo field, object target, DependencyInstall attribute)
+        private static void Install(FieldInfo field, object target, DI_Install attribute)
         {
             var type = attribute.type ?? field.FieldType;
 
@@ -176,7 +176,7 @@ namespace Common
             field.SetValue(target, dependency);
         }
 
-        private static void Uninstall(FieldInfo field, object target, DependencyInstall attribute)
+        private static void Uninstall(FieldInfo field, object target, DI_Install attribute)
         {
             var type = attribute.type ?? field.FieldType;
 
@@ -196,28 +196,28 @@ namespace Common
             var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             foreach (var field in fields)
             {
-                if (field.TryGetCustomAttribute<DependencyInstall>(out var attributeInstall))
+                if (field.TryGetCustomAttribute<DI_Install>(out var attributeInstall))
                 {
                     Install(field, target, attributeInstall);
                 }
-                else if (field.TryGetCustomAttribute<DependencyInject>(out var attributeInject))
+                else if (field.TryGetCustomAttribute<DI_Inject>(out var attributeInject))
                 {
                     Inject(field, target, attributeInject);
                 }
             }
         }
-        
+
         public static void Unbind(object target)
         {
             var type = target.GetType();
             var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             foreach (var field in fields)
             {
-                if (field.TryGetCustomAttribute<DependencyInject>(out var attributeInject))
+                if (field.TryGetCustomAttribute<DI_Inject>(out var attributeInject))
                 {
                     Uninject(field, target, attributeInject);
                 }
-                else if (field.TryGetCustomAttribute<DependencyInstall>(out var attributeInstall))
+                else if (field.TryGetCustomAttribute<DI_Install>(out var attributeInstall))
                 {
                     Uninstall(field, target, attributeInstall);
                 }
