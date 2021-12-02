@@ -1,12 +1,12 @@
-﻿using System;
-
-namespace Common.BehaviourTrees
+﻿namespace Common.BehaviourTrees
 {
     public sealed class BT_LambdaConditional : BT_AConditional
     {
-        private Func<bool> _canExecute;
+        public delegate bool CanExecuteDelegate();
 
-        public Func<bool> CanExecuteCall
+        private CanExecuteDelegate _canExecute;
+
+        public CanExecuteDelegate CanExecuteAction
         {
             set => _canExecute = value;
         }

@@ -7,119 +7,119 @@ namespace Common.Extensions
 {
     public static class SerializedPropertyExtensions
     {
-        public static void SetValue(this SerializedProperty property, object value)
+        public static void SetValue(this SerializedProperty self, object value)
         {
-            switch (property.propertyType)
+            switch (self.propertyType)
             {
                 case SerializedPropertyType.AnimationCurve:
-                    property.animationCurveValue = (AnimationCurve)value;
+                    self.animationCurveValue = (AnimationCurve)value;
                     break;
                 case SerializedPropertyType.ArraySize:
-                    property.arraySize = (int)value;
+                    self.arraySize = (int)value;
                     break;
                 case SerializedPropertyType.Boolean:
-                    property.boolValue = (bool)value;
+                    self.boolValue = (bool)value;
                     break;
                 case SerializedPropertyType.Bounds:
-                    property.boundsValue = (Bounds)value;
+                    self.boundsValue = (Bounds)value;
                     break;
                 case SerializedPropertyType.BoundsInt:
-                    property.boundsIntValue = (BoundsInt)value;
+                    self.boundsIntValue = (BoundsInt)value;
                     break;
                 case SerializedPropertyType.Color:
-                    property.colorValue = (Color)value;
+                    self.colorValue = (Color)value;
                     break;
                 case SerializedPropertyType.ExposedReference:
-                    property.exposedReferenceValue = (Object)value;
+                    self.exposedReferenceValue = (Object)value;
                     break;
                 case SerializedPropertyType.Float:
-                    property.floatValue = (float)value;
+                    self.floatValue = (float)value;
                     break;
                 case SerializedPropertyType.Integer:
-                    property.intValue = (int)value;
+                    self.intValue = (int)value;
                     break;
                 case SerializedPropertyType.ManagedReference:
-                    property.managedReferenceValue = value;
+                    self.managedReferenceValue = value;
                     break;
                 case SerializedPropertyType.ObjectReference:
-                    property.objectReferenceValue = (Object)value;
+                    self.objectReferenceValue = (Object)value;
                     break;
                 case SerializedPropertyType.Quaternion:
-                    property.quaternionValue = (Quaternion)value;
+                    self.quaternionValue = (Quaternion)value;
                     break;
                 case SerializedPropertyType.Rect:
-                    property.rectValue = (Rect)value;
+                    self.rectValue = (Rect)value;
                     break;
                 case SerializedPropertyType.RectInt:
-                    property.rectIntValue = (RectInt)value;
+                    self.rectIntValue = (RectInt)value;
                     break;
                 case SerializedPropertyType.String:
-                    property.stringValue = (string)value;
+                    self.stringValue = (string)value;
                     break;
                 case SerializedPropertyType.Vector2:
-                    property.vector2Value = (Vector2)value;
+                    self.vector2Value = (Vector2)value;
                     break;
                 case SerializedPropertyType.Vector2Int:
-                    property.vector2IntValue = (Vector2Int)value;
+                    self.vector2IntValue = (Vector2Int)value;
                     break;
                 case SerializedPropertyType.Vector3:
-                    property.vector3Value = (Vector3)value;
+                    self.vector3Value = (Vector3)value;
                     break;
                 case SerializedPropertyType.Vector3Int:
-                    property.vector3IntValue = (Vector3Int)value;
+                    self.vector3IntValue = (Vector3Int)value;
                     break;
                 case SerializedPropertyType.Vector4:
-                    property.vector4Value = (Vector4)value;
+                    self.vector4Value = (Vector4)value;
                     break;
                 default:
-                    throw new KeyNotFoundException(string.Format("Couldn't find {0} in {1}", property.propertyType, property));
+                    throw new KeyNotFoundException(string.Format("Couldn't find {0} in {1}", self.propertyType, self));
             }
         }
 
-        public static object GetValue(this SerializedProperty property)
+        public static object GetValue(this SerializedProperty self)
         {
-            switch (property.propertyType)
+            switch (self.propertyType)
             {
                 case SerializedPropertyType.AnimationCurve:
-                    return property.animationCurveValue;
+                    return self.animationCurveValue;
                 case SerializedPropertyType.ArraySize:
-                    return property.arraySize;
+                    return self.arraySize;
                 case SerializedPropertyType.Boolean:
-                    return property.boolValue;
+                    return self.boolValue;
                 case SerializedPropertyType.Bounds:
-                    return property.boundsValue;
+                    return self.boundsValue;
                 case SerializedPropertyType.BoundsInt:
-                    return property.boundsIntValue;
+                    return self.boundsIntValue;
                 case SerializedPropertyType.Color:
-                    return property.colorValue;
+                    return self.colorValue;
                 case SerializedPropertyType.ExposedReference:
-                    return property.exposedReferenceValue;
+                    return self.exposedReferenceValue;
                 case SerializedPropertyType.Float:
-                    return property.floatValue;
+                    return self.floatValue;
                 case SerializedPropertyType.Integer:
-                    return property.intValue;
+                    return self.intValue;
                 case SerializedPropertyType.ObjectReference:
-                    return property.objectReferenceValue;
+                    return self.objectReferenceValue;
                 case SerializedPropertyType.Quaternion:
-                    return property.quaternionValue;
+                    return self.quaternionValue;
                 case SerializedPropertyType.Rect:
-                    return property.rectValue;
+                    return self.rectValue;
                 case SerializedPropertyType.RectInt:
-                    return property.rectIntValue;
+                    return self.rectIntValue;
                 case SerializedPropertyType.String:
-                    return property.stringValue;
+                    return self.stringValue;
                 case SerializedPropertyType.Vector2:
-                    return property.vector2Value;
+                    return self.vector2Value;
                 case SerializedPropertyType.Vector2Int:
-                    return property.vector2IntValue;
+                    return self.vector2IntValue;
                 case SerializedPropertyType.Vector3:
-                    return property.vector3Value;
+                    return self.vector3Value;
                 case SerializedPropertyType.Vector3Int:
-                    return property.vector3IntValue;
+                    return self.vector3IntValue;
                 case SerializedPropertyType.Vector4:
-                    return property.vector4Value;
+                    return self.vector4Value;
                 default:
-                    throw new KeyNotFoundException(string.Format("Couldn't find {0} in {1}", property.propertyType, property));
+                    throw new KeyNotFoundException(string.Format("Couldn't find {0} in {1}", self.propertyType, self));
             }
         }
     }

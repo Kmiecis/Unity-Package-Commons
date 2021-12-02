@@ -1,12 +1,12 @@
-﻿using System;
-
-namespace Common.BehaviourTrees
+﻿namespace Common.BehaviourTrees
 {
     public sealed class BT_LambdaDecorator : BT_ADecorator
     {
-        private Func<BT_EStatus, BT_EStatus> _decorate;
+        public delegate BT_EStatus DecorateDelegate(BT_EStatus status);
 
-        public Func<BT_EStatus, BT_EStatus> DecorateCall
+        private DecorateDelegate _decorate;
+
+        public DecorateDelegate DecorateAction
         {
             set => _decorate = value;
         }

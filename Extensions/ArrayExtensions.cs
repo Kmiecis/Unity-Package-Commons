@@ -1,44 +1,53 @@
 using System;
+using System.Runtime.CompilerServices;
 
 namespace Common.Extensions
 {
     public static class ArrayExtensions
     {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNull<T>(this T[] self)
         {
             return self == null;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsEmpty<T>(this T[] self)
         {
             return self.Length == 0;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNullOrEmpty<T>(this T[] self)
         {
             return self.IsNull() || self.IsEmpty();
         }
-        
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetLengthSafely<T>(this T[] self)
         {
             return self.IsNull() ? 0 : self.Length;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T First<T>(this T[] self)
         {
             return self[0];
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T FirstOrDefault<T>(this T[] self, T value = default)
         {
             return self.IsNullOrEmpty() ? value : self.First();
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Last<T>(this T[] self)
         {
             return self[self.Length - 1];
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T LastOrDefault<T>(this T[] self, T value = default)
         {
             return self.IsNullOrEmpty() ? value : self.Last();
@@ -137,13 +146,15 @@ namespace Common.Extensions
             return index != -1;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Swap<T>(this T[] self, int i, int j)
         {
             var t = self[i];
             self[i] = self[j];
             self[j] = t;
         }
-        
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Populate<T>(this T[] self, T value)
         {
             for (int i = 0; i < self.Length; ++i)
@@ -151,12 +162,14 @@ namespace Common.Extensions
                 self[i] = value;
             }
         }
-        
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Contains<T>(this T[] self, T value)
         {
             return Array.IndexOf(self, value) != -1;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void ForEach<T>(this T[] self, Action<T> action)
         {
             for (int i = 0; i < self.Length; ++i)

@@ -1,35 +1,43 @@
+using System.Runtime.CompilerServices;
+
 namespace Common.Extensions
 {
     public static class ArrayTableExtensions
     {
-        public static bool IsNull<T>(this T[,] arr)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNull<T>(this T[,] self)
         {
-            return arr == null;
+            return self == null;
         }
 
-        public static bool IsEmpty<T>(this T[,] arr)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEmpty<T>(this T[,] self)
         {
-            return arr.Length == 0;
+            return self.Length == 0;
         }
 
-        public static bool IsNullOrEmpty<T>(this T[,] arr)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNullOrEmpty<T>(this T[,] self)
         {
-            return arr.IsNull() || arr.IsEmpty();
+            return self.IsNull() || self.IsEmpty();
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetWidth<T>(this T[,] self)
         {
             return self.GetLength(0);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetHeight<T>(this T[,] self)
         {
             return self.GetLength(1);
         }
 
-        public static int GetLengthSafely<T>(this T[,] arr, int dimension)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int GetLengthSafely<T>(this T[,] self, int dimension)
         {
-            return arr.IsNull() ? 0 : arr.GetLength(dimension);
+            return self.IsNull() ? 0 : self.GetLength(dimension);
         }
     }
 }

@@ -1,29 +1,31 @@
-﻿using System;
-
-namespace Common.BehaviourTrees
+﻿namespace Common.BehaviourTrees
 {
     public sealed class BT_LambdaTask : BT_ATask
     {
-        private Action _onStart;
-        private Func<BT_EStatus> _onUpdate;
-        private Action<BT_EStatus> _onFinish;
+        public delegate void OnStartDelegate();
+        public delegate BT_EStatus OnUpdateDelegate();
+        public delegate void OnFinishDelegate(BT_EStatus status);
+
+        private OnStartDelegate _onStart;
+        private OnUpdateDelegate _onUpdate;
+        private OnFinishDelegate _onFinish;
 
         public BT_LambdaTask(string name = "Lambda") :
             base(name)
         {
         }
 
-        public Action OnStartCall
+        public OnStartDelegate OnStartAction
         {
             set => _onStart = value;
         }
 
-        public Func<BT_EStatus> OnUpdateCall
+        public OnUpdateDelegate OnUpdateAction
         {
             set => _onUpdate = value;
         }
 
-        public Action<BT_EStatus> OnFinishCall
+        public OnFinishDelegate OnFinishAction
         {
             set => _onFinish = value;
         }

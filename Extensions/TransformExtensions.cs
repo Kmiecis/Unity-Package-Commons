@@ -4,12 +4,12 @@ namespace Common.Extensions
 {
     public static class TransformExtensions
     {
-        public static void DestroyChildren(this Transform transform)
+        public static void DestroyChildren(this Transform self)
         {
-            int childCount = transform.childCount;
+            int childCount = self.childCount;
             for (int i = childCount - 1; i > -1; i--)
             {
-                var child = transform.GetChild(i);
+                var child = self.GetChild(i);
                 ObjectUtility.DestroySafely(child.gameObject);
             }
         }

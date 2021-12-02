@@ -1,12 +1,14 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Common.Extensions
 {
     public static class GameObjectExtensions
     {
-        public static bool IsPrefab(this GameObject gameObject)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsPrefab(this GameObject self)
         {
-            return gameObject.scene.rootCount == 0;
+            return self.scene.rootCount == 0;
         }
     }
 }

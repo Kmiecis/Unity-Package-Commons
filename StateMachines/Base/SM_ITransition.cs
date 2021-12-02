@@ -6,6 +6,6 @@ namespace Common.StateMachines
     {
         Type Target { get; }
 
-        bool CanTransit();
+        bool IsValid();
     }
 }

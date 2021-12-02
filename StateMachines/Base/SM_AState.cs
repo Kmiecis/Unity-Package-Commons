@@ -55,7 +55,7 @@ namespace Common.StateMachines
             {
                 foreach (var transition in _transitions)
                 {
-                    if (transition.CanTransit())
+                    if (transition.IsValid())
                     {
                         return transition.Target;
                     }

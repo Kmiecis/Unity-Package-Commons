@@ -1,22 +1,22 @@
-using System;
-
 namespace Common.StateMachines
 {
     public class SM_LambdaTransition<T> : SM_ATransition<T>
         where T : SM_IState
     {
-        protected Func<bool> _canTransit;
+        public delegate bool IsValidDelegate();
 
-        public Func<bool> CanTransitCall
+        protected IsValidDelegate _isValid;
+
+        public IsValidDelegate IsValidAction
         {
-            set => _canTransit = value;
+            set => _isValid = value;
         }
 
-        public override bool CanTransit()
+        public override bool IsValid()
         {
-            if (_canTransit != null)
+            if (_isValid != null)
             {
-                return _canTransit();
+                return _isValid();
             }
             return false;
         }

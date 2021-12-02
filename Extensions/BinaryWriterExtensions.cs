@@ -5,62 +5,62 @@ namespace Common.Extensions
 {
     public static class BinaryWriterExtensions
     {
-        public static void Write(this BinaryWriter writer, Vector2 value)
+        public static void Write(this BinaryWriter self, Vector2 value)
         {
-            writer.Write(value.x);
-            writer.Write(value.y);
+            self.Write(value.x);
+            self.Write(value.y);
         }
 
-        public static void Write(this BinaryWriter writer, Vector3 value)
+        public static void Write(this BinaryWriter self, Vector3 value)
         {
-            writer.Write(value.x);
-            writer.Write(value.y);
-            writer.Write(value.z);
+            self.Write(value.x);
+            self.Write(value.y);
+            self.Write(value.z);
         }
 
-        public static void Write(this BinaryWriter writer, Vector4 value)
+        public static void Write(this BinaryWriter self, Vector4 value)
         {
-            writer.Write(value.x);
-            writer.Write(value.y);
-            writer.Write(value.z);
-            writer.Write(value.w);
+            self.Write(value.x);
+            self.Write(value.y);
+            self.Write(value.z);
+            self.Write(value.w);
         }
 
-        public static void Write(this BinaryWriter writer, Vector2Int value)
+        public static void Write(this BinaryWriter self, Vector2Int value)
         {
-            writer.Write(value.x);
-            writer.Write(value.y);
+            self.Write(value.x);
+            self.Write(value.y);
         }
 
-        public static void Write(this BinaryWriter writer, Vector3Int value)
+        public static void Write(this BinaryWriter self, Vector3Int value)
         {
-            writer.Write(value.x);
-            writer.Write(value.y);
-            writer.Write(value.z);
+            self.Write(value.x);
+            self.Write(value.y);
+            self.Write(value.z);
         }
 
-        public static void Write(this BinaryWriter writer, Color value)
+        public static void Write(this BinaryWriter self, Color value)
         {
-            writer.Write(value.r);
-            writer.Write(value.g);
-            writer.Write(value.b);
-            writer.Write(value.a);
+            self.Write(value.r);
+            self.Write(value.g);
+            self.Write(value.b);
+            self.Write(value.a);
         }
 
-        public static void Write(this BinaryWriter writer, Color32 value)
+        public static void Write(this BinaryWriter self, Color32 value)
         {
-            writer.Write(value.r);
-            writer.Write(value.g);
-            writer.Write(value.b);
-            writer.Write(value.a);
+            self.Write(value.r);
+            self.Write(value.g);
+            self.Write(value.b);
+            self.Write(value.a);
         }
 
-        public static void Write(this BinaryWriter writer, Quaternion value)
+        public static void Write(this BinaryWriter self, Quaternion value)
         {
-            writer.Write(value.x);
-            writer.Write(value.y);
-            writer.Write(value.z);
-            writer.Write(value.w);
+            self.Write(value.x);
+            self.Write(value.y);
+            self.Write(value.z);
+            self.Write(value.w);
         }
     }
 }

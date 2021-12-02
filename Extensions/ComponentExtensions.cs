@@ -13,8 +13,7 @@ namespace Common.Extensions
         public static void RemoveComponent<T>(this Component self)
             where T : Component
         {
-            var component = self.GetComponent<T>();
-            if (component != null)
+            if (self.TryGetComponent<T>(out var component))
             {
                 Object.Destroy(component);
             }

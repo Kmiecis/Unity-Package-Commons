@@ -4,26 +4,30 @@ namespace Common.StateMachines
 {
     public sealed class SM_LambdaState : SM_AState
     {
-        private Action _onStart;
-        private Func<Type> _onUpdate;
-        private Action _onFinish;
+        public delegate void OnStartDelegate();
+        public delegate Type OnUpdateDelegate();
+        public delegate void OnFinishDelegate();
+
+        private OnStartDelegate _onStart;
+        private OnUpdateDelegate _onUpdate;
+        private OnFinishDelegate _onFinish;
 
         public SM_LambdaState(string name = "Lambda") :
             base(name)
         {
         }
 
-        public Action OnStartCall
+        public OnStartDelegate OnStartAction
         {
             set => _onStart = value;
         }
 
-        public Func<Type> OnUpdateCall
+        public OnUpdateDelegate OnUpdateAction
         {
             set => _onUpdate = value;
         }
 
-        public Action OnFinishCall
+        public OnFinishDelegate OnFinishAction
         {
             set => _onFinish = value;
         }

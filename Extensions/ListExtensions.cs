@@ -1,215 +1,230 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace Common.Extensions
 {
     public static class ListExtensions
     {
-        public static bool IsNull<T>(this List<T> list)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNull<T>(this List<T> self)
         {
-            return list == null;
+            return self == null;
         }
 
-        public static bool IsEmpty<T>(this List<T> list)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEmpty<T>(this List<T> self)
         {
-            return list.Count == 0;
+            return self.Count == 0;
         }
 
-        public static bool IsNullOrEmpty<T>(this List<T> list)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNullOrEmpty<T>(this List<T> self)
         {
-            return list.IsNull() || list.IsEmpty();
+            return self.IsNull() || self.IsEmpty();
         }
 
-        public static int GetCountSafely<T>(this List<T> list)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int GetCountSafely<T>(this List<T> self)
         {
-            return list.IsNull() ? 0 : list.Count;
+            return self.IsNull() ? 0 : self.Count;
         }
 
-        public static T First<T>(this List<T> list)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T First<T>(this List<T> self)
         {
-            return list[0];
+            return self[0];
         }
 
-        public static T FirstOrDefault<T>(this List<T> list, T value = default)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T FirstOrDefault<T>(this List<T> self, T value = default)
         {
-            return list.IsNullOrEmpty() ? value : list.First();
+            return self.IsNullOrEmpty() ? value : self.First();
         }
 
-        public static T Last<T>(this List<T> list)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T Last<T>(this List<T> self)
         {
-            return list[list.Count - 1];
+            return self[self.Count - 1];
         }
 
-        public static T LastOrDefault<T>(this List<T> list, T value = default)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static T LastOrDefault<T>(this List<T> self, T value = default)
         {
-            return list.IsNullOrEmpty() ? value : list.Last();
+            return self.IsNullOrEmpty() ? value : self.Last();
         }
 
-        public static bool TryGet<T>(this List<T> list, int index, out T item)
+        public static bool TryGet<T>(this List<T> self, int index, out T item)
         {
-            if (0 > index || index > list.Count - 1)
+            if (0 > index || index > self.Count - 1)
             {
                 item = default;
                 return false;
             }
-            item = list[index];
+            item = self[index];
             return true;
         }
 
-        public static bool TryGetFirst<T>(this List<T> list, out T item)
+        public static bool TryGetFirst<T>(this List<T> self, out T item)
         {
-            return list.TryGet(0, out item);
+            return self.TryGet(0, out item);
         }
 
-        public static bool TryGetLast<T>(this List<T> list, out T item)
+        public static bool TryGetLast<T>(this List<T> self, out T item)
         {
-            return list.TryGet(list.Count - 1, out item);
+            return self.TryGet(self.Count - 1, out item);
         }
 
-        public static bool TryIndexOf<T>(this List<T> list, T item, out int index)
+        public static bool TryIndexOf<T>(this List<T> self, T item, out int index)
         {
-            index = list.IndexOf(item);
+            index = self.IndexOf(item);
             return index != -1;
         }
 
-        public static bool TryIndexOf<T>(this List<T> list, T item, int startIndex, out int index)
+        public static bool TryIndexOf<T>(this List<T> self, T item, int startIndex, out int index)
         {
-            index = list.IndexOf(item, startIndex);
+            index = self.IndexOf(item, startIndex);
             return index != -1;
         }
 
-        public static bool TryIndexOf<T>(this List<T> list, T item, int startIndex, int count, out int index)
+        public static bool TryIndexOf<T>(this List<T> self, T item, int startIndex, int count, out int index)
         {
-            index = list.IndexOf(item, startIndex, count);
+            index = self.IndexOf(item, startIndex, count);
             return index != -1;
         }
 
-        public static bool TryFind<T>(this List<T> list, Predicate<T> match, out T value)
+        public static bool TryFind<T>(this List<T> self, Predicate<T> match, out T value)
         {
-            value = list.Find(match);
+            value = self.Find(match);
             return value != default;
         }
 
-        public static bool TryFindLast<T>(this List<T> list, Predicate<T> match, out T value)
+        public static bool TryFindLast<T>(this List<T> self, Predicate<T> match, out T value)
         {
-            value = list.FindLast(match);
+            value = self.FindLast(match);
             return value != default;
         }
 
-        public static bool TryFindAll<T>(this List<T> list, Predicate<T> match, out List<T> value)
+        public static bool TryFindAll<T>(this List<T> self, Predicate<T> match, out List<T> value)
         {
-            value = list.FindAll(match);
+            value = self.FindAll(match);
             return value != default;
         }
 
-        public static bool TryFindIndex<T>(this List<T> list, Predicate<T> match, out int index)
+        public static bool TryFindIndex<T>(this List<T> self, Predicate<T> match, out int index)
         {
-            index = list.FindIndex(match);
+            index = self.FindIndex(match);
             return index != -1;
         }
 
-        public static bool TryFindIndex<T>(this List<T> list, int startIndex, Predicate<T> match, out int index)
+        public static bool TryFindIndex<T>(this List<T> self, int startIndex, Predicate<T> match, out int index)
         {
-            index = list.FindIndex(startIndex, match);
+            index = self.FindIndex(startIndex, match);
             return index != -1;
         }
 
-        public static bool TryFindIndex<T>(this List<T> list, int startIndex, int count, Predicate<T> match, out int index)
+        public static bool TryFindIndex<T>(this List<T> self, int startIndex, int count, Predicate<T> match, out int index)
         {
-            index = list.FindIndex(startIndex, count, match);
+            index = self.FindIndex(startIndex, count, match);
             return index != -1;
         }
 
-        public static bool TryFindLastIndex<T>(this List<T> list, Predicate<T> match, out int index)
+        public static bool TryFindLastIndex<T>(this List<T> self, Predicate<T> match, out int index)
         {
-            index = list.FindLastIndex(match);
+            index = self.FindLastIndex(match);
             return index != -1;
         }
 
-        public static bool TryFindLastIndex<T>(this List<T> list, int startIndex, Predicate<T> match, out int index)
+        public static bool TryFindLastIndex<T>(this List<T> self, int startIndex, Predicate<T> match, out int index)
         {
-            index = list.FindLastIndex(startIndex, match);
+            index = self.FindLastIndex(startIndex, match);
             return index != -1;
         }
 
-        public static bool TryFindLastIndex<T>(this List<T> list, int startIndex, int count, Predicate<T> match, out int index)
+        public static bool TryFindLastIndex<T>(this List<T> self, int startIndex, int count, Predicate<T> match, out int index)
         {
-            index = list.FindLastIndex(startIndex, count, match);
+            index = self.FindLastIndex(startIndex, count, match);
             return index != -1;
         }
 
-        public static void Swap<T>(this List<T> list, int i, int j)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Swap<T>(this List<T> self, int i, int j)
         {
-            var t = list[i];
-            list[i] = list[j];
-            list[j] = t;
+            var t = self[i];
+            self[i] = self[j];
+            self[j] = t;
         }
 
-        public static void SwapLast<T>(this List<T> list, int index)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SwapLast<T>(this List<T> self, int index)
         {
-            list.Swap(index, list.Count - 1);
+            self.Swap(index, self.Count - 1);
         }
 
-        public static List<T> Populate<T>(this List<T> list, T value)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static List<T> Populate<T>(this List<T> self, T value)
         {
-            return list.Populate(value, list.Capacity);
+            return self.Populate(value, self.Capacity);
         }
 
-        public static List<T> Populate<T>(this List<T> list, T value, int count)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static List<T> Populate<T>(this List<T> self, T value, int count)
         {
             for (int i = 0; i < count; ++i)
-                list.Add(value);
-            return list;
+                self.Add(value);
+            return self;
         }
 
-        public static bool AddUnique<T>(this List<T> list, T item)
+        public static bool AddUnique<T>(this List<T> self, T item)
         {
-            if (!list.Contains(item))
+            if (!self.Contains(item))
             {
-                list.Add(item);
+                self.Add(item);
                 return true;
             }
             return false;
         }
-        
-        public static void RemoveLast<T>(this List<T> list)
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void RemoveLast<T>(this List<T> self)
         {
-            list.RemoveAt(list.Count - 1);
+            self.RemoveAt(self.Count - 1);
         }
 
-        public static void RemoveLast<T>(this List<T> list, int count)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void RemoveLast<T>(this List<T> self, int count)
         {
-            list.RemoveRange(list.Count - 1 - count, count);
+            self.RemoveRange(self.Count - 1 - count, count);
         }
 
-        public static T Revoke<T>(this List<T> list, int index)
+        public static T Revoke<T>(this List<T> self, int index)
         {
-            var result = list[index];
-            list.RemoveAt(index);
+            var result = self[index];
+            self.RemoveAt(index);
             return result;
         }
 
-        public static T RevokeLast<T>(this List<T> list)
+        public static T RevokeLast<T>(this List<T> self)
         {
-            var last = list.Last();
-            list.RemoveLast();
+            var last = self.Last();
+            self.RemoveLast();
             return last;
         }
 
-        public static T[] RevokeLast<T>(this List<T> list, int count)
+        public static T[] RevokeLast<T>(this List<T> self, int count)
         {
             var last = new T[count];
-            list.CopyTo(list.Count - 1 - count, last, 0, count);
-            list.RemoveLast(count);
+            self.CopyTo(self.Count - 1 - count, last, 0, count);
+            self.RemoveLast(count);
             return last;
         }
 
-        public static T[] GetArray<T>(this List<T> list)
+        public static T[] GetArray<T>(this List<T> self)
         {
-            var type = list.GetType();
+            var type = self.GetType();
             var field = type.GetField("_items", BindingFlags.Instance | BindingFlags.NonPublic);
-            return (T[])field.GetValue(list);
+            return (T[])field.GetValue(self);
         }
     }
 }

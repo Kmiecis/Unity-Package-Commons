@@ -12,6 +12,6 @@ namespace Common.StateMachines
             get => _target;
         }
 
-        public abstract bool CanTransit();
+        public abstract bool IsValid();
     }
 }
