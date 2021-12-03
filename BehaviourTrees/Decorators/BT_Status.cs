@@ -1,5 +1,8 @@
 ﻿namespace Common.BehaviourTrees
 {
+    /// <summary>
+    /// <see cref="BT_ADecorator"/> which overrides a task execution result
+    /// </summary>
     public sealed class BT_Status : BT_ADecorator
     {
         private readonly BT_EStatus _status;

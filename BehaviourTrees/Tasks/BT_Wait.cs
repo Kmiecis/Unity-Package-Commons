@@ -4,6 +4,9 @@ using Random = System.Random;
 
 namespace Common.BehaviourTrees
 {
+    /// <summary>
+    /// <see cref="BT_ATask"/> which executes for a certain time duration
+    /// </summary>
     public sealed class BT_Wait : BT_ATask
     {
         private readonly Random _random = new Random();

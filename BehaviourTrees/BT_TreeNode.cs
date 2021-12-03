@@ -1,5 +1,8 @@
 ﻿namespace Common.BehaviourTrees
 {
+    /// <summary>
+    /// <see cref="BT_ATask"/> node with a single child task support, usually used as a root of a certain branch
+    /// </summary>
     public sealed class BT_TreeNode : BT_ATask
     {
         private BT_ITask _task;

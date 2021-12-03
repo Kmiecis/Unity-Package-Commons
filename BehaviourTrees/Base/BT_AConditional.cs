@@ -1,5 +1,8 @@
 ﻿namespace Common.BehaviourTrees
 {
+    /// <summary>
+    /// Base <see cref="BT_IConditional"/> implementation
+    /// </summary>
     public abstract class BT_AConditional : BT_IConditional
     {
         protected string _name;
@@ -49,6 +52,9 @@
         }
     }
 
+    /// <summary>
+    /// <see cref="BT_AConditional"/> implementation with build-in context <see cref="T"/> support of any type
+    /// </summary>
     public abstract class BT_AConditional<T> : BT_AConditional
     {
         protected readonly T _context;

@@ -1,5 +1,8 @@
 ﻿namespace Common.BehaviourTrees
 {
+    /// <summary>
+    /// <see cref="BT_ACompositeNode"/> which executes its child tasks in parallel until one succeed or all fail
+    /// </summary>
     public sealed class BT_RaceNode : BT_ACompositeNode
     {
         private bool _ran;

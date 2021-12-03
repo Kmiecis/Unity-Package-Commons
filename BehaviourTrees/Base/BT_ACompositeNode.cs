@@ -1,5 +1,8 @@
 ﻿namespace Common.BehaviourTrees
 {
+    /// <summary>
+    /// <see cref="BT_ATask"/> node with a multiple child tasks support, usually used as a base for a certain execution flow
+    /// </summary>
     public abstract class BT_ACompositeNode : BT_ATask
     {
         protected int _current;

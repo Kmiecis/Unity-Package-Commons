@@ -3,6 +3,9 @@ using Random = System.Random;
 
 namespace Common.BehaviourTrees
 {
+    /// <summary>
+    /// <see cref="BT_AConditional"/> which halts a task execution after limit frames pass
+    /// </summary>
     public sealed class BT_LimitFrames : BT_AConditional
     {
         private readonly Random _random = new Random();

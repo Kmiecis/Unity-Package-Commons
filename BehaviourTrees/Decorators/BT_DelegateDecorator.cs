@@ -1,10 +1,18 @@
 ﻿namespace Common.BehaviourTrees
 {
-    public sealed class BT_LambdaDecorator : BT_ADecorator
+    /// <summary>
+    /// <see cref="BT_ADecorator"/> with custom delegate support
+    /// </summary>
+    public sealed class BT_DelegateDecorator : BT_ADecorator
     {
         public delegate BT_EStatus DecorateDelegate(BT_EStatus status);
 
         private DecorateDelegate _decorate;
+
+        public BT_DelegateDecorator(string name = "Delegate") :
+            base(name)
+        {
+        }
 
         public DecorateDelegate DecorateAction
         {

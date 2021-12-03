@@ -2,6 +2,9 @@
 
 namespace Common.BehaviourTrees
 {
+    /// <summary>
+    /// <see cref="BT_ACompositeNode"/> which executes a random child task until it is no longer running and uses its result
+    /// </summary>
     public sealed class BT_RandomNode : BT_ACompositeNode
     {
         private readonly Random _random;

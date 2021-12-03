@@ -1,6 +1,9 @@
 ﻿namespace Common.BehaviourTrees
 {
-    public sealed class BT_LambdaTask : BT_ATask
+    /// <summary>
+    /// <see cref="BT_ATask"/> with custom delegate support
+    /// </summary>
+    public sealed class BT_DelegateTask : BT_ATask
     {
         public delegate void OnStartDelegate();
         public delegate BT_EStatus OnUpdateDelegate();
@@ -10,7 +13,7 @@
         private OnUpdateDelegate _onUpdate;
         private OnFinishDelegate _onFinish;
 
-        public BT_LambdaTask(string name = "Lambda") :
+        public BT_DelegateTask(string name = "Delegate") :
             base(name)
         {
         }

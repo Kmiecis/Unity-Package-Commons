@@ -1,5 +1,8 @@
 ﻿namespace Common.BehaviourTrees
 {
+    /// <summary>
+    /// <see cref="BT_ACompositeNode"/> which executes its child tasks sequentially until one fails or all succeeds, for which it succeeds
+    /// </summary>
     public sealed class BT_SequenceNode : BT_ACompositeNode
     {
         public BT_SequenceNode(string name = "Sequence") :

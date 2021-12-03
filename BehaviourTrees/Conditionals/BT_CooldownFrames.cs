@@ -3,6 +3,9 @@ using Random = System.Random;
 
 namespace Common.BehaviourTrees
 {
+    /// <summary>
+    /// <see cref="BT_AConditional"/> which prevents a task execution until cooldown frames pass
+    /// </summary>
     public sealed class BT_CooldownFrames : BT_AConditional
     {
         private readonly Random _random = new Random();

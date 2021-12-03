@@ -1,5 +1,8 @@
 ﻿namespace Common.BehaviourTrees
 {
+    /// <summary>
+    /// <see cref="BT_ADecorator"/> which negates a task execution result
+    /// </summary>
     public sealed class BT_Not : BT_ADecorator
     {
         public BT_Not() :

@@ -4,6 +4,9 @@ using Random = System.Random;
 
 namespace Common.BehaviourTrees
 {
+    /// <summary>
+    /// <see cref="BT_AConditional"/> which prevents a task execution until cooldown time expires
+    /// </summary>
     public sealed class BT_Cooldown : BT_AConditional
     {
         private readonly Random _random = new Random();

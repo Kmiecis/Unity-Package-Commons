@@ -1,5 +1,8 @@
 ﻿namespace Common.BehaviourTrees
 {
+    /// <summary>
+    /// Base <see cref="BT_IDecorator"/> implementation
+    /// </summary>
     public abstract class BT_ADecorator : BT_IDecorator
     {
         protected string _name;
@@ -49,6 +52,9 @@
         }
     }
 
+    /// <summary>
+    /// <see cref="BT_ADecorator"/> implementation with build-in context <see cref="T"/> support of any type
+    /// </summary>
     public abstract class BT_ADecorator<T> : BT_ADecorator
     {
         protected readonly T _context;

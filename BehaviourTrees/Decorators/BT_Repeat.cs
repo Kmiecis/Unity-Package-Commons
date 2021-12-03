@@ -1,5 +1,8 @@
 ﻿namespace Common.BehaviourTrees
 {
+    /// <summary>
+    /// <see cref="BT_ADecorator"/> which repeats a task number of times
+    /// </summary>
     public sealed class BT_Repeat : BT_ADecorator
     {
         private readonly int _repeats;

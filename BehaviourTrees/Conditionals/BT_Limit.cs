@@ -4,6 +4,9 @@ using Random = System.Random;
 
 namespace Common.BehaviourTrees
 {
+    /// <summary>
+    /// <see cref="BT_AConditional"/> which halts a task execution after limit time expires
+    /// </summary>
     public sealed class BT_Limit : BT_AConditional
     {
         private readonly Random _random = new Random();

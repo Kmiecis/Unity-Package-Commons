@@ -3,6 +3,9 @@ using Random = System.Random;
 
 namespace Common.BehaviourTrees
 {
+    /// <summary>
+    /// <see cref="BT_ATask"/> which executes for a certain frames count
+    /// </summary>
     public sealed class BT_WaitFrames : BT_ATask
     {
         private readonly Random _random;
