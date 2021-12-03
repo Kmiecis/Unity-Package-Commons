@@ -3,18 +3,18 @@
 namespace Common.Dependencies
 {
     /// <summary>
-    /// Base behaviour for managing lifetime of its dependencies
+    /// Base <see cref="DI_IDependant"/> implementation for <see cref="MonoBehaviour"/>
     /// </summary>
     public abstract class DI_ADependantBehaviour : MonoBehaviour
     {
         protected virtual void Awake()
         {
-            DI_Manager.Bind(this);
+            DI_Binder.Bind(this);
         }
 
         protected virtual void OnDestroy()
         {
-            DI_Manager.Unbind(this);
+            DI_Binder.Unbind(this);
         }
     }
 }

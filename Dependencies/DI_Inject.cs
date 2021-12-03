@@ -3,7 +3,7 @@
 namespace Common.Dependencies
 {
     /// <summary>
-    /// Mark a field to have a dependency injected into by <see cref="DI_Manager"/>
+    /// Marks a field to have a dependency injected into by <see cref="DI_Binder"/>
     /// </summary>
     [AttributeUsage(AttributeTargets.Field)]
     public class DI_Inject : Attribute

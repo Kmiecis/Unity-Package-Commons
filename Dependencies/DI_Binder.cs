@@ -10,7 +10,10 @@ using UnityEngine;
 
 namespace Common.Dependencies
 {
-    public static class DI_Manager
+    /// <summary>
+    /// Handles class fields marked by <see cref="DI_Inject"/> and <see cref="DI_Install"/> dependency binding
+    /// </summary>
+    public static class DI_Binder
     {
         private class Listener
         {
@@ -37,7 +40,7 @@ namespace Common.Dependencies
 
         private static void DebugWarning(string message)
         {
-            Debug.LogWarning($"[{nameof(DI_Manager)}] {message}");
+            Debug.LogWarning($"[{nameof(DI_Binder)}] {message}");
         }
 
         private static Dictionary<Type, ListenerList> s_ListenerLists = new Dictionary<Type, ListenerList>();
