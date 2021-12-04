@@ -2,7 +2,10 @@
 
 namespace Common.StateMachines
 {
-    public sealed class SM_LambdaState : SM_AState
+    /// <summary>
+    /// <see cref="SM_AState"/> with custom delegate support
+    /// </summary>
+    public sealed class SM_DelegateState : SM_AState
     {
         public delegate void OnStartDelegate();
         public delegate Type OnUpdateDelegate();
@@ -12,7 +15,7 @@ namespace Common.StateMachines
         private OnUpdateDelegate _onUpdate;
         private OnFinishDelegate _onFinish;
 
-        public SM_LambdaState(string name = "Lambda") :
+        public SM_DelegateState(string name = "Delegate") :
             base(name)
         {
         }

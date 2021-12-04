@@ -2,6 +2,9 @@ using System;
 
 namespace Common.StateMachines
 {
+    /// <summary>
+    /// Base <see cref="SM_IState"/> implementation
+    /// </summary>
     public abstract class SM_AState : SM_IState
     {
         protected string _name;
@@ -80,6 +83,9 @@ namespace Common.StateMachines
         }
     }
 
+    /// <summary>
+    /// <see cref="SM_AState"/> implementation with build-in context <see cref="T"/> support of any type
+    /// </summary>
     public abstract class SM_AState<T> : SM_AState
     {
         protected readonly T _context;

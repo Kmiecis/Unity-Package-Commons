@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Common.StateMachines
 {
+    /// <summary>
+    /// Base <see cref="SM_IStateMachine"/> implementation
+    /// </summary>
     public sealed class SM_StateMachine : SM_IStateMachine
     {
         private readonly Dictionary<Type, SM_IState> _states = new Dictionary<Type, SM_IState>();
