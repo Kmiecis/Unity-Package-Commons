@@ -3,7 +3,7 @@
 namespace Common.BehaviourTrees
 {
     /// <summary>
-    /// <see cref="BT_ACompositeNode"/> which executes a random child task until it is no longer running and uses its result
+    /// <see cref="BT_ACompositeNode"/> which executes a random child task as long as it is running
     /// </summary>
     public sealed class BT_RandomNode : BT_ACompositeNode
     {
@@ -42,6 +42,11 @@ namespace Common.BehaviourTrees
             base.OnFinish(status);
 
             AbortRunningTask();
+        }
+
+        public override string ToString()
+        {
+            return "random " + base.ToString();
         }
     }
 }

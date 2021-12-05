@@ -79,5 +79,10 @@
 
             AbortRunningTasks();
         }
+
+        public override string ToString()
+        {
+            return "parallel " + base.ToString();
+        }
     }
 }

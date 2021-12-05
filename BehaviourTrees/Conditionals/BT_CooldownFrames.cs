@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Random = System.Random;
 
 namespace Common.BehaviourTrees
 {
     /// <summary>
-    /// <see cref="BT_AConditional"/> which prevents a task execution until cooldown frames pass
+    /// <see cref="BT_AConditional"/> which prevents a task execution until a certain amount of frames passes
     /// </summary>
     public sealed class BT_CooldownFrames : BT_AConditional
     {
@@ -21,9 +22,14 @@ namespace Common.BehaviourTrees
             _deviation = deviation;
         }
 
+        private int Nowstamp
+        {
+            get => Time.frameCount;
+        }
+
         public int Remaining
         {
-            get => _cooldown - (Time.frameCount - _framestamp);
+            get => _cooldown - (Nowstamp - _framestamp);
         }
 
         public override bool CanExecute()
@@ -37,8 +43,14 @@ namespace Common.BehaviourTrees
 
             if (result != BT_EStatus.Failure)
             {
-                _framestamp = Time.frameCount + _random.Next(-_deviation, +_deviation);
+                _framestamp = Nowstamp + _random.Next(-_deviation, +_deviation);
             }
+        }
+
+        public override string ToString()
+        {
+            var remaining = Math.Max(Remaining, 0);
+            return base.ToString() + " [" + remaining.ToString() + ']';
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using Common.Extensions;
-using UnityEngine;
+using System;
 using Random = System.Random;
 
 namespace Common.BehaviourTrees
 {
     /// <summary>
-    /// <see cref="BT_AConditional"/> which halts a task execution after limit time expires
+    /// <see cref="BT_AConditional"/> which halts a task execution after a certain amount of time passes
     /// </summary>
     public sealed class BT_Limit : BT_AConditional
     {
@@ -26,7 +26,7 @@ namespace Common.BehaviourTrees
 
         private float Nowstamp
         {
-            get => _unscaled ? Time.unscaledTime : Time.time;
+            get => TimeUtility.GetTime(_unscaled);
         }
 
         public float Remaining
@@ -44,6 +44,12 @@ namespace Common.BehaviourTrees
             base.OnStart();
 
             _timestamp = Nowstamp + _limit + _random.NextFloat(-_deviation, +_deviation);
+        }
+
+        public override string ToString()
+        {
+            var remaining = Math.Max(Remaining, 0.0f);
+            return base.ToString() + " [" + remaining.ToString("F1") + ']';
         }
     }
 }

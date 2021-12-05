@@ -1,7 +1,7 @@
 ﻿namespace Common.BehaviourTrees
 {
     /// <summary>
-    /// <see cref="BT_ADecorator"/> which repeats a task number of times
+    /// <see cref="BT_ADecorator"/> which repeats a task for a certain number of times
     /// </summary>
     public sealed class BT_Repeat : BT_ADecorator
     {
@@ -14,6 +14,11 @@
         {
             _repeats = repeats;
             _remaining = repeats;
+        }
+
+        public int Remaining
+        {
+            get => _remaining;
         }
 
         public override BT_EStatus Decorate(BT_EStatus status)
@@ -36,6 +41,11 @@
             base.OnStart();
 
             _remaining = _repeats;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString() + " [" + _remaining.ToString() + "]";
         }
     }
 }

@@ -1,26 +1,21 @@
-﻿using Common.Extensions;
-using System;
-using Random = System.Random;
+﻿using System;
 
 namespace Common.BehaviourTrees
 {
     /// <summary>
-    /// <see cref="BT_ATask"/> which executes for a certain amount of time
+    /// <see cref="BT_ADecorator"/> which repeats a task for a certain amount of time
     /// </summary>
-    public sealed class BT_Wait : BT_ATask
+    public sealed class BT_RepeatFor : BT_ADecorator
     {
-        private readonly Random _random = new Random();
         private readonly float _duration;
-        private readonly float _deviation;
         private readonly bool _unscaled;
 
-        private float _timestamp = 0.0f;
+        private float _timestamp;
 
-        public BT_Wait(float duration, float deviation = 0.0f, bool unscaled = false) :
-            base("Wait")
+        public BT_RepeatFor(float duration, bool unscaled = false) :
+            base("RepeatFor")
         {
             _duration = duration;
-            _deviation = deviation;
             _unscaled = unscaled;
         }
 
@@ -33,21 +28,26 @@ namespace Common.BehaviourTrees
         {
             get => _timestamp - Nowstamp;
         }
-        
+
         protected override void OnStart()
         {
             base.OnStart();
 
-            _timestamp = Nowstamp + _duration + _random.NextFloat(-_deviation, +_deviation);
+            _timestamp = Nowstamp + _duration;
         }
 
-        protected override BT_EStatus OnUpdate()
+        public override BT_EStatus Decorate(BT_EStatus status)
         {
-            if (Remaining > 0.0f)
+            if (status == BT_EStatus.Success)
             {
-                return BT_EStatus.Running;
+                if (Remaining > 0.0f)
+                {
+                    return BT_EStatus.Running;
+                }
+                return BT_EStatus.Success;
             }
-            return BT_EStatus.Success;
+
+            return status;
         }
 
         public override string ToString()

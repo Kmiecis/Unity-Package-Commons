@@ -1,7 +1,7 @@
 ﻿namespace Common.BehaviourTrees
 {
     /// <summary>
-    /// <see cref="BT_ACompositeNode"/> which executes its child tasks sequentially until one succeeds or all fail, for which it fails
+    /// <see cref="BT_ACompositeNode"/> which executes its child tasks in sequence until one succeed or all fail
     /// </summary>
     public sealed class BT_SelectorNode : BT_ACompositeNode
     {
@@ -40,6 +40,11 @@
             base.OnFinish(status);
 
             AbortRunningTask();
+        }
+
+        public override string ToString()
+        {
+            return "selector " + base.ToString();
         }
     }
 }

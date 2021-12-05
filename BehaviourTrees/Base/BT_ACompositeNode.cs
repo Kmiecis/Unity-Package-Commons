@@ -20,11 +20,13 @@
 
         public virtual BT_ITask[] Tasks
         {
+            get => _tasks;
             set => _tasks = value;
         }
 
         public virtual BT_ITask Task
         {
+            get => _tasks[0];
             set => _tasks = new BT_ITask[] { value };
         }
 

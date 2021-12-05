@@ -29,31 +29,37 @@
 
         public BT_IConditional[] Conditionals
         {
+            get => _conditionals;
             set => _conditionals = value;
         }
 
         public BT_IConditional Conditional
         {
+            get => _conditionals[0];
             set => _conditionals = new BT_IConditional[] { value };
         }
 
         public BT_IDecorator[] Decorators
         {
+            get => _decorators;
             set => _decorators = value;
         }
 
         public BT_IDecorator Decorator
         {
+            get => _decorators[0];
             set => _decorators = new BT_IDecorator[] { value };
         }
 
         public BT_IService[] Services
         {
+            get => _services;
             set => _services = value;
         }
 
         public BT_IService Service
         {
+            get => _services[0];
             set => _services = new BT_IService[] { value };
         }
 
@@ -157,7 +163,7 @@
                 {
                     _status = BT_EStatus.Failure;
 
-                    FinishConditionals(_status);
+                    FinishConditionals(BT_EStatus.Failure);
 
                     return _status;
                 }
@@ -172,8 +178,9 @@
                 {
                     OnFinish(BT_EStatus.Failure);
 
-                    FinishConditionals(_status);
-                    FinishDecorators(_status);
+                    FinishDecorators(BT_EStatus.Failure);
+
+                    FinishConditionals(BT_EStatus.Failure);
 
                     return _status;
                 }
@@ -182,23 +189,16 @@
             var result = OnUpdate();
             
             var decorated = Decorate(result);
-
-            if (
-                result == BT_EStatus.Running &&
-                decorated != BT_EStatus.Running
-            )
+            
+            if (decorated != BT_EStatus.Running)
             {
-                result = BT_EStatus.Failure;
+                OnFinish(decorated);
+
+                FinishDecorators(decorated);
+
+                FinishConditionals(decorated);
             }
-
-            if (result != BT_EStatus.Running)
-            {
-                OnFinish(result);
-
-                FinishConditionals(_status);
-                FinishDecorators(_status);
-            }
-
+            
             return decorated;
         }
 
@@ -217,6 +217,10 @@
         public void Abort()
         {
             OnFinish(BT_EStatus.Failure);
+
+            FinishDecorators(BT_EStatus.Failure);
+
+            FinishConditionals(BT_EStatus.Failure);
         }
 
         public override string ToString()

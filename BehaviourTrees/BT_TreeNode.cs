@@ -37,5 +37,10 @@
 
             AbortRunningTask();
         }
+
+        public override string ToString()
+        {
+            return "tree " + base.ToString();
+        }
     }
 }

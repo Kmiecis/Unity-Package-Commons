@@ -8,7 +8,7 @@
         private readonly BT_EStatus _status;
 
         public BT_Status(BT_EStatus status) :
-            base("Status")
+            base(status.ToString())
         {
             _status = status;
         }

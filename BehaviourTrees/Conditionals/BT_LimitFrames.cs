@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Random = System.Random;
 
 namespace Common.BehaviourTrees
 {
     /// <summary>
-    /// <see cref="BT_AConditional"/> which halts a task execution after limit frames pass
+    /// <see cref="BT_AConditional"/> which halts a task execution after a certain amount of frames passes
     /// </summary>
     public sealed class BT_LimitFrames : BT_AConditional
     {
@@ -20,10 +21,15 @@ namespace Common.BehaviourTrees
             _limit = limit;
             _deviation = deviation;
         }
+
+        private int Nowstamp
+        {
+            get => Time.frameCount;
+        }
         
         public int Remaining
         {
-            get => _framestamp - Time.frameCount;
+            get => _framestamp - Nowstamp;
         }
 
         public override bool CanExecute()
@@ -35,7 +41,13 @@ namespace Common.BehaviourTrees
         {
             base.OnStart();
 
-            _framestamp = Time.frameCount + _limit + _random.Next(-_deviation, +_deviation);
+            _framestamp = Nowstamp + _limit + _random.Next(-_deviation, +_deviation);
+        }
+
+        public override string ToString()
+        {
+            var remaining = Math.Max(Remaining, 0);
+            return base.ToString() + " [" + remaining.ToString() + ']';
         }
     }
 }
