@@ -49,8 +49,8 @@ namespace Common.BehaviourTrees
 
         public override string ToString()
         {
-            var remaining = Math.Max(Remaining, 0);
-            return base.ToString() + " [" + remaining.ToString() + ']';
+            var remaining = Math.Max(Remaining, 0).ToString();
+            return base.ToString() + " [" + remaining + ']';
         }
     }
 }

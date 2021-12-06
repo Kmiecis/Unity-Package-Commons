@@ -30,11 +30,29 @@
             set => _tasks = new BT_ITask[] { value };
         }
 
+        protected void AbortTasks()
+        {
+            if (_tasks != null)
+            {
+                for (int i = 0; i < _tasks.Length; ++i)
+                {
+                    _tasks[i].Abort();
+                }
+            }
+        }
+
         protected override void OnStart()
         {
             base.OnStart();
 
             _current = 0;
+        }
+
+        protected override void OnFinish(BT_EStatus status)
+        {
+            base.OnFinish(status);
+
+            AbortTasks();
         }
     }
 }

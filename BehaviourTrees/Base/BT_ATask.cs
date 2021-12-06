@@ -163,6 +163,8 @@
                 {
                     _status = BT_EStatus.Failure;
 
+                    FinishDecorators(BT_EStatus.Failure);
+
                     FinishConditionals(BT_EStatus.Failure);
 
                     return _status;
@@ -198,6 +200,10 @@
 
                 FinishConditionals(decorated);
             }
+            else if (result != BT_EStatus.Running)
+            {
+                OnFinish(result);
+            }
             
             return decorated;
         }
@@ -216,7 +222,10 @@
 
         public void Abort()
         {
-            OnFinish(BT_EStatus.Failure);
+            if (_status == BT_EStatus.Running)
+            {
+                OnFinish(BT_EStatus.Failure);
+            }
 
             FinishDecorators(BT_EStatus.Failure);
 

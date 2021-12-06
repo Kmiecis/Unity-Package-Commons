@@ -5,20 +5,11 @@
     /// </summary>
     public sealed class BT_SelectorNode : BT_ACompositeNode
     {
-        public BT_SelectorNode(string name = "Selector") :
+        public BT_SelectorNode(string name = "") :
             base(name)
         {
         }
-
-        private void AbortRunningTask()
-        {
-            var current = _tasks[_current];
-            if (current.Status == BT_EStatus.Running)
-            {
-                current.Abort();
-            }
-        }
-
+        
         protected override BT_EStatus OnUpdate()
         {
             for (; _current < _tasks.Length; ++_current)
@@ -33,18 +24,6 @@
 
             _current -= 1;
             return BT_EStatus.Failure;
-        }
-
-        protected override void OnFinish(BT_EStatus status)
-        {
-            base.OnFinish(status);
-
-            AbortRunningTask();
-        }
-
-        public override string ToString()
-        {
-            return "selector " + base.ToString();
         }
     }
 }

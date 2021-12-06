@@ -48,8 +48,8 @@ namespace Common.BehaviourTrees
 
         public override string ToString()
         {
-            var remaining = Math.Max(Remaining, 0.0f);
-            return base.ToString() + " [" + remaining.ToString("F1") + ']';
+            var remaining = Math.Max(Remaining, 0.0f).ToString("F1");
+            return base.ToString() + " [" + remaining + ']';
         }
     }
 }

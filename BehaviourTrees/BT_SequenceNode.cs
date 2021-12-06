@@ -5,20 +5,11 @@
     /// </summary>
     public sealed class BT_SequenceNode : BT_ACompositeNode
     {
-        public BT_SequenceNode(string name = "Sequence") :
+        public BT_SequenceNode(string name = "") :
             base(name)
         {
         }
-
-        private void AbortRunningTask()
-        {
-            var current = CurrentTask;
-            if (current.Status == BT_EStatus.Running)
-            {
-                current.Abort();
-            }
-        }
-
+        
         protected override BT_EStatus OnUpdate()
         {
             for (; _current < _tasks.Length; ++_current)
@@ -33,18 +24,6 @@
 
             _current -= 1;
             return BT_EStatus.Success;
-        }
-
-        protected override void OnFinish(BT_EStatus status)
-        {
-            base.OnFinish(status);
-
-            AbortRunningTask();
-        }
-
-        public override string ToString()
-        {
-            return "sequence " + base.ToString();
         }
     }
 }

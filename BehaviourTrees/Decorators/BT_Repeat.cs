@@ -1,4 +1,6 @@
-﻿namespace Common.BehaviourTrees
+﻿using System;
+
+namespace Common.BehaviourTrees
 {
     /// <summary>
     /// <see cref="BT_ADecorator"/> which repeats a task for a certain number of times
@@ -26,7 +28,7 @@
             if (status == BT_EStatus.Success)
             {
                 _remaining -= 1;
-                if (_remaining == 0)
+                if (_remaining == -1)
                 {
                     return BT_EStatus.Success;
                 }
@@ -40,12 +42,13 @@
         {
             base.OnStart();
 
-            _remaining = _repeats;
+            _remaining = _repeats - 1;
         }
 
         public override string ToString()
         {
-            return base.ToString() + " [" + _remaining.ToString() + "]";
+            var remaining = _remaining > -2 ? Math.Max(_remaining, 0).ToString() : "inf";
+            return base.ToString() + " [" + remaining + "]";
         }
     }
 }

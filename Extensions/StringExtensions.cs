@@ -5,6 +5,21 @@ namespace Common.Extensions
 {
     public static class StringExtensions
     {
+        public static bool IsNull(this string self)
+        {
+            return self == null;
+        }
+
+        public static bool IsEmpty(this string self)
+        {
+            return self.Length == 0;
+        }
+
+        public static bool IsNullOrEmpty(this string self)
+        {
+            return self.IsNull() || self.IsEmpty();
+        }
+
         public static bool TryIndexOf(this string self, char value, out int index)
         {
             index = self.IndexOf(value);

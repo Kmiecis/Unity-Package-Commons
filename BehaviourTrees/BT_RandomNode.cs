@@ -9,21 +9,12 @@ namespace Common.BehaviourTrees
     {
         private readonly Random _random;
 
-        public BT_RandomNode(string name = "Random") :
+        public BT_RandomNode(string name = "") :
             base(name)
         {
             _random = new Random();
         }
-
-        private void AbortRunningTask()
-        {
-            var current = CurrentTask;
-            if (current.Status == BT_EStatus.Running)
-            {
-                current.Abort();
-            }
-        }
-
+        
         protected override void OnStart()
         {
             base.OnStart();
@@ -35,18 +26,6 @@ namespace Common.BehaviourTrees
         {
             var current = CurrentTask;
             return current.Execute();
-        }
-
-        protected override void OnFinish(BT_EStatus status)
-        {
-            base.OnFinish(status);
-
-            AbortRunningTask();
-        }
-
-        public override string ToString()
-        {
-            return "random " + base.ToString();
         }
     }
 }

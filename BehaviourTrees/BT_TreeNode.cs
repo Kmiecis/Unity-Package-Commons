@@ -18,14 +18,14 @@
             set => _task = value;
         }
 
-        private void AbortRunningTask()
+        private void AbortTask()
         {
-            if (_task.Status == BT_EStatus.Running)
+            if (_task != null)
             {
                 _task.Abort();
             }
         }
-
+        
         protected override BT_EStatus OnUpdate()
         {
             return _task.Execute();
@@ -35,12 +35,7 @@
         {
             base.OnFinish(status);
 
-            AbortRunningTask();
-        }
-
-        public override string ToString()
-        {
-            return "tree " + base.ToString();
+            AbortTask();
         }
     }
 }
