@@ -1,55 +1,46 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 
 namespace Common.Extensions
 {
     public static class ListExtensions
     {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNull<T>(this List<T> self)
         {
             return self == null;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsEmpty<T>(this List<T> self)
         {
             return self.Count == 0;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNullOrEmpty<T>(this List<T> self)
         {
             return self.IsNull() || self.IsEmpty();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetCountSafely<T>(this List<T> self)
         {
             return self.IsNull() ? 0 : self.Count;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T First<T>(this List<T> self)
         {
             return self[0];
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T FirstOrDefault<T>(this List<T> self, T value = default)
         {
             return self.IsNullOrEmpty() ? value : self.First();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T Last<T>(this List<T> self)
         {
             return self[self.Count - 1];
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T LastOrDefault<T>(this List<T> self, T value = default)
         {
             return self.IsNullOrEmpty() ? value : self.Last();
@@ -148,7 +139,6 @@ namespace Common.Extensions
             return index != -1;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Swap<T>(this List<T> self, int i, int j)
         {
             var t = self[i];
@@ -156,19 +146,16 @@ namespace Common.Extensions
             self[j] = t;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SwapLast<T>(this List<T> self, int index)
         {
             self.Swap(index, self.Count - 1);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static List<T> Populate<T>(this List<T> self, T value)
         {
             return self.Populate(value, self.Capacity);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static List<T> Populate<T>(this List<T> self, T value, int count)
         {
             for (int i = 0; i < count; ++i)
@@ -186,13 +173,11 @@ namespace Common.Extensions
             return false;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void RemoveLast<T>(this List<T> self)
         {
             self.RemoveAt(self.Count - 1);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void RemoveLast<T>(this List<T> self, int count)
         {
             self.RemoveRange(self.Count - 1 - count, count);

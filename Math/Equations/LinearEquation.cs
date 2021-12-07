@@ -55,25 +55,30 @@ namespace Common
             return new LinearEquation(a, b);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(LinearEquation other)
         {
-            return Mathx.IsEqual(this.a, other.a) && Mathx.IsEqual(this.b, other.b);
+            return (
+                Mathx.IsEqual(this.a, other.a) &&
+                Mathx.IsEqual(this.b, other.b)
+            );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
-            return obj is LinearEquation && Equals((LinearEquation)obj);
+            return (
+                obj is LinearEquation &&
+                Equals((LinearEquation)obj)
+            );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode()
         {
-            return a.GetHashCode() ^ b.GetHashCode();
+            return (
+                a.GetHashCode() ^
+                b.GetHashCode()
+            );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString()
         {
             return string.Format("y = {0}x + {1}", a, b);

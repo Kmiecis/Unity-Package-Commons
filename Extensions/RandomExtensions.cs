@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using Random = System.Random;
 
@@ -8,61 +7,51 @@ namespace Common.Extensions
 {
     public static class RandomExtensions
     {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double NextDouble(this Random self, double max)
         {
             return self.NextDouble() * max;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double NextDouble(this Random self, double min, double max)
         {
             return min + self.NextDouble() * (max - min);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float NextFloat(this Random self)
         {
             return (float)self.NextDouble();
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float NextFloat(this Random self, float max)
         {
             return self.NextFloat() * max;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float NextFloat(this Random self, float min, float max)
         {
             return min + self.NextFloat() * (max - min);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool NextBool(this Random self)
         {
             return self.NextDouble() > 0.5;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte NextByte(this Random self)
         {
             return (byte)self.Next(256);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte NextByte(this Random self, byte max)
         {
             return (byte)self.Next(max);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static byte NextByte(this Random self, byte min, byte max)
         {
             return (byte)self.Next(min, max);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 NextUnitVector2(this Random self)
         {
             var angle = self.NextFloat() * Mathx.PI_DOUBLE;
@@ -72,7 +61,6 @@ namespace Common.Extensions
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 NextVector2(this Random self)
         {
             return new Vector2(
@@ -81,7 +69,6 @@ namespace Common.Extensions
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 NextVector2(this Random self, Vector2 max)
         {
             return new Vector2(
@@ -90,7 +77,6 @@ namespace Common.Extensions
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 NextVector2(this Random self, Vector2 min, Vector2 max)
         {
             return new Vector2(
@@ -99,7 +85,6 @@ namespace Common.Extensions
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 NextUnitVector3(this Random self)
         {
             var theta = self.NextFloat() * Mathx.PI_DOUBLE;
@@ -112,7 +97,6 @@ namespace Common.Extensions
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 NextVector3(this Random self)
         {
             return new Vector3(
@@ -122,7 +106,6 @@ namespace Common.Extensions
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 NextVector3(this Random self, Vector3 max)
         {
             return new Vector3(
@@ -132,7 +115,6 @@ namespace Common.Extensions
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 NextVector3(this Random self, Vector3 min, Vector3 max)
         {
             return new Vector3(
@@ -142,7 +124,6 @@ namespace Common.Extensions
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Color32 NextColor(this Random self)
         {
             return new Color32(
@@ -159,13 +140,11 @@ namespace Common.Extensions
             return (TEnum)values.GetValue(self.Next(values.Length));
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T NextItem<T>(this Random self, List<T> list)
         {
             return list[self.Next(list.Count)];
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static T NextItem<T>(this Random self, params T[] args)
         {
             return args[self.Next(args.Length)];

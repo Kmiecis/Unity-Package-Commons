@@ -124,25 +124,32 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Equation3 other)
         {
-            return Mathx.IsEqual(this.x, other.x) &&
+            return (
+                Mathx.IsEqual(this.x, other.x) &&
                 Mathx.IsEqual(this.y, other.y) &&
                 Mathx.IsEqual(this.z, other.z) &&
-                Mathx.IsEqual(this.w, other.w);
+                Mathx.IsEqual(this.w, other.w)
+            );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
-            return obj is Equation3 && Equals((Equation3)obj);
+            return (
+                obj is Equation3 &&
+                Equals((Equation3)obj)
+            );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode()
         {
-            return x.GetHashCode() ^ y.GetHashCode() ^ z.GetHashCode() ^ w.GetHashCode();
+            return (
+                x.GetHashCode() ^
+                y.GetHashCode() ^
+                z.GetHashCode() ^
+                w.GetHashCode()
+            );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString()
         {
             return string.Format("{0}a + {1}b + {2}c = {3}", x, y, z, w);

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Runtime.CompilerServices;
+using UnityEngine;
 
 namespace Common.BehaviourTrees
 {
@@ -21,7 +22,7 @@ namespace Common.BehaviourTrees
 
         private float Nowstamp
         {
-            get => _unscaled ? Time.unscaledTime : Time.time;
+            get => TimeUtility.GetTime(_unscaled);
         }
 
         public override void Execute()

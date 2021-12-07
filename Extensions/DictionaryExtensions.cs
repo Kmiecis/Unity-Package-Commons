@@ -1,24 +1,20 @@
-using System.Collections.Generic;
 using System;
-using System.Runtime.CompilerServices;
+using System.Collections.Generic;
 
 namespace Common.Extensions
 {
     public static class DictionaryExtensions
     {
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNull<TKey, TValue>(this Dictionary<TKey, TValue> self)
         {
             return self == null;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsEmpty<TKey, TValue>(this Dictionary<TKey, TValue> self)
         {
             return self.Count == 0;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsNullOrEmpty<TKey, TValue>(this Dictionary<TKey, TValue> self)
         {
             return self.IsNull() || self.IsEmpty();

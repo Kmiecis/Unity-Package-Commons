@@ -1,100 +1,104 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Common.Collections
 {
     public class LockList<T>
     {
-        private bool m_IsLocked;
-        private List<T> m_List = new List<T>();
-        private List<T> m_AddedList = new List<T>();
-        private List<T> m_RemovedList = new List<T>();
+        private bool _isLocked;
+        private List<T> _list = new List<T>();
+        private List<T> _addedList = new List<T>();
+        private List<T> _removedList = new List<T>();
 
         public int Count
         {
-            get { return m_List.Count; }
+            get { return _list.Count; }
         }
 
         public T this[int index]
         {
-            get { return m_List[index]; }
-            set { m_List[index] = value; }
+            get { return _list[index]; }
+            set { _list[index] = value; }
         }
 
         public void Add(T item)
         {
-            if (m_IsLocked)
+            if (_isLocked)
             {
-                m_AddedList.Add(item);
+                _addedList.Add(item);
             }
             else
             {
-                m_List.Add(item);
+                _list.Add(item);
             }
         }
 
         public bool Remove(T item)
         {
-            if (m_IsLocked)
+            if (_isLocked)
             {
-                m_RemovedList.Add(item);
-                return m_List.Contains(item);
+                _removedList.Add(item);
+                return _list.Contains(item);
             }
             else
             {
-                return m_List.Remove(item);
+                return _list.Remove(item);
             }
         }
 
         public int RemoveAll(Predicate<T> match)
         {
-            if (m_IsLocked)
+            if (_isLocked)
             {
                 var result = 0;
-                result += m_AddedList.RemoveAll(match);
-                var removed = m_List.FindAll(match);
+                result += _addedList.RemoveAll(match);
+                var removed = _list.FindAll(match);
                 result += removed.Count;
-                m_RemovedList.AddRange(removed);
+                _removedList.AddRange(removed);
                 return result;
             }
             else
             {
-                return m_List.RemoveAll(match);
+                return _list.RemoveAll(match);
             }
         }
 
         public bool IsValid(T item)
         {
-            return !m_IsLocked || !m_RemovedList.Contains(item);
+            return (
+                !_isLocked ||
+                !_removedList.Contains(item)
+            );
         }
 
         public void Lock()
         {
-            m_IsLocked = true;
+            _isLocked = true;
         }
 
         public void Unlock()
         {
-            if (m_IsLocked)
+            if (_isLocked)
             {
-                foreach (var removed in m_RemovedList)
+                foreach (var removed in _removedList)
                 {
-                    m_List.Remove(removed);
+                    _list.Remove(removed);
                 }
-                foreach (var added in m_AddedList)
+                foreach (var added in _addedList)
                 {
-                    m_List.Add(added);
+                    _list.Add(added);
                 }
-                m_RemovedList.Clear();
-                m_AddedList.Clear();
+                _removedList.Clear();
+                _addedList.Clear();
             }
-            m_IsLocked = false;
+            _isLocked = false;
         }
 
         public void ForEach(Action<T> action)
         {
             Lock();
-            foreach (var item in m_List)
+            foreach (var item in _list)
             {
                 if (IsValid(item))
                 {
@@ -106,13 +110,13 @@ namespace Common.Collections
 
         public void Clear()
         {
-            if (m_IsLocked)
+            if (_isLocked)
             {
-                m_RemovedList.AddRange(m_List);
+                _removedList.AddRange(_list);
             }
             else
             {
-                m_List.Clear();
+                _list.Clear();
             }
         }
     }

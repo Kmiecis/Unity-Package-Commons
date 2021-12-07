@@ -115,24 +115,30 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Equation2 other)
         {
-            return Mathx.IsEqual(this.x, other.x) &&
+            return (
+                Mathx.IsEqual(this.x, other.x) &&
                 Mathx.IsEqual(this.y, other.y) &&
-                Mathx.IsEqual(this.z, other.z);
+                Mathx.IsEqual(this.z, other.z)
+            );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
-            return obj is Equation2 && Equals((Equation2)obj);
+            return (
+                obj is Equation2 &&
+                Equals((Equation2)obj)
+            );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode()
         {
-            return x.GetHashCode() ^ y.GetHashCode() ^ z.GetHashCode();
+            return (
+                x.GetHashCode() ^
+                y.GetHashCode() ^
+                z.GetHashCode()
+            );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString()
         {
             return string.Format("{0}a + {1}b = {2}", x, y, z);

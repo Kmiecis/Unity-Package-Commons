@@ -69,25 +69,30 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(QuadraticEquation other)
         {
-            return
+            return (
                 Mathx.IsEqual(this.a, other.a) &&
                 Mathx.IsEqual(this.b, other.b) &&
-                Mathx.IsEqual(this.c, other.c);
+                Mathx.IsEqual(this.c, other.c)
+            );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
-            return obj is QuadraticEquation && Equals((QuadraticEquation)obj);
+            return (
+                obj is QuadraticEquation &&
+                Equals((QuadraticEquation)obj)
+            );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode()
         {
-            return a.GetHashCode() ^ b.GetHashCode() ^ c.GetHashCode();
+            return (
+                a.GetHashCode() ^
+                b.GetHashCode() ^
+                c.GetHashCode()
+            );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString()
         {
             return string.Format("y = {0}x2 + {1}x + {2}", a, b, c);
