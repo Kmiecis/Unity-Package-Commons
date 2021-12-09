@@ -94,14 +94,14 @@ namespace CommonEditor.BehaviourTrees
                     AddLabelField(tree, indent, line);
                 }
             }
-            else if (itask is BT_ACompositeNode composite)
+            else if (itask is BT_AMultiNode multi)
             {
-                TryAddConditionalsField(composite, indent, ref line);
-                var foldout = AddFoldoutField(composite, indent, line++);
-                TryAddDecoratorsField(composite, indent, ref line);
+                TryAddConditionalsField(multi, indent, ref line);
+                var foldout = AddFoldoutField(multi, indent, line++);
+                TryAddDecoratorsField(multi, indent, ref line);
                 if (foldout)
                 {
-                    var tasks = composite.Tasks;
+                    var tasks = multi.Tasks;
                     if (!tasks.IsNullOrEmpty())
                     {
                         for (int i = 0; i < tasks.Length; ++i)

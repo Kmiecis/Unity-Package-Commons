@@ -63,6 +63,41 @@
             set => _services = new BT_IService[] { value };
         }
 
+        public BT_ATask FindNodeByName(string name)
+        {
+            return FindTaskByName(this, name);
+        }
+
+        public static BT_ATask FindTaskByName(BT_ATask task, string name)
+        {
+            if (task == null)
+                return null;
+
+            if (task._name == name)
+                return task;
+
+            if (task is BT_ASingleNode single)
+            {
+                task = single.Task as BT_ATask;
+                return FindTaskByName(task, name);
+            }
+            else if (task is BT_AMultiNode multi)
+            {
+                var tasks = multi.Tasks;
+                for (int i = 0; i < tasks.Length; ++i)
+                {
+                    task = tasks[i] as BT_ATask;
+                    task = FindTaskByName(task, name);
+                    if (task != null)
+                    {
+                        return task;
+                    }
+                }
+            }
+
+            return null;
+        }
+
         #region CONDITIONALS
         protected void StartConditionals()
         {

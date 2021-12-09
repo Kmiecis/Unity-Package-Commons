@@ -3,9 +3,9 @@
 namespace Common.BehaviourTrees
 {
     /// <summary>
-    /// <see cref="BT_ACompositeNode"/> which executes a random child task as long as it is running
+    /// <see cref="BT_AMultiNode"/> which executes a random child task as long as it is running
     /// </summary>
-    public sealed class BT_RandomNode : BT_ACompositeNode
+    public sealed class BT_RandomNode : BT_AMultiNode
     {
         private readonly Random _random;
 
