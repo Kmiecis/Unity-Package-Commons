@@ -63,39 +63,41 @@
             set => _services = new BT_IService[] { value };
         }
 
-        public BT_ATask FindNodeByName(string name)
+        public bool TryFindTaskByName(string name, out BT_ATask task)
         {
-            return FindTaskByName(this, name);
+            return TryFindTaskByName(this, name, out task);
         }
-
-        public static BT_ATask FindTaskByName(BT_ATask task, string name)
+        
+        public static bool TryFindTaskByName(BT_ATask root, string name, out BT_ATask task)
         {
-            if (task == null)
-                return null;
+            task = null;
 
-            if (task._name == name)
-                return task;
-
-            if (task is BT_ASingleNode single)
+            if (root != null)
             {
-                task = single.Task as BT_ATask;
-                return FindTaskByName(task, name);
-            }
-            else if (task is BT_AMultiNode multi)
-            {
-                var tasks = multi.Tasks;
-                for (int i = 0; i < tasks.Length; ++i)
+                if (root._name == name)
                 {
-                    task = tasks[i] as BT_ATask;
-                    task = FindTaskByName(task, name);
-                    if (task != null)
+                    task = root;
+                }
+                else if (root is BT_ASingleNode single)
+                {
+                    root = single.Task as BT_ATask;
+                    return TryFindTaskByName(root, name, out task);
+                }
+                else if (root is BT_AMultiNode multi)
+                {
+                    var tasks = multi.Tasks;
+                    for (int i = 0; i < tasks.Length; ++i)
                     {
-                        return task;
+                        root = tasks[i] as BT_ATask;
+                        if (TryFindTaskByName(root, name, out task))
+                        {
+                            return true;
+                        }
                     }
                 }
             }
 
-            return null;
+            return task != null;
         }
 
         #region CONDITIONALS

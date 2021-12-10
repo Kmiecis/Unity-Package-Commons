@@ -73,25 +73,22 @@ namespace CommonEditor.BehaviourTrees
 
         private void AddTask(BT_ITask itask, int indent, int line)
         {
-            if (itask is BT_TreeNode tree)
+            if (indent != 0 && Script.Tasks.Contains(itask))
             {
-                if (indent == 0)
+                AddLabelField(itask, indent, line);
+            }
+            else if (itask is BT_ASingleNode single)
+            {
+                TryAddConditionalsField(single, indent, ref line);
+                var foldout = AddFoldoutField(single, indent, line++);
+                TryAddDecoratorsField(single, indent, ref line);
+                if (foldout)
                 {
-                    TryAddConditionalsField(tree, indent, ref line);
-                    var foldout = AddFoldoutField(tree, indent, line++);
-                    TryAddDecoratorsField(tree, indent, ref line);
-                    if (foldout)
+                    var task = single.Task;
+                    if (task != null)
                     {
-                        var task = tree.Task;
-                        if (task != null)
-                        {
-                            AddTask(task, indent + 1, line);
-                        }
+                        AddTask(task, indent + 1, line);
                     }
-                }
-                else
-                {
-                    AddLabelField(tree, indent, line);
                 }
             }
             else if (itask is BT_AMultiNode multi)
@@ -102,7 +99,7 @@ namespace CommonEditor.BehaviourTrees
                 if (foldout)
                 {
                     var tasks = multi.Tasks;
-                    if (!tasks.IsNullOrEmpty())
+                    if (tasks != null)
                     {
                         for (int i = 0; i < tasks.Length; ++i)
                         {
