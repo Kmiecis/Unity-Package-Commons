@@ -22,5 +22,11 @@ namespace Common.Extensions
         {
             return new Vector3(0.0f, v.x, v.y);
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 YX(this Vector2 v)
+        {
+            return new Vector2(v.y, v.x);
+        }
     }
 }

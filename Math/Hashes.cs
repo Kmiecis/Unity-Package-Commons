@@ -2,7 +2,7 @@ namespace Common
 {
     public static class Hashes
     {
-        public static int Create(params object[] objects)
+        public static int ToHashCode(params object[] objects)
         {
             unchecked
             {

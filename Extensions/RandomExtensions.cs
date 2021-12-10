@@ -32,6 +32,11 @@ namespace Common.Extensions
             return min + self.NextFloat() * (max - min);
         }
 
+        public static int NextUnit(this Random self)
+        {
+            return self.Next(2);
+        }
+
         public static bool NextBool(this Random self)
         {
             return self.NextDouble() > 0.5;
@@ -124,7 +129,17 @@ namespace Common.Extensions
             );
         }
 
-        public static Color32 NextColor(this Random self)
+        public static Color NextColor(this Random self)
+        {
+            return new Color(
+                self.NextFloat(),
+                self.NextFloat(),
+                self.NextFloat(),
+                self.NextFloat()
+            );
+        }
+
+        public static Color32 NextColor32(this Random self)
         {
             return new Color32(
                 self.NextByte(),
@@ -140,14 +155,30 @@ namespace Common.Extensions
             return (TEnum)values.GetValue(self.Next(values.Length));
         }
 
+        public static T NextItem<T>(this Random self, params T[] args)
+        {
+            return args[self.Next(args.Length)];
+        }
+
         public static T NextItem<T>(this Random self, List<T> list)
         {
             return list[self.Next(list.Count)];
         }
-
-        public static T NextItem<T>(this Random self, params T[] args)
+        
+        public static void NextItems<T>(this Random self, T[] source, T[] target)
         {
-            return args[self.Next(args.Length)];
+            for (int i = 0; i < target.Length; ++i)
+            {
+                target[i] = self.NextItem(source);
+            }
+        }
+        
+        public static void NextItems<T>(this Random self, List<T> source, T[] target)
+        {
+            for (int i = 0; i < target.Length; ++i)
+            {
+                target[i] = self.NextItem(source);
+            }
         }
 
         public static void Shuffle<T>(this Random self, List<T> list)
