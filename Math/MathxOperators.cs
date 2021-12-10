@@ -254,7 +254,7 @@ namespace Common
         
         #region SUBTRACT
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Subtract(Vector2 a, Vector2 b)
+        public static Vector2 Sub(Vector2 a, Vector2 b)
         {
             return new Vector2(
                 a.x - b.x,
@@ -263,7 +263,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Subtract(Vector2 v, float f)
+        public static Vector2 Sub(Vector2 v, float f)
         {
             return new Vector2(
                 v.x - f,
@@ -272,7 +272,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Subtract(float f, Vector2 v)
+        public static Vector2 Sub(float f, Vector2 v)
         {
             return new Vector2(
                 f - v.x,
@@ -281,7 +281,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Subtract(Vector2 v, int i)
+        public static Vector2 Sub(Vector2 v, int i)
         {
             return new Vector2(
                 v.x - i,
@@ -290,7 +290,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Subtract(int i, Vector2 v)
+        public static Vector2 Sub(int i, Vector2 v)
         {
             return new Vector2(
                 i - v.x,
@@ -299,7 +299,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2Int Subtract(Vector2Int a, Vector2Int b)
+        public static Vector2Int Sub(Vector2Int a, Vector2Int b)
         {
             return new Vector2Int(
                 a.x - b.x,
@@ -308,7 +308,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Subtract(Vector2Int v, float f)
+        public static Vector2 Sub(Vector2Int v, float f)
         {
             return new Vector2(
                 v.x - f,
@@ -317,7 +317,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Subtract(float f, Vector2Int v)
+        public static Vector2 Sub(float f, Vector2Int v)
         {
             return new Vector2(
                 f - v.x,
@@ -326,7 +326,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2Int Subtract(Vector2Int v, int i)
+        public static Vector2Int Sub(Vector2Int v, int i)
         {
             return new Vector2Int(
                 v.x - i,
@@ -335,7 +335,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2Int Subtract(int i, Vector2Int v)
+        public static Vector2Int Sub(int i, Vector2Int v)
         {
             return new Vector2Int(
                 i - v.x,
@@ -344,7 +344,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Subtract(Vector3 a, Vector3 b)
+        public static Vector3 Sub(Vector3 a, Vector3 b)
         {
             return new Vector3(
                 a.x - b.x,
@@ -354,7 +354,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Subtract(Vector3 v, float f)
+        public static Vector3 Sub(Vector3 v, float f)
         {
             return new Vector3(
                 v.x - f,
@@ -364,7 +364,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Subtract(float f, Vector3 v)
+        public static Vector3 Sub(float f, Vector3 v)
         {
             return new Vector3(
                 f - v.x,
@@ -374,7 +374,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Subtract(Vector3 v, int i)
+        public static Vector3 Sub(Vector3 v, int i)
         {
             return new Vector3(
                 v.x - i,
@@ -384,7 +384,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Subtract(int i, Vector3 v)
+        public static Vector3 Sub(int i, Vector3 v)
         {
             return new Vector3(
                 i - v.x,
@@ -394,7 +394,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3Int Subtract(Vector3Int a, Vector3Int b)
+        public static Vector3Int Sub(Vector3Int a, Vector3Int b)
         {
             return new Vector3Int(
                 a.x - b.x,
@@ -404,7 +404,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Subtract(Vector3Int v, float f)
+        public static Vector3 Sub(Vector3Int v, float f)
         {
             return new Vector3(
                 v.x - f,
@@ -414,7 +414,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Subtract(float f, Vector3Int v)
+        public static Vector3 Sub(float f, Vector3Int v)
         {
             return new Vector3(
                 f - v.x,
@@ -424,7 +424,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3Int Subtract(Vector3Int v, int i)
+        public static Vector3Int Sub(Vector3Int v, int i)
         {
             return new Vector3Int(
                 v.x - i,
@@ -434,7 +434,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3Int Subtract(int i, Vector3Int v)
+        public static Vector3Int Sub(int i, Vector3Int v)
         {
             return new Vector3Int(
                 i - v.x,
@@ -444,7 +444,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Subtract(Vector4 a, Vector4 b)
+        public static Vector4 Sub(Vector4 a, Vector4 b)
         {
             return new Vector4(
                 a.x - b.x,
@@ -455,7 +455,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Subtract(Vector4 v, float f)
+        public static Vector4 Sub(Vector4 v, float f)
         {
             return new Vector4(
                 v.x - f,
@@ -466,7 +466,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Subtract(float f, Vector4 v)
+        public static Vector4 Sub(float f, Vector4 v)
         {
             return new Vector4(
                 f - v.x,
@@ -477,7 +477,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Subtract(Vector4 v, int i)
+        public static Vector4 Sub(Vector4 v, int i)
         {
             return new Vector4(
                 v.x - i,
@@ -488,7 +488,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Subtract(int i, Vector4 v)
+        public static Vector4 Sub(int i, Vector4 v)
         {
             return new Vector4(
                 i - v.x,
@@ -501,7 +501,7 @@ namespace Common
 
         #region MULTIPLY
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Multiply(Vector2 a, Vector2 b)
+        public static Vector2 Mul(Vector2 a, Vector2 b)
         {
             return new Vector2(
                 a.x * b.x,
@@ -510,7 +510,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Multiply(Vector2 v, float f)
+        public static Vector2 Mul(Vector2 v, float f)
         {
             return new Vector2(
                 v.x * f,
@@ -519,7 +519,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Multiply(float f, Vector2 v)
+        public static Vector2 Mul(float f, Vector2 v)
         {
             return new Vector2(
                 f * v.x,
@@ -528,7 +528,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Multiply(Vector2 v, int i)
+        public static Vector2 Mul(Vector2 v, int i)
         {
             return new Vector2(
                 v.x * i,
@@ -537,7 +537,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Multiply(int i, Vector2 v)
+        public static Vector2 Mul(int i, Vector2 v)
         {
             return new Vector2(
                 i * v.x,
@@ -546,7 +546,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2Int Multiply(Vector2Int a, Vector2Int b)
+        public static Vector2Int Mul(Vector2Int a, Vector2Int b)
         {
             return new Vector2Int(
                 a.x * b.x,
@@ -555,7 +555,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Multiply(Vector2Int v, float f)
+        public static Vector2 Mul(Vector2Int v, float f)
         {
             return new Vector2(
                 v.x * f,
@@ -564,7 +564,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Multiply(float f, Vector2Int v)
+        public static Vector2 Mul(float f, Vector2Int v)
         {
             return new Vector2(
                 f * v.x,
@@ -573,7 +573,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2Int Multiply(Vector2Int v, int i)
+        public static Vector2Int Mul(Vector2Int v, int i)
         {
             return new Vector2Int(
                 v.x * i,
@@ -582,7 +582,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2Int Multiply(int i, Vector2Int v)
+        public static Vector2Int Mul(int i, Vector2Int v)
         {
             return new Vector2Int(
                 i * v.x,
@@ -591,7 +591,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Multiply(Vector3 a, Vector3 b)
+        public static Vector3 Mul(Vector3 a, Vector3 b)
         {
             return new Vector3(
                 a.x * b.x,
@@ -601,7 +601,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Multiply(Vector3 v, float f)
+        public static Vector3 Mul(Vector3 v, float f)
         {
             return new Vector3(
                 v.x * f,
@@ -611,7 +611,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Multiply(float f, Vector3 v)
+        public static Vector3 Mul(float f, Vector3 v)
         {
             return new Vector3(
                 f * v.x,
@@ -621,7 +621,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Multiply(Vector3 v, int i)
+        public static Vector3 Mul(Vector3 v, int i)
         {
             return new Vector3(
                 v.x * i,
@@ -631,7 +631,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Multiply(int i, Vector3 v)
+        public static Vector3 Mul(int i, Vector3 v)
         {
             return new Vector3(
                 i * v.x,
@@ -641,7 +641,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3Int Multiply(Vector3Int a, Vector3Int b)
+        public static Vector3Int Mul(Vector3Int a, Vector3Int b)
         {
             return new Vector3Int(
                 a.x * b.x,
@@ -651,7 +651,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Multiply(Vector3Int v, float f)
+        public static Vector3 Mul(Vector3Int v, float f)
         {
             return new Vector3(
                 v.x * f,
@@ -661,7 +661,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Multiply(float f, Vector3Int v)
+        public static Vector3 Mul(float f, Vector3Int v)
         {
             return new Vector3(
                 f * v.x,
@@ -671,7 +671,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3Int Multiply(Vector3Int v, int i)
+        public static Vector3Int Mul(Vector3Int v, int i)
         {
             return new Vector3Int(
                 v.x * i,
@@ -681,7 +681,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3Int Multiply(int i, Vector3Int v)
+        public static Vector3Int Mul(int i, Vector3Int v)
         {
             return new Vector3Int(
                 i * v.x,
@@ -691,7 +691,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Multiply(Vector4 a, Vector4 b)
+        public static Vector4 Mul(Vector4 a, Vector4 b)
         {
             return new Vector4(
                 a.x * b.x,
@@ -702,7 +702,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Multiply(Vector4 v, float f)
+        public static Vector4 Mul(Vector4 v, float f)
         {
             return new Vector4(
                 v.x * f,
@@ -713,7 +713,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Multiply(float f, Vector4 v)
+        public static Vector4 Mul(float f, Vector4 v)
         {
             return new Vector4(
                 f * v.x,
@@ -724,7 +724,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Multiply(Vector4 v, int i)
+        public static Vector4 Mul(Vector4 v, int i)
         {
             return new Vector4(
                 v.x * i,
@@ -735,7 +735,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Multiply(int i, Vector4 v)
+        public static Vector4 Mul(int i, Vector4 v)
         {
             return new Vector4(
                 i * v.x,
@@ -748,7 +748,7 @@ namespace Common
 
         #region DIVIDE
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Divide(Vector2 a, Vector2 b)
+        public static Vector2 Div(Vector2 a, Vector2 b)
         {
             return new Vector2(
                 a.x / b.x,
@@ -757,7 +757,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Divide(Vector2 v, float f)
+        public static Vector2 Div(Vector2 v, float f)
         {
             return new Vector2(
                 v.x / f,
@@ -766,7 +766,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Divide(float f, Vector2 v)
+        public static Vector2 Div(float f, Vector2 v)
         {
             return new Vector2(
                 f / v.x,
@@ -775,7 +775,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Divide(Vector2 v, int i)
+        public static Vector2 Div(Vector2 v, int i)
         {
             return new Vector2(
                 v.x / i,
@@ -784,7 +784,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Divide(int i, Vector2 v)
+        public static Vector2 Div(int i, Vector2 v)
         {
             return new Vector2(
                 i / v.x,
@@ -793,7 +793,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2Int Divide(Vector2Int a, Vector2Int b)
+        public static Vector2Int Div(Vector2Int a, Vector2Int b)
         {
             return new Vector2Int(
                 a.x / b.x,
@@ -802,7 +802,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Divide(Vector2Int v, float f)
+        public static Vector2 Div(Vector2Int v, float f)
         {
             return new Vector2(
                 v.x / f,
@@ -811,7 +811,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Divide(float f, Vector2Int v)
+        public static Vector2 Div(float f, Vector2Int v)
         {
             return new Vector2(
                 f / v.x,
@@ -820,7 +820,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2Int Divide(Vector2Int v, int i)
+        public static Vector2Int Div(Vector2Int v, int i)
         {
             return new Vector2Int(
                 v.x / i,
@@ -829,7 +829,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2Int Divide(int i, Vector2Int v)
+        public static Vector2Int Div(int i, Vector2Int v)
         {
             return new Vector2Int(
                 i / v.x,
@@ -838,7 +838,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Divide(Vector3 a, Vector3 b)
+        public static Vector3 Div(Vector3 a, Vector3 b)
         {
             return new Vector3(
                 a.x / b.x,
@@ -848,7 +848,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Divide(Vector3 v, float f)
+        public static Vector3 Div(Vector3 v, float f)
         {
             return new Vector3(
                 v.x / f,
@@ -858,7 +858,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Divide(float f, Vector3 v)
+        public static Vector3 Div(float f, Vector3 v)
         {
             return new Vector3(
                 f / v.x,
@@ -868,7 +868,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Divide(Vector3 v, int i)
+        public static Vector3 Div(Vector3 v, int i)
         {
             return new Vector3(
                 v.x / i,
@@ -878,7 +878,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Divide(int i, Vector3 v)
+        public static Vector3 Div(int i, Vector3 v)
         {
             return new Vector3(
                 i / v.x,
@@ -888,7 +888,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3Int Divide(Vector3Int a, Vector3Int b)
+        public static Vector3Int Div(Vector3Int a, Vector3Int b)
         {
             return new Vector3Int(
                 a.x / b.x,
@@ -898,7 +898,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Divide(Vector3Int v, float f)
+        public static Vector3 Div(Vector3Int v, float f)
         {
             return new Vector3(
                 v.x / f,
@@ -908,7 +908,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Divide(float f, Vector3Int v)
+        public static Vector3 Div(float f, Vector3Int v)
         {
             return new Vector3(
                 f / v.x,
@@ -918,7 +918,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3Int Divide(Vector3Int v, int i)
+        public static Vector3Int Div(Vector3Int v, int i)
         {
             return new Vector3Int(
                 v.x / i,
@@ -928,7 +928,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3Int Divide(int i, Vector3Int v)
+        public static Vector3Int Div(int i, Vector3Int v)
         {
             return new Vector3Int(
                 i / v.x,
@@ -938,7 +938,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Divide(Vector4 a, Vector4 b)
+        public static Vector4 Div(Vector4 a, Vector4 b)
         {
             return new Vector4(
                 a.x / b.x,
@@ -949,7 +949,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Divide(Vector4 v, float f)
+        public static Vector4 Div(Vector4 v, float f)
         {
             return new Vector4(
                 v.x / f,
@@ -960,7 +960,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Divide(float f, Vector4 v)
+        public static Vector4 Div(float f, Vector4 v)
         {
             return new Vector4(
                 f / v.x,
@@ -971,7 +971,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Divide(Vector4 v, int i)
+        public static Vector4 Div(Vector4 v, int i)
         {
             return new Vector4(
                 v.x / i,
@@ -982,7 +982,7 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Divide(int i, Vector4 v)
+        public static Vector4 Div(int i, Vector4 v)
         {
             return new Vector4(
                 i / v.x,

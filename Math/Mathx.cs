@@ -143,19 +143,19 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Lerp(Vector2 a, Vector2 b, Vector2 t)
         {
-            return a + Multiply(t, (b - a));
+            return a + Mul(t, (b - a));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Lerp(Vector3 a, Vector3 b, Vector3 t)
         {
-            return a + Multiply(t, b - a);
+            return a + Mul(t, b - a);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Lerp(Vector4 a, Vector4 b, Vector4 t)
         {
-            return a + Multiply(t, b - a);
+            return a + Mul(t, b - a);
         }
 
 
@@ -205,19 +205,19 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Square(Vector2 v)
         {
-            return Multiply(v, v);
+            return Mul(v, v);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Square(Vector3 v)
         {
-            return Multiply(v, v);
+            return Mul(v, v);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Square(Vector4 v)
         {
-            return Multiply(v, v);
+            return Mul(v, v);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -229,13 +229,13 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Square(Vector2Int v)
         {
-            return Multiply(v, v);
+            return Mul(v, v);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Square(Vector3Int v)
         {
-            return Multiply(v, v);
+            return Mul(v, v);
         }
 
 
@@ -375,19 +375,19 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 SmoothStep(Vector2 v)
         {
-            return Multiply(v, Multiply(v, Subtract(3, Multiply(2, v))));
+            return Mul(v, Mul(v, Sub(3, Mul(2, v))));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 SmoothStep(Vector3 v)
         {
-            return Multiply(v, Multiply(v, Subtract(3, Multiply(2, v))));
+            return Mul(v, Mul(v, Sub(3, Mul(2, v))));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 SmoothStep(Vector4 v)
         {
-            return Multiply(v, Multiply(v, Subtract(3, Multiply(2, v))));
+            return Mul(v, Mul(v, Sub(3, Mul(2, v))));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -424,19 +424,19 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 SmootherStep(Vector2 v)
         {
-            return Multiply(v, Multiply(v, Multiply(v, Add(Multiply(v, Subtract(Multiply(v, 6), 15)), 10))));
+            return Mul(v, Mul(v, Mul(v, Add(Mul(v, Sub(Mul(v, 6), 15)), 10))));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 SmootherStep(Vector3 v)
         {
-            return Multiply(v, Multiply(v, Multiply(v, Add(Multiply(v, Subtract(Multiply(v, 6), 15)), 10))));
+            return Mul(v, Mul(v, Mul(v, Add(Mul(v, Sub(Mul(v, 6), 15)), 10))));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 SmootherStep(Vector4 v)
         {
-            return Multiply(v, Multiply(v, Multiply(v, Add(Multiply(v, Subtract(Multiply(v, 6), 15)), 10))));
+            return Mul(v, Mul(v, Mul(v, Add(Mul(v, Sub(Mul(v, 6), 15)), 10))));
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -502,13 +502,13 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsNotInRange(int v, int min, int max)
+        public static bool IsOutOfRange(int v, int min, int max)
         {
             return min > v || v > max;
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsNotInRange(float v, float min, float max)
+        public static bool IsOutOfRange(float v, float min, float max)
         {
             return min > v || v > max;
         }
@@ -583,19 +583,19 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Reciprocal(Vector2 v)
         {
-            return Divide(1.0f, v);
+            return Div(1.0f, v);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Reciprocal(Vector3 v)
         {
-            return Divide(1.0f, v);
+            return Div(1.0f, v);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Reciprocal(Vector4 v)
         {
-            return Divide(1.0f, v);
+            return Div(1.0f, v);
         }
 
 
@@ -1015,37 +1015,37 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Mod(Vector2 v, Vector2 m)
         {
-            return v - Multiply(Floor(Multiply(v, Divide(1.0f, m))), m);
+            return v - Mul(Floor(Mul(v, Div(1.0f, m))), m);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Mod(Vector3 v, Vector3 m)
         {
-            return v - Multiply(Floor(Multiply(v, Divide(1.0f, m))), m);
+            return v - Mul(Floor(Mul(v, Div(1.0f, m))), m);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Mod(Vector4 v, Vector4 m)
         {
-            return v - Multiply(Floor(Multiply(v, Divide(1.0f, m))), m);
+            return v - Mul(Floor(Mul(v, Div(1.0f, m))), m);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Mod(Vector2 v, float m)
         {
-            return v - Floor(Multiply(v, 1.0f / m)) * m;
+            return v - Floor(Mul(v, 1.0f / m)) * m;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Mod(Vector3 v, float m)
         {
-            return v - Floor(Multiply(v, 1.0f / m)) * m;
+            return v - Floor(Mul(v, 1.0f / m)) * m;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Mod(Vector4 v, float m)
         {
-            return v - Floor(Multiply(v, 1.0f / m)) * m;
+            return v - Floor(Mul(v, 1.0f / m)) * m;
         }
 
 
@@ -1058,37 +1058,37 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Permute(Vector2 v, Vector2 p, Vector2 m)
         {
-            return Mod(Multiply(Add(Multiply(p, v), 1.0f), v), m);
+            return Mod(Mul(Add(Mul(p, v), 1.0f), v), m);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Permute(Vector3 v, Vector3 p, Vector3 m)
         {
-            return Mod(Multiply(Add(Multiply(p, v), 1.0f), v), m);
+            return Mod(Mul(Add(Mul(p, v), 1.0f), v), m);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Permute(Vector4 v, Vector4 p, Vector4 m)
         {
-            return Mod(Multiply(Add(Multiply(p, v), 1.0f), v), m);
+            return Mod(Mul(Add(Mul(p, v), 1.0f), v), m);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Permute(Vector2 v, float p, float m)
         {
-            return Mod(Multiply(Add(Multiply(p, v), 1.0f), v), m);
+            return Mod(Mul(Add(Mul(p, v), 1.0f), v), m);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Permute(Vector3 v, float p, float m)
         {
-            return Mod(Multiply(Add(Multiply(p, v), 1.0f), v), m);
+            return Mod(Mul(Add(Mul(p, v), 1.0f), v), m);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Permute(Vector4 v, float p, float m)
         {
-            return Mod(Multiply(Add(Multiply(p, v), 1.0f), v), m);
+            return Mod(Mul(Add(Mul(p, v), 1.0f), v), m);
         }
 
 

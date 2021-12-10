@@ -32,7 +32,7 @@ namespace Common
         public Vector2 Center
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return Mathx.Multiply((max + min), 0.5f); }
+            get { return Mathx.Mul((max + min), 0.5f); }
         }
 
         public Vector2Int Size

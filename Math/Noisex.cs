@@ -28,20 +28,20 @@ namespace Common
             Vector4 ixy1 = Mathx.Permute(ixy + iz1, PERMUTE, MOD);
 
             Vector4 gx0 = ixy0 * (1.0f / 7.0f);
-            Vector4 gy0 = Mathx.Subtract(Mathx.Frac(Mathx.Multiply(Mathx.Floor(gx0), (1.0f / 7.0f))), 0.5f);
+            Vector4 gy0 = Mathx.Sub(Mathx.Frac(Mathx.Mul(Mathx.Floor(gx0), (1.0f / 7.0f))), 0.5f);
             gx0 = Mathx.Frac(gx0);
             Vector4 gz0 = Vector4.one * 0.5f - Mathx.Abs(gx0) - Mathx.Abs(gy0);
             Vector4 sz0 = Mathx.Step(gz0, Vector4.zero);
-            gx0 -= Mathx.Multiply(sz0, Mathx.Subtract(Mathx.Step(Vector4.zero, gx0), 0.5f));
-            gy0 -= Mathx.Multiply(sz0, Mathx.Subtract(Mathx.Step(Vector4.zero, gy0), 0.5f));
+            gx0 -= Mathx.Mul(sz0, Mathx.Sub(Mathx.Step(Vector4.zero, gx0), 0.5f));
+            gy0 -= Mathx.Mul(sz0, Mathx.Sub(Mathx.Step(Vector4.zero, gy0), 0.5f));
 
             Vector4 gx1 = ixy1 * (1.0f / 7.0f);
-            Vector4 gy1 = Mathx.Subtract(Mathx.Frac(Mathx.Floor(gx1) * (1.0f / 7.0f)), 0.5f);
+            Vector4 gy1 = Mathx.Sub(Mathx.Frac(Mathx.Floor(gx1) * (1.0f / 7.0f)), 0.5f);
             gx1 = Mathx.Frac(gx1);
             Vector4 gz1 = Vector4.one * 0.5f - Mathx.Abs(gx1) - Mathx.Abs(gy1);
             Vector4 sz1 = Mathx.Step(gz1, Vector4.zero);
-            gx1 -= Mathx.Multiply(sz1, Mathx.Subtract(Mathx.Step(Vector4.zero, gx1), 0.5f));
-            gy1 -= Mathx.Multiply(sz1, Mathx.Subtract(Mathx.Step(Vector4.zero, gy1), 0.5f));
+            gx1 -= Mathx.Mul(sz1, Mathx.Sub(Mathx.Step(Vector4.zero, gx1), 0.5f));
+            gy1 -= Mathx.Mul(sz1, Mathx.Sub(Mathx.Step(Vector4.zero, gy1), 0.5f));
 
             Vector3 g000 = new Vector3(gx0.x, gy0.x, gz0.x);
             Vector3 g100 = new Vector3(gx0.y, gy0.y, gz0.y);
@@ -54,7 +54,7 @@ namespace Common
 
             Vector4 TaylorInvSqrt(Vector4 v)
             {
-                return Mathx.Subtract(1.79284291400159f, Mathx.Multiply(0.85373472095314f, v));
+                return Mathx.Sub(1.79284291400159f, Mathx.Mul(0.85373472095314f, v));
             }
 
             Vector4 norm0 = TaylorInvSqrt(new Vector4(
