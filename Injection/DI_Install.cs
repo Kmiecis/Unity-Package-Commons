@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.Dependencies
+namespace Common.Injection
 {
     /// <summary>
     /// Marks a field to have it's value installed as a dependency by <see cref="DI_Binder"/>

@@ -1,4 +1,4 @@
-﻿namespace Common.Dependencies
+﻿namespace Common.Injection
 {
     /// <summary>
     /// Base <see cref="DI_IDependant"/> implementation

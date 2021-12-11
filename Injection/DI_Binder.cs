@@ -8,7 +8,7 @@ using UnityEditor.Callbacks;
 #endif
 using UnityEngine;
 
-namespace Common.Dependencies
+namespace Common.Injection
 {
     /// <summary>
     /// Handles class fields marked by <see cref="DI_Inject"/> and <see cref="DI_Install"/> dependency binding

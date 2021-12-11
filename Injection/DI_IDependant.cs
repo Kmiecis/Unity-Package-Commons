@@ -1,4 +1,4 @@
-﻿namespace Common.Dependencies
+﻿namespace Common.Injection
 {
     /// <summary>
     /// Dependency Injection dependant interface to implement reliable binding behaviour
