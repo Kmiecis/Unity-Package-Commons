@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Common.Pooling
 {
-    public abstract class APool<T> : IDisposable, IPool<T>, IPoolProvider<T>
+    public abstract class APool<T> : IDisposable, IPool<T>
     {
         protected readonly int _capacity;
         protected readonly Queue<T> _pool;
@@ -25,21 +25,23 @@ namespace Common.Pooling
 
         public abstract void OnReturn(T item);
 
-        public void Initialize(int count)
+        protected T DoConstruct()
         {
-            for (int i = 0; i < count; ++i)
-            {
-                _constructed += 1;
-                _pool.Enqueue(Construct());
-            }
+            _constructed += 1;
+            return Construct();
+        }
+
+        protected void DoDestroy(T item)
+        {
+            _constructed -= 1;
+            Destroy(item);
         }
 
         protected T Get()
         {
             if (_pool.Count == 0)
             {
-                _constructed += 1;
-                return Construct();
+                return DoConstruct();
             }
             return _pool.Dequeue();
         }
@@ -48,8 +50,7 @@ namespace Common.Pooling
         {
             if (_pool.Count >= _capacity)
             {
-                _constructed -= 1;
-                Destroy(item);
+                DoDestroy(item);
             }
             else
             {
@@ -57,6 +58,14 @@ namespace Common.Pooling
             }
         }
 
+        public void Initialize(int count)
+        {
+            for (int i = 0; i < count; ++i)
+            {
+                Return(DoConstruct());
+            }
+        }
+        
         public T Borrow()
         {
             T item = Get();
@@ -90,8 +99,7 @@ namespace Common.Pooling
         {
             while (_pool.TryDequeue(out var item))
             {
-                _constructed -= 1;
-                Destroy(item);
+                DoDestroy(item);
             }
         }
 
@@ -113,11 +121,6 @@ namespace Common.Pooling
         public void Dispose()
         {
             Clear();
-        }
-
-        public IPool<T> GetPool()
-        {
-            return this;
         }
     }
 }

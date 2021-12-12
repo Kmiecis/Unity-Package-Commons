@@ -2,7 +2,7 @@
 
 namespace Common.Pooling
 {
-    public class ReusablePoolComponent : MonoBehaviour, IPoolProvider<ReusableComponent>
+    public class ReusablePoolComponent : MonoBehaviour
     {
         public enum EStartup
         {
@@ -11,16 +11,23 @@ namespace Common.Pooling
             Manual
         }
 
+        [Header("Properties")]
         [SerializeField]
         protected EStartup _startup;
+        [SerializeField]
+        protected int _initialize = 1;
+        [Header("Pool")]
         [SerializeField]
         protected int _capacity = 1;
         [SerializeField]
         protected ReusableComponent _prefab;
-        [SerializeField]
-        protected int _initialize = 1;
 
         private APool<ReusableComponent> _pool;
+
+        public void Initialize()
+        {
+            _pool.Initialize(_initialize);
+        }
         
         protected virtual void Awake()
         {
@@ -33,11 +40,6 @@ namespace Common.Pooling
         {
             if (_startup == EStartup.Start)
                 _pool.Initialize(_initialize);
-        }
-
-        public IPool<ReusableComponent> GetPool()
-        {
-            return _pool;
         }
     }
 }
