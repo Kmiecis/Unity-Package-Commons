@@ -181,24 +181,44 @@ namespace Common.Extensions
             }
         }
 
-        public static void Shuffle<T>(this Random self, List<T> list)
+        public static void Shuffle<T>(this Random self, T[] array, int begin, int end)
         {
-            int n = list.Count;
-            while (n-- > 1)
+            int n = end;
+            while (--n > begin)
+            {
+                int k = self.Next(n);
+                array.Swap(k, n);
+            }
+        }
+
+        public static void Shuffle<T>(this Random self, T[] array, int end)
+        {
+            self.Shuffle(array, 0, end);
+        }
+
+        public static void Shuffle<T>(this Random self, T[] array)
+        {
+            self.Shuffle(array, array.Length);
+        }
+
+        public static void Shuffle<T>(this Random self, List<T> list, int begin, int end)
+        {
+            int n = end;
+            while (--n > begin)
             {
                 int k = self.Next(n);
                 list.Swap(k, n);
             }
         }
 
-        public static void Shuffle<T>(this Random self, params T[] args)
+        public static void Shuffle<T>(this Random self, List<T> list, int end)
         {
-            int n = args.Length;
-            while (n-- > 1)
-            {
-                int k = self.Next(n);
-                args.Swap(k, n);
-            }
+            self.Shuffle(list, 0, end);
+        }
+
+        public static void Shuffle<T>(this Random self, List<T> list)
+        {
+            self.Shuffle(list, list.Count);
         }
     }
 }
