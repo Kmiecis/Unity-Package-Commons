@@ -3,7 +3,7 @@
     public class IteratingProvider<T> : AProvider<T>
     {
         protected readonly T[] _values;
-        protected int _index;
+        protected int _index = -1;
 
         public IteratingProvider(T[] values)
         {
@@ -17,7 +17,8 @@
 
         public override T Get()
         {
-            return _values[(_index++) % _values.Length];
+            _index = (_index + 1) % _values.Length;
+            return Current;
         }
     }
 }

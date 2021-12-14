@@ -154,33 +154,7 @@ namespace Common.Extensions
             var values = Enum.GetValues(typeof(TEnum));
             return (TEnum)values.GetValue(self.Next(values.Length));
         }
-
-        public static T NextItem<T>(this Random self, params T[] args)
-        {
-            return args[self.Next(args.Length)];
-        }
-
-        public static T NextItem<T>(this Random self, List<T> list)
-        {
-            return list[self.Next(list.Count)];
-        }
         
-        public static void NextItems<T>(this Random self, T[] source, T[] target)
-        {
-            for (int i = 0; i < target.Length; ++i)
-            {
-                target[i] = self.NextItem(source);
-            }
-        }
-        
-        public static void NextItems<T>(this Random self, List<T> source, T[] target)
-        {
-            for (int i = 0; i < target.Length; ++i)
-            {
-                target[i] = self.NextItem(source);
-            }
-        }
-
         public static void Shuffle<T>(this Random self, T[] array, int begin, int end)
         {
             int n = end;
@@ -219,6 +193,32 @@ namespace Common.Extensions
         public static void Shuffle<T>(this Random self, List<T> list)
         {
             self.Shuffle(list, list.Count);
+        }
+
+        public static T NextItem<T>(this Random self, params T[] args)
+        {
+            return args[self.Next(args.Length)];
+        }
+
+        public static T NextItem<T>(this Random self, List<T> list)
+        {
+            return list[self.Next(list.Count)];
+        }
+
+        public static void NextItems<T>(this Random self, T[] source, T[] target)
+        {
+            for (int i = 0; i < target.Length; ++i)
+            {
+                target[i] = self.NextItem(source);
+            }
+        }
+
+        public static void NextItems<T>(this Random self, List<T> source, T[] target)
+        {
+            for (int i = 0; i < target.Length; ++i)
+            {
+                target[i] = self.NextItem(source);
+            }
         }
     }
 }
