@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 namespace Common.Extensions
 {
@@ -164,82 +163,74 @@ namespace Common.Extensions
             return index != -1;
         }
 
-        public static string[] GetLines(this string value)
+        public static string[] GetLines(this string self)
         {
-            return value.Split(new []{ "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+            return self.Split(new []{ "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
         }
 
-        public static Color32 HexToColorRGB(this string value)
+        public static string Capitalize(this string self)
         {
-            byte r = Convert.ToByte(value.Substring(0, 2), 16);
-            byte g = Convert.ToByte(value.Substring(2, 2), 16);
-            byte b = Convert.ToByte(value.Substring(4, 2), 16);
-            return new Color32(r, g, b, 255);
-        }
-
-        public static Color32 HexToColorRGBA(this string value)
-        {
-            byte r = Convert.ToByte(value.Substring(0, 2), 16);
-            byte g = Convert.ToByte(value.Substring(2, 2), 16);
-            byte b = Convert.ToByte(value.Substring(4, 2), 16);
-            byte a = Convert.ToByte(value.Substring(6, 2), 16);
-            return new Color32(r, g, b, a);
-        }
-
-        public static string Capitalize(this string value)
-        {
-            if (string.IsNullOrEmpty(value))
-                return value;
-            if (value.Length == 1)
-                return char.ToUpper(value[0]).ToString();
+            if (string.IsNullOrEmpty(self))
+                return self;
+            if (self.Length == 1)
+                return char.ToUpper(self[0]).ToString();
             else
-                return char.ToUpper(value[0]) + value.Substring(1);
+                return char.ToUpper(self[0]) + self.Substring(1);
         }
 
-        public static bool StartsWith(this string value, string prefix)
+        public static bool StartsWith(this string self, string prefix)
         {
-            if (string.IsNullOrEmpty(value) || string.IsNullOrEmpty(prefix))
+            if (string.IsNullOrEmpty(self) || string.IsNullOrEmpty(prefix))
                 return false;
 
-            var valueLength = value.Length;
+            var valueLength = self.Length;
             var prefixLength = prefix.Length;
             if (valueLength < prefixLength)
                 return false;
 
             for (int i = 0; i < prefixLength; i++)
-                if (value[i] != prefix[i])
+                if (self[i] != prefix[i])
                     return false;
             return true;
         }
 
-        public static bool EndsWith(this string value, string suffix)
+        public static bool EndsWith(this string self, string suffix)
         {
-            if (string.IsNullOrEmpty(value) || string.IsNullOrEmpty(suffix))
+            if (string.IsNullOrEmpty(self) || string.IsNullOrEmpty(suffix))
                 return false;
 
-            var valueLength = value.Length;
+            var valueLength = self.Length;
             var suffixLength = suffix.Length;
             if (valueLength < suffixLength)
                 return false;
 
             for (int i = 0; i < suffixLength; i++)
-                if (value[valueLength - suffixLength + i] != suffix[i])
+                if (self[valueLength - suffixLength + i] != suffix[i])
                     return false;
             return true;
         }
 
-        public static string RemovePrefix(this string value, string prefix)
+        public static string RemovePrefix(this string self, string prefix)
         {
-            if (StartsWith(value, prefix))
-                return value.Substring(prefix.Length);
-            return value;
+            if (StartsWith(self, prefix))
+                return self.Substring(prefix.Length);
+            return self;
         }
 
-        public static string RemoveSuffix(this string value, string suffix)
+        public static string RemoveSuffix(this string self, string suffix)
         {
-            if (EndsWith(value, suffix))
-                return value.Substring(0, value.Length - suffix.Length);
-            return value;
+            if (EndsWith(self, suffix))
+                return self.Substring(0, self.Length - suffix.Length);
+            return self;
+        }
+
+        public static string[] Split(this string self, int count)
+        {
+            int length = self.Length / count;
+            var result = new string[length];
+            for (int i = 0; i < result.Length; ++i)
+                result[i] = self.Substring(i * count, count);
+            return result;
         }
     }
 }
