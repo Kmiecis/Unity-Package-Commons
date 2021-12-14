@@ -31,13 +31,14 @@ namespace Common.BehaviourTrees
         public int Remaining
         {
             get => _framestamp - Nowstamp;
+            set => _framestamp = Nowstamp + value;
         }
 
         protected override void OnStart()
         {
             base.OnStart();
 
-            _framestamp = Nowstamp + _count + _random.Next(-_deviation, +_deviation);
+            Remaining = _count + _random.Next(-_deviation, +_deviation);
         }
 
         protected override BT_EStatus OnUpdate()

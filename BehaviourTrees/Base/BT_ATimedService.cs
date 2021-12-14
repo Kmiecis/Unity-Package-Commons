@@ -1,7 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using UnityEngine;
-
-namespace Common.BehaviourTrees
+﻿namespace Common.BehaviourTrees
 {
     /// <summary>
     /// <see cref="BT_AService"/> which executes after certain amount of time passes
@@ -19,15 +16,10 @@ namespace Common.BehaviourTrees
             _delay = delay;
             _unscaled = unscaled;
         }
-
-        private float Nowstamp
-        {
-            get => TimeUtility.GetTime(_unscaled);
-        }
-
+        
         public override void Execute()
         {
-            var nowstamp = Nowstamp;
+            var nowstamp = TimeUtility.GetTime(_unscaled);
             if (_timestamp > nowstamp)
                 return;
 

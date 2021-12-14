@@ -30,6 +30,7 @@ namespace Common.BehaviourTrees
         public int Remaining
         {
             get => _framestamp - Nowstamp;
+            set => _framestamp = Nowstamp + value;
         }
 
         public override bool CanExecute()
@@ -41,7 +42,7 @@ namespace Common.BehaviourTrees
         {
             base.OnStart();
 
-            _framestamp = Nowstamp + _limit + _random.Next(-_deviation, +_deviation);
+            Remaining = _limit + _random.Next(-_deviation, +_deviation);
         }
 
         public override string ToString()

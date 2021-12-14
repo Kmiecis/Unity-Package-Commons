@@ -31,7 +31,8 @@ namespace Common.BehaviourTrees
         
         public float Remaining
         {
-            get => _cooldown - (Nowstamp - _timestamp);
+            get => _timestamp - Nowstamp;
+            set => _timestamp = Nowstamp + value;
         }
 
         public override bool CanExecute()
@@ -43,10 +44,7 @@ namespace Common.BehaviourTrees
         {
             base.OnFinish(result);
 
-            if (result != BT_EStatus.Failure)
-            {
-                _timestamp = Nowstamp + _random.NextFloat(-_deviation, +_deviation);
-            }
+            Remaining = _cooldown + _random.NextFloat(-_deviation, +_deviation);
         }
 
         public override string ToString()

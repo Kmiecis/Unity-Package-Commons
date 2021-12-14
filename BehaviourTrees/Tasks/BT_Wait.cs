@@ -32,13 +32,14 @@ namespace Common.BehaviourTrees
         public float Remaining
         {
             get => _timestamp - Nowstamp;
+            set => _timestamp = Nowstamp + value;
         }
         
         protected override void OnStart()
         {
             base.OnStart();
 
-            _timestamp = Nowstamp + _duration + _random.NextFloat(-_deviation, +_deviation);
+            Remaining = _duration + _random.NextFloat(-_deviation, +_deviation);
         }
 
         protected override BT_EStatus OnUpdate()
