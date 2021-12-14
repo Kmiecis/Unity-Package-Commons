@@ -2,7 +2,7 @@
 
 namespace Common.Pooling
 {
-    public sealed class DelegatedPool<T> : APool<T>
+    public class DelegatedPool<T> : APool<T>
     {
         private Func<T> _construct;
         private Action<T> _destroy;

@@ -2,8 +2,8 @@
 
 namespace Common.Pooling
 {
-    public sealed class DelegatedReusablePool<T> : AReusablePool<T>
-        where T : IReusable
+    public class DelegatedReusablePool<T> : AReusablePool<T>
+        where T : IReusable<T>
     {
         private Func<T> _construct;
         private Action<T> _destroy;

@@ -2,12 +2,12 @@
 
 namespace Common.Pooling
 {
-    public class ReusableObjectPool<T> : AReusablePool<T>
-        where T : Object, IReusable
+    public class ReusableComponentPool<T> : AReusablePool<T>
+        where T : Component, IReusable<T>
     {
         protected readonly T _prefab;
 
-        public ReusableObjectPool(int capacity, T prefab) :
+        public ReusableComponentPool(int capacity, T prefab) :
             base(capacity)
         {
             _prefab = prefab;
@@ -20,7 +20,7 @@ namespace Common.Pooling
 
         public override void Destroy(T item)
         {
-            ObjectUtility.DestroySafely(item);
+            ObjectUtility.DestroySafely(item.gameObject);
         }
     }
 }

@@ -2,36 +2,48 @@
 
 namespace Common.Pooling
 {
-    public class ReusablePoolComponent : MonoBehaviour
+    public class ReusableComponentPoolBehaviour<T> : MonoBehaviour, IPool<T>
+        where T : Component, IReusable<T>
     {
         public enum EStartup
         {
-            Start,
+            Manual,
             Awake,
-            Manual
+            Start
         }
 
         [Header("Properties")]
         [SerializeField]
-        protected EStartup _startup;
+        protected EStartup _startup = EStartup.Start;
         [SerializeField]
         protected int _initialize = 1;
         [Header("Pool")]
         [SerializeField]
         protected int _capacity = 1;
-        [SerializeField]
-        protected ReusableComponent _prefab;
+        [SerializeReference]
+        protected T _prefab;
 
-        private APool<ReusableComponent> _pool;
+        private ReusableComponentPool<T> _pool;
+
+        public T Borrow()
+        {
+            return _pool.Borrow();
+        }
+
+        public void Return(T item)
+        {
+            _pool.Return(item);
+        }
 
         public void Initialize()
         {
-            _pool.Initialize(_initialize);
+            if (_startup == EStartup.Manual)
+                _pool.Initialize(_initialize);
         }
-        
+
         protected virtual void Awake()
         {
-            _pool = new ReusableObjectPool<ReusableComponent>(_capacity, _prefab);
+            _pool = new ReusableComponentPool<T>(_capacity, _prefab);
             if (_startup == EStartup.Awake)
                 _pool.Initialize(_initialize);
         }

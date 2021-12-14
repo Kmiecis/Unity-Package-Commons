@@ -1,8 +1,9 @@
 ﻿namespace Common.Pooling
 {
-    public interface IReusable
+    public interface IReusable<T>
+        where T : IReusable<T>
     {
-        void OnBorrow();
+        void OnBorrow(IPool<T> pool);
 
         void OnReturn();
     }
