@@ -2,8 +2,8 @@
 
 namespace Common.Pooling
 {
-    public class ReusableComponentPoolBehaviour<T> : MonoBehaviour, IPool<T>
-        where T : Component, IReusable<T>
+    public abstract class AReusableBehaviourPoolBehaviour<T> : MonoBehaviour, IPool<T>
+        where T : MonoBehaviour, IReusable
     {
         public enum EStartup
         {
@@ -23,7 +23,7 @@ namespace Common.Pooling
         [SerializeReference]
         protected T _prefab;
 
-        private ReusableComponentPool<T> _pool;
+        private ReusableBehaviourPool<T> _pool;
 
         public T Borrow()
         {
@@ -43,7 +43,7 @@ namespace Common.Pooling
 
         protected virtual void Awake()
         {
-            _pool = new ReusableComponentPool<T>(_capacity, _prefab);
+            _pool = new ReusableBehaviourPool<T>(_capacity, _prefab);
             if (_startup == EStartup.Awake)
                 _pool.Initialize(_initialize);
         }

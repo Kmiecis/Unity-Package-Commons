@@ -1,7 +1,7 @@
 ﻿namespace Common.Pooling
 {
     public abstract class AReusablePool<T> : APool<T>
-        where T : IReusable<T>
+        where T : IReusable
     {
         public AReusablePool(int capacity) :
             base(capacity)
@@ -10,7 +10,7 @@
 
         public override void OnBorrow(T item)
         {
-            item.OnBorrow(this);
+            item.OnBorrow();
         }
 
         public override void OnReturn(T item)

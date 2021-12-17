@@ -3,7 +3,7 @@
 namespace Common.Pooling
 {
     public class DelegatedReusablePool<T> : AReusablePool<T>
-        where T : IReusable<T>
+        where T : IReusable
     {
         private Func<T> _construct;
         private Action<T> _destroy;

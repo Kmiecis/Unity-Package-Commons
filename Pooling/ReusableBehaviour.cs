@@ -2,25 +2,16 @@
 
 namespace Common.Pooling
 {
-    public class ReusableBehaviour : MonoBehaviour, IReusable<ReusableBehaviour>
+    public class ReusableBehaviour : MonoBehaviour, IReusable
     {
-        protected IPool<ReusableBehaviour> _pool;
-
-        public void Return()
+        public virtual void OnBorrow()
         {
-            _pool.Return(this);
-        }
-
-        public void OnBorrow(IPool<ReusableBehaviour> pool)
-        {
-            _pool = pool;
             gameObject.SetActive(true);
         }
 
-        public void OnReturn()
+        public virtual void OnReturn()
         {
             gameObject.SetActive(false);
-            _pool = null;
         }
     }
 }

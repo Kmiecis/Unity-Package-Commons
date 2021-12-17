@@ -2,12 +2,12 @@
 
 namespace Common.Pooling
 {
-    public class ReusableComponentPool<T> : AReusablePool<T>
-        where T : Component, IReusable<T>
+    public class ReusableBehaviourPool<T> : AReusablePool<T>
+        where T : MonoBehaviour, IReusable
     {
         protected readonly T _prefab;
 
-        public ReusableComponentPool(int capacity, T prefab) :
+        public ReusableBehaviourPool(int capacity, T prefab) :
             base(capacity)
         {
             _prefab = prefab;
