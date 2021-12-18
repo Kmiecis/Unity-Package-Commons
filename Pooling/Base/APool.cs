@@ -20,70 +20,53 @@ namespace Common.Pooling
 
         public abstract void Destroy(T item);
 
-        public abstract void OnBorrow(T item);
-
-        public abstract void OnReturn(T item);
-
-        protected T DoConstruct()
+        protected T WrappedConstruct()
         {
             _constructed += 1;
             return Construct();
         }
 
-        protected void DoDestroy(T item)
+        protected void WrappedDestroy(T item)
         {
             _constructed -= 1;
             Destroy(item);
         }
-
-        protected T Get()
+        
+        public void Initialize(int count)
+        {
+            for (int i = 0; i < count; ++i)
+            {
+                Return(WrappedConstruct());
+            }
+        }
+        
+        public virtual T Borrow()
         {
             if (_pool.Count == 0)
             {
-                return DoConstruct();
+                return WrappedConstruct();
             }
             return _pool.Dequeue();
         }
 
-        protected void Put(T item)
+        public void Borrow(T[] target)
+        {
+            for (int i = 0; i < target.Length; ++i)
+            {
+                target[i] = Borrow();
+            }
+        }
+
+        public virtual void Return(T item)
         {
             if (_pool.Count >= _capacity)
             {
-                DoDestroy(item);
+                WrappedDestroy(item);
             }
             else
             {
                 _pool.Enqueue(item);
             }
-        }
-
-        public void Initialize(int count)
-        {
-            for (int i = 0; i < count; ++i)
-            {
-                Return(DoConstruct());
-            }
-        }
-        
-        public T Borrow()
-        {
-            T item = Get();
-            OnBorrow(item);
-            return item;
-        }
-
-        public void Borrow(T[] items)
-        {
-            for (int i = 0; i < items.Length; ++i)
-            {
-                items[i] = Borrow();
-            }
-        }
-
-        public void Return(T item)
-        {
-            OnReturn(item);
-            Put(item);
         }
 
         public void Return(T[] items)
@@ -98,7 +81,7 @@ namespace Common.Pooling
         {
             while (_pool.TryDequeue(out var item))
             {
-                DoDestroy(item);
+                WrappedDestroy(item);
             }
         }
 
@@ -117,7 +100,7 @@ namespace Common.Pooling
             get => _pool.Count;
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             Clear();
         }

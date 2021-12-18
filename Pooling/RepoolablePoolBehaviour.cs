@@ -2,7 +2,7 @@
 
 namespace Common.Pooling
 {
-    public abstract class AReusablePoolBehaviour<T> : MonoBehaviour, IPool<T>
+    public class RepoolablePoolBehaviour<T> : MonoBehaviour, IPool<IRepoolable<T>>
         where T : MonoBehaviour, IReusable
     {
         public enum EStartup
@@ -12,31 +12,32 @@ namespace Common.Pooling
             Start
         }
 
-        [Header("Properties")]
+        [Header("Initialization")]
         [SerializeField]
         protected EStartup _startup = EStartup.Start;
         [SerializeField]
         protected int _initialize = 1;
 
-        [Header("Pool")]
+        [Header("Pooling")]
         [SerializeField]
         protected int _capacity = 1;
         [SerializeReference]
         protected T _prefab;
 
-        private ReusableBehaviourPool<T> _pool;
+        private ReusableBehaviourPool<T> _subpool;
+        private RepoolablePool<T> _pool;
 
-        public T Borrow()
+        public virtual IRepoolable<T> Borrow()
         {
             return _pool.Borrow();
         }
 
-        public void Return(T item)
+        public virtual void Return(IRepoolable<T> item)
         {
             _pool.Return(item);
         }
 
-        public void Dispose()
+        public virtual void Dispose()
         {
             _pool.Dispose();
         }
@@ -49,7 +50,9 @@ namespace Common.Pooling
 
         protected virtual void Awake()
         {
-            _pool = new ReusableBehaviourPool<T>(_capacity, _prefab);
+            _subpool = new ReusableBehaviourPool<T>(_capacity, _prefab);
+            _pool = new RepoolablePool<T>(_capacity, _subpool);
+
             if (_startup == EStartup.Awake)
                 _pool.Initialize(_initialize);
         }
@@ -62,7 +65,17 @@ namespace Common.Pooling
 
         private void OnDestroy()
         {
-            _pool.Dispose();
+            Dispose();
+        }
+    }
+
+    public class RepoolablePoolBehaviour : RepoolablePoolBehaviour<ReusableBehaviour>
+    {
+        public override IRepoolable<ReusableBehaviour> Borrow()
+        {
+            var item = base.Borrow();
+            item.Value.transform.SetParent(this.transform);
+            return item;
         }
     }
 }

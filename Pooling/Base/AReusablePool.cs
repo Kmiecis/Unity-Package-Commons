@@ -8,14 +8,17 @@
         {
         }
 
-        public override void OnBorrow(T item)
+        public override T Borrow()
         {
+            var item = base.Borrow();
             item.OnBorrow();
+            return item;
         }
 
-        public override void OnReturn(T item)
+        public override void Return(T item)
         {
             item.OnReturn();
+            base.Return(item);
         }
     }
 }
