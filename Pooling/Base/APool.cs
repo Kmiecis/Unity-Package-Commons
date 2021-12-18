@@ -1,10 +1,9 @@
 ﻿using Common.Extensions;
-using System;
 using System.Collections.Generic;
 
 namespace Common.Pooling
 {
-    public abstract class APool<T> : IDisposable, IPool<T>
+    public abstract class APool<T> : IPool<T>
     {
         protected readonly int _capacity;
         protected readonly Queue<T> _pool;

@@ -1,6 +1,8 @@
-﻿namespace Common.Pooling
+﻿using System;
+
+namespace Common.Pooling
 {
-    public interface IPool<T>
+    public interface IPool<T> : IDisposable
     {
         T Borrow();
 

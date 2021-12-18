@@ -2,7 +2,7 @@
 
 namespace Common.Pooling
 {
-    public abstract class AReusableBehaviourPoolBehaviour<T> : MonoBehaviour, IPool<T>
+    public abstract class AReusablePoolBehaviour<T> : MonoBehaviour, IPool<T>
         where T : MonoBehaviour, IReusable
     {
         public enum EStartup
@@ -17,6 +17,7 @@ namespace Common.Pooling
         protected EStartup _startup = EStartup.Start;
         [SerializeField]
         protected int _initialize = 1;
+
         [Header("Pool")]
         [SerializeField]
         protected int _capacity = 1;
@@ -33,6 +34,11 @@ namespace Common.Pooling
         public void Return(T item)
         {
             _pool.Return(item);
+        }
+
+        public void Dispose()
+        {
+            _pool.Dispose();
         }
 
         public void Initialize()
@@ -52,6 +58,11 @@ namespace Common.Pooling
         {
             if (_startup == EStartup.Start)
                 _pool.Initialize(_initialize);
+        }
+
+        private void OnDestroy()
+        {
+            _pool.Dispose();
         }
     }
 }
