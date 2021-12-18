@@ -21,7 +21,7 @@ namespace Common.Providers
 
         public TValue Get()
         {
-            return _provider.Get();
+            return Provider.Get();
         }
     }
 }
