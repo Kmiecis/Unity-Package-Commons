@@ -25,25 +25,21 @@ namespace Common
             b = t;
         }
         
-        public static bool TryUpdate<T>(ref T value, T item)
+        public static bool TryUpdate<T>(ref T target, T value)
         {
-            if (!EqualsSafely(value, item))
+            if (!EqualsSafely(target, value))
             {
-                value = item;
+                target = value;
                 return true;
             }
             return false;
         }
 
         public static bool TryCast<T>(object obj, out T cast)
+            where T : class
         {
-            if (obj is T)
-            {
-                cast = (T)obj;
-                return true;
-            }
-            cast = default;
-            return false;
+            cast = obj as T;
+            return cast != null;
         }
     }
 }
