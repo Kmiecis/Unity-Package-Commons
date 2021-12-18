@@ -1,6 +1,6 @@
-﻿namespace Common
+﻿namespace Common.Providers
 {
-    public class CountedProvider<T> : IteratingProvider<T>
+    public class CountedProvider<T> : AArrayProvider<T>
     {
         protected readonly int _repeats;
         protected int _remaining;
@@ -27,7 +27,7 @@
             }
 
             Remaining = _repeats;
-            return base.Get();
+            return Next;
         }
     }
 }

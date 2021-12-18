@@ -1,6 +1,6 @@
-﻿namespace Common
+﻿namespace Common.Providers
 {
-    public class DelayedProvider<T> : IteratingProvider<T>
+    public class DelayedProvider<T> : AArrayProvider<T>
     {
         protected readonly float _interval;
         protected readonly bool _unscaled;
@@ -34,7 +34,7 @@
             }
 
             Remaining = _interval;
-            return base.Get();
+            return Next;
         }
     }
 }

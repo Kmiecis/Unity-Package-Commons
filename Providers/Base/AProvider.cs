@@ -1,4 +1,4 @@
-﻿namespace Common
+namespace Common.Providers
 {
     public abstract class AProvider<T> : IProvider<T>
     {
