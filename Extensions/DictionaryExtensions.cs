@@ -27,13 +27,10 @@ namespace Common.Extensions
 
         public static TValue GetOrCompute<TKey, TValue>(this Dictionary<TKey, TValue> self, TKey key, Func<TValue> computor)
         {
-            if (self.TryGetValue(key, out var result))
-            {
-                return result;
-            }
-            var value = computor();
-            self.Add(key, value);
-            return value;
+            TValue result;
+            if (!self.TryGetValue(key, out result))
+                self[key] = result = computor();
+            return result;
         }
     }
 }

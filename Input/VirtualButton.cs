@@ -4,24 +4,35 @@ namespace Common
 {
     public class VirtualButton
     {
-        private bool m_Pressed;
-        private int m_PressedFrame = -1;
-        private int m_ReleasedFrame = -1;
-
-        public void Pressed()
+        private bool _isPressed;
+        private int _pressedFrame = -1;
+        private int _releasedFrame = -1;
+        
+        public bool IsPressed
         {
-            m_Pressed = true;
-            m_PressedFrame = Time.frameCount;
+            get => _isPressed;
+            set
+            {
+                _isPressed = value;
+                if (value)
+                {
+                    _pressedFrame = Time.frameCount;
+                }
+                else
+                {
+                    _releasedFrame = Time.frameCount;
+                }
+            }
         }
 
-        public void Released()
+        public bool IsDown
         {
-            m_Pressed = false;
-            m_ReleasedFrame = Time.frameCount;
+            get => _pressedFrame == Time.frameCount - 1;
         }
 
-        public bool IsPressed => m_Pressed;
-        public bool IsDown => m_PressedFrame == Time.frameCount - 1;
-        public bool IsUp => m_ReleasedFrame == Time.frameCount - 1;
+        public bool IsUp
+        {
+            get => _releasedFrame == Time.frameCount - 1;
+        }
     }
 }

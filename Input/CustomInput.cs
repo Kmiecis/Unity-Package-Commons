@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Common.Extensions;
 
 namespace Common
 {
@@ -66,33 +67,33 @@ namespace Common
 
         public static bool GetKey(KeyCode key)
         {
-            if (m_Keys.TryGetValue(key, out VirtualButton virtualKey))
+            if (TryGetCheckedKey(key, out VirtualButton virtualKey))
                 return virtualKey.IsPressed;
             return Input.GetKey(key);
         }
 
         public static bool GetKeyDown(KeyCode key)
         {
-            if (m_Keys.TryGetValue(key, out VirtualButton virtualKey))
+            if (TryGetCheckedKey(key, out VirtualButton virtualKey))
                 return virtualKey.IsDown;
             return Input.GetKeyDown(key);
         }
 
         public static void SetKeyDown(KeyCode key)
         {
-            GetEnsuredKey(key).Pressed();
+            GetEnsuredKey(key).IsPressed = true;
         }
 
         public static bool GetKeyUp(KeyCode key)
         {
-            if (m_Keys.TryGetValue(key, out VirtualButton virtualKey))
+            if (TryGetCheckedKey(key, out VirtualButton virtualKey))
                 return virtualKey.IsUp;
             return Input.GetKeyUp(key);
         }
 
         public static void SetKeyUp(KeyCode key)
         {
-            GetEnsuredKey(key).Released();
+            GetEnsuredKey(key).IsPressed = false;
         }
 
         public static void RemoveKey(KeyCode key)
@@ -102,33 +103,33 @@ namespace Common
 
         public static bool GetButton(string buttonName)
         {
-            if (m_Buttons.TryGetValue(buttonName, out VirtualButton virtualKey))
+            if (TryGetCheckedButton(buttonName, out VirtualButton virtualKey))
                 return virtualKey.IsPressed;
             return Input.GetKey(buttonName);
         }
 
         public static bool GetButtonDown(string buttonName)
         {
-            if (m_Buttons.TryGetValue(buttonName, out VirtualButton virtualKey))
+            if (TryGetCheckedButton(buttonName, out VirtualButton virtualKey))
                 return virtualKey.IsDown;
             return Input.GetKeyDown(buttonName);
         }
 
         public static void SetButtonDown(string buttonName)
         {
-            GetEnsuredButton(buttonName).Pressed();
+            GetEnsuredButton(buttonName).IsPressed = true;
         }
 
         public static bool GetButtonUp(string buttonName)
         {
-            if (m_Buttons.TryGetValue(buttonName, out VirtualButton virtualKey))
+            if (TryGetCheckedButton(buttonName, out VirtualButton virtualKey))
                 return virtualKey.IsUp;
             return Input.GetKeyUp(buttonName);
         }
 
         public static void SetButtonUp(string buttonName)
         {
-            GetEnsuredButton(buttonName).Released();
+            GetEnsuredButton(buttonName).IsPressed = false;
         }
 
         public static void RemoveButton(string buttonName)
@@ -148,22 +149,43 @@ namespace Common
             m_MousePosition = position;
         }
 
+        private static VirtualButton GetEnsuredFrom<TKey>(Dictionary<TKey, VirtualButton> dictionary, TKey key)
+        {
+            return dictionary.GetOrCompute(key, () => new VirtualButton());
+        }
+
         private static VirtualButton GetEnsuredKey(KeyCode key)
         {
-            if (m_Keys.TryGetValue(key, out VirtualButton result))
-                return result;
-            result = new VirtualButton();
-            m_Keys[key] = result;
-            return result;
+            return GetEnsuredFrom(m_Keys, key);
         }
 
         private static VirtualButton GetEnsuredButton(string buttonName)
         {
-            if (m_Buttons.TryGetValue(buttonName, out VirtualButton result))
-                return result;
-            result = new VirtualButton();
-            m_Buttons[buttonName] = result;
-            return result;
+            return GetEnsuredFrom(m_Buttons, buttonName);
+        }
+
+        private static bool TryGetCheckedFrom<TKey>(Dictionary<TKey, VirtualButton> dictionary, TKey key, out VirtualButton button)
+        {
+            button = default;
+            if (dictionary.TryGetValue(key, out button))
+            {
+                if (!button.IsPressed && !button.IsUp)
+                {
+                    dictionary.Remove(key);
+                    button = default;
+                }
+            }
+            return button != default;
+        }
+
+        private static bool TryGetCheckedKey(KeyCode key, out VirtualButton button)
+        {
+            return TryGetCheckedFrom(m_Keys, key, out button);
+        }
+
+        private static bool TryGetCheckedButton(string buttonName, out VirtualButton button)
+        {
+            return TryGetCheckedFrom(m_Buttons, buttonName, out button);
         }
     }
 }
