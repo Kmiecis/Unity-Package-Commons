@@ -15,13 +15,7 @@ namespace Common.Injection
     /// </summary>
     public static class DI_Binder
     {
-        private class Listener
-        {
-            public object target;
-            public Action<object> callback;
-        }
-
-        private class ListenerList : List<Listener>
+        private class ListenerList : List<(object target, Action<object> callback)>
         {
             public void Call(object dependency)
             {
@@ -36,11 +30,6 @@ namespace Common.Injection
 
         private class DependencyList : List<object>
         {
-        }
-
-        private static void DebugWarning(string message)
-        {
-            Debug.LogWarning($"[{nameof(DI_Binder)}] {message}");
         }
 
         private static Dictionary<Type, ListenerList> s_ListenerLists = new Dictionary<Type, ListenerList>();
@@ -59,10 +48,10 @@ namespace Common.Injection
             return result;
         }
 
-        private static void AddListener(Type type, Action<object> callback, object target)
+        private static void AddListener(Type type, object target, Action<object> callback)
         {
             var listeners = GetListeners(type);
-            listeners.Add(new Listener { target = target, callback = callback });
+            listeners.Add((target, callback));
         }
 
         private static void RemoveListeners(Type type, object target)
@@ -78,12 +67,12 @@ namespace Common.Injection
             return result;
         }
 
-        private static void AddDependency(Type type, object target)
+        private static void AddDependency(Type type, object dependency)
         {
             var dependencies = GetDependencies(type);
-            dependencies.Add(target);
+            dependencies.Add(dependency);
             var listeners = GetListeners(type);
-            listeners.Call(target);
+            listeners.Call(dependency);
         }
 
         private static void RemoveDependency(Type type, object target)
@@ -92,36 +81,46 @@ namespace Common.Injection
             if (dependencies.Remove(target))
             {
                 var listeners = GetListeners(type);
-                var dependency = dependencies.LastOrDefault();
-                listeners.Call(dependency);
+                if (dependencies.TryGetLast(out var dependency))
+                {
+                    listeners.Call(dependency);
+                }
             }
         }
 
         private static void Inject(FieldInfo field, object target, DI_Inject attribute)
         {
             var type = attribute.type ?? field.FieldType;
+            var callback = attribute.callback ?? "On" + type.Name + "Inject";
 
             void Update(object value)
             {
-                var callback = $"On{type.Name}Inject";
                 if (value != null)
                 {
                     var targetType = target.GetType();
                     var method = targetType.GetMethod(callback, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
                     if (method != null)
                     {
+#if ENABLE_DI_LOGS
+                        DebugLog("Invoking", method, target, value);
+#endif
                         method.Invoke(target, new object[] { value });
                     }
                 }
 
+#if ENABLE_DI_LOGS
+                DebugLog("Injecting", field, target, value);
+#endif
                 field.SetValue(target, value);
             }
 
-            AddListener(type, Update, target);
+            AddListener(type, target, Update);
 
             var dependencies = GetDependencies(type);
-            var dependency = dependencies.LastOrDefault();
-            Update(dependency);
+            if (dependencies.TryGetLast(out var dependency))
+            {
+                Update(dependency);
+            }
         }
 
         private static void Uninject(FieldInfo field, object target, DI_Inject attribute)
@@ -130,6 +129,9 @@ namespace Common.Injection
 
             RemoveListeners(type, target);
 
+#if ENABLE_DI_LOGS
+            DebugLog("Uninjecting", field, target);
+#endif
             field.SetValue(target, null);
         }
 
@@ -166,17 +168,13 @@ namespace Common.Injection
                     dependency = args != null ? Activator.CreateInstance(type, args) : Activator.CreateInstance(type);
                 }
             }
-
-            if (dependency != null)
-            {
-                AddDependency(type, dependency);
-            }
-            else
-            {
-                DebugWarning($"Couldn't install dependency from {target.GetType().Name}.{field.Name}");
-            }
-
+            
+#if ENABLE_DI_LOGS
+            DebugLog("Installing", field, target, dependency);
+#endif
             field.SetValue(target, dependency);
+
+            AddDependency(type, dependency);
         }
 
         private static void Uninstall(FieldInfo field, object target, DI_Install attribute)
@@ -190,6 +188,9 @@ namespace Common.Injection
                 RemoveDependency(type, dependency);
             }
 
+#if ENABLE_DI_LOGS
+            DebugLog("Uninstalling", field, target);
+#endif
             field.SetValue(target, null);
         }
 
@@ -242,6 +243,18 @@ namespace Common.Injection
             }
 
             EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+        }
+#endif
+
+#if ENABLE_DI_LOGS
+        private static void DebugLog(string message, object field, object target, object value)
+        {
+            Debug.Log($"[{nameof(DI_Binder)}] {message} <color=#00FFFF>[{field}]</color> of <color=#FF8000>[{target}]</color> with value <color=#FFFFFF>[{value}]</color>");
+        }
+
+        private static void DebugLog(string message, object field, object target)
+        {
+            Debug.Log($"[{nameof(DI_Binder)}] {message} <color=#00FFFF>[{field}]</color> of <color=#FF8000>[{target}]</color>");
         }
 #endif
     }
