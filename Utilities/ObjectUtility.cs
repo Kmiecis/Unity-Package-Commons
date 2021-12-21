@@ -1,27 +1,18 @@
 ﻿using UnityEngine;
+using Common.Extensions;
 
 namespace Common
 {
     public static class ObjectUtility
     {
-        public static void DestroySafely<T>(T obj)
+        public static void Destroy<T>(ref T obj)
             where T : Object
         {
-            if (obj == null)
-                return;
-
-            if (Application.isPlaying)
-                Object.Destroy(obj);
-            else
-                Object.DestroyImmediate(obj);
-        }
-
-        public static void DestroySafely<T>(ref T obj)
-            where T : Object
-        {
-            DestroySafely(obj);
-
-            obj = null;
+            if (obj != null)
+            {
+                obj.Destroy();
+                obj = null;
+            }
         }
     }
 }

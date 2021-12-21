@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Common.Extensions;
 
 namespace Common.Pooling
 {
@@ -20,7 +21,7 @@ namespace Common.Pooling
 
         public override void Destroy(T item)
         {
-            ObjectUtility.DestroySafely(item.gameObject);
+            item.gameObject.Destroy();
         }
     }
 }

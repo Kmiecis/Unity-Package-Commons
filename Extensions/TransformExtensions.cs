@@ -10,7 +10,7 @@ namespace Common.Extensions
             for (int i = childCount - 1; i > -1; i--)
             {
                 var child = self.GetChild(i);
-                ObjectUtility.DestroySafely(child.gameObject);
+                child.Destroy();
             }
         }
     }
