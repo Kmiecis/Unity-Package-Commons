@@ -16,6 +16,7 @@ namespace Common
         0__ __ 7 __ __3
         */
 
+        /// <summary> Indices array by configuration </summary>
         public static readonly int[][] Triangles = new int[][]
         {
             new int[]{ -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1 }, // 0
@@ -63,11 +64,12 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetConfiguration(bool isActive0, bool isActive1, bool isActive2, bool isActive3)
         {
-            return
+            return (
                 (isActive0 ? 1 : 0) +
                 (isActive1 ? 2 : 0) +
                 (isActive2 ? 4 : 0) +
-                (isActive3 ? 8 : 0);
+                (isActive3 ? 8 : 0)
+            );
         }
     }
 }

@@ -32,9 +32,12 @@
             return self.GetLength(2);
         }
 
-        public static int GetLengthSafely<T>(this T[,,] self, int dimension)
+        public static bool ContainsIndices<T>(this T[,,] self, int x, int y, int z)
         {
-            return self.IsNull() ? 0 : self.GetLength(dimension);
+            return (
+                -1 < x && -1 < y && -1 < z &&
+                x < self.GetWidth() && y < self.GetHeight() && z < self.GetDepth()
+            );
         }
     }
 }

@@ -27,9 +27,12 @@ namespace Common.Extensions
             return self.GetLength(1);
         }
 
-        public static int GetLengthSafely<T>(this T[,] self, int dimension)
+        public static bool ContainsIndices<T>(this T[,] self, int x, int y)
         {
-            return self.IsNull() ? 0 : self.GetLength(dimension);
+            return (
+                -1 < x && -1 < y &&
+                x < self.GetWidth() && y < self.GetHeight()
+            );
         }
     }
 }

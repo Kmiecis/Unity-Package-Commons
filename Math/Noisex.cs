@@ -6,6 +6,127 @@ namespace Common
 {
     public static class Noisex
     {
+        public static void GetNoiseMap(
+            float[,] map, int dx = 0, int dy = 0,
+            int octaves = 1, float persistance = 0.5f, float lacunarity = 2.0f,
+            float sx = 1.0f, float sy = 1.0f, int seed = 0
+        )
+        {
+            var random = new Random(seed);
+
+            var width = map.GetWidth();
+            var height = map.GetHeight();
+
+            var pmin = 0.0f;
+            var pmax = 1.0f;
+            for (uint i = 1; i < octaves; ++i)
+            {
+                var ppow = Mathx.Pow(persistance, i);
+                pmin += ppow * 0.25f;
+                pmax += ppow * 0.75f;
+            }
+
+            var rdx = random.NextFloat(-99999.0f, +99999.0f);
+            var rdy = random.NextFloat(-99999.0f, +99999.0f);
+
+            var fx = 1.0f / (sx * width);
+            var fy = 1.0f / (sy * height);
+
+            for (int y = 0; y < height; ++y)
+            {
+                for (int x = 0; x < width; ++x)
+                {
+                    float amplitude = 1.0f;
+                    float frequency = 1.0f;
+                    float value = 0.0f;
+
+                    for (int i = 0; i < octaves; ++i)
+                    {
+                        float sampleX = ((x - dx) * fx) * frequency + rdx;
+                        float sampleY = ((y - dy) * fy) * frequency + rdy;
+
+                        float pv = Mathf.PerlinNoise(sampleX, sampleY);
+                        value += pv * amplitude;
+
+                        amplitude *= persistance;
+                        frequency *= lacunarity;
+                    }
+
+                    map[x, y] = Mathf.SmoothStep(pmin, pmax, value);
+                }
+            }
+        }
+
+        public static void GetRandomMap(bool[,] map, float fill = 0.5f, int seed = 0)
+        {
+            var random = new Random(seed);
+
+            var width = map.GetWidth();
+            var height = map.GetHeight();
+
+            for (int y = 0; y < height; ++y)
+            {
+                for (int x = 0; x < width; ++x)
+                {
+                    var rv = random.NextFloat();
+                    map[x, y] = rv < fill;
+                }
+            }
+        }
+
+        public static void GetRandomMap(int[,] map, int min = 0, int max = 1, int seed = 0)
+        {
+            var random = new Random(seed);
+
+            var width = map.GetWidth();
+            var height = map.GetHeight();
+
+            for (int y = 0; y < height; ++y)
+            {
+                for (int x = 0; x < width; ++x)
+                {
+                    var rv = random.Next(min, max);
+                    map[x, y] = rv;
+                }
+            }
+        }
+
+        public static void SmoothRandomMap(bool[,] map, int iterations = 5)
+        {
+            int width = map.GetWidth();
+            int height = map.GetHeight();
+
+            var mapRange = new Range2Int(0, 0, width - 1, height - 1);
+
+            for (int i = 0; i < iterations; i++)
+            {
+                for (int y = 0; y < height; y++)
+                {
+                    for (int x = 0; x < width; x++)
+                    {
+                        int counter = 0;
+
+                        for (int dy = y - 1; dy <= y + 1; dy++)
+                        {
+                            for (int dx = x - 1; dx <= x + 1; dx++)
+                            {
+                                if (dx == x && dy == y)
+                                    continue;
+
+                                if (!mapRange.Contains(dx, dy) || map[dx, dy])
+                                    counter += 1;
+                            }
+                        }
+
+                        if (counter != 4)
+                        {
+                            map[x, y] = counter > 4;
+                        }
+                    }
+                }
+            }
+        }
+
         public static float PerlinNoise(float x, float y, float z)
         {
             const float MOD = 289.0f;
@@ -93,153 +214,6 @@ namespace Common
             Vector2 n_yz = Vector2.Lerp(new Vector2(n_z.x, n_z.y), new Vector2(n_z.z, n_z.w), fade_xyz.y);
             float n_xyz = Mathf.Lerp(n_yz.x, n_yz.y, fade_xyz.x);
             return 2.2f * n_xyz;
-        }
-
-        /// <summary> Noise Map generator </summary>
-        public static void FillNoiseMap(float[,] map, int dx = 0, int dy = 0,
-            int octaves = 1, float persistance = 0.5f, float lacunarity = 2.0f,
-            float sx = 1.0f, float sy = 1.0f, int seed = 0
-        )
-        {
-            var width = map.GetWidth();
-            var height = map.GetHeight();
-
-            var random = new Random(seed);
-
-            var rdx = random.NextFloat(-99999.0f, +99999.0f);
-            var rdy = random.NextFloat(-99999.0f, +99999.0f);
-
-            var fx = 1.0f / (sx * width);
-            var fy = 1.0f / (sy * height);
-
-            for (int y = 0; y < height; ++y)
-            {
-                for (int x = 0; x < width; ++x)
-                {
-                    float amplitude = 1.0f;
-                    float frequency = 1.0f;
-                    float value = 0.0f;
-
-                    for (int i = 0; i < octaves; ++i)
-                    {
-                        float sampleX = ((x - dx) * fx) * frequency + rdx;
-                        float sampleY = ((y - dy) * fy) * frequency + rdy;
-
-                        float pv = Mathf.PerlinNoise(sampleX, sampleY);
-                        value += pv * amplitude;
-
-                        amplitude *= persistance;
-                        frequency *= lacunarity;
-                    }
-
-                    map[x, y] = value;
-                }
-            }
-        }
-
-        /// <summary> Noise Map generator smoothed to [0 .. 1] values </summary>
-        public static void FillNoiseSmoothMap(float[,] map, int dx = 0, int dy = 0,
-            int octaves = 1, float persistance = 0.5f, float lacunarity = 2.0f,
-            float sx = 1.0f, float sy = 1.0f, int seed = 0
-        )
-        {
-            var width = map.GetWidth();
-            var height = map.GetHeight();
-
-            var random = new Random(seed);
-
-            var noiseHeightMinMax = new Vector2(0.0f, 1.0f);
-            for (int i = 1; i < octaves; ++i)
-            {
-                float persistanceAffection = Mathf.Pow(persistance, i);
-                noiseHeightMinMax.x += persistanceAffection * 0.25f;
-                noiseHeightMinMax.y += persistanceAffection * 0.75f;
-            }
-
-            var rdx = random.NextFloat(-99999.0f, +99999.0f);
-            var rdy = random.NextFloat(-99999.0f, +99999.0f);
-
-            var fx = 1.0f / (sx * width);
-            var fy = 1.0f / (sy * height);
-
-            for (int y = 0; y < height; ++y)
-            {
-                for (int x = 0; x < width; ++x)
-                {
-                    float amplitude = 1.0f;
-                    float frequency = 1.0f;
-                    float value = 0.0f;
-
-                    for (int i = 0; i < octaves; ++i)
-                    {
-                        float sampleX = ((x - dx) * fx) * frequency + rdx;
-                        float sampleY = ((y - dy) * fy) * frequency + rdy;
-
-                        float pv = Mathf.PerlinNoise(sampleX, sampleY);
-                        value += pv * amplitude;
-
-                        amplitude *= persistance;
-                        frequency *= lacunarity;
-                    }
-
-                    map[x, y] = Mathf.SmoothStep(noiseHeightMinMax.x, noiseHeightMinMax.y, value);
-                }
-            }
-        }
-
-        /// <summary> Random Map generated as [true/false] values </summary>
-        public static void FillRandomMap(bool[,] map, float fill = 0.5f, int seed = 0)
-        {
-            var width = map.GetWidth();
-            var height = map.GetHeight();
-
-            var random = new Random(seed);
-
-            for (int y = 0; y < height; ++y)
-            {
-                for (int x = 0; x < width; ++x)
-                {
-                    var randomValue = random.NextFloat();
-                    map[x, y] = randomValue < fill;
-                }
-            }
-        }
-
-        /// <summary> Random Map smoothing algorithm implemented as Cellular Automata </summary>
-        public static void SmoothRandomMap(bool[,] map, int iterations = 5)
-        {
-            int width = map.GetWidth();
-            int height = map.GetHeight();
-
-            var mapRange = new Range2Int(0, 0, width - 1, height - 1);
-
-            for (int i = 0; i < iterations; i++)
-            {
-                for (int y = 0; y < height; y++)
-                {
-                    for (int x = 0; x < width; x++)
-                    {
-                        int counter = 0;
-
-                        for (int dy = y - 1; dy <= y + 1; dy++)
-                        {
-                            for (int dx = x - 1; dx <= x + 1; dx++)
-                            {
-                                if (dx == x && dy == y)
-                                    continue;
-
-                                if (!mapRange.Contains(dx, dy) || map[dx, dy])
-                                    counter += 1;
-                            }
-                        }
-
-                        if (counter != 4)
-                        {
-                            map[x, y] = counter > 4;
-                        }
-                    }
-                }
-            }
         }
     }
 }

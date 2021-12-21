@@ -18,12 +18,7 @@ namespace Common.Extensions
         {
             return self.IsNull() || self.IsEmpty();
         }
-
-        public static int GetLengthSafely<T>(this T[] self)
-        {
-            return self.IsNull() ? 0 : self.Length;
-        }
-
+        
         public static T First<T>(this T[] self)
         {
             return self[0];
@@ -44,15 +39,15 @@ namespace Common.Extensions
             return self.IsNullOrEmpty() ? value : self.Last();
         }
 
+        public static bool ContainsIndex<T>(this T[] self, int index)
+        {
+            return -1 < index && index < self.Length;
+        }
+
         public static bool TryGet<T>(this T[] self, int index, out T item)
         {
-            if (0 > index || index > self.Length - 1)
-            {
-                item = default;
-                return false;
-            }
-            item = self[index];
-            return true;
+            item = self.ContainsIndex(index) ? self[index] : default;
+            return item != default;
         }
 
         public static bool TryGetFirst<T>(this T[] self, out T item)
@@ -144,12 +139,22 @@ namespace Common.Extensions
             self[b] = t;
         }
 
-        public static void Populate<T>(this T[] self, T value)
+        public static T[] Populate<T>(this T[] self, T value)
         {
             for (int i = 0; i < self.Length; ++i)
             {
                 self[i] = value;
             }
+            return self;
+        }
+
+        public static T[] Populate<T>(this T[] self, Func<T> generator)
+        {
+            for (int i = 0; i < self.Length; ++i)
+            {
+                self[i] = generator();
+            }
+            return self;
         }
 
         public static bool Contains<T>(this T[] self, T value)

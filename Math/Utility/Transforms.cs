@@ -52,12 +52,12 @@ namespace Common
             return vs;
         }
 
-        public static Vector3[] Rotate(this Vector3[] vs, float r, float p, float y)
+        public static Vector3[] Rotate(this Vector3[] vs, float x, float y, float z)
         {
             for (int i = 0; i < vs.Length; ++i)
             {
                 var v = vs[i];
-                v = Mathx.Rotate(v, r, p, y);
+                v = Mathx.Rotate(v, x, y, z);
                 vs[i] = v;
             }
             return vs;

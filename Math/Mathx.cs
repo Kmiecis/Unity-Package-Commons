@@ -16,6 +16,40 @@ namespace Common
         public const float PI_QUARTER = Mathf.PI * 0.25f;
         public const float PI_INV = 1.0f / Mathf.PI;
 
+        /// <summary> Returns f raised to power p </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Pow(float f, uint p)
+        {
+            float r = 1.0f;
+            while (p > 0)
+            {
+                if ((p & 1) != 0)
+                {
+                    r *= f;
+                }
+                p >>= 1;
+                f *= f;
+            }
+            return r;
+        }
+
+        /// <summary> Returns i raised to power p </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Pow(int i, uint p)
+        {
+            int r = 1;
+            while (p > 0)
+            {
+                if ((p & 1) != 0)
+                {
+                    r *= i;
+                }
+                p >>= 1;
+                i *= i;
+            }
+            return r;
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsZero(float f)
         {
@@ -539,9 +573,9 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Rotate(Vector3 v, float r, float p, float y)
+        public static Vector3 Rotate(Vector3 v, float x, float y, float z)
         {
-            return Quaternion.Euler(r, p, y) * v;
+            return Quaternion.Euler(x, y, z) * v;
         }
 
 
