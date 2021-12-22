@@ -148,11 +148,11 @@ namespace Common.Extensions
             return self;
         }
 
-        public static T[] Populate<T>(this T[] self, Func<T> generator)
+        public static T[] Populate<T>(this T[] self, Func<T> provider)
         {
             for (int i = 0; i < self.Length; ++i)
             {
-                self[i] = generator();
+                self[i] = provider();
             }
             return self;
         }
@@ -168,6 +168,21 @@ namespace Common.Extensions
             {
                 action(self[i]);
             }
+        }
+
+        public static int GetWidth<T>(this T[][] self)
+        {
+            return self.Length;
+        }
+
+        public static int GetHeight<T>(this T[][] self)
+        {
+            return self.First().Length;
+        }
+
+        public static int GetDepth<T>(this T[][][] self)
+        {
+            return self.First().First().Length;
         }
     }
 }
