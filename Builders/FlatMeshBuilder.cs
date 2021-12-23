@@ -1,77 +1,173 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Common
 {
-    public class FlatMeshBuilder : IMeshBuilder
+    public class FlatMeshBuilder : MeshBuilder
     {
-        private List<Vector3> m_Vertices = new List<Vector3>();
-        private List<int> m_Triangles = new List<int>();
-        private List<Vector3> m_Normals = new List<Vector3>();
-
-        private List<Vector2> m_UVs = new List<Vector2>();
-        private List<Color32> m_Colors = new List<Color32>();
-
-        public void AddTriangle(Vector3 v0, Vector3 v1, Vector3 v2)
+        public FlatMeshBuilder()
         {
-            var n = Vector3.Cross(v1 - v0, v2 - v1);
-
-            m_Vertices.Add(v0);
-            m_Vertices.Add(v1);
-            m_Vertices.Add(v2);
-
-            for (int i = 0; i < 3; i++)
-            {
-                m_Triangles.Add(m_Triangles.Count);
-                m_Normals.Add(n);
-            }
-        }
-        
-        public void AddUVs(Vector2 uv0, Vector2 uv1, Vector2 uv2)
-        {
-            m_UVs.Add(uv0);
-            m_UVs.Add(uv1);
-            m_UVs.Add(uv2);
+            _options = EMeshBuildingOptions.BOUNDS;
         }
 
-        public void AddColors(Color32 c0, Color32 c1, Color32 c2)
+        public static Vector3 GetNormal(Vector3 v0, Vector3 v1, Vector3 v2)
         {
-            m_Colors.Add(c0);
-            m_Colors.Add(c1);
-            m_Colors.Add(c2);
+            return Vector3.Cross(v1 - v0, v2 - v1);
         }
 
-        public void Overwrite(Mesh mesh)
+        public override void AddTriangle(
+            Vector3 v0, Vector3 v1, Vector3 v2,
+            int t0, int t1, int t2
+        )
         {
-            mesh.Clear();
-
-            mesh.SetVertices(m_Vertices);
-            mesh.SetTriangles(m_Triangles, 0);
-
-            if (m_UVs.Count > 0)
-                mesh.SetUVs(0, m_UVs);
-
-            if (m_Colors.Count > 0)
-                mesh.SetColors(m_Colors);
-
-            mesh.SetNormals(m_Normals);
-        }
-        
-        public Mesh Build()
-        {
-            var mesh = new Mesh();
-            Overwrite(mesh);
-            return mesh;
+            var n = GetNormal(v0, v1, v2);
+            base.AddTriangle(
+                v0, v1, v2,
+                n, n, n,
+                t0, t1, t2
+            );
         }
 
-        public void Clear()
+        public override void AddTriangle(
+            Vector3 v0, Vector3 v1, Vector3 v2,
+            Color c0, Color c1, Color c2,
+            int t0, int t1, int t2
+        )
         {
-            m_Vertices.Clear();
-            m_Triangles.Clear();
-            m_Normals.Clear();
+            var n = GetNormal(v0, v1, v2);
+            base.AddTriangle(
+                v0, v1, v2,
+                n, n, n,
+                c0, c1, c2,
+                t0, t1, t2
+            );
+        }
 
-            m_UVs.Clear();
-            m_Colors.Clear();
+        public override void AddTriangle(
+            Vector3 v0, Vector3 v1, Vector3 v2,
+            Vector2 uv0, Vector2 uv1, Vector2 uv2,
+            int t0, int t1, int t2
+        )
+        {
+            var n = GetNormal(v0, v1, v2);
+            base.AddTriangle(
+                v0, v1, v2,
+                n, n, n,
+                uv0, uv1, uv2,
+                t0, t1, t2
+            );
+        }
+
+        public override void AddTriangle(Vector3 v0, Vector3 v1, Vector3 v2)
+        {
+            var n = GetNormal(v0, v1, v2);
+            base.AddTriangle(
+                v0, v1, v2,
+                n, n, n
+            );
+        }
+
+        public override void AddTriangle(
+            Vector3 v0, Vector3 v1, Vector3 v2,
+            Color c0, Color c1, Color c2
+        )
+        {
+            var n = GetNormal(v0, v1, v2);
+            base.AddTriangle(
+                v0, v1, v2,
+                n, n, n,
+                c0, c1, c2
+            );
+        }
+
+        public override void AddTriangle(
+            Vector3 v0, Vector3 v1, Vector3 v2,
+            Vector2 uv0, Vector2 uv1, Vector2 uv2
+        )
+        {
+            var n = GetNormal(v0, v1, v2);
+            base.AddTriangle(
+                v0, v1, v2,
+                n, n, n,
+                uv0, uv1, uv2
+            );
+        }
+
+        public override void AddQuad(
+            Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3,
+            int t0, int t1, int t2, int t3
+        )
+        {
+            var n = GetNormal(v0, v1, v2);
+            base.AddQuad(
+                v0, v1, v2, v3,
+                n, n, n, n,
+                t0, t1, t2, t3
+            );
+        }
+
+        public override void AddQuad(
+            Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3,
+            Color c0, Color c1, Color c2, Color c3,
+            int t0, int t1, int t2, int t3
+        )
+        {
+            var n = GetNormal(v0, v1, v2);
+            base.AddQuad(
+                v0, v1, v2, v3,
+                n, n, n, n,
+                c0, c1, c2, c3,
+                t0, t1, t2, t3
+            );
+        }
+
+        public override void AddQuad(
+            Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3,
+            Vector2 uv0, Vector2 uv1, Vector2 uv2, Vector2 uv3,
+            int t0, int t1, int t2, int t3
+        )
+        {
+            var n = GetNormal(v0, v1, v2);
+            base.AddQuad(
+                v0, v1, v2, v3,
+                n, n, n, n,
+                uv0, uv1, uv2, uv3,
+                t0, t1, t2, t3
+            );
+        }
+
+        public override void AddQuad(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3)
+        {
+            var n = GetNormal(v0, v1, v2);
+            base.AddQuad(
+                v0, v1, v2, v3,
+                n, n, n, n
+            );
+        }
+
+        public override void AddQuad(
+            Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3,
+            Color c0, Color c1, Color c2, Color c3
+        )
+        {
+            var n = GetNormal(v0, v1, v2);
+            base.AddQuad(
+                v0, v1, v2, v3,
+                n, n, n, n,
+                c0, c1, c2, c3
+            );
+        }
+
+        public override void AddQuad(
+            Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3,
+            Vector2 uv0, Vector2 uv1, Vector2 uv2, Vector2 uv3
+        )
+        {
+            var n = GetNormal(v0, v1, v2);
+            base.AddQuad(
+                v0, v1, v2, v3,
+                n, n, n, n,
+                uv0, uv1, uv2, uv3
+            );
         }
     }
 }

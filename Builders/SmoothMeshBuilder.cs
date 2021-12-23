@@ -3,72 +3,77 @@ using UnityEngine;
 
 namespace Common
 {
-    public class SmoothMeshBuilder : IMeshBuilder
+    public class SmoothVertexBuilder : MeshBuilder
     {
-        private List<Vector3> m_Vertices = new List<Vector3>();
-        private List<int> m_Triangles = new List<int>();
-        private List<Vector2> m_UVs = new List<Vector2>();
+        protected float _scale;
+        protected Dictionary<Vector3Int, int> _trianglesMap = new Dictionary<Vector3Int, int>();
 
-        private int m_Scale;
-        private Dictionary<Vector3Int, int> m_UniqueTriangles = new Dictionary<Vector3Int, int>();
-
-        public SmoothMeshBuilder(float precision = 0.01f)
+        public SmoothVertexBuilder(float precision = 0.01f)
         {
-            m_Scale = Mathf.RoundToInt(1.0f / precision);
-        }
-        
-        public void AddTriangle(
-            Vector3 v0, Vector3 v1, Vector3 v2,
-            Vector2 uv0, Vector2 uv1, Vector2 uv2
-        )
-        {
-            AddVertex(v0, uv0);
-            AddVertex(v1, uv1);
-            AddVertex(v2, uv2);
+            _options = EMeshBuildingOptions.BOUNDS | EMeshBuildingOptions.NORMALS;
+            _scale = Mathf.Round(1.0f / precision);
         }
 
-        private void AddVertex(Vector3 v, Vector2 uv)
+        protected Vector3Int ToKey(Vector3 v)
         {
-            var key = Mathx.RoundToInt(v * m_Scale);
-            if (m_UniqueTriangles.TryGetValue(key, out int t))
+            return Mathx.RoundToInt(v * _scale);
+        }
+
+        protected bool TryAddTriangle(Vector3 v, int t)
+        {
+            var key = ToKey(v);
+            if (_trianglesMap.TryGetValue(key, out int _t))
             {
-                m_Triangles.Add(t);
+                AddTriangle(_t);
+                return true;
             }
             else
             {
-                m_Triangles.Add(m_Triangles.Count);
-                m_Vertices.Add(v);
-                m_UVs.Add(uv);
+                _trianglesMap[key] = t;
+                return false;
             }
         }
-        
-        public void Overwrite(Mesh mesh)
+
+        public override void Clear()
         {
-            mesh.Clear();
-
-            mesh.SetVertices(m_Vertices);
-            mesh.SetTriangles(m_Triangles, 0);
-
-            if (m_UVs.Count > 0)
-                mesh.SetUVs(0, m_UVs);
-
-            mesh.RecalculateNormals();
+            _trianglesMap.Clear();
+            base.Clear();
         }
 
-        public Mesh Build()
+        public override void AddVertex(Vector3 v, int t)
         {
-            var mesh = new Mesh();
-            Overwrite(mesh);
-            return mesh;
+            if (!TryAddTriangle(v, t))
+                base.AddVertex(v, t);
         }
 
-        public void Clear()
+        public override void AddVertex(Vector3 v, Color c, int t)
         {
-            m_Vertices.Clear();
-            m_Triangles.Clear();
-            m_UVs.Clear();
+            if (!TryAddTriangle(v, t))
+                base.AddVertex(v, c, t);
+        }
 
-            m_UniqueTriangles.Clear();
+        public override void AddVertex(Vector3 v, Vector2 uv, int t)
+        {
+            if (!TryAddTriangle(v, t))
+                base.AddVertex(v, uv, t);
+        }
+
+        public override void AddVertex(Vector3 v, Vector3 n, int t)
+        {
+            if (!TryAddTriangle(v, t))
+                base.AddVertex(v, n, t);
+        }
+
+        public override void AddVertex(Vector3 v, Vector3 n, Color c, int t)
+        {
+            if (!TryAddTriangle(v, t))
+                base.AddVertex(v, n, c, t);
+        }
+
+        public override void AddVertex(Vector3 v, Vector3 n, Vector2 uv, int t)
+        {
+            if (!TryAddTriangle(v, t))
+                base.AddVertex(v, n, uv, t);
         }
     }
 }
