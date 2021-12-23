@@ -92,5 +92,28 @@ namespace Common
         {
             return ToColor((Mathx.Add(v.XZY(), 1.0f)) * 0.5f);
         }
+
+        /// <summary>Checks whether <see cref="Color"/> has any NaN variable</summary>
+        public static bool HasNaN(Color c)
+        {
+            return (
+                float.IsNaN(c.r) ||
+                float.IsNaN(c.g) ||
+                float.IsNaN(c.b) ||
+                float.IsNaN(c.a)
+            );
+        }
+
+        /// <summary>Checks whether <see cref="Color"/> has all NaN variables</summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsNaN(Color c)
+        {
+            return (
+                float.IsNaN(c.r) &&
+                float.IsNaN(c.g) &&
+                float.IsNaN(c.b) &&
+                float.IsNaN(c.a)
+            );
+        }
     }
 }
