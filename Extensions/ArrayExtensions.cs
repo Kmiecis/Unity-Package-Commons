@@ -18,6 +18,11 @@ namespace Common.Extensions
         {
             return self.IsNull() || self.IsEmpty();
         }
+
+        public static T At<T>(this T[] self, int index)
+        {
+            return self[index];
+        }
         
         public static T First<T>(this T[] self)
         {
@@ -26,7 +31,7 @@ namespace Common.Extensions
 
         public static T FirstOrDefault<T>(this T[] self, T value = default)
         {
-            return self.IsNullOrEmpty() ? value : self.First();
+            return self.IsEmpty() ? value : self.First();
         }
 
         public static T Last<T>(this T[] self)
@@ -36,7 +41,7 @@ namespace Common.Extensions
 
         public static T LastOrDefault<T>(this T[] self, T value = default)
         {
-            return self.IsNullOrEmpty() ? value : self.Last();
+            return self.IsEmpty() ? value : self.Last();
         }
 
         public static bool ContainsIndex<T>(this T[] self, int index)
@@ -44,7 +49,7 @@ namespace Common.Extensions
             return -1 < index && index < self.Length;
         }
 
-        public static bool TryGet<T>(this T[] self, int index, out T item)
+        public static bool TryGetAt<T>(this T[] self, int index, out T item)
         {
             item = self.ContainsIndex(index) ? self[index] : default;
             return item != default;
@@ -52,12 +57,12 @@ namespace Common.Extensions
 
         public static bool TryGetFirst<T>(this T[] self, out T item)
         {
-            return self.TryGet(0, out item);
+            return self.TryGetAt(0, out item);
         }
 
         public static bool TryGetLast<T>(this T[] self, out T item)
         {
-            return self.TryGet(self.Length - 1, out item);
+            return self.TryGetAt(self.Length - 1, out item);
         }
 
         public static bool TryIndexOf<T>(this T[] self, T value, out int index)
@@ -139,22 +144,36 @@ namespace Common.Extensions
             self[b] = t;
         }
 
-        public static T[] Populate<T>(this T[] self, T value)
+        public static T[] Populate<T>(this T[] self, T value, int count)
+            where T : struct
         {
-            for (int i = 0; i < self.Length; ++i)
+            for (int i = 0; i < count; ++i)
             {
                 self[i] = value;
             }
             return self;
         }
 
-        public static T[] Populate<T>(this T[] self, Func<T> provider)
+        public static T[] Populate<T>(this T[] self, T value)
+            where T : struct
         {
-            for (int i = 0; i < self.Length; ++i)
+            return self.Populate(value, self.Length);
+        }
+
+        public static T[] Populate<T>(this T[] self, Func<T> provider, int count)
+            where T : class
+        {
+            for (int i = 0; i < count; ++i)
             {
                 self[i] = provider();
             }
             return self;
+        }
+
+        public static T[] Populate<T>(this T[] self, Func<T> provider)
+            where T : class
+        {
+            return self.Populate(provider, self.Length);
         }
 
         public static bool Contains<T>(this T[] self, T value)

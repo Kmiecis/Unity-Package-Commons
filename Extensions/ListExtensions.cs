@@ -26,6 +26,11 @@ namespace Common.Extensions
             return self.IsNull() ? 0 : self.Count;
         }
 
+        public static T At<T>(this List<T> self, int index)
+        {
+            return self[index];
+        }
+
         public static T First<T>(this List<T> self)
         {
             return self[0];
@@ -33,7 +38,7 @@ namespace Common.Extensions
 
         public static T FirstOrDefault<T>(this List<T> self, T value = default)
         {
-            return self.IsNullOrEmpty() ? value : self.First();
+            return self.IsEmpty() ? value : self.First();
         }
 
         public static T Last<T>(this List<T> self)
@@ -43,28 +48,23 @@ namespace Common.Extensions
 
         public static T LastOrDefault<T>(this List<T> self, T value = default)
         {
-            return self.IsNullOrEmpty() ? value : self.Last();
+            return self.IsEmpty() ? value : self.Last();
         }
 
-        public static bool TryGet<T>(this List<T> self, int index, out T item)
+        public static bool TryGetAt<T>(this List<T> self, int index, out T item)
         {
-            if (0 > index || index > self.Count - 1)
-            {
-                item = default;
-                return false;
-            }
-            item = self[index];
-            return true;
+            item = (-1 < index && index < self.Count) ? self[index] : default;
+            return item != default;
         }
 
         public static bool TryGetFirst<T>(this List<T> self, out T item)
         {
-            return self.TryGet(0, out item);
+            return self.TryGetAt(0, out item);
         }
 
         public static bool TryGetLast<T>(this List<T> self, out T item)
         {
-            return self.TryGet(self.Count - 1, out item);
+            return self.TryGetAt(self.Count - 1, out item);
         }
 
         public static bool TryIndexOf<T>(this List<T> self, T item, out int index)
@@ -151,16 +151,36 @@ namespace Common.Extensions
             self.Swap(index, self.Count - 1);
         }
 
+        public static List<T> Populate<T>(this List<T> self, T value, int count)
+            where T : struct
+        {
+            for (int i = 0; i < count; ++i)
+            {
+                self.Add(value);
+            }
+            return self;
+        }
+
         public static List<T> Populate<T>(this List<T> self, T value)
+            where T : struct
         {
             return self.Populate(value, self.Capacity);
         }
 
-        public static List<T> Populate<T>(this List<T> self, T value, int count)
+        public static List<T> Populate<T>(this List<T> self, Func<T> provider, int count)
+            where T : class
         {
             for (int i = 0; i < count; ++i)
-                self.Add(value);
+            {
+                self.Add(provider());
+            }
             return self;
+        }
+
+        public static List<T> Populate<T>(this List<T> self, Func<T> provider)
+            where T : class
+        {
+            return self.Populate(provider, self.Capacity);
         }
 
         public static bool AddUnique<T>(this List<T> self, T item)
