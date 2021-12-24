@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Common
 {
@@ -53,6 +54,8 @@ namespace Common
         {
             mesh.Clear();
 
+            mesh.indexFormat = _vertices.Count > ushort.MaxValue ? IndexFormat.UInt32 : IndexFormat.UInt16;
+
             mesh.SetVertices(_vertices);
             mesh.SetTriangles(_triangles, 0);
 
@@ -69,9 +72,6 @@ namespace Common
                 mesh.RecalculateNormals();
             if (BitUtility.HasFlag((int)_options, (int)EMeshBuildingOptions.TANGENTS))
                 mesh.RecalculateTangents();
-
-            if (_vertices.Count > ushort.MaxValue)
-                Debug.LogWarning("Mesh vertex overflow with " + (_vertices.Count - ushort.MaxValue) + " vertices dropped");
         }
 
         public Mesh Build()
