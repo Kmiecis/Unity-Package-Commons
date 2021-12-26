@@ -1,5 +1,6 @@
 ﻿using Common.Extensions;
 using System;
+using UnityEngine;
 using Random = System.Random;
 
 namespace Common.BehaviourTrees
@@ -9,24 +10,23 @@ namespace Common.BehaviourTrees
     /// </summary>
     public sealed class BT_Wait : BT_ATask
     {
-        private readonly Random _random = new Random();
         private readonly float _duration;
         private readonly float _deviation;
-        private readonly bool _unscaled;
+        private readonly Random _random;
 
         private float _timestamp = 0.0f;
 
-        public BT_Wait(float duration, float deviation = 0.0f, bool unscaled = false) :
+        public BT_Wait(float duration, float deviation = 0.0f, Random random = null) :
             base("Wait")
         {
             _duration = duration;
             _deviation = deviation;
-            _unscaled = unscaled;
+            _random = random ?? new Random();
         }
 
         private float Nowstamp
         {
-            get => TimeUtility.GetTime(_unscaled);
+            get => Time.time;
         }
 
         public float Remaining

@@ -9,10 +9,10 @@ namespace Common.BehaviourTrees
     {
         private readonly Random _random;
 
-        public BT_RandomNode(string name = "") :
+        public BT_RandomNode(string name = "", Random random = null) :
             base(name)
         {
-            _random = new Random();
+            _random = random ?? new Random();
         }
         
         protected override void OnStart()

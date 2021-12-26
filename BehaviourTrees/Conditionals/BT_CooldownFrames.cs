@@ -9,17 +9,18 @@ namespace Common.BehaviourTrees
     /// </summary>
     public sealed class BT_CooldownFrames : BT_AConditional
     {
-        private readonly Random _random = new Random();
         private readonly int _cooldown;
         private readonly int _deviation;
+        private readonly Random _random;
 
         private int _framestamp = 0;
 
-        public BT_CooldownFrames(int cooldown, int deviation = 0) :
+        public BT_CooldownFrames(int cooldown, int deviation = 0, Random random = null) :
             base("Cooldown")
         {
             _cooldown = cooldown;
             _deviation = deviation;
+            _random = random ?? new Random();
         }
 
         private int Nowstamp

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Common.Extensions;
+using System;
+using UnityEngine;
+using Random = System.Random;
 
 namespace Common.BehaviourTrees
 {
@@ -8,20 +11,22 @@ namespace Common.BehaviourTrees
     public sealed class BT_RepeatFor : BT_ADecorator
     {
         private readonly float _duration;
-        private readonly bool _unscaled;
+        private readonly float _deviation;
+        private readonly Random _random;
 
         private float _timestamp;
 
-        public BT_RepeatFor(float duration, bool unscaled = false) :
+        public BT_RepeatFor(float duration, float deviation = 0.0f, Random random = null) :
             base("RepeatFor")
         {
             _duration = duration;
-            _unscaled = unscaled;
+            _deviation = deviation;
+            _random = random ?? new Random();
         }
 
         private float Nowstamp
         {
-            get => TimeUtility.GetTime(_unscaled);
+            get => Time.time;
         }
 
         public float Remaining
@@ -34,7 +39,7 @@ namespace Common.BehaviourTrees
         {
             base.OnStart();
 
-            Remaining = _duration;
+            Remaining = _duration + _random.NextFloat(-_deviation, +_deviation);
         }
 
         public override BT_EStatus Decorate(BT_EStatus status)

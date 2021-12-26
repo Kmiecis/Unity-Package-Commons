@@ -9,18 +9,18 @@ namespace Common.BehaviourTrees
     /// </summary>
     public sealed class BT_WaitFrames : BT_ATask
     {
-        private readonly Random _random;
         private readonly int _count;
         private readonly int _deviation;
+        private readonly Random _random;
 
         private int _framestamp = 0;
 
-        public BT_WaitFrames(int count, int deviation = 0) :
+        public BT_WaitFrames(int count, int deviation = 0, Random random = null) :
             base("WaitFrames")
         {
-            _random = new Random();
             _count = count;
             _deviation = deviation;
+            _random = random ?? new Random();
         }
 
         private int Nowstamp
