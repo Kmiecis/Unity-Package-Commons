@@ -7,7 +7,7 @@ namespace Common
     public static class Noisex
     {
         public static void GetNoiseMap(
-            float[,] map, int dx = 0, int dy = 0,
+            float[][] map, int dx = 0, int dy = 0,
             int octaves = 1, float persistance = 0.5f, float lacunarity = 2.0f,
             float sx = 1.0f, float sy = 1.0f, int seed = 0
         )
@@ -52,12 +52,12 @@ namespace Common
                         frequency *= lacunarity;
                     }
 
-                    map[x, y] = Mathf.SmoothStep(pmin, pmax, value);
+                    map[x][y] = Mathf.SmoothStep(pmin, pmax, value);
                 }
             }
         }
 
-        public static void GetRandomMap(bool[,] map, float fill = 0.5f, int seed = 0)
+        public static void GetRandomMap(bool[][] map, float fill = 0.5f, int seed = 0)
         {
             var random = new Random(seed);
 
@@ -69,12 +69,12 @@ namespace Common
                 for (int x = 0; x < width; ++x)
                 {
                     var rv = random.NextFloat();
-                    map[x, y] = rv < fill;
+                    map[x][y] = rv < fill;
                 }
             }
         }
 
-        public static void GetRandomMap(int[,] map, int min = 0, int max = 1, int seed = 0)
+        public static void GetRandomMap(int[][] map, int min = 0, int max = 1, int seed = 0)
         {
             var random = new Random(seed);
 
@@ -86,12 +86,12 @@ namespace Common
                 for (int x = 0; x < width; ++x)
                 {
                     var rv = random.Next(min, max);
-                    map[x, y] = rv;
+                    map[x][y] = rv;
                 }
             }
         }
 
-        public static void SmoothRandomMap(bool[,] map, int iterations = 5)
+        public static void SmoothRandomMap(bool[][]map, int iterations = 5)
         {
             int width = map.GetWidth();
             int height = map.GetHeight();
@@ -113,14 +113,14 @@ namespace Common
                                 if (dx == x && dy == y)
                                     continue;
 
-                                if (!mapRange.Contains(dx, dy) || map[dx, dy])
+                                if (!mapRange.Contains(dx, dy) || map[dx][dy])
                                     counter += 1;
                             }
                         }
 
                         if (counter != 4)
                         {
-                            map[x, y] = counter > 4;
+                            map[x][y] = counter > 4;
                         }
                     }
                 }
