@@ -183,6 +183,11 @@ namespace Common.Extensions
             return self.Populate(provider, self.Capacity);
         }
 
+        public static void AddRange<T>(this List<T> self, params T[] items)
+        {
+            self.AddRange(items);
+        }
+
         public static bool AddUnique<T>(this List<T> self, T item)
         {
             if (!self.Contains(item))

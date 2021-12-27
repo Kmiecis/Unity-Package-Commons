@@ -203,5 +203,30 @@ namespace Common.Extensions
         {
             return self.First().First().Length;
         }
+
+        public static int GetWidth<T>(this T[,] self)
+        {
+            return self.GetLength(0);
+        }
+
+        public static int GetHeight<T>(this T[,] self)
+        {
+            return self.GetLength(1);
+        }
+
+        public static int GetWidth<T>(this T[,,] self)
+        {
+            return self.GetLength(0);
+        }
+
+        public static int GetHeight<T>(this T[,,] self)
+        {
+            return self.GetLength(1);
+        }
+
+        public static int GetDepth<T>(this T[,,] self)
+        {
+            return self.GetLength(2);
+        }
     }
 }

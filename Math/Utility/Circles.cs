@@ -9,7 +9,7 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Diameter(float r)
         {
-            return r * 2.0f;
+            return 2.0f * r;
         }
 
         /// <summary> Calculates area of a circle with radius 'r' </summary>
@@ -60,7 +60,7 @@ namespace Common
             return dx * dx + dy * dy <= sr * sr;
         }
 
-        /// <summary> Calculates circle with center in 'c' and radius 'r' from points 'v0', 'v1' and 'v2' </summary>
+        /// <summary> Attempts to calculate circle with center in 'c' and radius 'r' from three points </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool TryCreate(Vector2 v0, Vector2 v1, Vector2 v2, out Vector2 c, out float r)
         {
@@ -86,11 +86,9 @@ namespace Common
             if (Mathx.IsZero(detM11))
                 return false;
 
-            var x = 0.5f * detM12 / detM11;
-            var y = -0.5f * detM13 / detM11;
-
-            c = new Vector2(x, y);
-            r = Mathf.Sqrt(x * x + y * y + detM14 / detM11);
+            c.x = 0.5f * detM12 / detM11;
+            c.y = -0.5f * detM13 / detM11;
+            r = Mathf.Sqrt(c.x * c.x + c.y * c.y + detM14 / detM11);
             
             return true;
         }

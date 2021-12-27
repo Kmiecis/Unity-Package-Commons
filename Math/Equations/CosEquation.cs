@@ -18,7 +18,7 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Evaluate(float x, float dx = 0.0f, float sx = 1.0f, float dy = 0.0f, float sy = 1.0f)
         {
-            return (Mathf.Cos(((x + dx) * sx) * Mathx.PI_HALF) + dy) * sy;
+            return (Mathf.Cos(((x + dx) * sx) * 0.5f * Mathf.PI) + dy) * sy;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

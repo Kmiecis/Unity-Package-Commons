@@ -59,7 +59,7 @@ namespace Common.Extensions
 
         public static Vector2 NextUnitVector2(this Random self)
         {
-            var angle = self.NextFloat() * Mathx.PI_DOUBLE;
+            var angle = self.NextFloat() * 2.0f * Mathf.PI;
             return new Vector2(
                 Mathf.Cos(angle),
                 Mathf.Sin(angle)
@@ -92,9 +92,9 @@ namespace Common.Extensions
 
         public static Vector3 NextUnitVector3(this Random self)
         {
-            var theta = self.NextFloat() * Mathx.PI_DOUBLE;
-            var omega = self.NextFloat() * Mathx.PI_DOUBLE;
-            var t = Mathf.Acos(omega * Mathx.PI_INV - 1.0f);
+            var theta = self.NextFloat() * 2.0f * Mathf.PI;
+            var omega = self.NextFloat() * 2.0f * Mathf.PI;
+            var t = Mathf.Acos(omega * (1.0f / Mathf.PI) - 1.0f);
             return new Vector3(
                 Mathf.Sin(t) * Mathf.Cos(theta),
                 Mathf.Sin(t) * Mathf.Sin(theta),

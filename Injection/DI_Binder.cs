@@ -88,6 +88,69 @@ namespace Common.Injection
             }
         }
 
+        private static void Install(FieldInfo field, object target, DI_Install attribute)
+        {
+            var type = attribute.type ?? field.FieldType;
+
+            var dependency = field.GetValue(target);
+
+            // Unity-specific. Could be abstracted in the future by using DI_Provider attribute on methods
+            if (dependency == null)
+            {
+                if (type.IsSubclassOf(typeof(Component)))
+                {
+                    dependency = UnityEngine.Object.FindObjectOfType(type);
+
+                    if (dependency == null)
+                    {
+                        var gameObject = new GameObject($"{type.Name}(Inject)");
+                        dependency = gameObject.AddComponent(type);
+                    }
+                }
+            }
+            else
+            {
+                if (
+                    dependency is Component component &&
+                    component.gameObject.IsPrefab()
+                )
+                {
+                    dependency = UnityEngine.Object.Instantiate(component);
+                }
+            }
+            //
+
+            if (dependency == null)
+            {
+                var args = attribute.args;
+                dependency = args != null ? Activator.CreateInstance(type, args) : Activator.CreateInstance(type);
+            }
+            
+#if ENABLE_DI_LOGS
+            DebugLog("Installing", field, target, dependency);
+#endif
+            field.SetValue(target, dependency);
+
+            AddDependency(type, dependency);
+        }
+
+        private static void Uninstall(FieldInfo field, object target, DI_Install attribute)
+        {
+            var type = attribute.type ?? field.FieldType;
+
+            var dependency = field.GetValue(target);
+
+            if (dependency != null)
+            {
+                RemoveDependency(type, dependency);
+            }
+
+#if ENABLE_DI_LOGS
+            DebugLog("Uninstalling", field, target);
+#endif
+            field.SetValue(target, null);
+        }
+
         private static void Inject(FieldInfo field, object target, DI_Inject attribute)
         {
             var type = attribute.type ?? field.FieldType;
@@ -131,65 +194,6 @@ namespace Common.Injection
 
 #if ENABLE_DI_LOGS
             DebugLog("Uninjecting", field, target);
-#endif
-            field.SetValue(target, null);
-        }
-
-        private static void Install(FieldInfo field, object target, DI_Install attribute)
-        {
-            var type = attribute.type ?? field.FieldType;
-
-            var dependency = field.GetValue(target);
-            if (dependency != null)
-            {
-                if (
-                    dependency is Component component &&
-                    component.gameObject.IsPrefab()
-                )
-                {
-                    dependency = UnityEngine.Object.Instantiate(component);
-                }
-            }
-            else
-            {
-                if (type.IsSubclassOf(typeof(Component)))
-                {
-                    dependency = UnityEngine.Object.FindObjectOfType(type);
-
-                    if (dependency == null)
-                    {
-                        var gameObject = new GameObject($"{type.Name}(Clone)");
-                        dependency = gameObject.AddComponent(type);
-                    }
-                }
-                else
-                {
-                    var args = attribute.args;
-                    dependency = args != null ? Activator.CreateInstance(type, args) : Activator.CreateInstance(type);
-                }
-            }
-            
-#if ENABLE_DI_LOGS
-            DebugLog("Installing", field, target, dependency);
-#endif
-            field.SetValue(target, dependency);
-
-            AddDependency(type, dependency);
-        }
-
-        private static void Uninstall(FieldInfo field, object target, DI_Install attribute)
-        {
-            var type = attribute.type ?? field.FieldType;
-
-            var dependency = field.GetValue(target);
-
-            if (dependency != null)
-            {
-                RemoveDependency(type, dependency);
-            }
-
-#if ENABLE_DI_LOGS
-            DebugLog("Uninstalling", field, target);
 #endif
             field.SetValue(target, null);
         }

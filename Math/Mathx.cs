@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using Common.Extensions;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Common
@@ -9,47 +10,7 @@ namespace Common
 
         public const float ROOT_3 = 1.73205080757f;
         public const float ROOT_2 = 1.41421356237f;
-
-        public const float PI_DOUBLE = Mathf.PI * 2.0f;
-        public const float PI_HALF = Mathf.PI * 0.5f;
-        public const float PI_QUARTER = Mathf.PI * 0.25f;
-        public const float PI_INV = 1.0f / Mathf.PI;
-
-        /// <summary> Returns f raised to power p </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Pow(float f, uint p)
-        {
-            float r = 1.0f;
-            while (p > 0)
-            {
-                if ((p & 1) != 0)
-                {
-                    r *= f;
-                }
-                p >>= 1;
-                f *= f;
-            }
-            return r;
-        }
-
-        /// <summary> Returns i raised to power p </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int Pow(int i, uint p)
-        {
-            int r = 1;
-            while (p > 0)
-            {
-                if ((p & 1) != 0)
-                {
-                    r *= i;
-                }
-                p >>= 1;
-                i *= i;
-            }
-            return r;
-        }
-
-
+        
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsZero(float f)
         {
@@ -237,73 +198,92 @@ namespace Common
             );
         }
 
-
+        
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsPositiveInfinity(Vector2 v)
+        public static bool HasInfinity(Vector2 v)
         {
             return (
-                float.IsPositiveInfinity(v.x) &&
-                float.IsPositiveInfinity(v.y)
+                float.IsInfinity(v.x) ||
+                float.IsInfinity(v.y)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsPositiveInfinity(Vector3 v)
+        public static bool HasInfinity(Vector3 v)
         {
             return (
-                float.IsPositiveInfinity(v.x) &&
-                float.IsPositiveInfinity(v.y) &&
-                float.IsPositiveInfinity(v.z)
+                float.IsInfinity(v.x) ||
+                float.IsInfinity(v.y) ||
+                float.IsInfinity(v.z)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsPositiveInfinity(Vector4 v)
+        public static bool HasInfinity(Vector4 v)
         {
             return (
-                float.IsPositiveInfinity(v.x) &&
-                float.IsPositiveInfinity(v.y) &&
-                float.IsPositiveInfinity(v.z) &&
-                float.IsPositiveInfinity(v.w)
+                float.IsInfinity(v.x) ||
+                float.IsInfinity(v.y) ||
+                float.IsInfinity(v.z) ||
+                float.IsInfinity(v.w)
             );
         }
 
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsNegativeInfinity(Vector2 v)
+        public static bool HasNaN(Vector2 v)
         {
             return (
-                float.IsNegativeInfinity(v.x) &&
-                float.IsNegativeInfinity(v.y)
+                float.IsNaN(v.x) ||
+                float.IsNaN(v.y)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsNegativeInfinity(Vector3 v)
+        public static bool HasNaN(Vector3 v)
         {
             return (
-                float.IsNegativeInfinity(v.x) &&
-                float.IsNegativeInfinity(v.y) &&
-                float.IsNegativeInfinity(v.z)
+                float.IsNaN(v.x) ||
+                float.IsNaN(v.y) ||
+                float.IsNaN(v.z)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsNegativeInfinity(Vector4 v)
+        public static bool HasNaN(Vector4 v)
         {
             return (
-                float.IsNegativeInfinity(v.x) &&
-                float.IsNegativeInfinity(v.y) &&
-                float.IsNegativeInfinity(v.z) &&
-                float.IsNegativeInfinity(v.w)
+                float.IsNaN(v.x) ||
+                float.IsNaN(v.y) ||
+                float.IsNaN(v.z) ||
+                float.IsNaN(v.w)
             );
+        }
+
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsValid(Vector2 v)
+        {
+            return !HasNaN(v) && !HasInfinity(v);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsValid(Vector3 v)
+        {
+            return !HasNaN(v) && !HasInfinity(v);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsValid(Vector4 v)
+        {
+            return !HasNaN(v) && !HasInfinity(v);
         }
 
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Lerp(Vector2 a, Vector2 b, Vector2 t)
         {
-            return a + Mul(t, (b - a));
+            return a + Mul(t, b - a);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -711,6 +691,13 @@ namespace Common
             return Quaternion.Euler(x, y, z) * v;
         }
 
+
+        /// <summary> Calculates index wrapped around by 'count' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int WrapIndex(int i, int count)
+        {
+            return Wrap(i, 0, count);
+        }
 
         /// <summary> Calculates next index wrapped around by 'count' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1593,6 +1580,74 @@ namespace Common
                 Mathf.Max(i, v.y),
                 Mathf.Max(i, v.z)
             );
+        }
+
+        /// <summary> Returns f raised to power p </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Pow(float f, uint p)
+        {
+            float r = 1.0f;
+            while (p > 0)
+            {
+                if ((p & 1) != 0)
+                {
+                    r *= f;
+                }
+                p >>= 1;
+                f *= f;
+            }
+            return r;
+        }
+
+        /// <summary> Returns i raised to power p </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Pow(int i, uint p)
+        {
+            int r = 1;
+            while (p > 0)
+            {
+                if ((p & 1) != 0)
+                {
+                    r *= i;
+                }
+                p >>= 1;
+                i *= i;
+            }
+            return r;
+        }
+
+        /// <summary> Calculates determinant of an [n,n] matrix </summary>
+        public static float Determinant(float[,] a)
+        {
+            var n = a.GetLength(0);
+            if (n == 2)
+            {
+                return a[0, 0] * a[1, 1] - a[1, 0] * a[0, 1];
+            }
+            else
+            {
+                float[,] m = new float[n - 1, n - 1];
+
+                float d = 0.0f;
+                for (int c1 = 0; c1 < n; c1++)
+                {
+                    for (int i = 1; i < n; i++)
+                    {
+                        int c2 = 0;
+                        for (int j = 0; j < n; j++)
+                        {
+                            if (j == c1)
+                                continue;
+
+                            m[i - 1, c2] = a[i, j];
+                            c2++;
+                        }
+                    }
+
+                    d = d + Mathf.Pow(-1.0f, c1) * a[0, c1] * Determinant(m);
+                }
+                return d;
+            }
         }
     }
 }
