@@ -95,7 +95,6 @@ namespace Common
                 a[i, 0] = p[i, 0] * p[i, 0] + p[i, 1] * p[i, 1] + p[i, 2] * p[i, 2];
             }
 
-            // Find minor 1, 2.
             for (int i = 0; i < 4; i++)
             {
                 a[i, 1] = p[i, 1];
@@ -103,7 +102,6 @@ namespace Common
             }
             float detM12 = Mathx.Determinant(a);
 
-            // Find minor 1, 3.
             for (int i = 0; i < 4; i++)
             {
                 a[i, 1] = p[i, 0];
@@ -111,7 +109,6 @@ namespace Common
             }
             float detM13 = Mathx.Determinant(a);
 
-            // Find minor 1, 4.
             for (int i = 0; i < 4; i++)
             {
                 a[i, 1] = p[i, 0];
@@ -119,7 +116,6 @@ namespace Common
             }
             float detM14 = Mathx.Determinant(a);
 
-            // Find minor 1, 5.
             for (int i = 0; i < 4; i++)
             {
                 a[i, 1] = p[i, 0];

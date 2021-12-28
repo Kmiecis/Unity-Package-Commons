@@ -22,9 +22,9 @@ namespace Common.Extensions
             return new Vector2(x, y);
         }
 
-        public static Vector2 GetFrustumSize(this Camera self, float at)
+        public static Vector2 GetFrustumSize(this Camera self, float distance)
         {
-            var y = 2.0f * at * Mathf.Tan(self.fieldOfView * 0.5f * Mathf.Deg2Rad);
+            var y = Mathx.SizeAtDistance(self.fieldOfView, distance);
             var x = y * self.aspect;
             return new Vector2(x, y);
         }

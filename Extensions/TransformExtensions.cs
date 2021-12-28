@@ -13,5 +13,32 @@ namespace Common.Extensions
                 child.Destroy();
             }
         }
+
+        public static Vector3 TransformDirectionTo(this Transform self, Vector3 position, Transform target)
+        {
+            if (self != null)
+                position = self.TransformDirection(position);
+            if (target != null)
+                position = target.InverseTransformDirection(position);
+            return position;
+        }
+
+        public static Vector3 TransformPointTo(this Transform self, Vector3 position, Transform target)
+        {
+            if (self != null)
+                position = self.TransformPoint(position);
+            if (target != null)
+                position = target.InverseTransformPoint(position);
+            return position;
+        }
+
+        public static Vector3 TransformVectorTo(this Transform self, Vector3 position, Transform target)
+        {
+            if (self != null)
+                position = self.TransformVector(position);
+            if (target != null)
+                position = target.InverseTransformVector(position);
+            return position;
+        }
     }
 }

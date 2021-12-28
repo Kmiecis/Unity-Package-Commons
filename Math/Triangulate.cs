@@ -1,3 +1,4 @@
+using Common.Extensions;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -42,15 +43,11 @@ namespace Common
 
                                 if (Vector3.Dot(triangleNormal, normal) > 0)
                                 {
-                                    ts.Add(i);
-                                    ts.Add(j);
-                                    ts.Add(k);
+                                    ts.AddRange(i, j, k);
                                 }
                                 else
                                 {
-                                    ts.Add(k);
-                                    ts.Add(j);
-                                    ts.Add(i);
+                                    ts.AddRange(k, j, i);
                                 }
                             }
                         }

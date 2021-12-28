@@ -250,8 +250,63 @@ namespace Common
                 i + v.w
             );
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Matrix4x4 Add(Matrix4x4 a, Matrix4x4 b)
+        {
+            return new Matrix4x4(
+                a.GetColumn(0) + b.GetColumn(0),
+                a.GetColumn(1) + b.GetColumn(1),
+                a.GetColumn(2) + b.GetColumn(2),
+                a.GetColumn(3) + b.GetColumn(3)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Matrix4x4 Add(Matrix4x4 m, float f)
+        {
+            return new Matrix4x4(
+                Add(m.GetColumn(0), f),
+                Add(m.GetColumn(1), f),
+                Add(m.GetColumn(2), f),
+                Add(m.GetColumn(3), f)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Matrix4x4 Add(float f, Matrix4x4 m)
+        {
+            return new Matrix4x4(
+                Add(f, m.GetColumn(0)),
+                Add(f, m.GetColumn(1)),
+                Add(f, m.GetColumn(2)),
+                Add(f, m.GetColumn(3))
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Matrix4x4 Add(Matrix4x4 m, int i)
+        {
+            return new Matrix4x4(
+                Add(m.GetColumn(0), i),
+                Add(m.GetColumn(1), i),
+                Add(m.GetColumn(2), i),
+                Add(m.GetColumn(3), i)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Matrix4x4 Add(int i, Matrix4x4 m)
+        {
+            return new Matrix4x4(
+                Add(i, m.GetColumn(0)),
+                Add(i, m.GetColumn(1)),
+                Add(i, m.GetColumn(2)),
+                Add(i, m.GetColumn(3))
+            );
+        }
         #endregion
-        
+
         #region SUBTRACT
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Sub(Vector2 a, Vector2 b)
@@ -495,6 +550,61 @@ namespace Common
                 i - v.y,
                 i - v.z,
                 i - v.w
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Matrix4x4 Sub(Matrix4x4 a, Matrix4x4 b)
+        {
+            return new Matrix4x4(
+                a.GetColumn(0) - b.GetColumn(0),
+                a.GetColumn(1) - b.GetColumn(1),
+                a.GetColumn(2) - b.GetColumn(2),
+                a.GetColumn(3) - b.GetColumn(3)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Matrix4x4 Sub(Matrix4x4 m, float f)
+        {
+            return new Matrix4x4(
+                Sub(m.GetColumn(0), f),
+                Sub(m.GetColumn(1), f),
+                Sub(m.GetColumn(2), f),
+                Sub(m.GetColumn(3), f)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Matrix4x4 Sub(float f, Matrix4x4 m)
+        {
+            return new Matrix4x4(
+                Sub(f, m.GetColumn(0)),
+                Sub(f, m.GetColumn(1)),
+                Sub(f, m.GetColumn(2)),
+                Sub(f, m.GetColumn(3))
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Matrix4x4 Sub(Matrix4x4 m, int i)
+        {
+            return new Matrix4x4(
+                Sub(m.GetColumn(0), i),
+                Sub(m.GetColumn(1), i),
+                Sub(m.GetColumn(2), i),
+                Sub(m.GetColumn(3), i)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Matrix4x4 Sub(int i, Matrix4x4 m)
+        {
+            return new Matrix4x4(
+                Sub(i, m.GetColumn(0)),
+                Sub(i, m.GetColumn(1)),
+                Sub(i, m.GetColumn(2)),
+                Sub(i, m.GetColumn(3))
             );
         }
         #endregion

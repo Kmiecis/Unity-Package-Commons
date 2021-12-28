@@ -180,15 +180,12 @@ namespace Common.Extensions
         {
             return Array.IndexOf(self, value) != -1;
         }
-
-        public static void ForEach<T>(this T[] self, Action<T> action)
+        
+        public static void CopyTo<T>(this T[] self, T[] target)
         {
-            for (int i = 0; i < self.Length; ++i)
-            {
-                action(self[i]);
-            }
+            self.CopyTo(target, 0);
         }
-
+        
         public static int GetWidth<T>(this T[][] self)
         {
             return self.Length;
