@@ -198,6 +198,15 @@ namespace Common.Extensions
             return false;
         }
 
+        public static int InsertSorted<T>(this List<T> self, T item, IComparer<T> comparer = null)
+        {
+            int index = self.BinarySearch(item, comparer ?? Comparer<T>.Default);
+            if (index < 0)
+                index = self.Count;
+            self.Insert(index, item);
+            return index;
+        }
+
         public static void RemoveLast<T>(this List<T> self)
         {
             self.RemoveAt(self.Count - 1);

@@ -79,18 +79,28 @@ namespace Common
             );
         }
 
-        /// <summary>Converts texture normal vector to unity normal vector.</summary>
+        /// <summary>Converts texture normal vector to unity normal vector</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 ToNormal(Color c)
         {
             return (Mathx.Sub(Mathx.Mul(ToVector3(c), 2), 1)).XZY();
         }
 
-        /// <summary>Converts unity normal vector to texture normal vector.</summary>
+        /// <summary>Converts unity normal vector to texture normal vector</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Color ToNormal(Vector3 v)
         {
             return ToColor((Mathx.Add(v.XZY(), 1.0f)) * 0.5f);
+        }
+
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Color MulByAlpha(Color c)
+        {
+            c.r *= c.a;
+            c.g *= c.a;
+            c.b *= c.a;
+            return c;
         }
         
         /// <summary>Checks whether <see cref="Color"/> has all NaN variables</summary>

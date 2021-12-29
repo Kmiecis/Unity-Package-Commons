@@ -30,11 +30,22 @@ namespace Common
             callback.Invoke();
         }
 
-        public static IEnumerator InvokeRepeating(Action callback, float delay)
+        public static IEnumerator InvokeRepeating(Action callback, float delay, bool unscaled = false)
         {
             while (true)
             {
-                yield return InvokeDelayed(callback, delay);
+                yield return InvokeDelayed(callback, delay, unscaled);
+            }
+        }
+
+        public static IEnumerator InvokeChained(params IEnumerator[] coroutines)
+        {
+            foreach (var coroutine in coroutines)
+            {
+                while (coroutine.MoveNext())
+                {
+                    yield return coroutine.Current;
+                }
             }
         }
 
@@ -46,7 +57,7 @@ namespace Common
             {
                 consumer(t);
 
-                t += unscaled ? Time.unscaledDeltaTime : Time.deltaTime;
+                t += TimeUtility.GetDeltaTime(unscaled);
 
                 yield return null;
             }
@@ -63,7 +74,7 @@ namespace Common
             {
                 consumer(t);
 
-                t += n * (unscaled ? Time.unscaledDeltaTime : Time.deltaTime);
+                t += n * TimeUtility.GetDeltaTime(unscaled);
 
                 yield return null;
             }

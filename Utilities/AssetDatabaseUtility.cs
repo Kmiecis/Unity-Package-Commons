@@ -6,41 +6,15 @@ namespace Common
 {
     public static class AssetDatabaseUtility
     {
-        public static void CreateScriptableObjectAsset<T>()
-            where T : ScriptableObject
+        private const string GENERAL_PATH_FORMAT = "Assets/{0}/{1}.{2}";
+
+        public enum EAssetType
         {
-            var filePath = SelectionUtility.GetActiveProjectPath();
-
-            if (!string.IsNullOrEmpty(filePath))
-            {
-                var asset = ScriptableObject.CreateInstance<T>();
-
-                AssetDatabase.CreateAsset(asset, $"{filePath}/New{typeof(T).Name}.asset");
-                AssetDatabase.SaveAssets();
-
-                EditorUtility.FocusProjectWindow();
-
-                Selection.activeObject = asset;
-            }
-        }
-
-        public static Mesh CreateOrReplaceAssetAtPath(Mesh asset, string path)
-        {
-            var existingAsset = AssetDatabase.LoadMainAssetAtPath(path) as Mesh;
-
-            if (existingAsset == null)
-            {
-                AssetDatabase.CreateAsset(asset, path);
-                existingAsset = asset;
-            }
-            else
-            {
-                existingAsset.Clear();
-                EditorUtility.CopySerialized(asset, existingAsset);
-            }
-            AssetDatabase.SaveAssets();
-
-            return existingAsset;
+            Material,
+            Cubemap,
+            GUISkin,
+            Animation,
+            Other
         }
 
         public static T CreateOrReplaceAssetAtPath<T>(T asset, string path) where T : Object
@@ -54,6 +28,8 @@ namespace Common
             }
             else
             {
+                if (asset is Mesh mesh)
+                    mesh.Clear();
                 EditorUtility.CopySerialized(asset, existingAsset);
             }
             AssetDatabase.SaveAssets();
@@ -103,15 +79,18 @@ namespace Common
             return string.Format(GENERAL_PATH_FORMAT, path, name, GetAssetExtension(type));
         }
 
-        private const string GENERAL_PATH_FORMAT = "Assets/{0}/{1}{2}";
-
-        public enum EAssetType
+        public static T[] LoadAssets<T>()
+            where T : Object
         {
-            Material,
-            Cubemap,
-            GUISkin,
-            Animation,
-            Other
+            var guids = AssetDatabase.FindAssets("t:" + typeof(T).Name);
+
+            var result = new T[guids.Length];
+            for (int i = 0; i < guids.Length; ++i)
+            {
+                var path = AssetDatabase.GUIDToAssetPath(guids[i]);
+                result[i] = AssetDatabase.LoadAssetAtPath<T>(path);
+            }
+            return result;
         }
     }
 }

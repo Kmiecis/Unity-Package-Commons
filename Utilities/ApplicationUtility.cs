@@ -5,12 +5,12 @@ namespace Common
 {
     public static class ApplicationUtility
     {
-        public static string ConvertToProjectPath(string filePath)
+        public static string ToProjectPath(string filePath)
         {
             return "Assets" + filePath.RemovePrefix(Application.dataPath);
         }
 
-        public static string ConvertToFilePath(string projectPath)
+        public static string ToFilePath(string projectPath)
         {
             return Application.dataPath + projectPath.RemovePrefix("Assets");
         }

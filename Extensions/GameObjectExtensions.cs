@@ -58,5 +58,13 @@ namespace Common.Extensions
             components = self.GetComponentsInParent<T>();
             return !components.IsNullOrEmpty();
         }
+
+        public static void SetLayerRecursively(this GameObject self, int layer)
+        {
+            foreach (var child in self.transform.GetDownwardEnumerator())
+            {
+                child.gameObject.layer = layer;
+            }
+        }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Common.Extensions
+namespace CommonEditor.Extensions
 {
     public static class SerializedPropertyExtensions
     {
