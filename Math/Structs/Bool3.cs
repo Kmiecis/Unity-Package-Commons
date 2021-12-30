@@ -118,7 +118,7 @@ namespace Common
                     case 1: return y;
                     case 2: return z;
                 }
-                throw new IndexOutOfRangeException($"Invalid Bool3 index {index}");
+                throw new IndexOutOfRangeException($"Invalid index {index} out of range [0, 2]");
 #endif
             }
             set
@@ -135,7 +135,7 @@ namespace Common
                     case 1: y = value; break;
                     case 2: z = value; break;
                 }
-                throw new IndexOutOfRangeException($"Invalid Bool3 index {index}");
+                throw new IndexOutOfRangeException($"Invalid index {index} out of range [0, 2]");
 #endif
             }
         }
@@ -173,19 +173,23 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
-            return obj is Bool3 converted && Equals(converted);
+            return obj is Bool3 && Equals((Bool3)obj);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode()
         {
-            return x.GetHashCode() | (y.GetHashCode() << 1) | (z.GetHashCode() << 2);
+            return (
+                x.GetHashCode() |
+                (y.GetHashCode() << 1) |
+                (z.GetHashCode() << 2)
+            );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString()
         {
-            return string.Format("Bool3({0}, {1}, {2})", x, y, z);
+            return string.Format("({0}, {1}, {2})", x, y, z);
         }
     }
 }

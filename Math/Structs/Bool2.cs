@@ -109,7 +109,7 @@ namespace Common
                     case 0: return x;
                     case 1: return y;
                 }
-                throw new IndexOutOfRangeException($"Invalid Bool2 index {index}");
+                throw new IndexOutOfRangeException($"Invalid index {index} out of range [0, 1]");
 #endif
             }
             set
@@ -125,7 +125,7 @@ namespace Common
                     case 0: x = value; break;
                     case 1: y = value; break;
                 }
-                throw new IndexOutOfRangeException($"Invalid Bool2 index {index}");
+                throw new IndexOutOfRangeException($"Invalid index {index} out of range [0, 1]");
 #endif
             }
         }
@@ -160,19 +160,22 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
-            return obj is Bool2 converted && Equals(converted);
+            return obj is Bool2 && Equals((Bool2)obj);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode()
         {
-            return x.GetHashCode() | (y.GetHashCode() << 1);
+            return (
+                x.GetHashCode() |
+                (y.GetHashCode() << 1)
+            );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString()
         {
-            return string.Format("Bool2({0}, {1})", x, y);
+            return string.Format("({0}, {1})", x, y);
         }
     }
 }

@@ -127,7 +127,7 @@ namespace Common
                     case 2: return z;
                     case 3: return w;
                 }
-                throw new IndexOutOfRangeException($"Invalid Bool4 index {index}");
+                throw new IndexOutOfRangeException($"Invalid index {index} out of range [0, 3]");
 #endif
             }
             set
@@ -145,7 +145,7 @@ namespace Common
                     case 2: z = value; break;
                     case 3: w = value; break;
                 }
-                throw new IndexOutOfRangeException($"Invalid Bool4 index {index}");
+                throw new IndexOutOfRangeException($"Invalid index {index} out of range [0, 3]");
 #endif
             }
         }
@@ -186,19 +186,24 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
-            return obj is Bool4 converted && Equals(converted);
+            return obj is Bool4 && Equals((Bool4)obj);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode()
         {
-            return x.GetHashCode() | (y.GetHashCode() << 1) | (z.GetHashCode() << 2) | (w.GetHashCode() << 3);
+            return (
+                x.GetHashCode() |
+                (y.GetHashCode() << 1) |
+                (z.GetHashCode() << 2) |
+                (w.GetHashCode() << 3)
+            );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString()
         {
-            return string.Format("Bool4({0}, {1}, {2}, {3})", x, y, z, w);
+            return string.Format("({0}, {1}, {2}, {3})", x, y, z, w);
         }
     }
 }
