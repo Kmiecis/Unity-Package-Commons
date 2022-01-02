@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common
+namespace Common.Mathematics
 {
     public static class Polygons
     {
@@ -9,20 +9,14 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Centroid(params Vector2[] vs)
         {
-            var c = Vector2.zero;
-            for (int i = 0; i < vs.Length; ++i)
-                c += vs[i];
-            return c * (1.0f / vs.Length);
+            return Mathx.Average(vs);
         }
 
         /// <summary> Calculates centroid point of vertices 'vs' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Centroid(params Vector3[] vs)
         {
-            var c = Vector3.zero;
-            for (int i = 0; i < vs.Length; ++i)
-                c += vs[i];
-            return c * (1.0f / vs.Length);
+            return Mathx.Average(vs);
         }
 
         /// <summary> Calculates distance to point 'p' from nearest point on polygon defined by vertices 'vs' </summary>

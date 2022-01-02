@@ -1,7 +1,8 @@
 using System;
 using System.Runtime.CompilerServices;
+using UnityEngine;
 
-namespace Common
+namespace Common.Mathematics
 {
     [Serializable]
     public struct Range : IEquatable<Range>
@@ -11,7 +12,7 @@ namespace Common
 
         public static readonly Range Zero;
         public static readonly Range One = new Range(0.0f, 1.0f);
-        public static readonly Range Full = new Range(float.MinValue, float.MaxValue);
+        public static readonly Range Max = new Range(float.MinValue, float.MaxValue);
         public static readonly Range Empty = new Range(float.MaxValue, float.MinValue);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -19,6 +20,15 @@ namespace Common
         {
             this.min = min;
             this.max = max;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static explicit operator RangeInt(Range r)
+        {
+            return new RangeInt(
+                Mathf.RoundToInt(r.min),
+                Mathf.RoundToInt(r.max)
+            );
         }
 
         public float Center
@@ -95,22 +105,27 @@ namespace Common
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
-            return obj is Range converted && Equals(converted);
+            return obj is Range && Equals((Range)obj);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode()
         {
-            return min.GetHashCode() ^ (max.GetHashCode() << 2);
+            return (
+                min.GetHashCode() ^
+                (max.GetHashCode() << 2)
+            );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString()
         {
-            return string.Format("Range({0}, {1})", min, max);
+            return ToString("F2");
+        }
+
+        public string ToString(string format)
+        {
+            return string.Format("({0}, {1})", min.ToString(format), max.ToString(format));
         }
     }
 }

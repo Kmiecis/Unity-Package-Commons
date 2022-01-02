@@ -2,7 +2,7 @@ using Common.Extensions;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Common
+namespace Common.Mathematics
 {
     public static class Triangulate
     {

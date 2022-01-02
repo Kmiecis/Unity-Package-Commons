@@ -2,7 +2,7 @@ using Common.Extensions;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Common
+namespace Common.Mathematics
 {
     public static class Noisex
     {

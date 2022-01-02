@@ -1,7 +1,7 @@
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common
+namespace Common.Mathematics
 {
     public static class Triangles
     {
@@ -23,59 +23,9 @@ namespace Common
             return Mathf.Sqrt(s * (s - a) * (s - b) * (s - c));
         }
 
-        /// <summary> Calculates perimeter of a triangle defined by three vertices 'v0', 'v1' and 'v2' </summary>
+        /// <summary> Calculates barycenter of a point 'p' on a triangle defined by three vertices 'v0', 'v1' and 'v2' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Perimeter(Vector2 v0, Vector2 v1, Vector2 v2)
-        {
-            return Vector2.Distance(v1, v0) + Vector2.Distance(v2, v1) + Vector2.Distance(v0, v2);
-        }
-
-        /// <summary> Calculates perimeter of a triangle defined by three vertices 'v0', 'v1' and 'v2' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Perimeter(Vector3 v0, Vector3 v1, Vector3 v2)
-        {
-            return Vector3.Distance(v1, v0) + Vector3.Distance(v2, v1) + Vector3.Distance(v0, v2);
-        }
-
-        /// <summary> Calculates unnormalized normal vector of a triangle defined by three vertices 'v0', 'v1' and 'v2' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Normal(Vector3 v0, Vector3 v1, Vector3 v2)
-        {
-            return Vector3.Cross(v1 - v0, v2 - v1);
-        }
-
-        /// <summary> Returns whether triangle defined by three vertices 'v0', 'v1' and 'v2' contains point 'p' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool Contains(Vector2 v0, Vector2 v1, Vector2 v2, Vector2 p)
-        {
-            var s = v0.y * v2.x - v0.x * v2.y + (v2.y - v0.y) * p.x + (v0.x - v2.x) * p.y;
-            var t = v0.x * v1.y - v0.y * v1.x + (v0.y - v1.y) * p.x + (v1.x - v0.x) * p.y;
-
-            if ((s < 0) != (t < 0))
-                return false;
-
-            var A = -v1.y * v2.x + v0.y * (v2.x - v1.x) + v0.x * (v1.y - v2.y) + v1.x * v2.y;
-
-            return A < 0 ?
-                    (s <= 0 && s + t >= A) :
-                    (s >= 0 && s + t <= A);
-        }
-
-        /// <summary> Returns whether triangle defined by three vertices 'v0', 'v1' and 'v2' contains point 'p' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool Contains(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 p)
-        {
-            var weights = Weights(v0, v1, v2, p);
-            return
-                Mathx.IsEqual(weights.x + weights.y + weights.z, 1.0f) &&
-                0.0f <= weights.x && weights.x <= 1.0f &&
-                0.0f <= weights.y && weights.y <= 1.0f &&
-                0.0f <= weights.z && weights.z <= 1.0f;
-        }
-
-        /// <summary> Calculates weights of a point 'p' on a triangle defined by three vertices 'v0', 'v1' and 'v2' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Weights(Vector2 v0, Vector2 v1, Vector2 v2, Vector2 p)
+        public static Vector3 Barycenter(Vector2 v0, Vector2 v1, Vector2 v2, Vector2 p)
         {
             var a = v1 - v0;
             var b = v2 - v0;
@@ -90,9 +40,9 @@ namespace Common
             return new Vector3(v, w, u);
         }
 
-        /// <summary> Calculates weights of a point 'p' on a triangle defined by three vertices 'v0', 'v1' and 'v2' </summary>
+        /// <summary> Calculates barycenter of a point 'p' on a triangle defined by three vertices 'v0', 'v1' and 'v2' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Weights(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 p)
+        public static Vector3 Barycenter(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 p)
         {
             var a = v1 - v0;
             var b = v2 - v0;
@@ -110,6 +60,55 @@ namespace Common
             var u = 1.0f - v - w;
 
             return new Vector3(v, w, u);
+        }
+
+        /// <summary> Calculates whether triangle defined by three vertices 'v0', 'v1' and 'v2' contains point 'p' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Contains(Vector2 v0, Vector2 v1, Vector2 v2, Vector2 p)
+        {
+            var s = v0.y * v2.x - v0.x * v2.y + (v2.y - v0.y) * p.x + (v0.x - v2.x) * p.y;
+            var t = v0.x * v1.y - v0.y * v1.x + (v0.y - v1.y) * p.x + (v1.x - v0.x) * p.y;
+
+            if ((s < 0) != (t < 0))
+                return false;
+
+            var A = -v1.y * v2.x + v0.y * (v2.x - v1.x) + v0.x * (v1.y - v2.y) + v1.x * v2.y;
+
+            return A < 0 ?
+                    (s <= 0 && s + t >= A) :
+                    (s >= 0 && s + t <= A);
+        }
+
+        /// <summary> Calculates whether triangle defined by three vertices 'v0', 'v1' and 'v2' contains point 'p' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Contains(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 p)
+        {
+            var bc = Barycenter(v0, v1, v2, p);
+            return (
+                Mathx.IsEqual(bc.x + bc.y + bc.z, 1.0f) &&
+                Mathx.IsInRange(bc, Vector3.zero, Vector3.one)
+            );
+        }
+
+        /// <summary> Calculates normal of triangle defined by three vertices 'v0', 'v1' and 'v2' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Normal(Vector3 v0, Vector3 v1, Vector3 v2)
+        {
+            return Vector3.Cross(v1 - v0, v2 - v1);
+        }
+
+        /// <summary> Calculates perimeter of a triangle defined by three vertices 'v0', 'v1' and 'v2' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Perimeter(Vector2 v0, Vector2 v1, Vector2 v2)
+        {
+            return Vector2.Distance(v1, v0) + Vector2.Distance(v2, v1) + Vector2.Distance(v0, v2);
+        }
+
+        /// <summary> Calculates perimeter of a triangle defined by three vertices 'v0', 'v1' and 'v2' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Perimeter(Vector3 v0, Vector3 v1, Vector3 v2)
+        {
+            return Vector3.Distance(v1, v0) + Vector3.Distance(v2, v1) + Vector3.Distance(v0, v2);
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common
+namespace Common.Mathematics
 {
     [Serializable]
     public struct CosEquation

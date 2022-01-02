@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Common
+namespace Common.Mathematics
 {
     public static class Vectors2
     {

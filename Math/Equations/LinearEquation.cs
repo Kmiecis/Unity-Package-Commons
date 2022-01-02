@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common
+namespace Common.Mathematics
 {
     /// <summary> Equation in form of: y = a * x + b </summary>
     [Serializable]

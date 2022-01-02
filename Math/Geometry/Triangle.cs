@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common
+namespace Common.Mathematics
 {
     [Serializable]
     public struct Triangle : IEquatable<Triangle>
@@ -11,7 +11,7 @@ namespace Common
         public Vector3 v1;
         public Vector3 v2;
 
-        public static readonly Triangle zero;
+        public static readonly Triangle Zero;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Triangle(Vector3 v0, Vector3 v1, Vector3 v2)
@@ -22,8 +22,8 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Triangle(Triangle o) :
-            this(o.v0, o.v1, o.v2)
+        public Triangle(Triangle other) :
+            this(other.v0, other.v1, other.v2)
         {
         }
 
@@ -68,6 +68,7 @@ namespace Common
             }
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Triangle other)
         {
             return (

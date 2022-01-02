@@ -1,21 +1,21 @@
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common
+namespace Common.Mathematics
 {
     public static class Lines
     {
-        /// <summary> Calculates whether line of points 'v0' and 'v1' contains point 'p' </summary>
+        /// <summary> Calculates whether point 'p' is within line between points 'v0' and 'v1' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Contains(Vector3 v0, Vector3 v1, Vector3 p)
         {
-            float dv0v1 = (v1 - v0).sqrMagnitude;
-            float dv0p = (p - v0).sqrMagnitude;
-            float dpv1 = (v1 - p).sqrMagnitude;
-            return Mathx.IsEqual(dv0v1, dv0p + dpv1);
+            float v0v1 = (v1 - v0).sqrMagnitude;
+            float v0p = (p - v0).sqrMagnitude;
+            float pv1 = (v1 - p).sqrMagnitude;
+            return Mathx.IsEqual(v0v1, v0p + pv1);
         }
 
-        /// <summary> Calculates nearest point on line of points 'v0' and 'v1' to point 'p' </summary>
+        /// <summary> Calculates nearest point in line between points 'v0' and 'v1' to point 'p' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 NearestPoint(Vector3 v0, Vector3 v1, Vector3 p)
         {
@@ -23,17 +23,16 @@ namespace Common
             var v0p = p - v0;
 
             float f1 = Vector3.Dot(v0p, v0v1);
+            if (f1 <= 0.0f)
+                return v0;
+
             float f2 = Vector3.Dot(v0v1, v0v1);
+            if (f2 <= f1)
+                return v1;
+
             float t = f1 / f2;
 
             return v0 + (t * v0v1);
-        }
-
-        /// <summary> Calculates square distance from line of points 'v0' and 'v1' to point 'p' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float SqrDistance(Vector3 v0, Vector3 v1, Vector3 p)
-        {
-            return (p - NearestPoint(v0, v1, p)).sqrMagnitude;
         }
 
         /// <summary> Calculates relative positioning of point 'p' to line through points 'v0' and 'v1' </summary>
@@ -45,8 +44,8 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Positioning(Vector2 v0, Vector2 v1, Vector2 p)
         {
-            float v = (p.x - v0.x) * (v1.y - v0.y) - (p.y - v0.y) * (v1.x - v0.x);
-            return v > 0.0f ? +1 : v < 0.0f ? -1 : 0;
+            float f = (p.x - v0.x) * (v1.y - v0.y) - (p.y - v0.y) * (v1.x - v0.x);
+            return f > 0.0f ? +1 : f < 0.0f ? -1 : 0;
         }
 
         /// <summary> Checks whether point 'p' is above line through points 'v0' and 'v1' </summary>

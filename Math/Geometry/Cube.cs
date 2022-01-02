@@ -2,35 +2,42 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common
+namespace Common.Mathematics
 {
     [Serializable]
     public struct Cube : IEquatable<Cube>
     {
-        public Vector3 c;
-        public Vector3 e;
+        public Vector3 origin;
+        public Vector3 extents;
 
-        public static readonly Cube zero;
-        public static readonly Cube one = new Cube { e = Vector3.one };
+        public static readonly Cube Zero;
+        public static readonly Cube One = new Cube { extents = Vector3.one };
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Cube(Vector3 c, Vector3 e)
+        public Cube(Vector3 origin, Vector3 extents)
         {
-            this.c = c;
-            this.e = e;
+            this.origin = origin;
+            this.extents = extents;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Cube(Cube o) :
-            this(o.c, o.e)
+        public Cube(Cube other) :
+            this(other.origin, other.extents)
         {
         }
 
+        public Vector3 Centre
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => origin + extents * 0.5f;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Cube other)
         {
             return (
-                Mathx.IsEqual(c, other.c) &&
-                Mathx.IsEqual(e, other.e)
+                Mathx.IsEqual(origin, other.origin) &&
+                Mathx.IsEqual(extents, other.extents)
             );
         }
 
@@ -42,8 +49,8 @@ namespace Common
         public override int GetHashCode()
         {
             return (
-                c.GetHashCode() ^
-                (e.GetHashCode() << 2)
+                origin.GetHashCode() ^
+                (extents.GetHashCode() << 2)
             );
         }
 
@@ -54,7 +61,7 @@ namespace Common
 
         public string ToString(string format)
         {
-            return string.Format("({0}, {1})", c.ToString(format), e.ToString(format));
+            return string.Format("({0}, {1})", origin.ToString(format), extents.ToString(format));
         }
     }
 }

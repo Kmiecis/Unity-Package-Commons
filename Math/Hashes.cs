@@ -1,4 +1,4 @@
-namespace Common
+namespace Common.Mathematics
 {
     public static class Hashes
     {

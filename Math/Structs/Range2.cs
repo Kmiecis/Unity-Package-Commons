@@ -2,7 +2,7 @@ using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common
+namespace Common.Mathematics
 {
     [Serializable]
     public struct Range2 : IEquatable<Range2>
@@ -12,7 +12,7 @@ namespace Common
 
         public static readonly Range2 Zero;
         public static readonly Range2 One = new Range2(Vector2.zero, Vector2.one);
-        public static readonly Range2 Full = new Range2(Vector2.one * float.MinValue, Vector2.one * float.MaxValue);
+        public static readonly Range2 Max = new Range2(Vector2.one * float.MinValue, Vector2.one * float.MaxValue);
         public static readonly Range2 Empty = new Range2(Vector2.one * float.MaxValue, Vector2.one * float.MinValue);
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -23,10 +23,18 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Range2(float minX, float minY, float maxX, float maxY)
+        public Range2(float minX, float minY, float maxX, float maxY) :
+            this(new Vector2(minX, minY), new Vector2(maxX, maxY))
         {
-            this.min = new Vector2(minX, minY);
-            this.max = new Vector2(maxX, maxY);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static explicit operator Range2Int(Range2 r)
+        {
+            return new Range2Int(
+                Mathx.RoundToInt(r.min),
+                Mathx.RoundToInt(r.max)
+            );
         }
 
         public Vector2 Center
@@ -129,22 +137,22 @@ namespace Common
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
-            return obj is Range2 converted && Equals(converted);
+            return obj is Range2 && Equals((Range2)obj);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode()
         {
-            return min.GetHashCode() ^ (max.GetHashCode() << 2);
+            return (
+                min.GetHashCode() ^
+                (max.GetHashCode() << 2)
+            );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString()
         {
-            return string.Format("Range2({0}, {1})", min, max);
+            return string.Format("({0}, {1})", min, max);
         }
     }
 }

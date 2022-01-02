@@ -2,41 +2,42 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common
+namespace Common.Mathematics
 {
     [Serializable]
     public struct Sphere : IEquatable<Sphere>
     {
-        public Vector3 c;
-        public float r;
+        public Vector3 centre;
+        public float radius;
 
-        public static readonly Sphere zero;
-        public static readonly Sphere one = new Sphere { r = 1.0f };
+        public static readonly Sphere Zero;
+        public static readonly Sphere One = new Sphere { radius = 1.0f };
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Sphere(Vector3 c, float r)
+        public Sphere(Vector3 centre, float radius)
         {
-            this.c = c;
-            this.r = r;
+            this.centre = centre;
+            this.radius = radius;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Sphere(Sphere o) :
-            this(o.c, o.r)
+        public Sphere(Sphere other) :
+            this(other.centre, other.radius)
         {
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static implicit operator Sphere(Circle c)
         {
-            return new Sphere(c.c, c.r);
+            return new Sphere(c.centre, c.radius);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Sphere other)
         {
             return (
-                Mathx.IsEqual(c, other.c) &&
-                Mathx.IsEqual(r, other.r)
+                Mathx.IsEqual(centre, other.centre) &&
+                Mathx.IsEqual(radius, other.radius)
             );
         }
 
@@ -48,8 +49,8 @@ namespace Common
         public override int GetHashCode()
         {
             return (
-                c.GetHashCode() ^
-                (r.GetHashCode() << 2)
+                centre.GetHashCode() ^
+                (radius.GetHashCode() << 2)
             );
         }
 
@@ -60,7 +61,7 @@ namespace Common
 
         public string ToString(string format)
         {
-            return string.Format("({0}, {1})", c.ToString(format), r.ToString(format));
+            return string.Format("({0}, {1})", centre.ToString(format), radius.ToString(format));
         }
     }
 }

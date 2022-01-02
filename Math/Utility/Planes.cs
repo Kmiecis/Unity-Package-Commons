@@ -1,26 +1,26 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common
+namespace Common.Mathematics
 {
     public static class Planes
     {
-        /// <summary> Calculates unnormalized normal vector of a plane defined by three vertices 'v0', 'v1' and 'v2' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Normal(Vector3 v0, Vector3 v1, Vector3 v2)
-        {
-            return Vector3.Cross(v1 - v0, v2 - v1);
-        }
-
         /// <summary> Calculates distance of a point 'p' to a plane going through three vertices 'v0', 'v1' and 'v2' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Distance(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 p)
         {
-            var n = Normal(v0, v1, v2);
+            var n = Vector3.Cross(v1 - v0, v2 - v1);
             n.Normalize();
             var dv2 = Vector3.Dot(v2, n);
             var dp = Vector3.Dot(p, n);
             return dp - dv2;
+        }
+
+        /// <summary> Calculates normal of plane defined by three vertices 'v0', 'v1' and 'v2' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Normal(Vector3 v0, Vector3 v1, Vector3 v2)
+        {
+            return Vector3.Cross(v1 - v0, v2 - v1);
         }
 
         /// <summary> Calculates relative positioning of point 'p' to a plane going through three vertices 'v0', 'v1' and 'v2' </summary>

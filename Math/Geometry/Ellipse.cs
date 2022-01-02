@@ -2,34 +2,35 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common
+namespace Common.Mathematics
 {
     [Serializable]
     public struct Ellipse : IEquatable<Ellipse>
     {
-        public Vector2 c;
-        public Vector2 e;
+        public Vector2 centre;
+        public Vector2 extents;
 
-        public static readonly Ellipse zero;
+        public static readonly Ellipse Zero;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Ellipse(Vector2 c, Vector2 e)
+        public Ellipse(Vector2 centre, Vector2 extents)
         {
-            this.c = c;
-            this.e = e;
+            this.centre = centre;
+            this.extents = extents;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Ellipse(Ellipse o) :
-            this(o.c, o.e)
+        public Ellipse(Ellipse other) :
+            this(other.centre, other.extents)
         {
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Ellipse other)
         {
             return (
-                Mathx.IsEqual(c, other.c) &&
-                Mathx.IsEqual(e, other.e)
+                Mathx.IsEqual(centre, other.centre) &&
+                Mathx.IsEqual(extents, other.extents)
             );
         }
 
@@ -41,8 +42,8 @@ namespace Common
         public override int GetHashCode()
         {
             return (
-                c.GetHashCode() ^
-                (e.GetHashCode() << 2)
+                centre.GetHashCode() ^
+                (extents.GetHashCode() << 2)
             );
         }
 
@@ -53,7 +54,7 @@ namespace Common
 
         public string ToString(string format)
         {
-            return string.Format("({0}, {1})", c.ToString(format), e.ToString(format));
+            return string.Format("({0}, {1})", centre.ToString(format), extents.ToString(format));
         }
     }
 }

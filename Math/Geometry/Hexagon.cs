@@ -2,35 +2,36 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common
+namespace Common.Mathematics
 {
     [Serializable]
     public struct Hexagon : IEquatable<Hexagon>
     {
-        public Vector2 c;
-        public float r;
+        public Vector2 centre;
+        public float radius;
 
-        public static readonly Hexagon zero;
-        public static readonly Hexagon one = new Hexagon { r = 1.0f };
+        public static readonly Hexagon Zero;
+        public static readonly Hexagon One = new Hexagon { radius = 1.0f };
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Hexagon(Vector2 c, float r)
+        public Hexagon(Vector2 centre, float radius)
         {
-            this.c = c;
-            this.r = r;
+            this.centre = centre;
+            this.radius = radius;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Hexagon(Hexagon o) :
-            this(o.c, o.r)
+        public Hexagon(Hexagon other) :
+            this(other.centre, other.radius)
         {
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Hexagon other)
         {
             return (
-                Mathx.IsEqual(c, other.c) &&
-                Mathx.IsEqual(r, other.r)
+                Mathx.IsEqual(centre, other.centre) &&
+                Mathx.IsEqual(radius, other.radius)
             );
         }
 
@@ -42,8 +43,8 @@ namespace Common
         public override int GetHashCode()
         {
             return (
-                c.GetHashCode() ^
-                (r.GetHashCode() << 2)
+                centre.GetHashCode() ^
+                (radius.GetHashCode() << 2)
             );
         }
 
@@ -54,7 +55,7 @@ namespace Common
 
         public string ToString(string format)
         {
-            return string.Format("({0}, {1})", c.ToString(format), r.ToString(format));
+            return string.Format("({0}, {1})", centre.ToString(format), radius.ToString(format));
         }
     }
 }

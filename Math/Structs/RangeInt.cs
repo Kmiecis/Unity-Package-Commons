@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace Common
+namespace Common.Mathematics
 {
     [Serializable]
     public struct RangeInt : IEquatable<RangeInt>
@@ -11,7 +11,7 @@ namespace Common
 
         public static readonly RangeInt Zero;
         public static readonly RangeInt One = new RangeInt(0, 1);
-        public static readonly RangeInt Full = new RangeInt(int.MinValue, int.MaxValue);
+        public static readonly RangeInt Max = new RangeInt(int.MinValue, int.MaxValue);
         public static readonly RangeInt Empty = new RangeInt(int.MaxValue, int.MinValue);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -19,6 +19,12 @@ namespace Common
         {
             this.min = min;
             this.max = max;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static implicit operator Range(RangeInt r)
+        {
+            return new Range(r.min, r.max);
         }
 
         public float Center
@@ -95,22 +101,22 @@ namespace Common
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
-            return obj is RangeInt converted && Equals(converted);
+            return obj is RangeInt && Equals((RangeInt)obj);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode()
         {
-            return min.GetHashCode() ^ (max.GetHashCode() << 2);
+            return (
+                min.GetHashCode() ^
+                (max.GetHashCode() << 2)
+            );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString()
         {
-            return string.Format("RangeInt({0}, {1})", min, max);
+            return string.Format("({0}, {1})", min, max);
         }
     }
 }

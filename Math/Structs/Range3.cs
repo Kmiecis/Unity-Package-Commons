@@ -2,7 +2,7 @@ using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common
+namespace Common.Mathematics
 {
     [Serializable]
     public struct Range3 : IEquatable<Range3>
@@ -12,7 +12,7 @@ namespace Common
 
         public static readonly Range3 Zero;
         public static readonly Range3 One = new Range3(Vector3.zero, Vector3.one);
-        public static readonly Range3 Full = new Range3(Vector3.one * float.MinValue, Vector3.one * float.MaxValue);
+        public static readonly Range3 Max = new Range3(Vector3.one * float.MinValue, Vector3.one * float.MaxValue);
         public static readonly Range3 Empty = new Range3(Vector3.one * float.MaxValue, Vector3.one * float.MinValue);
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -23,10 +23,18 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Range3(float minX, float minY, float minZ, float maxX, float maxY, float maxZ)
+        public Range3(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) :
+            this(new Vector3(minX, minY, minZ), new Vector3(maxX, maxY, maxZ))
         {
-            this.min = new Vector3(minX, minY, minZ);
-            this.max = new Vector3(maxX, maxY, maxZ);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static explicit operator Range3Int(Range3 r)
+        {
+            return new Range3Int(
+                Mathx.RoundToInt(r.min),
+                Mathx.RoundToInt(r.max)
+            );
         }
 
         public Vector3 Center
@@ -132,22 +140,22 @@ namespace Common
             );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(object obj)
         {
-            return obj is Range3 converted && Equals(converted);
+            return obj is Range3 && Equals((Range3)obj);
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override int GetHashCode()
         {
-            return min.GetHashCode() ^ (max.GetHashCode() << 2);
+            return (
+                min.GetHashCode() ^
+                (max.GetHashCode() << 2)
+            );
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override string ToString()
         {
-            return string.Format("Range3({0}, {1})", min, max);
+            return string.Format("({0}, {1})", min, max);
         }
     }
 }

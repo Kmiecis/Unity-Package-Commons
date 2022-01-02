@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace Common
+namespace Common.Mathematics
 {
     [Serializable]
     public struct Bool2 : IEquatable<Bool2>

@@ -2,41 +2,42 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common
+namespace Common.Mathematics
 {
     [Serializable]
     public struct Circle : IEquatable<Circle>
     {
-        public Vector2 c;
-        public float r;
+        public Vector2 centre;
+        public float radius;
 
-        public static readonly Circle zero;
-        public static readonly Circle one = new Circle { r = 1.0f };
+        public static readonly Circle Zero;
+        public static readonly Circle One = new Circle { radius = 1.0f };
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Circle(Vector2 c, float r)
+        public Circle(Vector2 centre, float radius)
         {
-            this.c = c;
-            this.r = r;
+            this.centre = centre;
+            this.radius = radius;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Circle(Circle o) :
-            this(o.c, o.r)
+        public Circle(Circle other) :
+            this(other.centre, other.radius)
         {
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator Circle(Sphere s)
+        public static explicit operator Circle(Sphere sphere)
         {
-            return new Circle(s.c, s.r);
+            return new Circle(sphere.centre, sphere.radius);
         }
-        
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Circle other)
         {
             return (
-                Mathx.IsEqual(c, other.c) &&
-                Mathx.IsEqual(r, other.r)
+                Mathx.IsEqual(centre, other.centre) &&
+                Mathx.IsEqual(radius, other.radius)
             );
         }
 
@@ -48,8 +49,8 @@ namespace Common
         public override int GetHashCode()
         {
             return (
-                c.GetHashCode() ^
-                (r.GetHashCode() << 2)
+                centre.GetHashCode() ^
+                (radius.GetHashCode() << 2)
             );
         }
 
@@ -60,7 +61,7 @@ namespace Common
         
         public string ToString(string format)
         {
-            return string.Format("({0}, {1})", c.ToString(format), r.ToString(format));
+            return string.Format("({0}, {1})", centre.ToString(format), radius.ToString(format));
         }
     }
 }

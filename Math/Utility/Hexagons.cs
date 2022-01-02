@@ -1,16 +1,16 @@
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common
+namespace Common.Mathematics
 {
     public static class Hexagons
     {
-        public const int VERTEX_COUNT = 6;
-
         public enum Direction
         {
             NE, E, SE, SW, W, NW, Count
         }
+
+        public const int VERTEX_COUNT = 6;
 
         public const float INNER_TO_OUTER_RADIUS = 2.0f / Mathx.ROOT_3;
         public const float OUTER_TO_INNER_RADIUS = Mathx.ROOT_3 * 0.5f;
@@ -18,7 +18,11 @@ namespace Common
         /// <summary> Triangles of a hexagon </summary>
         public static readonly int[] Triangles = new int[]
         {
-            0, 1, 2, 0, 2, 3, 0, 3, 4, 0, 4, 5, -1
+            0, 1, 2,
+            0, 2, 3,
+            0, 3, 4,
+            0, 4, 5,
+            -1
         };
 
         public static readonly Vector2Int[] Translations = new Vector2Int[]
@@ -31,9 +35,9 @@ namespace Common
             new Vector2Int() { x = -1, y = +1 }
         };
 
-        /// <summary> Calculates vertices of a unit hexagon into array </summary>
+        /// <summary> Calculates vertices of a hexagon defined by centre 'c' and circumradius 'r', into array </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Vertices(Vector2[] vs)
+        public static void Vertices(Vector2[] vs, Vector2 c, float r)
         {
             const float INNER_RADIUS = 0.5f;
             const float OUTER_RADIUS = INNER_RADIUS * INNER_TO_OUTER_RADIUS;
@@ -46,16 +50,16 @@ namespace Common
             vs[5] = new Vector2(-INNER_RADIUS, OUTER_RADIUS * 0.5f);
         }
 
-        /// <summary> Calculates vertices of a unit hexagon </summary>
+        /// <summary> Calculates vertices of a hexagon defined by centre 'c' and circumradius 'r' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2[] Vertices()
+        public static Vector2[] Vertices(Vector2 c, float r)
         {
             var vs = new Vector2[VERTEX_COUNT];
-            Vertices(vs);
+            Vertices(vs, c, r);
             return vs;
         }
         
-        /// <summary> Convers position defined in hex coordinates 'v' of a hexagon defined by circumradius 'r' to world position </summary>
+        /// <summary> Converts position defined in hex coordinates 'v' of a hexagon defined by circumradius 'r' to world position </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Convert(Vector2Int v, float r)
         {
