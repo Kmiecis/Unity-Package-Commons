@@ -2,11 +2,11 @@
 
 namespace Common
 {
-    public class MaxFieldAttribute : PropertyAttribute
+    public sealed class MaxAttribute : PropertyAttribute
     {
         public readonly float max;
 
-        public MaxFieldAttribute(float max)
+        public MaxAttribute(float max)
         {
             this.max = max;
         }

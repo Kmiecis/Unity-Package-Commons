@@ -2,11 +2,11 @@
 
 namespace Common
 {
-    public class SelectableFieldAttribute : PropertyAttribute
+    public sealed class SelectableAttribute : PropertyAttribute
     {
         public readonly object[] values;
 
-        public SelectableFieldAttribute(params object[] values)
+        public SelectableAttribute(params object[] values)
         {
             this.values = values;
         }

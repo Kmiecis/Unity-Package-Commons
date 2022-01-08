@@ -2,7 +2,7 @@
 
 namespace Common
 {
-    public class NamedArrayAttribute : PropertyAttribute
+    public sealed class NamedArrayAttribute : PropertyAttribute
     {
         public readonly string[] names;
 

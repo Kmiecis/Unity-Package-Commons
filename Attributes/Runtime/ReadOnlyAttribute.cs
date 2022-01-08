@@ -8,7 +8,9 @@ namespace Common
     /// </summary>
     /// <seealso cref="BeginReadOnlyGroupAttribute"/>
     /// <seealso cref="EndReadOnlyGroupAttribute"/>
-    public class ReadOnlyFieldAttribute : PropertyAttribute { }
+    public class ReadOnlyAttribute : PropertyAttribute
+    {
+    }
 
     /// <summary>
     /// Display one or more fields as read-only in the inspector.
@@ -16,14 +18,18 @@ namespace Common
     /// Works with CustomPropertyDrawers.
     /// </summary>
     /// <seealso cref="EndReadOnlyGroupAttribute"/>
-    /// <seealso cref="ReadOnlyFieldAttribute"/>
-    public class BeginReadOnlyGroupAttribute : PropertyAttribute { }
+    /// <seealso cref="ReadOnlyAttribute"/>
+    public class BeginReadOnlyGroupAttribute : PropertyAttribute
+    {
+    }
 
     /// <summary>
     /// Use with <see cref="BeginReadOnlyGroupAttribute"/>.
     /// Close the read-only group and resume editable fields.
     /// </summary>
     /// <seealso cref="BeginReadOnlyGroupAttribute"/>
-    /// <seealso cref="ReadOnlyFieldAttribute"/>
-    public class EndReadOnlyGroupAttribute : PropertyAttribute { }
+    /// <seealso cref="ReadOnlyAttribute"/>
+    public class EndReadOnlyGroupAttribute : PropertyAttribute
+    {
+    }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace CommonEditor
 {
-    [CustomPropertyDrawer(typeof(ShiftFieldAttribute))]
+    [CustomPropertyDrawer(typeof(ShiftAttribute))]
     public class ShiftFieldDrawer : PropertyDrawer
     {
         const float ARROW_WIDTH = 20.0f;

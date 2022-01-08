@@ -9,14 +9,14 @@ using UnityEngine;
 
 namespace CommonEditor
 {
-    [CustomPropertyDrawer(typeof(SelectableFieldAttribute))]
-    public class SelectableFieldDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(SelectableAttribute))]
+    public class SelectableDrawer : PropertyDrawer
     {
         const float SPACING = 2.0f;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            var attribute = (SelectableFieldAttribute)this.attribute;
+            var attribute = (SelectableAttribute)this.attribute;
 
             EditorGUI.LabelField(position.CopyAndSet(width: EditorGUIUtility.labelWidth), label);
             var currentValue = property.GetValue();

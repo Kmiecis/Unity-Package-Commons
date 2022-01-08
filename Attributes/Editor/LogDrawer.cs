@@ -6,8 +6,8 @@ using UnityEngine;
 
 namespace CommonEditor
 {
-    [CustomPropertyDrawer(typeof(LogFieldAttribute))]
-    public class LogFieldDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(LogAttribute))]
+    public class LogDrawer : PropertyDrawer
     {
         const float ARROW_WIDTH = 20.0f;
 
@@ -31,7 +31,7 @@ namespace CommonEditor
             }
             else
             {
-                EditorGUI.LabelField(position, label.text, "Use LogField with float or int.");
+                EditorGUI.LabelField(position, label.text, $"Use {nameof(LogAttribute)} with float or int.");
             }
         }
 
