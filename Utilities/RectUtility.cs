@@ -1,16 +1,19 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Common
 {
     public static class RectUtility
     {
+        [Obsolete("Use Rects.GetVertices() method instead")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3[] GetRect3D(Vector3 center, Vector3 normal, Vector2 size)
         {
             return GetRect3D(center, normal, size.x, size.y);
         }
 
+        [Obsolete("Use Rects.GetVertices() method instead")]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3[] GetRect3D(Vector3 center, Vector3 normal, float width, float height)
         {

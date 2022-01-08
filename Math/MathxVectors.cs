@@ -1790,10 +1790,10 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Rotate(Vector2 point, float a)
+        public static Vector2 Rotate(Vector2 point, float angle)
         {
-            float sin = Mathf.Sin(a);
-            float cos = Mathf.Cos(a);
+            float sin = Mathf.Sin(angle);
+            float cos = Mathf.Cos(angle);
             return new Vector2(
                 (cos * point.x) - (sin * point.y),
                 (sin * point.x) + (cos * point.y)
@@ -1807,9 +1807,9 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 RotateAround(Vector2 point, Vector2 pivot, float a)
+        public static Vector2 RotateAround(Vector2 point, Vector2 pivot, float angle)
         {
-            return Rotate(point - pivot, a) + pivot;
+            return Rotate(point - pivot, angle) + pivot;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1819,15 +1819,27 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Transform(Vector2 point, Vector2 translation, float angle, Vector2 scale)
+        {
+            return Rotate(Mul(point, scale), angle) + translation;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 InverseTransform(Vector2 point, Vector2 translation, float angle, Vector2 scale)
+        {
+            return Mul(Rotate(point - translation, -angle), Reciprocal(scale));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Transform(Vector3 point, Vector3 translation, Quaternion rotation, Vector3 scale)
         {
-            return rotation * Mul(point, scale) + translation;
+            return Rotate(Mul(point, scale), rotation) + translation;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 InverseTransform(Vector3 point, Vector3 translation, Quaternion rotation, Vector3 scale)
         {
-            return Mul(Quaternion.Inverse(rotation) * (point - translation), Reciprocal(scale));
+            return Mul(Rotate(point - translation, Quaternion.Inverse(rotation)), Reciprocal(scale));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

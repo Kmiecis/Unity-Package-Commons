@@ -5,7 +5,18 @@ namespace Common.Mathematics
 {
     public static class Cubes
     {
-        public const int VERTEX_COUNT = 8;
+        /// <summary> Vertices of a cube </summary>
+        public static readonly Vector3[] Vertices = new Vector3[]
+        {
+            new Vector3(0.0f, 0.0f, 0.0f),
+            new Vector3(0.0f, 1.0f, 0.0f),
+            new Vector3(1.0f, 1.0f, 0.0f),
+            new Vector3(1.0f, 0.0f, 0.0f),
+            new Vector3(0.0f, 0.0f, 1.0f),
+            new Vector3(0.0f, 1.0f, 1.0f),
+            new Vector3(1.0f, 1.0f, 1.0f),
+            new Vector3(1.0f, 0.0f, 1.0f)
+        };
 
         /// <summary> Triangles of a cube </summary>
         public static readonly int[][] Triangles = new int[][]
@@ -25,35 +36,18 @@ namespace Common.Mathematics
             return e.x * e.y * 2 + e.y * e.z * 2 + e.z * e.x * 2;
         }
 
-        /// <summary> Calculates vertices of a cube defined by centre 'c' and extents 'e', into array </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Vertices(Vector3[] vs, Vector3 c, Vector3 e)
-        {
-            e *= 0.5f;
-            vs[0] = c + new Vector3(-e.x, -e.y, -e.z);
-            vs[1] = c + new Vector3(-e.x, +e.y, -e.z);
-            vs[2] = c + new Vector3(+e.x, +e.y, -e.z);
-            vs[3] = c + new Vector3(+e.x, -e.y, -e.z);
-            vs[4] = c + new Vector3(-e.x, -e.y, +e.z);
-            vs[5] = c + new Vector3(-e.x, +e.y, +e.z);
-            vs[6] = c + new Vector3(+e.x, +e.y, +e.z);
-            vs[7] = c + new Vector3(+e.x, -e.y, +e.z);
-        }
-
-        /// <summary> Calculates vertices of a cube defined by centre 'c' and extents 'e' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3[] Vertices(Vector3 c, Vector3 e)
-        {
-            var vs = new Vector3[VERTEX_COUNT];
-            Vertices(vs, c, e);
-            return vs;
-        }
-
         /// <summary> Calculates volume of a cube defined by extents 'e' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Volume(Vector3 e)
         {
             return e.x * e.y * e.z;
+        }
+
+        /// <summary> Calculates rectangle vertices into 'target' array </summary>
+        public static void GetVertices(Vector3[] target, Vector3 position, Vector3 size, Quaternion rotation)
+        {
+            for (int i = 0; i < Vertices.Length; ++i)
+                target[i] = Mathx.Transform(Vertices[i], position, rotation, size);
         }
     }
 }
