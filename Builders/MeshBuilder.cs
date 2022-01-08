@@ -297,14 +297,12 @@ namespace Common
             int t0, int t1, int t2, int t3
         )
         {
-            AddTriangle(
-                v0, v1, v2,
-                t0, t1, t2
-            );
-            AddTriangle(
-                v0, v2, v3,
-                t0, t2, t3
-            );
+            AddVertex(v0, t0);
+            AddVertex(v1, t1);
+            AddVertex(v2, t2);
+            AddVertex(v3, t3);
+            AddTriangle(t0);
+            AddTriangle(t2);
         }
 
         public virtual void AddQuad(
@@ -313,16 +311,12 @@ namespace Common
             int t0, int t1, int t2, int t3
         )
         {
-            AddTriangle(
-                v0, v1, v2,
-                c0, c1, c2,
-                t0, t1, t2
-            );
-            AddTriangle(
-                v0, v2, v3,
-                c0, c2, c3,
-                t0, t2, t3
-            );
+            AddVertex(v0, c0, t0);
+            AddVertex(v1, c1, t1);
+            AddVertex(v2, c2, t2);
+            AddVertex(v3, c3, t3);
+            AddTriangle(t0);
+            AddTriangle(t2);
         }
 
         public virtual void AddQuad(
@@ -331,16 +325,12 @@ namespace Common
             int t0, int t1, int t2, int t3
         )
         {
-            AddTriangle(
-                v0, v1, v2,
-                uv0, uv1, uv2,
-                t0, t1, t2
-            );
-            AddTriangle(
-                v0, v2, v3,
-                uv0, uv2, uv3,
-                t0, t2, t3
-            );
+            AddVertex(v0, uv0, t0);
+            AddVertex(v1, uv1, t1);
+            AddVertex(v2, uv2, t2);
+            AddVertex(v3, uv3, t3);
+            AddTriangle(t0);
+            AddTriangle(t2);
         }
 
         public virtual void AddQuad(
@@ -349,16 +339,12 @@ namespace Common
             int t0, int t1, int t2, int t3
         )
         {
-            AddTriangle(
-                v0, v1, v2,
-                n0, n1, n2,
-                t0, t1, t2
-            );
-            AddTriangle(
-                v0, v2, v3,
-                n0, n2, n3,
-                t0, t2, t3
-            );
+            AddVertex(v0, n0, t0);
+            AddVertex(v1, n1, t1);
+            AddVertex(v2, n2, t2);
+            AddVertex(v3, n3, t3);
+            AddTriangle(t0);
+            AddTriangle(t2);
         }
 
         public virtual void AddQuad(
@@ -368,18 +354,12 @@ namespace Common
             int t0, int t1, int t2, int t3
         )
         {
-            AddTriangle(
-                v0, v1, v2,
-                n0, n1, n2,
-                c0, c1, c2,
-                t0, t1, t2
-            );
-            AddTriangle(
-                v0, v2, v3,
-                n0, n2, n3,
-                c0, c2, c3,
-                t0, t2, t3
-            );
+            AddVertex(v0, n0, c0, t0);
+            AddVertex(v1, n1, c1, t1);
+            AddVertex(v2, n2, c2, t2);
+            AddVertex(v3, n3, c3, t3);
+            AddTriangle(t0);
+            AddTriangle(t2);
         }
 
         public virtual void AddQuad(
@@ -389,18 +369,12 @@ namespace Common
             int t0, int t1, int t2, int t3
         )
         {
-            AddTriangle(
-                v0, v1, v2,
-                n0, n1, n2,
-                uv0, uv1, uv2,
-                t0, t1, t2
-            );
-            AddTriangle(
-                v0, v2, v3,
-                n0, n2, n3,
-                uv0, uv2, uv3,
-                t0, t2, t3
-            );
+            AddVertex(v0, n0, uv0, t0);
+            AddVertex(v1, n1, uv1, t1);
+            AddVertex(v2, n2, uv2, t2);
+            AddVertex(v3, n3, uv3, t3);
+            AddTriangle(t0);
+            AddTriangle(t2);
         }
 
         public virtual void AddQuad(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3)
