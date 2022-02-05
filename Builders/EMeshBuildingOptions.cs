@@ -3,7 +3,7 @@
 namespace Common
 {
     [Flags]
-    public enum EMeshBuildingOptions
+    public enum EMeshBuildingOptions : byte
     {
         FULL = BOUNDS | NORMALS | TANGENTS,
         TANGENTS = 4,

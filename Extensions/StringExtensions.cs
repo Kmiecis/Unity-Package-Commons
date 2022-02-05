@@ -178,6 +178,16 @@ namespace Common.Extensions
                 return char.ToUpper(self[0]) + self.Substring(1);
         }
 
+        public static string Decapitalize(this string self)
+        {
+            if (string.IsNullOrEmpty(self))
+                return self;
+            if (self.Length == 1)
+                return char.ToLower(self[0]).ToString();
+            else
+                return char.ToLower(self[0]) + self.Substring(1);
+        }
+
         public static bool StartsWith(this string self, string prefix)
         {
             if (string.IsNullOrEmpty(self) || string.IsNullOrEmpty(prefix))

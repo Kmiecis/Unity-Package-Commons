@@ -202,9 +202,14 @@ namespace Common.Extensions
         {
             int index = self.BinarySearch(item, comparer ?? Comparer<T>.Default);
             if (index < 0)
-                index = self.Count;
+                index = ~index;
             self.Insert(index, item);
             return index;
+        }
+
+        public static int InsertSorted<T>(this List<T> self, T item, Comparison<T> comparison)
+        {
+            return self.InsertSorted(item, Comparer<T>.Create(comparison));
         }
 
         public static void RemoveLast<T>(this List<T> self)

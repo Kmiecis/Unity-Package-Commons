@@ -1348,6 +1348,28 @@ namespace Common.Mathematics
                 IsZero(i - v.w)
             );
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Bool4 AreEqual(Quaternion a, Quaternion b)
+        {
+            return new Bool4(
+                IsEqual(a.x, b.x),
+                IsEqual(a.y, b.y),
+                IsEqual(a.z, b.z),
+                IsEqual(a.w, b.w)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Bool4 AreEqual(Matrix4x4 a, Matrix4x4 b)
+        {
+            return new Bool4(
+                IsEqual(a.GetColumn(0), b.GetColumn(0)),
+                IsEqual(a.GetColumn(1), b.GetColumn(1)),
+                IsEqual(a.GetColumn(2), b.GetColumn(2)),
+                IsEqual(a.GetColumn(3), b.GetColumn(3))
+            );
+        }
         #endregion
 
         #region ARE_GREATER
@@ -2587,6 +2609,23 @@ namespace Common.Mathematics
                 IsZero(i - v.y) &&
                 IsZero(i - v.z) &&
                 IsZero(i - v.w)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEqual(Quaternion a, Quaternion b)
+        {
+            return IsZero(Quaternion.Dot(a, b));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEqual(Matrix4x4 a, Matrix4x4 b)
+        {
+            return (
+                IsEqual(a.GetColumn(0), b.GetColumn(0)) &&
+                IsEqual(a.GetColumn(1), b.GetColumn(1)) &&
+                IsEqual(a.GetColumn(2), b.GetColumn(2)) &&
+                IsEqual(a.GetColumn(3), b.GetColumn(3))
             );
         }
         #endregion

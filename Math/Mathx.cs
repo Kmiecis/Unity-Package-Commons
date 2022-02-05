@@ -5,7 +5,7 @@ namespace Common.Mathematics
 {
     public static partial class Mathx
     {
-        private const float EPS = 1e-7f;
+        private const float kEpsilon = 1e-7f;
 
         public const float ROOT_2 = 1.41421356237f;
         public const float ROOT_3 = 1.73205080757f;
@@ -26,7 +26,7 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsZero(float f)
         {
-            return Mathf.Abs(f) < EPS;
+            return Mathf.Abs(f) < kEpsilon;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -199,7 +199,7 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float ReciprocalSafe(float f)
         {
-            return Reciprocal(Mathf.Max(f, EPS));
+            return Reciprocal(Mathf.Max(f, kEpsilon));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

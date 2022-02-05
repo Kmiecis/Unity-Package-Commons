@@ -6,14 +6,14 @@ namespace Common
     {
         public static readonly DateTime Epoch = new DateTime(1970, 1, 1);
         
-        public static float NowUtc
+        public static int NowUtc
         {
-            get { return (float)DateTime.UtcNow.Subtract(Epoch).TotalSeconds; }
+            get { return ToTimestamp(DateTime.UtcNow); }
         }
 
-        public static float Now
+        public static int Now
         {
-            get { return (float)DateTime.Now.Subtract(Epoch).TotalSeconds; }
+            get { return ToTimestamp(DateTime.Now); }
         }
 
         public static int ToTimestamp(DateTime date)

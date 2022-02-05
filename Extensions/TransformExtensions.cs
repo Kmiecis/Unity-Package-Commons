@@ -76,8 +76,11 @@ namespace Common.Extensions
 
         public static string GetHierarchyPath(this Transform self, char delimiter = '/')
         {
+            var path = self.name;
             var parent = self.parent;
-            return (parent == null ? "" : GetHierarchyPath(parent, delimiter) + delimiter) + self.name;
+            while (parent != null)
+                path = parent.name + delimiter + path;
+            return path;
         }
     }
 }

@@ -6,6 +6,36 @@ namespace Common.Mathematics
     public static partial class Mathx
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Approximately(Vector2 a, Vector2 b)
+        {
+            return (
+                Mathf.Approximately(a.x, b.x) &&
+                Mathf.Approximately(a.y, b.y)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Approximately(Vector3 a, Vector3 b)
+        {
+            return (
+                Mathf.Approximately(a.x, b.x) &&
+                Mathf.Approximately(a.y, b.y) &&
+                Mathf.Approximately(a.z, b.z)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Approximately(Vector4 a, Vector4 b)
+        {
+            return (
+                Mathf.Approximately(a.x, b.x) &&
+                Mathf.Approximately(a.y, b.y) &&
+                Mathf.Approximately(a.z, b.z) &&
+                Mathf.Approximately(a.w, b.w)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsZero(Vector2 v)
         {
             return (
@@ -933,19 +963,19 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 ReciprocalSafe(Vector2 v)
         {
-            return Reciprocal(Vector2.Max(v, Vector2.one * EPS));
+            return Reciprocal(Vector2.Max(v, Vector2.one * kEpsilon));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 ReciprocalSafe(Vector3 v)
         {
-            return Reciprocal(Vector3.Max(v, Vector3.one * EPS));
+            return Reciprocal(Vector3.Max(v, Vector3.one * kEpsilon));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 ReciprocalSafe(Vector4 v)
         {
-            return Reciprocal(Vector4.Max(v, Vector4.one * EPS));
+            return Reciprocal(Vector4.Max(v, Vector4.one * kEpsilon));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

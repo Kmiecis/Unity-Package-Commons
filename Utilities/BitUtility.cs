@@ -5,15 +5,33 @@ namespace Common
     public static class BitUtility
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsFlag(int value, int flag)
+        public static bool IsBit(int value, int bit)
         {
-            return (value & flag) == flag;
+            return (value & bit) == bit;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool HasFlag(int value, int flag)
+        public static bool IsSet(int value, int bit)
         {
-            return (value & flag) != 0;
+            return (value & bit) != 0;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEqual(int value, int lbit, int rbit)
+        {
+            return (value & lbit) == (value & rbit);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void SetBit(ref int value, int bit)
+        {
+            value |= bit;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ClearBit(ref int value, int bit)
+        {
+            value &= ~bit;
         }
     }
 }

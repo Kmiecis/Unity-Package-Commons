@@ -6,10 +6,18 @@ namespace Common.Extensions
     {
         public static bool IsGenericTypeOf(this Type self, Type type)
         {
-            return (
-                self.IsGenericType &&
-                self.GetGenericTypeDefinition() == type
-            );
+            while (self != null)
+            {
+                if (
+                    self.IsGenericType &&
+                    self.GetGenericTypeDefinition() == type
+                )
+                {
+                    return true;
+                }
+                self = self.BaseType;
+            }
+            return false;
         }
     }
 }
