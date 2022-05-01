@@ -24,9 +24,9 @@ namespace Common.Mathematics
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsZero(float f)
+        public static bool IsZero(float f, float e = kEpsilon)
         {
-            return Mathf.Abs(f) < kEpsilon;
+            return Mathf.Abs(f) < e;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -36,9 +36,9 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsOne(float f)
+        public static bool IsOne(float f, float e = kEpsilon)
         {
-            return IsZero(f - 1.0f);
+            return IsZero(f - 1.0f, e);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

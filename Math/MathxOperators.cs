@@ -1105,47 +1105,47 @@ namespace Common.Mathematics
 
         #region ARE_EQUAL
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 AreEqual(Vector2 a, Vector2 b)
+        public static Bool2 AreEqual(Vector2 a, Vector2 b, float e = kEpsilon)
         {
             return new Bool2(
-                IsZero(a.x - b.x),
-                IsZero(a.y - b.y)
+                IsZero(a.x - b.x, e),
+                IsZero(a.y - b.y, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 AreEqual(Vector2 v, float f)
+        public static Bool2 AreEqual(Vector2 v, float f, float e = kEpsilon)
         {
             return new Bool2(
-                IsZero(v.x - f),
-                IsZero(v.y - f)
+                IsZero(v.x - f, e),
+                IsZero(v.y - f, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 AreEqual(float f, Vector2 v)
+        public static Bool2 AreEqual(float f, Vector2 v, float e = kEpsilon)
         {
             return new Bool2(
-                IsZero(f - v.x),
-                IsZero(f - v.y)
+                IsZero(f - v.x, e),
+                IsZero(f - v.y, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 AreEqual(Vector2 v, int i)
+        public static Bool2 AreEqual(Vector2 v, int i, float e = kEpsilon)
         {
             return new Bool2(
-                IsZero(v.x - i),
-                IsZero(v.y - i)
+                IsZero(v.x - i, e),
+                IsZero(v.y - i, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 AreEqual(int i, Vector2 v)
+        public static Bool2 AreEqual(int i, Vector2 v, float e = kEpsilon)
         {
             return new Bool2(
-                IsZero(i - v.x),
-                IsZero(i - v.y)
+                IsZero(i - v.x, e),
+                IsZero(i - v.y, e)
             );
         }
 
@@ -1159,20 +1159,20 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 AreEqual(Vector2Int v, float f)
+        public static Bool2 AreEqual(Vector2Int v, float f, float e = kEpsilon)
         {
             return new Bool2(
-                IsZero(v.x - f),
-                IsZero(v.y - f)
+                IsZero(v.x - f, e),
+                IsZero(v.y - f, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool2 AreEqual(float f, Vector2Int v)
+        public static Bool2 AreEqual(float f, Vector2Int v, float e = kEpsilon)
         {
             return new Bool2(
-                IsZero(f - v.x),
-                IsZero(f - v.y)
+                IsZero(f - v.x, e),
+                IsZero(f - v.y, e)
             );
         }
 
@@ -1195,52 +1195,52 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 AreEqual(Vector3 a, Vector3 b)
+        public static Bool3 AreEqual(Vector3 a, Vector3 b, float e = kEpsilon)
         {
             return new Bool3(
-                IsZero(a.x - b.x),
-                IsZero(a.y - b.y),
-                IsZero(a.z - b.z)
+                IsZero(a.x - b.x, e),
+                IsZero(a.y - b.y, e),
+                IsZero(a.z - b.z, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 AreEqual(Vector3 v, float f)
+        public static Bool3 AreEqual(Vector3 v, float f, float e = kEpsilon)
         {
             return new Bool3(
-                IsZero(v.x - f),
-                IsZero(v.y - f),
-                IsZero(v.z - f)
+                IsZero(v.x - f, e),
+                IsZero(v.y - f, e),
+                IsZero(v.z - f, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 AreEqual(float f, Vector3 v)
+        public static Bool3 AreEqual(float f, Vector3 v, float e = kEpsilon)
         {
             return new Bool3(
-                IsZero(f - v.x),
-                IsZero(f - v.y),
-                IsZero(f - v.z)
+                IsZero(f - v.x, e),
+                IsZero(f - v.y, e),
+                IsZero(f - v.z, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 AreEqual(Vector3 v, int i)
+        public static Bool3 AreEqual(Vector3 v, int i, float e = kEpsilon)
         {
             return new Bool3(
-                IsZero(v.x - i),
-                IsZero(v.y - i),
-                IsZero(v.z - i)
+                IsZero(v.x - i, e),
+                IsZero(v.y - i, e),
+                IsZero(v.z - i, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 AreEqual(int i, Vector3 v)
+        public static Bool3 AreEqual(int i, Vector3 v, float e = kEpsilon)
         {
             return new Bool3(
-                IsZero(i - v.x),
-                IsZero(i - v.y),
-                IsZero(i - v.z)
+                IsZero(i - v.x, e),
+                IsZero(i - v.y, e),
+                IsZero(i - v.z, e)
             );
         }
 
@@ -1255,22 +1255,22 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 AreEqual(Vector3Int v, float f)
+        public static Bool3 AreEqual(Vector3Int v, float f, float e = kEpsilon)
         {
             return new Bool3(
-                IsZero(v.x - f),
-                IsZero(v.y - f),
-                IsZero(v.z - f)
+                IsZero(v.x - f, e),
+                IsZero(v.y - f, e),
+                IsZero(v.z - f, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool3 AreEqual(float f, Vector3Int v)
+        public static Bool3 AreEqual(float f, Vector3Int v, float e = kEpsilon)
         {
             return new Bool3(
-                IsZero(f - v.x),
-                IsZero(f - v.y),
-                IsZero(f - v.z)
+                IsZero(f - v.x, e),
+                IsZero(f - v.y, e),
+                IsZero(f - v.z, e)
             );
         }
 
@@ -1295,79 +1295,79 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 AreEqual(Vector4 a, Vector4 b)
+        public static Bool4 AreEqual(Vector4 a, Vector4 b, float e = kEpsilon)
         {
             return new Bool4(
-                IsZero(a.x - b.x),
-                IsZero(a.y - b.y),
-                IsZero(a.z - b.z),
-                IsZero(a.w - b.w)
+                IsZero(a.x - b.x, e),
+                IsZero(a.y - b.y, e),
+                IsZero(a.z - b.z, e),
+                IsZero(a.w - b.w, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 AreEqual(Vector4 v, float f)
+        public static Bool4 AreEqual(Vector4 v, float f, float e = kEpsilon)
         {
             return new Bool4(
-                IsZero(v.x - f),
-                IsZero(v.y - f),
-                IsZero(v.z - f),
-                IsZero(v.w - f)
+                IsZero(v.x - f, e),
+                IsZero(v.y - f, e),
+                IsZero(v.z - f, e),
+                IsZero(v.w - f, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 AreEqual(float f, Vector4 v)
+        public static Bool4 AreEqual(float f, Vector4 v, float e = kEpsilon)
         {
             return new Bool4(
-                IsZero(f - v.x),
-                IsZero(f - v.y),
-                IsZero(f - v.z),
-                IsZero(f - v.w)
+                IsZero(f - v.x, e),
+                IsZero(f - v.y, e),
+                IsZero(f - v.z, e),
+                IsZero(f - v.w, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 AreEqual(Vector4 v, int i)
+        public static Bool4 AreEqual(Vector4 v, int i, float e = kEpsilon)
         {
             return new Bool4(
-                IsZero(v.x - i),
-                IsZero(v.y - i),
-                IsZero(v.z - i),
-                IsZero(v.w - i)
+                IsZero(v.x - i, e),
+                IsZero(v.y - i, e),
+                IsZero(v.z - i, e),
+                IsZero(v.w - i, e)
             );
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 AreEqual(int i, Vector4 v)
+        public static Bool4 AreEqual(int i, Vector4 v, float e = kEpsilon)
         {
             return new Bool4(
-                IsZero(i - v.x),
-                IsZero(i - v.y),
-                IsZero(i - v.z),
-                IsZero(i - v.w)
+                IsZero(i - v.x, e),
+                IsZero(i - v.y, e),
+                IsZero(i - v.z, e),
+                IsZero(i - v.w, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 AreEqual(Quaternion a, Quaternion b)
+        public static Bool4 AreEqual(Quaternion a, Quaternion b, float e = kEpsilon)
         {
             return new Bool4(
-                IsEqual(a.x, b.x),
-                IsEqual(a.y, b.y),
-                IsEqual(a.z, b.z),
-                IsEqual(a.w, b.w)
+                IsEqual(a.x, b.x, e),
+                IsEqual(a.y, b.y, e),
+                IsEqual(a.z, b.z, e),
+                IsEqual(a.w, b.w, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Bool4 AreEqual(Matrix4x4 a, Matrix4x4 b)
+        public static Bool4 AreEqual(Matrix4x4 a, Matrix4x4 b, float e = kEpsilon)
         {
             return new Bool4(
-                IsEqual(a.GetColumn(0), b.GetColumn(0)),
-                IsEqual(a.GetColumn(1), b.GetColumn(1)),
-                IsEqual(a.GetColumn(2), b.GetColumn(2)),
-                IsEqual(a.GetColumn(3), b.GetColumn(3))
+                IsEqual(a.GetColumn(0), b.GetColumn(0), e),
+                IsEqual(a.GetColumn(1), b.GetColumn(1), e),
+                IsEqual(a.GetColumn(2), b.GetColumn(2), e),
+                IsEqual(a.GetColumn(3), b.GetColumn(3), e)
             );
         }
         #endregion
@@ -2362,53 +2362,53 @@ namespace Common.Mathematics
 
         #region IS_EQUAL
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(float a, float b)
+        public static bool IsEqual(float a, float b, float e = kEpsilon)
         {
-            return IsZero(a - b);
+            return IsZero(a - b, e);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(Vector2 a, Vector2 b)
+        public static bool IsEqual(Vector2 a, Vector2 b, float e = kEpsilon)
         {
             return (
-                IsZero(a.x - b.x) &&
-                IsZero(a.y - b.y)
+                IsZero(a.x - b.x, e) &&
+                IsZero(a.y - b.y, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(Vector2 v, float f)
+        public static bool IsEqual(Vector2 v, float f, float e = kEpsilon)
         {
             return (
-                IsZero(v.x - f) &&
-                IsZero(v.y - f)
+                IsZero(v.x - f, e) &&
+                IsZero(v.y - f, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(float f, Vector2 v)
+        public static bool IsEqual(float f, Vector2 v, float e = kEpsilon)
         {
             return (
-                IsZero(f - v.x) &&
-                IsZero(f - v.y)
+                IsZero(f - v.x, e) &&
+                IsZero(f - v.y, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(Vector2 v, int i)
+        public static bool IsEqual(Vector2 v, int i, float e = kEpsilon)
         {
             return (
-                IsZero(v.x - i) &&
-                IsZero(v.y - i)
+                IsZero(v.x - i, e) &&
+                IsZero(v.y - i, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(int i, Vector2 v)
+        public static bool IsEqual(int i, Vector2 v, float e = kEpsilon)
         {
             return (
-                IsZero(i - v.x) &&
-                IsZero(i - v.y)
+                IsZero(i - v.x, e) &&
+                IsZero(i - v.y, e)
             );
         }
 
@@ -2422,20 +2422,20 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(Vector2Int v, float f)
+        public static bool IsEqual(Vector2Int v, float f, float e = kEpsilon)
         {
             return (
-                IsZero(v.x - f) &&
-                IsZero(v.y - f)
+                IsZero(v.x - f, e) &&
+                IsZero(v.y - f, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(float f, Vector2Int v)
+        public static bool IsEqual(float f, Vector2Int v, float e = kEpsilon)
         {
             return (
-                IsZero(f - v.x) &&
-                IsZero(f - v.y)
+                IsZero(f - v.x, e) &&
+                IsZero(f - v.y, e)
             );
         }
 
@@ -2458,52 +2458,52 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(Vector3 a, Vector3 b)
+        public static bool IsEqual(Vector3 a, Vector3 b, float e = kEpsilon)
         {
             return (
-                IsZero(a.x - b.x) &&
-                IsZero(a.y - b.y) &&
-                IsZero(a.z - b.z)
+                IsZero(a.x - b.x, e) &&
+                IsZero(a.y - b.y, e) &&
+                IsZero(a.z - b.z, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(Vector3 v, float f)
+        public static bool IsEqual(Vector3 v, float f, float e = kEpsilon)
         {
             return (
-                IsZero(v.x - f) &&
-                IsZero(v.y - f) &&
-                IsZero(v.z - f)
+                IsZero(v.x - f, e) &&
+                IsZero(v.y - f, e) &&
+                IsZero(v.z - f, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(float f, Vector3 v)
+        public static bool IsEqual(float f, Vector3 v, float e = kEpsilon)
         {
             return (
-                IsZero(f - v.x) &&
-                IsZero(f - v.y) &&
-                IsZero(f - v.z)
+                IsZero(f - v.x, e) &&
+                IsZero(f - v.y, e) &&
+                IsZero(f - v.z, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(Vector3 v, int i)
+        public static bool IsEqual(Vector3 v, int i, float e = kEpsilon)
         {
             return (
-                IsZero(v.x - i) &&
-                IsZero(v.y - i) &&
-                IsZero(v.z - i)
+                IsZero(v.x - i, e) &&
+                IsZero(v.y - i, e) &&
+                IsZero(v.z - i, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(int i, Vector3 v)
+        public static bool IsEqual(int i, Vector3 v, float e = kEpsilon)
         {
             return (
-                IsZero(i - v.x) &&
-                IsZero(i - v.y) &&
-                IsZero(i - v.z)
+                IsZero(i - v.x, e) &&
+                IsZero(i - v.y, e) &&
+                IsZero(i - v.z, e)
             );
         }
 
@@ -2518,22 +2518,22 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(Vector3Int v, float f)
+        public static bool IsEqual(Vector3Int v, float f, float e = kEpsilon)
         {
             return (
-                IsZero(v.x - f) &&
-                IsZero(v.y - f) &&
-                IsZero(v.z - f)
+                IsZero(v.x - f, e) &&
+                IsZero(v.y - f, e) &&
+                IsZero(v.z - f, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(float f, Vector3Int v)
+        public static bool IsEqual(float f, Vector3Int v, float e = kEpsilon)
         {
             return (
-                IsZero(f - v.x) &&
-                IsZero(f - v.y) &&
-                IsZero(f - v.z)
+                IsZero(f - v.x, e) &&
+                IsZero(f - v.y, e) &&
+                IsZero(f - v.z, e)
             );
         }
 
@@ -2558,74 +2558,74 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(Vector4 a, Vector4 b)
+        public static bool IsEqual(Vector4 a, Vector4 b, float e = kEpsilon)
         {
             return (
-                IsZero(a.x - b.x) &&
-                IsZero(a.y - b.y) &&
-                IsZero(a.z - b.z) &&
-                IsZero(a.w - b.w)
+                IsZero(a.x - b.x, e) &&
+                IsZero(a.y - b.y, e) &&
+                IsZero(a.z - b.z, e) &&
+                IsZero(a.w - b.w, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(Vector4 v, float f)
+        public static bool IsEqual(Vector4 v, float f, float e = kEpsilon)
         {
             return (
-                IsZero(v.x - f) &&
-                IsZero(v.y - f) &&
-                IsZero(v.z - f) &&
-                IsZero(v.w - f)
+                IsZero(v.x - f, e) &&
+                IsZero(v.y - f, e) &&
+                IsZero(v.z - f, e) &&
+                IsZero(v.w - f, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(float f, Vector4 v)
+        public static bool IsEqual(float f, Vector4 v, float e = kEpsilon)
         {
             return (
-                IsZero(f - v.x) &&
-                IsZero(f - v.y) &&
-                IsZero(f - v.z) &&
-                IsZero(f - v.w)
+                IsZero(f - v.x, e) &&
+                IsZero(f - v.y, e) &&
+                IsZero(f - v.z, e) &&
+                IsZero(f - v.w, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(Vector4 v, int i)
+        public static bool IsEqual(Vector4 v, int i, float e = kEpsilon)
         {
             return (
-                IsZero(v.x - i) &&
-                IsZero(v.y - i) &&
-                IsZero(v.z - i) &&
-                IsZero(v.w - i)
+                IsZero(v.x - i, e) &&
+                IsZero(v.y - i, e) &&
+                IsZero(v.z - i, e) &&
+                IsZero(v.w - i, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(int i, Vector4 v)
+        public static bool IsEqual(int i, Vector4 v, float e = kEpsilon)
         {
             return (
-                IsZero(i - v.x) &&
-                IsZero(i - v.y) &&
-                IsZero(i - v.z) &&
-                IsZero(i - v.w)
+                IsZero(i - v.x, e) &&
+                IsZero(i - v.y, e) &&
+                IsZero(i - v.z, e) &&
+                IsZero(i - v.w, e)
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(Quaternion a, Quaternion b)
+        public static bool IsEqual(Quaternion a, Quaternion b, float e = kEpsilon)
         {
-            return IsZero(Quaternion.Dot(a, b));
+            return IsZero(Quaternion.Dot(a, b), e);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsEqual(Matrix4x4 a, Matrix4x4 b)
+        public static bool IsEqual(Matrix4x4 a, Matrix4x4 b, float e = kEpsilon)
         {
             return (
-                IsEqual(a.GetColumn(0), b.GetColumn(0)) &&
-                IsEqual(a.GetColumn(1), b.GetColumn(1)) &&
-                IsEqual(a.GetColumn(2), b.GetColumn(2)) &&
-                IsEqual(a.GetColumn(3), b.GetColumn(3))
+                IsEqual(a.GetColumn(0), b.GetColumn(0), e) &&
+                IsEqual(a.GetColumn(1), b.GetColumn(1), e) &&
+                IsEqual(a.GetColumn(2), b.GetColumn(2), e) &&
+                IsEqual(a.GetColumn(3), b.GetColumn(3), e)
             );
         }
         #endregion
