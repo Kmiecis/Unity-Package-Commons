@@ -54,7 +54,7 @@ namespace Common.Extensions
         public static bool TryGetAt<T>(this List<T> self, int index, out T item)
         {
             item = (-1 < index && index < self.Count) ? self[index] : default;
-            return item != default;
+            return !Equals(item, default);
         }
 
         public static bool TryGetFirst<T>(this List<T> self, out T item)
@@ -88,19 +88,19 @@ namespace Common.Extensions
         public static bool TryFind<T>(this List<T> self, Predicate<T> match, out T value)
         {
             value = self.Find(match);
-            return value != default;
+            return !Equals(value, default);
         }
 
         public static bool TryFindLast<T>(this List<T> self, Predicate<T> match, out T value)
         {
             value = self.FindLast(match);
-            return value != default;
+            return !Equals(value, default);
         }
 
         public static bool TryFindAll<T>(this List<T> self, Predicate<T> match, out List<T> value)
         {
             value = self.FindAll(match);
-            return value != default;
+            return !value.IsNullOrEmpty();
         }
 
         public static bool TryFindIndex<T>(this List<T> self, Predicate<T> match, out int index)
@@ -155,9 +155,7 @@ namespace Common.Extensions
             where T : struct
         {
             for (int i = 0; i < count; ++i)
-            {
                 self.Add(value);
-            }
             return self;
         }
 
@@ -171,9 +169,7 @@ namespace Common.Extensions
             where T : class
         {
             for (int i = 0; i < count; ++i)
-            {
                 self.Add(provider());
-            }
             return self;
         }
 

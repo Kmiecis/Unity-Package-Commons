@@ -7,15 +7,8 @@ namespace Common
         public static void AssignOrThrow<T>(ref T target, T value)
         {
             if (target != null)
-            {
                 throw new Exception(string.Format("Target {0} already assigned", typeof(T).Name));
-            }
             target = value;
-        }
-
-        public static bool EqualsSafely(object left, object right)
-        {
-            return left != null ? left.Equals(right) : right != null ? right.Equals(left) : true;
         }
 
         public static void Swap<T>(ref T a, ref T b)
@@ -27,7 +20,7 @@ namespace Common
         
         public static bool TryUpdate<T>(ref T target, T value)
         {
-            if (!EqualsSafely(target, value))
+            if (!Equals(target, value))
             {
                 target = value;
                 return true;

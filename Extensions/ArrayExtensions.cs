@@ -52,7 +52,7 @@ namespace Common.Extensions
         public static bool TryGetAt<T>(this T[] self, int index, out T item)
         {
             item = self.ContainsIndex(index) ? self[index] : default;
-            return item != default;
+            return !Equals(item, default);
         }
 
         public static bool TryGetFirst<T>(this T[] self, out T item)
@@ -86,19 +86,19 @@ namespace Common.Extensions
         public static bool TryFind<T>(this T[] self, Predicate<T> match, out T value)
         {
             value = Array.Find(self, match);
-            return value != default;
+            return !Equals(value, default);
         }
 
         public static bool TryFindLast<T>(this T[] self, Predicate<T> match, out T value)
         {
             value = Array.FindLast(self, match);
-            return value != default;
+            return !Equals(value, default);
         }
 
         public static bool TryFindAll<T>(this T[] self, Predicate<T> match, out T[] value)
         {
             value = Array.FindAll(self, match);
-            return value != default;
+            return !value.IsNullOrEmpty();
         }
 
         public static bool TryFindIndex<T>(this T[] self, Predicate<T> match, out int index)
@@ -148,9 +148,7 @@ namespace Common.Extensions
             where T : struct
         {
             for (int i = 0; i < count; ++i)
-            {
                 self[i] = value;
-            }
             return self;
         }
 
@@ -164,9 +162,7 @@ namespace Common.Extensions
             where T : class
         {
             for (int i = 0; i < count; ++i)
-            {
                 self[i] = provider();
-            }
             return self;
         }
 

@@ -20,6 +20,13 @@ namespace Common.Extensions
             return self.IsNull() || self.IsEmpty();
         }
 
+        public static KeyValuePair<TKey, TValue> First<TKey, TValue>(this Dictionary<TKey, TValue> self)
+        {
+            foreach (var pairs in self)
+                return pairs;
+            return default;
+        }
+
         public static TValue GetOrDefault<TKey, TValue>(this Dictionary<TKey, TValue> self, TKey key, TValue value = default)
         {
             return self.TryGetValue(key, out var result) ? result : value;
@@ -30,6 +37,20 @@ namespace Common.Extensions
             TValue result;
             if (!self.TryGetValue(key, out result))
                 self[key] = result = computor();
+            return result;
+        }
+
+        public static TValue Revoke<TKey, TValue>(this Dictionary<TKey, TValue> self, TKey key)
+        {
+            var value = self[key];
+            self.Remove(key);
+            return value;
+        }
+
+        public static bool TryRevoke<TKey, TValue>(this Dictionary<TKey, TValue> self, TKey key, out TValue value)
+        {
+            var result = self.TryGetValue(key, out value);
+            self.Remove(key);
             return result;
         }
     }

@@ -195,14 +195,34 @@ namespace Common.Extensions
             self.Shuffle(list, list.Count);
         }
 
+        public static T NextItem<T>(this Random self, T[] args, int min, int max)
+        {
+            return args[self.Next(min, max)];
+        }
+
+        public static T NextItem<T>(this Random self, T[] args, int max)
+        {
+            return self.NextItem(args, 0, max);
+        }
+
         public static T NextItem<T>(this Random self, params T[] args)
         {
-            return args[self.Next(args.Length)];
+            return self.NextItem(args, args.Length);
+        }
+
+        public static T NextItem<T>(this Random self, List<T> list, int min, int max)
+        {
+            return list[self.Next(min, max)];
+        }
+
+        public static T NextItem<T>(this Random self, List<T> list, int max)
+        {
+            return self.NextItem(list, 0, max);
         }
 
         public static T NextItem<T>(this Random self, List<T> list)
         {
-            return list[self.Next(list.Count)];
+            return self.NextItem(list, list.Count);
         }
 
         public static void NextItems<T>(this Random self, T[] source, T[] target)

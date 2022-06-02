@@ -29,24 +29,24 @@ namespace Common.Mathematics
         /// <summary> Indices array by configuration </summary>
         public static readonly int[][] Triangles = new int[][]
         {
-            new int[]{ },                                                   // 0
-            new int[]{  0,  4,  7 },                                        // 1
-            new int[]{  1,  5,  4 },                                        // 2
-            new int[]{  0,  1,  5,  0,  5,  7 },                            // 3 = 1 + 2
-            new int[]{  2,  6,  5 },                                        // 4
-            new int[]{  0,  4,  5,  0,  5,  2,  0,  2,  6,  0,  6,  7 },    // 5 = 1 + 4
-            new int[]{  1,  2,  6,  1,  6,  4 },                            // 6 = 2 + 4
-            new int[]{  0,  1,  2,  0,  2,  6,  0,  6,  7 },                // 7 = 1 + 2 + 4
-            new int[]{  3,  7,  6 },                                        // 8
-            new int[]{  3,  0,  4,  3,  4,  6 },                            // 9 = 1 + 8
-            new int[]{  1,  5,  6,  1,  6,  3,  1,  3,  7,  1,  7,  4 },    // 10 = 2 + 8
-            new int[]{  3,  0,  1,  3,  1,  5,  3,  5,  6 },                // 11 = 1 + 2 + 8
-            new int[]{  2,  3,  7,  2,  7,  5 },                            // 12 = 4 + 8
-            new int[]{  2,  3,  0,  2,  0,  4,  2,  4,  5 },                // 13 = 1 + 4 + 8
-            new int[]{  1,  2,  3,  1,  3,  7,  1,  7,  4 },                // 14 = 2 + 4 + 8
-            new int[]{  0,  1,  2,  0,  2,  3 }                             // 15 = 1 + 2 + 4 + 8
+            new int[]{ },                                       // 0
+            new int[]{ 0, 4, 7 },                               // 1
+            new int[]{ 1, 5, 4 },                               // 2
+            new int[]{ 0, 1, 5, 0, 5, 7 },                      // 3 = 1 + 2
+            new int[]{ 2, 6, 5 },                               // 4
+            new int[]{ 0, 4, 5, 0, 5, 2, 0, 2, 6, 0, 6, 7 },    // 5 = 1 + 4
+            new int[]{ 1, 2, 6, 1, 6, 4 },                      // 6 = 2 + 4
+            new int[]{ 0, 1, 2, 0, 2, 6, 0, 6, 7 },             // 7 = 1 + 2 + 4
+            new int[]{ 3, 7, 6 },                               // 8
+            new int[]{ 3, 0, 4, 3, 4, 6 },                      // 9 = 1 + 8
+            new int[]{ 1, 5, 6, 1, 6, 3, 1, 3, 7, 1, 7, 4 },    // 10 = 2 + 8
+            new int[]{ 3, 0, 1, 3, 1, 5, 3, 5, 6 },             // 11 = 1 + 2 + 8
+            new int[]{ 2, 3, 7, 2, 7, 5 },                      // 12 = 4 + 8
+            new int[]{ 2, 3, 0, 2, 0, 4, 2, 4, 5 },             // 13 = 1 + 4 + 8
+            new int[]{ 1, 2, 3, 1, 3, 7, 1, 7, 4 },             // 14 = 2 + 4 + 8
+            new int[]{ 0, 1, 2, 0, 2, 3 }                       // 15 = 1 + 2 + 4 + 8
         };
-        
+
         /// <summary> Returns configuration of vertices for a marching square </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetConfiguration(bool isActive0, bool isActive1, bool isActive2, bool isActive3)
