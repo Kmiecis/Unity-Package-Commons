@@ -53,8 +53,13 @@ namespace Common.Extensions
 
         public static bool TryGetAt<T>(this List<T> self, int index, out T item)
         {
-            item = (-1 < index && index < self.Count) ? self[index] : default;
-            return !Equals(item, default);
+            if (-1 < index && index < self.Count)
+            {
+                item = self[index];
+                return true;
+            }
+            item = default;
+            return false;
         }
 
         public static bool TryGetFirst<T>(this List<T> self, out T item)
