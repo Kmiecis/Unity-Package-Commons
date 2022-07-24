@@ -13,7 +13,20 @@ namespace Common.Mathematics
         public const int VERTEX_COUNT = 6;
 
         public const float INNER_TO_OUTER_RADIUS = 2.0f / Mathx.ROOT_3;
-        public const float OUTER_TO_INNER_RADIUS = Mathx.ROOT_3 * 0.5f;
+        public const float OUTER_TO_INNER_RADIUS = Mathx.ROOT_3 / 2.0f;
+
+        private const float INNER_RADIUS = 0.5f;
+        private const float OUTER_RADIUS = INNER_RADIUS * INNER_TO_OUTER_RADIUS;
+
+        public static readonly Vector2[] Vertices = new Vector2[]
+        {
+            new Vector2(0.0f, OUTER_RADIUS),
+            new Vector2(INNER_RADIUS, OUTER_RADIUS * 0.5f),
+            new Vector2(INNER_RADIUS, -OUTER_RADIUS * 0.5f),
+            new Vector2(0.0f, -OUTER_RADIUS),
+            new Vector2(-INNER_RADIUS, -OUTER_RADIUS * 0.5f),
+            new Vector2(-INNER_RADIUS, OUTER_RADIUS * 0.5f),
+        };
 
         /// <summary> Triangles of a hexagon </summary>
         public static readonly int[] Triangles = new int[]
@@ -27,35 +40,28 @@ namespace Common.Mathematics
 
         public static readonly Vector2Int[] Translations = new Vector2Int[]
         {
-            new Vector2Int() { x = +0, y = +1 },
-            new Vector2Int() { x = +1, y = +0 },
-            new Vector2Int() { x = +0, y = -1 },
-            new Vector2Int() { x = -1, y = -1 },
-            new Vector2Int() { x = -1, y = +0 },
-            new Vector2Int() { x = -1, y = +1 }
+            new Vector2Int() { x =  0, y =  1 },
+            new Vector2Int() { x =  1, y =  0 },
+            new Vector2Int() { x =  1, y = -1 },
+            new Vector2Int() { x =  0, y = -1 },
+            new Vector2Int() { x = -1, y =  0 },
+            new Vector2Int() { x = -1, y =  1 }
         };
 
-        /// <summary> Calculates vertices of a hexagon defined by centre 'c' and circumradius 'r', into array </summary>
+        /// <summary> Calculates vertices of a hexagon defined by centre 'c' and circumradius 'r' into 'target' array </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Vertices(Vector2[] vs, Vector2 c, float r)
+        public static void GetVertices(Vector2[] target, Vector2 c, float r)
         {
-            const float INNER_RADIUS = 0.5f;
-            const float OUTER_RADIUS = INNER_RADIUS * INNER_TO_OUTER_RADIUS;
-
-            vs[0] = new Vector2(0.0f, OUTER_RADIUS);
-            vs[1] = new Vector2(INNER_RADIUS, OUTER_RADIUS * 0.5f);
-            vs[2] = new Vector2(INNER_RADIUS, -OUTER_RADIUS * 0.5f);
-            vs[3] = new Vector2(0.0f, -OUTER_RADIUS);
-            vs[4] = new Vector2(-INNER_RADIUS, -OUTER_RADIUS * 0.5f);
-            vs[5] = new Vector2(-INNER_RADIUS, OUTER_RADIUS * 0.5f);
+            for (int i = 0; i < target.Length; ++i)
+                target[i] = c + Vertices[i] * r;
         }
 
         /// <summary> Calculates vertices of a hexagon defined by centre 'c' and circumradius 'r' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2[] Vertices(Vector2 c, float r)
+        public static Vector2[] GetVertices(Vector2 c, float r)
         {
             var vs = new Vector2[VERTEX_COUNT];
-            Vertices(vs, c, r);
+            GetVertices(vs, c, r);
             return vs;
         }
         
@@ -63,8 +69,8 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Convert(Vector2Int v, float r)
         {
-            float x = (v.x + Mathf.Abs(v.y % 2) * 0.5f) * 2.0f * r * OUTER_TO_INNER_RADIUS;
-            float y = v.y * 1.5f * r;
+            float x = (v.x + v.y * 0.5f) * r * 2.0f * OUTER_TO_INNER_RADIUS;
+            float y = v.y * r * 1.5f;
             return new Vector2(x, y);
         }
 

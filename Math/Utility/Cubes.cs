@@ -49,5 +49,13 @@ namespace Common.Mathematics
             for (int i = 0; i < Vertices.Length; ++i)
                 target[i] = Mathx.Transform(Vertices[i], position, rotation, size);
         }
+
+        /// <summary> Calculates rectangle vertices </summary>
+        public static Vector3[] GetVertices(Vector3 position, Vector3 size, Quaternion rotation)
+        {
+            var vs = new Vector3[Vertices.Length];
+            GetVertices(vs, position, size, rotation);
+            return vs;
+        }
     }
 }

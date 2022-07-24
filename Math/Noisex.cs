@@ -7,7 +7,7 @@ namespace Common.Mathematics
     public static class Noisex
     {
         public static void GetNoiseMap(
-            float[][] map, int dx = 0, int dy = 0,
+            float[,] map, int dx = 0, int dy = 0,
             int octaves = 1, float persistance = 0.5f, float lacunarity = 2.0f,
             float sx = 1.0f, float sy = 1.0f, int seed = 0
         )
@@ -52,7 +52,7 @@ namespace Common.Mathematics
                         frequency *= lacunarity;
                     }
 
-                    map[x][y] = Mathf.SmoothStep(pmin, pmax, value);
+                    map[x, y] = Mathf.SmoothStep(pmin, pmax, value);
                 }
             }
         }
