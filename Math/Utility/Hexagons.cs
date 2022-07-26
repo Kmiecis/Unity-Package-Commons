@@ -48,39 +48,39 @@ namespace Common.Mathematics
             new Vector2Int() { x = -1, y =  1 }
         };
 
-        /// <summary> Calculates vertices of a hexagon defined by centre 'c' and circumradius 'r' into 'target' array </summary>
+        /// <summary> Calculates vertices of a hexagon defined by centre 'c' and short diagonal 'd' into 'target' array </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void GetVertices(Vector2[] target, Vector2 c, float r)
+        public static void GetVertices(Vector2[] target, Vector2 c, float d)
         {
             for (int i = 0; i < target.Length; ++i)
-                target[i] = c + Vertices[i] * r;
+                target[i] = c + Vertices[i] * d;
         }
 
-        /// <summary> Calculates vertices of a hexagon defined by centre 'c' and circumradius 'r' </summary>
+        /// <summary> Calculates vertices of a hexagon defined by centre 'c' and short diagonal 'd' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2[] GetVertices(Vector2 c, float r)
+        public static Vector2[] GetVertices(Vector2 c, float d)
         {
             var vs = new Vector2[VERTEX_COUNT];
-            GetVertices(vs, c, r);
+            GetVertices(vs, c, d);
             return vs;
         }
-        
-        /// <summary> Converts position defined in hex coordinates 'v' of a hexagon defined by circumradius 'r' to world position </summary>
+
+        /// <summary> Converts position defined in hex coordinates 'v' of a hexagon defined by short diagonal 'd' to world position </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Convert(Vector2Int v, float r)
+        public static Vector2 Convert(Vector2Int v, float d)
         {
-            float x = (v.x + v.y * 0.5f) * r * 2.0f * OUTER_TO_INNER_RADIUS;
-            float y = v.y * r * 1.5f;
+            float x = (v.x + v.y * 0.5f) * d;
+            float y = (v.y * INNER_TO_OUTER_RADIUS * 0.75f) * d;
             return new Vector2(x, y);
         }
 
-        /// <summary> Converts position defined as world position 'v' of a hexagon defined by circumradius 'r' to hex coordinates </summary>
-        public static Vector2Int Convert(Vector2 v, float r)
+        /// <summary> Converts position defined as world position 'v' of a hexagon defined by short diagonal 'd' to hex coordinates </summary>
+        public static Vector2Int Convert(Vector2 v, float d)
         {
-            float x = v.x / (r * OUTER_TO_INNER_RADIUS * 2.0f);
+            float x = v.x / d;
             float y = -x;
 
-            float offset = v.y / (r * 3.0f);
+            float offset = v.y / (INNER_TO_OUTER_RADIUS * 1.5f * d);
             x -= offset;
             y -= offset;
 
