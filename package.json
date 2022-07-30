@@ -1,11 +1,11 @@
 {
-  "name": "com.unity.common",
-  "displayName": "Unity Common",
+  "name": "com.common.assemblies",
+  "displayName": "Common Assemblies",
   "author": {
     "name": "Slawomir Kmiecik",
     "email": "slawekkmiecik@gmail.com"
   },
-  "description": "Unity Common assemblies",
+  "description": "Common assemblies",
   "version": "1.0.0",
   "category": "Scripts",
   "repository": {
