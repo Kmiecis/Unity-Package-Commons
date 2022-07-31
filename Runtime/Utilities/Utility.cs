@@ -30,7 +30,7 @@ namespace Common
 
         public static bool TryCast<T>(object obj, out T cast)
             where T : class
-        {
+        {   // Useful when unable to use: obj is T cast
             cast = obj as T;
             return cast != null;
         }

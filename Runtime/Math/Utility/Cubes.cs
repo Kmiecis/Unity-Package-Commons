@@ -8,14 +8,14 @@ namespace Common.Mathematics
         /// <summary> Vertices of a cube </summary>
         public static readonly Vector3[] Vertices = new Vector3[]
         {
-            new Vector3(-0.5f, -0.5f, -0.5f),
-            new Vector3(-0.5f, +0.5f, -0.5f),
-            new Vector3(+0.5f, +0.5f, -0.5f),
-            new Vector3(+0.5f, -0.5f, -0.5f),
-            new Vector3(-0.5f, -0.5f, +0.5f),
-            new Vector3(-0.5f, +0.5f, +0.5f),
-            new Vector3(+0.5f, +0.5f, +0.5f),
-            new Vector3(+0.5f, -0.5f, +0.5f)
+            new Vector3(0.0f, 0.0f, 0.0f),
+            new Vector3(0.0f, 1.0f, 0.0f),
+            new Vector3(1.0f, 1.0f, 0.0f),
+            new Vector3(1.0f, 0.0f, 0.0f),
+            new Vector3(0.0f, 0.0f, 1.0f),
+            new Vector3(0.0f, 1.0f, 1.0f),
+            new Vector3(1.0f, 1.0f, 1.0f),
+            new Vector3(1.0f, 0.0f, 1.0f)
         };
 
         /// <summary> Triangles of a cube </summary>

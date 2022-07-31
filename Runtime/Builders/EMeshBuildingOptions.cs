@@ -5,7 +5,7 @@ namespace Common
     [Flags]
     public enum EMeshBuildingOptions : byte
     {
-        FULL = BOUNDS | NORMALS | TANGENTS,
+        ALL = BOUNDS | NORMALS | TANGENTS,
         TANGENTS = 4,
         NORMALS = 2,
         BOUNDS = 1,

@@ -1,4 +1,3 @@
-using Common.Extensions;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -9,10 +8,10 @@ namespace Common.Mathematics
         /// <summary> Vertices of a rect </summary>
         public static Vector2[] Vertices = new Vector2[]
         {
-            new Vector2(-0.5f, -0.5f),
-            new Vector2(-0.5f, 0.5f),
-            new Vector2(0.5f, 0.5f),
-            new Vector2(0.5f, -0.5f)
+            new Vector2(0.0f, 0.0f),
+            new Vector2(0.0f, 1.0f),
+            new Vector2(1.0f, 1.0f),
+            new Vector2(1.0f, 0.0f)
         };
 
         /// <summary> Triangles of a rect </summary>
@@ -46,14 +45,14 @@ namespace Common.Mathematics
         }
 
         /// <summary> Calculates rectangle vertices into 'target' array </summary>
-        public static void GetVertices(Vector3[] target, Vector3 position, Vector3 size, Quaternion rotation)
+        public static void GetVertices(Vector3[] target, Vector3 position, Vector2 size, Quaternion rotation)
         {
             for (int i = 0; i < target.Length; ++i)
-                target[i] = Mathx.Transform(Vertices[i].X_Y(), position, rotation, size);
+                target[i] = Mathx.Transform(Vertices[i], position, rotation, size);
         }
 
         /// <summary> Calculates rectangle vertices </summary>
-        public static Vector3[] GetVertices(Vector3 position, Vector3 size, Quaternion rotation)
+        public static Vector3[] GetVertices(Vector3 position, Vector2 size, Quaternion rotation)
         {
             var vs = new Vector3[Vertices.Length];
             GetVertices(vs, position, size, rotation);

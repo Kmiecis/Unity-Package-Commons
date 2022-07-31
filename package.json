@@ -1,15 +1,10 @@
 {
-  "name": "com.common.assemblies",
-  "displayName": "Common Assemblies",
-  "author": {
-    "name": "Slawomir Kmiecik",
-    "email": "slawekkmiecik@gmail.com"
-  },
-  "description": "Common assemblies",
-  "version": "1.0.0",
+  "name": "com.kmiecis.unity.common",
+  "displayName": "Unity-Common",
+  "version": "1.0.1",
+  "unity": "2019.4",
+  "description": "Unity Common assemblies",
+  "keywords": [ "config", "file", "data" ],
   "category": "Scripts",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/kmiecis/unity-common"
-  }
+  "dependencies": { }
 }
