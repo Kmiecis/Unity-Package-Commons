@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Common.Extensions
 {
@@ -10,6 +11,21 @@ namespace Common.Extensions
                 self.SetTrigger(id);
             else
                 self.ResetTrigger(id);
+        }
+
+        public static IEnumerable<T> GetBehaviours<T>(this Animator animator)
+        {
+            var behaviours = animator.GetBehaviours<StateMachineBehaviour>();
+            if (behaviours != null)
+            {
+                foreach (var behaviour in behaviours)
+                {
+                    if (behaviour is T casted)
+                    {
+                        yield return casted;
+                    }
+                }
+            }
         }
     }
 }

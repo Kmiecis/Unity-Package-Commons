@@ -42,8 +42,8 @@ namespace Common.StateMachines
             var result = OnUpdate();
 
             if (
-                result != null &&
-                _started
+                _started &&
+                result != null
             )
             {
                 OnFinish();
