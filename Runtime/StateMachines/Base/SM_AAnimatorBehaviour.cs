@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace Common.StateMachines
 {
+    /// <summary>
+    /// Base <see cref="SM_IAnimatorBehaviour{T}"/> implementation
+    /// </summary>
     public abstract class SM_AAnimatorBehaviour<T> : StateMachineBehaviour, SM_IAnimatorBehaviour<T>
     {
         protected Animator _animator;

@@ -15,6 +15,6 @@ namespace Common.StateMachines
         /// <summary>
         /// Checks whether transition should occur
         /// </summary>
-        bool IsValid();
+        Func<bool> Validator { get; }
     }
 }

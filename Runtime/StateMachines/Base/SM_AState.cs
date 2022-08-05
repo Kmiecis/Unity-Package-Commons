@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Common.StateMachines
 {
@@ -7,10 +8,10 @@ namespace Common.StateMachines
     /// </summary>
     public abstract class SM_AState : SM_IState
     {
-        protected string _name;
-        protected bool _started;
+        protected readonly List<SM_ITransition> _transitions = new List<SM_ITransition>();
 
-        protected SM_ITransition[] _transitions;
+        protected string _name;
+        protected bool _active;
 
         public SM_AState(string name = null)
         {
@@ -22,46 +23,58 @@ namespace Common.StateMachines
             get => _name;
         }
 
-        public SM_ITransition[] Transitions
+        public bool IsActive
         {
-            set => _transitions = value;
+            get => _active;
         }
 
-        public SM_ITransition Transition
+        public void WithTransition(SM_ITransition transition)
         {
-            set => _transitions = new SM_ITransition[] { value };
+            _transitions.Add(transition);
+        }
+
+        public void WithTransition(Type type, Func<bool> validator)
+        {
+            var transition = new SM_Transition(type, validator);
+            WithTransition(transition);
+        }
+
+        public void WithTransition<T>(Func<bool> validator)
+            where T : SM_IState
+        {
+            var transition = new SM_Transition<T>(validator);
+            WithTransition(transition);
         }
 
         public Type Execute()
         {
-            if (!_started)
+            if (!_active)
             {
                 OnStart();
+                _active = true;
             }
 
-            var result = OnUpdate();
+            var result = OnExecute();
 
             if (
-                _started &&
+                _active &&
                 result != null
             )
             {
                 OnFinish();
+                _active = false;
             }
 
             return result;
         }
 
-        protected Type GetTransition()
+        protected virtual Type CheckTransitions()
         {
-            if (_transitions != null)
+            foreach (var transition in _transitions)
             {
-                foreach (var transition in _transitions)
+                if (transition.Validator())
                 {
-                    if (transition.IsValid())
-                    {
-                        return transition.Target;
-                    }
+                    return transition.Target;
                 }
             }
             return null;
@@ -69,17 +82,20 @@ namespace Common.StateMachines
 
         protected virtual void OnStart()
         {
-            _started = true;
         }
 
-        protected virtual Type OnUpdate()
+        protected virtual Type OnExecute()
         {
-            return GetTransition();
+            return CheckTransitions();
         }
 
         protected virtual void OnFinish()
         {
-            _started = false;
+        }
+
+        public override string ToString()
+        {
+            return _name;
         }
     }
 
