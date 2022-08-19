@@ -7,7 +7,7 @@ namespace Common.Mathematics
     public static class Noisex
     {
         public static void GetNoiseMap(
-            float[,] map, int dx = 0, int dy = 0,
+            float[][] map, int dx = 0, int dy = 0,
             int octaves = 1, float persistance = 0.5f, float lacunarity = 2.0f,
             float sx = 1.0f, float sy = 1.0f, Random random = null
         )
@@ -32,9 +32,9 @@ namespace Common.Mathematics
             var fx = 1.0f / (sx * width);
             var fy = 1.0f / (sy * height);
 
-            for (int y = 0; y < height; ++y)
+            for (int x = 0; x < width; ++x)
             {
-                for (int x = 0; x < width; ++x)
+                for (int y = 0; y < height; ++y)
                 {
                     float amplitude = 1.0f;
                     float frequency = 1.0f;
@@ -52,7 +52,7 @@ namespace Common.Mathematics
                         frequency *= lacunarity;
                     }
 
-                    map[x, y] = Mathf.SmoothStep(pmin, pmax, value);
+                    map[x][y] = Mathf.SmoothStep(pmin, pmax, value);
                 }
             }
         }
@@ -64,13 +64,14 @@ namespace Common.Mathematics
             var width = map.GetWidth();
             var height = map.GetHeight();
 
-            for (int y = 0; y < height; ++y)
+            for (int x = 0; x < width; ++x)
             {
-                var mapX = map[y];
-                for (int x = 0; x < width; ++x)
+                var mapY = map[x];
+
+                for (int y = 0; y < height; ++y)
                 {
                     var rv = random.NextFloat();
-                    mapX[x] = rv < fill;
+                    mapY[y] = rv < fill;
                 }
             }
         }
@@ -83,22 +84,24 @@ namespace Common.Mathematics
             var height = map.GetHeight();
             var depth = map.GetDepth();
 
-            for (int z = 0; z < depth; ++z)
+            for (int x = 0; x < width; ++x)
             {
-                var mapY = map[z];
+                var mapYZ = map[x];
+
                 for (int y = 0; y < height; ++y)
                 {
-                    var mapX = mapY[y];
-                    for (int x = 0; x < width; ++x)
+                    var mapZ = mapYZ[y];
+
+                    for (int z = 0; z < depth; ++z)
                     {
                         var rv = random.NextFloat();
-                        mapX[x] = rv < fill;
+                        mapZ[z] = rv < fill;
                     }
                 }
             }
         }
 
-        public static void SmoothRandomMap(bool[][]map, int iterations = 5)
+        public static void SmoothRandomMap(bool[][] map, int iterations = 5)
         {
             int width = map.GetWidth();
             int height = map.GetHeight();
@@ -107,15 +110,17 @@ namespace Common.Mathematics
 
             for (int i = 0; i < iterations; i++)
             {
-                for (int y = 0; y < height; y++)
+                for (int x = 0; x < width; x++)
                 {
-                    for (int x = 0; x < width; x++)
+                    var mapY = map[x];
+
+                    for (int y = 0; y < height; y++)
                     {
                         int counter = 0;
 
-                        for (int dy = y - 1; dy <= y + 1; dy++)
+                        for (int dx = x - 1; dx <= x + 1; dx++)
                         {
-                            for (int dx = x - 1; dx <= x + 1; dx++)
+                            for (int dy = y - 1; dy <= y + 1; dy++)
                             {
                                 if (dx == x && dy == y)
                                     continue;
@@ -127,7 +132,7 @@ namespace Common.Mathematics
 
                         if (counter != 4)
                         {
-                            map[x][y] = counter > 4;
+                            mapY[y] = counter > 4;
                         }
                     }
                 }
@@ -144,21 +149,21 @@ namespace Common.Mathematics
 
             for (int i = 0; i < iterations; i++)
             {
-                for (int z = 0; z < depth; z++)
+                for (int x = 0; x < width; x++)
                 {
-                    var mapY = map[z];
+                    var mapYZ = map[x];
                     for (int y = 0; y < height; y++)
                     {
-                        var mapX = mapY[y];
-                        for (int x = 0; x < width; x++)
+                        var mapZ = mapYZ[y];
+                        for (int z = 0; z < depth; z++)
                         {
                             int counter = 0;
 
-                            for (int dz = z - 1; dz <= z + 1; dz++)
+                            for (int dx = x - 1; dx <= x + 1; dx++)
                             {
                                 for (int dy = y - 1; dy <= y + 1; dy++)
                                 {
-                                    for (int dx = x - 1; dx <= x + 1; dx++)
+                                    for (int dz = z - 1; dz <= z + 1; dz++)
                                     {
                                         if (dx == x && dy == y && dz == z)
                                             continue;
@@ -171,7 +176,7 @@ namespace Common.Mathematics
 
                             if (counter != 13)
                             {
-                                mapX[x] = counter > 13;
+                                mapZ[z] = counter > 13;
                             }
                         }
                     }
