@@ -73,6 +73,11 @@ namespace Common
             return Input.GetKey(key);
         }
 
+        public static void SetKey(KeyCode key, bool pressed)
+        {
+            GetEnsuredKey(key).IsPressed = pressed;
+        }
+
         public static bool GetKeyDown(KeyCode key)
         {
             if (TryGetCheckedKey(key, out VirtualButton virtualKey))
@@ -80,21 +85,11 @@ namespace Common
             return Input.GetKeyDown(key);
         }
 
-        public static void SetKeyDown(KeyCode key)
-        {
-            GetEnsuredKey(key).IsPressed = true;
-        }
-
         public static bool GetKeyUp(KeyCode key)
         {
             if (TryGetCheckedKey(key, out VirtualButton virtualKey))
                 return virtualKey.IsUp;
             return Input.GetKeyUp(key);
-        }
-
-        public static void SetKeyUp(KeyCode key)
-        {
-            GetEnsuredKey(key).IsPressed = false;
         }
 
         public static void RemoveKey(KeyCode key)
@@ -109,6 +104,11 @@ namespace Common
             return Input.GetKey(buttonName);
         }
 
+        public static void SetButton(string buttonName, bool pressed)
+        {
+            GetEnsuredButton(buttonName).IsPressed = pressed;
+        }
+
         public static bool GetButtonDown(string buttonName)
         {
             if (TryGetCheckedButton(buttonName, out VirtualButton virtualKey))
@@ -116,21 +116,11 @@ namespace Common
             return Input.GetKeyDown(buttonName);
         }
 
-        public static void SetButtonDown(string buttonName)
-        {
-            GetEnsuredButton(buttonName).IsPressed = true;
-        }
-
         public static bool GetButtonUp(string buttonName)
         {
             if (TryGetCheckedButton(buttonName, out VirtualButton virtualKey))
                 return virtualKey.IsUp;
             return Input.GetKeyUp(buttonName);
-        }
-
-        public static void SetButtonUp(string buttonName)
-        {
-            GetEnsuredButton(buttonName).IsPressed = false;
         }
 
         public static void RemoveButton(string buttonName)
