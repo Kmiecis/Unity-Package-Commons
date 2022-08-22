@@ -314,9 +314,16 @@ namespace Common.Mathematics
         }
 
         /// <summary> Calculates size of an object within field of view of 'angle' at 'distance' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float SizeAtDistance(float angle, float distance)
         {
             return 2.0f * distance * Mathf.Tan(angle * 0.5f * Mathf.Deg2Rad);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static Vector4 TaylorInvSqrt(Vector4 v)
+        {
+            return Sub(1.79284291400159f, Mul(0.85373472095314f, v));
         }
 
         /// <summary> Calculates a perlin noise value based on 'x', 'y' and 'z' value </summary>
@@ -327,11 +334,11 @@ namespace Common.Mathematics
             const float MULTIPLIER = 2.2f;
 
             var p = new Vector3(x, y, z);
-            var pi0 = Mathx.Floor(p); // Integer part for indexing
+            var pi0 = Floor(p); // Integer part for indexing
             var pi1 = pi0 + Vector3.one; // Integer part + 1
-            pi0 = Mathx.Mod(pi0, MOD);
-            pi1 = Mathx.Mod(pi1, MOD);
-            var pf0 = Mathx.Frac(p); // Fractional part for interpolation
+            pi0 = Mod(pi0, MOD);
+            pi1 = Mod(pi1, MOD);
+            var pf0 = Frac(p); // Fractional part for interpolation
             var pf1 = pf0 - Vector3.one; // Fractional part - 1.0
 
             var ix = new Vector4(pi0.x, pi1.x, pi0.x, pi1.x);
@@ -339,25 +346,25 @@ namespace Common.Mathematics
             var iz0 = new Vector4(pi0.z, pi0.z, pi0.z, pi0.z);
             var iz1 = new Vector4(pi1.z, pi1.z, pi1.z, pi1.z);
 
-            var ixy = Mathx.Permute(Mathx.Permute(ix, PERMUTE, MOD) + iy, PERMUTE, MOD);
-            var ixy0 = Mathx.Permute(ixy + iz0, PERMUTE, MOD);
-            var ixy1 = Mathx.Permute(ixy + iz1, PERMUTE, MOD);
+            var ixy = Permute(Permute(ix, PERMUTE, MOD) + iy, PERMUTE, MOD);
+            var ixy0 = Permute(ixy + iz0, PERMUTE, MOD);
+            var ixy1 = Permute(ixy + iz1, PERMUTE, MOD);
 
             var gx0 = ixy0 * (1.0f / 7.0f);
-            var gy0 = Mathx.Sub(Mathx.Frac(Mathx.Mul(Mathx.Floor(gx0), (1.0f / 7.0f))), 0.5f);
-            gx0 = Mathx.Frac(gx0);
-            var gz0 = Vector4.one * 0.5f - Mathx.Abs(gx0) - Mathx.Abs(gy0);
-            var sz0 = Mathx.Step(gz0, Vector4.zero);
-            gx0 -= Mathx.Mul(sz0, Mathx.Sub(Mathx.Step(Vector4.zero, gx0), 0.5f));
-            gy0 -= Mathx.Mul(sz0, Mathx.Sub(Mathx.Step(Vector4.zero, gy0), 0.5f));
+            var gy0 = Sub(Frac(Mul(Floor(gx0), (1.0f / 7.0f))), 0.5f);
+            gx0 = Frac(gx0);
+            var gz0 = Vector4.one * 0.5f - Abs(gx0) - Abs(gy0);
+            var sz0 = Step(gz0, Vector4.zero);
+            gx0 -= Mul(sz0, Sub(Step(Vector4.zero, gx0), 0.5f));
+            gy0 -= Mul(sz0, Sub(Step(Vector4.zero, gy0), 0.5f));
 
             var gx1 = ixy1 * (1.0f / 7.0f);
-            var gy1 = Mathx.Sub(Mathx.Frac(Mathx.Floor(gx1) * (1.0f / 7.0f)), 0.5f);
-            gx1 = Mathx.Frac(gx1);
-            var gz1 = Vector4.one * 0.5f - Mathx.Abs(gx1) - Mathx.Abs(gy1);
-            var sz1 = Mathx.Step(gz1, Vector4.zero);
-            gx1 -= Mathx.Mul(sz1, Mathx.Sub(Mathx.Step(Vector4.zero, gx1), 0.5f));
-            gy1 -= Mathx.Mul(sz1, Mathx.Sub(Mathx.Step(Vector4.zero, gy1), 0.5f));
+            var gy1 = Sub(Frac(Floor(gx1) * (1.0f / 7.0f)), 0.5f);
+            gx1 = Frac(gx1);
+            var gz1 = Vector4.one * 0.5f - Abs(gx1) - Abs(gy1);
+            var sz1 = Step(gz1, Vector4.zero);
+            gx1 -= Mul(sz1, Sub(Step(Vector4.zero, gx1), 0.5f));
+            gy1 -= Mul(sz1, Sub(Step(Vector4.zero, gy1), 0.5f));
 
             var g000 = new Vector3(gx0.x, gy0.x, gz0.x);
             var g100 = new Vector3(gx0.y, gy0.y, gz0.y);
@@ -367,11 +374,6 @@ namespace Common.Mathematics
             var g101 = new Vector3(gx1.y, gy1.y, gz1.y);
             var g011 = new Vector3(gx1.z, gy1.z, gz1.z);
             var g111 = new Vector3(gx1.w, gy1.w, gz1.w);
-
-            Vector4 TaylorInvSqrt(Vector4 v)
-            {
-                return Mathx.Sub(1.79284291400159f, Mathx.Mul(0.85373472095314f, v));
-            }
 
             var norm0 = TaylorInvSqrt(new Vector4(
                 Vector3.Dot(g000, g000),
@@ -406,7 +408,7 @@ namespace Common.Mathematics
             float n011 = Vector3.Dot(g011, new Vector3(pf0.x, pf1.y, pf1.z));
             float n111 = Vector3.Dot(g111, pf1);
 
-            var fade_xyz = Mathx.SmootherStep(pf0);
+            var fade_xyz = SmootherStep(pf0);
             var n_z = Vector4.Lerp(new Vector4(n000, n100, n010, n110), new Vector4(n001, n101, n011, n111), fade_xyz.z);
             var n_yz = Vector2.Lerp(new Vector2(n_z.x, n_z.y), new Vector2(n_z.z, n_z.w), fade_xyz.y);
             float n_xyz = Mathf.Lerp(n_yz.x, n_yz.y, fade_xyz.x);

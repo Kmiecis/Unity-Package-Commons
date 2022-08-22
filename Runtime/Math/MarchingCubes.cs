@@ -5,31 +5,34 @@ namespace Common.Mathematics
 {
     public static class MarchingCubes
     {
-        /*
-           4 __ _ 4 _ __ 5 
+        /*  __ __ 5 __ __  
           /|            /|
-        7/ 8          5/ 9
-        /__ __ 6 __ __/  |
-        7  |          6  |
-        |  0 __ _ 0 _ |_ 1
-       11  /         10  /
-        | /3          | /1
-        3/__ _ 2 _ __ 2/
+         9 4          10 6
+        /__ __ 1 __ __/  |
+        |  |          |  |
+        |  |__ __ 7 __|__|
+        0  /          2  /
+        | 8           | 11
+        |/__ _ 3 __ __|/
         */
 
         public static readonly Vector3[] Vertices = new Vector3[]
         {
-            new Vector3(0.0f, 0.0f, 1.0f),
-            new Vector3(1.0f, 0.0f, 1.0f),
-            new Vector3(1.0f, 0.0f, 0.0f),
-            new Vector3(0.0f, 0.0f, 0.0f),
-            new Vector3(0.0f, 1.0f, 1.0f),
-            new Vector3(1.0f, 1.0f, 1.0f),
-            new Vector3(1.0f, 1.0f, 0.0f),
-            new Vector3(0.0f, 1.0f, 0.0f),
+            new Vector3(0.0f, 0.5f, 0.0f), // 0
+            new Vector3(0.5f, 1.0f, 0.0f), // 1
+            new Vector3(1.0f, 0.5f, 0.0f), // 2
+            new Vector3(0.5f, 0.0f, 0.0f), // 3
+            new Vector3(0.0f, 0.5f, 1.0f), // 4
+            new Vector3(0.5f, 1.0f, 1.0f), // 5
+            new Vector3(1.0f, 0.5f, 1.0f), // 6
+            new Vector3(0.5f, 0.0f, 1.0f), // 7
+            new Vector3(0.0f, 0.0f, 0.5f), // 8
+            new Vector3(0.0f, 1.0f, 0.5f), // 9
+            new Vector3(1.0f, 1.0f, 0.5f), // 10
+            new Vector3(1.0f, 0.0f, 0.5f), // 11
         };
-
-        /// <summary> Edges array by configuration </summary>
+         
+        /// <summary> Indices array by configuration </summary>
         public static readonly int[][] Triangles = new int[][]
         {
             new int[] { },
@@ -283,62 +286,29 @@ namespace Common.Mathematics
             new int[] { 2, 3, 8, 2, 8, 10, 10, 8, 9 },
             new int[] { 9, 10, 2, 0, 9, 2 },
             new int[] { 2, 3, 8, 2, 8, 10, 0, 1, 8, 1, 10, 8 },
-            new int[] { 1, 10, 2 },
+            new int[] { 1, 10, 2 }, 
             new int[] { 1, 3, 8, 9, 1, 8 },
             new int[] { 0, 9, 1 },
             new int[] { 0, 3, 8 },
             new int[] { }
         };
 
-        /// <summary> Vertices array by index </summary>
-        public static readonly int[][] Edges = new int[][]
-        {
-            new int[] { 0, 1 },
-            new int[] { 1, 2 },
-            new int[] { 2, 3 },
-            new int[] { 3, 0 },
-            new int[] { 4, 5 },
-            new int[] { 5, 6 },
-            new int[] { 6, 7 },
-            new int[] { 7, 4 },
-            new int[] { 0, 4 },
-            new int[] { 1, 5 },
-            new int[] { 2, 6 },
-            new int[] { 3, 7 },
-        };
-
-        public static Vector3 GetEdgeVertex(Vector3 v0, Vector3 v1, float w0 = 1.0f, float w1 = 1.0f, float isolevel = 0.5f)
-        {
-            /*
-            if (Mathx.IsZero(isolevel - w0))
-                return v0;
-            if (Mathx.IsZero(isolevel - w1))
-                return v1;
-            if (Mathx.IsZero(w0 - w1))
-                return v0;
-
-            var t = (isolevel - w0) / (w1 - w0);
-            */
-            return Mathx.Lerp(v0, v1, isolevel);
-        }
-
-        /// <summary> Returns configuration of vertices for a marching square </summary>
+        /// <summary> Returns configuration of vertices for a marching cube </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int GetConfiguration(
             bool isActive0, bool isActive1, bool isActive2, bool isActive3,
             bool isActive4, bool isActive5, bool isActive6, bool isActive7
         )
         {
-            return (
-                (isActive0 ? 1 : 0) +
-                (isActive1 ? 2 : 0) +
-                (isActive2 ? 4 : 0) +
-                (isActive3 ? 8 : 0) +
-                (isActive4 ? 16 : 0) +
-                (isActive5 ? 32 : 0) +
-                (isActive6 ? 64 : 0) +
-                (isActive7 ? 128 : 0)
-            );
+            return
+                (isActive0 ? 1 << 0 : 0) +
+                (isActive1 ? 1 << 1 : 0) +
+                (isActive2 ? 1 << 2 : 0) +
+                (isActive3 ? 1 << 3 : 0) +
+                (isActive4 ? 1 << 4 : 0) +
+                (isActive5 ? 1 << 5 : 0) +
+                (isActive6 ? 1 << 6 : 0) +
+                (isActive7 ? 1 << 7 : 0);
         }
     }
 }

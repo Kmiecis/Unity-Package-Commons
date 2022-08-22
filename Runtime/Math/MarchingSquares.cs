@@ -52,10 +52,10 @@ namespace Common.Mathematics
         public static int GetConfiguration(bool isActive0, bool isActive1, bool isActive2, bool isActive3)
         {
             return (
-                (isActive0 ? 1 : 0) +
-                (isActive1 ? 2 : 0) +
-                (isActive2 ? 4 : 0) +
-                (isActive3 ? 8 : 0)
+                (isActive0 ? 1 << 0 : 0) +
+                (isActive1 ? 1 << 1 : 0) +
+                (isActive2 ? 1 << 2 : 0) +
+                (isActive3 ? 1 << 3 : 0)
             );
         }
     }
