@@ -82,5 +82,15 @@ namespace Common.Extensions
                 path = parent.name + delimiter + path;
             return path;
         }
+
+        public static void DestroyChildren(this Transform self)
+        {
+            var childCount = self.childCount;
+            for (int i = childCount; i > -1; --i)
+            {
+                var child = self.GetChild(i);
+                child.gameObject.Destroy();
+            }
+        }
     }
 }
