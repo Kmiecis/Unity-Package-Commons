@@ -86,7 +86,7 @@ namespace Common.Extensions
         public static void DestroyChildren(this Transform self)
         {
             var childCount = self.childCount;
-            for (int i = childCount; i > -1; --i)
+            for (int i = childCount - 1; i > -1; --i)
             {
                 var child = self.GetChild(i);
                 child.gameObject.Destroy();
