@@ -15,7 +15,7 @@ namespace CommonEditor
         {
             if (property.propertyType == SerializedPropertyType.Float)
             {
-                EditorGUI.PropertyField(position.CopyAndSet(width: position.width - 2 * ARROW_WIDTH), property);
+                EditorGUI.PropertyField(position.CopyAndSet(width: position.width - 2 * ARROW_WIDTH), property, label);
                 if (GUI.Button(position.CopyAndSet(x: position.x + position.width - 2 * ARROW_WIDTH, width: ARROW_WIDTH), "<"))
                     property.floatValue = LogShiftLeft(property.floatValue);
                 if (GUI.Button(position.CopyAndSet(x: position.x + position.width - ARROW_WIDTH, width: ARROW_WIDTH), ">"))
@@ -23,7 +23,7 @@ namespace CommonEditor
             }
             else if (property.propertyType == SerializedPropertyType.Integer)
             {
-                EditorGUI.PropertyField(position.CopyAndSet(width: position.width - 2 * ARROW_WIDTH), property);
+                EditorGUI.PropertyField(position.CopyAndSet(width: position.width - 2 * ARROW_WIDTH), property, label);
                 if (GUI.Button(position.CopyAndSet(x: position.x + position.width - 2 * ARROW_WIDTH, width: ARROW_WIDTH), "<"))
                     property.intValue = LogShiftLeft(property.intValue);
                 if (GUI.Button(position.CopyAndSet(x: position.x + position.width - ARROW_WIDTH, width: ARROW_WIDTH), ">"))

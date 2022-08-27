@@ -15,13 +15,13 @@ namespace CommonEditor
             switch (property.propertyType)
             {
                 case SerializedPropertyType.Float:
-                    EditorGUI.PropertyField(position, property);
-                    property.floatValue = Math.Max(property.floatValue, attribute.max);
+                    EditorGUI.PropertyField(position, property, label);
+                    property.floatValue = Math.Min(property.floatValue, attribute.max);
                     break;
 
                 case SerializedPropertyType.Integer:
-                    EditorGUI.PropertyField(position, property);
-                    property.intValue = Math.Max(property.intValue, Mathf.RoundToInt(attribute.max));
+                    EditorGUI.PropertyField(position, property, label);
+                    property.intValue = Math.Min(property.intValue, Mathf.RoundToInt(attribute.max));
                     break;
 
                 default:
