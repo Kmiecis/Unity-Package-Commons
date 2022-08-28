@@ -155,6 +155,37 @@ namespace Common.Mathematics
             return (i % 2) == 1;
         }
 
+        /// <summary> Calculates array index from 'x' and 'y' coords with width 'w' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int ToIndex(int x, int y, int w)
+        {
+            return x + y * w;
+        }
+
+        /// <summary> Calculates array index from 'x', 'y' and 'z' coords with width 'w' and height 'h' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int ToIndex(int x, int y, int z, int w, int h)
+        {
+            return x + (y + z * h) * w;
+        }
+
+        /// <summary> Calculates 'x' and 'y' coords from array index with width 'w' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void FromIndex(int i, int w, out int x, out int y)
+        {
+            x = i % w;
+            y = i / w;
+        }
+
+        /// <summary> Calculates 'x', 'y' and 'z' coords from array index with width 'w' and height 'h' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void FromIndex(int i, int w, int h, out int x, out int y, out int z)
+        {
+            x = i % w;
+            y = (i / w) % h;
+            z = i / (w * h);
+        }
+
         /// <summary> Calculates index wrapped around by 'count' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int WrapIndex(int i, int count)

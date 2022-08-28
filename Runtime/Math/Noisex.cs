@@ -7,15 +7,13 @@ namespace Common.Mathematics
     public static class Noisex
     {
         public static void GetNoiseMap(
-            float[][] map, int octaves = 1, float persistance = 0.5f, float lacunarity = 2.0f,
+            float[] map, int width, int height,
+            int octaves = 1, float persistance = 0.5f, float lacunarity = 2.0f,
             float dx = 0.0f, float dy = 0.0f, float sx = 1.0f, float sy = 1.0f,
             Random random = null
         )
         {
             random ??= new Random();
-
-            var width = map.GetWidth();
-            var height = map.GetHeight();
 
             var rdx = random.NextFloat(-99999.0f, +99999.0f);
             var rdy = random.NextFloat(-99999.0f, +99999.0f);
@@ -23,15 +21,15 @@ namespace Common.Mathematics
             var fx = 1.0f / (sx * width);
             var fy = 1.0f / (sy * height);
 
-            for (int x = 0; x < width; ++x)
+            for (int y = 0; y < height; ++y)
             {
-                for (int y = 0; y < height; ++y)
+                for (int x = 0; x < width; ++x)
                 {
                     float amplitude = 1.0f;
                     float frequency = 1.0f;
                     float value = 0.0f;
 
-                    for (int i = 0; i < octaves; ++i)
+                    for (int _ = 0; _ < octaves; ++_)
                     {
                         float sampleX = ((x - dx) * fx) * frequency + rdx;
                         float sampleY = ((y - dy) * fy) * frequency + rdy;
@@ -43,16 +41,14 @@ namespace Common.Mathematics
                         frequency *= lacunarity;
                     }
 
-                    map[x][y] = value;
+                    var i = x + y * width;
+                    map[i] = value;
                 }
             }
         }
 
-        public static void SmoothNoiseMap(float[][] map, int octaves = 1, float persistance = 0.5f)
+        public static void SmoothNoiseMap(float[] map, int width, int height, int octaves = 1, float persistance = 0.5f)
         {
-            var width = map.GetWidth();
-            var height = map.GetHeight();
-
             var pmin = 0.0f;
             var pmax = 1.0f;
             for (uint i = 1; i < octaves; ++i)
@@ -62,26 +58,24 @@ namespace Common.Mathematics
                 pmax += ppow * 0.75f;
             }
 
-            for (int x = 0; x < width; ++x)
+            for (int y = 0; y < height; ++y)
             {
-                for (int y = 0; y < height; ++y)
+                for (int x = 0; x < width; ++x)
                 {
-                    map[x][y] = Mathf.SmoothStep(pmin, pmax, map[x][y]);
+                    int index = x + y * width;
+                    map[index] = Mathf.SmoothStep(pmin, pmax, map[index]);
                 }
             }
         }
 
         public static void GetNoiseMap(
-            float[][][] map, int octaves = 1, float persistance = 0.5f, float lacunarity = 2.0f,
+            float[] map, int width, int height, int depth,
+            int octaves = 1, float persistance = 0.5f, float lacunarity = 2.0f,
             float dx = 0.0f, float dy = 0.0f, float dz = 0.0f, float sx = 1.0f, float sy = 1.0f, float sz = 1.0f,
             Random random = null
         )
         {
             random ??= new Random();
-
-            var width = map.GetWidth();
-            var height = map.GetHeight();
-            var depth = map.GetDepth();
 
             var rdx = random.NextFloat(-99999.0f, +99999.0f);
             var rdy = random.NextFloat(-99999.0f, +99999.0f);
@@ -91,17 +85,17 @@ namespace Common.Mathematics
             var fy = 1.0f / (sy * height);
             var fz = 1.0f / (sz * depth);
 
-            for (int x = 0; x < width; ++x)
+            for (int z = 0; z < depth; z++)
             {
                 for (int y = 0; y < height; ++y)
                 {
-                    for (int z = 0; z < depth; z++)
+                    for (int x = 0; x < width; ++x)
                     {
                         float amplitude = 1.0f;
                         float frequency = 1.0f;
                         float value = 0.0f;
 
-                        for (int i = 0; i < octaves; ++i)
+                        for (int _ = 0; _ < octaves; ++_)
                         {
                             float sampleX = ((x - dx) * fx) * frequency + rdx;
                             float sampleY = ((y - dy) * fy) * frequency + rdy;
@@ -114,136 +108,119 @@ namespace Common.Mathematics
                             frequency *= lacunarity;
                         }
 
-                        map[x][y][z] = value;
+                        int i = x + (y + z * height) * width;
+                        map[i] = value;
                     }
                 }
             }
         }
 
-        public static void GetRandomMap(bool[][] map, float fill = 0.5f, Random random = null)
+        public static void GetRandomMap(bool[] map, int width, int height, float fill = 0.5f, Random random = null)
         {
             random ??= new Random();
 
-            var width = map.GetWidth();
-            var height = map.GetHeight();
-
-            for (int x = 0; x < width; ++x)
+            for (int y = 0; y < height; ++y)
             {
-                var mapY = map[x];
-
-                for (int y = 0; y < height; ++y)
+                for (int x = 0; x < width; ++x)
                 {
                     var rv = random.NextFloat();
-                    mapY[y] = rv < fill;
+                    var i = x + y * width;
+                    map[i] = rv < fill;
                 }
             }
         }
 
-        public static void GetRandomMap(bool[][][] map, float fill = 0.5f, Random random = null)
+        public static void GetRandomMap(bool[] map, int width, int height, int depth, float fill = 0.5f, Random random = null)
         {
             random ??= new Random();
 
-            var width = map.GetWidth();
-            var height = map.GetHeight();
-            var depth = map.GetDepth();
-
-            for (int x = 0; x < width; ++x)
+            for (int z = 0; z < depth; ++z)
             {
-                var mapYZ = map[x];
-
                 for (int y = 0; y < height; ++y)
                 {
-                    var mapZ = mapYZ[y];
-
-                    for (int z = 0; z < depth; ++z)
+                    for (int x = 0; x < width; ++x)
                     {
                         var rv = random.NextFloat();
-                        mapZ[z] = rv < fill;
+                        int i = x + (y + z * height) * width;
+                        map[i] = rv < fill;
                     }
                 }
             }
         }
 
-        public static void SmoothRandomMap(bool[][] map, int iterations = 5)
+        public static void SmoothRandomMap(bool[] map, int width, int height, int iterations = 5)
         {
-            int width = map.GetWidth();
-            int height = map.GetHeight();
-
             var mapRange = new Range2Int(0, 0, width - 1, height - 1);
 
             for (int i = 0; i < iterations; i++)
             {
-                for (int x = 0; x < width; x++)
+                for (int y = 0; y < height; y++)
                 {
-                    var mapY = map[x];
-
-                    for (int y = 0; y < height; y++)
+                    for (int x = 0; x < width; x++)
                     {
                         int counter = 0;
 
-                        for (int dx = x - 1; dx <= x + 1; dx++)
+                        for (int dy = y - 1; dy <= y + 1; dy++)
                         {
-                            for (int dy = y - 1; dy <= y + 1; dy++)
+                            for (int dx = x - 1; dx <= x + 1; dx++)
                             {
                                 if (dx == x && dy == y)
                                     continue;
 
-                                if (!mapRange.Contains(dx, dy) || map[dx][dy])
+                                int di = dx + dy * width;
+                                if (!mapRange.Contains(dx, dy) || map[di])
                                     counter += 1;
                             }
                         }
 
                         if (counter != 4)
                         {
-                            mapY[y] = counter > 4;
+                            int m = x + y * width;
+                            map[m] = counter > 4;
                         }
                     }
                 }
             }
         }
 
-        public static void SmoothRandomMap(bool[][][] map, int iterations = 5)
+        public static void SmoothRandomMap(bool[] map, int width, int height, int depth, int iterations = 5)
         {
-            int width = map.GetWidth();
-            int height = map.GetHeight();
-            int depth = map.GetDepth();
-
             var mapRange = new Range3Int(0, 0, 0, width - 1, height - 1, depth - 1);
 
             for (int i = 0; i < iterations; i++)
             {
-                for (int x = 0; x < width; x++)
+                for (int z = 0; z < depth; z++)
                 {
-                    var mapYZ = map[x];
                     for (int y = 0; y < height; y++)
                     {
-                        var mapZ = mapYZ[y];
-                        for (int z = 0; z < depth; z++)
+                        for (int x = 0; x < width; x++)
                         {
                             int counter = 0;
 
-                            for (int dx = x - 1; dx <= x + 1; dx++)
+                            for (int dz = z - 1; dz <= z + 1; dz++)
                             {
                                 for (int dy = y - 1; dy <= y + 1; dy++)
                                 {
-                                    for (int dz = z - 1; dz <= z + 1; dz++)
+                                    for (int dx = x - 1; dx <= x + 1; dx++)
                                     {
                                         if (dx == x && dy == y && dz == z)
                                             continue;
 
-                                        if (!mapRange.Contains(dx, dy, dz) || map[dx][dy][dz])
+                                        int di = dx + (dy + dz * height) * width;
+                                        if (!mapRange.Contains(dx, dy, dz) || map[di])
                                             counter += 1;
                                     }
                                 }
                             }
 
+                            int m = x + (y + z * height) * width;
                             if (counter < 9)
                             {
-                                mapZ[z] = false;
+                                map[m] = false;
                             }
                             else if (counter > 16)
                             {
-                                mapZ[z] = true;
+                                map[m] = true;
                             }
                         }
                     }

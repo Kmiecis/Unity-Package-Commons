@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using Common.Mathematics;
+using System.Runtime.CompilerServices;
 
 namespace Common.Collections
 {
@@ -66,22 +67,9 @@ namespace Common.Collections
         public T this[int x, int y]
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => this[ToIndex(x, y)];
+            get => this[Mathx.ToIndex(x, y, _width)];
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            set => this[ToIndex(x, y)] = value;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public int ToIndex(int x, int y)
-        {
-            return y * _width + x;
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void FromIndex(int i, out int x, out int y)
-        {
-            x = i % _width;
-            y = i / _width;
+            set => this[Mathx.ToIndex(x, y, _width)] = value;
         }
     }
 }
