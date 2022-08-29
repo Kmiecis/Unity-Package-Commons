@@ -10,10 +10,10 @@ namespace Common.Mathematics
             float[] map, int width, int height,
             int octaves = 1, float persistance = 0.5f, float lacunarity = 2.0f,
             float dx = 0.0f, float dy = 0.0f, float sx = 1.0f, float sy = 1.0f,
-            Random random = null
+            int seed = 0
         )
         {
-            random ??= new Random();
+            var random = new Random(seed);
 
             var rdx = random.NextFloat(-99999.0f, +99999.0f);
             var rdy = random.NextFloat(-99999.0f, +99999.0f);
@@ -72,10 +72,10 @@ namespace Common.Mathematics
             float[] map, int width, int height, int depth,
             int octaves = 1, float persistance = 0.5f, float lacunarity = 2.0f,
             float dx = 0.0f, float dy = 0.0f, float dz = 0.0f, float sx = 1.0f, float sy = 1.0f, float sz = 1.0f,
-            Random random = null
+            int seed = 0
         )
         {
-            random ??= new Random();
+            var random = new Random(seed);
 
             var rdx = random.NextFloat(-99999.0f, +99999.0f);
             var rdy = random.NextFloat(-99999.0f, +99999.0f);
@@ -115,9 +115,9 @@ namespace Common.Mathematics
             }
         }
 
-        public static void GetRandomMap(bool[] map, int width, int height, float fill = 0.5f, Random random = null)
+        public static void GetRandomMap(bool[] map, int width, int height, float fill = 0.5f, int seed = 0)
         {
-            random ??= new Random();
+            var random = new Random(seed);
 
             for (int y = 0; y < height; ++y)
             {
@@ -130,9 +130,9 @@ namespace Common.Mathematics
             }
         }
 
-        public static void GetRandomMap(bool[] map, int width, int height, int depth, float fill = 0.5f, Random random = null)
+        public static void GetRandomMap(bool[] map, int width, int height, int depth, float fill = 0.5f, int seed = 0)
         {
-            random ??= new Random();
+            var random = new Random(seed);
 
             for (int z = 0; z < depth; ++z)
             {
