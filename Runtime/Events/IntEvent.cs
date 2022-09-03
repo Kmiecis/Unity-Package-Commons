@@ -4,7 +4,7 @@ using UnityEngine.Events;
 namespace Common.Events
 {
     [Serializable]
-    public class IntEvent : UnityEvent<int>
+    public sealed class IntEvent : UnityEvent<int>
     {
     }
 }

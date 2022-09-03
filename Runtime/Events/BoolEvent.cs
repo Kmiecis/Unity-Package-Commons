@@ -4,7 +4,7 @@ using UnityEngine.Events;
 namespace Common.Events
 {
     [Serializable]
-    public class BoolEvent : UnityEvent<bool>
+    public sealed class BoolEvent : UnityEvent<bool>
     {
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.Events;
 namespace Common.Events
 {
     [Serializable]
-    public class GameObjectEvent : UnityEvent<GameObject>
+    public sealed class GameObjectEvent : UnityEvent<GameObject>
     {
     }
 }

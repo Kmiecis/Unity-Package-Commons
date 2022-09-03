@@ -5,7 +5,7 @@ using UnityEngine.Events;
 namespace Common.Events
 {
     [Serializable]
-    public class QuaternionEvent : UnityEvent<Quaternion>
+    public sealed class QuaternionEvent : UnityEvent<Quaternion>
     {
     }
 }

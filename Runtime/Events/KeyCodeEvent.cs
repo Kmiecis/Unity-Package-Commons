@@ -5,7 +5,7 @@ using UnityEngine.Events;
 namespace Common.Events
 {
     [Serializable]
-    public class KeyCodeEvent : UnityEvent<KeyCode>
+    public sealed class KeyCodeEvent : UnityEvent<KeyCode>
     {
     }
 }

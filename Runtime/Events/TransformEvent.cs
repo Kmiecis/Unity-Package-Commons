@@ -5,7 +5,7 @@ using UnityEngine.Events;
 namespace Common.Events
 {
     [Serializable]
-    public class TransformEvent : UnityEvent<Transform>
+    public sealed class TransformEvent : UnityEvent<Transform>
     {
     }
 }

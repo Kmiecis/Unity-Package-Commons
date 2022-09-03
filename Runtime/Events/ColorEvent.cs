@@ -5,7 +5,7 @@ using UnityEngine.Events;
 namespace Common.Events
 {
     [Serializable]
-    public class ColorEvent : UnityEvent<Color>
+    public sealed class ColorEvent : UnityEvent<Color>
     {
     }
 }

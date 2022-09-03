@@ -5,7 +5,7 @@ using UnityEngine.Events;
 namespace Common.Events
 {
     [Serializable]
-    public class ColliderEvent : UnityEvent<Collider>
+    public sealed class ColliderEvent : UnityEvent<Collider>
     {
     }
 }

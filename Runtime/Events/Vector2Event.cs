@@ -5,7 +5,7 @@ using UnityEngine.Events;
 namespace Common.Events
 {
     [Serializable]
-    public class Vector2Event : UnityEvent<Vector2>
+    public sealed class Vector2Event : UnityEvent<Vector2>
     {
     }
 }
