@@ -1,5 +1,4 @@
-﻿#if UNITY_EDITOR
-using Common.Mathematics;
+﻿using Common.Mathematics;
 using UnityEditor;
 
 namespace CommonEditor.Mathematics
@@ -10,4 +9,3 @@ namespace CommonEditor.Mathematics
         protected override int FieldCount => 3;
     }
 }
-#endif
