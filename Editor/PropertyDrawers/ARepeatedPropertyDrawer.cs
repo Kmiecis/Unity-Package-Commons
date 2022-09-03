@@ -4,17 +4,25 @@ using UnityEngine;
 
 namespace CommonEditor
 {
-    public abstract class RepeatedPropertyDrawer : PropertyDrawer
+    public abstract class ARepeatedPropertyDrawer : PropertyDrawer
     {
-        private const float HORIZONTAL_SPACING = 4.0f;
-        private const float VERTICAL_SPACING = 2.0f;
+        protected abstract int FieldCount
+        {
+            get;
+        }
 
-        protected abstract int FieldCount { get; }
+        protected virtual bool UseLabels
+        {
+            get => true;
+        }
+
+        protected object GetTarget(SerializedProperty property)
+        {
+            return fieldInfo.GetValue(property.serializedObject.targetObject);
+        }
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            position.height -= VERTICAL_SPACING;
-
             label = EditorGUI.BeginProperty(position, label, property);
             position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
 
@@ -25,7 +33,7 @@ namespace CommonEditor
             for (int i = 0; i < FieldCount && copy.Next(true); i++)
             {
                 var current = copy.Copy();
-                labels[i] = new GUIContent(current.displayName);
+                labels[i] = UseLabels ? new GUIContent(current.displayName) : GUIContent.none;
                 properties[i] = current;
             }
             
@@ -39,7 +47,7 @@ namespace CommonEditor
             var indentLevel = EditorGUI.indentLevel;
             var labelWidth = EditorGUIUtility.labelWidth;
 
-            var width = (position.width - (count - 1) * HORIZONTAL_SPACING) / count;
+            var width = position.width / count;
             var contentPosition = new Rect(position.x, position.y, width, position.height);
 
             EditorGUI.indentLevel = 0;
@@ -47,7 +55,7 @@ namespace CommonEditor
             {
                 EditorGUIUtility.labelWidth = EditorStyles.label.CalcSize(labels[i]).x;
                 EditorGUI.PropertyField(contentPosition, properties[i], labels[i]);
-                contentPosition.x += width + HORIZONTAL_SPACING;
+                contentPosition.x += width;
             }
 
             EditorGUIUtility.labelWidth = labelWidth;
