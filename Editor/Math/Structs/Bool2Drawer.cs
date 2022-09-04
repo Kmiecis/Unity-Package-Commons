@@ -4,8 +4,7 @@ using UnityEditor;
 namespace CommonEditor.Mathematics
 {
     [CustomPropertyDrawer(typeof(Bool2))]
-    public class Bool2Drawer : ARepeatedPropertyDrawer
+    public class Bool2Drawer : AHorizontalPropertyDrawer
     {
-        protected override int FieldCount => 2;
     }
 }

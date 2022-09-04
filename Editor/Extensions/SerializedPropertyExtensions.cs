@@ -6,6 +6,16 @@ namespace CommonEditor.Extensions
 {
     public static class SerializedPropertyExtensions
     {
+        public static int CountChildren(this SerializedProperty self)
+        {
+            self = self.Copy();
+
+            int result = 0;
+            foreach (var child in self)
+                result++;
+            return result;
+        }
+
         public static void SetValue(this SerializedProperty self, object value)
         {
             switch (self.propertyType)
