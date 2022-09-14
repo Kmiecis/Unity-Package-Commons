@@ -6,7 +6,7 @@ namespace Common.Extensions
     {
         public static bool IsPrefab(this GameObject self)
         {
-            return self.scene.rootCount == 0;
+            return self.scene.IsValid();
         }
 
         public static bool HasComponent<T>(this GameObject self)

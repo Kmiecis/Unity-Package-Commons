@@ -2,8 +2,18 @@
 
 namespace Common.Extensions
 {
-    public static class ObjectExtensions
+    public static class UnityObjectExtensions
     {
+        public static bool IsPrefab(this Object self)
+        {
+            return (self as GameObject)?.IsPrefab() ?? false;
+        }
+
+        public static bool IsAsset(this Object self)
+        {
+            return !(self is GameObject) && !(self is Component);
+        }
+
         public static void Destroy(this Object self)
         {
             if (Application.isPlaying)
