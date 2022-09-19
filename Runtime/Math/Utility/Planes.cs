@@ -59,11 +59,25 @@ namespace Common.Mathematics
 
         /// <summary> Calculates point 'p' projection onto plane defined by axes 'ax' and 'ay' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Project(Vector3 ax, Vector3 ay, Vector3 p)
+        public static Vector2 ProjectPoint(Vector3 ax, Vector3 ay, Vector3 p)
         {
             var x = Vector3.Dot(ax, p);
             var y = Vector3.Dot(ay, p);
             return new Vector2(x, y);
+        }
+
+        /// <summary> Calculates vector 'v' projection onto other vector 'n' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 ProjectVector(Vector3 v, Vector3 n)
+        {
+            return n * Vector3.Dot(v, n);
+        }
+
+        /// <summary> Calculates vector 'v' projection onto plane defined by normal 'n' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 ProjectVectorOnPlane(Vector3 v, Vector3 n)
+        {
+            return v - ProjectVector(v, n);
         }
     }
 }
