@@ -8,14 +8,14 @@ namespace Common.Mathematics
         /// <summary> Vertices of a cube </summary>
         public static readonly Vector3[] Vertices = new Vector3[]
         {
-            new Vector3(0.0f, 0.0f, 0.0f),
-            new Vector3(0.0f, 1.0f, 0.0f),
-            new Vector3(1.0f, 1.0f, 0.0f),
-            new Vector3(1.0f, 0.0f, 0.0f),
-            new Vector3(0.0f, 0.0f, 1.0f),
-            new Vector3(0.0f, 1.0f, 1.0f),
-            new Vector3(1.0f, 1.0f, 1.0f),
-            new Vector3(1.0f, 0.0f, 1.0f)
+            new Vector3(-0.5f, -0.5f, -0.5f),
+            new Vector3(-0.5f,  0.5f, -0.5f),
+            new Vector3( 0.5f,  0.5f, -0.5f),
+            new Vector3( 0.5f, -0.5f, -0.5f),
+            new Vector3(-0.5f, -0.5f,  0.5f),
+            new Vector3(-0.5f,  0.5f,  0.5f),
+            new Vector3( 0.5f,  0.5f,  0.5f),
+            new Vector3( 0.5f, -0.5f,  0.5f)
         };
 
         /// <summary> Triangles of a cube </summary>
@@ -56,6 +56,26 @@ namespace Common.Mathematics
             var vs = new Vector3[Vertices.Length];
             GetVertices(vs, position, size, rotation);
             return vs;
+        }
+
+        /// <summary> Converts coordinates defined by 'v' in space of extents 'e' to a position </summary>
+        public static Vector3 Convert(Vector3Int v, Vector3 e)
+        {
+            return new Vector3(
+                v.x * e.x,
+                v.y * e.y,
+                v.z * e.z
+            );
+        }
+
+        /// <summary> Converts position defined by 'v' in space of extents 'e' to a coordinate </summary>
+        public static Vector3Int Convert(Vector3 v, Vector3 e)
+        {
+            return new Vector3Int(
+                Mathf.RoundToInt(v.x / e.x),
+                Mathf.RoundToInt(v.y / e.y),
+                Mathf.RoundToInt(v.z / e.z)
+            );
         }
     }
 }

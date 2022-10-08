@@ -8,10 +8,10 @@ namespace Common.Mathematics
         /// <summary> Vertices of a rect </summary>
         public static Vector2[] Vertices = new Vector2[]
         {
-            new Vector2(0.0f, 0.0f),
-            new Vector2(0.0f, 1.0f),
-            new Vector2(1.0f, 1.0f),
-            new Vector2(1.0f, 0.0f)
+            new Vector2(-0.5f, -0.5f),
+            new Vector2(-0.5f,  0.5f),
+            new Vector2( 0.5f,  0.5f),
+            new Vector2( 0.5f, -0.5f)
         };
 
         /// <summary> Triangles of a rect </summary>
@@ -57,6 +57,24 @@ namespace Common.Mathematics
             var vs = new Vector3[Vertices.Length];
             GetVertices(vs, position, size, rotation);
             return vs;
+        }
+
+        /// <summary> Converts coordinates defined by 'v' in space of extents 'e' to a position </summary>
+        public static Vector2 Convert(Vector2Int v, Vector2 e)
+        {
+            return new Vector2(
+                v.x * e.x,
+                v.y * e.y
+            );
+        }
+
+        /// <summary> Converts position defined by 'v' in space of extents 'e' to a coordinate </summary>
+        public static Vector2Int Convert(Vector2 v, Vector2 e)
+        {
+            return new Vector2Int(
+                Mathf.RoundToInt(v.x / e.x),
+                Mathf.RoundToInt(v.y / e.y)
+            );
         }
     }
 }
