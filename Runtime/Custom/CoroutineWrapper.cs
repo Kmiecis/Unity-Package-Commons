@@ -4,29 +4,52 @@ using UnityEngine;
 
 namespace Common
 {
-    public abstract class ACoroutineWrapper : IDisposable
+    public class CoroutineWrapper : IDisposable
     {
-        protected readonly MonoBehaviour _target;
-
         protected Coroutine _coroutine;
 
-        public ACoroutineWrapper(MonoBehaviour target)
+        protected MonoBehaviour _target;
+        protected Func<IEnumerator> _enumerator;
+
+        public CoroutineWrapper WithTarget(MonoBehaviour target)
         {
             _target = target;
+            return this;
         }
 
-        public bool IsRunning
+        public CoroutineWrapper WithEnumerator(Func<IEnumerator> enumerator)
         {
-            get => _coroutine != null;
+            _enumerator = enumerator;
+            return this;
         }
 
-        public abstract void Start();
+        public CoroutineWrapper With(MonoBehaviour target, Func<IEnumerator> enumerator)
+        {
+            return WithTarget(target)
+                .WithEnumerator(enumerator);
+        }
+
+        public CoroutineWrapper Start()
+        {
+            Stop();
+
+            if (_target != null && _enumerator != null)
+            {
+                _coroutine = _target.StartCoroutine(_enumerator());
+            }
+
+            return this;
+        }
 
         public void Stop()
         {
             if (_coroutine != null)
             {
-                _target.StopCoroutine(_coroutine);
+                if (_target != null)
+                {
+                    _target.StopCoroutine(_coroutine);
+                }
+                
                 _coroutine = null;
             }
         }
@@ -37,54 +60,59 @@ namespace Common
         }
     }
 
-    public class CoroutineWrapper : ACoroutineWrapper
+    public class CoroutineWrapper<T> : IDisposable
     {
-        private readonly Func<IEnumerator> _routiner;
+        protected Coroutine _coroutine;
 
-        public CoroutineWrapper(MonoBehaviour target, Func<IEnumerator> routiner) :
-            base(target)
+        protected MonoBehaviour _target;
+        protected Func<T, IEnumerator> _enumerator;
+
+        public CoroutineWrapper<T> WithTarget(MonoBehaviour target)
         {
-            _routiner = routiner;
+            _target = target;
+            return this;
         }
 
-        public override void Start()
+        public CoroutineWrapper<T> WithEnumerator(Func<T, IEnumerator> enumerator)
+        {
+            _enumerator = enumerator;
+            return this;
+        }
+
+        public CoroutineWrapper<T> With(MonoBehaviour target, Func<T, IEnumerator> enumerator)
+        {
+            return WithTarget(target)
+                .WithEnumerator(enumerator);
+        }
+
+        public CoroutineWrapper<T> Start(T value)
         {
             Stop();
 
-            _coroutine = _target.StartCoroutine(_routiner());
+            if (_target != null && _enumerator != null)
+            {
+                _coroutine = _target.StartCoroutine(_enumerator(value));
+            }
+
+            return this;
         }
 
-        public static CoroutineWrapper Create(MonoBehaviour target, Func<IEnumerator> routiner)
+        public void Stop()
         {
-            return new CoroutineWrapper(target, routiner);
+            if (_coroutine != null)
+            {
+                if (_target != null)
+                {
+                    _target.StopCoroutine(_coroutine);
+                }
+
+                _coroutine = null;
+            }
         }
 
-        public static CoroutineWrapper<T> Create<T>(MonoBehaviour target, Func<T, IEnumerator> routiner)
-        {
-            return new CoroutineWrapper<T>(target, routiner);
-        }
-    }
-
-    public class CoroutineWrapper<T> : ACoroutineWrapper
-    {
-        private readonly Func<T, IEnumerator> _routiner;
-
-        public CoroutineWrapper(MonoBehaviour target, Func<T, IEnumerator> routiner) :
-            base(target)
-        {
-            _routiner = routiner;
-        }
-
-        public override void Start()
-        {
-            Start(default);
-        }
-
-        public void Start(T args)
+        public void Dispose()
         {
             Stop();
-
-            _coroutine = _target.StartCoroutine(_routiner(args));
         }
     }
 }
