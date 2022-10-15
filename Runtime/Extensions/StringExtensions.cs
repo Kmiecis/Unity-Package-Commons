@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 
 namespace Common.Extensions
 {
@@ -241,6 +242,31 @@ namespace Common.Extensions
             for (int i = 0; i < result.Length; ++i)
                 result[i] = self.Substring(i * count, count);
             return result;
+        }
+
+        public static string[] SplitByCamelCase(this string self)
+        {
+            return Regex.Split(self, @"(?<!^)(?=[A-Z])");
+        }
+
+        public static string Join(this string[] selfs, char separator, int startIndex, int count)
+        {
+            return string.Join(separator, selfs, startIndex, count);
+        }
+
+        public static string Join(this string[] selfs, char separator)
+        {
+            return string.Join(separator, selfs);
+        }
+
+        public static string Join(this string[] selfs, string separator, int startIndex, int count)
+        {
+            return string.Join(separator, selfs, startIndex, count);
+        }
+
+        public static string Join(this string[] selfs, string separator)
+        {
+            return string.Join(separator, selfs);
         }
     }
 }
