@@ -65,6 +65,66 @@ namespace Common.Extensions
             return self.TryGetAt(self.Length - 1, out item);
         }
 
+        public static int IndexOf<T>(this T[] self, T value)
+        {
+            return Array.IndexOf(self, value);
+        }
+
+        public static int IndexOf<T>(this T[] self, T value, int startIndex)
+        {
+            return Array.IndexOf(self, value, startIndex);
+        }
+
+        public static int IndexOf<T>(this T[] self, T value, int startIndex, int count)
+        {
+            return Array.IndexOf(self, value, startIndex, count);
+        }
+
+        public static T Find<T>(this T[] self, Predicate<T> match)
+        {
+            return Array.Find(self, match);
+        }
+
+        public static T FindLast<T>(this T[] self, Predicate<T> match)
+        {
+            return Array.FindLast(self, match);
+        }
+
+        public static T[] FindAll<T>(this T[] self, Predicate<T> match)
+        {
+            return Array.FindAll(self, match);
+        }
+
+        public static int FindIndex<T>(this T[] self, Predicate<T> match)
+        {
+            return Array.FindIndex(self, match);
+        }
+
+        public static int FindIndex<T>(this T[] self, int startIndex, Predicate<T> match)
+        {
+            return Array.FindIndex(self, startIndex, match);
+        }
+
+        public static int FindIndex<T>(this T[] self, int startIndex, int count, Predicate<T> match)
+        {
+            return Array.FindIndex(self, startIndex, count, match);
+        }
+
+        public static int FindLastIndex<T>(this T[] self, Predicate<T> match)
+        {
+            return Array.FindLastIndex(self, match);
+        }
+
+        public static int FindLastIndex<T>(this T[] self, int startIndex, Predicate<T> match)
+        {
+            return Array.FindLastIndex(self, startIndex, match);
+        }
+
+        public static int FindLastIndex<T>(this T[] self, int startIndex, int count, Predicate<T> match)
+        {
+            return Array.FindLastIndex(self, startIndex, count, match);
+        }
+
         public static bool TryIndexOf<T>(this T[] self, T value, out int index)
         {
             index = Array.IndexOf(self, value);
