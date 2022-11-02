@@ -3,8 +3,23 @@ using UnityEngine;
 
 namespace Common
 {
-    public static class GizmosUtility
+    public static class UGizmos
     {
+        public static void DrawVector(Vector3 center, Vector3 direction)
+        {
+            Gizmos.DrawLine(center, center + direction);
+        }
+
+        public static void DrawWireRect(Vector2 center, Vector2 size)
+        {
+            Gizmos.DrawWireCube(center, size);
+        }
+
+        public static void DrawRect(Vector2 center, Vector2 size)
+        {
+            Gizmos.DrawCube(center, size);
+        }
+
         public static void DrawCubes(Vector3[] centers, Vector3[] sizes)
         {
             var length = Math.Min(centers.Length, sizes.Length);
@@ -90,12 +105,7 @@ namespace Common
             }
         }
 
-        public static void DrawVector(Vector3 center, Vector3 direction)
-        {
-            Gizmos.DrawLine(center, center + direction);
-        }
-
-        public static void DrawVector(Vector3[] centers, Vector3[] directions)
+        public static void DrawVectors(Vector3[] centers, Vector3[] directions)
         {
             var length = Math.Min(centers.Length, directions.Length);
             for (int i = 0; i < length; ++i)
