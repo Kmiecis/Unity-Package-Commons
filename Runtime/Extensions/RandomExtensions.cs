@@ -154,46 +154,6 @@ namespace Common.Extensions
             var values = Enum.GetValues(typeof(TEnum));
             return (TEnum)values.GetValue(self.Next(values.Length));
         }
-        
-        public static void Shuffle<T>(this Random self, T[] array, int begin, int end)
-        {
-            int n = end;
-            while (--n > begin)
-            {
-                int k = self.Next(n);
-                array.Swap(k, n);
-            }
-        }
-
-        public static void Shuffle<T>(this Random self, T[] array, int end)
-        {
-            self.Shuffle(array, 0, end);
-        }
-
-        public static void Shuffle<T>(this Random self, T[] array)
-        {
-            self.Shuffle(array, array.Length);
-        }
-
-        public static void Shuffle<T>(this Random self, List<T> list, int begin, int end)
-        {
-            int n = end;
-            while (--n > begin)
-            {
-                int k = self.Next(n);
-                list.Swap(k, n);
-            }
-        }
-
-        public static void Shuffle<T>(this Random self, List<T> list, int end)
-        {
-            self.Shuffle(list, 0, end);
-        }
-
-        public static void Shuffle<T>(this Random self, List<T> list)
-        {
-            self.Shuffle(list, list.Count);
-        }
 
         public static T NextItem<T>(this Random self, T[] args, int min, int max)
         {
@@ -239,6 +199,46 @@ namespace Common.Extensions
             {
                 target[i] = self.NextItem(source);
             }
+        }
+
+        public static void Shuffle<T>(this Random self, T[] array, int begin, int end)
+        {
+            int n = end;
+            while (--n > begin)
+            {
+                int k = self.Next(n);
+                array.Swap(k, n);
+            }
+        }
+
+        public static void Shuffle<T>(this Random self, T[] array, int end)
+        {
+            self.Shuffle(array, 0, end);
+        }
+
+        public static void Shuffle<T>(this Random self, T[] array)
+        {
+            self.Shuffle(array, array.Length);
+        }
+
+        public static void Shuffle<T>(this Random self, List<T> list, int begin, int end)
+        {
+            int n = end;
+            while (--n > begin)
+            {
+                int k = self.Next(n);
+                list.Swap(k, n);
+            }
+        }
+
+        public static void Shuffle<T>(this Random self, List<T> list, int end)
+        {
+            self.Shuffle(list, 0, end);
+        }
+
+        public static void Shuffle<T>(this Random self, List<T> list)
+        {
+            self.Shuffle(list, list.Count);
         }
     }
 }
