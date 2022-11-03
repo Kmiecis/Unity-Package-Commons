@@ -15,14 +15,14 @@ namespace Common
             }
         }
 
-        public T Create<T>(string name)
+        public static T Create<T>(string name)
             where T : Component
         {
             var instance = new GameObject(name);
             return instance.AddComponent<T>();
         }
 
-        public T Create<T>()
+        public static T Create<T>()
             where T : Component
         {
             string name = $"{typeof(T).Name}(New)";
