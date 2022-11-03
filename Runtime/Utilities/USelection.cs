@@ -4,7 +4,7 @@ using UnityEditor;
 
 namespace Common
 {
-    public static class SelectionUtility
+    public static class USelection
     {
         public static string GetActiveProjectPath()
         {

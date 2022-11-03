@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Common
 {
-    public static class ApplicationUtility
+    public static class UApplication
     {
         public static string ToProjectPath(string filePath)
         {

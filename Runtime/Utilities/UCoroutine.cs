@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Common
 {
-    public static class CoroutineUtility
+    public static class UCoroutine
     {
         public static IEnumerator InvokeNextFrame(Action callback)
         {
@@ -57,7 +57,7 @@ namespace Common
             {
                 consumer(t);
 
-                t += TimeUtility.GetDeltaTime(unscaled);
+                t += UTime.GetDeltaTime(unscaled);
 
                 yield return null;
             }
@@ -74,7 +74,7 @@ namespace Common
             {
                 consumer(t);
 
-                t += n * TimeUtility.GetDeltaTime(unscaled);
+                t += n * UTime.GetDeltaTime(unscaled);
 
                 yield return null;
             }

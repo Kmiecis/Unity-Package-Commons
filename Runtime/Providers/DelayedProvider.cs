@@ -17,7 +17,7 @@
 
         private float Nowstamp
         {
-            get => TimeUtility.GetTime(_unscaled);
+            get => UTime.GetTime(_unscaled);
         }
 
         public float Remaining

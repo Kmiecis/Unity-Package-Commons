@@ -2,7 +2,7 @@
 
 namespace Common
 {
-    public static class TimeUtility
+    public static class UTime
     {
         public static float GetTime(bool unscaled)
         {
