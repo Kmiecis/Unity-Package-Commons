@@ -21,7 +21,7 @@ namespace Common.Extensions
                 Object.Destroy(component);
         }
 
-        public static T EnsureComponent<T>(this GameObject self)
+        public static T GetComponentEnsured<T>(this GameObject self)
             where T : Component
         {
             if (!self.TryGetComponent<T>(out T component))
@@ -29,15 +29,15 @@ namespace Common.Extensions
             return component;
         }
 
-        public static bool TryGetComponentInChildren<T>(this GameObject self, out T component)
+        public static bool TryGetComponentInChildren<T>(this GameObject self, out T component, bool includeInactive = false)
         {
-            component = self.GetComponentInChildren<T>();
+            component = self.GetComponentInChildren<T>(includeInactive);
             return component != null;
         }
 
-        public static bool TryGetComponentInParent<T>(this GameObject self, out T component)
+        public static bool TryGetComponentInParent<T>(this GameObject self, out T component, bool includeInactive = false)
         {
-            component = self.GetComponentInParent<T>();
+            component = self.GetComponentInParent<T>(includeInactive);
             return component != null;
         }
 
@@ -47,15 +47,15 @@ namespace Common.Extensions
             return !components.IsNullOrEmpty();
         }
 
-        public static bool TryGetComponentsInChildren<T>(this GameObject self, out T[] components)
+        public static bool TryGetComponentsInChildren<T>(this GameObject self, out T[] components, bool includeInactive = false)
         {
-            components = self.GetComponentsInChildren<T>();
+            components = self.GetComponentsInChildren<T>(includeInactive);
             return !components.IsNullOrEmpty();
         }
 
-        public static bool TryGetComponentsInParent<T>(this GameObject self, out T[] components)
+        public static bool TryGetComponentsInParent<T>(this GameObject self, out T[] components, bool includeInactive = false)
         {
-            components = self.GetComponentsInParent<T>();
+            components = self.GetComponentsInParent<T>(includeInactive);
             return !components.IsNullOrEmpty();
         }
 
