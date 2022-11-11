@@ -20,11 +20,6 @@ namespace Common
             return Input.GetKey(key);
         }
 
-        public static void SetKey(KeyCode key, bool pressed)
-        {
-            GetEnsuredKey(key).IsPressed = pressed;
-        }
-
         public static bool GetKeyDown(KeyCode key)
         {
             if (TryGetCheckedKey(key, out var virtualKey))
@@ -39,6 +34,21 @@ namespace Common
             return Input.GetKeyUp(key);
         }
 
+        public static void SetKey(KeyCode key, bool pressed)
+        {
+            GetEnsuredKey(key).IsPressed = pressed;
+        }
+
+        public static void SetKeyDown(KeyCode key)
+        {
+            SetKey(key, true);
+        }
+
+        public static void SetKeyUp(KeyCode key)
+        {
+            SetKey(key, false);
+        }
+
         public static bool RemoveKey(KeyCode key)
         {
             return _keys.Remove(key);
@@ -49,11 +59,6 @@ namespace Common
             if (TryGetCheckedButton(buttonName, out var virtualKey))
                 return virtualKey.IsPressed;
             return Input.GetKey(buttonName);
-        }
-
-        public static void SetButton(string buttonName, bool pressed)
-        {
-            GetEnsuredButton(buttonName).IsPressed = pressed;
         }
 
         public static bool GetButtonDown(string buttonName)
@@ -68,6 +73,21 @@ namespace Common
             if (TryGetCheckedButton(buttonName, out var virtualKey))
                 return virtualKey.IsUp;
             return Input.GetKeyUp(buttonName);
+        }
+
+        public static void SetButton(string buttonName, bool pressed)
+        {
+            GetEnsuredButton(buttonName).IsPressed = pressed;
+        }
+
+        public static void SetButtonDown(string buttonName)
+        {
+            SetButton(buttonName, true);
+        }
+
+        public static void SetButtonUp(string buttonName)
+        {
+            SetButton(buttonName, false);
         }
 
         public static bool RemoveButton(string buttonName)
