@@ -17,17 +17,21 @@ namespace CommonEditor
         {
             var attribute = (ChoiceAttribute)this.attribute;
 
-            EditorGUI.LabelField(position.CopyAndSet(width: EditorGUIUtility.labelWidth), label);
-            var currentValue = property.GetValue();
+            EditorGUI.LabelField(position, label);
+
+            var currentValue = this.GetValue(property);
             int currentIndex = Array.IndexOf(attribute.options, currentValue);
             int selectedIndex = EditorGUI.Popup(
-                position.CopyAndSet(x: position.x + EditorGUIUtility.labelWidth + SPACING, width: position.width - EditorGUIUtility.labelWidth - SPACING),
+                position
+                    .WithX(position.x + EditorGUIUtility.labelWidth + SPACING)
+                    .WithWidth(position.width - EditorGUIUtility.labelWidth - SPACING),
                 currentIndex,
                 attribute.options.Select(v => v.ToString()).ToArray()
             );
+
             if (selectedIndex != currentIndex)
             {
-                property.SetValue(attribute.options[selectedIndex]);
+                this.SetValue(property, attribute.options[selectedIndex]);
             }
         }
     }

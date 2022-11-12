@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,6 +13,11 @@ namespace CommonEditor.Extensions
             foreach (var child in self)
                 result++;
             return result;
+        }
+
+        public static Object GetTarget(this SerializedProperty self)
+        {
+            return self.serializedObject.targetObject;
         }
 
         public static void SetValue(this SerializedProperty self, object value)
@@ -80,9 +84,12 @@ namespace CommonEditor.Extensions
                 case SerializedPropertyType.Vector4:
                     self.vector4Value = (Vector4)value;
                     break;
-                default:
-                    throw new KeyNotFoundException(string.Format("Couldn't find {0} in {1}", self.propertyType, self));
             }
+
+            var targetName = self.serializedObject.targetObject.GetType().Name;
+            var propertyName = self.name;
+            var error = $"Failed to get serialized value of {targetName}.{propertyName}";
+            throw new System.Exception(error);
         }
 
         public static object GetValue(this SerializedProperty self)
@@ -127,9 +134,12 @@ namespace CommonEditor.Extensions
                     return self.vector3IntValue;
                 case SerializedPropertyType.Vector4:
                     return self.vector4Value;
-                default:
-                    throw new KeyNotFoundException(string.Format("Couldn't find {0} in {1}", self.propertyType, self));
             }
+
+            var targetName = self.serializedObject.targetObject.GetType().Name;
+            var propertyName = self.name;
+            var error = $"Failed to get serialized value of {targetName}.{propertyName}";
+            throw new System.Exception(error);
         }
     }
 }

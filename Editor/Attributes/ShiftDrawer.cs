@@ -14,10 +14,10 @@ namespace CommonEditor
         {
             if (property.propertyType == SerializedPropertyType.Integer)
             {
-                EditorGUI.PropertyField(position.CopyAndSet(width: position.width - 2 * ARROW_WIDTH), property, label);
-                if (GUI.Button(position.CopyAndSet(x: position.x + position.width - 2 * ARROW_WIDTH, width: ARROW_WIDTH), "<"))
+                EditorGUI.PropertyField(position.WithWidth(position.width - 2 * ARROW_WIDTH), property, label);
+                if (GUI.Button(position.WithX(position.x + position.width - 2 * ARROW_WIDTH).WithWidth(ARROW_WIDTH), "<"))
                     property.intValue = ShiftLeft(property.intValue);
-                if (GUI.Button(position.CopyAndSet(x: position.x + position.width - ARROW_WIDTH, width: ARROW_WIDTH), ">"))
+                if (GUI.Button(position.WithX(position.x + position.width - ARROW_WIDTH).WithWidth(ARROW_WIDTH), ">"))
                     property.intValue = ShiftRight(property.intValue);
             }
             else
