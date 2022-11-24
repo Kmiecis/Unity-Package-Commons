@@ -6,30 +6,22 @@ namespace Common.Extensions
     {
         public static Rect WithX(this Rect self, float x)
         {
-            var result = self;
-            result.x = x;
-            return result;
+            return new Rect(x, self.y, self.width, self.height);
         }
 
         public static Rect WithY(this Rect self, float y)
         {
-            var result = self;
-            result.y = y;
-            return result;
+            return new Rect(self.x, y, self.width, self.height);
         }
 
         public static Rect WithWidth(this Rect self, float width)
         {
-            var result = self;
-            result.width = width;
-            return result;
+            return new Rect(self.x, self.y, width, self.height);
         }
 
         public static Rect WithHeight(this Rect self, float height)
         {
-            var result = self;
-            result.height = height;
-            return result;
+            return new Rect(self.x, self.y, self.width, height);
         }
     }
 }

@@ -46,5 +46,17 @@ namespace Common.Extensions
         {
             return new Vector2Int(v.y, v.x);
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2Int WithX(this Vector2Int v, int x)
+        {
+            return new Vector2Int(x, v.y);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2Int WithY(this Vector2Int v, int y)
+        {
+            return new Vector2Int(v.x, y);
+        }
     }
 }

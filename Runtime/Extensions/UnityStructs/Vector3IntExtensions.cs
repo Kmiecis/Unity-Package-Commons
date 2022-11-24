@@ -22,5 +22,23 @@ namespace Common.Extensions
         {
             return new Vector2Int(v.y, v.z);
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int WithX(this Vector3Int v, int x)
+        {
+            return new Vector3Int(x, v.y, v.z);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int WithY(this Vector3Int v, int y)
+        {
+            return new Vector3Int(v.x, y, v.z);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int WithZ(this Vector3Int v, int z)
+        {
+            return new Vector3Int(v.x, v.y, z);
+        }
     }
 }
