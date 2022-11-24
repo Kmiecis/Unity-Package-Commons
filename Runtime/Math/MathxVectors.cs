@@ -311,8 +311,8 @@ namespace Common.Mathematics
         public static Vector2 Unlerp(Vector2 a, Vector2 b, Vector2 t)
         {
             return new Vector2(
-                Unlerp(a.x, b.x, t.x),
-                Unlerp(a.y, b.y, t.y)
+                InverseLerp(a.x, b.x, t.x),
+                InverseLerp(a.y, b.y, t.y)
             );
         }
 
@@ -320,8 +320,8 @@ namespace Common.Mathematics
         public static Vector2 Unlerp(Vector2 a, Vector2 b, float t)
         {
             return new Vector2(
-                Unlerp(a.x, b.x, t),
-                Unlerp(a.y, b.y, t)
+                InverseLerp(a.x, b.x, t),
+                InverseLerp(a.y, b.y, t)
             );
         }
 
@@ -329,9 +329,9 @@ namespace Common.Mathematics
         public static Vector3 Unlerp(Vector3 a, Vector3 b, Vector3 t)
         {
             return new Vector3(
-                Unlerp(a.x, b.x, t.x),
-                Unlerp(a.y, b.y, t.y),
-                Unlerp(a.z, b.z, t.z)
+                InverseLerp(a.x, b.x, t.x),
+                InverseLerp(a.y, b.y, t.y),
+                InverseLerp(a.z, b.z, t.z)
             );
         }
 
@@ -339,9 +339,9 @@ namespace Common.Mathematics
         public static Vector3 Unlerp(Vector3 a, Vector3 b, float t)
         {
             return new Vector3(
-                Unlerp(a.x, b.x, t),
-                Unlerp(a.y, b.y, t),
-                Unlerp(a.z, b.z, t)
+                InverseLerp(a.x, b.x, t),
+                InverseLerp(a.y, b.y, t),
+                InverseLerp(a.z, b.z, t)
             );
         }
 
@@ -349,10 +349,10 @@ namespace Common.Mathematics
         public static Vector4 Unlerp(Vector4 a, Vector4 b, Vector4 t)
         {
             return new Vector4(
-                Unlerp(a.x, b.x, t.x),
-                Unlerp(a.y, b.y, t.y),
-                Unlerp(a.z, b.z, t.z),
-                Unlerp(a.w, b.w, t.w)
+                InverseLerp(a.x, b.x, t.x),
+                InverseLerp(a.y, b.y, t.y),
+                InverseLerp(a.z, b.z, t.z),
+                InverseLerp(a.w, b.w, t.w)
             );
         }
 
@@ -360,10 +360,10 @@ namespace Common.Mathematics
         public static Vector4 Unlerp(Vector4 a, Vector4 b, float t)
         {
             return new Vector4(
-                Unlerp(a.x, b.x, t),
-                Unlerp(a.y, b.y, t),
-                Unlerp(a.z, b.z, t),
-                Unlerp(a.w, b.w, t)
+                InverseLerp(a.x, b.x, t),
+                InverseLerp(a.y, b.y, t),
+                InverseLerp(a.z, b.z, t),
+                InverseLerp(a.w, b.w, t)
             );
         }
 
@@ -822,21 +822,39 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 SmoothStep(Vector2 a, Vector2 b, float t)
+        {
+            return Lerp(a, b, SmoothStep(t));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 SmoothStep(Vector2 a, Vector2 b, Vector2 t)
         {
-            return SmoothStep(Unlerp(a, b, t));
+            return Lerp(a, b, SmoothStep(t));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 SmoothStep(Vector3 a, Vector3 b, float t)
+        {
+            return Lerp(a, b, SmoothStep(t));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 SmoothStep(Vector3 a, Vector3 b, Vector3 t)
         {
-            return SmoothStep(Unlerp(a, b, t));
+            return Lerp(a, b, SmoothStep(t));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 SmoothStep(Vector4 a, Vector4 b, float t)
+        {
+            return Lerp(a, b, SmoothStep(t));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 SmoothStep(Vector4 a, Vector4 b, Vector4 t)
         {
-            return SmoothStep(Unlerp(a, b, t));
+            return Lerp(a, b, SmoothStep(t));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -858,21 +876,39 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 SmootherStep(Vector2 a, Vector2 b, float t)
+        {
+            return Lerp(a, b, SmootherStep(t));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 SmootherStep(Vector2 a, Vector2 b, Vector2 t)
         {
-            return SmootherStep(Unlerp(a, b, t));
+            return Lerp(a, b, SmootherStep(t));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 SmootherStep(Vector3 a, Vector3 b, float t)
+        {
+            return Lerp(a, b, SmootherStep(t));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 SmootherStep(Vector3 a, Vector3 b, Vector3 t)
         {
-            return SmootherStep(Unlerp(a, b, t));
+            return Lerp(a, b, SmootherStep(t));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 SmootherStep(Vector4 a, Vector4 b, float t)
+        {
+            return Lerp(a, b, SmootherStep(t));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 SmootherStep(Vector4 a, Vector4 b, Vector4 t)
         {
-            return SmootherStep(Unlerp(a, b, t));
+            return Lerp(a, b, SmootherStep(t));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
