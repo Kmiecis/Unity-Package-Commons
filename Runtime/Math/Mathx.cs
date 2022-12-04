@@ -57,14 +57,20 @@ namespace Common.Mathematics
         {
             t = Mathf.Clamp(t, 0.0f, 1.0f);
             if (f < min)
-                return Mathf.Lerp(f, min, t);
+                return Lerp(f, min, t);
             if (f > max)
-                return Mathf.Lerp(f, max, t);
+                return Lerp(f, max, t);
             return f;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Unlerp(float a, float b, float t)
+        public static float Lerp(float a, float b, float t)
+        {
+            return a + (b - a) * t;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float InverseLerp(float a, float b, float t)
         {
             return (t - a) / (b - a);
         }
@@ -110,7 +116,7 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float SmoothStep(float a, float b, float t)
         {
-            return SmoothStep(Unlerp(a, b, t));
+            return Lerp(a, b, SmoothStep(t));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -122,13 +128,13 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float SmootherStep(float a, float b, float t)
         {
-            return SmootherStep(Unlerp(a, b, t));
+            return Lerp(a, b, SmootherStep(t));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Remap(float fromMin, float fromMax, float toMin, float toMax, float v)
         {
-            return Mathf.Lerp(toMin, toMax, Unlerp(fromMin, fromMax, v));
+            return Lerp(toMin, toMax, InverseLerp(fromMin, fromMax, v));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -442,7 +448,7 @@ namespace Common.Mathematics
             var fade_xyz = SmootherStep(pf0);
             var n_z = Vector4.Lerp(new Vector4(n000, n100, n010, n110), new Vector4(n001, n101, n011, n111), fade_xyz.z);
             var n_yz = Vector2.Lerp(new Vector2(n_z.x, n_z.y), new Vector2(n_z.z, n_z.w), fade_xyz.y);
-            float n_xyz = Mathf.Lerp(n_yz.x, n_yz.y, fade_xyz.x);
+            float n_xyz = Lerp(n_yz.x, n_yz.y, fade_xyz.x);
 
             return MULTIPLIER * n_xyz;
         }
