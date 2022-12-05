@@ -15,7 +15,7 @@ namespace Common
         [SerializeField, HideInInspector]
         private string _name;
 
-        public string Name
+        public string SceneName
         {
             get
             {
@@ -40,6 +40,11 @@ namespace Common
             }
         }
 #endif
+
+        public static implicit operator string(SceneReference value)
+        {
+            return value.SceneName;
+        }
 
         #region ISerializationCallbackReceiver
         public void OnBeforeSerialize()

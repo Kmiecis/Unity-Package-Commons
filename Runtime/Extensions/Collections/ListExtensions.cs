@@ -199,6 +199,11 @@ namespace Common.Extensions
             return false;
         }
 
+        public static void InsertFirst<T>(this List<T> self, T item)
+        {
+            self.Insert(0, item);
+        }
+
         public static int InsertSorted<T>(this List<T> self, T item, IComparer<T> comparer = null)
         {
             int index = self.BinarySearch(item, comparer ?? Comparer<T>.Default);
@@ -211,6 +216,16 @@ namespace Common.Extensions
         public static int InsertSorted<T>(this List<T> self, T item, Comparison<T> comparison)
         {
             return self.InsertSorted(item, Comparer<T>.Create(comparison));
+        }
+
+        public static bool InsertUnique<T>(this List<T> self, int index, T item)
+        {
+            if (!self.Contains(item))
+            {
+                self.Insert(index, item);
+                return true;
+            }
+            return false;
         }
 
         public static void RemoveLast<T>(this List<T> self)
