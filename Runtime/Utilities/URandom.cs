@@ -12,6 +12,11 @@ namespace Common
             return (byte)Random.Range(min, max);
         }
 
+        public static uint Range(uint min, uint max)
+        {
+            return (uint)Random.Range((int)min, (int)max);
+        }
+
         public static Vector2 Range(Vector2 min, Vector2 max)
         {
             return new Vector2(
@@ -29,14 +34,39 @@ namespace Common
             );
         }
 
-        public static int Unit()
+        public static Vector4 Range(Vector4 min, Vector4 max)
         {
-            return Random.Range(0, 2);
+            return new Vector4(
+                Random.Range(min.x, max.x),
+                Random.Range(min.y, max.y),
+                Random.Range(min.z, max.z),
+                Random.Range(min.w, max.w)
+            );
+        }
+
+        public static Color Range(Color min, Color max)
+        {
+            return new Color(
+                Random.Range(min.r, max.r),
+                Random.Range(min.g, max.g),
+                Random.Range(min.b, max.b),
+                Random.Range(min.a, max.a)
+            );
         }
 
         public static bool Bool()
         {
             return Random.Range(0.0f, 1.0f) > 0.5f;
+        }
+
+        public static int Sign()
+        {
+            return Bool() ? +1 : -1;
+        }
+
+        public static int Unit()
+        {
+            return Random.Range(0, 2);
         }
 
         public static TEnum Enum<TEnum>()
