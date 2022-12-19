@@ -60,11 +60,6 @@ namespace Common
         }
 #endif
 
-        public static implicit operator string(ObjectReference value)
-        {
-            return value.AssetName;
-        }
-
         #region ISerializationCallbackReceiver
         public void OnBeforeSerialize()
         {
