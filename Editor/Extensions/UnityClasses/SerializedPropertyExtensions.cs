@@ -20,6 +20,11 @@ namespace CommonEditor.Extensions
             return self.serializedObject.targetObject;
         }
 
+        public static Object[] GetTargets(this SerializedProperty self)
+        {
+            return self.serializedObject.targetObjects;
+        }
+
         public static void SetValue(this SerializedProperty self, object value)
         {
             switch (self.propertyType)
