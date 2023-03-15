@@ -11,5 +11,22 @@ namespace Common.Extensions
             attribute = self.GetCustomAttribute<T>();
             return attribute != null;
         }
+
+        public static T GetValue<T>(this FieldInfo self, object target)
+        {
+            return (T)self.GetValue(target);
+        }
+
+        public static bool TryGetValue(this FieldInfo self, object target, out object value)
+        {
+            value = self.GetValue(target);
+            return value != null;
+        }
+
+        public static bool TryGetValue<T>(this FieldInfo self, object target, out T value)
+        {
+            value = self.GetValue<T>(target);
+            return value != null;
+        }
     }
 }

@@ -16,11 +16,8 @@ namespace CommonEditor
                 var target = (Component)property.GetTarget();
                 var type = fieldInfo.FieldType;
 
-                var component = SearchComponent(target, type);
-                if (component != null)
-                {
-                    property.objectReferenceValue = component;
-                }
+                var value = SearchComponent(target, type);
+                property.objectReferenceValue = value; 
             }
 
             EditorGUI.PropertyField(position, property, label, true);
