@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Common.Extensions
 {
@@ -14,11 +16,38 @@ namespace Common.Extensions
             return self.GetComponent<T>() != null;
         }
 
+        public static bool HasComponent(this GameObject self, Type type)
+        {
+            return self.GetComponent(type) != null;
+        }
+
+        public static bool HasComponentInChildren<T>(this GameObject self)
+        {
+            return self.GetComponentInChildren<T>() != null;
+        }
+
+        public static bool HasComponentInChildren(this GameObject self, Type type)
+        {
+            return self.GetComponentInChildren(type) != null;
+        }
+
+        public static bool HasComponentInParent<T>(this GameObject self)
+        {
+            return self.GetComponentInParent<T>() != null;
+        }
+
+        public static bool HasComponentInParent(this GameObject self, Type type)
+        {
+            return self.GetComponentInParent(type) != null;
+        }
+
         public static void RemoveComponent<T>(this GameObject self)
             where T : Component
         {
             if (self.TryGetComponent<T>(out var component))
+            {
                 Object.Destroy(component);
+            }
         }
 
         public static T GetComponentEnsured<T>(this GameObject self)
@@ -35,9 +64,21 @@ namespace Common.Extensions
             return component != null;
         }
 
+        public static bool TryGetComponentInChildren(this GameObject self, Type type, out Component component, bool includeInactive = false)
+        {
+            component = self.GetComponentInChildren(type, includeInactive);
+            return component != null;
+        }
+
         public static bool TryGetComponentInParent<T>(this GameObject self, out T component, bool includeInactive = false)
         {
             component = self.GetComponentInParent<T>(includeInactive);
+            return component != null;
+        }
+
+        public static bool TryGetComponentInParent(this GameObject self, Type type, out Component component, bool includeInactive = false)
+        {
+            component = self.GetComponentInParent(type, includeInactive);
             return component != null;
         }
 
@@ -47,15 +88,33 @@ namespace Common.Extensions
             return !components.IsNullOrEmpty();
         }
 
+        public static bool TryGetComponents(this GameObject self, Type type, out Component[] components)
+        {
+            components = self.GetComponents(type);
+            return !components.IsNullOrEmpty();
+        }
+
         public static bool TryGetComponentsInChildren<T>(this GameObject self, out T[] components, bool includeInactive = false)
         {
             components = self.GetComponentsInChildren<T>(includeInactive);
             return !components.IsNullOrEmpty();
         }
 
+        public static bool TryGetComponentsInChildren(this GameObject self, Type type, out Component[] components, bool includeInactive = false)
+        {
+            components = self.GetComponentsInChildren(type, includeInactive);
+            return !components.IsNullOrEmpty();
+        }
+
         public static bool TryGetComponentsInParent<T>(this GameObject self, out T[] components, bool includeInactive = false)
         {
             components = self.GetComponentsInParent<T>(includeInactive);
+            return !components.IsNullOrEmpty();
+        }
+
+        public static bool TryGetComponentsInParent(this GameObject self, Type type, out Component[] components, bool includeInactive = false)
+        {
+            components = self.GetComponentsInParent(type, includeInactive);
             return !components.IsNullOrEmpty();
         }
 

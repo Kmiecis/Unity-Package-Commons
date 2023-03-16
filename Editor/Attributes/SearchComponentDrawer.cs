@@ -16,20 +16,20 @@ namespace CommonEditor
                 var target = (Component)property.GetTarget();
                 var type = fieldInfo.FieldType;
 
-                var value = SearchComponent(target, type);
-                property.objectReferenceValue = value; 
+                var value = GetComponent(target, type);
+                property.objectReferenceValue = value;
             }
 
             EditorGUI.PropertyField(position, property, label, true);
         }
 
-        protected abstract Component SearchComponent(Component target, Type type);
+        protected abstract Component GetComponent(Component target, Type type);
     }
 
     [CustomPropertyDrawer(typeof(SearchComponentAttribute))]
     public class SearchComponentDrawer : ASearchComponentDrawer
     {
-        protected override Component SearchComponent(Component target, Type type)
+        protected override Component GetComponent(Component target, Type type)
         {
             return target.GetComponent(type);
         }
@@ -38,7 +38,7 @@ namespace CommonEditor
     [CustomPropertyDrawer(typeof(SearchComponentInChildrenAttribute))]
     public class SearchComponentInChildrenDrawer : ASearchComponentDrawer
     {
-        protected override Component SearchComponent(Component target, Type type)
+        protected override Component GetComponent(Component target, Type type)
         {
             return target.GetComponentInChildren(type);
         }
@@ -47,7 +47,7 @@ namespace CommonEditor
     [CustomPropertyDrawer(typeof(SearchComponentInParentAttribute))]
     public class SearchComponentInParentDrawer : ASearchComponentDrawer
     {
-        protected override Component SearchComponent(Component target, Type type)
+        protected override Component GetComponent(Component target, Type type)
         {
             return target.GetComponentInParent(type);
         }
