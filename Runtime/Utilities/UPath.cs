@@ -15,9 +15,9 @@ namespace Common
 
         public static string GetPathFrom(string path, string directory)
         {
-            if (path.TryIndexOf(directory, out int index))
+            if (path.TryIndexOf(directory, out int i))
             {
-                return path.Substring(index + directory.Length + 1);
+                return path.Substring(i + directory.Length + 1);
             }
             return null;
         }
@@ -31,7 +31,7 @@ namespace Common
             return null;
         }
 
-        public static string GetPathWithoutExtension(string path)
+        public static string RemoveExtension(string path)
         {
             if (path.TryLastIndexOf('.', out int i))
             {

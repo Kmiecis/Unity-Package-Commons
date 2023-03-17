@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -7,7 +6,7 @@ using Object = UnityEngine.Object;
 namespace Common
 {
     [Serializable]
-    public class ObjectReference : ISerializationCallbackReceiver
+    public class AssetReference : ISerializationCallbackReceiver
     {
         private const string RESOURCES = "Resources";
 
@@ -18,7 +17,7 @@ namespace Common
         [SerializeField, HideInInspector]
         private string _path;
 
-        public string AssetPath
+        public string Path
         {
             get
             {
@@ -29,11 +28,11 @@ namespace Common
             }
         }
 
-        public string AssetName
+        public string Name
         {
             get
             {
-                return Path.GetFileName(AssetPath);
+                return System.IO.Path.GetFileName(Path);
             }
         }
 
@@ -41,7 +40,7 @@ namespace Common
         {
             get
             {
-                return UPath.GetPathFrom(AssetPath, RESOURCES);
+                return UPath.GetPathFrom(Path, RESOURCES);
             }
         }
 
@@ -55,7 +54,7 @@ namespace Common
             else
             {
                 var assetPath = AssetDatabase.GetAssetPath(_value);
-                _path = UPath.GetPathWithoutExtension(assetPath);
+                _path = UPath.RemoveExtension(assetPath);
             }
         }
 #endif

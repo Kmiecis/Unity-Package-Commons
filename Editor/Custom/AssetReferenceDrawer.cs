@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace CommonEditor
 {
-    [CustomPropertyDrawer(typeof(ObjectReference))]
-    public class ObjectReferenceDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(AssetReference))]
+    public class AssetReferenceDrawer : PropertyDrawer
     {
         private const string OBJECT_PROPERTY_NAME = "_value";
 
@@ -13,8 +13,8 @@ namespace CommonEditor
         {
             position = EditorGUI.PrefixLabel(position, label);
 
-            var sceneProperty = property.FindPropertyRelative(OBJECT_PROPERTY_NAME);
-            EditorGUI.PropertyField(position, sceneProperty, GUIContent.none);
+            var assetProperty = property.FindPropertyRelative(OBJECT_PROPERTY_NAME);
+            EditorGUI.PropertyField(position, assetProperty, GUIContent.none);
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)

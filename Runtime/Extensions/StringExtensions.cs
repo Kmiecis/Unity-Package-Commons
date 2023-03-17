@@ -249,16 +249,6 @@ namespace Common.Extensions
             return Regex.Split(self, @"(?<!^)(?=[A-Z])");
         }
 
-        public static string Join(this string[] selfs, char separator, int startIndex, int count)
-        {
-            return string.Join(separator, selfs, startIndex, count);
-        }
-
-        public static string Join(this string[] selfs, char separator)
-        {
-            return string.Join(separator, selfs);
-        }
-
         public static string Join(this string[] selfs, string separator, int startIndex, int count)
         {
             return string.Join(separator, selfs, startIndex, count);
