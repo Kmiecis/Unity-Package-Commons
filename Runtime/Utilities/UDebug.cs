@@ -38,6 +38,8 @@ namespace Common
 
         private static readonly Vector3[] kUnitSphere = MakeUnitSphere(32);
 
+        private static readonly Vector2[] kUnitCircle = MakeUnitCircle(32);
+
         public static void DrawAxes(Vector3 position, float scale = 1.0f)
         {
             Debug.DrawLine(position, position + new Vector3(scale, 0, 0), Color.red);
@@ -201,6 +203,26 @@ namespace Common
             }
         }
 
+        public static void DrawWireCircle(Vector3 center, float radius, Color color)
+        {
+            DrawWireCircle(center, radius, color, Vector3.forward);
+        }
+
+        public static void DrawWireCircle(Vector3 center, float radius, Color color, Vector3 up)
+        {
+            var vs = kUnitCircle;
+            var length = vs.Length;
+
+            var rotation = Quaternion.FromToRotation(Vector3.forward, up);
+            for (int i = 0; i < vs.Length; ++i)
+            {
+                var s = center + radius * (rotation * vs[i]);
+                var e = center + radius * (rotation * vs[(i + 1) % length]);
+
+                Debug.DrawLine(s, e, color);
+            }
+        }
+
         private static Vector3[] MakeUnitSphere(int resolution)
         {
             var result = new Vector3[resolution * 3];
@@ -213,6 +235,20 @@ namespace Common
                 result[0 * resolution + i] = new Vector3(x, y, 0.0f);
                 result[1 * resolution + i] = new Vector3(0.0f, x, y);
                 result[2 * resolution + i] = new Vector3(y, 0.0f, x);
+            }
+            return result;
+        }
+
+        private static Vector2[] MakeUnitCircle(int resolution)
+        {
+            var result = new Vector2[resolution];
+            for (int i = 0; i < resolution; ++i)
+            {
+                var f = i * 1.0f / resolution;
+                var a = f * Mathf.PI * 2.0f;
+                var x = Mathf.Cos(a);
+                var y = Mathf.Sin(a);
+                result[i] = new Vector2(x, y);
             }
             return result;
         }
