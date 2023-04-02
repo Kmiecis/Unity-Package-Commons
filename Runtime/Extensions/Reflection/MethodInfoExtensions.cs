@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
 
-namespace Common
+namespace Common.Extensions
 {
     public static class MethodInfoExtensions
     {
-        public static void Invoke(this MethodInfo self, object obj, object parameter)
+        public static void Invoke(this MethodInfo self, object obj, params object[] parameters)
         {
-            self.Invoke(obj, new object[] { parameter });
+            self.Invoke(obj, parameters);
         }
     }
 }

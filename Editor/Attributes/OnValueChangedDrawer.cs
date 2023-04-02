@@ -1,4 +1,5 @@
 ﻿using Common;
+using Common.Extensions;
 using CommonEditor.Extensions;
 using System.Reflection;
 using UnityEditor;
@@ -25,8 +26,9 @@ namespace CommonEditor
             if (property.serializedObject.ApplyModifiedProperties())
             {
                 var target = property.GetTarget();
-                var method = target.GetType()
-                    .GetMethod(attribute.callback, BINDING_FLAGS);
+                var type = target.GetType();
+                var method = type.GetMethod(attribute.callback, BINDING_FLAGS);
+
                 if (method != null)
                 {
                     method.Invoke(target, this.GetValue(property));
