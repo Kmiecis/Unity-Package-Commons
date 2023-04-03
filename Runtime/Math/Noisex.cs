@@ -165,11 +165,15 @@ namespace Common.Mathematics
                             for (int dx = x - 1; dx <= x + 1; dx++)
                             {
                                 if (dx == x && dy == y)
+                                {
                                     continue;
+                                }
 
                                 int di = dx + dy * width;
-                                if (!mapRange.Contains(dx, dy) || map[di])
+                                if (mapRange.Contains(dx, dy) && map[di])
+                                {
                                     counter += 1;
+                                }
                             }
                         }
 
@@ -204,11 +208,15 @@ namespace Common.Mathematics
                                     for (int dx = x - 1; dx <= x + 1; dx++)
                                     {
                                         if (dx == x && dy == y && dz == z)
+                                        {
                                             continue;
+                                        }
 
                                         int di = dx + (dy + dz * height) * width;
-                                        if (!mapRange.Contains(dx, dy, dz) || map[di])
+                                        if (mapRange.Contains(dx, dy, dz) && map[di])
+                                        {
                                             counter += 1;
+                                        }
                                     }
                                 }
                             }
