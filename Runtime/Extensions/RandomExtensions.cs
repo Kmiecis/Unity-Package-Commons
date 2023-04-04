@@ -152,76 +152,47 @@ namespace Common.Extensions
         public static TEnum NextEnum<TEnum>(this Random self)
         {
             var values = Enum.GetValues(typeof(TEnum));
-            return (TEnum)values.GetValue(self.Next(values.Length));
+            var index = self.Next(values.Length);
+            return (TEnum)values.GetValue(index);
         }
 
-        public static T NextItem<T>(this Random self, T[] args, int min, int max)
-        {
-            return args[self.Next(min, max)];
-        }
-
-        public static T NextItem<T>(this Random self, T[] args, int max)
-        {
-            return self.NextItem(args, 0, max);
-        }
-
-        public static T NextItem<T>(this Random self, params T[] args)
-        {
-            return self.NextItem(args, args.Length);
-        }
-
-        public static T NextItem<T>(this Random self, List<T> list, int min, int max)
+        public static T NextItem<T>(this Random self, IList<T> list, int min, int max)
         {
             return list[self.Next(min, max)];
         }
 
-        public static T NextItem<T>(this Random self, List<T> list, int max)
+        public static T NextItem<T>(this Random self, IList<T> list, int max)
         {
             return self.NextItem(list, 0, max);
         }
 
-        public static T NextItem<T>(this Random self, List<T> list)
+        public static T NextItem<T>(this Random self, IList<T> list)
         {
             return self.NextItem(list, list.Count);
         }
 
-        public static void NextItems<T>(this Random self, T[] source, T[] target)
+        public static void NextItems<T>(this Random self, IList<T> source, IList<T> target)
         {
-            for (int i = 0; i < target.Length; ++i)
+            for (int i = 0; i < target.Count; ++i)
             {
                 target[i] = self.NextItem(source);
             }
         }
 
-        public static void NextItems<T>(this Random self, List<T> source, T[] target)
+        public static void NextUniques<T>(this Random self, IList<T> source, IList<T> target)
         {
-            for (int i = 0; i < target.Length; ++i)
+            int offset = self.Next(target.Count);
+            float step = source.Count * 1.0f / target.Count;
+            for (int i = 0; i < target.Count; ++i)
             {
-                target[i] = self.NextItem(source);
+                int o = (i + offset) % target.Count;
+                int j = (int)(step * o);
+                target[i] = source[j];
             }
+            self.Shuffle(target);
         }
 
-        public static void Shuffle<T>(this Random self, T[] array, int begin, int end)
-        {
-            int n = end;
-            while (--n > begin)
-            {
-                int k = self.Next(n);
-                array.Swap(k, n);
-            }
-        }
-
-        public static void Shuffle<T>(this Random self, T[] array, int end)
-        {
-            self.Shuffle(array, 0, end);
-        }
-
-        public static void Shuffle<T>(this Random self, T[] array)
-        {
-            self.Shuffle(array, array.Length);
-        }
-
-        public static void Shuffle<T>(this Random self, List<T> list, int begin, int end)
+        public static void Shuffle<T>(this Random self, IList<T> list, int begin, int end)
         {
             int n = end;
             while (--n > begin)
@@ -231,12 +202,12 @@ namespace Common.Extensions
             }
         }
 
-        public static void Shuffle<T>(this Random self, List<T> list, int end)
+        public static void Shuffle<T>(this Random self, IList<T> list, int end)
         {
             self.Shuffle(list, 0, end);
         }
 
-        public static void Shuffle<T>(this Random self, List<T> list)
+        public static void Shuffle<T>(this Random self, IList<T> list)
         {
             self.Shuffle(list, list.Count);
         }

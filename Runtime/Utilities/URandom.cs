@@ -72,56 +72,47 @@ namespace Common
         public static TEnum Enum<TEnum>()
         {
             var values = System.Enum.GetValues(typeof(TEnum));
-            return (TEnum)values.GetValue(Random.Range(0, values.Length));
+            var index = Random.Range(0, values.Length);
+            return (TEnum)values.GetValue(index);
         }
 
-        public static T Item<T>(T[] args, int min, int max)
+        public static T Item<T>(IList<T> args, int min, int max)
         {
             return args[Random.Range(min, max)];
         }
 
-        public static T Item<T>(T[] args, int max)
+        public static T Item<T>(IList<T> args, int max)
         {
             return Item(args, 0, max);
         }
 
-        public static T Item<T>(params T[] args)
-        {
-            return Item(args, args.Length);
-        }
-
-        public static T Item<T>(List<T> list, int min, int max)
-        {
-            return list[Random.Range(min, max)];
-        }
-
-        public static T Item<T>(List<T> list, int max)
-        {
-            return Item(list, 0, max);
-        }
-
-        public static T Item<T>(List<T> list)
+        public static T Item<T>(IList<T> list)
         {
             return Item(list, list.Count);
         }
 
-        public static void Items<T>(T[] source, T[] target)
+        public static void Items<T>(IList<T> source, IList<T> target)
         {
-            for (int i = 0; i < target.Length; ++i)
+            for (int i = 0; i < target.Count; ++i)
             {
                 target[i] = Item(source);
             }
         }
 
-        public static void Items<T>(List<T> source, T[] target)
+        public static void Uniques<T>(IList<T> source, IList<T> target)
         {
-            for (int i = 0; i < target.Length; ++i)
+            int offset = Random.Range(0, target.Count);
+            float step = source.Count * 1.0f / target.Count;
+            for (int i = 0; i < target.Count; ++i)
             {
-                target[i] = Item(source);
+                int o = (i + offset) % target.Count;
+                int j = (int)(step * o);
+                target[i] = source[j];
             }
+            Shuffle(target);
         }
 
-        public static void Shuffle<T>(T[] array, int begin, int end)
+        public static void Shuffle<T>(IList<T> array, int begin, int end)
         {
             int n = end;
             while (--n > begin)
@@ -131,34 +122,14 @@ namespace Common
             }
         }
 
-        public static void Shuffle<T>(T[] array, int end)
+        public static void Shuffle<T>(IList<T> array, int end)
         {
             Shuffle(array, 0, end);
         }
 
-        public static void Shuffle<T>(T[] array)
+        public static void Shuffle<T>(IList<T> array)
         {
-            Shuffle(array, array.Length);
-        }
-
-        public static void Shuffle<T>(List<T> list, int begin, int end)
-        {
-            int n = end;
-            while (--n > begin)
-            {
-                int k = Random.Range(0, n);
-                list.Swap(k, n);
-            }
-        }
-
-        public static void Shuffle<T>(List<T> list, int end)
-        {
-            Shuffle(list, 0, end);
-        }
-
-        public static void Shuffle<T>(List<T> list)
-        {
-            Shuffle(list, list.Count);
+            Shuffle(array, array.Count);
         }
     }
 }

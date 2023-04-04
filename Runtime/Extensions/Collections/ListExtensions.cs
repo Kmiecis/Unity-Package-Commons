@@ -144,7 +144,7 @@ namespace Common.Extensions
             return index != -1;
         }
 
-        public static void Swap<T>(this List<T> self, int a, int b)
+        public static void Swap<T>(this IList<T> self, int a, int b)
         {
             var t = self[a];
             self[a] = self[b];
