@@ -22,12 +22,8 @@ namespace Common.Extensions
         public static bool TryPop<T>(this Stack<T> self, out T item)
         {
             if (self.Count > 0)
-            {
-                item = self.Pop();
-                return true;
-            }
-            item = default;
-            return false;
+                return self.Pop().OutWithTrue(out item);
+            return default(T).OutWithFalse(out item);
         }
     }
 }

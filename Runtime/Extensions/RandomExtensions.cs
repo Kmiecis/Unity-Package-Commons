@@ -181,12 +181,11 @@ namespace Common.Extensions
 
         public static void NextUniques<T>(this Random self, IList<T> source, IList<T> target)
         {
-            int offset = self.Next(target.Count);
+            int offset = self.Next(0, source.Count);
             float step = source.Count * 1.0f / target.Count;
             for (int i = 0; i < target.Count; ++i)
             {
-                int o = (i + offset) % target.Count;
-                int j = (int)(step * o);
+                int j = ((int)(i * step) + offset) % source.Count;
                 target[i] = source[j];
             }
             self.Shuffle(target);

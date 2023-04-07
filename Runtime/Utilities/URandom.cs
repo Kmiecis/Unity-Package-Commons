@@ -101,12 +101,11 @@ namespace Common
 
         public static void Uniques<T>(IList<T> source, IList<T> target)
         {
-            int offset = Random.Range(0, target.Count);
+            int offset = Random.Range(0, source.Count);
             float step = source.Count * 1.0f / target.Count;
             for (int i = 0; i < target.Count; ++i)
             {
-                int o = (i + offset) % target.Count;
-                int j = (int)(step * o);
+                int j = ((int)(i * step) + offset) % source.Count;
                 target[i] = source[j];
             }
             Shuffle(target);
