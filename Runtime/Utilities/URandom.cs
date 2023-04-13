@@ -7,6 +7,35 @@ namespace Common
 {
     public static class URandom
     {
+        public static bool Bool(float p = 0.5f)
+        {
+            return Random.Range(0.0f, 1.0f) > p;
+        }
+
+        public static int Sign(float p = 0.5f)
+        {
+            return Bool(p) ? +1 : -1;
+        }
+
+        public static int Unit()
+        {
+            return Random.Range(0, 2);
+        }
+
+        /// <summary> Calculates Gaussian number sample using Box-Muller transform with 70% values between -1.0 and 1.0 </summary>
+        public static float Gaussian()
+        {
+            var u1 = 1.0f - Random.Range(0.0f, 1.0f);
+            var u2 = 1.0f - Random.Range(0.0f, 1.0f);
+            return Mathf.Sqrt(-2.0f * Mathf.Log(u1)) * Mathf.Sin(2.0f * Mathf.PI * u2);
+        }
+
+        /// <summary> Calculates Gaussian number sample using Box-Muller transform with 70% values between (mean - stdev) and (mean + stdev) </summary>
+        public static float Gaussian(float mean, float stdev)
+        {
+            return mean + stdev * Gaussian();
+        }
+
         public static byte Range(byte min, byte max)
         {
             return (byte)Random.Range(min, max);
@@ -52,21 +81,6 @@ namespace Common
                 Random.Range(min.b, max.b),
                 Random.Range(min.a, max.a)
             );
-        }
-
-        public static bool Bool()
-        {
-            return Random.Range(0.0f, 1.0f) > 0.5f;
-        }
-
-        public static int Sign()
-        {
-            return Bool() ? +1 : -1;
-        }
-
-        public static int Unit()
-        {
-            return Random.Range(0, 2);
         }
 
         public static TEnum Enum<TEnum>()

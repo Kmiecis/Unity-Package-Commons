@@ -32,14 +32,19 @@ namespace Common.Extensions
             return min + self.NextFloat() * (max - min);
         }
 
+        public static bool NextBool(this Random self, double p = 0.5)
+        {
+            return self.NextDouble() > p;
+        }
+
+        public static int NextSign(this Random self, double p = 0.5)
+        {
+            return self.NextBool(p) ? +1 : -1;
+        }
+
         public static int NextUnit(this Random self)
         {
             return self.Next(2);
-        }
-
-        public static bool NextBool(this Random self)
-        {
-            return self.NextDouble() > 0.5;
         }
 
         public static byte NextByte(this Random self)
@@ -55,6 +60,20 @@ namespace Common.Extensions
         public static byte NextByte(this Random self, byte min, byte max)
         {
             return (byte)self.Next(min, max);
+        }
+
+        /// <summary> Calculates Gaussian number sample using Box-Muller transform with 70% values between -1.0 and 1.0 </summary>
+        public static float NextGaussian(this Random self)
+        {
+            var u1 = 1.0f - self.NextFloat();
+            var u2 = 1.0f - self.NextFloat();
+            return Mathf.Sqrt(-2.0f * Mathf.Log(u1)) * Mathf.Sin(2.0f * Mathf.PI * u2);
+        }
+
+        /// <summary> Calculates Gaussian number sample using Box-Muller transform with 70% values between (mean - stdev) and (mean + stdev) </summary>
+        public static float NextGaussian(this Random self, float mean, float stdev)
+        {
+            return mean + stdev * self.NextGaussian();
         }
 
         public static Vector2 NextUnitVector2(this Random self)
