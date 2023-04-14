@@ -207,10 +207,10 @@ namespace Common.Extensions
                 int j = ((int)(i * step) + offset) % source.Count;
                 target[i] = source[j];
             }
-            self.Shuffle(target);
+            self.NextShuffle(target);
         }
 
-        public static void Shuffle<T>(this Random self, IList<T> list, int begin, int end)
+        public static void NextShuffle<T>(this Random self, IList<T> list, int begin, int end)
         {
             int n = end;
             while (--n > begin)
@@ -220,14 +220,24 @@ namespace Common.Extensions
             }
         }
 
-        public static void Shuffle<T>(this Random self, IList<T> list, int end)
+        public static void NextShuffle<T>(this Random self, IList<T> list, int end)
         {
-            self.Shuffle(list, 0, end);
+            self.NextShuffle(list, 0, end);
         }
 
-        public static void Shuffle<T>(this Random self, IList<T> list)
+        public static void NextShuffle<T>(this Random self, IList<T> list)
         {
-            self.Shuffle(list, list.Count);
+            self.NextShuffle(list, list.Count);
+        }
+
+        public static IEnumerable<T> NextEnumerable<T>(this Random self, IList<T> list)
+        {
+            int offset = self.Next(list.Count);
+            for (int i = 0; i < list.Count; ++i)
+            {
+                int index = (i + offset) % list.Count;
+                yield return list[index];
+            }
         }
     }
 }

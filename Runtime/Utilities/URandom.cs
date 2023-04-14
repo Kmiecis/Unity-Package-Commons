@@ -90,14 +90,14 @@ namespace Common
             return (TEnum)values.GetValue(index);
         }
 
-        public static T Item<T>(IList<T> args, int min, int max)
+        public static T Item<T>(IList<T> list, int min, int max)
         {
-            return args[Random.Range(min, max)];
+            return list[Random.Range(min, max)];
         }
 
-        public static T Item<T>(IList<T> args, int max)
+        public static T Item<T>(IList<T> list, int max)
         {
-            return Item(args, 0, max);
+            return Item(list, 0, max);
         }
 
         public static T Item<T>(IList<T> list)
@@ -125,24 +125,34 @@ namespace Common
             Shuffle(target);
         }
 
-        public static void Shuffle<T>(IList<T> array, int begin, int end)
+        public static void Shuffle<T>(IList<T> list, int begin, int end)
         {
             int n = end;
             while (--n > begin)
             {
                 int k = Random.Range(0, n);
-                array.Swap(k, n);
+                list.Swap(k, n);
             }
         }
 
-        public static void Shuffle<T>(IList<T> array, int end)
+        public static void Shuffle<T>(IList<T> list, int end)
         {
-            Shuffle(array, 0, end);
+            Shuffle(list, 0, end);
         }
 
-        public static void Shuffle<T>(IList<T> array)
+        public static void Shuffle<T>(IList<T> list)
         {
-            Shuffle(array, array.Count);
+            Shuffle(list, list.Count);
+        }
+
+        public static IEnumerable<T> Enumerable<T>(IList<T> list)
+        {
+            int offset = Random.Range(0, list.Count);
+            for (int i = 0; i < list.Count; ++i)
+            {
+                int index = (i + offset) % list.Count;
+                yield return list[index];
+            }
         }
     }
 }
