@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Common.Mathematics
+namespace Common
 {
-    public static class Vectors3
+    public static class UVector3
     {
         public static readonly Vector3 Max = new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
         public static readonly Vector3 Min = new Vector3(float.MinValue, float.MinValue, float.MinValue);

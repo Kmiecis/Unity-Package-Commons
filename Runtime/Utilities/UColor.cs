@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Common.Mathematics
+namespace Common
 {
-    public static class Colors
+    public static class UColor
     {
         public static readonly Color NaN = new Color(float.NaN, float.NaN, float.NaN, float.NaN);
     }

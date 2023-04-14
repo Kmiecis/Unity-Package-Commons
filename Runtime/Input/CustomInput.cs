@@ -11,7 +11,7 @@ namespace Common
         private static readonly Dictionary<string, VirtualButton> _buttons = new Dictionary<string, VirtualButton>();
         private static readonly Dictionary<string, float> _axes = new Dictionary<string, float>();
 
-        private static Vector3 _mousePosition = Vectors3.NaN;
+        private static Vector3 _mousePosition = UVector3.NaN;
 
         public static bool GetKey(KeyCode key)
         {
@@ -126,7 +126,7 @@ namespace Common
 
         public static void RemoveMousePosition()
         {
-            _mousePosition = Vectors3.NaN;
+            _mousePosition = UVector3.NaN;
         }
 
         private static VirtualButton GetEnsuredFrom<TKey>(Dictionary<TKey, VirtualButton> dictionary, TKey key)
