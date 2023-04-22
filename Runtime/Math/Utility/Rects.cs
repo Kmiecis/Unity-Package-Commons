@@ -18,8 +18,7 @@ namespace Common.Mathematics
         public static readonly int[] Triangles = new int[]
         {
             0, 1, 2,
-            0, 2, 3,
-            -1
+            0, 2, 3
         };
         
         /// <summary> Calculates area of a rectangle defined by extents 'e' </summary>

@@ -34,8 +34,7 @@ namespace Common.Mathematics
             0, 1, 2,
             0, 2, 3,
             0, 3, 4,
-            0, 4, 5,
-            -1
+            0, 4, 5
         };
 
         public static readonly Vector2Int[] Translations = new Vector2Int[]

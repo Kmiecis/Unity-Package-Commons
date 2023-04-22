@@ -21,12 +21,12 @@ namespace Common.Mathematics
         /// <summary> Triangles of a cube </summary>
         public static readonly int[][] Triangles = new int[][]
         {
-            new int[] { 4, 5, 1, 4, 1, 0, -1 }, // -x
-            new int[] { 3, 2, 6, 3, 6, 7, -1 }, // +x
-            new int[] { 4, 0, 3, 4, 3, 7, -1 }, // -y
-            new int[] { 1, 5, 6, 1, 6, 2, -1 }, // +y
-            new int[] { 0, 1, 2, 0, 2, 3, -1 }, // -z
-            new int[] { 7, 6, 5, 7, 5, 4, -1 }  // +z
+            new int[] { 4, 5, 1, 4, 1, 0 }, // -x
+            new int[] { 3, 2, 6, 3, 6, 7 }, // +x
+            new int[] { 4, 0, 3, 4, 3, 7 }, // -y
+            new int[] { 1, 5, 6, 1, 6, 2 }, // +y
+            new int[] { 0, 1, 2, 0, 2, 3 }, // -z
+            new int[] { 7, 6, 5, 7, 5, 4 }  // +z
         };
 
         /// <summary> Calculates area of a cube defined by extents 'e' </summary>
