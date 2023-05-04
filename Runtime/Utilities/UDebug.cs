@@ -40,6 +40,19 @@ namespace Common
 
         private static readonly Vector2[] kUnitCircle = MakeUnitCircle(32);
 
+        public static void DrawArrow(Vector3 position, Vector3 vector, Color color)
+        {
+            const float ARROW_ANGLE = 15.0f;
+            const float ARROW_LENGTH = 0.15f;
+
+            var direction = vector.normalized;
+            var left = Quaternion.LookRotation(direction) * Quaternion.Euler(0.0f, 180.0f + ARROW_ANGLE, 0.0f) * Vector3.forward;
+            var right = Quaternion.LookRotation(direction) * Quaternion.Euler(0.0f, 180.0f - ARROW_ANGLE, 0.0f) * Vector3.forward;
+            Debug.DrawRay(position, vector, color);
+            Debug.DrawRay(position + vector, ARROW_LENGTH * left, color);
+            Debug.DrawRay(position + vector, ARROW_LENGTH * right, color);
+        }
+
         public static void DrawAxes(Vector3 position, float scale = 1.0f)
         {
             Debug.DrawLine(position, position + new Vector3(scale, 0, 0), Color.red);
