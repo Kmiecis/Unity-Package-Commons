@@ -58,5 +58,12 @@ namespace Common.Extensions
         {
             return new Vector2Int(v.x, y);
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Normalized(this Vector2Int v)
+        {
+            var l = v.magnitude;
+            return new Vector2(v.x / l, v.y / l);
+        }
     }
 }

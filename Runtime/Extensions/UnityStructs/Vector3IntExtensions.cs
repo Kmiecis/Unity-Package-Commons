@@ -40,5 +40,12 @@ namespace Common.Extensions
         {
             return new Vector3Int(v.x, v.y, z);
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Normalized(this Vector3Int v)
+        {
+            var l = v.magnitude;
+            return new Vector3(v.x / l, v.y / l, v.z / l);
+        }
     }
 }
