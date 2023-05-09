@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Common.Extensions
 {
@@ -18,6 +21,16 @@ namespace Common.Extensions
                 self = self.BaseType;
             }
             return false;
+        }
+
+        public static IEnumerable<FieldInfo> GetAllFields(this Type self, BindingFlags bindingAttr)
+        {
+            if (self != null)
+            {
+                return self.GetFields(bindingAttr | BindingFlags.DeclaredOnly)
+                    .Concat(self.BaseType.GetAllFields(bindingAttr));
+            }
+            return Enumerable.Empty<FieldInfo>();
         }
     }
 }
