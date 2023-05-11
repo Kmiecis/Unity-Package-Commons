@@ -4,24 +4,10 @@ namespace Common
 {
     public static class UTime
     {
-        public static float GetTime(bool unscaled)
-        {
-            return unscaled ? Time.unscaledTime : Time.time;
-        }
+        public static float previousTime
+            => Time.time - Time.deltaTime;
 
-        public static float GetDeltaTime(bool unscaled)
-        {
-            return unscaled ? Time.unscaledDeltaTime : Time.deltaTime;
-        }
-
-        public static float GetFixedTime(bool unscaled)
-        {
-            return unscaled ? Time.fixedUnscaledTime : Time.fixedTime;
-        }
-
-        public static float GetFixedDeltaTime(bool unscaled)
-        {
-            return unscaled ? Time.fixedUnscaledDeltaTime : Time.fixedDeltaTime;
-        }
+        public static float previousRealtime
+            => Time.realtimeSinceStartup - Time.unscaledDeltaTime;
     }
 }
