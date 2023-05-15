@@ -47,15 +47,7 @@ namespace Common
 #if UNITY_EDITOR
         private void UpdatePath()
         {
-            if (_value == null)
-            {
-                _path = null;
-            }
-            else
-            {
-                var assetPath = AssetDatabase.GetAssetPath(_value);
-                _path = UPath.RemoveExtension(assetPath);
-            }
+            _path = _value != null ? AssetDatabase.GetAssetPath(_value) : null;
         }
 #endif
 
