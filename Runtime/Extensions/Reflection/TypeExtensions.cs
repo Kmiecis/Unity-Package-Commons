@@ -7,6 +7,13 @@ namespace Common.Extensions
 {
     public static class TypeExtensions
     {
+        public static bool TryGetCustomAttribute<T>(this Type self, out T attribute)
+            where T : Attribute
+        {
+            attribute = self.GetCustomAttribute<T>();
+            return attribute != null;
+        }
+
         public static bool IsGenericTypeOf(this Type self, Type type)
         {
             while (self != null)
