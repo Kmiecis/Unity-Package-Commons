@@ -252,6 +252,12 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Select01(bool b)
+        {
+            return Select(0, 1, b);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Step(float a, float b)
         {
             return Select(0.0f, 1.0f, b >= a);
