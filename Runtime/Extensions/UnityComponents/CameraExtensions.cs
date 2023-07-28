@@ -29,5 +29,11 @@ namespace Common.Extensions
             var x = y * self.aspect;
             return new Vector2(x, y);
         }
+
+        public static Ray ScreenCenterToRay(this Camera self)
+        {
+            var pos = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
+            return self.ScreenPointToRay(pos);
+        }
     }
 }
