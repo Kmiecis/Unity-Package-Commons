@@ -17,6 +17,14 @@ namespace Common
         [SerializeField, HideInInspector]
         private string _path;
 
+        public Object Asset
+        {
+            get
+            {
+                return _value;
+            }
+        }
+
         public string Path
         {
             get
@@ -33,6 +41,14 @@ namespace Common
             get
             {
                 return System.IO.Path.GetFileName(Path);
+            }
+        }
+
+        public bool IsInResources
+        {
+            get
+            {
+                return _path.Contains(RESOURCES);
             }
         }
 
