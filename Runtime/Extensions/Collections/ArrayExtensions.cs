@@ -80,6 +80,11 @@ namespace Common.Extensions
             return Array.IndexOf(self, value, startIndex, count);
         }
 
+        public static bool Exists<T>(this T[] self, Predicate<T> match)
+        {
+            return Array.Exists(self, match);
+        }
+
         public static T Find<T>(this T[] self, Predicate<T> match)
         {
             return Array.Find(self, match);
