@@ -5,6 +5,15 @@ namespace Common
 {
     public class UObject
     {
+        public static void Destroy<T>(T obj)
+            where T : Object
+        {
+            if (obj != null)
+            {
+                obj.Destroy();
+            }
+        }
+
         public static void Destroy<T>(ref T obj)
             where T : Object
         {
@@ -12,6 +21,25 @@ namespace Common
             {
                 obj.Destroy();
                 obj = null;
+            }
+        }
+
+        public static void DestroyObject<T>(T comp)
+            where T : Component
+        {
+            if (comp != null)
+            {
+                comp.DestroyObject();
+            }
+        }
+
+        public static void DestroyObject<T>(ref T comp)
+            where T : Component
+        {
+            if (comp != null)
+            {
+                comp.DestroyObject();
+                comp = null;
             }
         }
 

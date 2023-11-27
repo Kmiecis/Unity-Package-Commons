@@ -104,5 +104,15 @@ namespace Common.Extensions
             components = self.GetComponentsInParent(type, includeInactive);
             return !components.IsNullOrEmpty();
         }
+
+        public static void DestroyObject(this Component self)
+        {
+            self.gameObject.Destroy();
+        }
+
+        public static void Destroy(this Component self, float t)
+        {
+            self.gameObject.Destroy(t);
+        }
     }
 }
