@@ -4,6 +4,12 @@ namespace Common
 {
     public static class USceneManager
     {
+        public static bool TryGetSceneByPath(string scenePath, out Scene scene)
+        {
+            scene = SceneManager.GetSceneByPath(scenePath);
+            return scene.IsValid();
+        }
+
         public static bool TryGetSceneByName(string name, out Scene scene)
         {
             scene = SceneManager.GetSceneByName(name);
@@ -16,12 +22,17 @@ namespace Common
             return scene.IsValid();
         }
 
-        public static bool HasScene(string name)
+        public static bool IsSceneLoadedByPath(string scenePath)
+        {
+            return SceneManager.GetSceneByPath(scenePath).IsValid();
+        }
+
+        public static bool IsSceneLoadedByName(string name)
         {
             return SceneManager.GetSceneByName(name).IsValid();
         }
 
-        public static bool HasScene(int buildIndex)
+        public static bool IsSceneLoadedByBuildIndex(int buildIndex)
         {
             return SceneManager.GetSceneByBuildIndex(buildIndex).IsValid();
         }
