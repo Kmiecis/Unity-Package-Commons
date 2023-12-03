@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 namespace Common.Extensions
@@ -18,13 +17,12 @@ namespace Common.Extensions
         {
             while (self != null)
             {
-                if (
-                    self.IsGenericType &&
-                    self.GetGenericTypeDefinition() == type
-                )
+                if (self.IsGenericType &&
+                    self.GetGenericTypeDefinition() == type)
                 {
                     return true;
                 }
+
                 self = self.BaseType;
             }
             return false;
@@ -32,12 +30,54 @@ namespace Common.Extensions
 
         public static IEnumerable<FieldInfo> GetAllFields(this Type self, BindingFlags bindingAttr)
         {
-            if (self != null)
+            while (self != null)
             {
-                return self.GetFields(bindingAttr | BindingFlags.DeclaredOnly)
-                    .Concat(self.BaseType.GetAllFields(bindingAttr));
+                var fields = self.GetFields(bindingAttr);
+                for (int i = 0; i < fields.Length; ++i)
+                {
+                    yield return fields[i];
+                }
+
+                self = self.BaseType;
             }
-            return Enumerable.Empty<FieldInfo>();
+        }
+
+        public static IEnumerable<PropertyInfo> GetAllProperties(this Type self, BindingFlags bindingAttr)
+        {
+            while (self != null)
+            {
+                var properties = self.GetProperties(bindingAttr);
+                for (int i = 0; i < properties.Length; ++i)
+                {
+                    yield return properties[i];
+                }
+
+                self = self.BaseType;
+            }
+        }
+
+        public static FieldInfo FindField(this Type self, string name, BindingFlags bindingAttr)
+        {
+            foreach (var field in GetAllFields(self, bindingAttr))
+            {
+                if (field.Name == name)
+                {
+                    return field;
+                }
+            }
+            return null;
+        }
+
+        public static PropertyInfo FindProperty(this Type self, string name, BindingFlags bindingAttr)
+        {
+            foreach (var property in GetAllProperties(self, bindingAttr))
+            {
+                if (property.Name == name)
+                {
+                    return property;
+                }
+            }
+            return null;
         }
     }
 }
