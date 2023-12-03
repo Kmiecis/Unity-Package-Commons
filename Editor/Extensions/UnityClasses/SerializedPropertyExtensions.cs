@@ -25,6 +25,65 @@ namespace CommonEditor.Extensions
             return self.serializedObject.targetObjects;
         }
 
+        public static object GetValue(this SerializedProperty self)
+        {
+            switch (self.propertyType)
+            {
+                case SerializedPropertyType.AnimationCurve:
+                    return self.animationCurveValue;
+                case SerializedPropertyType.ArraySize:
+                    return self.arraySize;
+                case SerializedPropertyType.Boolean:
+                    return self.boolValue;
+                case SerializedPropertyType.Bounds:
+                    return self.boundsValue;
+                case SerializedPropertyType.BoundsInt:
+                    return self.boundsIntValue;
+                case SerializedPropertyType.Character:
+                    return self.intValue;
+                case SerializedPropertyType.Color:
+                    return self.colorValue;
+                case SerializedPropertyType.Enum:
+                    goto case SerializedPropertyType.Integer;
+                case SerializedPropertyType.ExposedReference:
+                    return self.exposedReferenceValue;
+                case SerializedPropertyType.FixedBufferSize:
+                    return self.intValue;
+                case SerializedPropertyType.Float:
+                    return self.floatValue;
+                case SerializedPropertyType.Hash128:
+                    return self.hash128Value;
+                case SerializedPropertyType.Integer:
+                    return self.intValue;
+                case SerializedPropertyType.LayerMask:
+                    return self.intValue;
+                case SerializedPropertyType.ManagedReference:
+                    return self.managedReferenceValue;
+                case SerializedPropertyType.ObjectReference:
+                    return self.objectReferenceValue;
+                case SerializedPropertyType.Quaternion:
+                    return self.quaternionValue;
+                case SerializedPropertyType.Rect:
+                    return self.rectValue;
+                case SerializedPropertyType.RectInt:
+                    return self.rectIntValue;
+                case SerializedPropertyType.String:
+                    return self.stringValue;
+                case SerializedPropertyType.Vector2:
+                    return self.vector2Value;
+                case SerializedPropertyType.Vector2Int:
+                    return self.vector2IntValue;
+                case SerializedPropertyType.Vector3:
+                    return self.vector3Value;
+                case SerializedPropertyType.Vector3Int:
+                    return self.vector3IntValue;
+                case SerializedPropertyType.Vector4:
+                    return self.vector4Value;
+            }
+
+            throw new System.NotSupportedException(string.Format("The GetValue method failed on \"{0}\" because it has an unsupported propertyType {1}.", self.propertyPath, self.propertyType));
+        }
+
         public static void SetValue(this SerializedProperty self, object value)
         {
             switch (self.propertyType)
@@ -44,18 +103,29 @@ namespace CommonEditor.Extensions
                 case SerializedPropertyType.BoundsInt:
                     self.boundsIntValue = (BoundsInt)value;
                     break;
+                case SerializedPropertyType.Character:
+                    goto case SerializedPropertyType.Integer;
                 case SerializedPropertyType.Color:
                     self.colorValue = (Color)value;
                     break;
+                case SerializedPropertyType.Enum:
+                    goto case SerializedPropertyType.Integer;
                 case SerializedPropertyType.ExposedReference:
                     self.exposedReferenceValue = (Object)value;
                     break;
+                case SerializedPropertyType.FixedBufferSize:
+                    goto case SerializedPropertyType.Integer;
                 case SerializedPropertyType.Float:
                     self.floatValue = (float)value;
+                    break;
+                case SerializedPropertyType.Hash128:
+                    self.hash128Value = (Hash128)value;
                     break;
                 case SerializedPropertyType.Integer:
                     self.intValue = (int)value;
                     break;
+                case SerializedPropertyType.LayerMask:
+                    goto case SerializedPropertyType.Integer;
                 case SerializedPropertyType.ManagedReference:
                     self.managedReferenceValue = value;
                     break;
@@ -91,60 +161,7 @@ namespace CommonEditor.Extensions
                     break;
             }
 
-            var targetName = self.serializedObject.targetObject.GetType().Name;
-            var propertyName = self.name;
-            var error = $"Failed to get serialized value of {targetName}.{propertyName}";
-            throw new System.Exception(error);
-        }
-
-        public static object GetValue(this SerializedProperty self)
-        {
-            switch (self.propertyType)
-            {
-                case SerializedPropertyType.AnimationCurve:
-                    return self.animationCurveValue;
-                case SerializedPropertyType.ArraySize:
-                    return self.arraySize;
-                case SerializedPropertyType.Boolean:
-                    return self.boolValue;
-                case SerializedPropertyType.Bounds:
-                    return self.boundsValue;
-                case SerializedPropertyType.BoundsInt:
-                    return self.boundsIntValue;
-                case SerializedPropertyType.Color:
-                    return self.colorValue;
-                case SerializedPropertyType.ExposedReference:
-                    return self.exposedReferenceValue;
-                case SerializedPropertyType.Float:
-                    return self.floatValue;
-                case SerializedPropertyType.Integer:
-                    return self.intValue;
-                case SerializedPropertyType.ObjectReference:
-                    return self.objectReferenceValue;
-                case SerializedPropertyType.Quaternion:
-                    return self.quaternionValue;
-                case SerializedPropertyType.Rect:
-                    return self.rectValue;
-                case SerializedPropertyType.RectInt:
-                    return self.rectIntValue;
-                case SerializedPropertyType.String:
-                    return self.stringValue;
-                case SerializedPropertyType.Vector2:
-                    return self.vector2Value;
-                case SerializedPropertyType.Vector2Int:
-                    return self.vector2IntValue;
-                case SerializedPropertyType.Vector3:
-                    return self.vector3Value;
-                case SerializedPropertyType.Vector3Int:
-                    return self.vector3IntValue;
-                case SerializedPropertyType.Vector4:
-                    return self.vector4Value;
-            }
-
-            var targetName = self.serializedObject.targetObject.GetType().Name;
-            var propertyName = self.name;
-            var error = $"Failed to get serialized value of {targetName}.{propertyName}";
-            throw new System.Exception(error);
+            throw new System.NotSupportedException(string.Format("The SetValue method failed on \"{0}\" because it has an unsupported propertyType {1}.", self.propertyPath, self.propertyType));
         }
     }
 }
