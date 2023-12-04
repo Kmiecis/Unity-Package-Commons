@@ -6,6 +6,15 @@ namespace Common.Extensions
 {
     public static class TypeExtensions
     {
+        public static object GetDefaultValue(this Type type)
+        {
+            if (type.IsValueType)
+            {
+                return Activator.CreateInstance(type);
+            }
+            return null;
+        }
+
         public static bool TryGetCustomAttribute<T>(this Type self, out T attribute)
             where T : Attribute
         {

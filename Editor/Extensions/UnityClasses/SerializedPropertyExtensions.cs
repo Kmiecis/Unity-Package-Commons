@@ -25,6 +25,65 @@ namespace CommonEditor.Extensions
             return self.serializedObject.targetObjects;
         }
 
+        public static System.Type GetValueType(this SerializedProperty self)
+        {
+            switch (self.propertyType)
+            {
+                case SerializedPropertyType.AnimationCurve:
+                    return typeof(AnimationCurve);
+                case SerializedPropertyType.ArraySize:
+                    return typeof(int);
+                case SerializedPropertyType.Boolean:
+                    return typeof(bool);
+                case SerializedPropertyType.Bounds:
+                    return typeof(Bounds);
+                case SerializedPropertyType.BoundsInt:
+                    return typeof(BoundsInt);
+                case SerializedPropertyType.Character:
+                    return typeof(char);
+                case SerializedPropertyType.Color:
+                    return typeof(Color);
+                case SerializedPropertyType.Enum:
+                    break;
+                case SerializedPropertyType.ExposedReference:
+                    break;
+                case SerializedPropertyType.FixedBufferSize:
+                    return typeof(int);
+                case SerializedPropertyType.Float:
+                    return typeof(float);
+                case SerializedPropertyType.Hash128:
+                    return typeof(Hash128);
+                case SerializedPropertyType.Integer:
+                    return typeof(int);
+                case SerializedPropertyType.LayerMask:
+                    return typeof(LayerMask);
+                case SerializedPropertyType.ManagedReference:
+                    break;
+                case SerializedPropertyType.ObjectReference:
+                    break;
+                case SerializedPropertyType.Quaternion:
+                    return typeof(Quaternion);
+                case SerializedPropertyType.Rect:
+                    return typeof(Rect);
+                case SerializedPropertyType.RectInt:
+                    return typeof(RectInt);
+                case SerializedPropertyType.String:
+                    return typeof(string);
+                case SerializedPropertyType.Vector2:
+                    return typeof(Vector2);
+                case SerializedPropertyType.Vector2Int:
+                    return typeof(Vector2Int);
+                case SerializedPropertyType.Vector3:
+                    return typeof(Vector3);
+                case SerializedPropertyType.Vector3Int:
+                    return typeof(Vector3Int);
+                case SerializedPropertyType.Vector4:
+                    return typeof(Vector4);
+            }
+
+            return typeof(object);
+        }
+
         public static object GetValue(this SerializedProperty self)
         {
             switch (self.propertyType)
