@@ -21,7 +21,15 @@ namespace Common
         {
             get
             {
+#if UNITY_EDITOR
                 return _value;
+#else
+                if (IsInResources)
+                {
+                    return Resources.Load(ResourcePath);
+                }
+                return null;
+#endif
             }
         }
 
