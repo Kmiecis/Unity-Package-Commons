@@ -13,6 +13,22 @@ namespace Common
             _heap = new List<T>();
         }
 
+        public int Count
+        {
+            get => _heap.Count;
+        }
+
+        public T Find(Predicate<T> predicate)
+        {
+            return _heap.Find(predicate);
+        }
+
+        public void Remove(T item)
+        {
+            _heap.Remove(item);
+            _heap.Sort();
+        }
+
         public void Enqueue(T item)
         {
             _heap.Add(item);
@@ -30,6 +46,18 @@ namespace Common
             }
 
             _heap[index] = item;
+        }
+
+        public bool TryDequeue(out T item)
+        {
+            if (_heap.Count > 0)
+            {
+                item = Dequeue();
+                return true;
+            }
+
+            item = default;
+            return false;
         }
 
         public T Dequeue()
@@ -58,7 +86,7 @@ namespace Common
                 if (_heap[i].CompareTo(_heap[smallest]) <= 0)
                     break;
 
-                T temp = _heap[i];
+                var temp = _heap[i];
                 _heap[i] = _heap[smallest];
                 _heap[smallest] = temp;
 
@@ -66,17 +94,6 @@ namespace Common
             }
 
             return firstItem;
-        }
-
-        public T Find(Predicate<T> predicate)
-        {
-            return _heap.Find(predicate);
-        }
-
-        public void Remove(T item)
-        {
-            _heap.Remove(item);
-            _heap.Sort();
         }
     }
 }

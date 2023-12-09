@@ -10,7 +10,7 @@ namespace CommonEditor
     [CustomPropertyDrawer(typeof(OnValueChangedAttribute))]
     public class OnValueChangedDrawer : BasePropertyDrawer
     {
-        private static readonly BindingFlags BINDING_FLAGS =
+        private const BindingFlags BINDING_FLAGS =
             BindingFlags.Instance |
             BindingFlags.Static |
             BindingFlags.Public |
