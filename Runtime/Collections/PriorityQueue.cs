@@ -6,94 +6,173 @@ namespace Common
     public class PriorityQueue<T>
         where T : IComparable<T>
     {
-        private readonly List<T> _heap;
+        private const int DefaultCapacity = 4;
 
-        public PriorityQueue()
+        private T[] _array;
+        private int _count;
+
+        public PriorityQueue(int capacity)
         {
-            _heap = new List<T>();
+            _array = new T[capacity];
+            _count = 0;
+        }
+
+        public PriorityQueue(IEnumerable<T> collection)
+        {
+            _array = new T[DefaultCapacity];
+            _count = 0;
+
+            foreach (var item in collection)
+            {
+                Enqueue(item);
+            }
         }
 
         public int Count
         {
-            get => _heap.Count;
+            get => _count;
         }
 
-        public T Find(Predicate<T> predicate)
+        public T Peek()
         {
-            return _heap.Find(predicate);
+            return _array[0];
         }
 
-        public void Remove(T item)
+        public void Clear()
         {
-            _heap.Remove(item);
-            _heap.Sort();
+            Array.Clear(_array, 0, _count);
+
+            _count = 0;
         }
 
-        public void Enqueue(T item)
+        public bool Contains(T item)
         {
-            _heap.Add(item);
-
-            int index = _heap.Count - 1;
-            while (index > 0)
+            var comparer = EqualityComparer<T>.Default;
+            for (int i = 0; i < _count; ++i)
             {
-                int parentIndex = (index - 1) / 2;
-
-                if (_heap[parentIndex].CompareTo(item) <= 0)
-                    break;
-
-                _heap[index] = _heap[parentIndex];
-                index = parentIndex;
+                if (comparer.Equals(_array[i], item))
+                {
+                    return true;
+                }
             }
-
-            _heap[index] = item;
-        }
-
-        public bool TryDequeue(out T item)
-        {
-            if (_heap.Count > 0)
-            {
-                item = Dequeue();
-                return true;
-            }
-
-            item = default;
             return false;
+        }
+
+        public void Enqueue(T value)
+        {
+            if (_count == _array.Length)
+            {
+                Array.Resize(ref _array, _count * 2);
+            }
+
+            SiftUp(_count, ref value, 0);
+
+            _count++;
         }
 
         public T Dequeue()
         {
-            int lastIndex = _heap.Count - 1;
-            T firstItem = _heap[0];
-            _heap[0] = _heap[lastIndex];
-            _heap.RemoveAt(lastIndex);
+            var result = _array[0];
+            RemoveAt(0);
+            return result;
+        }
 
-            lastIndex--;
-
-            int i = 0;
-            while (true)
+        public bool Remove(T item)
+        {
+            var index = Array.IndexOf(_array, item);
+            if (index > 0)
             {
-                int left = 2 * i + 1;
-                int right = 2 * i + 2;
+                RemoveAt(index);
+                return true;
+            }
+            return false;
+        }
 
-                if (left > lastIndex)
-                    break;
+        public int RemoveAll(Predicate<T> match)
+        {
+            var result = 0;
+            while (RemoveSingle(match))
+            {
+                result++;
+            }
+            return result;
+        }
 
-                int smallest = left;
+        private bool RemoveSingle(Predicate<T> match)
+        {
+            for (int i = _count - 1; i > -1; --i)
+            {
+                var item = _array[i];
+                if (match(item))
+                {
+                    RemoveAt(i);
+                    return true;
+                }
+            }
+            return false;
+        }
 
-                if (right <= lastIndex && _heap[right].CompareTo(_heap[left]) < 0)
-                    smallest = right;
+        private void RemoveAt(int index)
+        {
+            --_count;
+            var x = _array[_count];
+            int i = SiftDown(index);
+            SiftUp(i, ref x, index);
+            _array[_count] = default;
+        }
 
-                if (_heap[i].CompareTo(_heap[smallest]) <= 0)
-                    break;
+        private int SiftDown(int index)
+        {
+            int parent = index;
+            int leftChild = HeapLeftChild(parent);
 
-                var temp = _heap[i];
-                _heap[i] = _heap[smallest];
-                _heap[smallest] = temp;
+            while (leftChild < _count)
+            {
+                int rightChild = HeapRightFromLeft(leftChild);
+                int bestChild =
+                    (rightChild < _count && _array[rightChild].CompareTo(_array[leftChild]) < 0) ?
+                    rightChild : leftChild;
 
-                i = smallest;
+                _array[parent] = _array[bestChild];
+
+                parent = bestChild;
+                leftChild = HeapLeftChild(parent);
             }
 
-            return firstItem;
+            return parent;
+        }
+
+        private void SiftUp(int index, ref T x, int boundary)
+        {
+            while (index > boundary)
+            {
+                int parent = HeapParent(index);
+                if (_array[parent].CompareTo(x) > 0)
+                {
+                    _array[index] = _array[parent];
+                    index = parent;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            _array[index] = x;
+        }
+
+        private static int HeapParent(int i)
+        {
+            return (i - 1) / 2;
+        }
+
+        private static int HeapLeftChild(int i)
+        {
+            return (i * 2) + 1;
+        }
+
+        private static int HeapRightFromLeft(int i)
+        {
+            return i + 1;
         }
     }
 }
