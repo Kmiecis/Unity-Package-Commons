@@ -11,17 +11,20 @@ namespace Common
         private T[] _array;
         private int _count;
 
+        public PriorityQueue() :
+            this(DefaultCapacity)
+        {
+        }
+
         public PriorityQueue(int capacity)
         {
             _array = new T[capacity];
             _count = 0;
         }
 
-        public PriorityQueue(IEnumerable<T> collection)
+        public PriorityQueue(IEnumerable<T> collection) :
+            this(DefaultCapacity)
         {
-            _array = new T[DefaultCapacity];
-            _count = 0;
-
             foreach (var item in collection)
             {
                 Enqueue(item);
