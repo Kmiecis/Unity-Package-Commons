@@ -16,6 +16,8 @@ namespace Common
 #endif
         [SerializeField, HideInInspector]
         private string _path;
+        [SerializeField, HideInInspector]
+        private string _extension;
 
         public Object Asset
         {
@@ -38,9 +40,20 @@ namespace Common
             get
             {
 #if UNITY_EDITOR
-                UpdatePath();
+                ReadProperties();
 #endif
                 return _path;
+            }
+        }
+
+        public string Extension
+        {
+            get
+            {
+#if UNITY_EDITOR
+                ReadProperties();
+#endif
+                return _extension;
             }
         }
 
@@ -56,7 +69,7 @@ namespace Common
         {
             get
             {
-                return _path.Contains(RESOURCES);
+                return Path.Contains(RESOURCES);
             }
         }
 
@@ -69,9 +82,19 @@ namespace Common
         }
 
 #if UNITY_EDITOR
-        private void UpdatePath()
+        private void ReadProperties()
         {
-            _path = _value != null ? AssetDatabase.GetAssetPath(_value) : null;
+            if (_value != null)
+            {
+                var path = AssetDatabase.GetAssetPath(_value);
+                _path = UPath.RemoveExtension(path);
+                _extension = System.IO.Path.GetExtension(path);
+            }
+            else
+            {
+                _path = null;
+                _extension = null;
+            }
         }
 #endif
 
@@ -79,20 +102,20 @@ namespace Common
         public void OnBeforeSerialize()
         {
 #if UNITY_EDITOR
-            UpdatePath();
+            ReadProperties();
 #endif
         }
 
         public void OnAfterDeserialize()
         {
 #if UNITY_EDITOR
-            void UpdateNameOnNextUpdate()
+            void ReadPropertiesOnNextUpdate()
             {
-                EditorApplication.update -= UpdateNameOnNextUpdate;
-                UpdatePath();
+                EditorApplication.update -= ReadPropertiesOnNextUpdate;
+                ReadProperties();
             }
 
-            EditorApplication.update += UpdateNameOnNextUpdate;
+            EditorApplication.update += ReadPropertiesOnNextUpdate;
 #endif
         }
         #endregion
