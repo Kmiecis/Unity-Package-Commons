@@ -27,21 +27,15 @@ namespace CommonEditor
                 {
                     return path;
                 }
-                else
-                {
-                    return Path.GetDirectoryName(path);
-                }
+                return Path.GetDirectoryName(path);
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
-        public static T[] LoadAssets<T>()
+        public static T[] LoadAssets<T>(params string[] folders)
             where T : Object
         {
-            var guids = AssetDatabase.FindAssets("t:" + typeof(T).Name);
+            var guids = AssetDatabase.FindAssets("t:" + typeof(T).Name, folders);
 
             var result = new T[guids.Length];
             for (int i = 0; i < guids.Length; ++i)
@@ -65,7 +59,9 @@ namespace CommonEditor
             else
             {
                 if (asset is Mesh mesh)
+                {
                     mesh.Clear();
+                }
                 EditorUtility.CopySerialized(asset, existingAsset);
             }
             AssetDatabase.SaveAssets();
