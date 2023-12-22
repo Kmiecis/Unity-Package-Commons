@@ -62,6 +62,30 @@ namespace Common.Extensions
             return (byte)self.Next(min, max);
         }
 
+        public static long NextLong(this Random self, long min, long max)
+        {
+            ulong range = (ulong)(max - min);
+            var bytes = new byte[8];
+            ulong rand;
+            do
+            {
+                self.NextBytes(bytes);
+                rand = (ulong)BitConverter.ToInt64(bytes, 0);
+            }
+            while (rand > ulong.MaxValue - ((ulong.MaxValue % range) + 1) % range);
+            return (long)(rand % range) + min;
+        }
+
+        public static long NextLong(this Random self, long max)
+        {
+            return self.NextLong(long.MinValue, max);
+        }
+
+        public static long NextLong(this Random self)
+        {
+            return self.NextLong(long.MaxValue);
+        }
+
         /// <summary> Calculates Gaussian number sample using Box-Muller transform with 70% values between -1.0 and 1.0 </summary>
         public static float NextGaussian(this Random self)
         {
