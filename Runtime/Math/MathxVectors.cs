@@ -308,6 +308,17 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Rect Lerp(Rect a, Rect b, float t)
+        {
+            return new Rect(
+                Mathf.Lerp(a.x, b.x, t),
+                Mathf.Lerp(a.y, b.y, t),
+                Mathf.Lerp(a.width, b.width, t),
+                Mathf.Lerp(a.height, b.height, t)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float InverseLerp(Vector2 a, Vector2 b, Vector2 v)
         {
             var ab = b - a;
