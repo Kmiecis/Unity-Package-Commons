@@ -8,14 +8,13 @@ using UnityEngine;
 namespace CommonEditor
 {
     [CustomPropertyDrawer(typeof(OnValueChangedAttribute))]
-    public class OnValueChangedDrawer : BasePropertyDrawer
+    public class OnValueChangedDrawer : PropertyDrawer
     {
         private const BindingFlags BINDING_FLAGS =
             BindingFlags.Instance |
             BindingFlags.Static |
             BindingFlags.Public |
-            BindingFlags.NonPublic
-        ;
+            BindingFlags.NonPublic;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -33,7 +32,16 @@ namespace CommonEditor
                 {
                     method.Invoke(target, this.GetValue(property));
                 }
+                else
+                {
+                    Debug.LogWarning($"{nameof(OnValueChangedAttribute)}: Unable to find method {attribute.callback} in {type}");
+                }
             }
+        }
+
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            return EditorGUI.GetPropertyHeight(property, label, true);
         }
     }
 }
