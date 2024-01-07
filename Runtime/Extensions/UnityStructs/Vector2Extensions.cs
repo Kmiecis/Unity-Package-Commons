@@ -6,57 +6,57 @@ namespace Common.Extensions
     public static class Vector2Extensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 XY_(this Vector2 v, float f = 0.0f)
+        public static Vector3 XY_(this Vector2 self, float f = 0.0f)
         {
-            return new Vector3(v.x, v.y, f);
+            return new Vector3(self.x, self.y, f);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 X_Y(this Vector2 v, float f = 0.0f)
+        public static Vector3 X_Y(this Vector2 self, float f = 0.0f)
         {
-            return new Vector3(v.x, f, v.y);
+            return new Vector3(self.x, f, self.y);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 _XY(this Vector2 v, float f = 0.0f)
+        public static Vector3 _XY(this Vector2 self, float f = 0.0f)
         {
-            return new Vector3(f, v.x, v.y);
+            return new Vector3(f, self.x, self.y);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 YX_(this Vector2 v, float f = 0.0f)
+        public static Vector3 YX_(this Vector2 self, float f = 0.0f)
         {
-            return new Vector3(v.y, v.x, f);
+            return new Vector3(self.y, self.x, f);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Y_X(this Vector2 v, float f = 0.0f)
+        public static Vector3 Y_X(this Vector2 self, float f = 0.0f)
         {
-            return new Vector3(v.y, f, v.x);
+            return new Vector3(self.y, f, self.x);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 _YX(this Vector2 v, float f = 0.0f)
+        public static Vector3 _YX(this Vector2 self, float f = 0.0f)
         {
-            return new Vector3(f, v.y, v.x);
+            return new Vector3(f, self.y, self.x);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 YX(this Vector2 v)
+        public static Vector2 YX(this Vector2 self)
         {
-            return new Vector2(v.y, v.x);
+            return new Vector2(self.y, self.x);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 WithX(this Vector2 v, float x)
+        public static Vector2 WithX(this Vector2 self, float x)
         {
-            return new Vector2(x, v.y);
+            return new Vector2(x, self.y);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 WithY(this Vector2 v, float y)
+        public static Vector2 WithY(this Vector2 self, float y)
         {
-            return new Vector2(v.x, y);
+            return new Vector2(self.x, y);
         }
     }
 }

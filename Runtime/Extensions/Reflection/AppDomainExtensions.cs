@@ -7,27 +7,13 @@ namespace Common.Extensions
     {
         public static Type FindType(this AppDomain self, string name, StringComparison stringComp = StringComparison.Ordinal)
         {
-            var typeName = name.RemoveSuffix("[]");
-            var isArray = typeName != name;
-
             var assemblies = self.GetAssemblies();
             foreach (var assembly in assemblies)
             {
-                var types = assembly.GetTypes();
-                foreach (var type in types)
+                var type = assembly.FindType(name, stringComp);
+                if (type != null)
                 {
-                    if (string.Equals(typeName, type.Name, stringComp) ||
-                        string.Equals(typeName, type.FullName, stringComp))
-                    {
-                        if (isArray)
-                        {
-                            return type.MakeArrayType();
-                        }
-                        else
-                        {
-                            return type;
-                        }
-                    }
+                    return type;
                 }
             }
 
@@ -39,13 +25,9 @@ namespace Common.Extensions
             var assemblies = self.GetAssemblies();
             foreach (var assembly in assemblies)
             {
-                var types = assembly.GetTypes();
-                foreach (var type in types)
+                foreach (var type in assembly.GetTypes(match))
                 {
-                    if (match(type))
-                    {
-                        yield return type;
-                    }
+                    yield return type;
                 }
             }
         }

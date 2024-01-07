@@ -6,64 +6,64 @@ namespace Common.Extensions
     public static class Vector2IntExtensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3Int XY_(this Vector2Int v, int i = 0)
+        public static Vector3Int XY_(this Vector2Int self, int i = 0)
         {
-            return new Vector3Int(v.x, v.y, i);
+            return new Vector3Int(self.x, self.y, i);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3Int X_Y(this Vector2Int v, int i = 0)
+        public static Vector3Int X_Y(this Vector2Int self, int i = 0)
         {
-            return new Vector3Int(v.x, i, v.y);
+            return new Vector3Int(self.x, i, self.y);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3Int _XY(this Vector2Int v, int i = 0)
+        public static Vector3Int _XY(this Vector2Int self, int i = 0)
         {
-            return new Vector3Int(i, v.x, v.y);
+            return new Vector3Int(i, self.x, self.y);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3Int YX_(this Vector2Int v, int i = 0)
+        public static Vector3Int YX_(this Vector2Int self, int i = 0)
         {
-            return new Vector3Int(v.y, v.x, i);
+            return new Vector3Int(self.y, self.x, i);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3Int Y_X(this Vector2Int v, int i = 0)
+        public static Vector3Int Y_X(this Vector2Int self, int i = 0)
         {
-            return new Vector3Int(v.y, i, v.x);
+            return new Vector3Int(self.y, i, self.x);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3Int _YX(this Vector2Int v, int i = 0)
+        public static Vector3Int _YX(this Vector2Int self, int i = 0)
         {
-            return new Vector3Int(i, v.y, v.x);
+            return new Vector3Int(i, self.y, self.x);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2Int YX(this Vector2Int v)
+        public static Vector2Int YX(this Vector2Int self)
         {
-            return new Vector2Int(v.y, v.x);
+            return new Vector2Int(self.y, self.x);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2Int WithX(this Vector2Int v, int x)
+        public static Vector2Int WithX(this Vector2Int self, int x)
         {
-            return new Vector2Int(x, v.y);
+            return new Vector2Int(x, self.y);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2Int WithY(this Vector2Int v, int y)
+        public static Vector2Int WithY(this Vector2Int self, int y)
         {
-            return new Vector2Int(v.x, y);
+            return new Vector2Int(self.x, y);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Normalized(this Vector2Int v)
+        public static Vector2 Normalized(this Vector2Int self)
         {
-            var l = v.magnitude;
-            return new Vector2(v.x / l, v.y / l);
+            var l = self.magnitude;
+            return new Vector2(self.x / l, self.y / l);
         }
     }
 }
