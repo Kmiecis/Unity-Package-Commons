@@ -19,22 +19,33 @@ namespace CommonEditor
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             var attribute = (OnValueChangedAttribute)this.attribute;
+
+            EditorGUI.BeginChangeCheck();
             
             EditorGUI.PropertyField(position, property, label, true);
 
-            if (property.serializedObject.ApplyModifiedProperties())
+            if (EditorGUI.EndChangeCheck())
             {
                 var target = property.GetTarget();
-                var type = target.GetType();
-                var method = type.GetMethod(attribute.callback, BINDING_FLAGS);
+                var targetType = target.GetType();
+                var method = targetType.GetMethod(attribute.callback, BINDING_FLAGS);
 
                 if (method != null)
                 {
-                    method.Invoke(target, this.GetValue(property));
+                    var value = this.GetValue(property);
+
+                    if (method.HasMatchingParameters(value.GetType()))
+                    {
+                        method.Invoke(target, value);
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"{nameof(OnValueChangedAttribute)}: Unable to match parameters of method '{attribute.callback}' and field '{fieldInfo.Name}'");
+                    }
                 }
                 else
                 {
-                    Debug.LogWarning($"{nameof(OnValueChangedAttribute)}: Unable to find method {attribute.callback} in {type}");
+                    Debug.LogWarning($"{nameof(OnValueChangedAttribute)}: Unable to find method '{attribute.callback}' in '{targetType.Name}'");
                 }
             }
         }
