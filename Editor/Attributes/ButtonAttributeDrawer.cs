@@ -19,11 +19,12 @@ namespace CommonEditor
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             var attribute = (ButtonAttribute)this.attribute;
+            var propertyHeight = position.height - EditorGUIUtility.singleLineHeight;
 
-            position.height -= (EditorGUIUtility.singleLineHeight + PROPERTY_SPACE);
+            position.height -= propertyHeight;
             EditorGUI.PropertyField(position, property, label, true);
 
-            position.y += EditorGUIUtility.singleLineHeight + PROPERTY_SPACE;
+            position.y += propertyHeight;
             if (GUI.Button(position, attribute.name))
             {
                 var target = property.serializedObject.targetObject;
@@ -36,7 +37,7 @@ namespace CommonEditor
                 }
                 else
                 {
-                    Debug.LogWarning($"{nameof(ButtonAttribute)}: Unable to find method {attribute.callback} in {type}");
+                    Debug.LogWarning($"{nameof(ButtonAttribute)}: Unable to find method '{attribute.callback}' in '{type.Name}'");
                 }
             }
         }
