@@ -1,5 +1,8 @@
 ﻿using Common.Extensions;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Common
 {
@@ -55,6 +58,21 @@ namespace Common
         {
             string name = $"{typeof(T).Name}(New)";
             return Create<T>(name);
+        }
+
+        public static IEnumerable<T> FindOfType<T>(bool includeInactive = false)
+        {
+            foreach (var found in FindOfType(typeof(T), includeInactive))
+            {
+                yield return (T)found;
+            }
+        }
+
+        public static IEnumerable<object> FindOfType(System.Type type, bool includeInactive = false)
+        {
+            return SceneManager.GetActiveScene()
+                .GetRootGameObjects()
+                .SelectMany(go => go.GetComponentsInChildren(type, includeInactive));
         }
     }
 }
