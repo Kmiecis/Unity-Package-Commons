@@ -1,10 +1,23 @@
 using System;
+using System.Collections.Generic;
 using UnityEditor;
 
 namespace CommonEditor.Extensions
 {
     public static class SerializedObjectExtensions
     {
+        public static IEnumerable<SerializedProperty> GetChildren(this SerializedObject self)
+        {
+            var iterator = self.GetIterator();
+            if (iterator.NextVisible(true))
+            {
+                while (iterator.NextVisible(false))
+                {
+                    yield return iterator;
+                }
+            }
+        }
+
         public static Type GetTargetType(this SerializedObject self)
         {
             if (self.isEditingMultipleObjects)

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
@@ -6,24 +7,61 @@ namespace CommonEditor.Extensions
 {
     public static class SerializedPropertyExtensions
     {
+        public static IEnumerable<SerializedProperty> GetChildren(this SerializedProperty self)
+        {
+            var iterator = self.Copy();
+            var end = iterator.GetEndProperty();
+
+            if (iterator.NextVisible(true))
+            {
+                do
+                {
+                    if (SerializedProperty.EqualContents(iterator, end))
+                    {
+                        break;
+                    }
+                    yield return iterator;
+                }
+                while (iterator.NextVisible(false));
+            }
+        }
+
         public static int CountChildren(this SerializedProperty self)
         {
-            self = self.Copy();
-
             int result = 0;
-            foreach (var child in self)
+            foreach (var child in self.GetChildren())
+            {
                 result++;
+            }
             return result;
         }
 
-        public static Object GetTarget(this SerializedProperty self)
+        public static IEnumerable<SerializedProperty> GetArrayElements(this SerializedProperty self)
         {
-            return self.serializedObject.targetObject;
+            int count = self.arraySize;
+            for (int i = 0; i < count; ++i)
+            {
+                yield return self.GetArrayElementAtIndex(i);
+            }
         }
 
-        public static Object[] GetTargets(this SerializedProperty self)
+        public static SerializedProperty AddArrayElement(this SerializedProperty self)
         {
-            return self.serializedObject.targetObjects;
+            int index = self.arraySize;
+            self.InsertArrayElementAtIndex(index);
+            return self.GetArrayElementAtIndex(index);
+        }
+
+        public static SerializedProperty GetLastArrayElement(this SerializedProperty self)
+        {
+            int index = self.arraySize - 1;
+            return self.GetArrayElementAtIndex(index);
+        }
+
+        public static void DeleteLastArrayElement(this SerializedProperty self)
+        {
+            int index = self.arraySize - 1;
+            self.DeleteArrayElementAtIndex(index);
         }
 
         public static System.Type GetValueType(this SerializedProperty self)

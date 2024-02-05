@@ -65,6 +65,13 @@ namespace Common.Extensions
             }
         }
 
+        public static FieldInfo FindField(this Type self, string name)
+        {
+            const BindingFlags Flags = BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+            
+            return self.FindField(name, Flags);
+        }
+
         public static FieldInfo FindField(this Type self, string name, BindingFlags bindingAttr)
         {
             foreach (var field in GetAllFields(self, bindingAttr))
@@ -75,6 +82,13 @@ namespace Common.Extensions
                 }
             }
             return null;
+        }
+
+        public static PropertyInfo FindProperty(this Type self, string name)
+        {
+            const BindingFlags Flags = BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+            
+            return self.FindProperty(name, Flags);
         }
 
         public static PropertyInfo FindProperty(this Type self, string name, BindingFlags bindingAttr)
