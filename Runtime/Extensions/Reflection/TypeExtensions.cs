@@ -74,31 +74,37 @@ namespace Common.Extensions
 
         public static FieldInfo FindField(this Type self, string name, BindingFlags bindingAttr)
         {
-            foreach (var field in GetAllFields(self, bindingAttr))
+            while (self != null)
             {
-                if (field.Name == name)
+                var field = self.GetField(name, bindingAttr);
+                if (field != null)
                 {
                     return field;
                 }
+
+                self = self.BaseType;
             }
             return null;
         }
 
         public static PropertyInfo FindProperty(this Type self, string name)
         {
-            const BindingFlags Flags = BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+            const BindingFlags Flags = BindingFlags.FlattenHierarchy | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.IgnoreCase;
             
             return self.FindProperty(name, Flags);
         }
 
         public static PropertyInfo FindProperty(this Type self, string name, BindingFlags bindingAttr)
         {
-            foreach (var property in GetAllProperties(self, bindingAttr))
+            while (self != null)
             {
-                if (property.Name == name)
+                var property = self.GetProperty(name, bindingAttr);
+                if (property != null)
                 {
                     return property;
                 }
+
+                self = self.BaseType;
             }
             return null;
         }
