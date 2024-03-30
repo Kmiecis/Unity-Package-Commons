@@ -17,6 +17,15 @@ namespace Common
             }
         }
 
+        public static void Destroy<T>(IEnumerable<T> objs)
+            where T : Object
+        {
+            foreach (var obj in objs)
+            {
+                obj.Destroy();
+            }
+        }
+
         public static void Destroy<T>(ref T obj)
             where T : Object
         {
@@ -31,6 +40,15 @@ namespace Common
             where T : Component
         {
             if (comp != null)
+            {
+                comp.DestroyObject();
+            }
+        }
+
+        public static void DestroyObject<T>(IEnumerable<T> comps)
+            where T : Component
+        {
+            foreach (var comp in comps)
             {
                 comp.DestroyObject();
             }
