@@ -20,6 +20,40 @@ namespace Common.Extensions
             return self.IsNull() || self.IsEmpty();
         }
 
+        public static bool ContainsKeys<TKey, TValue>(this Dictionary<TKey, TValue> self, IEnumerable<TKey> keys)
+        {
+            foreach (var key in keys)
+            {
+                if (!self.ContainsKey(key))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool ContainsValues<TKey, TValue>(this Dictionary<TKey, TValue> self, IEnumerable<TValue> values)
+        {
+            foreach (var value in values)
+            {
+                if (!self.ContainsValue(value))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool Remove<TKey, TValue>(this Dictionary<TKey, TValue> self, IEnumerable<TKey> keys)
+        {
+            var result = true;
+            foreach (var key in keys)
+            {
+                result &= self.Remove(key);
+            }
+            return result;
+        }
+
         public static KeyValuePair<TKey, TValue> First<TKey, TValue>(this Dictionary<TKey, TValue> self)
         {
             foreach (var pairs in self)
@@ -34,23 +68,8 @@ namespace Common.Extensions
 
         public static TValue GetOrCompute<TKey, TValue>(this Dictionary<TKey, TValue> self, TKey key, Func<TValue> computor)
         {
-            TValue result;
-            if (!self.TryGetValue(key, out result))
+            if (!self.TryGetValue(key, out var result))
                 self[key] = result = computor();
-            return result;
-        }
-
-        public static TValue Revoke<TKey, TValue>(this Dictionary<TKey, TValue> self, TKey key)
-        {
-            var value = self[key];
-            self.Remove(key);
-            return value;
-        }
-
-        public static bool TryRevoke<TKey, TValue>(this Dictionary<TKey, TValue> self, TKey key, out TValue value)
-        {
-            var result = self.TryGetValue(key, out value);
-            self.Remove(key);
             return result;
         }
     }

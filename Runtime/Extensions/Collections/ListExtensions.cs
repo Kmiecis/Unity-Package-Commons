@@ -51,6 +51,34 @@ namespace Common.Extensions
             return self.IsEmpty() ? value : self.Last();
         }
 
+        public static bool Contains<T>(this List<T> self, IEnumerable<T> items)
+        {
+            foreach (var item in items)
+            {
+                if (!self.Contains(item))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool Remove<T>(this List<T> self, IEnumerable<T> items)
+        {
+            var result = true;
+            foreach (var item in items)
+            {
+                result &= self.Remove(item);
+            }
+            return result;
+        }
+
+        public static void RemoveAt<T>(this List<T> self, int index, out T item)
+        {
+            item = self[index];
+            self.RemoveAt(index);
+        }
+
         public static bool TryGetAt<T>(this List<T> self, int index, out T item)
         {
             if (-1 < index && index < self.Count)
@@ -233,31 +261,15 @@ namespace Common.Extensions
             self.RemoveAt(self.Count - 1);
         }
 
+        public static void RemoveLast<T>(this List<T> self, out T item)
+        {
+            item = self.Last();
+            self.RemoveLast();
+        }
+
         public static void RemoveLast<T>(this List<T> self, int count)
         {
             self.RemoveRange(self.Count - 1 - count, count);
-        }
-
-        public static T Revoke<T>(this List<T> self, int index)
-        {
-            var result = self[index];
-            self.RemoveAt(index);
-            return result;
-        }
-
-        public static T RevokeLast<T>(this List<T> self)
-        {
-            var last = self.Last();
-            self.RemoveLast();
-            return last;
-        }
-
-        public static T[] RevokeLast<T>(this List<T> self, int count)
-        {
-            var last = new T[count];
-            self.CopyTo(self.Count - 1 - count, last, 0, count);
-            self.RemoveLast(count);
-            return last;
         }
 
         public static T[] GetArray<T>(this List<T> self)

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Common.Extensions
 {
@@ -42,6 +43,23 @@ namespace Common.Extensions
         public static T LastOrDefault<T>(this T[] self, T value = default)
         {
             return self.IsEmpty() ? value : self.Last();
+        }
+
+        public static bool Contains<T>(this T[] self, T value)
+        {
+            return Array.IndexOf(self, value) != -1;
+        }
+
+        public static bool Contains<T>(this T[] self, IEnumerable<T> items)
+        {
+            foreach (var item in items)
+            {
+                if (!self.Contains(item))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public static bool ContainsIndex<T>(this T[] self, int index)
@@ -237,11 +255,6 @@ namespace Common.Extensions
             return self.Populate(provider, self.Length);
         }
 
-        public static bool Contains<T>(this T[] self, T value)
-        {
-            return Array.IndexOf(self, value) != -1;
-        }
-        
         public static void CopyTo<T>(this T[] self, T[] target)
         {
             self.CopyTo(target, 0);

@@ -19,6 +19,18 @@ namespace Common.Extensions
             return self.IsNull() || self.IsEmpty();
         }
 
+        public static bool Contains<T>(this Queue<T> self, IEnumerable<T> items)
+        {
+            foreach (var item in items)
+            {
+                if (!self.Contains(item))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public static bool TryDequeue<T>(this Queue<T> self, out T item)
         {
             if (self.Count > 0)
