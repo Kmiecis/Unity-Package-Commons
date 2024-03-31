@@ -49,6 +49,18 @@ namespace Common.Mathematics
             get { return max - min; }
         }
 
+        public float Width
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get { return max.x - min.x; }
+        }
+
+        public float Height
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get { return max.y - min.y; }
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Include(float x, float y)
         {
@@ -82,10 +94,8 @@ namespace Common.Mathematics
         public bool Contains(float x, float y)
         {
             return (
-                min.x <= x &&
-                min.y <= y &&
-                x <= max.x &&
-                y <= max.y
+                min.x <= x && x <= max.x &&
+                min.y <= y && y <= max.y
             );
         }
 
