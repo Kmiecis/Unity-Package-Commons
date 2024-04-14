@@ -67,10 +67,30 @@ namespace Common.Extensions
             return -1 < index && index < self.Length;
         }
 
+        public static TOutput[] ConvertAll<TInput, TOutput>(this TInput[] self, Converter<TInput, TOutput> converter)
+        {
+            return Array.ConvertAll(self, converter);
+        }
+
+        public static List<TOutput> ConvertAllToList<TInput, TOutput>(this TInput[] self, Converter<TInput, TOutput> converter)
+        {
+            var result = new List<TOutput>(self.Length);
+            for (int i = 0; i < self.Length; ++i)
+            {
+                result.Add(converter(self[i]));
+            }
+            return result;
+        }
+
         public static bool TryGetAt<T>(this T[] self, int index, out T item)
         {
-            item = self.ContainsIndex(index) ? self[index] : default;
-            return !Equals(item, default);
+            if (self.ContainsIndex(index))
+            {
+                item = self[index];
+                return true;
+            }
+            item = default;
+            return false;
         }
 
         public static bool TryGetFirst<T>(this T[] self, out T item)
