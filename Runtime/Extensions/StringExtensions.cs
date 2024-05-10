@@ -221,6 +221,34 @@ namespace Common.Extensions
             return true;
         }
 
+        public static string Remove(this string self, char value)
+        {
+            if (self.TryIndexOf(value, out int index))
+                return self.Remove(index, 1);
+            return self;
+        }
+
+        public static string Remove(this string self, string value)
+        {
+            if (self.TryIndexOf(value, out int index))
+                return self.Remove(index, value.Length);
+            return self;
+        }
+
+        public static string RemoveAll(this string self, char value)
+        {
+            while (self.TryIndexOf(value, out int index))
+                self = self.Remove(index, 1);
+            return self;
+        }
+
+        public static string RemoveAll(this string self, string value)
+        {
+            while (self.TryIndexOf(value, out int index))
+                self = self.Remove(index, value.Length);
+            return self;
+        }
+
         public static string RemovePrefix(this string self, string prefix)
         {
             if (StartsWith(self, prefix))
