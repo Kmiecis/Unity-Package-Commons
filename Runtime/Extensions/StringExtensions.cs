@@ -15,6 +15,16 @@ namespace Common.Extensions
             return self.Length == 0;
         }
 
+        public static string NonNull(this string self)
+        {
+            return !self.IsNull() ? self : string.Empty;
+        }
+
+        public static string NonEmpty(this string self)
+        {
+            return self.IsNull() || !self.IsEmpty() ? self : null;
+        }
+
         public static bool IsNullOrEmpty(this string self)
         {
             return self.IsNull() || self.IsEmpty();
