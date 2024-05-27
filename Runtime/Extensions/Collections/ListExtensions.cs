@@ -63,22 +63,6 @@ namespace Common.Extensions
             return true;
         }
 
-        public static bool Remove<T>(this List<T> self, IEnumerable<T> items)
-        {
-            var result = true;
-            foreach (var item in items)
-            {
-                result &= self.Remove(item);
-            }
-            return result;
-        }
-
-        public static void RemoveAt<T>(this List<T> self, int index, out T item)
-        {
-            item = self[index];
-            self.RemoveAt(index);
-        }
-
         public static bool TryGetAt<T>(this List<T> self, int index, out T item)
         {
             if (-1 < index && index < self.Count)
@@ -256,20 +240,36 @@ namespace Common.Extensions
             return false;
         }
 
+        public static bool Remove<T>(this List<T> self, IEnumerable<T> items)
+        {
+            var result = true;
+            foreach (var item in items)
+            {
+                result &= self.Remove(item);
+            }
+            return result;
+        }
+
         public static void RemoveLast<T>(this List<T> self)
         {
             self.RemoveAt(self.Count - 1);
         }
 
-        public static void RemoveLast<T>(this List<T> self, out T item)
-        {
-            item = self.Last();
-            self.RemoveLast();
-        }
-
         public static void RemoveLast<T>(this List<T> self, int count)
         {
             self.RemoveRange(self.Count - 1 - count, count);
+        }
+
+        public static T RevokeAt<T>(this List<T> self, int index)
+        {
+            var result = self[index];
+            self.RemoveAt(index);
+            return result;
+        }
+
+        public static T RevokeLast<T>(this List<T> self)
+        {
+            return self.RevokeAt(self.Count - 1);
         }
 
         public static T[] GetArray<T>(this List<T> self)
