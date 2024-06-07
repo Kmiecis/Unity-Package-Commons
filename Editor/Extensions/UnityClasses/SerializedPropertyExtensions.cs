@@ -163,7 +163,7 @@ namespace CommonEditor.Extensions
                 }
             }
 
-            element = elements[element.Length - 1];
+            element = elements[elements.Length - 1];
             if (element.Contains("["))
             {
                 SetValueToList(target, element, value);
