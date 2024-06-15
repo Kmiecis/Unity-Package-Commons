@@ -22,6 +22,13 @@ namespace Common.Extensions
             return attribute != null;
         }
 
+        public static bool HasCustomAttribute<T>(this Type self)
+            where T : Attribute
+        {
+            var attribute = self.GetCustomAttribute<T>();
+            return attribute != null;
+        }
+
         public static bool IsGenericTypeOf(this Type self, Type type)
         {
             while (self != null)
