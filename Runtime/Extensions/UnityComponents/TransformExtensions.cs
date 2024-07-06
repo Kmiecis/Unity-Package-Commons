@@ -32,7 +32,7 @@ namespace Common.Extensions
             return position;
         }
 
-        /// <summary> Get enumerator going down in hierarchy, including self </summary>
+        /// <summary> Get <see cref="Transform"/> enumerator going down in hierarchy, including self </summary>
         public static IEnumerable<Transform> GetDownwardEnumerator(this Transform self)
         {
             var queue = new Queue<Transform>();
@@ -50,12 +50,36 @@ namespace Common.Extensions
             }
         }
 
-        /// <summary> Get enumerator going up in hierarchy, including self </summary>
+        /// <summary> Get <see cref="{T}"/> enumerator going down in hierarchy, including self </summary>
+        public static IEnumerable<T> GetDownwardEnumerator<T>(this Transform self)
+        {
+            foreach (var transform in self.GetDownwardEnumerator())
+            {
+                if (transform.TryGetComponent<T>(out var component))
+                {
+                    yield return component;
+                }
+            }
+        }
+
+        /// <summary> Get <see cref="Transform"/> enumerator going up in hierarchy, including self </summary>
         public static IEnumerable<Transform> GetUpwardEnumerator(this Transform self)
         {
-            for (var transform = self; transform != null; self = transform.parent)
+            for (var transform = self; transform != null; transform = transform.parent)
             {
                 yield return transform;
+            }
+        }
+
+        /// <summary> Get <see cref="{T}"/> enumerator going up in hierarchy, including self </summary>
+        public static IEnumerable<T> GetUpwardEnumerator<T>(this Transform self)
+        {
+            foreach (var transform in self.GetUpwardEnumerator())
+            {
+                if (transform.TryGetComponent<T>(out var component))
+                {
+                    yield return component;
+                }
             }
         }
 
