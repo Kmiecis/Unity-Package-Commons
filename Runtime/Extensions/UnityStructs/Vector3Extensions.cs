@@ -76,5 +76,23 @@ namespace Common.Extensions
         {
             return new Vector3(self.x, self.y, z);
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 WithXY(this Vector3 self, float x, float y)
+        {
+            return new Vector3(x, y, self.z);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 WithXZ(this Vector3 self, float x, float z)
+        {
+            return new Vector3(x, self.y, z);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 WithYZ(this Vector3 self, float y, float z)
+        {
+            return new Vector3(self.x, y, z);
+        }
     }
 }
