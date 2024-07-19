@@ -7,92 +7,90 @@ namespace Common.Extensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Color RGB(this Vector3 self)
-        {
-            return new Color(self.x, self.y, self.z);
-        }
+            => new Color(self.x, self.y, self.z);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 XY(this Vector3 self)
-        {
-            return new Vector2(self.x, self.y);
-        }
+        public static Color RGBA(this Vector3 self, float a = 1.0f)
+            => new Color(self.x, self.y, self.z, a);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 XZ(this Vector3 self)
-        {
-            return new Vector2(self.x, self.z);
-        }
+        public static Vector3 X__(this Vector3 self, float y = 0.0f, float z = 0.0f)
+            => new Vector3(self.x, y, z);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 YZ(this Vector3 self)
-        {
-            return new Vector2(self.y, self.z);
-        }
+        public static Vector3 _X_(this Vector3 self, float x = 0.0f, float z = 0.0f)
+            => new Vector3(x, self.x, z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 __X(this Vector3 self, float x = 0.0f, float y = 0.0f)
+            => new Vector3(x, y, self.x);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Y__(this Vector3 self, float y = 0.0f, float z = 0.0f)
+            => new Vector3(self.y, y, z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 _Y_(this Vector3 self, float x = 0.0f, float z = 0.0f)
+            => new Vector3(x, self.y, z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 __Y(this Vector3 self, float x = 0.0f, float y = 0.0f)
+            => new Vector3(x, y, self.y);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Z__(this Vector3 self, float y = 0.0f, float z = 0.0f)
+            => new Vector3(self.z, y, z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 _Z_(this Vector3 self, float x = 0.0f, float z = 0.0f)
+            => new Vector3(x, self.z, z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 __Z(this Vector3 self, float x = 0.0f, float y = 0.0f)
+            => new Vector3(x, y, self.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 XY_(this Vector3 self, float z = 0.0f)
+            => new Vector3(self.x, self.y, z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 X_Z(this Vector3 self, float y = 0.0f)
+            => new Vector3(self.x, y, self.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 _YZ(this Vector3 self, float x = 0.0f)
+            => new Vector3(x, self.y, self.z);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 XZY(this Vector3 self)
-        {
-            return new Vector3(self.x, self.z, self.y);
-        }
+            => new Vector3(self.x, self.z, self.y);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 YXZ(this Vector3 self)
-        {
-            return new Vector3(self.y, self.x, self.z);
-        }
+            => new Vector3(self.y, self.x, self.z);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 YZX(this Vector3 self)
-        {
-            return new Vector3(self.y, self.z, self.x);
-        }
+            => new Vector3(self.y, self.z, self.x);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 ZXY(this Vector3 self)
-        {
-            return new Vector3(self.z, self.x, self.y);
-        }
+            => new Vector3(self.z, self.x, self.y);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 ZYX(this Vector3 self)
-        {
-            return new Vector3(self.z, self.y, self.x);
-        }
+            => new Vector3(self.z, self.y, self.x);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 WithX(this Vector3 self, float x)
-        {
-            return new Vector3(x, self.y, self.z);
-        }
+        public static Vector2 XY(this Vector3 self)
+            => new Vector2(self.x, self.y);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 WithY(this Vector3 self, float y)
-        {
-            return new Vector3(self.x, y, self.z);
-        }
+        public static Vector2 XZ(this Vector3 self)
+            => new Vector2(self.x, self.z);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 WithZ(this Vector3 self, float z)
-        {
-            return new Vector3(self.x, self.y, z);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 WithXY(this Vector3 self, float x, float y)
-        {
-            return new Vector3(x, y, self.z);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 WithXZ(this Vector3 self, float x, float z)
-        {
-            return new Vector3(x, self.y, z);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 WithYZ(this Vector3 self, float y, float z)
-        {
-            return new Vector3(self.x, y, z);
-        }
+        public static Vector2 YZ(this Vector3 self)
+            => new Vector2(self.y, self.z);
     }
 }
