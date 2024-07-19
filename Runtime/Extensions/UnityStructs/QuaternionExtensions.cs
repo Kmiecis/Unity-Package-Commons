@@ -14,19 +14,19 @@ namespace Common.Extensions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Quaternion WithAngleX(this Quaternion self, float value)
         {
-            return Quaternion.Euler(self.eulerAngles.WithX(value));
+            return Quaternion.Euler(self.eulerAngles._YZ(value));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Quaternion WithAngleY(this Quaternion self, float value)
         {
-            return Quaternion.Euler(self.eulerAngles.WithY(value));
+            return Quaternion.Euler(self.eulerAngles.X_Z(value));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Quaternion WithAngleZ(this Quaternion self, float value)
         {
-            return Quaternion.Euler(self.eulerAngles.WithZ(value));
+            return Quaternion.Euler(self.eulerAngles.XY_(value));
         }
     }
 }
