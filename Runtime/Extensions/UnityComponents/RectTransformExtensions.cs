@@ -5,6 +5,8 @@ namespace Common.Extensions
 {
     public static class RectTransformExtensions
     {
+        private static readonly Vector3[] _WorldCorners = new Vector3[4];
+
         public static Vector2 GetVisibleSize(this RectTransform self)
         {
             var anchorMin = self.anchorMin;
@@ -19,6 +21,14 @@ namespace Common.Extensions
                 size.y -= sizeDelta.y;
 
             return size;
+        }
+
+        public static Rect GetWorldRect(this RectTransform self)
+        {
+            self.GetWorldCorners(_WorldCorners);
+            var position = _WorldCorners[0];
+            var size = _WorldCorners[2] - position;
+            return new Rect(position, size);
         }
 
         /// <summary> Get <see cref="RectTransform"/> enumerator enclosing a 'screenPoint', including self </summary>
