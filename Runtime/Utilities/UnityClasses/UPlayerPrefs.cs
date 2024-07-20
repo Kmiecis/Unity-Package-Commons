@@ -12,6 +12,12 @@ namespace Common
             return Convert.ToBoolean(intValue);
         }
 
+        public static void SetBool(string key, bool value)
+        {
+            var intValue = Convert.ToInt32(value);
+            PlayerPrefs.SetInt(key, intValue);
+        }
+
         public static bool TryGetBool(string key, out bool value)
         {
             value = GetBool(key);
