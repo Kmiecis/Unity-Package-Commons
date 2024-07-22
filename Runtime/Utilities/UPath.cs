@@ -1,4 +1,5 @@
 ﻿using Common.Extensions;
+using System.IO;
 
 namespace Common
 {
@@ -38,6 +39,11 @@ namespace Common
                 return path.Substring(0, i);
             }
             return path;
+        }
+
+        public static string[] Split(string path)
+        {
+            return path.Split(Path.DirectorySeparatorChar);
         }
     }
 }

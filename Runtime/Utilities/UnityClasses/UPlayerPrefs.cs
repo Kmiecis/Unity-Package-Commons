@@ -41,5 +41,32 @@ namespace Common
             value = PlayerPrefs.GetString(key);
             return PlayerPrefs.HasKey(key);
         }
+
+        public static bool[] GetBools(string key, bool[] defaultValue = null)
+        {
+            var keyValue = PlayerPrefs.GetString(key);
+            if (string.IsNullOrEmpty(keyValue))
+                return defaultValue;
+            var values = keyValue.Split(';');
+            var result = new bool[values.Length];
+            for (int i = 0; i < values.Length; ++i)
+                result[i] = Convert.ToBoolean(Convert.ToInt32(values[i]));
+            return result;
+        }
+
+        public static void SetBools(string key, bool[] values)
+        {
+            var strings = new string[values.Length];
+            for (int i = 0; i < values.Length; ++i)
+                strings[i] = Convert.ToString(Convert.ToInt32(values[i]));
+            var keyValue = string.Join(';', strings);
+            PlayerPrefs.SetString(key, keyValue);
+        }
+
+        public static bool TryGetBools(string key, out bool[] values)
+        {
+            values = GetBools(key);
+            return values != null;
+        }
     }
 }
