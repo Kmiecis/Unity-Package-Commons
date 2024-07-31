@@ -27,5 +27,10 @@ namespace CommonEditor.Extensions
             }
             return self.targetObject.GetType();
         }
+
+        public static SerializedProperty FindPropertyField(this SerializedObject self, string name)
+        {
+            return self.FindProperty($"<{name}>k__BackingField");
+        }
     }
 }
