@@ -7,6 +7,11 @@ namespace CommonEditor.Extensions
 {
     public static class SerializedPropertyExtensions
     {
+        public static SerializedProperty FindPropertyRelativeField(this SerializedProperty self, string name)
+        {
+            return self.FindPropertyRelative($"<{name}>k__BackingField");
+        }
+
         public static IEnumerable<SerializedProperty> GetChildren(this SerializedProperty self)
         {
             var iterator = self.Copy();
