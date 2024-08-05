@@ -130,6 +130,49 @@ namespace Common.Extensions
             }
         }
 
+        /// <summary> Safely handles destroying transform child at given index </summary>
+        public static void DestroyChild(this Transform self, int index)
+        {
+            if (-1 < index && index < self.childCount)
+            {
+                var child = self.GetChild(index);
+                child.gameObject.Destroy();
+            }
+        }
+
+        /// <summary> Returns a transform child component by index </summary>
+        public static T GetChild<T>(this Transform self, int index)
+        {
+            var child = self.GetChild(index);
+            return child.GetComponent<T>();
+        }
+
+        /// <summary> Returns a transform first child </summary>
+        public static Transform GetFirstChild(this Transform self)
+        {
+            return self.GetChild(0);
+        }
+
+        /// <summary> Returns a transform first child component </summary>
+        public static T GetFirstChild<T>(this Transform self)
+        {
+            var child = self.GetFirstChild();
+            return child.GetComponent<T>();
+        }
+
+        /// <summary> Returns a transform last child </summary>
+        public static Transform GetLastChild(this Transform self)
+        {
+            return self.GetChild(self.childCount - 1);
+        }
+
+        /// <summary> Returns a transform last child component </summary>
+        public static T GetLastChild<T>(this Transform self)
+        {
+            var child = self.GetLastChild();
+            return child.GetComponent<T>();
+        }
+
         /// <summary> Attempts retrieving transform child at given index </summary>
         public static bool TryGetChild(this Transform self, int index, out Transform child)
         {
