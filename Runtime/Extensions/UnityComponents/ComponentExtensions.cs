@@ -40,9 +40,12 @@ namespace Common.Extensions
             where T : Component
         {
             if (self.TryGetComponent<T>(out var component))
-            {
                 Object.Destroy(component);
-            }
+        }
+
+        public static string GetHierarchyPath(this Component self, char delimiter = '/')
+        {
+            return self.transform.GetHierarchyPath(delimiter);
         }
 
         public static bool TryGetComponentInChildren<T>(this Component self, out T component, bool includeInactive = false)

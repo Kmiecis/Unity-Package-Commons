@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 namespace Common.Extensions
@@ -98,6 +99,7 @@ namespace Common.Extensions
             );
         }
 
+        /// <summary> Calculates max transform depth </summary>
         public static int GetDepth(this Transform self, int depth = 0)
         {
             var result = depth;
@@ -106,15 +108,18 @@ namespace Common.Extensions
             return result;
         }
 
+        /// <summary> Returns transform hierarchy path separated by delimiter </summary>
         public static string GetHierarchyPath(this Transform self, char delimiter = '/')
         {
-            var path = self.name;
+            var builder = new StringBuilder();
+            builder.Append(self.name);
             var parent = self.parent;
             while (parent != null)
-                path = parent.name + delimiter + path;
-            return path;
+                builder.Insert(0, delimiter).Insert(0, parent.name);
+            return builder.ToString();
         }
 
+        /// <summary> Safely handles destroying of all transform children </summary>
         public static void DestroyChildren(this Transform self)
         {
             var childCount = self.childCount;
@@ -123,6 +128,60 @@ namespace Common.Extensions
                 var child = self.GetChild(i);
                 child.gameObject.Destroy();
             }
+        }
+
+        /// <summary> Attempts retrieving transform child at given index </summary>
+        public static bool TryGetChild(this Transform self, int index, out Transform child)
+        {
+            child = default;
+            if (-1 < index && index < self.childCount)
+            {
+                child = self.GetChild(index);
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary> Attempts retrieving transform child component at given index </summary>
+        public static bool TryGetChild<T>(this Transform self, int index, out T component)
+        {
+            component = default;
+            return (
+                self.TryGetChild(index, out var child) &&
+                child.TryGetComponent(out component)
+            );
+        }
+
+        /// <summary> Attempts retrieving transform first child </summary>
+        public static bool TryGetFirstChild(this Transform self, out Transform child)
+        {
+            return self.TryGetChild(0, out child);
+        }
+
+        /// <summary> Attempts retrieving transform first child component </summary>
+        public static bool TryGetFirstChild<T>(this Transform self, out T component)
+        {
+            component = default;
+            return (
+                self.TryGetFirstChild(out var child) &&
+                child.TryGetComponent(out component)
+            );
+        }
+
+        /// <summary> Attempts retrieving transform last child </summary>
+        public static bool TryGetLastChild(this Transform self, out Transform child)
+        {
+            return self.TryGetChild(self.childCount - 1, out child);
+        }
+
+        /// <summary> Attempts retrieving transform last child component </summary>
+        public static bool TryGetLastChild<T>(this Transform self, out T component)
+        {
+            component = default;
+            return (
+                self.TryGetLastChild(out var child) &&
+                child.TryGetComponent(out component)
+            );
         }
     }
 }
