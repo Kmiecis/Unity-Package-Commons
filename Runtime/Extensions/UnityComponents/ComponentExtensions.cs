@@ -36,11 +36,33 @@ namespace Common.Extensions
             return self.GetComponentInParent(type) != null;
         }
 
+        public static T AddComponent<T>(this Component self)
+            where T : Component
+        {
+            return self.gameObject.AddComponent<T>();
+        }
+
+        public static T EnsureComponent<T>(this Component self)
+            where T : Component
+        {
+            if (!self.TryGetComponent<T>(out T component))
+                component = self.AddComponent<T>();
+            return component;
+        }
+
         public static void RemoveComponent<T>(this Component self)
             where T : Component
         {
             if (self.TryGetComponent<T>(out var component))
                 Object.Destroy(component);
+        }
+
+        public static T RequireComponent<T>(this Component self)
+        {
+            var result = self.GetComponent<T>();
+            if (result == null)
+                throw new NullReferenceException($"Required {typeof(T)} Component not found at {self.GetHierarchyPath()}");
+            return result;
         }
 
         public static string GetHierarchyPath(this Component self, char delimiter = '/')
