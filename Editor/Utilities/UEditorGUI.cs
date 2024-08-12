@@ -9,11 +9,25 @@ namespace CommonEditor
         public const float SpaceHeight = 2.0f;
         public const float IndentWidth = 10.0f;
 
-        public static void PropertyField(ref Rect position, SerializedProperty property, bool includeChildren = true)
+        public static bool PropertyField(ref Rect position, SerializedProperty property, GUIContent label = null, bool includeChildren = true)
         {
             position.height = EditorGUI.GetPropertyHeight(property, includeChildren);
-            EditorGUI.PropertyField(position, property, includeChildren);
+            var result = EditorGUI.PropertyField(position, property, label, includeChildren);
             position.y += position.height + SpaceHeight;
+            return result;
+        }
+
+        public static bool PropertyField(ref Rect position, SerializedProperty property, bool includeChildren = true)
+        {
+            return PropertyField(ref position, property, null, includeChildren);
+        }
+
+        public static float FloatField(ref Rect position, string label, float value)
+        {
+            position.height = EditorGUIUtility.singleLineHeight;
+            var result = EditorGUI.FloatField(position, label, value);
+            position.y += position.height + SpaceHeight;
+            return result;
         }
 
         public static float GetPropertyHeight(SerializedProperty property, bool includeChildren = true)
