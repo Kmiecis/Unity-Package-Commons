@@ -6,9 +6,6 @@ namespace CommonEditor
 {
     public static class UEditorGUI
     {
-        public const float SpaceHeight = 2.0f;
-        public const float IndentWidth = 10.0f;
-
         public static bool PropertyField(ref Rect position, SerializedProperty property, GUIContent label = null, bool includeChildren = true)
         {
             position.height = EditorGUIUtility.singleLineHeight;
@@ -17,7 +14,7 @@ namespace CommonEditor
             position.height = EditorGUI.GetPropertyHeight(property, includeChildren);
             var result = EditorGUI.PropertyField(position, property, includeChildren);
 
-            position.y += position.height + SpaceHeight;
+            position.y += position.height + UEditorGUIUtility.SpaceHeight;
             return result;
         }
 
@@ -35,13 +32,13 @@ namespace CommonEditor
         {
             position.height = EditorGUIUtility.singleLineHeight;
             var result = EditorGUI.FloatField(position, label, value);
-            position.y += position.height + SpaceHeight;
+            position.y += position.height + UEditorGUIUtility.SpaceHeight;
             return result;
         }
 
         public static float GetPropertyHeight(SerializedProperty property, bool includeChildren = true)
         {
-            return EditorGUI.GetPropertyHeight(property, includeChildren) + SpaceHeight;
+            return EditorGUI.GetPropertyHeight(property, includeChildren) + UEditorGUIUtility.SpaceHeight;
         }
 
         public static float GetPropertiesHeight(params SerializedProperty[] properties)
@@ -54,13 +51,13 @@ namespace CommonEditor
 
         public static void UnfoldedLabelField(ref Rect position, GUIContent label, GUIStyle style)
         {
-            position.x -= IndentWidth;
-            position.width += IndentWidth;
+            position.x -= UEditorGUIUtility.IndentWidth;
+            position.width += UEditorGUIUtility.IndentWidth;
             position.height = EditorGUIUtility.singleLineHeight;
 
             EditorGUI.LabelField(position, label, style);
 
-            position.y += position.height + SpaceHeight;
+            position.y += position.height + UEditorGUIUtility.SpaceHeight;
         }
 
         public static void UnfoldedLabelField(ref Rect position, GUIContent label)
@@ -74,7 +71,7 @@ namespace CommonEditor
             {
                 position.height = EditorGUI.GetPropertyHeight(child, includeChildren);
                 EditorGUI.PropertyField(position, child, includeChildren);
-                position.y += position.height + SpaceHeight;
+                position.y += position.height + UEditorGUIUtility.SpaceHeight;
             }
         }
 
@@ -85,14 +82,14 @@ namespace CommonEditor
 
         public static float GetUnfoldedLabelHeight(GUIContent label)
         {
-            return EditorGUIUtility.singleLineHeight + SpaceHeight;
+            return EditorGUIUtility.singleLineHeight + UEditorGUIUtility.SpaceHeight;
         }
 
         public static float GetUnfoldedPropertyHeight(SerializedProperty property)
         {
             var result = 0.0f;
             foreach (var child in property.GetChildren())
-                result += EditorGUI.GetPropertyHeight(child, true) + SpaceHeight;
+                result += EditorGUI.GetPropertyHeight(child, true) + UEditorGUIUtility.SpaceHeight;
             return result;
         }
     }

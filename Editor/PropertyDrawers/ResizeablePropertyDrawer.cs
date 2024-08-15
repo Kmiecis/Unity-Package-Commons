@@ -20,7 +20,7 @@ namespace CommonEditor
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            return _heightMax - _heightMin;
+            return _heightMax - _heightMin - UEditorGUIUtility.SpaceHeight;
         }
     }
 }

@@ -27,10 +27,8 @@ namespace CommonEditor
 
         private void Button(ref Rect position, Object target)
         {
-            position.height = EditorGUIUtility.singleLineHeight;
-
             var attribute = (FooterButtonAttribute)this.attribute;
-            if (GUI.Button(position, attribute.name))
+            if (UGUI.Button(ref position, attribute.name))
             {
                 var type = target.GetType();
 
@@ -44,8 +42,6 @@ namespace CommonEditor
                     Debug.LogWarning($"{nameof(FooterButtonAttribute)}: Unable to find method '{attribute.callback}' in '{type.Name}'");
                 }
             }
-
-            position.y += position.height + UEditorGUI.SpaceHeight;
         }
     }
 }
