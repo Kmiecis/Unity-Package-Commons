@@ -2,18 +2,18 @@ using UnityEngine;
 
 namespace Common
 {
-    public class ButtonAttribute : PropertyAttribute
+    public class HeaderButtonAttribute : PropertyAttribute
     {
         public readonly string callback;
         public readonly string name;
 
-        public ButtonAttribute(string callback, string name)
+        public HeaderButtonAttribute(string callback, string name)
         {
             this.callback = callback;
             this.name = name;
         }
 
-        public ButtonAttribute(string callback) :
+        public HeaderButtonAttribute(string callback) :
             this(callback, callback)
         {
         }

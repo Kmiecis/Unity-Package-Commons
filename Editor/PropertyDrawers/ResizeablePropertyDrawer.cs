@@ -5,24 +5,22 @@ namespace CommonEditor
 {
     public class ResizeablePropertyDrawer : PropertyDrawer
     {
-        protected float _heightMin;
-        protected float _heightMax;
+        private float _heightMin;
+        private float _heightMax;
 
-        private float _height;
-
-        protected void CheckHeight(SerializedProperty property)
+        protected void MarkHeightBegin(float value)
         {
-            var dheight = _heightMax - _heightMin;
-            if (!Mathf.Approximately(_height, dheight))
-            {
-                EditorUtility.SetDirty(property.serializedObject.targetObject);
-                _height = dheight;
-            }
+            _heightMin = value;
+        }
+
+        protected void MarkHeightEnd(float value)
+        {
+            _heightMax = value;
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            return _height;
+            return _heightMax - _heightMin;
         }
     }
 }
