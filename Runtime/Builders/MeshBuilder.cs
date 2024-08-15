@@ -49,6 +49,11 @@ namespace Common
             get => _uvs;
             set => _uvs = value;
         }
+
+        public MeshBuilder(EMeshBuildingOptions options = EMeshBuildingOptions.NONE)
+        {
+            _options = options;
+        }
         
         public virtual void Overwrite(Mesh mesh)
         {

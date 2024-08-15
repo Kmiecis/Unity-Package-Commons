@@ -9,9 +9,9 @@ namespace Common
         protected float _scale;
         protected Dictionary<Vector3Int, int> _trianglesMap = new Dictionary<Vector3Int, int>();
 
-        public SmoothMeshBuilder(float precision = 0.01f)
+        public SmoothMeshBuilder(float precision = 0.01f) :
+            base(EMeshBuildingOptions.RECALCULATE_BOUNDS | EMeshBuildingOptions.RECALCULATE_NORMALS)
         {
-            _options = EMeshBuildingOptions.RECALCULATE_BOUNDS | EMeshBuildingOptions.RECALCULATE_NORMALS;
             _scale = Mathf.Round(1.0f / precision);
         }
 

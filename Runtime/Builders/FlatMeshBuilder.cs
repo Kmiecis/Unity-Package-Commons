@@ -4,9 +4,9 @@ namespace Common
 {
     public class FlatMeshBuilder : MeshBuilder
     {
-        public FlatMeshBuilder()
+        public FlatMeshBuilder() :
+            base(EMeshBuildingOptions.RECALCULATE_BOUNDS)
         {
-            _options = EMeshBuildingOptions.RECALCULATE_BOUNDS;
         }
 
         public static Vector3 GetNormal(Vector3 v0, Vector3 v1, Vector3 v2)
