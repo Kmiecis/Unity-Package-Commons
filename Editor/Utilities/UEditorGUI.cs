@@ -22,6 +22,11 @@ namespace CommonEditor
             return PropertyField(ref position, property, null, includeChildren);
         }
 
+        public static bool PropertyField(ref Rect position, SerializedProperty property)
+        {
+            return PropertyField(ref position, property, null, true);
+        }
+
         public static float FloatField(ref Rect position, string label, float value)
         {
             position.height = EditorGUIUtility.singleLineHeight;
