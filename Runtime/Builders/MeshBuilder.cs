@@ -66,11 +66,11 @@ namespace Common
             if (_uvs.Count > 0)
                 mesh.SetUVs(0, _uvs);
 
-            if (BitUtility.IsSet((int)_options, (int)EMeshBuildingOptions.BOUNDS))
+            if (BitUtility.IsSet((int)_options, (int)EMeshBuildingOptions.RECALCULATE_BOUNDS))
                 mesh.RecalculateBounds();
-            if (BitUtility.IsSet((int)_options, (int)EMeshBuildingOptions.NORMALS))
+            if (BitUtility.IsSet((int)_options, (int)EMeshBuildingOptions.RECALCULATE_NORMALS))
                 mesh.RecalculateNormals();
-            if (BitUtility.IsSet((int)_options, (int)EMeshBuildingOptions.TANGENTS))
+            if (BitUtility.IsSet((int)_options, (int)EMeshBuildingOptions.RECALCULATE_TANGENTS))
                 mesh.RecalculateTangents();
         }
 

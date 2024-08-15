@@ -11,7 +11,7 @@ namespace Common
 
         public SmoothMeshBuilder(float precision = 0.01f)
         {
-            _options = EMeshBuildingOptions.BOUNDS | EMeshBuildingOptions.NORMALS;
+            _options = EMeshBuildingOptions.RECALCULATE_BOUNDS | EMeshBuildingOptions.RECALCULATE_NORMALS;
             _scale = Mathf.Round(1.0f / precision);
         }
 

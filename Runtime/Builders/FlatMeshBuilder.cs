@@ -6,7 +6,7 @@ namespace Common
     {
         public FlatMeshBuilder()
         {
-            _options = EMeshBuildingOptions.BOUNDS;
+            _options = EMeshBuildingOptions.RECALCULATE_BOUNDS;
         }
 
         public static Vector3 GetNormal(Vector3 v0, Vector3 v1, Vector3 v2)
