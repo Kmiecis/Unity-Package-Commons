@@ -11,8 +11,12 @@ namespace CommonEditor
 
         public static bool PropertyField(ref Rect position, SerializedProperty property, GUIContent label = null, bool includeChildren = true)
         {
+            position.height = EditorGUIUtility.singleLineHeight;
+            EditorGUI.LabelField(position, label);
+
             position.height = EditorGUI.GetPropertyHeight(property, includeChildren);
-            var result = EditorGUI.PropertyField(position, property, label, includeChildren);
+            var result = EditorGUI.PropertyField(position, property, includeChildren);
+
             position.y += position.height + SpaceHeight;
             return result;
         }
