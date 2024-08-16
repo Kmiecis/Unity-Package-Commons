@@ -7,8 +7,12 @@ namespace Common.Extensions
         public static bool TryGetColor(this Material self, int nameID, out Color value)
         {
             if (self.HasColor(nameID))
-                return self.GetColor(nameID).OutWithTrue(out value);
-            return default(Color).OutWithFalse(out value);
+            {
+                value = self.GetColor(nameID);
+                return true;
+            }
+            value = default;
+            return false;
         }
 
         public static bool TryGetColor(this Material self, string name, out Color value)
@@ -19,8 +23,12 @@ namespace Common.Extensions
         public static bool TryGetFloat(this Material self, int nameID, out float value)
         {
             if (self.HasFloat(nameID))
-                return self.GetFloat(nameID).OutWithTrue(out value);
-            return default(float).OutWithFalse(out value);
+            {
+                value = self.GetFloat(nameID);
+                return true;
+            }
+            value = default;
+            return false;
         }
 
         public static bool TryGetFloat(this Material self, string name, out float value)
@@ -31,8 +39,12 @@ namespace Common.Extensions
         public static bool TryGetInteger(this Material self, int nameID, out int value)
         {
             if (self.HasInteger(nameID))
-                return self.GetInteger(nameID).OutWithTrue(out value);
-            return default(int).OutWithFalse(out value);
+            {
+                value = self.GetInteger(nameID);
+                return true;
+            }
+            value = default;
+            return false;
         }
 
         public static bool TryGetInteger(this Material self, string name, out int value)
@@ -43,8 +55,12 @@ namespace Common.Extensions
         public static bool TryGetMatrix(this Material self, int nameID, out Matrix4x4 value)
         {
             if (self.HasMatrix(nameID))
-                return self.GetMatrix(nameID).OutWithTrue(out value);
-            return default(Matrix4x4).OutWithFalse(out value);
+            {
+                value = self.GetMatrix(nameID);
+                return true;
+            }
+            value = default;
+            return false;
         }
 
         public static bool TryGetMatrix(this Material self, string name, out Matrix4x4 value)
@@ -55,8 +71,12 @@ namespace Common.Extensions
         public static bool TryGetTexture(this Material self, int nameID, out Texture value)
         {
             if (self.HasTexture(nameID))
-                return self.GetTexture(nameID).OutWithTrue(out value);
-            return default(Texture).OutWithFalse(out value);
+            {
+                value = self.GetTexture(nameID);
+                return true;
+            }
+            value = default;
+            return false;
         }
 
         public static bool TryGetTexture(this Material self, string name, out Texture value)
@@ -64,11 +84,31 @@ namespace Common.Extensions
             return self.TryGetTexture(Shader.PropertyToID(name), out value);
         }
 
+        public static bool TryGetTexture2D(this Material self, int nameID, out Texture2D value)
+        {
+            value = null;
+            if (self.TryGetTexture(nameID, out var texture))
+            {
+                value = texture as Texture2D;
+                return value != null;
+            }
+            return false;
+        }
+
+        public static bool TryGetTexture2D(this Material self, string name, out Texture2D value)
+        {
+            return self.TryGetTexture2D(Shader.PropertyToID(name), out value);
+        }
+
         public static bool TryGetVector(this Material self, int nameID, out Vector4 value)
         {
             if (self.HasVector(nameID))
-                return self.GetVector(nameID).OutWithTrue(out value);
-            return default(Vector4).OutWithFalse(out value);
+            {
+                value = self.GetVector(nameID);
+                return true;
+            }
+            value = default;
+            return false;
         }
 
         public static bool TryGetVector(this Material self, string name, out Vector4 value)
