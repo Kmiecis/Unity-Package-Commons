@@ -6,6 +6,46 @@ namespace Common.Mathematics
 {
     public static class Noisex
     {
+        public static float GetNoiseValue(
+            float x, float y,
+            int octaves = 1, float persistance = 0.5f, float lacunarity = 2.0f,
+            float sx = 1.0f, float sy = 1.0f
+        )
+        {
+            float amplitude = 1.0f;
+            float frequency = 1.0f;
+            float value = 0.0f;
+
+            for (int _ = 0; _ < octaves; ++_)
+            {
+                float sampleX = (x * sx) * frequency;
+                float sampleY = (y * sy) * frequency;
+
+                float pv = Mathf.PerlinNoise(sampleX, sampleY);
+                value += pv * amplitude;
+
+                amplitude *= persistance;
+                frequency *= lacunarity;
+            }
+
+            return value;
+        }
+
+        public static float SmoothNoiseValue(float value, int octaves = 1, float persistance = 0.5f)
+        {
+            var pmin = 0.0f;
+            var pmax = 1.0f;
+
+            for (uint i = 1; i < octaves; ++i)
+            {
+                var ppow = Mathx.Pow(persistance, i);
+                pmin += ppow * 0.25f;
+                pmax += ppow * 0.75f;
+            }
+
+            return Mathf.SmoothStep(pmin, pmax, value);
+        }
+
         public static void GetNoiseMap(
             float[] map, int width, int height,
             int octaves = 1, float persistance = 0.5f, float lacunarity = 2.0f,
