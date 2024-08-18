@@ -43,7 +43,7 @@ namespace Common.Mathematics
                 pmax += ppow * 0.75f;
             }
 
-            return Mathf.SmoothStep(pmin, pmax, value);
+            return Mathx.Remap(pmin, pmax, 0.0f, 1.0f, value);
         }
 
         public static void GetNoiseMap(
@@ -103,7 +103,7 @@ namespace Common.Mathematics
                 for (int x = 0; x < width; ++x)
                 {
                     int index = x + y * width;
-                    map[index] = Mathf.SmoothStep(pmin, pmax, map[index]);
+                    map[index] = Mathx.Remap(pmin, pmax, 0.0f, 1.0f, map[index]);
                 }
             }
         }
