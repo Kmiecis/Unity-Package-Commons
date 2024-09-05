@@ -6,12 +6,16 @@ namespace Common.Extensions
     public static class Vector3Extensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Color RGB(this Vector3 self)
-            => new Color(self.x, self.y, self.z);
+        public static Vector2 XY(this Vector3 self)
+            => new Vector2(self.x, self.y);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Color RGBA(this Vector3 self, float a = 1.0f)
-            => new Color(self.x, self.y, self.z, a);
+        public static Vector2 XZ(this Vector3 self)
+            => new Vector2(self.x, self.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 YZ(this Vector3 self)
+            => new Vector2(self.y, self.z);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 X__(this Vector3 self, float y = 0.0f, float z = 0.0f)
@@ -82,15 +86,15 @@ namespace Common.Extensions
             => new Vector3(self.z, self.y, self.x);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 XY(this Vector3 self)
-            => new Vector2(self.x, self.y);
+        public static Vector4 XYZ_(this Vector3 self, float w = 0.0f)
+            => new Vector4(self.x, self.y, self.z, w);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 XZ(this Vector3 self)
-            => new Vector2(self.x, self.z);
+        public static Color RGB(this Vector3 self)
+            => new Color(self.x, self.y, self.z);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 YZ(this Vector3 self)
-            => new Vector2(self.y, self.z);
+        public static Color RGBA(this Vector3 self, float a = 1.0f)
+            => new Color(self.x, self.y, self.z, a);
     }
 }

@@ -236,6 +236,20 @@ namespace Common
             }
         }
 
+        public static void DrawWireMesh(Vector3[] vertices, Color color)
+        {
+            for (int i = 0; i < vertices.Length - 2; i += 3)
+            {
+                var v0 = vertices[i + 0];
+                var v1 = vertices[i + 1];
+                var v2 = vertices[i + 2];
+
+                Debug.DrawLine(v0, v1, color);
+                Debug.DrawLine(v1, v2, color);
+                Debug.DrawLine(v2, v0, color);
+            }
+        }
+
         private static Vector3[] MakeUnitSphere(int resolution)
         {
             var result = new Vector3[resolution * 3];
