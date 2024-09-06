@@ -6,8 +6,8 @@ namespace Common.Extensions
     public static class Vector4Extensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Color RGBA(this Vector4 self)
-            => new Color(self.x, self.y, self.z, self.w);
+        public static Vector3 XYZ(this Vector4 self)
+            => new Vector3(self.x, self.y, self.z);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 _YZW(this Vector4 self, float value)
@@ -24,5 +24,9 @@ namespace Common.Extensions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 XYZ_(this Vector4 self, float value)
             => new Vector4(self.x, self.y, self.z, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Color RGBA(this Vector4 self)
+            => new Color(self.x, self.y, self.z, self.w);
     }
 }
