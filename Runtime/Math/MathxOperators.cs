@@ -5,6 +5,56 @@ namespace Common.Mathematics
 {
     public static partial class Mathx
     {
+        #region COMPARE
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int CompareTo(Vector2 a, Vector2 b)
+        {
+            return a.x.CompareTo(b.x).CompareTo(
+                a.y.CompareTo(b.y)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int CompareTo(Vector2Int a, Vector2Int b)
+        {
+            return a.x.CompareTo(b.x).CompareTo(
+                a.y.CompareTo(b.y)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int CompareTo(Vector3 a, Vector3 b)
+        {
+            return a.x.CompareTo(b.x).CompareTo(
+                a.y.CompareTo(b.y).CompareTo(
+                    a.z.CompareTo(b.z)
+                )
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int CompareTo(Vector3Int a, Vector3Int b)
+        {
+            return a.x.CompareTo(b.x).CompareTo(
+                a.y.CompareTo(b.y).CompareTo(
+                    a.z.CompareTo(b.z)
+                )
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int CompareTo(Vector4 a, Vector4 b)
+        {
+            return a.x.CompareTo(b.x).CompareTo(
+                a.y.CompareTo(b.y).CompareTo(
+                    a.z.CompareTo(b.z).CompareTo(
+                        a.w.CompareTo(b.w)
+                    )
+                )
+            );
+        }
+        #endregion
+
         #region ADD
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Add(Vector2 a, Vector2 b)
