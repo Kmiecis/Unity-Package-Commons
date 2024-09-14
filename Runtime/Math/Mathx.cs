@@ -88,6 +88,18 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign(float f)
+        {
+            return (f >= 0.0f) ? 1 : -1;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Sign(int i)
+        {
+            return (i >= 0) ? 1 : -1;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Wrap(float f, float min, float max)
         {
             float delta = max - min;
