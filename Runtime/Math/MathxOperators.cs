@@ -9,49 +9,45 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int CompareTo(Vector2 a, Vector2 b)
         {
-            return a.x.CompareTo(b.x).CompareTo(
-                a.y.CompareTo(b.y)
-            );
+            int result = a.x.CompareTo(b.x);
+            if (result == 0) result = a.y.CompareTo(b.y);
+            return result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int CompareTo(Vector2Int a, Vector2Int b)
         {
-            return a.x.CompareTo(b.x).CompareTo(
-                a.y.CompareTo(b.y)
-            );
+            int result = a.x.CompareTo(b.x);
+            if (result == 0) result = a.y.CompareTo(b.y);
+            return result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int CompareTo(Vector3 a, Vector3 b)
         {
-            return a.x.CompareTo(b.x).CompareTo(
-                a.y.CompareTo(b.y).CompareTo(
-                    a.z.CompareTo(b.z)
-                )
-            );
+            int result = a.x.CompareTo(b.x);
+            if (result == 0) result = a.y.CompareTo(b.y);
+            if (result == 0) result = a.z.CompareTo(b.z);
+            return result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int CompareTo(Vector3Int a, Vector3Int b)
         {
-            return a.x.CompareTo(b.x).CompareTo(
-                a.y.CompareTo(b.y).CompareTo(
-                    a.z.CompareTo(b.z)
-                )
-            );
+            int result = a.x.CompareTo(b.x);
+            if (result == 0) result = a.y.CompareTo(b.y);
+            if (result == 0) result = a.z.CompareTo(b.z);
+            return result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int CompareTo(Vector4 a, Vector4 b)
         {
-            return a.x.CompareTo(b.x).CompareTo(
-                a.y.CompareTo(b.y).CompareTo(
-                    a.z.CompareTo(b.z).CompareTo(
-                        a.w.CompareTo(b.w)
-                    )
-                )
-            );
+            int result = a.x.CompareTo(b.x);
+            if (result == 0) result = a.y.CompareTo(b.y);
+            if (result == 0) result = a.z.CompareTo(b.z);
+            if (result == 0) result = a.w.CompareTo(b.w);
+            return result;
         }
         #endregion
 
