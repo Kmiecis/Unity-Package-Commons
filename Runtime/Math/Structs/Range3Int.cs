@@ -128,12 +128,18 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Overlaps(Range3Int other)
+        public bool Overlaps(Vector3Int otherMin, Vector3Int otherMax)
         {
             return (
-                Mathx.IsLesserOrEqual(min, other.max) &&
-                Mathx.IsLesserOrEqual(other.min, max)
+                Mathx.IsLesserOrEqual(min, otherMax) &&
+                Mathx.IsLesserOrEqual(otherMin, max)
             );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Overlaps(Range3Int other)
+        {
+            return Overlaps(other.min, other.max);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

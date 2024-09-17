@@ -82,9 +82,15 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool Overlaps(float otherMin, float otherMax)
+        {
+            return min <= otherMax && otherMin <= max;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Overlaps(Range other)
         {
-            return min <= other.max && other.min <= max;
+            return Overlaps(other.min, other.max);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
