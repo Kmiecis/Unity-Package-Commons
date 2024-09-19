@@ -18,7 +18,8 @@ namespace CommonEditor
         {
             MarkHeightBegin(position.y);
 
-            UEditorGUI.PropertyField(ref position, property, label, true);
+            UEditorGUI.LabelField(ref position, label);
+            UEditorGUI.PropertyField(ref position, property, true);
 
             Button(ref position, property.serializedObject.targetObject);
 

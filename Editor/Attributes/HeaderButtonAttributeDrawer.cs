@@ -20,7 +20,8 @@ namespace CommonEditor
 
             Button(ref position, property.serializedObject.targetObject);
 
-            UEditorGUI.PropertyField(ref position, property, label, true);
+            UEditorGUI.LabelField(ref position, label);
+            UEditorGUI.PropertyField(ref position, property, true);
 
             MarkHeightEnd(position.y);
         }
