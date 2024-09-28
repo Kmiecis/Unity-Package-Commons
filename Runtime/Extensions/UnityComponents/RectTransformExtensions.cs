@@ -7,6 +7,14 @@ namespace Common.Extensions
     {
         private static readonly Vector3[] _WorldCorners = new Vector3[4];
 
+        public static RectTransform GetRectRoot(this RectTransform self)
+        {
+            var root = self;
+            while (root.parent is RectTransform parent)
+                root = parent;
+            return root;
+        }
+
         public static Vector2 GetVisibleSize(this RectTransform self)
         {
             var anchorMin = self.anchorMin;
