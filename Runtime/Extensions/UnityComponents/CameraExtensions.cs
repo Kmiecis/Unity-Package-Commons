@@ -5,7 +5,7 @@ namespace Common.Extensions
 {
     public static class CameraExtensions
     {
-        public static bool IsInFOV(this Camera self, Vector3 v)
+        public static bool HasInFOV(this Camera self, Vector3 v)
         {
             var sv = self.WorldToViewportPoint(v);
 
