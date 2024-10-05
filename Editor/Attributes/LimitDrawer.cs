@@ -1,30 +1,29 @@
-﻿using System;
+using Common;
 using UnityEditor;
 using UnityEngine;
-using MinAttribute = Common.MinAttribute;
 
 namespace CommonEditor
 {
-    [CustomPropertyDrawer(typeof(MinAttribute))]
-    public class MinDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(LimitAttribute))]
+    public class LimitDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            var attribute = (MinAttribute)this.attribute;
+            var attribute = (LimitAttribute)this.attribute;
             switch (property.propertyType)
             {
                 case SerializedPropertyType.Float:
                     EditorGUI.PropertyField(position, property, label);
-                    property.floatValue = Math.Max(property.floatValue, attribute.min);
+                    property.floatValue = Mathf.Clamp(property.floatValue, attribute.min, attribute.max);
                     break;
 
                 case SerializedPropertyType.Integer:
                     EditorGUI.PropertyField(position, property, label);
-                    property.intValue = Math.Max(property.intValue, Mathf.RoundToInt(attribute.min));
+                    property.intValue = (int)Mathf.Clamp(property.intValue, attribute.min, attribute.max);
                     break;
 
                 default:
-                    EditorGUI.LabelField(position, label.text, $"Use {nameof(MinAttribute)} with float or int.");
+                    EditorGUI.LabelField(position, label.text, $"Use {nameof(LimitAttribute)} with float or int.");
                     break;
             }
         }
