@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using UnityEditor.UIElements;
 
 namespace Common.Extensions
 {
@@ -172,7 +173,9 @@ namespace Common.Extensions
             where T : struct
         {
             for (int i = 0; i < count; ++i)
+            {
                 self.Add(value);
+            }
             return self;
         }
 
@@ -186,7 +189,9 @@ namespace Common.Extensions
             where T : class
         {
             for (int i = 0; i < count; ++i)
+            {
                 self.Add(provider());
+            }
             return self;
         }
 
@@ -194,6 +199,20 @@ namespace Common.Extensions
             where T : class
         {
             return self.Populate(provider, self.Capacity);
+        }
+
+        public static List<T> Populate<T>(this List<T> self, int count)
+        {
+            for (int i = 0; i < count; ++i)
+            {
+                self.Add(default);
+            }
+            return self;
+        }
+
+        public static List<T> Populate<T>(this List<T> self)
+        {
+            return self.Populate(self.Capacity);
         }
 
         public static void AddRange<T>(this List<T> self, params T[] items)
