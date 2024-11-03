@@ -44,7 +44,7 @@ namespace Common.Extensions
         {
             foreach (var rectTransform in self.GetDownwardEnumerator<RectTransform>())
             {
-                if (RectTransformUtility.RectangleContainsScreenPoint(rectTransform, screenPoint))
+                if (rectTransform.ContainsScreenPoint(screenPoint))
                 {
                     yield return rectTransform;
                 }
@@ -61,6 +61,46 @@ namespace Common.Extensions
                     yield return component;
                 }
             }
+        }
+
+        public static Rect GetPixelRect(this RectTransform self, Canvas canvas)
+        {
+            return RectTransformUtility.PixelAdjustRect(self, canvas);
+        }
+
+        public static bool ContainsScreenPoint(this RectTransform self, Vector2 screenPoint)
+        {
+            return RectTransformUtility.RectangleContainsScreenPoint(self, screenPoint);
+        }
+
+        public static bool ContainsScreenPoint(this RectTransform self, Vector2 screenPoint, Camera camera)
+        {
+            return RectTransformUtility.RectangleContainsScreenPoint(self, screenPoint, camera);
+        }
+
+        public static bool ContainsScreenPoint(this RectTransform self, Vector2 screenPoint, Camera camera, Vector4 offset)
+        {
+            return RectTransformUtility.RectangleContainsScreenPoint(self, screenPoint, camera, offset);
+        }
+
+        public static bool TryGetWorldPointFromScreenPoint(this RectTransform self, Camera camera, Vector2 screenPoint, out Vector3 worldPoint)
+        {
+            return RectTransformUtility.ScreenPointToWorldPointInRectangle(self, screenPoint, camera, out worldPoint);
+        }
+
+        public static bool TryGetLocalPointFromScreenPoint(this RectTransform self, Camera camera, Vector2 screenPoint, out Vector2 localPoint)
+        {
+            return RectTransformUtility.ScreenPointToLocalPointInRectangle(self, screenPoint, camera, out localPoint);
+        }
+
+        public static void FlipLayoutOnAxis(this RectTransform self, int axis, bool keepPositioning, bool recursive)
+        {
+            RectTransformUtility.FlipLayoutOnAxis(self, axis, keepPositioning, recursive);
+        }
+
+        public static void FlipLayoutAxes(this RectTransform self, bool keepPositioning, bool recursive)
+        {
+            RectTransformUtility.FlipLayoutAxes(self, keepPositioning, recursive);
         }
     }
 }
