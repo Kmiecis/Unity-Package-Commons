@@ -6,27 +6,19 @@ namespace Common.Extensions
     public static class Color32Extensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Color32 WithR(this Color32 self, byte r)
-        {
-            return new Color32(r, self.g, self.b, self.a);
-        }
+        public static Color32 _GBA(this Color32 self, byte r = byte.MaxValue)
+            => new Color32(r, self.g, self.b, self.a);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Color32 WithG(this Color32 self, byte g)
-        {
-            return new Color32(self.r, g, self.b, self.a);
-        }
+        public static Color32 R_BA(this Color32 self, byte g = byte.MaxValue)
+            => new Color32(self.r, g, self.b, self.a);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Color32 WithB(this Color32 self, byte b)
-        {
-            return new Color32(self.r, self.g, b, self.a);
-        }
+        public static Color32 RG_A(this Color32 self, byte b = byte.MaxValue)
+            => new Color32(self.r, self.g, b, self.a);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Color32 WithA(this Color32 self, byte a)
-        {
-            return new Color32(self.r, self.g, self.b, a);
-        }
+        public static Color32 RGB_(this Color32 self, byte a = byte.MaxValue)
+            => new Color32(self.r, self.g, self.b, a);
     }
 }

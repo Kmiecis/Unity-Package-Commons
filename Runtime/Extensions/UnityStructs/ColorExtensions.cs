@@ -28,5 +28,17 @@ namespace Common.Extensions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Color _GBA(this Color self, float r = 1.0f)
             => new Color(r, self.g, self.b, self.a);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Color Add(this Color self, float f)
+            => new Color(self.r + f, self.g + f, self.b + f, self.a + f);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Color Sub(this Color self, float f)
+            => new Color(self.r - f, self.g - f, self.b - f, self.a - f);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Color Div(this Color self, Color c)
+            => new Color(self.r / c.r, self.g / c.g, self.b / c.b, self.a / c.a);
     }
 }

@@ -64,5 +64,21 @@ namespace Common.Extensions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 _YX(this Vector2 self, float f = 0.0f)
             => new Vector3(f, self.y, self.x);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Add(this Vector2 self, float f)
+            => new Vector2(self.x + f, self.y + f);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Add(this Vector2 self, int i)
+            => new Vector2(self.x + i, self.y + i);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Sub(this Vector2 self, float f)
+            => new Vector2(self.x - f, self.y - f);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Sub(this Vector2 self, int i)
+            => new Vector2(self.x - i, self.y - i);
     }
 }

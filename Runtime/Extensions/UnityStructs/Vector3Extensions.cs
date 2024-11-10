@@ -90,6 +90,38 @@ namespace Common.Extensions
             => new Vector4(self.x, self.y, self.z, w);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Add(this Vector3 self, float f)
+            => new Vector3(self.x + f, self.y + f, self.z + f);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Add(this Vector3 self, int i)
+            => new Vector3(self.x + i, self.y + i, self.z + i);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Sub(this Vector3 self, float f)
+            => new Vector3(self.x - f, self.y - f, self.z - f);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Sub(this Vector3 self, int i)
+            => new Vector3(self.x - i, self.y - i, self.z - i);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Mul(this Vector3 self, Vector3 v)
+            => new Vector3(self.x * v.x, self.y * v.y, self.z * v.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Mul(this Vector3 self, Vector3Int v)
+            => new Vector3(self.x * v.x, self.y * v.y, self.z * v.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Div(this Vector3 self, Vector3 v)
+            => new Vector3(self.x / v.x, self.y / v.y, self.z / v.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Div(this Vector3 self, Vector3Int v)
+            => new Vector3(self.x / v.x, self.y / v.y, self.z / v.z);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Color RGB(this Vector3 self)
             => new Color(self.x, self.y, self.z);
 
