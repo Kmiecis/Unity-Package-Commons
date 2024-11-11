@@ -6,9 +6,9 @@ namespace Common
 {
     public class CollisionHandler : MonoBehaviour
     {
-        [SerializeField] private UnityEvent<Collision> _onCollisionEnter = new UnityEvent<Collision>();
-        [SerializeField] private UnityEvent<Collision> _onCollisionStay = new UnityEvent<Collision>();
-        [SerializeField] private UnityEvent<Collision> _onCollisionExit = new UnityEvent<Collision>();
+        [SerializeField] protected UnityEvent<Collision> _onCollisionEnter = new UnityEvent<Collision>();
+        [SerializeField] protected UnityEvent<Collision> _onCollisionStay = new UnityEvent<Collision>();
+        [SerializeField] protected UnityEvent<Collision> _onCollisionExit = new UnityEvent<Collision>();
 
         private Dictionary<Collider, Collision> _collisions;
 

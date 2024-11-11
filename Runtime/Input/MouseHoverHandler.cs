@@ -6,8 +6,8 @@ namespace Common.Inputs
     [AddComponentMenu(nameof(Common) + "/" + nameof(Inputs) + "/" + "Mouse Hover Handler")]
     public class MouseHoverHandler : MonoBehaviour
     {
-        [SerializeField] private UnityEvent<MouseEventData> _onHoverBegan;
-        [SerializeField] private UnityEvent<MouseEventData> _onHoverEnded;
+        [SerializeField] protected UnityEvent<MouseEventData> _onHoverBegan = new UnityEvent<MouseEventData>();
+        [SerializeField] protected UnityEvent<MouseEventData> _onHoverEnded = new UnityEvent<MouseEventData>();
 
         private MouseEventData _cache;
 

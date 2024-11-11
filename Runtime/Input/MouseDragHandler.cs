@@ -6,9 +6,9 @@ namespace Common.Inputs
     [AddComponentMenu(nameof(Common) + "/" + nameof(Inputs) + "/" + "Mouse Drag Handler")]
     public class MouseDragHandler : MonoBehaviour
     {
-        [SerializeField] private UnityEvent<MouseEventData> _onDragBegan = new UnityEvent<MouseEventData>();
-        [SerializeField] private UnityEvent<MouseEventData> _onDragging = new UnityEvent<MouseEventData>();
-        [SerializeField] private UnityEvent<MouseEventData> _onDragEnded = new UnityEvent<MouseEventData>();
+        [SerializeField] protected UnityEvent<MouseEventData> _onDragBegan = new UnityEvent<MouseEventData>();
+        [SerializeField] protected UnityEvent<MouseEventData> _onDragging = new UnityEvent<MouseEventData>();
+        [SerializeField] protected UnityEvent<MouseEventData> _onDragEnded = new UnityEvent<MouseEventData>();
 
         private MouseEventData _cache;
 

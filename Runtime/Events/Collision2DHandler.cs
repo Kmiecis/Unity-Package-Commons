@@ -6,9 +6,9 @@ namespace Common
 {
     public class Collision2DHandler : MonoBehaviour
     {
-        [SerializeField] private UnityEvent<Collision2D> _onCollisionEnter = new UnityEvent<Collision2D>();
-        [SerializeField] private UnityEvent<Collision2D> _onCollisionStay = new UnityEvent<Collision2D>();
-        [SerializeField] private UnityEvent<Collision2D> _onCollisionExit = new UnityEvent<Collision2D>();
+        [SerializeField] protected UnityEvent<Collision2D> _onCollisionEnter = new UnityEvent<Collision2D>();
+        [SerializeField] protected UnityEvent<Collision2D> _onCollisionStay = new UnityEvent<Collision2D>();
+        [SerializeField] protected UnityEvent<Collision2D> _onCollisionExit = new UnityEvent<Collision2D>();
 
         private Dictionary<Collider2D, Collision2D> _collisions;
 

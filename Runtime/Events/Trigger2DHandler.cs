@@ -6,9 +6,9 @@ namespace Common
 {
     public class Trigger2DHandler : MonoBehaviour
     {
-        [SerializeField] private UnityEvent<Collider2D> _onTriggerEnter = new UnityEvent<Collider2D>();
-        [SerializeField] private UnityEvent<Collider2D> _onTriggerStay = new UnityEvent<Collider2D>();
-        [SerializeField] private UnityEvent<Collider2D> _onTriggerExit = new UnityEvent<Collider2D>();
+        [SerializeField] protected UnityEvent<Collider2D> _onTriggerEnter = new UnityEvent<Collider2D>();
+        [SerializeField] protected UnityEvent<Collider2D> _onTriggerStay = new UnityEvent<Collider2D>();
+        [SerializeField] protected UnityEvent<Collider2D> _onTriggerExit = new UnityEvent<Collider2D>();
 
         private List<Collider2D> _colliders;
 

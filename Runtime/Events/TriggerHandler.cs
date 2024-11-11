@@ -6,9 +6,9 @@ namespace Common
 {
     public class TriggerHandler : MonoBehaviour
     {
-        [SerializeField] private UnityEvent<Collider> _onTriggerEnter = new UnityEvent<Collider>();
-        [SerializeField] private UnityEvent<Collider> _onTriggerStay = new UnityEvent<Collider>();
-        [SerializeField] private UnityEvent<Collider> _onTriggerExit = new UnityEvent<Collider>();
+        [SerializeField] protected UnityEvent<Collider> _onTriggerEnter = new UnityEvent<Collider>();
+        [SerializeField] protected UnityEvent<Collider> _onTriggerStay = new UnityEvent<Collider>();
+        [SerializeField] protected UnityEvent<Collider> _onTriggerExit = new UnityEvent<Collider>();
 
         private List<Collider> _colliders;
 
