@@ -1860,6 +1860,24 @@ namespace Common.Mathematics
             );
         }
 
+        /// <summary> Returns projection of vector 'v' onto normal vector 'n' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Project(Vector2 v, Vector2 n)
+        {
+            var vdotn = Vector2.Dot(v, n);
+            var ndotn = Vector2.Dot(n, n);
+            return Mul(n, vdotn / ndotn);
+        }
+
+        /// <summary> Returns projection of vector 'v' onto normal vector 'n' </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Project(Vector3 v, Vector3 n)
+        {
+            var vdotn = Vector3.Dot(v, n);
+            var ndotn = Vector3.Dot(n, n);
+            return Mul(n, vdotn / ndotn);
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Rotate(Vector2 point, float angle)
         {
