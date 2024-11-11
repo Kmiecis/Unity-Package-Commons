@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Common.Mathematics
@@ -1017,6 +1018,36 @@ namespace Common.Mathematics
         public static Vector4 ReciprocalSafe(Vector4 v)
         {
             return Reciprocal(Vector4.Max(v, Vector4.one * kEpsilon));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Round(Vector2 v, int d)
+        {
+            return new Vector2(
+                (float)Math.Round(v.x, d),
+                (float)Math.Round(v.y, d)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Round(Vector3 v, int d)
+        {
+            return new Vector3(
+                (float)Math.Round(v.x, d),
+                (float)Math.Round(v.y, d),
+                (float)Math.Round(v.z, d)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Round(Vector4 v, int d)
+        {
+            return new Vector4(
+                (float)Math.Round(v.x, d),
+                (float)Math.Round(v.y, d),
+                (float)Math.Round(v.z, d),
+                (float)Math.Round(v.w, d)
+            );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
