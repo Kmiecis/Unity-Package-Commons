@@ -2,7 +2,6 @@
 using Common;
 using Common.Extensions;
 using System;
-using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -137,9 +136,9 @@ namespace CommonEditor
 
         private static Action<CompareFunction> CreateApplyWireMaterialMethod()
         {
-            return typeof(HandleUtility).GetMethodAction<CompareFunction>(
-                "ApplyWireMaterial", BindingFlags.Static | BindingFlags.NonPublic
-            );
+            return typeof(HandleUtility)
+                .GetMethod("ApplyWireMaterial", UBinding.NonPublicStatic)
+                .AsAction<CompareFunction>();
         }
     }
 }

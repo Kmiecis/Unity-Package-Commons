@@ -29,5 +29,41 @@ namespace Common.Extensions
             }
             return false;
         }
+
+        public static T AsDelegate<T>(this MethodInfo self)
+            where T : Delegate
+        {
+            return (T)self.CreateDelegate(typeof(T));
+        }
+
+        public static Action AsAction(this MethodInfo self)
+        {
+            return self.AsDelegate<Action>();
+        }
+
+        public static Action<T> AsAction<T>(this MethodInfo self)
+        {
+            return self.AsDelegate<Action<T>>();
+        }
+
+        public static Action<T1, T2> AsAction<T1, T2>(this MethodInfo self)
+        {
+            return self.AsDelegate<Action<T1, T2>>();
+        }
+
+        public static Func<TResult> AsFunc<TResult>(this MethodInfo self)
+        {
+            return self.AsDelegate<Func<TResult>>();
+        }
+
+        public static Func<T, TResult> AsFunc<T, TResult>(this MethodInfo self)
+        {
+            return self.AsDelegate<Func<T, TResult>>();
+        }
+
+        public static Func<T1, T2, TResult> AsFunc<T1, T2, TResult>(this MethodInfo self)
+        {
+            return self.AsDelegate<Func<T1, T2, TResult>>();
+        }
     }
 }
