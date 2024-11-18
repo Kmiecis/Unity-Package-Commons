@@ -6,7 +6,7 @@ namespace Common.Mathematics
     public static class Rects
     {
         /// <summary> Vertices of a rect </summary>
-        public static Vector2[] Vertices = new Vector2[]
+        public static readonly Vector2[] Vertices = new Vector2[]
         {
             new Vector2(-0.5f, -0.5f),
             new Vector2(-0.5f,  0.5f),
@@ -26,36 +26,6 @@ namespace Common.Mathematics
         public static float Area(Vector2 e)
         {
             return e.x * e.y;
-        }
-
-        /// <summary> Calculates rectangle vertices into 'target' array </summary>
-        public static void GetVertices(Vector2[] target, Vector2 position, Vector2 size, float angle)
-        {
-            for (int i = 0; i < target.Length; ++i)
-                target[i] = Mathx.Transform(Vertices[i], position, angle, size);
-        }
-
-        /// <summary> Calculates rectangle vertices </summary>
-        public static Vector2[] GetVertices(Vector2 position, Vector2 size, float angle)
-        {
-            var vs = new Vector2[Vertices.Length];
-            GetVertices(vs, position, size, angle);
-            return vs;
-        }
-
-        /// <summary> Calculates rectangle vertices into 'target' array </summary>
-        public static void GetVertices(Vector3[] target, Vector3 position, Vector2 size, Quaternion rotation)
-        {
-            for (int i = 0; i < target.Length; ++i)
-                target[i] = Mathx.Transform(Vertices[i], position, rotation, size);
-        }
-
-        /// <summary> Calculates rectangle vertices </summary>
-        public static Vector3[] GetVertices(Vector3 position, Vector2 size, Quaternion rotation)
-        {
-            var vs = new Vector3[Vertices.Length];
-            GetVertices(vs, position, size, rotation);
-            return vs;
         }
 
         /// <summary> Converts coordinates defined by 'v' in space of extents 'e' to a position </summary>

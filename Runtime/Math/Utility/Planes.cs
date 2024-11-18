@@ -9,18 +9,19 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Distance(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 p)
         {
-            var n = Vector3.Cross(v1 - v0, v2 - v1);
-            n.Normalize();
-            var dv2 = Vector3.Dot(v2, n);
-            var dp = Vector3.Dot(p, n);
-            return dp - dv2;
+            var n = Normal(v0, v1, v2);
+            var v2dotn = Vector3.Dot(v2, n);
+            var pdotn = Vector3.Dot(p, n);
+            return pdotn - v2dotn;
         }
 
         /// <summary> Calculates normal of plane defined by three vertices 'v0', 'v1' and 'v2' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Normal(Vector3 v0, Vector3 v1, Vector3 v2)
         {
-            return Vector3.Cross(v1 - v0, v2 - v1);
+            var result = Vector3.Cross(v1 - v0, v2 - v1);
+            result.Normalize();
+            return result;
         }
 
         /// <summary> Calculates relative positioning of point 'p' to a plane going through three vertices 'v0', 'v1' and 'v2' </summary>

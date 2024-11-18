@@ -12,7 +12,7 @@ namespace Common.Mathematics
             return 4.0f * Mathf.PI * r * r;
         }
 
-        /// <summary> Calculates whether sphere 'a' with center in 'ac' and radius 'ar' collides with sphere 'b' with center in 'bc' and radius 'br' </summary>
+        /// <summary> Calculates whether sphere with center in 'ac' and radius 'ar' collides with sphere with center in 'bc' and radius 'br' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Collides(Vector3 ac, float ar, Vector3 bc, float br)
         {

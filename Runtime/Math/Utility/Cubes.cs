@@ -43,21 +43,6 @@ namespace Common.Mathematics
             return e.x * e.y * e.z;
         }
 
-        /// <summary> Calculates rectangle vertices into 'target' array </summary>
-        public static void GetVertices(Vector3[] target, Vector3 position, Vector3 size, Quaternion rotation)
-        {
-            for (int i = 0; i < Vertices.Length; ++i)
-                target[i] = Mathx.Transform(Vertices[i], position, rotation, size);
-        }
-
-        /// <summary> Calculates rectangle vertices </summary>
-        public static Vector3[] GetVertices(Vector3 position, Vector3 size, Quaternion rotation)
-        {
-            var vs = new Vector3[Vertices.Length];
-            GetVertices(vs, position, size, rotation);
-            return vs;
-        }
-
         /// <summary> Converts coordinates defined by 'v' in space of extents 'e' to a position </summary>
         public static Vector3 Convert(Vector3Int v, Vector3 e)
         {

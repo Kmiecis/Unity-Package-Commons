@@ -1939,9 +1939,16 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Transform(Vector2 point, Vector2 translation, float angle, Vector2 scale)
+        public static Vector2 Transform(Vector2 point, Vector2 translation, float rotation, Vector2 scale)
         {
-            return Rotate(Mul(point, scale), angle) + translation;
+            return Rotate(Mul(point, scale), rotation) + translation;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Transform(Vector2[] points, Vector2 translation, float rotation, Vector2 scale)
+        {
+            for (int i = 0; i < points.Length; ++i)
+                points[i] = Transform(points[i], translation, rotation, scale);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1954,6 +1961,13 @@ namespace Common.Mathematics
         public static Vector3 Transform(Vector3 point, Vector3 translation, Quaternion rotation, Vector3 scale)
         {
             return Rotate(Mul(point, scale), rotation) + translation;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Transform(Vector3[] points, Vector3 translation, Quaternion rotation, Vector3 scale)
+        {
+            for (int i = 0; i < points.Length; ++i)
+                points[i] = Transform(points[i], translation, rotation, scale);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

@@ -12,7 +12,7 @@ namespace Common.Mathematics
             return Mathf.PI * r * r;
         }
 
-        /// <summary> Calculates whether circle 'a' with center in 'ac' and radius 'ar' collides with circle 'b' with center in 'bc' and radius 'br' </summary>
+        /// <summary> Calculates whether circle with center in 'ac' and radius 'ar' collides with circle with center in 'bc' and radius 'br' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Collides(Vector2 ac, float ar, Vector2 bc, float br)
         {

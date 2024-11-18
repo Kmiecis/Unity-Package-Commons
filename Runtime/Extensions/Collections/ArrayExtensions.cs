@@ -275,6 +275,13 @@ namespace Common.Extensions
             return self.Populate(provider, self.Length);
         }
 
+        public static T[] Copy<T>(this T[] self)
+        {
+            var result = new T[self.Length];
+            self.CopyTo(result);
+            return result;
+        }
+
         public static void CopyTo<T>(this T[] self, T[] target)
         {
             self.CopyTo(target, 0);
