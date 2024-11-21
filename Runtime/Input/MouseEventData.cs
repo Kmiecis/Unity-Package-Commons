@@ -8,5 +8,6 @@ namespace Common.Inputs
         public Vector3 normal;
         public int button;
         public Transform source;
+        public Camera camera;
     }
 }

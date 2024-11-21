@@ -137,13 +137,14 @@ namespace Common.Inputs
                 if (component != null)
                 {
                     result = new MouseEventData();
+                    result.camera = Camera;
                     result.position = closestRaycast.point;
                     result.normal = closestRaycast.normal;
-                    
+
                     return true;
                 }
             }
-            
+
             return false;
         }
 
@@ -151,6 +152,9 @@ namespace Common.Inputs
         {
             var ray = Camera.ScreenPointToRay(screenPosition);
             var hits = Physics.RaycastNonAlloc(ray, Raycasts, Camera.farClipPlane, EventMask);
+
+            var result = new MouseEventData();
+            result.camera = Camera;
 
             if (hits > 0)
             {
@@ -169,20 +173,16 @@ namespace Common.Inputs
                     }
                 }
 
-                var result = new MouseEventData();
                 result.position = closestRaycast.point;
                 result.normal = closestRaycast.normal;
-
-                return result;
             }
             else
             {
-                var result = new MouseEventData();
                 result.position = ray.GetPoint(Camera.farClipPlane);
                 result.normal = -Camera.transform.forward;
-
-                return result;
             }
+
+            return result;
         }
 
         private void Update()
