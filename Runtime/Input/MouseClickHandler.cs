@@ -11,7 +11,7 @@ namespace Common.Inputs
         public UnityEvent<MouseEventData> OnClicked
             => _onClicked;
 
-        public void OnClick(MouseEventData data)
+        public virtual void OnClick(MouseEventData data)
         {
             data.source = transform;
 

@@ -24,7 +24,7 @@ namespace Common.Inputs
         public bool IsDragging
             => _cache != null;
 
-        public void OnBeginDrag(MouseEventData data)
+        public virtual void OnBeginDrag(MouseEventData data)
         {
             data.source = transform;
 
@@ -32,7 +32,7 @@ namespace Common.Inputs
             _cache = data;
         }
 
-        public void OnDrag(MouseEventData data)
+        public virtual void OnDrag(MouseEventData data)
         {
             if (_cache != null)
             {
@@ -43,7 +43,7 @@ namespace Common.Inputs
             }
         }
 
-        public void OnEndDrag(MouseEventData data)
+        public virtual void OnEndDrag(MouseEventData data)
         {
             if (_cache != null)
             {

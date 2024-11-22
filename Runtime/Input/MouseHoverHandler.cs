@@ -20,7 +20,7 @@ namespace Common.Inputs
         public bool IsHovering
             => _cache != null;
 
-        public void OnHoverBegin(MouseEventData data)
+        public virtual void OnHoverBegin(MouseEventData data)
         {
             data.source = transform;
 
@@ -28,7 +28,7 @@ namespace Common.Inputs
             _cache = data;
         }
 
-        public void OnHoverEnd(MouseEventData data)
+        public virtual void OnHoverEnd(MouseEventData data)
         {
             if (_cache != null)
             {
