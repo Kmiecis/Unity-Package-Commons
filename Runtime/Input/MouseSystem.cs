@@ -17,6 +17,16 @@ namespace Common.Inputs
         private MouseDragHandler _dragger;
         private MouseHoverHandler _hoverer;
 
+        public MouseDragHandler Dragger
+        {
+            get => _dragger;
+        }
+
+        public MouseHoverHandler Hoverer
+        {
+            get => _hoverer;
+        }
+
         public Camera Camera
         {
             get => _camera ?? (_camera = GetComponent<Camera>()) ?? (_camera = Camera.main);
