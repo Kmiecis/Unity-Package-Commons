@@ -7,8 +7,9 @@ namespace Common.Inputs
     {
         private const int NoEventMaskSet = -1;
 
-        [SerializeField] private LayerMask _eventMask = NoEventMaskSet;
-        [SerializeField] private int _eventIntersections = 10;
+        [SerializeField] protected LayerMask _eventMask = NoEventMaskSet;
+        [SerializeField] protected float _eventDistance = 1000.0f;
+        [SerializeField] protected int _eventIntersections = 10;
 
         private Camera _camera;
         private RaycastHit[] _raycasts;
@@ -20,6 +21,12 @@ namespace Common.Inputs
         {
             get => _camera ?? (_camera = GetComponent<Camera>()) ?? (_camera = Camera.main);
             set => _camera = value;
+        }
+
+        public float EventDistance
+        {
+            get => _eventDistance > 0 ? _eventDistance : Camera.farClipPlane;
+            set => _eventDistance = value;
         }
 
         public int EventMask
@@ -109,7 +116,7 @@ namespace Common.Inputs
         private bool TryRaycastComponent<T>(Vector2 screenPosition, out T component, out MouseEventData result)
         {
             var ray = Camera.ScreenPointToRay(screenPosition);
-            var hits = Physics.RaycastNonAlloc(ray, Raycasts, Camera.farClipPlane, EventMask);
+            var hits = Physics.RaycastNonAlloc(ray, Raycasts, EventDistance, EventMask);
 
             component = default;
             result = default;
@@ -151,7 +158,7 @@ namespace Common.Inputs
         private MouseEventData RaycastAnything(Vector2 screenPosition)
         {
             var ray = Camera.ScreenPointToRay(screenPosition);
-            var hits = Physics.RaycastNonAlloc(ray, Raycasts, Camera.farClipPlane, EventMask);
+            var hits = Physics.RaycastNonAlloc(ray, Raycasts, EventDistance, EventMask);
 
             var result = new MouseEventData();
             result.camera = Camera;
@@ -178,7 +185,7 @@ namespace Common.Inputs
             }
             else
             {
-                result.position = ray.GetPoint(Camera.farClipPlane);
+                result.position = ray.GetPoint(EventDistance);
                 result.normal = -Camera.transform.forward;
             }
 
