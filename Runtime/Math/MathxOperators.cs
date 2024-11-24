@@ -106,7 +106,7 @@ namespace Common.Mathematics
             Vector2 r;
             r.x = v.x + f;
             r.y = v.y + f;
-            return v;
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -115,7 +115,7 @@ namespace Common.Mathematics
             Vector2 r;
             r.x = v.x + f;
             r.y = v.y + f;
-            return v;
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
