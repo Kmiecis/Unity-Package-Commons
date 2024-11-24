@@ -62,9 +62,10 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 ProjectPoint(Vector3 ax, Vector3 ay, Vector3 p)
         {
-            var x = Vector3.Dot(ax, p);
-            var y = Vector3.Dot(ay, p);
-            return new Vector2(x, y);
+            Vector2 r;
+            r.x = Vector3.Dot(ax, p);
+            r.y = Vector3.Dot(ay, p);
+            return r;
         }
 
         /// <summary> Calculates vector 'v' projection onto other vector 'n' </summary>

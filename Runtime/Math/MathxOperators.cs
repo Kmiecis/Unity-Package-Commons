@@ -55,301 +55,360 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Add(Vector2 a, Vector2 b)
         {
-            return new Vector2(
-                a.x + b.x,
-                a.y + b.y
-            );
+            a.x += b.x;
+            a.y += b.y;
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Add(Vector2 v, float f)
         {
-            return new Vector2(
-                v.x + f,
-                v.y + f
-            );
+            v.x += f;
+            v.y += f;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Add(float f, Vector2 v)
         {
-            return new Vector2(
-                f + v.x,
-                f + v.y
-            );
+            v.x += f;
+            v.y += f;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Add(Vector2 v, int i)
         {
-            return new Vector2(
-                v.x + i,
-                v.y + i
-            );
+            v.x += i;
+            v.y += i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Add(int i, Vector2 v)
         {
-            return new Vector2(
-                i + v.x,
-                i + v.y
-            );
+            v.x += i;
+            v.y += i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Add(Vector2Int a, Vector2Int b)
         {
-            return new Vector2Int(
-                a.x + b.x,
-                a.y + b.y
-            );
+            a.x += b.x;
+            a.y += b.y;
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Add(Vector2Int v, float f)
         {
-            return new Vector2(
-                v.x + f,
-                v.y + f
-            );
+            Vector2 r;
+            r.x = v.x + f;
+            r.y = v.y + f;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Add(float f, Vector2Int v)
         {
-            return new Vector2(
-                f + v.x,
-                f + v.y
-            );
+            Vector2 r;
+            r.x = v.x + f;
+            r.y = v.y + f;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Add(Vector2Int v, int i)
         {
-            return new Vector2Int(
-                v.x + i,
-                v.y + i
-            );
+            v.x += i;
+            v.y += i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Add(int i, Vector2Int v)
         {
-            return new Vector2Int(
-                i + v.x,
-                i + v.y
-            );
+            v.x += i;
+            v.y += i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Add(Vector3 a, Vector3 b)
         {
-            return new Vector3(
-                a.x + b.x,
-                a.y + b.y,
-                a.z + b.z
-            );
+            a.x += b.x;
+            a.y += b.y;
+            a.z += b.z;
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Add(Vector3 v, float f)
         {
-            return new Vector3(
-                v.x + f,
-                v.y + f,
-                v.z + f
-            );
+            v.x += f;
+            v.y += f;
+            v.z += f;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Add(float f, Vector3 v)
         {
-            return new Vector3(
-                f + v.x,
-                f + v.y,
-                f + v.z
-            );
+            v.x += f;
+            v.y += f;
+            v.z += f;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Add(Vector3 v, int i)
         {
-            return new Vector3(
-                v.x + i,
-                v.y + i,
-                v.z + i
-            );
+            v.x += i;
+            v.y += i;
+            v.z += i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Add(int i, Vector3 v)
         {
-            return new Vector3(
-                i + v.x,
-                i + v.y,
-                i + v.z
-            );
+            v.x += i;
+            v.y += i;
+            v.z += i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Add(Vector3Int a, Vector3Int b)
         {
-            return new Vector3Int(
-                a.x + b.x,
-                a.y + b.y,
-                a.z + b.z
-            );
+            a.x += b.x;
+            a.y += b.y;
+            a.z += b.z;
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Add(Vector3Int v, float f)
         {
-            return new Vector3(
-                v.x + f,
-                v.y + f,
-                v.z + f
-            );
+            Vector3 r;
+            r.x = v.x + f;
+            r.y = v.y + f;
+            r.z = v.z + f;
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Add(float f, Vector3Int v)
         {
-            return new Vector3(
-                f + v.x,
-                f + v.y,
-                f + v.z
-            );
+            Vector3 r;
+            r.x = v.x + f;
+            r.y = v.y + f;
+            r.z = v.z + f;
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Add(Vector3Int v, int i)
         {
-            return new Vector3Int(
-                v.x + i,
-                v.y + i,
-                v.z + i
-            );
+            v.x += i;
+            v.y += i;
+            v.z += i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Add(int i, Vector3Int v)
         {
-            return new Vector3Int(
-                i + v.x,
-                i + v.y,
-                i + v.z
-            );
+            v.x += i;
+            v.y += i;
+            v.z += i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Add(Vector4 a, Vector4 b)
         {
-            return new Vector4(
-                a.x + b.x,
-                a.y + b.y,
-                a.z + b.z,
-                a.w + b.w
-            );
+            a.x += b.x;
+            a.y += b.y;
+            a.z += b.z;
+            a.w += b.w;
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Add(Vector4 v, float f)
         {
-            return new Vector4(
-                v.x + f,
-                v.y + f,
-                v.z + f,
-                v.w + f
-            );
+            v.x += f;
+            v.y += f;
+            v.z += f;
+            v.w += f;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Add(float f, Vector4 v)
         {
-            return new Vector4(
-                f + v.x,
-                f + v.y,
-                f + v.z,
-                f + v.w
-            );
+            v.x += f;
+            v.y += f;
+            v.z += f;
+            v.w += f;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Add(Vector4 v, int i)
         {
-            return new Vector4(
-                v.x + i,
-                v.y + i,
-                v.z + i,
-                v.w + i
-            );
+            v.x += i;
+            v.y += i;
+            v.z += i;
+            v.w += i;
+            return v;
         }
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Add(int i, Vector4 v)
         {
-            return new Vector4(
-                i + v.x,
-                i + v.y,
-                i + v.z,
-                i + v.w
-            );
+            v.x += i;
+            v.y += i;
+            v.z += i;
+            v.w += i;
+            return v;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4 Add(Matrix4x4 a, Matrix4x4 b)
         {
-            return new Matrix4x4(
-                a.GetColumn(0) + b.GetColumn(0),
-                a.GetColumn(1) + b.GetColumn(1),
-                a.GetColumn(2) + b.GetColumn(2),
-                a.GetColumn(3) + b.GetColumn(3)
-            );
+            var column0 = a.GetColumn(0) + b.GetColumn(0);
+            var column1 = a.GetColumn(1) + b.GetColumn(1);
+            var column2 = a.GetColumn(2) + b.GetColumn(2);
+            var column3 = a.GetColumn(3) + b.GetColumn(3);
+
+            Matrix4x4 r;
+            r.m00 = column0.x;
+            r.m01 = column1.x;
+            r.m02 = column2.x;
+            r.m03 = column3.x;
+            r.m10 = column0.y;
+            r.m11 = column1.y;
+            r.m12 = column2.y;
+            r.m13 = column3.y;
+            r.m20 = column0.z;
+            r.m21 = column1.z;
+            r.m22 = column2.z;
+            r.m23 = column3.z;
+            r.m30 = column0.w;
+            r.m31 = column1.w;
+            r.m32 = column2.w;
+            r.m33 = column3.w;
+            return r;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4 Add(Matrix4x4 m, float f)
         {
-            return new Matrix4x4(
-                Add(m.GetColumn(0), f),
-                Add(m.GetColumn(1), f),
-                Add(m.GetColumn(2), f),
-                Add(m.GetColumn(3), f)
-            );
+            var column0 = Add(m.GetColumn(0), f);
+            var column1 = Add(m.GetColumn(1), f);
+            var column2 = Add(m.GetColumn(2), f);
+            var column3 = Add(m.GetColumn(3), f);
+
+            Matrix4x4 r;
+            r.m00 = column0.x;
+            r.m01 = column1.x;
+            r.m02 = column2.x;
+            r.m03 = column3.x;
+            r.m10 = column0.y;
+            r.m11 = column1.y;
+            r.m12 = column2.y;
+            r.m13 = column3.y;
+            r.m20 = column0.z;
+            r.m21 = column1.z;
+            r.m22 = column2.z;
+            r.m23 = column3.z;
+            r.m30 = column0.w;
+            r.m31 = column1.w;
+            r.m32 = column2.w;
+            r.m33 = column3.w;
+            return r;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4 Add(float f, Matrix4x4 m)
         {
-            return new Matrix4x4(
-                Add(f, m.GetColumn(0)),
-                Add(f, m.GetColumn(1)),
-                Add(f, m.GetColumn(2)),
-                Add(f, m.GetColumn(3))
-            );
+            var column0 = Add(f, m.GetColumn(0));
+            var column1 = Add(f, m.GetColumn(1));
+            var column2 = Add(f, m.GetColumn(2));
+            var column3 = Add(f, m.GetColumn(3));
+
+            Matrix4x4 r;
+            r.m00 = column0.x;
+            r.m01 = column1.x;
+            r.m02 = column2.x;
+            r.m03 = column3.x;
+            r.m10 = column0.y;
+            r.m11 = column1.y;
+            r.m12 = column2.y;
+            r.m13 = column3.y;
+            r.m20 = column0.z;
+            r.m21 = column1.z;
+            r.m22 = column2.z;
+            r.m23 = column3.z;
+            r.m30 = column0.w;
+            r.m31 = column1.w;
+            r.m32 = column2.w;
+            r.m33 = column3.w;
+            return r;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4 Add(Matrix4x4 m, int i)
         {
-            return new Matrix4x4(
-                Add(m.GetColumn(0), i),
-                Add(m.GetColumn(1), i),
-                Add(m.GetColumn(2), i),
-                Add(m.GetColumn(3), i)
-            );
+            var column0 = Add(m.GetColumn(0), i);
+            var column1 = Add(m.GetColumn(1), i);
+            var column2 = Add(m.GetColumn(2), i);
+            var column3 = Add(m.GetColumn(3), i);
+
+            Matrix4x4 r;
+            r.m00 = column0.x;
+            r.m01 = column1.x;
+            r.m02 = column2.x;
+            r.m03 = column3.x;
+            r.m10 = column0.y;
+            r.m11 = column1.y;
+            r.m12 = column2.y;
+            r.m13 = column3.y;
+            r.m20 = column0.z;
+            r.m21 = column1.z;
+            r.m22 = column2.z;
+            r.m23 = column3.z;
+            r.m30 = column0.w;
+            r.m31 = column1.w;
+            r.m32 = column2.w;
+            r.m33 = column3.w;
+            return r;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4 Add(int i, Matrix4x4 m)
         {
-            return new Matrix4x4(
-                Add(i, m.GetColumn(0)),
-                Add(i, m.GetColumn(1)),
-                Add(i, m.GetColumn(2)),
-                Add(i, m.GetColumn(3))
-            );
+            var column0 = Add(i, m.GetColumn(0));
+            var column1 = Add(i, m.GetColumn(1));
+            var column2 = Add(i, m.GetColumn(2));
+            var column3 = Add(i, m.GetColumn(3));
+
+            Matrix4x4 r;
+            r.m00 = column0.x;
+            r.m01 = column1.x;
+            r.m02 = column2.x;
+            r.m03 = column3.x;
+            r.m10 = column0.y;
+            r.m11 = column1.y;
+            r.m12 = column2.y;
+            r.m13 = column3.y;
+            r.m20 = column0.z;
+            r.m21 = column1.z;
+            r.m22 = column2.z;
+            r.m23 = column3.z;
+            r.m30 = column0.w;
+            r.m31 = column1.w;
+            r.m32 = column2.w;
+            r.m33 = column3.w;
+            return r;
         }
         #endregion
 
@@ -357,301 +416,360 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Sub(Vector2 a, Vector2 b)
         {
-            return new Vector2(
-                a.x - b.x,
-                a.y - b.y
-            );
+            a.x -= b.x;
+            a.y -= b.y;
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Sub(Vector2 v, float f)
         {
-            return new Vector2(
-                v.x - f,
-                v.y - f
-            );
+            v.x -= f;
+            v.y -= f;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Sub(float f, Vector2 v)
         {
-            return new Vector2(
-                f - v.x,
-                f - v.y
-            );
+            v.x -= f;
+            v.y -= f;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Sub(Vector2 v, int i)
         {
-            return new Vector2(
-                v.x - i,
-                v.y - i
-            );
+            v.x -= i;
+            v.y -= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Sub(int i, Vector2 v)
         {
-            return new Vector2(
-                i - v.x,
-                i - v.y
-            );
+            v.x -= i;
+            v.y -= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Sub(Vector2Int a, Vector2Int b)
         {
-            return new Vector2Int(
-                a.x - b.x,
-                a.y - b.y
-            );
+            a.x -= b.x;
+            a.y -= b.y;
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Sub(Vector2Int v, float f)
         {
-            return new Vector2(
-                v.x - f,
-                v.y - f
-            );
+            Vector2 r;
+            r.x = v.x - f;
+            r.y = v.y - f;
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Sub(float f, Vector2Int v)
         {
-            return new Vector2(
-                f - v.x,
-                f - v.y
-            );
+            Vector2 r;
+            r.x = v.x - f;
+            r.y = v.y - f;
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Sub(Vector2Int v, int i)
         {
-            return new Vector2Int(
-                v.x - i,
-                v.y - i
-            );
+            v.x -= i;
+            v.y -= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Sub(int i, Vector2Int v)
         {
-            return new Vector2Int(
-                i - v.x,
-                i - v.y
-            );
+            v.x -= i;
+            v.y -= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Sub(Vector3 a, Vector3 b)
         {
-            return new Vector3(
-                a.x - b.x,
-                a.y - b.y,
-                a.z - b.z
-            );
+            a.x -= b.x;
+            a.y -= b.y;
+            a.z -= b.z;
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Sub(Vector3 v, float f)
         {
-            return new Vector3(
-                v.x - f,
-                v.y - f,
-                v.z - f
-            );
+            v.x -= f;
+            v.y -= f;
+            v.z -= f;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Sub(float f, Vector3 v)
         {
-            return new Vector3(
-                f - v.x,
-                f - v.y,
-                f - v.z
-            );
+            v.x -= f;
+            v.y -= f;
+            v.z -= f;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Sub(Vector3 v, int i)
         {
-            return new Vector3(
-                v.x - i,
-                v.y - i,
-                v.z - i
-            );
+            v.x -= i;
+            v.y -= i;
+            v.z -= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Sub(int i, Vector3 v)
         {
-            return new Vector3(
-                i - v.x,
-                i - v.y,
-                i - v.z
-            );
+            v.x -= i;
+            v.y -= i;
+            v.z -= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Sub(Vector3Int a, Vector3Int b)
         {
-            return new Vector3Int(
-                a.x - b.x,
-                a.y - b.y,
-                a.z - b.z
-            );
+            a.x -= b.x;
+            a.y -= b.y;
+            a.z -= b.z;
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Sub(Vector3Int v, float f)
         {
-            return new Vector3(
-                v.x - f,
-                v.y - f,
-                v.z - f
-            );
+            Vector3 r;
+            r.x = v.x - f;
+            r.y = v.y - f;
+            r.z = v.z - f;
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Sub(float f, Vector3Int v)
         {
-            return new Vector3(
-                f - v.x,
-                f - v.y,
-                f - v.z
-            );
+            Vector3 r;
+            r.x = v.x - f;
+            r.y = v.y - f;
+            r.z = v.z - f;
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Sub(Vector3Int v, int i)
         {
-            return new Vector3Int(
-                v.x - i,
-                v.y - i,
-                v.z - i
-            );
+            v.x -= i;
+            v.y -= i;
+            v.z -= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Sub(int i, Vector3Int v)
         {
-            return new Vector3Int(
-                i - v.x,
-                i - v.y,
-                i - v.z
-            );
+            v.x -= i;
+            v.y -= i;
+            v.z -= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Sub(Vector4 a, Vector4 b)
         {
-            return new Vector4(
-                a.x - b.x,
-                a.y - b.y,
-                a.z - b.z,
-                a.w - b.w
-            );
+            a.x -= b.x;
+            a.y -= b.y;
+            a.z -= b.z;
+            a.w -= b.w;
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Sub(Vector4 v, float f)
         {
-            return new Vector4(
-                v.x - f,
-                v.y - f,
-                v.z - f,
-                v.w - f
-            );
+            v.x -= f;
+            v.y -= f;
+            v.z -= f;
+            v.w -= f;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Sub(float f, Vector4 v)
         {
-            return new Vector4(
-                f - v.x,
-                f - v.y,
-                f - v.z,
-                f - v.w
-            );
+            v.x -= f;
+            v.y -= f;
+            v.z -= f;
+            v.w -= f;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Sub(Vector4 v, int i)
         {
-            return new Vector4(
-                v.x - i,
-                v.y - i,
-                v.z - i,
-                v.w - i
-            );
+            v.x -= i;
+            v.y -= i;
+            v.z -= i;
+            v.w -= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Sub(int i, Vector4 v)
         {
-            return new Vector4(
-                i - v.x,
-                i - v.y,
-                i - v.z,
-                i - v.w
-            );
+            v.x -= i;
+            v.y -= i;
+            v.z -= i;
+            v.w -= i;
+            return v;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4 Sub(Matrix4x4 a, Matrix4x4 b)
         {
-            return new Matrix4x4(
-                a.GetColumn(0) - b.GetColumn(0),
-                a.GetColumn(1) - b.GetColumn(1),
-                a.GetColumn(2) - b.GetColumn(2),
-                a.GetColumn(3) - b.GetColumn(3)
-            );
+            var column0 = a.GetColumn(0) - b.GetColumn(0);
+            var column1 = a.GetColumn(1) - b.GetColumn(1);
+            var column2 = a.GetColumn(2) - b.GetColumn(2);
+            var column3 = a.GetColumn(3) - b.GetColumn(3);
+
+            Matrix4x4 r;
+            r.m00 = column0.x;
+            r.m01 = column1.x;
+            r.m02 = column2.x;
+            r.m03 = column3.x;
+            r.m10 = column0.y;
+            r.m11 = column1.y;
+            r.m12 = column2.y;
+            r.m13 = column3.y;
+            r.m20 = column0.z;
+            r.m21 = column1.z;
+            r.m22 = column2.z;
+            r.m23 = column3.z;
+            r.m30 = column0.w;
+            r.m31 = column1.w;
+            r.m32 = column2.w;
+            r.m33 = column3.w;
+            return r;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4 Sub(Matrix4x4 m, float f)
         {
-            return new Matrix4x4(
-                Sub(m.GetColumn(0), f),
-                Sub(m.GetColumn(1), f),
-                Sub(m.GetColumn(2), f),
-                Sub(m.GetColumn(3), f)
-            );
+            var column0 = Sub(m.GetColumn(0), f);
+            var column1 = Sub(m.GetColumn(1), f);
+            var column2 = Sub(m.GetColumn(2), f);
+            var column3 = Sub(m.GetColumn(3), f);
+
+            Matrix4x4 r;
+            r.m00 = column0.x;
+            r.m01 = column1.x;
+            r.m02 = column2.x;
+            r.m03 = column3.x;
+            r.m10 = column0.y;
+            r.m11 = column1.y;
+            r.m12 = column2.y;
+            r.m13 = column3.y;
+            r.m20 = column0.z;
+            r.m21 = column1.z;
+            r.m22 = column2.z;
+            r.m23 = column3.z;
+            r.m30 = column0.w;
+            r.m31 = column1.w;
+            r.m32 = column2.w;
+            r.m33 = column3.w;
+            return r;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4 Sub(float f, Matrix4x4 m)
         {
-            return new Matrix4x4(
-                Sub(f, m.GetColumn(0)),
-                Sub(f, m.GetColumn(1)),
-                Sub(f, m.GetColumn(2)),
-                Sub(f, m.GetColumn(3))
-            );
+            var column0 = Sub(f, m.GetColumn(0));
+            var column1 = Sub(f, m.GetColumn(1));
+            var column2 = Sub(f, m.GetColumn(2));
+            var column3 = Sub(f, m.GetColumn(3));
+
+            Matrix4x4 r;
+            r.m00 = column0.x;
+            r.m01 = column1.x;
+            r.m02 = column2.x;
+            r.m03 = column3.x;
+            r.m10 = column0.y;
+            r.m11 = column1.y;
+            r.m12 = column2.y;
+            r.m13 = column3.y;
+            r.m20 = column0.z;
+            r.m21 = column1.z;
+            r.m22 = column2.z;
+            r.m23 = column3.z;
+            r.m30 = column0.w;
+            r.m31 = column1.w;
+            r.m32 = column2.w;
+            r.m33 = column3.w;
+            return r;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4 Sub(Matrix4x4 m, int i)
         {
-            return new Matrix4x4(
-                Sub(m.GetColumn(0), i),
-                Sub(m.GetColumn(1), i),
-                Sub(m.GetColumn(2), i),
-                Sub(m.GetColumn(3), i)
-            );
+            var column0 = Sub(m.GetColumn(0), i);
+            var column1 = Sub(m.GetColumn(1), i);
+            var column2 = Sub(m.GetColumn(2), i);
+            var column3 = Sub(m.GetColumn(3), i);
+
+            Matrix4x4 r;
+            r.m00 = column0.x;
+            r.m01 = column1.x;
+            r.m02 = column2.x;
+            r.m03 = column3.x;
+            r.m10 = column0.y;
+            r.m11 = column1.y;
+            r.m12 = column2.y;
+            r.m13 = column3.y;
+            r.m20 = column0.z;
+            r.m21 = column1.z;
+            r.m22 = column2.z;
+            r.m23 = column3.z;
+            r.m30 = column0.w;
+            r.m31 = column1.w;
+            r.m32 = column2.w;
+            r.m33 = column3.w;
+            return r;
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Matrix4x4 Sub(int i, Matrix4x4 m)
         {
-            return new Matrix4x4(
-                Sub(i, m.GetColumn(0)),
-                Sub(i, m.GetColumn(1)),
-                Sub(i, m.GetColumn(2)),
-                Sub(i, m.GetColumn(3))
-            );
+            var column0 = Sub(i, m.GetColumn(0));
+            var column1 = Sub(i, m.GetColumn(1));
+            var column2 = Sub(i, m.GetColumn(2));
+            var column3 = Sub(i, m.GetColumn(3));
+
+            Matrix4x4 r;
+            r.m00 = column0.x;
+            r.m01 = column1.x;
+            r.m02 = column2.x;
+            r.m03 = column3.x;
+            r.m10 = column0.y;
+            r.m11 = column1.y;
+            r.m12 = column2.y;
+            r.m13 = column3.y;
+            r.m20 = column0.z;
+            r.m21 = column1.z;
+            r.m22 = column2.z;
+            r.m23 = column3.z;
+            r.m30 = column0.w;
+            r.m31 = column1.w;
+            r.m32 = column2.w;
+            r.m33 = column3.w;
+            return r;
         }
         #endregion
 
@@ -659,246 +777,225 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Mul(Vector2 a, Vector2 b)
         {
-            return new Vector2(
-                a.x * b.x,
-                a.y * b.y
-            );
+            a.x *= b.x;
+            a.y *= b.y;
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Mul(Vector2 v, float f)
         {
-            return new Vector2(
-                v.x * f,
-                v.y * f
-            );
+            v.x *= f;
+            v.y *= f;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Mul(float f, Vector2 v)
         {
-            return new Vector2(
-                f * v.x,
-                f * v.y
-            );
+            v.x *= f;
+            v.y *= f;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Mul(Vector2 v, int i)
         {
-            return new Vector2(
-                v.x * i,
-                v.y * i
-            );
+            v.x *= i;
+            v.y *= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Mul(int i, Vector2 v)
         {
-            return new Vector2(
-                i * v.x,
-                i * v.y
-            );
+            v.x *= i;
+            v.y *= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Mul(Vector2Int a, Vector2Int b)
         {
-            return new Vector2Int(
-                a.x * b.x,
-                a.y * b.y
-            );
+            a.x *= b.x;
+            a.y *= b.y;
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Mul(Vector2Int v, float f)
         {
-            return new Vector2(
-                v.x * f,
-                v.y * f
-            );
+            Vector2 r;
+            r.x = v.x * f;
+            r.y = v.y * f;
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Mul(float f, Vector2Int v)
         {
-            return new Vector2(
-                f * v.x,
-                f * v.y
-            );
+            Vector2 r;
+            r.x = v.x * f;
+            r.y = v.y * f;
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Mul(Vector2Int v, int i)
         {
-            return new Vector2Int(
-                v.x * i,
-                v.y * i
-            );
+            v.x *= i;
+            v.y *= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Mul(int i, Vector2Int v)
         {
-            return new Vector2Int(
-                i * v.x,
-                i * v.y
-            );
+            v.x *= i;
+            v.y *= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Mul(Vector3 a, Vector3 b)
         {
-            return new Vector3(
-                a.x * b.x,
-                a.y * b.y,
-                a.z * b.z
-            );
+            a.x *= b.x;
+            a.y *= b.y;
+            a.z *= b.z;
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Mul(Vector3 v, float f)
         {
-            return new Vector3(
-                v.x * f,
-                v.y * f,
-                v.z * f
-            );
+            v.x *= f;
+            v.y *= f;
+            v.z *= f;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Mul(float f, Vector3 v)
         {
-            return new Vector3(
-                f * v.x,
-                f * v.y,
-                f * v.z
-            );
+            v.x *= f;
+            v.y *= f;
+            v.z *= f;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Mul(Vector3 v, int i)
         {
-            return new Vector3(
-                v.x * i,
-                v.y * i,
-                v.z * i
-            );
+            v.x *= i;
+            v.y *= i;
+            v.z *= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Mul(int i, Vector3 v)
         {
-            return new Vector3(
-                i * v.x,
-                i * v.y,
-                i * v.z
-            );
+            v.x *= i;
+            v.y *= i;
+            v.z *= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Mul(Vector3Int a, Vector3Int b)
         {
-            return new Vector3Int(
-                a.x * b.x,
-                a.y * b.y,
-                a.z * b.z
-            );
+            a.x *= b.x;
+            a.y *= b.y;
+            a.z *= b.z;
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Mul(Vector3Int v, float f)
         {
-            return new Vector3(
-                v.x * f,
-                v.y * f,
-                v.z * f
-            );
+            Vector3 r;
+            r.x = v.x * f;
+            r.y = v.y * f;
+            r.z = v.z * f;
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Mul(float f, Vector3Int v)
         {
-            return new Vector3(
-                f * v.x,
-                f * v.y,
-                f * v.z
-            );
+            Vector3 r;
+            r.x = v.x * f;
+            r.y = v.y * f;
+            r.z = v.z * f;
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Mul(Vector3Int v, int i)
         {
-            return new Vector3Int(
-                v.x * i,
-                v.y * i,
-                v.z * i
-            );
+            v.x *= i;
+            v.y *= i;
+            v.z *= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Mul(int i, Vector3Int v)
         {
-            return new Vector3Int(
-                i * v.x,
-                i * v.y,
-                i * v.z
-            );
+            v.x *= i;
+            v.y *= i;
+            v.z *= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Mul(Vector4 a, Vector4 b)
         {
-            return new Vector4(
-                a.x * b.x,
-                a.y * b.y,
-                a.z * b.z,
-                a.w * b.w
-            );
+            a.x *= b.x;
+            a.y *= b.y;
+            a.z *= b.z;
+            a.w *= b.w;
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Mul(Vector4 v, float f)
         {
-            return new Vector4(
-                v.x * f,
-                v.y * f,
-                v.z * f,
-                v.w * f
-            );
+            v.x *= f;
+            v.y *= f;
+            v.z *= f;
+            v.w *= f;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Mul(float f, Vector4 v)
         {
-            return new Vector4(
-                f * v.x,
-                f * v.y,
-                f * v.z,
-                f * v.w
-            );
+            v.x *= f;
+            v.y *= f;
+            v.z *= f;
+            v.w *= f;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Mul(Vector4 v, int i)
         {
-            return new Vector4(
-                v.x * i,
-                v.y * i,
-                v.z * i,
-                v.w * i
-            );
+            v.x *= i;
+            v.y *= i;
+            v.z *= i;
+            v.w *= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Mul(int i, Vector4 v)
         {
-            return new Vector4(
-                i * v.x,
-                i * v.y,
-                i * v.z,
-                i * v.w
-            );
+            v.x *= i;
+            v.y *= i;
+            v.z *= i;
+            v.w *= i;
+            return v;
         }
         #endregion
 
@@ -906,246 +1003,241 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Div(Vector2 a, Vector2 b)
         {
-            return new Vector2(
-                a.x / b.x,
-                a.y / b.y
-            );
+            a.x /= b.x;
+            a.y /= b.y;
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Div(Vector2 v, float f)
         {
-            return new Vector2(
-                v.x / f,
-                v.y / f
-            );
+            var e = 1 / f;
+            v.x *= e;
+            v.y *= e;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Div(float f, Vector2 v)
         {
-            return new Vector2(
-                f / v.x,
-                f / v.y
-            );
+            var e = 1 / f;
+            v.x *= e;
+            v.y *= e;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Div(Vector2 v, int i)
         {
-            return new Vector2(
-                v.x / i,
-                v.y / i
-            );
+            var e = 1.0f / i;
+            v.x *= e;
+            v.y *= e;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Div(int i, Vector2 v)
         {
-            return new Vector2(
-                i / v.x,
-                i / v.y
-            );
+            var e = 1.0f / i;
+            v.x *= e;
+            v.y *= e;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Div(Vector2Int a, Vector2Int b)
         {
-            return new Vector2Int(
-                a.x / b.x,
-                a.y / b.y
-            );
+            a.x /= b.x;
+            a.y /= b.y;
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Div(Vector2Int v, float f)
         {
-            return new Vector2(
-                v.x / f,
-                v.y / f
-            );
+            var e = 1 / f;
+            Vector2 r;
+            r.x = v.x * e;
+            r.y = v.y * e;
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Div(float f, Vector2Int v)
         {
-            return new Vector2(
-                f / v.x,
-                f / v.y
-            );
+            var e = 1 / f;
+            Vector2 r;
+            r.x = v.x * e;
+            r.y = v.y * e;
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Div(Vector2Int v, int i)
         {
-            return new Vector2Int(
-                v.x / i,
-                v.y / i
-            );
+            v.x /= i;
+            v.y /= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Div(int i, Vector2Int v)
         {
-            return new Vector2Int(
-                i / v.x,
-                i / v.y
-            );
+            v.x /= i;
+            v.y /= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Div(Vector3 a, Vector3 b)
         {
-            return new Vector3(
-                a.x / b.x,
-                a.y / b.y,
-                a.z / b.z
-            );
+            a.x /= b.x;
+            a.y /= b.y;
+            a.z /= b.z;
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Div(Vector3 v, float f)
         {
-            return new Vector3(
-                v.x / f,
-                v.y / f,
-                v.z / f
-            );
+            var e = 1 / f;
+            v.x *= e;
+            v.y *= e;
+            v.z *= e;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Div(float f, Vector3 v)
         {
-            return new Vector3(
-                f / v.x,
-                f / v.y,
-                f / v.z
-            );
+            var e = 1 / f;
+            v.x *= e;
+            v.y *= e;
+            v.z *= e;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Div(Vector3 v, int i)
         {
-            return new Vector3(
-                v.x / i,
-                v.y / i,
-                v.z / i
-            );
+            var e = 1.0f / i;
+            v.x *= e;
+            v.y *= e;
+            v.z *= e;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Div(int i, Vector3 v)
         {
-            return new Vector3(
-                i / v.x,
-                i / v.y,
-                i / v.z
-            );
+            var e = 1.0f / i;
+            v.x *= e;
+            v.y *= e;
+            v.z *= e;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Div(Vector3Int a, Vector3Int b)
         {
-            return new Vector3Int(
-                a.x / b.x,
-                a.y / b.y,
-                a.z / b.z
-            );
+            a.x /= b.x;
+            a.y /= b.y;
+            a.z /= b.z;
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Div(Vector3Int v, float f)
         {
-            return new Vector3(
-                v.x / f,
-                v.y / f,
-                v.z / f
-            );
+            var e = 1 / f;
+            Vector3 r;
+            r.x = v.x * e;
+            r.y = v.y * e;
+            r.z = v.z * e;
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Div(float f, Vector3Int v)
         {
-            return new Vector3(
-                f / v.x,
-                f / v.y,
-                f / v.z
-            );
+            var e = 1 / f;
+            Vector3 r;
+            r.x = v.x * e;
+            r.y = v.y * e;
+            r.z = v.z * e;
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Div(Vector3Int v, int i)
         {
-            return new Vector3Int(
-                v.x / i,
-                v.y / i,
-                v.z / i
-            );
+            v.x /= i;
+            v.y /= i;
+            v.z /= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Div(int i, Vector3Int v)
         {
-            return new Vector3Int(
-                i / v.x,
-                i / v.y,
-                i / v.z
-            );
+            v.x /= i;
+            v.y /= i;
+            v.z /= i;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Div(Vector4 a, Vector4 b)
         {
-            return new Vector4(
-                a.x / b.x,
-                a.y / b.y,
-                a.z / b.z,
-                a.w / b.w
-            );
+            a.x /= b.x;
+            a.y /= b.y;
+            a.z /= b.z;
+            a.w /= b.w;
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Div(Vector4 v, float f)
         {
-            return new Vector4(
-                v.x / f,
-                v.y / f,
-                v.z / f,
-                v.w / f
-            );
+            var e = 1 / f;
+            v.x *= e;
+            v.y *= e;
+            v.z *= e;
+            v.w *= e;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Div(float f, Vector4 v)
         {
-            return new Vector4(
-                f / v.x,
-                f / v.y,
-                f / v.z,
-                f / v.w
-            );
+            var e = 1 / f;
+            v.x *= e;
+            v.y *= e;
+            v.z *= e;
+            v.w *= e;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Div(Vector4 v, int i)
         {
-            return new Vector4(
-                v.x / i,
-                v.y / i,
-                v.z / i,
-                v.w / i
-            );
+            var e = 1.0f / i;
+            v.x *= e;
+            v.y *= e;
+            v.z *= e;
+            v.w *= e;
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Div(int i, Vector4 v)
         {
-            return new Vector4(
-                i / v.x,
-                i / v.y,
-                i / v.z,
-                i / v.w
-            );
+            var e = 1.0f / i;
+            v.x *= e;
+            v.y *= e;
+            v.z *= e;
+            v.w *= e;
+            return v;
         }
         #endregion
 

@@ -1,3 +1,4 @@
+using Common.Extensions;
 using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -31,22 +32,22 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static explicit operator Range3Int(Range3 r)
         {
-            return new Range3Int(
-                Mathx.RoundToInt(r.min),
-                Mathx.RoundToInt(r.max)
-            );
+            Range3Int ri;
+            ri.min = Mathx.RoundToInt(r.min);
+            ri.max = Mathx.RoundToInt(r.max);
+            return ri;
         }
 
         public Vector3 Center
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return (max + min) * 0.5f; }
+            get { return max.Add(min).Mul(0.5f); }
         }
 
         public Vector3 Extents
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return max - min; }
+            get { return max.Sub(min); }
         }
 
         public float Width
@@ -146,10 +147,9 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Range3 Intersection(Range3 other)
         {
-            return new Range3(
-                Mathx.Max(min, other.min),
-                Mathx.Min(max, other.max)
-            );
+            other.min = Mathx.Max(min, other.min);
+            other.max = Mathx.Min(max, other.max);
+            return other;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

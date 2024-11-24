@@ -22,9 +22,12 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static implicit operator Range(RangeInt r)
+        public static implicit operator Range(RangeInt ri)
         {
-            return new Range(r.min, r.max);
+            Range r;
+            r.min = ri.min;
+            r.max = ri.max;
+            return r;
         }
 
         public float Center
@@ -92,10 +95,10 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public RangeInt Intersection(RangeInt other)
         {
-            return new RangeInt(
-                Math.Max(min, other.min),
-                Math.Min(max, other.max)
-            );
+            RangeInt r;
+            r.min = Math.Max(min, other.min);
+            r.max = Math.Min(max, other.max);
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

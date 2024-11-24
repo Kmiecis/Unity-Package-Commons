@@ -48,9 +48,10 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Point(float a)
         {
-            var x = Mathf.Cos(a);
-            var y = Mathf.Sin(a);
-            return new Vector2(x, y);
+            Vector2 r;
+            r.x = Mathf.Cos(a);
+            r.y = Mathf.Sin(a);
+            return r;
         }
 
         /// <summary> Attempts to calculate circle with center in 'c' and radius 'r' from three points </summary>

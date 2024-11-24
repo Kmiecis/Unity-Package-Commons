@@ -55,11 +55,11 @@ namespace Common.Mathematics
             var d21 = Vector3.Dot(c, b);
             var d = d00 * d11 - d01 * d01;
 
-            var v = (d11 * d20 - d01 * d21) / d;
-            var w = (d00 * d21 - d01 * d20) / d;
-            var u = 1.0f - v - w;
-
-            return new Vector3(v, w, u);
+            Vector3 r;
+            r.x = (d11 * d20 - d01 * d21) / d;
+            r.y = (d00 * d21 - d01 * d20) / d;
+            r.z = 1.0f - r.x - r.y;
+            return r;
         }
 
         /// <summary> Calculates whether triangle defined by three vertices 'v0', 'v1' and 'v2' contains point 'p' </summary>

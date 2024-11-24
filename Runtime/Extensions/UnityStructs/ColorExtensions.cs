@@ -7,38 +7,132 @@ namespace Common.Extensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 XYZ(this Color self)
-            => new Vector3(self.r, self.g, self.b);
+        {
+            Vector3 r;
+            r.x = self.r;
+            r.y = self.g;
+            r.z = self.b;
+            return r;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 XYZW(this Color self)
-            => new Vector4(self.r, self.g, self.b, self.a);
+        {
+            Vector4 r;
+            r.x = self.r;
+            r.y = self.g;
+            r.z = self.b;
+            r.w = self.a;
+            return r;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Color RGB_(this Color self, float a = 1.0f)
-            => new Color(self.r, self.g, self.b, a);
+        {
+            self.a = a;
+            return self;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Color RG_A(this Color self, float b = 1.0f)
-            => new Color(self.r, self.g, b, self.a);
+        {
+            self.b = b;
+            return self;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Color R_BA(this Color self, float g = 1.0f)
-            => new Color(self.r, g, self.b, self.a);
+        {
+            self.g = g;
+            return self;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Color _GBA(this Color self, float r = 1.0f)
-            => new Color(r, self.g, self.b, self.a);
+        {
+            self.r = r;
+            return self;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Color Add(this Color self, float f)
-            => new Color(self.r + f, self.g + f, self.b + f, self.a + f);
+        {
+            self.r += f;
+            self.g += f;
+            self.b += f;
+            self.a += f;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Color Add(this Color self, Color c)
+        {
+            self.r += c.r;
+            self.g += c.g;
+            self.b += c.b;
+            self.a += c.a;
+            return self;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Color Sub(this Color self, float f)
-            => new Color(self.r - f, self.g - f, self.b - f, self.a - f);
+        {
+            self.r -= f;
+            self.g -= f;
+            self.b -= f;
+            self.a -= f;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Color Sub(this Color self, Color c)
+        {
+            self.r -= c.r;
+            self.g -= c.g;
+            self.b -= c.b;
+            self.a -= c.a;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Color Mul(this Color self, float f)
+        {
+            self.r *= f;
+            self.g *= f;
+            self.b *= f;
+            self.a *= f;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Color Mul(this Color self, Color c)
+        {
+            self.r *= c.r;
+            self.g *= c.g;
+            self.b *= c.b;
+            self.a *= c.a;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Color Div(this Color self, float f)
+        {
+            var e = 1 / f;
+            self.r *= e;
+            self.g *= e;
+            self.b *= e;
+            self.a *= e;
+            return self;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Color Div(this Color self, Color c)
-            => new Color(self.r / c.r, self.g / c.g, self.b / c.b, self.a / c.a);
+        {
+            self.r /= c.r;
+            self.g /= c.g;
+            self.b /= c.b;
+            self.a /= c.a;
+            return self;
+        }
     }
 }

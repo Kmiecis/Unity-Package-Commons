@@ -1,3 +1,4 @@
+using Common.Extensions;
 using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
@@ -38,13 +39,13 @@ namespace Common.Mathematics
         public Vector2 Center
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return Mathx.Mul((max + min), 0.5f); }
+            get { return max.Add(min).Mul(0.5f); }
         }
 
         public Vector2Int Size
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return max - min; }
+            get { return max.Sub(min); }
         }
 
         public int Width
@@ -136,10 +137,9 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Range2Int Intersection(Range2Int other)
         {
-            return new Range2Int(
-                Mathx.Max(min, other.min),
-                Mathx.Min(max, other.max)
-            );
+            other.min = Mathx.Max(min, other.min);
+            other.max = Mathx.Min(max, other.max);
+            return other;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

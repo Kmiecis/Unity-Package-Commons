@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Extensions;
+using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -29,7 +30,7 @@ namespace Common.Mathematics
         public Vector3 Centre
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => origin + extents * 0.5f;
+            get => origin.Add(extents.Mul(0.5f));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

@@ -330,10 +330,9 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 InverseLerp(Vector2 a, Vector2 b, float t)
         {
-            return new Vector2(
-                InverseLerp(a.x, b.x, t),
-                InverseLerp(a.y, b.y, t)
-            );
+            a.x = InverseLerp(a.x, b.x, t);
+            a.y = InverseLerp(a.y, b.y, t);
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -347,11 +346,10 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 InverseLerp(Vector3 a, Vector3 b, float t)
         {
-            return new Vector3(
-                InverseLerp(a.x, b.x, t),
-                InverseLerp(a.y, b.y, t),
-                InverseLerp(a.z, b.z, t)
-            );
+            a.x = InverseLerp(a.x, b.x, t);
+            a.y = InverseLerp(a.y, b.y, t);
+            a.z = InverseLerp(a.z, b.z, t);
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -365,12 +363,11 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 InverseLerp(Vector4 a, Vector4 b, float t)
         {
-            return new Vector4(
-                InverseLerp(a.x, b.x, t),
-                InverseLerp(a.y, b.y, t),
-                InverseLerp(a.z, b.z, t),
-                InverseLerp(a.w, b.w, t)
-            );
+            a.x = InverseLerp(a.x, b.x, t);
+            a.y = InverseLerp(a.y, b.y, t);
+            a.z = InverseLerp(a.z, b.z, t);
+            a.w = InverseLerp(a.w, b.w, t);
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -406,389 +403,349 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Clamp(Vector2 v, Vector2 min, Vector2 max)
         {
-            return new Vector2(
-                Mathf.Clamp(v.x, min.x, max.x),
-                Mathf.Clamp(v.y, min.y, max.y)
-            );
+            v.x = Mathf.Clamp(v.x, min.x, max.x);
+            v.y = Mathf.Clamp(v.y, min.y, max.y);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Clamp(Vector2 v, float min, Vector2 max)
         {
-            return new Vector2(
-                Mathf.Clamp(v.x, min, max.x),
-                Mathf.Clamp(v.y, min, max.y)
-            );
+            v.x = Mathf.Clamp(v.x, min, max.x);
+            v.y = Mathf.Clamp(v.y, min, max.y);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Clamp(Vector2 v, Vector2 min, float max)
         {
-            return new Vector2(
-                Mathf.Clamp(v.x, min.x, max),
-                Mathf.Clamp(v.y, min.y, max)
-            );
+            v.x = Mathf.Clamp(v.x, min.x, max);
+            v.y = Mathf.Clamp(v.y, min.y, max);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Clamp(Vector2 v, float min, float max)
         {
-            return new Vector2(
-                Mathf.Clamp(v.x, min, max),
-                Mathf.Clamp(v.y, min, max)
-            );
+            v.x = Mathf.Clamp(v.x, min, max);
+            v.y = Mathf.Clamp(v.y, min, max);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Clamp(Vector3 v, Vector3 min, Vector3 max)
         {
-            return new Vector3(
-                Mathf.Clamp(v.x, min.x, max.x),
-                Mathf.Clamp(v.y, min.y, max.y),
-                Mathf.Clamp(v.z, min.z, max.z)
-            );
+            v.x = Mathf.Clamp(v.x, min.x, max.x);
+            v.y = Mathf.Clamp(v.y, min.y, max.y);
+            v.z = Mathf.Clamp(v.z, min.z, max.z);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Clamp(Vector3 v, float min, Vector3 max)
         {
-            return new Vector3(
-                Mathf.Clamp(v.x, min, max.x),
-                Mathf.Clamp(v.y, min, max.y),
-                Mathf.Clamp(v.z, min, max.z)
-            );
+            v.x = Mathf.Clamp(v.x, min, max.x);
+            v.y = Mathf.Clamp(v.y, min, max.y);
+            v.z = Mathf.Clamp(v.z, min, max.z);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Clamp(Vector3 v, Vector3 min, float max)
         {
-            return new Vector3(
-                Mathf.Clamp(v.x, min.x, max),
-                Mathf.Clamp(v.y, min.y, max),
-                Mathf.Clamp(v.z, min.z, max)
-            );
+            v.x = Mathf.Clamp(v.x, min.x, max);
+            v.y = Mathf.Clamp(v.y, min.y, max);
+            v.z = Mathf.Clamp(v.z, min.z, max);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Clamp(Vector3 v, float min, float max)
         {
-            return new Vector3(
-                Mathf.Clamp(v.x, min, max),
-                Mathf.Clamp(v.y, min, max),
-                Mathf.Clamp(v.z, min, max)
-            );
+            v.x = Mathf.Clamp(v.x, min, max);
+            v.y = Mathf.Clamp(v.y, min, max);
+            v.z = Mathf.Clamp(v.z, min, max);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Clamp(Vector4 v, Vector4 min, Vector4 max)
         {
-            return new Vector4(
-                Mathf.Clamp(v.x, min.x, max.x),
-                Mathf.Clamp(v.y, min.y, max.y),
-                Mathf.Clamp(v.z, min.z, max.z),
-                Mathf.Clamp(v.w, min.w, max.w)
-            );
+            v.x = Mathf.Clamp(v.x, min.x, max.x);
+            v.y = Mathf.Clamp(v.y, min.y, max.y);
+            v.z = Mathf.Clamp(v.z, min.z, max.z);
+            v.w = Mathf.Clamp(v.w, min.w, max.w);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Clamp(Vector4 v, float min, Vector4 max)
         {
-            return new Vector4(
-                Mathf.Clamp(v.x, min, max.x),
-                Mathf.Clamp(v.y, min, max.y),
-                Mathf.Clamp(v.z, min, max.z),
-                Mathf.Clamp(v.w, min, max.w)
-            );
+            v.x = Mathf.Clamp(v.x, min, max.x);
+            v.y = Mathf.Clamp(v.y, min, max.y);
+            v.z = Mathf.Clamp(v.z, min, max.z);
+            v.w = Mathf.Clamp(v.w, min, max.w);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Clamp(Vector4 v, Vector4 min, float max)
         {
-            return new Vector4(
-                Mathf.Clamp(v.x, min.x, max),
-                Mathf.Clamp(v.y, min.y, max),
-                Mathf.Clamp(v.z, min.z, max),
-                Mathf.Clamp(v.w, min.w, max)
-            );
+            v.x = Mathf.Clamp(v.x, min.x, max);
+            v.y = Mathf.Clamp(v.y, min.y, max);
+            v.z = Mathf.Clamp(v.z, min.z, max);
+            v.w = Mathf.Clamp(v.w, min.w, max);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Clamp(Vector4 v, float min, float max)
         {
-            return new Vector4(
-                Mathf.Clamp(v.x, min, max),
-                Mathf.Clamp(v.y, min, max),
-                Mathf.Clamp(v.z, min, max),
-                Mathf.Clamp(v.w, min, max)
-            );
+            v.x = Mathf.Clamp(v.x, min, max);
+            v.y = Mathf.Clamp(v.y, min, max);
+            v.z = Mathf.Clamp(v.z, min, max);
+            v.w = Mathf.Clamp(v.w, min, max);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Clamp(Vector2Int v, Vector2Int min, Vector2Int max)
         {
-            return new Vector2Int(
-                Mathf.Clamp(v.x, min.x, max.x),
-                Mathf.Clamp(v.y, min.y, max.y)
-            );
+            v.x = Mathf.Clamp(v.x, min.x, max.x);
+            v.y = Mathf.Clamp(v.y, min.y, max.y);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Clamp(Vector2Int v, int min, Vector2Int max)
         {
-            return new Vector2Int(
-                Mathf.Clamp(v.x, min, max.x),
-                Mathf.Clamp(v.y, min, max.y)
-            );
+            v.x = Mathf.Clamp(v.x, min, max.x);
+            v.y = Mathf.Clamp(v.y, min, max.y);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Clamp(Vector2Int v, Vector2Int min, int max)
         {
-            return new Vector2Int(
-                Mathf.Clamp(v.x, min.x, max),
-                Mathf.Clamp(v.y, min.y, max)
-            );
+            v.x = Mathf.Clamp(v.x, min.x, max);
+            v.y = Mathf.Clamp(v.y, min.y, max);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Clamp(Vector2Int v, int min, int max)
         {
-            return new Vector2Int(
-                Mathf.Clamp(v.x, min, max),
-                Mathf.Clamp(v.y, min, max)
-            );
+            v.x = Mathf.Clamp(v.x, min, max);
+            v.y = Mathf.Clamp(v.y, min, max);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Clamp(Vector3Int v, Vector3Int min, Vector3Int max)
         {
-            return new Vector3Int(
-                Mathf.Clamp(v.x, min.x, max.x),
-                Mathf.Clamp(v.y, min.y, max.y),
-                Mathf.Clamp(v.z, min.z, max.z)
-            );
+            v.x = Mathf.Clamp(v.x, min.x, max.x);
+            v.y = Mathf.Clamp(v.y, min.y, max.y);
+            v.z = Mathf.Clamp(v.z, min.z, max.z);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Clamp(Vector3Int v, int min, Vector3Int max)
         {
-            return new Vector3Int(
-                Mathf.Clamp(v.x, min, max.x),
-                Mathf.Clamp(v.y, min, max.y),
-                Mathf.Clamp(v.z, min, max.z)
-            );
+            v.x = Mathf.Clamp(v.x, min, max.x);
+            v.y = Mathf.Clamp(v.y, min, max.y);
+            v.z = Mathf.Clamp(v.z, min, max.z);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Clamp(Vector3Int v, Vector3Int min, int max)
         {
-            return new Vector3Int(
-                Mathf.Clamp(v.x, min.x, max),
-                Mathf.Clamp(v.y, min.y, max),
-                Mathf.Clamp(v.z, min.z, max)
-            );
+            v.x = Mathf.Clamp(v.x, min.x, max);
+            v.y = Mathf.Clamp(v.y, min.y, max);
+            v.z = Mathf.Clamp(v.z, min.z, max);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Clamp(Vector3Int v, int min, int max)
         {
-            return new Vector3Int(
-                Mathf.Clamp(v.x, min, max),
-                Mathf.Clamp(v.y, min, max),
-                Mathf.Clamp(v.z, min, max)
-            );
+            v.x = Mathf.Clamp(v.x, min, max);
+            v.y = Mathf.Clamp(v.y, min, max);
+            v.z = Mathf.Clamp(v.z, min, max);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Wrap(Vector2 v, Vector2 min, Vector2 max)
         {
-            return new Vector2(
-                Wrap(v.x, min.x, max.x),
-                Wrap(v.y, min.y, max.y)
-            );
+            v.x = Wrap(v.x, min.x, max.x);
+            v.y = Wrap(v.y, min.y, max.y);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Wrap(Vector2 v, float min, Vector2 max)
         {
-            return new Vector2(
-                Wrap(v.x, min, max.x),
-                Wrap(v.y, min, max.y)
-            );
+            v.x = Wrap(v.x, min, max.x);
+            v.y = Wrap(v.y, min, max.y);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Wrap(Vector2 v, Vector2 min, float max)
         {
-            return new Vector2(
-                Wrap(v.x, min.x, max),
-                Wrap(v.y, min.y, max)
-            );
+            v.x = Wrap(v.x, min.x, max);
+            v.y = Wrap(v.y, min.y, max);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Wrap(Vector2 v, float min, float max)
         {
-            return new Vector2(
-                Wrap(v.x, min, max),
-                Wrap(v.y, min, max)
-            );
+            v.x = Wrap(v.x, min, max);
+            v.y = Wrap(v.y, min, max);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Wrap(Vector3 v, Vector3 min, Vector3 max)
         {
-            return new Vector3(
-                Wrap(v.x, min.x, max.x),
-                Wrap(v.y, min.y, max.y),
-                Wrap(v.z, min.z, max.z)
-            );
+            v.x = Wrap(v.x, min.x, max.x);
+            v.y = Wrap(v.y, min.y, max.y);
+            v.z = Wrap(v.z, min.z, max.z);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Wrap(Vector3 v, float min, Vector3 max)
         {
-            return new Vector3(
-                Wrap(v.x, min, max.x),
-                Wrap(v.y, min, max.y),
-                Wrap(v.z, min, max.z)
-            );
+            v.x = Wrap(v.x, min, max.x);
+            v.y = Wrap(v.y, min, max.y);
+            v.z = Wrap(v.z, min, max.z);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Wrap(Vector3 v, Vector3 min, float max)
         {
-            return new Vector3(
-                Wrap(v.x, min.x, max),
-                Wrap(v.y, min.y, max),
-                Wrap(v.z, min.z, max)
-            );
+            v.x = Wrap(v.x, min.x, max);
+            v.y = Wrap(v.y, min.y, max);
+            v.z = Wrap(v.z, min.z, max);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Wrap(Vector3 v, float min, float max)
         {
-            return new Vector3(
-                Wrap(v.x, min, max),
-                Wrap(v.y, min, max),
-                Wrap(v.z, min, max)
-            );
+            v.x = Wrap(v.x, min, max);
+            v.y = Wrap(v.y, min, max);
+            v.z = Wrap(v.z, min, max);
+            return v;
         }
 
         public static Vector4 Wrap(Vector4 v, Vector4 min, Vector4 max)
         {
-            return new Vector4(
-                Wrap(v.x, min.x, max.x),
-                Wrap(v.y, min.y, max.y),
-                Wrap(v.z, min.z, max.z),
-                Wrap(v.w, min.w, max.w)
-            );
+            v.x = Wrap(v.x, min.x, max.x);
+            v.y = Wrap(v.y, min.y, max.y);
+            v.z = Wrap(v.z, min.z, max.z);
+            v.w = Wrap(v.w, min.w, max.w);
+            return v;
         }
 
         public static Vector4 Wrap(Vector4 v, float min, Vector4 max)
         {
-            return new Vector4(
-                Wrap(v.x, min, max.x),
-                Wrap(v.y, min, max.y),
-                Wrap(v.z, min, max.z),
-                Wrap(v.w, min, max.w)
-            );
+            v.x = Wrap(v.x, min, max.x);
+            v.y = Wrap(v.y, min, max.y);
+            v.z = Wrap(v.z, min, max.z);
+            v.w = Wrap(v.w, min, max.w);
+            return v;
         }
 
         public static Vector4 Wrap(Vector4 v, Vector4 min, float max)
         {
-            return new Vector4(
-                Wrap(v.x, min.x, max),
-                Wrap(v.y, min.y, max),
-                Wrap(v.z, min.z, max),
-                Wrap(v.w, min.w, max)
-            );
+            v.x = Wrap(v.x, min.x, max);
+            v.y = Wrap(v.y, min.y, max);
+            v.z = Wrap(v.z, min.z, max);
+            v.w = Wrap(v.w, min.w, max);
+            return v;
         }
 
         public static Vector4 Wrap(Vector4 v, float min, float max)
         {
-            return new Vector4(
-                Wrap(v.x, min, max),
-                Wrap(v.y, min, max),
-                Wrap(v.z, min, max),
-                Wrap(v.w, min, max)
-            );
+            v.x = Wrap(v.x, min, max);
+            v.y = Wrap(v.y, min, max);
+            v.z = Wrap(v.z, min, max);
+            v.w = Wrap(v.w, min, max);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Wrap(Vector2Int v, Vector2Int min, Vector2Int max)
         {
-            return new Vector2Int(
-                Wrap(v.x, min.x, max.x),
-                Wrap(v.y, min.y, max.y)
-            );
+            v.x = Wrap(v.x, min.x, max.x);
+            v.y = Wrap(v.y, min.y, max.y);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Wrap(Vector2Int v, int min, Vector2Int max)
         {
-            return new Vector2Int(
-                Wrap(v.x, min, max.x),
-                Wrap(v.y, min, max.y)
-            );
+            v.x = Wrap(v.x, min, max.x);
+            v.y = Wrap(v.y, min, max.y);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Wrap(Vector2Int v, Vector2Int min, int max)
         {
-            return new Vector2Int(
-                Wrap(v.x, min.x, max),
-                Wrap(v.y, min.y, max)
-            );
+            v.x = Wrap(v.x, min.x, max);
+            v.y = Wrap(v.y, min.y, max);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Wrap(Vector2Int v, int min, int max)
         {
-            return new Vector2Int(
-                Wrap(v.x, min, max),
-                Wrap(v.y, min, max)
-            );
+            v.x = Wrap(v.x, min, max);
+            v.y = Wrap(v.y, min, max);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Wrap(Vector3Int v, Vector3Int min, Vector3Int max)
         {
-            return new Vector3Int(
-                Wrap(v.x, min.x, max.x),
-                Wrap(v.y, min.y, max.y),
-                Wrap(v.z, min.z, max.z)
-            );
+            v.x = Wrap(v.x, min.x, max.x);
+            v.y = Wrap(v.y, min.y, max.y);
+            v.z = Wrap(v.z, min.z, max.z);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Wrap(Vector3Int v, int min, Vector3Int max)
         {
-            return new Vector3Int(
-                Wrap(v.x, min, max.x),
-                Wrap(v.y, min, max.y),
-                Wrap(v.z, min, max.z)
-            );
+            v.x = Wrap(v.x, min, max.x);
+            v.y = Wrap(v.y, min, max.y);
+            v.z = Wrap(v.z, min, max.z);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Wrap(Vector3Int v, Vector3Int min, int max)
         {
-            return new Vector3Int(
-                Wrap(v.x, min.x, max),
-                Wrap(v.y, min.y, max),
-                Wrap(v.z, min.z, max)
-            );
+            v.x = Wrap(v.x, min.x, max);
+            v.y = Wrap(v.y, min.y, max);
+            v.z = Wrap(v.z, min.z, max);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Wrap(Vector3Int v, int min, int max)
         {
-            return new Vector3Int(
-                Wrap(v.x, min, max),
-                Wrap(v.y, min, max),
-                Wrap(v.z, min, max)
-            );
+            v.x = Wrap(v.x, min, max);
+            v.y = Wrap(v.y, min, max);
+            v.z = Wrap(v.z, min, max);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1023,227 +980,210 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Round(Vector2 v, int d)
         {
-            return new Vector2(
-                (float)Math.Round(v.x, d),
-                (float)Math.Round(v.y, d)
-            );
+            v.x = (float)Math.Round(v.x, d);
+            v.y = (float)Math.Round(v.y, d);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Round(Vector3 v, int d)
         {
-            return new Vector3(
-                (float)Math.Round(v.x, d),
-                (float)Math.Round(v.y, d),
-                (float)Math.Round(v.z, d)
-            );
+            v.x = (float)Math.Round(v.x, d);
+            v.y = (float)Math.Round(v.y, d);
+            v.z = (float)Math.Round(v.z, d);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Round(Vector4 v, int d)
         {
-            return new Vector4(
-                (float)Math.Round(v.x, d),
-                (float)Math.Round(v.y, d),
-                (float)Math.Round(v.z, d),
-                (float)Math.Round(v.w, d)
-            );
+            v.x = (float)Math.Round(v.x, d);
+            v.y = (float)Math.Round(v.y, d);
+            v.z = (float)Math.Round(v.z, d);
+            v.w = (float)Math.Round(v.w, d);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Round(Vector2 v)
         {
-            return new Vector2(
-                Mathf.Round(v.x),
-                Mathf.Round(v.y)
-            );
+            v.x = Mathf.Round(v.x);
+            v.y = Mathf.Round(v.y);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Round(Vector3 v)
         {
-            return new Vector3(
-                Mathf.Round(v.x),
-                Mathf.Round(v.y),
-                Mathf.Round(v.z)
-            );
+            v.x = Mathf.Round(v.x);
+            v.y = Mathf.Round(v.y);
+            v.z = Mathf.Round(v.z);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Round(Vector4 v)
         {
-            return new Vector4(
-                Mathf.Round(v.x),
-                Mathf.Round(v.y),
-                Mathf.Round(v.z),
-                Mathf.Round(v.w)
-            );
+            v.x = Mathf.Round(v.x);
+            v.y = Mathf.Round(v.y);
+            v.z = Mathf.Round(v.z);
+            v.w = Mathf.Round(v.w);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Floor(Vector2 v)
         {
-            return new Vector2(
-                Mathf.Floor(v.x),
-                Mathf.Floor(v.y)
-            );
+            v.x = Mathf.Floor(v.x);
+            v.y = Mathf.Floor(v.y);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Floor(Vector3 v)
         {
-            return new Vector3(
-                Mathf.Floor(v.x),
-                Mathf.Floor(v.y),
-                Mathf.Floor(v.z)
-            );
+            v.x = Mathf.Floor(v.x);
+            v.y = Mathf.Floor(v.y);
+            v.z = Mathf.Floor(v.z);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Floor(Vector4 v)
         {
-            return new Vector4(
-                Mathf.Floor(v.x),
-                Mathf.Floor(v.y),
-                Mathf.Floor(v.z),
-                Mathf.Floor(v.w)
-            );
+            v.x = Mathf.Floor(v.x);
+            v.y = Mathf.Floor(v.y);
+            v.z = Mathf.Floor(v.z);
+            v.w = Mathf.Floor(v.w);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Ceil(Vector2 v)
         {
-            return new Vector2(
-                Mathf.Ceil(v.x),
-                Mathf.Ceil(v.y)
-            );
+            v.x = Mathf.Ceil(v.x);
+            v.y = Mathf.Ceil(v.y);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Ceil(Vector3 v)
         {
-            return new Vector3(
-                Mathf.Ceil(v.x),
-                Mathf.Ceil(v.y),
-                Mathf.Ceil(v.z)
-            );
+            v.x = Mathf.Ceil(v.x);
+            v.y = Mathf.Ceil(v.y);
+            v.z = Mathf.Ceil(v.z);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Ceil(Vector4 v)
         {
-            return new Vector4(
-                Mathf.Ceil(v.x),
-                Mathf.Ceil(v.y),
-                Mathf.Ceil(v.z),
-                Mathf.Ceil(v.w)
-            );
+            v.x = Mathf.Ceil(v.x);
+            v.y = Mathf.Ceil(v.y);
+            v.z = Mathf.Ceil(v.z);
+            v.w = Mathf.Ceil(v.w);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int RoundToInt(Vector2 v)
         {
-            return new Vector2Int(
-                Mathf.RoundToInt(v.x),
-                Mathf.RoundToInt(v.y)
-            );
+            Vector2Int r = Vector2Int.zero;
+            r.x = Mathf.RoundToInt(v.x);
+            r.y = Mathf.RoundToInt(v.y);
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int RoundToInt(Vector3 v)
         {
-            return new Vector3Int(
-                Mathf.RoundToInt(v.x),
-                Mathf.RoundToInt(v.y),
-                Mathf.RoundToInt(v.z)
-            );
+            Vector3Int r = Vector3Int.zero;
+            r.x = Mathf.RoundToInt(v.x);
+            r.y = Mathf.RoundToInt(v.y);
+            r.z = Mathf.RoundToInt(v.z);
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int FloorToInt(Vector2 v)
         {
-            return new Vector2Int(
-                Mathf.FloorToInt(v.x),
-                Mathf.FloorToInt(v.y)
-            );
+            Vector2Int r = Vector2Int.zero;
+            r.x = Mathf.FloorToInt(v.x);
+            r.y = Mathf.FloorToInt(v.y);
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int FloorToInt(Vector3 v)
         {
-            return new Vector3Int(
-                Mathf.FloorToInt(v.x),
-                Mathf.FloorToInt(v.y),
-                Mathf.FloorToInt(v.z)
-            );
+            Vector3Int r = Vector3Int.zero;
+            r.x = Mathf.FloorToInt(v.x);
+            r.y = Mathf.FloorToInt(v.y);
+            r.z = Mathf.FloorToInt(v.z);
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int CeilToInt(Vector2 v)
         {
-            return new Vector2Int(
-                Mathf.CeilToInt(v.x),
-                Mathf.CeilToInt(v.y)
-            );
+            Vector2Int r = Vector2Int.zero;
+            r.x = Mathf.CeilToInt(v.x);
+            r.y = Mathf.CeilToInt(v.y);
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int CeilToInt(Vector3 v)
         {
-            return new Vector3Int(
-                Mathf.CeilToInt(v.x),
-                Mathf.CeilToInt(v.y),
-                Mathf.CeilToInt(v.z)
-            );
+            Vector3Int r = Vector3Int.zero;
+            r.x = Mathf.CeilToInt(v.x);
+            r.y = Mathf.CeilToInt(v.y);
+            r.z = Mathf.CeilToInt(v.z);
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Abs(Vector2 v)
         {
-            return new Vector2(
-                Mathf.Abs(v.x),
-                Mathf.Abs(v.y)
-            );
+            v.x = Mathf.Abs(v.x);
+            v.y = Mathf.Abs(v.y);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Abs(Vector3 v)
         {
-            return new Vector3(
-                Mathf.Abs(v.x),
-                Mathf.Abs(v.y),
-                Mathf.Abs(v.z)
-            );
+            v.x = Mathf.Abs(v.x);
+            v.y = Mathf.Abs(v.y);
+            v.z = Mathf.Abs(v.z);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Abs(Vector4 v)
         {
-            return new Vector4(
-                Mathf.Abs(v.x),
-                Mathf.Abs(v.y),
-                Mathf.Abs(v.z),
-                Mathf.Abs(v.w)
-            );
+            v.x = Mathf.Abs(v.x);
+            v.y = Mathf.Abs(v.y);
+            v.z = Mathf.Abs(v.z);
+            v.w = Mathf.Abs(v.w);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Abs(Vector2Int v)
         {
-            return new Vector2Int(
-                Mathf.Abs(v.x),
-                Mathf.Abs(v.y)
-            );
+            v.x = Mathf.Abs(v.x);
+            v.y = Mathf.Abs(v.y);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Abs(Vector3Int v)
         {
-            return new Vector3Int(
-                Mathf.Abs(v.x),
-                Mathf.Abs(v.y),
-                Mathf.Abs(v.z)
-            );
+            v.x = Mathf.Abs(v.x);
+            v.y = Mathf.Abs(v.y);
+            v.z = Mathf.Abs(v.z);
+            return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1267,31 +1207,28 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Select(Vector2 a, Vector2 b, Bool2 c)
         {
-            return new Vector2(
-                Select(a.x, b.x, c.x),
-                Select(a.y, b.y, c.y)
-            );
+            a.x = Select(a.x, b.x, c.x);
+            a.y = Select(a.y, b.y, c.y);
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Select(Vector3 a, Vector3 b, Bool3 c)
         {
-            return new Vector3(
-                Select(a.x, b.x, c.x),
-                Select(a.y, b.y, c.y),
-                Select(a.z, b.z, c.z)
-            );
+            a.x = Select(a.x, b.x, c.x);
+            a.y = Select(a.y, b.y, c.y);
+            a.z = Select(a.z, b.z, c.z);
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Select(Vector4 a, Vector4 b, Bool4 c)
         {
-            return new Vector4(
-                Select(a.x, b.x, c.x),
-                Select(a.y, b.y, c.y),
-                Select(a.z, b.z, c.z),
-                Select(a.w, b.w, c.w)
-            );
+            a.x = Select(a.x, b.x, c.x);
+            a.y = Select(a.y, b.y, c.y);
+            a.z = Select(a.z, b.z, c.z);
+            a.w = Select(a.w, b.w, c.w);
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1309,126 +1246,119 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Select(Vector2Int a, Vector2Int b, Bool2 c)
         {
-            return new Vector2Int(
-                Select(a.x, b.x, c.x),
-                Select(a.y, b.y, c.y)
-            );
+            a.x = Select(a.x, b.x, c.x);
+            a.y = Select(a.y, b.y, c.y);
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Select(Vector3Int a, Vector3Int b, Bool3 c)
         {
-            return new Vector3Int(
-                Select(a.x, b.x, c.x),
-                Select(a.y, b.y, c.y),
-                Select(a.z, b.z, c.z)
-            );
+            a.x = Select(a.x, b.x, c.x);
+            a.y = Select(a.y, b.y, c.y);
+            a.z = Select(a.z, b.z, c.z);
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Step(Vector2 a, Vector2 b)
         {
-            return new Vector2(
-                Step(a.x, b.x),
-                Step(a.y, b.y)
-            );
+            a.x = Step(a.x, b.x);
+            a.y = Step(a.y, b.y);
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Step(Vector3 a, Vector3 b)
         {
-            return new Vector3(
-                Step(a.x, b.x),
-                Step(a.y, b.y),
-                Step(a.z, b.z)
-            );
+            a.x = Step(a.x, b.x);
+            a.y = Step(a.y, b.y);
+            a.z = Step(a.z, b.z);
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Step(Vector4 a, Vector4 b)
         {
-            return new Vector4(
-                Step(a.x, b.x),
-                Step(a.y, b.y),
-                Step(a.z, b.z),
-                Step(a.w, b.w)
-            );
+            a.x = Step(a.x, b.x);
+            a.y = Step(a.y, b.y);
+            a.z = Step(a.z, b.z);
+            a.w = Step(a.w, b.w);
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Step(Vector2Int a, Vector2Int b)
         {
-            return new Vector2Int(
-                Step(a.x, b.x),
-                Step(a.y, b.y)
-            );
+            a.x = Step(a.x, b.x);
+            a.y = Step(a.y, b.y);
+            return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Step(Vector3Int a, Vector3Int b)
         {
-            return new Vector3Int(
-                Step(a.x, b.x),
-                Step(a.y, b.y),
-                Step(a.z, b.z)
-            );
+            a.x = Step(a.x, b.x);
+            a.y = Step(a.y, b.y);
+            a.z = Step(a.z, b.z);
+            return a;
         }
 
         /// <summary> Returns the componentwise fractional part of a Vector2 vector </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Frac(Vector2 f)
         {
-            return f - Floor(f);
+            return Sub(f, Floor(f));
         }
 
         /// <summary> Returns the componentwise fractional part of a Vector3 vector </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Frac(Vector3 f)
         {
-            return f - Floor(f);
+            return Sub(f, Floor(f));
         }
 
         /// <summary> Returns the componentwise fractional part of a Vector4 vector </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Frac(Vector4 f)
         {
-            return f - Floor(f);
+            return Sub(f, Floor(f));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Mod(Vector2 v, Vector2 m)
         {
-            return v - Mul(Floor(Mul(v, Div(1.0f, m))), m);
+            return Sub(v, Mul(Floor(Mul(v, Div(1.0f, m))), m));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Mod(Vector3 v, Vector3 m)
         {
-            return v - Mul(Floor(Mul(v, Div(1.0f, m))), m);
+            return Sub(v, Mul(Floor(Mul(v, Div(1.0f, m))), m));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Mod(Vector4 v, Vector4 m)
         {
-            return v - Mul(Floor(Mul(v, Div(1.0f, m))), m);
+            return Sub(v, Mul(Floor(Mul(v, Div(1.0f, m))), m));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Mod(Vector2 v, float m)
         {
-            return v - Floor(Mul(v, 1.0f / m)) * m;
+            return Sub(v, Mul(Floor(Mul(v, 1.0f / m)), m));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Mod(Vector3 v, float m)
         {
-            return v - Floor(Mul(v, 1.0f / m)) * m;
+            return Sub(v, Mul(Floor(Mul(v, 1.0f / m)), m));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Mod(Vector4 v, float m)
         {
-            return v - Floor(Mul(v, 1.0f / m)) * m;
+            return Sub(v, Mul(Floor(Mul(v, 1.0f / m)), m));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1471,10 +1401,9 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Min(Vector2 a, Vector2 b)
         {
-            return new Vector2(
-                Mathf.Min(a.x, b.x),
-                Mathf.Min(a.y, b.y)
-            );
+            a.x = Mathf.Min(a.x, b.x);
+            a.y = Mathf.Min(a.y, b.y);
+            return a;
         }
 
         /// <summary> Returns the componentwise minimum of an Vector2 array </summary>
@@ -1491,31 +1420,28 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Min(Vector2 v, float f)
         {
-            return new Vector2(
-                Mathf.Min(v.x, f),
-                Mathf.Min(v.y, f)
-            );
+            v.x = Mathf.Min(v.x, f);
+            v.y = Mathf.Min(v.y, f);
+            return v;
         }
 
         /// <summary> Returns the componentwise minimum of a float value and a Vector2 vector </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Min(float f, Vector2 v)
         {
-            return new Vector2(
-                Mathf.Min(f, v.x),
-                Mathf.Min(f, v.y)
-            );
+            v.x = Mathf.Min(f, v.x);
+            v.y = Mathf.Min(f, v.y);
+            return v;
         }
 
         /// <summary> Returns the componentwise minimum of two Vector3 vectors </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Min(Vector3 a, Vector3 b)
         {
-            return new Vector3(
-                Mathf.Min(a.x, b.x),
-                Mathf.Min(a.y, b.y),
-                Mathf.Min(a.z, b.z)
-            );
+            a.x = Mathf.Min(a.x, b.x);
+            a.y = Mathf.Min(a.y, b.y);
+            a.z = Mathf.Min(a.z, b.z);
+            return a;
         }
 
         /// <summary> Returns the componentwise minimum of an Vector3 array </summary>
@@ -1532,34 +1458,31 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Min(Vector3 v, float f)
         {
-            return new Vector3(
-                Mathf.Min(v.x, f),
-                Mathf.Min(v.y, f),
-                Mathf.Min(v.z, f)
-            );
+            v.x = Mathf.Min(v.x, f);
+            v.y = Mathf.Min(v.y, f);
+            v.z = Mathf.Min(v.z, f);
+            return v;
         }
 
         /// <summary> Returns the componentwise minimum of a float value and a Vector3 vector </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Min(float f, Vector3 v)
         {
-            return new Vector3(
-                Mathf.Min(f, v.x),
-                Mathf.Min(f, v.y),
-                Mathf.Min(f, v.z)
-            );
+            v.x = Mathf.Min(f, v.x);
+            v.y = Mathf.Min(f, v.y);
+            v.z = Mathf.Min(f, v.z);
+            return v;
         }
 
         /// <summary> Returns the componentwise minimum of two Vector4 vectors </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Min(Vector4 a, Vector4 b)
         {
-            return new Vector4(
-                Mathf.Min(a.x, b.x),
-                Mathf.Min(a.y, b.y),
-                Mathf.Min(a.z, b.z),
-                Mathf.Min(a.w, b.w)
-            );
+            a.x = Mathf.Min(a.x, b.x);
+            a.y = Mathf.Min(a.y, b.y);
+            a.z = Mathf.Min(a.z, b.z);
+            a.w = Mathf.Min(a.w, b.w);
+            return a;
         }
 
         /// <summary> Returns the componentwise minimum of an Vector4 array </summary>
@@ -1576,34 +1499,31 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Min(Vector4 v, float f)
         {
-            return new Vector4(
-                Mathf.Min(v.x, f),
-                Mathf.Min(v.y, f),
-                Mathf.Min(v.z, f),
-                Mathf.Min(v.w, f)
-            );
+            v.x = Mathf.Min(v.x, f);
+            v.y = Mathf.Min(v.y, f);
+            v.z = Mathf.Min(v.z, f);
+            v.w = Mathf.Min(v.w, f);
+            return v;
         }
 
         /// <summary> Returns the componentwise minimum of a float value and a Vector4 vector </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Min(float f, Vector4 v)
         {
-            return new Vector4(
-                Mathf.Min(f, v.x),
-                Mathf.Min(f, v.y),
-                Mathf.Min(f, v.z),
-                Mathf.Min(f, v.w)
-            );
+            v.x = Mathf.Min(f, v.x);
+            v.y = Mathf.Min(f, v.y);
+            v.z = Mathf.Min(f, v.z);
+            v.w = Mathf.Min(f, v.w);
+            return v;
         }
 
         /// <summary> Returns the componentwise minimum of two Vector2Int vectors </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Min(Vector2Int a, Vector2Int b)
         {
-            return new Vector2Int(
-                Mathf.Min(a.x, b.x),
-                Mathf.Min(a.y, b.y)
-            );
+            a.x = Mathf.Min(a.x, b.x);
+            a.y = Mathf.Min(a.y, b.y);
+            return a;
         }
 
         /// <summary> Returns the componentwise minimum of an Vector2Int array </summary>
@@ -1620,31 +1540,28 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Min(Vector2Int v, int i)
         {
-            return new Vector2Int(
-                Mathf.Min(v.x, i),
-                Mathf.Min(v.y, i)
-            );
+            v.x = Mathf.Min(v.x, i);
+            v.y = Mathf.Min(v.y, i);
+            return v;
         }
 
         /// <summary> Returns the componentwise minimum of an int value and a Vector2Int vector </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Min(int i, Vector2Int v)
         {
-            return new Vector2Int(
-                Mathf.Min(i, v.x),
-                Mathf.Min(i, v.y)
-            );
+            v.x = Mathf.Min(i, v.x);
+            v.y = Mathf.Min(i, v.y);
+            return v;
         }
 
         /// <summary> Returns the componentwise minimum of two Vector3Int vectors </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Min(Vector3Int a, Vector3Int b)
         {
-            return new Vector3Int(
-                Mathf.Min(a.x, b.x),
-                Mathf.Min(a.y, b.y),
-                Mathf.Min(a.z, b.z)
-            );
+            a.x = Mathf.Min(a.x, b.x);
+            a.y = Mathf.Min(a.y, b.y);
+            a.z = Mathf.Min(a.z, b.z);
+            return a;
         }
 
         /// <summary> Returns the componentwise minimum of an Vector3Int array </summary>
@@ -1661,32 +1578,29 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Min(Vector3Int v, int i)
         {
-            return new Vector3Int(
-                Mathf.Min(v.x, i),
-                Mathf.Min(v.y, i),
-                Mathf.Min(v.z, i)
-            );
+            v.x = Mathf.Min(v.x, i);
+            v.y = Mathf.Min(v.y, i);
+            v.z = Mathf.Min(v.z, i);
+            return v;
         }
 
         /// <summary> Returns the componentwise minimum of an int value and a Vector3Int vector </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Min(int i, Vector3Int v)
         {
-            return new Vector3Int(
-                Mathf.Min(i, v.x),
-                Mathf.Min(i, v.y),
-                Mathf.Min(i, v.z)
-            );
+            v.x = Mathf.Min(i, v.x);
+            v.y = Mathf.Min(i, v.y);
+            v.z = Mathf.Min(i, v.z);
+            return v;
         }
 
         /// <summary> Returns the componentwise maximum of two Vector2 vectors </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Max(Vector2 a, Vector2 b)
         {
-            return new Vector2(
-                Mathf.Max(a.x, b.x),
-                Mathf.Max(a.y, b.y)
-            );
+            a.x = Mathf.Max(a.x, b.x);
+            a.y = Mathf.Max(a.y, b.y);
+            return a;
         }
 
         /// <summary> Returns the componentwise maximum of an Vector2 array </summary>
@@ -1703,31 +1617,28 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Max(Vector2 v, float f)
         {
-            return new Vector2(
-                Mathf.Max(v.x, f),
-                Mathf.Max(v.y, f)
-            );
+            v.x = Mathf.Max(v.x, f);
+            v.y = Mathf.Max(v.y, f);
+            return v;
         }
 
         /// <summary> Returns the componentwise maximum of a float value and a Vector2 vector </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Max(float f, Vector2 v)
         {
-            return new Vector2(
-                Mathf.Max(f, v.x),
-                Mathf.Max(f, v.y)
-            );
+            v.x = Mathf.Max(f, v.x);
+            v.y = Mathf.Max(f, v.y);
+            return v;
         }
 
         /// <summary> Returns the componentwise maximum of two Vector3 vectors </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Max(Vector3 a, Vector3 b)
         {
-            return new Vector3(
-                Mathf.Max(a.x, b.x),
-                Mathf.Max(a.y, b.y),
-                Mathf.Max(a.z, b.z)
-            );
+            a.x = Mathf.Max(a.x, b.x);
+            a.y = Mathf.Max(a.y, b.y);
+            a.z = Mathf.Max(a.z, b.z);
+            return a;
         }
 
         /// <summary> Returns the componentwise maximum of an Vector3 array </summary>
@@ -1744,34 +1655,31 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Max(Vector3 v, float f)
         {
-            return new Vector3(
-                Mathf.Max(v.x, f),
-                Mathf.Max(v.y, f),
-                Mathf.Max(v.z, f)
-            );
+            v.x = Mathf.Max(v.x, f);
+            v.y = Mathf.Max(v.y, f);
+            v.z = Mathf.Max(v.z, f);
+            return v;
         }
 
         /// <summary> Returns the componentwise maximum of a float value and a Vector3 vector </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Max(float f, Vector3 v)
         {
-            return new Vector3(
-                Mathf.Max(f, v.x),
-                Mathf.Max(f, v.y),
-                Mathf.Max(f, v.z)
-            );
+            v.x = Mathf.Max(f, v.x);
+            v.y = Mathf.Max(f, v.y);
+            v.z = Mathf.Max(f, v.z);
+            return v;
         }
 
         /// <summary> Returns the componentwise maximum of two Vector4 vectors </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Max(Vector4 a, Vector4 b)
         {
-            return new Vector4(
-                Mathf.Max(a.x, b.x),
-                Mathf.Max(a.y, b.y),
-                Mathf.Max(a.z, b.z),
-                Mathf.Max(a.w, b.w)
-            );
+            a.x = Mathf.Max(a.x, b.x);
+            a.y = Mathf.Max(a.y, b.y);
+            a.z = Mathf.Max(a.z, b.z);
+            a.w = Mathf.Max(a.w, b.w);
+            return a;
         }
 
         /// <summary> Returns the componentwise maximum of an Vector4 array </summary>
@@ -1788,34 +1696,31 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Max(Vector4 v, float f)
         {
-            return new Vector4(
-                Mathf.Max(v.x, f),
-                Mathf.Max(v.y, f),
-                Mathf.Max(v.z, f),
-                Mathf.Max(v.w, f)
-            );
+            v.x = Mathf.Max(v.x, f);
+            v.y = Mathf.Max(v.y, f);
+            v.z = Mathf.Max(v.z, f);
+            v.w = Mathf.Max(v.w, f);
+            return v;
         }
 
         /// <summary> Returns the componentwise maximum of a float value and a Vector4 vector </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Max(float f, Vector4 v)
         {
-            return new Vector4(
-                Mathf.Max(f, v.x),
-                Mathf.Max(f, v.y),
-                Mathf.Max(f, v.z),
-                Mathf.Max(f, v.w)
-            );
+            v.x = Mathf.Max(f, v.x);
+            v.y = Mathf.Max(f, v.y);
+            v.z = Mathf.Max(f, v.z);
+            v.w = Mathf.Max(f, v.w);
+            return v;
         }
 
         /// <summary> Returns the componentwise maximum of two Vector2Int vectors </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Max(Vector2Int a, Vector2Int b)
         {
-            return new Vector2Int(
-                Mathf.Max(a.x, b.x),
-                Mathf.Max(a.y, b.y)
-            );
+            a.x = Mathf.Max(a.x, b.x);
+            a.y = Mathf.Max(a.y, b.y);
+            return a;
         }
 
         /// <summary> Returns the componentwise maximum of an Vector2Int array </summary>
@@ -1832,31 +1737,28 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Max(Vector2Int v, int i)
         {
-            return new Vector2Int(
-                Mathf.Max(v.x, i),
-                Mathf.Max(v.y, i)
-            );
+            v.x = Mathf.Max(v.x, i);
+            v.y = Mathf.Max(v.y, i);
+            return v;
         }
 
         /// <summary> Returns the componentwise maximum of an int value and a Vector2Int vector </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Max(int i, Vector2Int v)
         {
-            return new Vector2Int(
-                Mathf.Max(i, v.x),
-                Mathf.Max(i, v.y)
-            );
+            v.x = Mathf.Max(i, v.x);
+            v.y = Mathf.Max(i, v.y);
+            return v;
         }
 
         /// <summary> Returns the componentwise maximum of two Vector3Int vectors </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Max(Vector3Int a, Vector3Int b)
         {
-            return new Vector3Int(
-                Mathf.Max(a.x, b.x),
-                Mathf.Max(a.y, b.y),
-                Mathf.Max(a.z, b.z)
-            );
+            a.x = Mathf.Max(a.x, b.x);
+            a.y = Mathf.Max(a.y, b.y);
+            a.z = Mathf.Max(a.z, b.z);
+            return a;
         }
 
         /// <summary> Returns the componentwise maximum of an Vector3Int array </summary>
@@ -1873,22 +1775,20 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Max(Vector3Int v, int i)
         {
-            return new Vector3Int(
-                Mathf.Max(v.x, i),
-                Mathf.Max(v.y, i),
-                Mathf.Max(v.z, i)
-            );
+            v.x = Mathf.Max(v.x, i);
+            v.y = Mathf.Max(v.y, i);
+            v.z = Mathf.Max(v.z, i);
+            return v;
         }
 
         /// <summary> Returns the componentwise maximum of an int value and a Vector3Int vector </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Max(int i, Vector3Int v)
         {
-            return new Vector3Int(
-                Mathf.Max(i, v.x),
-                Mathf.Max(i, v.y),
-                Mathf.Max(i, v.z)
-            );
+            v.x = Mathf.Max(i, v.x);
+            v.y = Mathf.Max(i, v.y);
+            v.z = Mathf.Max(i, v.z);
+            return v;
         }
 
         /// <summary> Returns projection of vector 'v' onto normal vector 'n' </summary>
@@ -1912,12 +1812,12 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Rotate(Vector2 point, float angle)
         {
+            Vector2 r;
             float sin = Mathf.Sin(angle);
             float cos = Mathf.Cos(angle);
-            return new Vector2(
-                (cos * point.x) - (sin * point.y),
-                (sin * point.x) + (cos * point.y)
-            );
+            r.x = (cos * point.x) - (sin * point.y);
+            r.y = (sin * point.x) + (cos * point.y);
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1929,19 +1829,19 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 RotateAround(Vector2 point, Vector2 pivot, float angle)
         {
-            return Rotate(point - pivot, angle) + pivot;
+            return Add(Rotate(Sub(point, pivot), angle), pivot);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 RotateAround(Vector3 point, Vector3 pivot, Quaternion rotation)
         {
-            return rotation * (point - pivot) + pivot;
+            return Add(rotation * Sub(point, pivot), pivot);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Transform(Vector2 point, Vector2 translation, float rotation, Vector2 scale)
         {
-            return Rotate(Mul(point, scale), rotation) + translation;
+            return Add(Rotate(Mul(point, scale), rotation), translation);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1954,7 +1854,7 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 InverseTransform(Vector2 point, Vector2 translation, float angle, Vector2 scale)
         {
-            return Mul(Rotate(point - translation, -angle), Reciprocal(scale));
+            return Mul(Rotate(Sub(point, translation), -angle), Reciprocal(scale));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1973,7 +1873,7 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 InverseTransform(Vector3 point, Vector3 translation, Quaternion rotation, Vector3 scale)
         {
-            return Mul(Rotate(point - translation, Quaternion.Inverse(rotation)), Reciprocal(scale));
+            return Mul(Rotate(Sub(point, translation), Quaternion.Inverse(rotation)), Reciprocal(scale));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -1981,7 +1881,7 @@ namespace Common.Mathematics
         {
             var r = Vector2.zero;
             for (int i = 0; i < vs.Length; ++i)
-                r += vs[i];
+                r = Add(r, vs[i]);
             return Div(r, vs.Length);
         }
 
@@ -1990,7 +1890,7 @@ namespace Common.Mathematics
         {
             var r = Vector3.zero;
             for (int i = 0; i < vs.Length; ++i)
-                r += vs[i];
+                r = Add(r, vs[i]);
             return Div(r, vs.Length);
         }
     }

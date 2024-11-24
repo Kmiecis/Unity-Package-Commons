@@ -44,23 +44,24 @@ namespace Common.Mathematics
         }
 
         /// <summary> Converts coordinates defined by 'v' in space of extents 'e' to a position </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Convert(Vector3Int v, Vector3 e)
         {
-            return new Vector3(
-                v.x * e.x,
-                v.y * e.y,
-                v.z * e.z
-            );
+            e.x *= v.x;
+            e.y *= v.y;
+            e.z *= v.z;
+            return e;
         }
 
         /// <summary> Converts position defined by 'v' in space of extents 'e' to a coordinate </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Convert(Vector3 v, Vector3 e)
         {
-            return new Vector3Int(
-                Mathf.RoundToInt(v.x / e.x),
-                Mathf.RoundToInt(v.y / e.y),
-                Mathf.RoundToInt(v.z / e.z)
-            );
+            Vector3Int r = Vector3Int.zero;
+            r.x = Mathf.RoundToInt(v.x / e.x);
+            r.y = Mathf.RoundToInt(v.y / e.y);
+            r.z = Mathf.RoundToInt(v.z / e.z);
+            return r;
         }
     }
 }

@@ -7,61 +7,210 @@ namespace Common.Extensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int XY(this Vector3Int self)
-            => new Vector2Int(self.x, self.y);
+        {
+            Vector2Int r = Vector2Int.zero;
+            r.x = self.x;
+            r.y = self.y;
+            return r;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int XZ(this Vector3Int self)
-            => new Vector2Int(self.x, self.z);
+        {
+            Vector2Int r = Vector2Int.zero;
+            r.x = self.x;
+            r.y = self.z;
+            return r;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int YZ(this Vector3Int self)
-            => new Vector2Int(self.y, self.z);
+        {
+            Vector2Int r = Vector2Int.zero;
+            r.x = self.y;
+            r.y = self.z;
+            return r;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int _YZ(this Vector3Int self, int x)
-            => new Vector3Int(x, self.y, self.z);
+        {
+            self.x = x;
+            return self;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int X_Z(this Vector3Int self, int y)
-            => new Vector3Int(self.x, y, self.z);
+        {
+            self.y = y;
+            return self;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int XY_(this Vector3Int self, int z)
-            => new Vector3Int(self.x, self.y, z);
+        {
+            self.z = z;
+            return self;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Add(this Vector3Int self, float f)
-            => new Vector3(self.x + f, self.y + f, self.z + f);
+        {
+            Vector3 r;
+            r.x = self.x + f;
+            r.y = self.y + f;
+            r.z = self.z + f;
+            return r;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Add(this Vector3Int self, int i)
-            => new Vector3Int(self.x + i, self.y + i, self.z + i);
+        {
+            self.x += i;
+            self.y += i;
+            self.z += i;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Add(this Vector3Int self, Vector3 v)
+        {
+            v.x = self.x + v.x;
+            v.y = self.y + v.y;
+            v.z = self.z + v.z;
+            return v;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int Add(this Vector3Int self, Vector3Int v)
+        {
+            self.x += v.x;
+            self.y += v.y;
+            self.z += v.z;
+            return self;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Sub(this Vector3Int self, float f)
-            => new Vector3(self.x - f, self.y - f, self.z - f);
+        {
+            Vector3 r;
+            r.x = self.x - f;
+            r.y = self.y - f;
+            r.z = self.z - f;
+            return r;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Sub(this Vector3Int self, int i)
-            => new Vector3Int(self.x - i, self.y - i, self.z - i);
+        {
+            self.x -= i;
+            self.y -= i;
+            self.z -= i;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Sub(this Vector3Int self, Vector3 v)
+        {
+            v.x = self.x - v.x;
+            v.y = self.y - v.y;
+            v.z = self.z - v.z;
+            return v;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int Sub(this Vector3Int self, Vector3Int v)
+        {
+            self.x -= v.x;
+            self.y -= v.y;
+            self.z -= v.z;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Mul(this Vector3Int self, float f)
+        {
+            Vector3 r;
+            r.x = self.x * f;
+            r.y = self.y * f;
+            r.z = self.z * f;
+            return r;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int Mul(this Vector3Int self, int i)
+        {
+            self.x *= i;
+            self.y *= i;
+            self.z *= i;
+            return self;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Mul(this Vector3Int self, Vector3 v)
-            => new Vector3(self.x * v.x, self.y * v.y, self.z * v.z);
+        {
+            v.x = self.x * v.x;
+            v.y = self.y * v.y;
+            v.z = self.z * v.z;
+            return v;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int Mul(this Vector3Int self, Vector3Int v)
+        {
+            self.x *= v.x;
+            self.y *= v.y;
+            self.z *= v.z;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Div(this Vector3Int self, float f)
+        {
+            Vector3 r;
+            var e = 1 / f;
+            r.x = self.x * e;
+            r.y = self.y * e;
+            r.z = self.z * e;
+            return r;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int Div(this Vector3Int self, int i)
+        {
+            self.x /= i;
+            self.y /= i;
+            self.z /= i;
+            return self;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Div(this Vector3Int self, Vector3 v)
-            => new Vector3(self.x / v.x, self.y / v.y, self.z / v.z);
+        {
+            v.x = self.x / v.x;
+            v.y = self.y / v.y;
+            v.z = self.z / v.z;
+            return v;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Div(this Vector3Int self, Vector3Int v)
-            => new Vector3Int(self.x / v.x, self.y / v.y, self.z / v.z);
+        {
+            self.x /= v.x;
+            self.y /= v.y;
+            self.z /= v.z;
+            return self;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Normalized(this Vector3Int self)
         {
-            var l = self.magnitude;
-            return new Vector3(self.x / l, self.y / l, self.z / l);
+            Vector3 r;
+            var e = 1 / self.magnitude;
+            r.x = self.x * e;
+            r.y = self.y * e;
+            r.z = self.z * e;
+            return r;
         }
     }
 }

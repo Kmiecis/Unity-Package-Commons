@@ -7,69 +7,228 @@ namespace Common.Extensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int XY_(this Vector2Int self, int i = 0)
-            => new Vector3Int(self.x, self.y, i);
+        {
+            Vector3Int r = Vector3Int.zero;
+            r.x = self.x;
+            r.y = self.y;
+            r.z = i;
+            return r;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int X_Y(this Vector2Int self, int i = 0)
-            => new Vector3Int(self.x, i, self.y);
+        {
+            Vector3Int r = Vector3Int.zero;
+            r.x = self.x;
+            r.y = i;
+            r.z = self.y;
+            return r;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int _XY(this Vector2Int self, int i = 0)
-            => new Vector3Int(i, self.x, self.y);
+        {
+            Vector3Int r = Vector3Int.zero;
+            r.x = i;
+            r.y = self.x;
+            r.z = self.y;
+            return r;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int YX_(this Vector2Int self, int i = 0)
-            => new Vector3Int(self.y, self.x, i);
+        {
+            Vector3Int r = Vector3Int.zero;
+            r.x = self.y;
+            r.y = self.x;
+            r.z = i;
+            return r;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Y_X(this Vector2Int self, int i = 0)
-            => new Vector3Int(self.y, i, self.x);
+        {
+            Vector3Int r = Vector3Int.zero;
+            r.x = self.y;
+            r.y = i;
+            r.z = self.x;
+            return r;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int _YX(this Vector2Int self, int i = 0)
-            => new Vector3Int(i, self.y, self.x);
+        {
+            Vector3Int r = Vector3Int.zero;
+            r.x = i;
+            r.y = self.y;
+            r.z = self.x;
+            return r;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int YX(this Vector2Int self)
-            => new Vector2Int(self.y, self.x);
+        {
+            Vector2Int r = Vector2Int.zero;
+            r.x = self.y;
+            r.y = self.x;
+            return r;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int _Y(this Vector2Int self, int x = 0)
-            => new Vector2Int(x, self.y);
+        {
+            self.x = x;
+            return self;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int X_(this Vector2Int self, int y = 0)
-            => new Vector2Int(self.x, y);
+        {
+            self.y = y;
+            return self;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Add(this Vector2Int self, float f)
-            => new Vector2(self.x + f, self.y + f);
+        {
+            Vector2 r;
+            r.x = self.x + f;
+            r.y = self.y + f;
+            return r;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Add(this Vector2Int self, int i)
-            => new Vector2Int(self.x + i, self.y + i);
+        {
+            self.x += i;
+            self.y += i;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Add(this Vector2Int self, Vector2 v)
+        {
+            v.x = self.x + v.x;
+            v.y = self.y + v.y;
+            return v;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2Int Add(this Vector2Int self, Vector2Int v)
+        {
+            self.x += v.x;
+            self.y += v.y;
+            return self;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Sub(this Vector2Int self, float f)
-            => new Vector2(self.x - f, self.y - f);
+        {
+            Vector2 r;
+            r.x = self.x - f;
+            r.y = self.y - f;
+            return r;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Sub(this Vector2Int self, int i)
-            => new Vector2Int(self.x - i, self.y - i);
+        {
+            self.x -= i;
+            self.y -= i;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Sub(this Vector2Int self, Vector2 v)
+        {
+            v.x = self.x - v.x;
+            v.y = self.y - v.y;
+            return v;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2Int Sub(this Vector2Int self, Vector2Int v)
+        {
+            self.x -= v.x;
+            self.y -= v.y;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Mul(this Vector2Int self, float f)
+        {
+            Vector2 r;
+            r.x = self.x * f;
+            r.y = self.y * f;
+            return r;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2Int Mul(this Vector2Int self, int i)
+        {
+            self.x *= i;
+            self.y *= i;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Mul(this Vector2Int self, Vector2 v)
+        {
+            v.x = self.x * v.x;
+            v.y = self.y * v.y;
+            return v;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2Int Mul(this Vector2Int self, Vector2Int v)
+        {
+            self.x *= v.x;
+            self.y *= v.y;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Div(this Vector2Int self, float f)
+        {
+            Vector2 r;
+            var e = 1 / f;
+            r.x = self.x * e;
+            r.y = self.y * e;
+            return r;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2Int Div(this Vector2Int self, int i)
+        {
+            self.x /= i;
+            self.y /= i;
+            return self;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Div(this Vector2Int self, Vector2 v)
-            => new Vector2(self.x / v.x, self.y / v.y);
+        {
+            v.x = self.x / v.x;
+            v.y = self.y / v.y;
+            return v;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Div(this Vector2Int self, Vector2Int v)
-            => new Vector2Int(self.x / v.x, self.y / v.y);
+        {
+            self.x /= v.x;
+            self.y /= v.y;
+            return self;
+        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Normalized(this Vector2Int self)
         {
-            var l = self.magnitude;
-            return new Vector2(self.x / l, self.y / l);
+            Vector2 r;
+            var e = 1 / self.magnitude;
+            r.x = self.x * e;
+            r.y = self.y * e;
+            return r;
         }
     }
 }

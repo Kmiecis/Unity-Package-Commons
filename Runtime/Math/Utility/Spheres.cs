@@ -42,11 +42,12 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Point(float a, float b)
         {
+            Vector3 r;
             var t = Mathf.Acos(b * (1.0f / Mathf.PI) - 1.0f);
-            var x = Mathf.Sin(t) * Mathf.Cos(a);
-            var y = Mathf.Sin(t) * Mathf.Sin(a);
-            var z = Mathf.Cos(t);
-            return new Vector3(x, y, z);
+            r.x = Mathf.Sin(t) * Mathf.Cos(a);
+            r.y = Mathf.Sin(t) * Mathf.Sin(a);
+            r.z = Mathf.Cos(t);
+            return r;
         }
 
         /// <summary> Attempts to calculate a sphere with center in 'c' and radius 'r' from four points </summary>
