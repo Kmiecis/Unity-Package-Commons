@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Common.Inputs
 {
-    [AddComponentMenu(nameof(Common) + "/" + nameof(Inputs) + "/" + "Input Mouse System")]
+    [AddComponentMenu(nameof(Common) + "/" + nameof(Inputs) + "/" + nameof(InputMouseSystem))]
     public class InputMouseSystem : MouseSystem
     {
         protected override Vector2 GetMousePosition()

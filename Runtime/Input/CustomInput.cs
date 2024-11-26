@@ -3,7 +3,7 @@ using UnityEngine;
 using Common.Extensions;
 using Common.Mathematics;
 
-namespace Common
+namespace Common.Inputs
 {
     public static class CustomInput
     {

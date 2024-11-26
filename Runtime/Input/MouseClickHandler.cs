@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace Common.Inputs
 {
-    [AddComponentMenu(nameof(Common) + "/" + nameof(Inputs) + "/" + "Mouse Click Handler")]
+    [AddComponentMenu(nameof(Common) + "/" + nameof(Inputs) + "/" + nameof(MouseClickHandler))]
     public class MouseClickHandler : MonoBehaviour
     {
         [SerializeField] protected UnityEvent<MouseEventData> _onClicked = new UnityEvent<MouseEventData>();
@@ -18,7 +18,7 @@ namespace Common.Inputs
             _onClicked.Invoke(data);
         }
 
-        public void RemoveAllListeners()
+        public virtual void RemoveAllListeners()
         {
             _onClicked.RemoveAllListeners();
         }

@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace Common.Inputs
 {
-    [AddComponentMenu(nameof(Common) + "/" + nameof(Inputs) + "/" + "Mouse Hover Handler")]
+    [AddComponentMenu(nameof(Common) + "/" + nameof(Inputs) + "/" + nameof(MouseHoverHandler))]
     public class MouseHoverHandler : MonoBehaviour
     {
         [SerializeField] protected UnityEvent<MouseEventData> _onHoverBegan = new UnityEvent<MouseEventData>();
@@ -39,7 +39,7 @@ namespace Common.Inputs
             }
         }
 
-        public void RemoveAllListeners()
+        public virtual void RemoveAllListeners()
         {
             _onHoverBegan.RemoveAllListeners();
             _onHoverEnded.RemoveAllListeners();
