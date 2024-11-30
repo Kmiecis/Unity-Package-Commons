@@ -1,12 +1,17 @@
+using Common;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor;
-using UnityEngine;
 
 namespace CommonEditor.Extensions
 {
     public static class SerializedPropertyExtensions
     {
+        public static bool IsInArray(this SerializedProperty self)
+        {
+            return self.propertyPath.EndsWith("]");
+        }
+
         public static SerializedProperty FindPropertyRelativeField(this SerializedProperty self, string name)
         {
             return self.FindPropertyRelative($"<{name}>k__BackingField");
@@ -67,65 +72,6 @@ namespace CommonEditor.Extensions
         {
             int index = self.arraySize - 1;
             self.DeleteArrayElementAtIndex(index);
-        }
-
-        public static System.Type GetValueType(this SerializedProperty self)
-        {
-            switch (self.propertyType)
-            {
-                case SerializedPropertyType.AnimationCurve:
-                    return typeof(AnimationCurve);
-                case SerializedPropertyType.ArraySize:
-                    return typeof(int);
-                case SerializedPropertyType.Boolean:
-                    return typeof(bool);
-                case SerializedPropertyType.Bounds:
-                    return typeof(Bounds);
-                case SerializedPropertyType.BoundsInt:
-                    return typeof(BoundsInt);
-                case SerializedPropertyType.Character:
-                    return typeof(char);
-                case SerializedPropertyType.Color:
-                    return typeof(Color);
-                case SerializedPropertyType.Enum:
-                    break;
-                case SerializedPropertyType.ExposedReference:
-                    break;
-                case SerializedPropertyType.FixedBufferSize:
-                    return typeof(int);
-                case SerializedPropertyType.Float:
-                    return typeof(float);
-                case SerializedPropertyType.Hash128:
-                    return typeof(Hash128);
-                case SerializedPropertyType.Integer:
-                    return typeof(int);
-                case SerializedPropertyType.LayerMask:
-                    return typeof(LayerMask);
-                case SerializedPropertyType.ManagedReference:
-                    break;
-                case SerializedPropertyType.ObjectReference:
-                    break;
-                case SerializedPropertyType.Quaternion:
-                    return typeof(Quaternion);
-                case SerializedPropertyType.Rect:
-                    return typeof(Rect);
-                case SerializedPropertyType.RectInt:
-                    return typeof(RectInt);
-                case SerializedPropertyType.String:
-                    return typeof(string);
-                case SerializedPropertyType.Vector2:
-                    return typeof(Vector2);
-                case SerializedPropertyType.Vector2Int:
-                    return typeof(Vector2Int);
-                case SerializedPropertyType.Vector3:
-                    return typeof(Vector3);
-                case SerializedPropertyType.Vector3Int:
-                    return typeof(Vector3Int);
-                case SerializedPropertyType.Vector4:
-                    return typeof(Vector4);
-            }
-
-            return typeof(object);
         }
 
         public static object GetValue(this SerializedProperty self)
@@ -217,14 +163,14 @@ namespace CommonEditor.Extensions
             var type = source.GetType();
             while (type != null)
             {
-                var fieldFlags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance;
+                var fieldFlags = UBinding.AnyInstance;
                 var field = type.GetField(name, fieldFlags);
                 if (field != null)
                 {
                     return field.GetValue(source);
                 }
 
-                var propertyFlags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase;
+                var propertyFlags = UBinding.AnyInstance | BindingFlags.IgnoreCase;
                 var property = type.GetProperty(name, propertyFlags);
                 if (property != null)
                 {
@@ -241,7 +187,7 @@ namespace CommonEditor.Extensions
             var type = target.GetType();
             while (type != null)
             {
-                var fieldFlags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance;
+                var fieldFlags = UBinding.AnyInstance;
                 var field = type.GetField(name, fieldFlags);
                 if (field != null)
                 {
@@ -249,7 +195,7 @@ namespace CommonEditor.Extensions
                     return;
                 }
 
-                var propertyFlags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase;
+                var propertyFlags = UBinding.AnyInstance | BindingFlags.IgnoreCase;
                 var property = type.GetProperty(name, propertyFlags);
                 if (property != null)
                 {
