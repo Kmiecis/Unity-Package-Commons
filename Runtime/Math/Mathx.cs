@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Common.Mathematics
@@ -249,6 +250,12 @@ namespace Common.Mathematics
         public static float ReciprocalSafe(float f)
         {
             return Reciprocal(Mathf.Max(f, kEpsilon));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Round(float f, int d)
+        {
+            return (float)Math.Round(f, d);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

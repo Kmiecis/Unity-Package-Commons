@@ -980,27 +980,27 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Round(Vector2 v, int d)
         {
-            v.x = (float)Math.Round(v.x, d);
-            v.y = (float)Math.Round(v.y, d);
+            v.x = Round(v.x, d);
+            v.y = Round(v.y, d);
             return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Round(Vector3 v, int d)
         {
-            v.x = (float)Math.Round(v.x, d);
-            v.y = (float)Math.Round(v.y, d);
-            v.z = (float)Math.Round(v.z, d);
+            v.x = Round(v.x, d);
+            v.y = Round(v.y, d);
+            v.z = Round(v.z, d);
             return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Round(Vector4 v, int d)
         {
-            v.x = (float)Math.Round(v.x, d);
-            v.y = (float)Math.Round(v.y, d);
-            v.z = (float)Math.Round(v.z, d);
-            v.w = (float)Math.Round(v.w, d);
+            v.x = Round(v.x, d);
+            v.y = Round(v.y, d);
+            v.z = Round(v.z, d);
+            v.w = Round(v.w, d);
             return v;
         }
 
