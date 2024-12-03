@@ -31,6 +31,17 @@ namespace Common.Extensions
             return null;
         }
 
+        public static IEnumerable<Type> FindTypes(this Assembly self, Predicate<Type> match)
+        {
+            foreach (var type in self.GetTypes())
+            {
+                if (match(type))
+                {
+                    yield return type;
+                }
+            }
+        }
+
         public static IEnumerable<Type> GetTypes(this Assembly self, Predicate<Type> match)
         {
             var types = self.GetTypes();

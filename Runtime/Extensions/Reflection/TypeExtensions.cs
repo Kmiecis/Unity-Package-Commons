@@ -29,6 +29,19 @@ namespace Common.Extensions
             return attribute != null;
         }
 
+        public static bool HasInterface(this Type self, Type target)
+        {
+            var interfaces = self.GetInterfaces();
+            foreach (var item in interfaces)
+            {
+                if (Equals(item, target))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public static bool IsGenericTypeOf(this Type self, Type type)
         {
             while (self != null)
