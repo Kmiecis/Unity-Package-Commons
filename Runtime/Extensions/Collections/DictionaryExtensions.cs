@@ -54,6 +54,16 @@ namespace Common.Extensions
             return result;
         }
 
+        public static TValue Revoke<TKey, TValue>(this IDictionary<TKey, TValue> self, TKey key)
+        {
+            if (self.TryGetValue(key, out var result))
+            {
+                self.Remove(key);
+                return result;
+            }
+            return default;
+        }
+
         public static KeyValuePair<TKey, TValue> First<TKey, TValue>(this IDictionary<TKey, TValue> self)
         {
             foreach (var pairs in self)
