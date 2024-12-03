@@ -287,6 +287,19 @@ namespace Common.Extensions
             self.CopyTo(target, 0);
         }
         
+        public static void Parse<T, U>(this T[] self, U[] target, Func<T, U> parser)
+        {
+            for (int i = 0; i < self.Length; ++i)
+                target[i] = parser(self[i]);
+        }
+
+        public static U[] Parse<T, U>(this T[] self, Func<T, U> parser)
+        {
+            var result = new U[self.Length];
+            self.Parse(result, parser);
+            return result;
+        }
+
         public static int GetWidth<T>(this T[][] self)
         {
             return self.Length;

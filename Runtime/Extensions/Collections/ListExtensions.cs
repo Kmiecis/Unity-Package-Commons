@@ -214,6 +214,19 @@ namespace Common.Extensions
             return self.Populate(self.Capacity);
         }
 
+        public static void Parse<T, U>(this List<T> self, List<U> target, Func<T, U> parser)
+        {
+            for (int i = 0; i < self.Count; ++i)
+                target[i] = parser(self[i]);
+        }
+
+        public static List<U> Parse<T, U>(this List<T> self, Func<T, U> parser)
+        {
+            var result = new List<U>(self.Count);
+            self.Parse(result, parser);
+            return result;
+        }
+
         public static void AddRange<T>(this List<T> self, params T[] items)
         {
             self.AddRange(items);
