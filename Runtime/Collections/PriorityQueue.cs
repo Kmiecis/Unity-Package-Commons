@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Common
+namespace Common.Collections
 {
     public class PriorityQueue<T>
         where T : IComparable<T>
@@ -68,7 +68,11 @@ namespace Common
                 Array.Resize(ref _array, _count * 2);
             }
 
-            SiftUp(_count, ref value, 0);
+            var index = FindIndex(ref value);
+
+            ShiftUpFrom(index);
+
+            _array[index] = value;
 
             _count++;
         }
@@ -76,7 +80,9 @@ namespace Common
         public T Dequeue()
         {
             var result = _array[0];
+
             RemoveAt(0);
+
             return result;
         }
 
@@ -118,64 +124,36 @@ namespace Common
         private void RemoveAt(int index)
         {
             --_count;
-            var x = _array[_count];
-            int i = SiftDown(index);
-            SiftUp(i, ref x, index);
+
+            ShiftDownTo(index);
+
             _array[_count] = default;
         }
 
-        private int SiftDown(int index)
+        private int FindIndex(ref T value)
         {
-            int parent = index;
-            int leftChild = HeapLeftChild(parent);
-
-            while (leftChild < _count)
+            var index = _count - 1;
+            while (index > -1 && value.CompareTo(_array[index]) < 0)
             {
-                int rightChild = HeapRightFromLeft(leftChild);
-                int bestChild =
-                    (rightChild < _count && _array[rightChild].CompareTo(_array[leftChild]) < 0) ?
-                    rightChild : leftChild;
-
-                _array[parent] = _array[bestChild];
-
-                parent = bestChild;
-                leftChild = HeapLeftChild(parent);
+                index -= 1;
             }
-
-            return parent;
+            return Math.Min(index + 1, _count);
         }
 
-        private void SiftUp(int index, ref T x, int boundary)
+        private void ShiftDownTo(int target)
         {
-            while (index > boundary)
+            for (int i = target; i < _count; ++i)
             {
-                int parent = HeapParent(index);
-                if (_array[parent].CompareTo(x) > 0)
-                {
-                    _array[index] = _array[parent];
-                    index = parent;
-                }
-                else
-                {
-                    break;
-                }
+                _array[i] = _array[i + 1];
             }
-            _array[index] = x;
         }
 
-        private static int HeapParent(int i)
+        private void ShiftUpFrom(int start)
         {
-            return (i - 1) / 2;
-        }
-
-        private static int HeapLeftChild(int i)
-        {
-            return (i * 2) + 1;
-        }
-
-        private static int HeapRightFromLeft(int i)
-        {
-            return i + 1;
+            for (int i = _count; i > start; --i)
+            {
+                _array[i] = _array[i - 1];
+            }
         }
     }
 }

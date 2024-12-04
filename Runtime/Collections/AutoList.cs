@@ -6,28 +6,28 @@ namespace Common.Collections
 {
     public class AutoList<T> : List<T>
     {
-        private Func<T> m_Constructor;
-        private Action<T> m_Destructor;
+        private Func<T> _constructor;
+        private Action<T> _destructor;
 
         public Func<T> Constructor
         {
-            set { m_Constructor = value; }
+            set => _constructor = value;
         }
 
         public Action<T> Destructor
         {
-            set { m_Destructor = value; }
+            set => _destructor = value;
         }
 
         public AutoList(Func<T> constructor, Action<T> destructor)
         {
-            m_Constructor = constructor;
-            m_Destructor = destructor;
+            _constructor = constructor;
+            _destructor = destructor;
         }
 
         public new int Count
         {
-            get { return base.Count; }
+            get => base.Count;
             set
             {
                 var diff = value - base.Count;
@@ -38,7 +38,7 @@ namespace Common.Collections
                 {
                     var ts = new T[diff];
                     for (int i = 0; i < diff; ++i)
-                        ts[i] = m_Constructor();
+                        ts[i] = _constructor();
                     base.AddRange(ts);
                 }
                 else
@@ -46,7 +46,7 @@ namespace Common.Collections
                     while (diff++ < 0)
                     {
                         var element = this.Last();
-                        m_Destructor(element);
+                        _destructor(element);
                         this.RemoveLast();
                     }
                 }
