@@ -216,8 +216,9 @@ namespace Common.Extensions
 
         public static void Parse<T, U>(this List<T> self, List<U> target, Func<T, U> parser)
         {
+            target.Clear();
             for (int i = 0; i < self.Count; ++i)
-                target[i] = parser(self[i]);
+                target.Add(parser(self[i]));
         }
 
         public static List<U> Parse<T, U>(this List<T> self, Func<T, U> parser)
