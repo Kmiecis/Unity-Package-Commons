@@ -33,10 +33,20 @@ namespace Common.Extensions
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3Int _YZ(this Vector3Int self, int x)
+        public static Vector3Int XY_(this Vector3Int self, int z)
         {
-            self.x = x;
+            self.z = z;
             return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 XY_(this Vector3Int self, float z)
+        {
+            Vector3 r;
+            r.x = self.x;
+            r.y = self.y;
+            r.z = z;
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -47,10 +57,30 @@ namespace Common.Extensions
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3Int XY_(this Vector3Int self, int z)
+        public static Vector3 X_Z(this Vector3Int self, float y)
         {
-            self.z = z;
+            Vector3 r;
+            r.x = self.x;
+            r.y = y;
+            r.z = self.z;
+            return r;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int _YZ(this Vector3Int self, int x)
+        {
+            self.x = x;
             return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 _YZ(this Vector3Int self, float x)
+        {
+            Vector3 r;
+            r.x = x;
+            r.y = self.y;
+            r.z = self.z;
+            return r;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
