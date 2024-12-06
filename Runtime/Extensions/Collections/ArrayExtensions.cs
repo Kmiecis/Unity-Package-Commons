@@ -67,19 +67,20 @@ namespace Common.Extensions
             return -1 < index && index < self.Length;
         }
 
-        public static TOutput[] ConvertAll<TInput, TOutput>(this TInput[] self, Converter<TInput, TOutput> converter)
+        public static TOut[] ConvertAll<TIn, TOut>(this TIn[] self, Converter<TIn, TOut> converter)
         {
             return Array.ConvertAll(self, converter);
         }
 
-        public static List<TOutput> ConvertAllToList<TInput, TOutput>(this TInput[] self, Converter<TInput, TOutput> converter)
+        public static List<TOut> ConvertAll<TIn, TOut>(this TIn[] self, Converter<TIn, TOut> converter, List<TOut> target)
         {
-            var result = new List<TOutput>(self.Length);
+            target.Clear();
             for (int i = 0; i < self.Length; ++i)
             {
-                result.Add(converter(self[i]));
+                var item = converter(self[i]);
+                target.Add(item);
             }
-            return result;
+            return target;
         }
 
         public static bool TryGetAt<T>(this T[] self, int index, out T item)
@@ -287,19 +288,6 @@ namespace Common.Extensions
             self.CopyTo(target, 0);
         }
         
-        public static void Parse<T, U>(this T[] self, U[] target, Func<T, U> parser)
-        {
-            for (int i = 0; i < self.Length; ++i)
-                target[i] = parser(self[i]);
-        }
-
-        public static U[] Parse<T, U>(this T[] self, Func<T, U> parser)
-        {
-            var result = new U[self.Length];
-            self.Parse(result, parser);
-            return result;
-        }
-
         public static int GetWidth<T>(this T[][] self)
         {
             return self.Length;

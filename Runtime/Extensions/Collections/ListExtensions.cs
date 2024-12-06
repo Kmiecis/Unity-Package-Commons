@@ -63,6 +63,24 @@ namespace Common.Extensions
             return true;
         }
 
+        public static List<TOut> ConvertAll<TIn, TOut>(this List<TIn> self, Converter<TIn, TOut> converter)
+        {
+            var result = new List<TOut>(self.Count);
+            self.ConvertAll(converter, result);
+            return result;
+        }
+
+        public static List<TOut> ConvertAll<TIn, TOut>(this List<TIn> self, Converter<TIn, TOut> converter, List<TOut> target)
+        {
+            target.Clear();
+            for (int i = 0; i < self.Count; ++i)
+            {
+                var item = converter(self[i]);
+                target.Add(item);
+            }
+            return target;
+        }
+
         public static bool TryGetAt<T>(this List<T> self, int index, out T item)
         {
             if (-1 < index && index < self.Count)
@@ -212,20 +230,6 @@ namespace Common.Extensions
         public static List<T> Populate<T>(this List<T> self)
         {
             return self.Populate(self.Capacity);
-        }
-
-        public static void Parse<T, U>(this List<T> self, List<U> target, Func<T, U> parser)
-        {
-            target.Clear();
-            for (int i = 0; i < self.Count; ++i)
-                target.Add(parser(self[i]));
-        }
-
-        public static List<U> Parse<T, U>(this List<T> self, Func<T, U> parser)
-        {
-            var result = new List<U>(self.Count);
-            self.Parse(result, parser);
-            return result;
         }
 
         public static void AddRange<T>(this List<T> self, params T[] items)
