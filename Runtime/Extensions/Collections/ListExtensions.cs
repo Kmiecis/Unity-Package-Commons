@@ -311,7 +311,7 @@ namespace Common.Extensions
         public static T[] GetArray<T>(this List<T> self)
         {
             var type = self.GetType();
-            var field = type.GetField("_items", BindingFlags.Instance | BindingFlags.NonPublic);
+            var field = type.GetField("_items", UBinding.NonPublicInstance);
             return (T[])field.GetValue(self);
         }
     }

@@ -35,6 +35,14 @@ namespace Common
             }
         }
 
+        public string FullPath
+        {
+            get
+            {
+                return string.Concat(Path, Extension);
+            }
+        }
+
         public string Path
         {
             get
@@ -70,6 +78,14 @@ namespace Common
             get
             {
                 return Path.Contains(RESOURCES);
+            }
+        }
+
+        public string FullResourcePath
+        {
+            get
+            {
+                return string.Concat(ResourcePath, Extension);
             }
         }
 

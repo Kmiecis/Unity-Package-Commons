@@ -67,18 +67,31 @@ namespace Common.Extensions
             return -1 < index && index < self.Length;
         }
 
-        public static TOut[] ConvertAll<TIn, TOut>(this TIn[] self, Converter<TIn, TOut> converter)
+        public static TOut[] ConvertAll<T, TOut>(this T[] self, Converter<T, TOut> converter)
         {
             return Array.ConvertAll(self, converter);
         }
 
-        public static List<TOut> ConvertAll<TIn, TOut>(this TIn[] self, Converter<TIn, TOut> converter, List<TOut> target)
+        public static List<TOut> ConvertAll<T, TOut>(this T[] self, Converter<T, TOut> converter, List<TOut> target)
         {
             target.Clear();
             for (int i = 0; i < self.Length; ++i)
             {
                 var item = converter(self[i]);
                 target.Add(item);
+            }
+            return target;
+        }
+
+        public static Dictionary<TKey, TValue> ConvertAll<T, TKey, TValue>(this T[] self, Converter<T, TKey> keygen, Converter<T, TValue> valuegen, Dictionary<TKey, TValue> target)
+        {
+            target.Clear();
+            for (int i = 0; i < self.Length; ++i)
+            {
+                var item = self[i];
+                var key = keygen(item);
+                var value = valuegen(item);
+                target.Add(key, value);
             }
             return target;
         }

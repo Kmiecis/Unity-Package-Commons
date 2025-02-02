@@ -6,6 +6,13 @@ namespace Common.Extensions
 {
     public static class TransformExtensions
     {
+        public static void Reset(this Transform self)
+        {
+            self.localPosition = Vector3.zero;
+            self.localRotation = Quaternion.identity;
+            self.localScale = Vector3.one;
+        }
+
         public static Vector3 TransformDirectionTo(this Transform self, Vector3 position, Transform target)
         {
             if (self != null)

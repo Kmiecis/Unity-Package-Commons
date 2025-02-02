@@ -21,12 +21,13 @@ namespace CommonEditor
         protected abstract Object FindObject();
     }
 
-    [CustomPropertyDrawer(typeof(FindObjectAttribute))]
-    public class FindObjectDrawer : AFindObjectDrawer
+    [CustomPropertyDrawer(typeof(FindObjectOfTypeAttribute))]
+    public class FindObjectOfTypeDrawer : AFindObjectDrawer
     {
         protected override Object FindObject()
         {
-            var type = fieldInfo.FieldType;
+            var attribute = (FindObjectOfTypeAttribute)this.attribute;
+            var type = attribute.type ?? fieldInfo.FieldType;
             return Object.FindObjectOfType(type);
         }
     }
@@ -37,7 +38,8 @@ namespace CommonEditor
         protected override Object FindObject()
         {
             var attribute = (FindObjectWithNameAttribute)this.attribute;
-            return GameObject.Find(attribute.name);
+            var name = attribute.name ?? fieldInfo.Name;
+            return GameObject.Find(name);
         }
     }
 
