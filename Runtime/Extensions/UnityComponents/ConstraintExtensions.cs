@@ -3,19 +3,19 @@ using UnityEngine.Animations;
 
 namespace Common.Extensions
 {
-    public static class ParentConstraintExtensions
+    public static class ConstraintExtensions
     {
-        public static void AddSource(this ParentConstraint self, Transform source, float weight = 1.0f)
+        public static int AddSource(this IConstraint self, Transform source, float weight = 1.0f)
         {
-            self.AddSource(new ConstraintSource { sourceTransform = source, weight = weight });
+            return self.AddSource(new ConstraintSource { sourceTransform = source, weight = weight });
         }
 
-        public static void EnsureSource(this ParentConstraint self, Transform source, float weight = 1.0f)
+        public static void EnsureSource(this IConstraint self, Transform source, float weight = 1.0f)
         {
             self.EnsureSource(new ConstraintSource { sourceTransform = source, weight = weight });
         }
 
-        public static void EnsureSource(this ParentConstraint self, ConstraintSource source)
+        public static void EnsureSource(this IConstraint self, ConstraintSource source)
         {
             if (self.sourceCount == 0)
             {
@@ -27,7 +27,7 @@ namespace Common.Extensions
             }
         }
 
-        public static void RemoveSource(this ParentConstraint self, Transform source)
+        public static void RemoveSource(this IConstraint self, Transform source)
         {
             var count = self.sourceCount;
             for (int i = count - 1; i > -1; --i)
@@ -40,7 +40,7 @@ namespace Common.Extensions
             }
         }
 
-        public static void ClearSources(this ParentConstraint self)
+        public static void ClearSources(this IConstraint self)
         {
             var count = self.sourceCount;
             for (int i = count - 1; i > -1; --i)
@@ -49,7 +49,7 @@ namespace Common.Extensions
             }
         }
 
-        public static void RemoveLastSource(this ParentConstraint self)
+        public static void RemoveLastSource(this IConstraint self)
         {
             self.RemoveSource(self.sourceCount - 1);
         }
