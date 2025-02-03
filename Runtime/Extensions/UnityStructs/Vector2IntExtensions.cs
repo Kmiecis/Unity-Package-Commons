@@ -16,7 +16,7 @@ namespace Common.Extensions
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 XY_(this Vector2Int self, float f = 0.0f)
+        public static Vector3 XY_(this Vector2Int self, float f)
         {
             Vector3 r;
             r.x = self.x;
@@ -36,7 +36,7 @@ namespace Common.Extensions
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 X_Y(this Vector2Int self, float f = 0.0f)
+        public static Vector3 X_Y(this Vector2Int self, float f)
         {
             Vector3 r;
             r.x = self.x;
@@ -56,7 +56,7 @@ namespace Common.Extensions
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 _XY(this Vector2Int self, float f = 0.0f)
+        public static Vector3 _XY(this Vector2Int self, float f)
         {
             Vector3 r;
             r.x = f;
@@ -76,7 +76,7 @@ namespace Common.Extensions
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 YX_(this Vector2Int self, float f = 0.0f)
+        public static Vector3 YX_(this Vector2Int self, float f)
         {
             Vector3 r;
             r.x = self.y;
@@ -96,7 +96,7 @@ namespace Common.Extensions
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Y_X(this Vector2Int self, float f = 0.0f)
+        public static Vector3 Y_X(this Vector2Int self, float f)
         {
             Vector3 r;
             r.x = self.y;
@@ -116,7 +116,7 @@ namespace Common.Extensions
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 _YX(this Vector2Int self, float f = 0.0f)
+        public static Vector3 _YX(this Vector2Int self, float f)
         {
             Vector3 r;
             r.x = f;
@@ -142,7 +142,7 @@ namespace Common.Extensions
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 X_(this Vector2Int self, float y = 0.0f)
+        public static Vector2 X_(this Vector2Int self, float y)
         {
             Vector2 r;
             r.x = self.x;
@@ -158,7 +158,7 @@ namespace Common.Extensions
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 _Y(this Vector2Int self, float x = 0.0f)
+        public static Vector2 _Y(this Vector2Int self, float x)
         {
             Vector2 r;
             r.x = x;
