@@ -54,6 +54,32 @@ namespace Common.Mathematics
             return !float.IsNaN(f) && !float.IsInfinity(f);
         }
 
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsBit(int value, int bit)
+        {
+            return (value & bit) == bit;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool HasBit(int value, int bit)
+        {
+            return (value & bit) != 0;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int SetBit(int value, int bit)
+        {
+            return value |= bit;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int ClearBit(int value, int bit)
+        {
+            return value &= ~bit;
+        }
+
+
         public static float ClampLerped(float f, float min, float max, float t)
         {
             t = Mathf.Clamp(t, 0.0f, 1.0f);
@@ -63,6 +89,7 @@ namespace Common.Mathematics
                 return Lerp(f, max, t);
             return f;
         }
+
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Lerp(float a, float b, float t)
@@ -77,6 +104,13 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Remap(float fromMin, float fromMax, float toMin, float toMax, float v)
+        {
+            return Lerp(toMin, toMax, InverseLerp(fromMin, fromMax, v));
+        }
+
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Square(float f)
         {
             return f * f;
@@ -87,6 +121,7 @@ namespace Common.Mathematics
         {
             return i * i;
         }
+
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int Sign(float f)
@@ -99,6 +134,7 @@ namespace Common.Mathematics
         {
             return (i >= 0) ? 1 : -1;
         }
+
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Wrap(float f, float min, float max)
@@ -114,11 +150,13 @@ namespace Common.Mathematics
             return (((i - min) % delta) + delta) % delta + min;
         }
 
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Saturate(float f)
         {
             return Mathf.Clamp(f, 0.0f, 1.0f);
         }
+
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float SmoothStep(float f)
@@ -144,11 +182,6 @@ namespace Common.Mathematics
             return Lerp(a, b, SmootherStep(t));
         }
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Remap(float fromMin, float fromMax, float toMin, float toMax, float v)
-        {
-            return Lerp(toMin, toMax, InverseLerp(fromMin, fromMax, v));
-        }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsInRange(float f, float min, float max)
@@ -162,6 +195,7 @@ namespace Common.Mathematics
             return min <= i && i <= max;
         }
 
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsEven(int i)
         {
@@ -173,6 +207,7 @@ namespace Common.Mathematics
         {
             return (i % 2) == 1;
         }
+
 
         /// <summary> Calculates array index from 'x' and 'y' coords with width 'w' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -239,6 +274,7 @@ namespace Common.Mathematics
         {
             return (i - offset + count) % count;
         }
+
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Reciprocal(float f)
@@ -252,11 +288,31 @@ namespace Common.Mathematics
             return Reciprocal(Mathf.Max(f, kEpsilon));
         }
 
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Round(float f, int d)
         {
             return (float)Math.Round(f, d);
         }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte FloorToByte(float f)
+        {
+            return (byte)Mathf.FloorToInt(f);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte CeilToByte(float f)
+        {
+            return (byte)Mathf.CeilToInt(f);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte RoundToByte(float f)
+        {
+            return (byte)Mathf.RoundToInt(f);
+        }
+
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Select(float a, float b, bool c)
@@ -276,6 +332,7 @@ namespace Common.Mathematics
             return Select(0, 1, b);
         }
 
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Step(float a, float b)
         {
@@ -288,6 +345,7 @@ namespace Common.Mathematics
             return Select(0, 1, b >= a);
         }
 
+
         /// <summary> Returns the fractional part of a float value </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Frac(float f)
@@ -295,17 +353,20 @@ namespace Common.Mathematics
             return f - Mathf.Floor(f);
         }
 
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Mod(float f, float m)
         {
             return f - m * Mathf.Floor(f / m);
         }
 
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Permute(float f, float p, float m)
         {
             return Mod((p * f + 1.0f) * f, m);
         }
+
 
         /// <summary> Returns f raised to power p </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -341,6 +402,7 @@ namespace Common.Mathematics
             return r;
         }
 
+
         /// <summary> Calculates determinant of an [n,n] matrix </summary>
         public static float Determinant(float[,] a)
         {
@@ -374,6 +436,7 @@ namespace Common.Mathematics
                 return d;
             }
         }
+
 
         /// <summary> Calculates size of an object within field of view of 'angle' at 'distance' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

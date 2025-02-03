@@ -1,10 +1,20 @@
-﻿using System.Runtime.CompilerServices;
+﻿using Common.Mathematics;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Common.Extensions
 {
     public static class ColorExtensions
     {
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string Hex(this Color self)
+        {
+            var r = Mathx.RoundToByte(self.r * 255.0f);
+            var g = Mathx.RoundToByte(self.g * 255.0f);
+            var b = Mathx.RoundToByte(self.b * 255.0f);
+            return string.Format("{0:X2}{1:X2}{2:X2}", r, g, b);
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 XYZ(this Color self)
         {

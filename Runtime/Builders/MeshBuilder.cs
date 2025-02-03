@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Mathematics;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -71,11 +72,11 @@ namespace Common
             if (_uvs.Count > 0)
                 mesh.SetUVs(0, _uvs);
 
-            if (BitUtility.IsSet((int)_options, (int)EMeshBuildingOptions.RECALCULATE_BOUNDS))
+            if (Mathx.HasBit((int)_options, (int)EMeshBuildingOptions.RECALCULATE_BOUNDS))
                 mesh.RecalculateBounds();
-            if (BitUtility.IsSet((int)_options, (int)EMeshBuildingOptions.RECALCULATE_NORMALS))
+            if (Mathx.HasBit((int)_options, (int)EMeshBuildingOptions.RECALCULATE_NORMALS))
                 mesh.RecalculateNormals();
-            if (BitUtility.IsSet((int)_options, (int)EMeshBuildingOptions.RECALCULATE_TANGENTS))
+            if (Mathx.HasBit((int)_options, (int)EMeshBuildingOptions.RECALCULATE_TANGENTS))
                 mesh.RecalculateTangents();
         }
 
