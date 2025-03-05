@@ -316,7 +316,7 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float RoundTo(float f, float s)
         {
-            return (f / s) * s;
+            return Mathf.Round(f / s) * s;
         }
 
 

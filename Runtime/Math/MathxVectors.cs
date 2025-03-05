@@ -1145,54 +1145,54 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 RoundTo(Vector2 v, float s)
         {
-            v.x = (v.x / s) * s;
-            v.y = (v.y / s) * s;
+            v.x = Mathf.Round(v.x / s) * s;
+            v.y = Mathf.Round(v.y / s) * s;
             return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 RoundTo(Vector2 v, Vector2 s)
         {
-            v.x = (v.x / s.x) * s.x;
-            v.y = (v.y / s.y) * s.y;
+            v.x = Mathf.Round(v.x / s.x) * s.x;
+            v.y = Mathf.Round(v.y / s.y) * s.y;
             return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 RoundTo(Vector3 v, float s)
         {
-            v.x = (v.x / s) * s;
-            v.y = (v.y / s) * s;
-            v.z = (v.z / s) * s;
+            v.x = Mathf.Round(v.x / s) * s;
+            v.y = Mathf.Round(v.y / s) * s;
+            v.z = Mathf.Round(v.z / s) * s;
             return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 RoundTo(Vector3 v, Vector3 s)
         {
-            v.x = (v.x / s.x) * s.x;
-            v.y = (v.y / s.y) * s.y;
-            v.z = (v.z / s.z) * s.z;
+            v.x = Mathf.Round(v.x / s.x) * s.x;
+            v.y = Mathf.Round(v.y / s.y) * s.y;
+            v.z = Mathf.Round(v.z / s.z) * s.z;
             return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 RoundTo(Vector4 v, float s)
         {
-            v.x = (v.x / s) * s;
-            v.y = (v.y / s) * s;
-            v.z = (v.z / s) * s;
-            v.w = (v.w / s) * s;
+            v.x = Mathf.Round(v.x / s) * s;
+            v.y = Mathf.Round(v.y / s) * s;
+            v.z = Mathf.Round(v.z / s) * s;
+            v.w = Mathf.Round(v.w / s) * s;
             return v;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 RoundTo(Vector4 v, Vector4 s)
         {
-            v.x = (v.x / s.x) * s.x;
-            v.y = (v.y / s.y) * s.y;
-            v.z = (v.z / s.z) * s.z;
-            v.w = (v.w / s.w) * s.w;
+            v.x = Mathf.Round(v.x / s.x) * s.x;
+            v.y = Mathf.Round(v.y / s.y) * s.y;
+            v.z = Mathf.Round(v.z / s.z) * s.z;
+            v.w = Mathf.Round(v.w / s.w) * s.w;
             return v;
         }
 
