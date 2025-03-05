@@ -313,6 +313,12 @@ namespace Common.Mathematics
             return (byte)Mathf.RoundToInt(f);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float RoundTo(float f, float s)
+        {
+            return (f / s) * s;
+        }
+
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Select(float a, float b, bool c)
