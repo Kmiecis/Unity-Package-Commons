@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -15,35 +17,6 @@ namespace CommonEditor
             GUISkin,
             Animation,
             Other
-        }
-
-        public static string GetAssetDirectory(Object asset)
-        {
-            var path = AssetDatabase.GetAssetPath(asset);
-
-            if (!string.IsNullOrEmpty(path))
-            {
-                if (Directory.Exists(path))
-                {
-                    return path;
-                }
-                return Path.GetDirectoryName(path);
-            }
-            return null;
-        }
-
-        public static T[] LoadAssets<T>(params string[] folders)
-            where T : Object
-        {
-            var guids = AssetDatabase.FindAssets("t:" + typeof(T).Name, folders);
-
-            var result = new T[guids.Length];
-            for (int i = 0; i < guids.Length; ++i)
-            {
-                var path = AssetDatabase.GUIDToAssetPath(guids[i]);
-                result[i] = AssetDatabase.LoadAssetAtPath<T>(path);
-            }
-            return result;
         }
 
         public static T CreateOrReplaceAssetAtPath<T>(T asset, string path)
@@ -67,6 +40,47 @@ namespace CommonEditor
             AssetDatabase.SaveAssets();
 
             return existingAsset;
+        }
+
+        public static bool DeleteAsset(Object assetObject)
+        {
+            var path = AssetDatabase.GetAssetPath(assetObject);
+            return AssetDatabase.DeleteAsset(path);
+        }
+
+        public static bool DeleteAssets(Object[] assetObjects, List<string> outFailedPaths)
+        {
+            var paths = assetObjects.Select(o => AssetDatabase.GetAssetPath(o)).ToArray();
+            return AssetDatabase.DeleteAssets(paths, outFailedPaths);
+        }
+
+        public static T[] LoadAssets<T>(params string[] folders)
+            where T : Object
+        {
+            var guids = AssetDatabase.FindAssets("t:" + typeof(T).Name, folders);
+
+            var result = new T[guids.Length];
+            for (int i = 0; i < guids.Length; ++i)
+            {
+                var path = AssetDatabase.GUIDToAssetPath(guids[i]);
+                result[i] = AssetDatabase.LoadAssetAtPath<T>(path);
+            }
+            return result;
+        }
+
+        public static string GetAssetDirectory(Object asset)
+        {
+            var path = AssetDatabase.GetAssetPath(asset);
+
+            if (!string.IsNullOrEmpty(path))
+            {
+                if (Directory.Exists(path))
+                {
+                    return path;
+                }
+                return Path.GetDirectoryName(path);
+            }
+            return null;
         }
 
         public static string GetAssetExtension(EAssetType assetType)

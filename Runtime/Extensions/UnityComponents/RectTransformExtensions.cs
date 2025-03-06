@@ -15,7 +15,7 @@ namespace Common.Extensions
             return root;
         }
 
-        public static Vector2 GetVisibleSize(this RectTransform self)
+        public static Vector2 GetRealSize(this RectTransform self)
         {
             var anchorMin = self.anchorMin;
             var anchorMax = self.anchorMax;
@@ -37,6 +37,20 @@ namespace Common.Extensions
             var position = _WorldCorners[0];
             var size = _WorldCorners[2] - position;
             return new Rect(position, size);
+        }
+
+        public static Vector2 GetParentRealSize(this RectTransform self)
+        {
+            var parent = self.parent as RectTransform;
+            if (parent != null) return parent.GetRealSize();
+            return new Vector2(Screen.width, Screen.height);
+        }
+
+        public static Vector2 GetParentSize(this RectTransform self)
+        {
+            var parent = self.parent as RectTransform;
+            if (parent != null) return parent.rect.size;
+            return new Vector2(Screen.width, Screen.height);
         }
 
         /// <summary> Get <see cref="RectTransform"/> enumerator enclosing a 'screenPoint', including self </summary>
