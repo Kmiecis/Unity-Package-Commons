@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.Extensions;
+using System;
 using UnityEngine;
 
 namespace Common
@@ -266,31 +267,55 @@ namespace Common
         }
         #endregion
 
-        #region Bools
-        public static bool[] GetBools(string key, bool[] defaultValue = null)
+        #region Strings
+        public static string[] GetStrings(string key, string[] defaults = null)
         {
-            var keyValue = PlayerPrefs.GetString(key);
-            if (string.IsNullOrEmpty(keyValue))
-                return defaultValue;
-            var values = keyValue.Split(';');
-            var result = new bool[values.Length];
-            for (int i = 0; i < values.Length; ++i)
-                result[i] = Convert.ToBoolean(Convert.ToInt32(values[i]));
+            var serialized = PlayerPrefs.GetString(key);
+            if (string.IsNullOrEmpty(serialized))
+                return defaults;
+            return serialized.Split(';');
+        }
+
+        public static void SetStrings(string key, string[] values)
+        {
+            var serialized = values.Join(';');
+            PlayerPrefs.SetString(key, serialized);
+        }
+
+        public static bool TryGetStrings(string key, out string[] values)
+        {
+            values = GetStrings(key);
+            return values != null;
+        }
+        #endregion
+
+        #region Values
+        public static T[] GetValues<T>(string key, Func<string, T> deserializer, T[] defaults = null)
+        {
+            var serialized = PlayerPrefs.GetString(key);
+            if (string.IsNullOrEmpty(serialized))
+                return defaults;
+
+            var serializable = serialized.Split(';');
+            var result = new T[serializable.Length];
+            for (int i = 0; i < serializable.Length; ++i)
+                result[i] = deserializer(serializable[i]);
             return result;
         }
 
-        public static void SetBools(string key, bool[] values)
+        public static void SetValues<T>(string key, T[] values, Func<T, string> serializer)
         {
-            var strings = new string[values.Length];
+            var serializable = new string[values.Length];
             for (int i = 0; i < values.Length; ++i)
-                strings[i] = Convert.ToString(Convert.ToInt32(values[i]));
-            var keyValue = string.Join(';', strings);
-            PlayerPrefs.SetString(key, keyValue);
+                serializable[i] = serializer(values[i]);
+
+            var serialized = serializable.Join(';');
+            PlayerPrefs.SetString(key, serialized);
         }
 
-        public static bool TryGetBools(string key, out bool[] values)
+        public static bool TryGetValues<T>(string key, Func<string, T> serializer, out T[] values)
         {
-            values = GetBools(key);
+            values = GetValues(key, serializer);
             return values != null;
         }
         #endregion
