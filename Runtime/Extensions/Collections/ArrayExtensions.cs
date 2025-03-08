@@ -50,7 +50,7 @@ namespace Common.Extensions
             return Array.IndexOf(self, value) != -1;
         }
 
-        public static bool Contains<T>(this T[] self, IEnumerable<T> items)
+        public static bool ContainsAll<T>(this T[] self, IEnumerable<T> items)
         {
             foreach (var item in items)
             {
@@ -60,6 +60,18 @@ namespace Common.Extensions
                 }
             }
             return true;
+        }
+
+        public static bool ContainsAny<T>(this T[] self, IEnumerable<T> items)
+        {
+            foreach (var item in items)
+            {
+                if (self.Contains(item))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public static bool ContainsIndex<T>(this T[] self, int index)

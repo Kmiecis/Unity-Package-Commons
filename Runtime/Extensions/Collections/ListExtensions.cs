@@ -51,7 +51,7 @@ namespace Common.Extensions
             return self.IsEmpty() ? value : self.Last();
         }
 
-        public static bool Contains<T>(this List<T> self, IEnumerable<T> items)
+        public static bool ContainsAll<T>(this List<T> self, IEnumerable<T> items)
         {
             foreach (var item in items)
             {
@@ -61,6 +61,18 @@ namespace Common.Extensions
                 }
             }
             return true;
+        }
+
+        public static bool ContainsAny<T>(this List<T> self, IEnumerable<T> items)
+        {
+            foreach (var item in items)
+            {
+                if (self.Contains(item))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public static List<TOut> ConvertAll<TIn, TOut>(this List<TIn> self, Converter<TIn, TOut> converter)
