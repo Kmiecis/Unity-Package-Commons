@@ -5,10 +5,18 @@ namespace Common.Extensions
 {
     public static class CameraExtensions
     {
-        public static bool HasInFOV(this Camera self, Vector3 v)
+        public static bool ContainsScreenPoint(this Camera self, Vector2 v)
+        {
+            var sv = self.ScreenToViewportPoint(v);
+            return (
+                sv.x >= 0.0f && sv.x <= 1.0f &&
+                sv.y >= 0.0f && sv.y <= 1.0f
+            );
+        }
+
+        public static bool ContainsWorldPoint(this Camera self, Vector3 v)
         {
             var sv = self.WorldToViewportPoint(v);
-
             return (
                 sv.x >= 0.0f && sv.x <= 1.0f &&
                 sv.y >= 0.0f && sv.y <= 1.0f &&
