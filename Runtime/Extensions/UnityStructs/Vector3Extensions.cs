@@ -43,8 +43,8 @@ namespace Common.Extensions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 _X_(this Vector3 self, float x = 0.0f, float z = 0.0f)
         {
-            self.y = self.x;
             self.x = x;
+            self.y = self.x;
             self.z = z;
             return self;
         }
@@ -52,9 +52,9 @@ namespace Common.Extensions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 __X(this Vector3 self, float x = 0.0f, float y = 0.0f)
         {
-            self.z = self.x;
             self.x = x;
             self.y = y;
+            self.z = self.x;
             return self;
         }
 
@@ -78,9 +78,9 @@ namespace Common.Extensions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 __Y(this Vector3 self, float x = 0.0f, float y = 0.0f)
         {
-            self.z = self.y;
             self.x = x;
             self.y = y;
+            self.z = self.y;
             return self;
         }
 
@@ -96,8 +96,8 @@ namespace Common.Extensions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 _Z_(this Vector3 self, float x = 0.0f, float z = 0.0f)
         {
-            self.y = self.z;
             self.x = x;
+            self.y = self.z;
             self.z = z;
             return self;
         }
@@ -185,9 +185,9 @@ namespace Common.Extensions
         public static Vector4 XYZ_(this Vector3 self, float w = 0.0f)
         {
             Vector4 r;
-            r.x = self.z;
+            r.x = self.x;
             r.y = self.y;
-            r.z = self.x;
+            r.z = self.z;
             r.w = w;
             return r;
         }
