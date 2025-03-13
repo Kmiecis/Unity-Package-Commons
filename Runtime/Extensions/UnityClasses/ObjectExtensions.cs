@@ -6,7 +6,7 @@ namespace Common.Extensions
     {
         public static bool IsPrefab(this Object self)
         {
-            return (self as GameObject)?.IsPrefab() ?? false;
+            return self is GameObject gameObject && gameObject.IsPrefab();
         }
 
         public static bool IsAsset(this Object self)
@@ -19,10 +19,7 @@ namespace Common.Extensions
 
         public static void Destroy(this Object self)
         {
-            if (Application.isPlaying)
-                Object.Destroy(self);
-            else
-                Object.DestroyImmediate(self);
+            UObject.Destroy(self);
         }
 
         public static void Destroy(this Object self, float t)

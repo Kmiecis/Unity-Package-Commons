@@ -137,7 +137,7 @@ namespace Common.Extensions
 
         public static void Destroy(this Component self, float t)
         {
-            self.gameObject.Destroy(t);
+            self.Destroy(t);
         }
     }
 }
