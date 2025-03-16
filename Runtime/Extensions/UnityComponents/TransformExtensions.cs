@@ -147,6 +147,25 @@ namespace Common.Extensions
             }
         }
 
+        /// <summary> Finds a child by name 'name' recursively and returns it </summary>
+        public static Transform FindRecursively(this Transform self, string name)
+        {
+            var result = self.Find(name);
+            if (result != null)
+            {
+                return result;
+            }
+            foreach (Transform child in self)
+            {
+                result = child.FindRecursively(name);
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+            return null;
+        }
+
         /// <summary> Returns a transform child component by index </summary>
         public static T GetChild<T>(this Transform self, int index)
         {
