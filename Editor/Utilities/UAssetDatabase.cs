@@ -68,6 +68,13 @@ namespace CommonEditor
             return result;
         }
 
+        public static T LoadAnyAsset<T>(params string[] folders)
+            where T : Object
+        {
+            var assets = LoadAssets<T>(folders);
+            return assets.Length > 0 ? assets[0] : null;
+        }
+
         public static string GetAssetDirectory(Object asset)
         {
             var path = AssetDatabase.GetAssetPath(asset);

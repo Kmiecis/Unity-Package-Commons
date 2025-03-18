@@ -298,6 +298,32 @@ namespace Common.Extensions
             return result;
         }
 
+        public static bool RemoveFirst<T>(this List<T> self, Predicate<T> match)
+        {
+            for (int i = 0; i < self.Count; ++i)
+            {
+                if (match(self[i]))
+                {
+                    self.RemoveAt(i);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static bool RemoveLast<T>(this List<T> self, Predicate<T> match)
+        {
+            for (int i = self.Count - 1; i > -1; --i)
+            {
+                if (match(self[i]))
+                {
+                    self.RemoveAt(i);
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public static void RemoveLast<T>(this List<T> self)
         {
             self.RemoveAt(self.Count - 1);
