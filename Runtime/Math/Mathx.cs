@@ -6,7 +6,7 @@ namespace Common.Mathematics
 {
     public static partial class Mathx
     {
-        private const float kEpsilon = 1e-7f;
+        private const float kEpsilon = 1e-6f;
 
         public const float ROOT_2 = 1.41421356237f;
         public const float ROOT_3 = 1.73205080757f;

@@ -1,3 +1,4 @@
+using Common.Extensions;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
@@ -2747,6 +2748,72 @@ namespace Common.Mathematics
                 IsZero(i - v.y, e) &&
                 IsZero(i - v.z, e) &&
                 IsZero(i - v.w, e)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEqual(Color a, Color b, float e = kEpsilon)
+        {
+            return (
+                IsZero(a.r - b.r, e) &&
+                IsZero(a.g - b.g, e) &&
+                IsZero(a.b - b.b, e) &&
+                IsZero(a.a - b.a, e)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEqual(Color c, float f, float e = kEpsilon)
+        {
+            return (
+                IsZero(c.r - f, e) &&
+                IsZero(c.g - f, e) &&
+                IsZero(c.b - f, e) &&
+                IsZero(c.a - f, e)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEqual(float f, Color c, float e = kEpsilon)
+        {
+            return (
+                IsZero(f - c.r, e) &&
+                IsZero(f - c.g, e) &&
+                IsZero(f - c.b, e) &&
+                IsZero(f - c.a, e)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEqual(Color32 a, Color32 b)
+        {
+            return (
+                a.r == b.r &&
+                a.g == b.g &&
+                a.b == b.b &&
+                a.a == b.a
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEqual(Color32 c, byte b)
+        {
+            return (
+                c.r == b &&
+                c.g == b &&
+                c.b == b &&
+                c.a == b
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool IsEqual(byte b, Color32 c)
+        {
+            return (
+                b == c.r &&
+                b == c.g &&
+                b == c.b &&
+                b == c.a
             );
         }
 

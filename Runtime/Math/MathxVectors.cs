@@ -1,5 +1,4 @@
-﻿using System;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Common.Mathematics
@@ -16,12 +15,50 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Approximately(Vector2 v, float f)
+        {
+            return (
+                Mathf.Approximately(v.x, f) &&
+                Mathf.Approximately(v.y, f)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Approximately(float f, Vector2 v)
+        {
+            return (
+                Mathf.Approximately(f, v.x) &&
+                Mathf.Approximately(f, v.y)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Approximately(Vector3 a, Vector3 b)
         {
             return (
                 Mathf.Approximately(a.x, b.x) &&
                 Mathf.Approximately(a.y, b.y) &&
                 Mathf.Approximately(a.z, b.z)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Approximately(Vector3 v, float f)
+        {
+            return (
+                Mathf.Approximately(v.x, f) &&
+                Mathf.Approximately(v.y, f) &&
+                Mathf.Approximately(v.z, f)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Approximately(float f, Vector3 v)
+        {
+            return (
+                Mathf.Approximately(f, v.x) &&
+                Mathf.Approximately(f, v.y) &&
+                Mathf.Approximately(f, v.z)
             );
         }
 
@@ -33,6 +70,61 @@ namespace Common.Mathematics
                 Mathf.Approximately(a.y, b.y) &&
                 Mathf.Approximately(a.z, b.z) &&
                 Mathf.Approximately(a.w, b.w)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Approximately(Vector4 v, float f)
+        {
+            return (
+                Mathf.Approximately(v.x, f) &&
+                Mathf.Approximately(v.y, f) &&
+                Mathf.Approximately(v.z, f) &&
+                Mathf.Approximately(v.w, f)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Approximately(float f, Vector4 v)
+        {
+            return (
+                Mathf.Approximately(f, v.x) &&
+                Mathf.Approximately(f, v.y) &&
+                Mathf.Approximately(f, v.z) &&
+                Mathf.Approximately(f, v.w)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Approximately(Color a, Color b)
+        {
+            return (
+                Mathf.Approximately(a.r, b.r) &&
+                Mathf.Approximately(a.g, b.g) &&
+                Mathf.Approximately(a.b, b.b) &&
+                Mathf.Approximately(a.a, b.a)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Approximately(Color c, float f)
+        {
+            return (
+                Mathf.Approximately(c.r, f) &&
+                Mathf.Approximately(c.g, f) &&
+                Mathf.Approximately(c.b, f) &&
+                Mathf.Approximately(c.a, f)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool Approximately(float f, Color c)
+        {
+            return (
+                Mathf.Approximately(f, c.r) &&
+                Mathf.Approximately(f, c.g) &&
+                Mathf.Approximately(f, c.b) &&
+                Mathf.Approximately(f, c.a)
             );
         }
 
