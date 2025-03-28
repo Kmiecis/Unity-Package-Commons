@@ -189,6 +189,22 @@ namespace Common.Extensions
             self.Apply(true);
         }
 
+        public static void SwapColors(this Texture2D self, Color color, Color swap)
+        {
+            var pixels = self.GetPixels();
+
+            for (int i = 0; i < pixels.Length; ++i)
+            {
+                if (pixels[i] == color)
+                {
+                    pixels[i] = swap;
+                }
+            }
+
+            self.SetPixels(pixels);
+            self.Apply();
+        }
+
         public static void FloodFillArea(this Texture2D self, int sx, int sy, Color fill)
         {
             int width = self.width;
