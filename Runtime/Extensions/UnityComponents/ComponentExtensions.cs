@@ -7,6 +7,7 @@ namespace Common.Extensions
     public static class ComponentExtensions
     {
         public static bool HasComponent<T>(this Component self)
+            where T : Component
         {
             return self.GetComponent<T>() != null;
         }
@@ -17,6 +18,7 @@ namespace Common.Extensions
         }
 
         public static bool HasComponentInChildren<T>(this Component self)
+            where T : Component
         {
             return self.GetComponentInChildren<T>() != null;
         }
@@ -27,6 +29,7 @@ namespace Common.Extensions
         }
 
         public static bool HasComponentInParent<T>(this Component self)
+            where T : Component
         {
             return self.GetComponentInParent<T>() != null;
         }
@@ -58,6 +61,7 @@ namespace Common.Extensions
         }
 
         public static T RequireComponent<T>(this Component self)
+            where T : Component
         {
             var result = self.GetComponent<T>();
             if (result == null)
@@ -71,6 +75,7 @@ namespace Common.Extensions
         }
 
         public static bool TryGetComponentInChildren<T>(this Component self, out T component, bool includeInactive = false)
+            where T : Component
         {
             component = self.GetComponentInChildren<T>(includeInactive);
             return component != null;
@@ -83,6 +88,7 @@ namespace Common.Extensions
         }
 
         public static bool TryGetComponentInParent<T>(this Component self, out T component, bool includeInactive = false)
+            where T : Component
         {
             component = self.GetComponentInParent<T>(includeInactive);
             return component != null;
@@ -95,6 +101,7 @@ namespace Common.Extensions
         }
 
         public static bool TryGetComponents<T>(this Component self, out T[] components)
+            where T : Component
         {
             components = self.GetComponents<T>();
             return !components.IsNullOrEmpty();
@@ -107,6 +114,7 @@ namespace Common.Extensions
         }
 
         public static bool TryGetComponentsInChildren<T>(this Component self, out T[] components, bool includeInactive = false)
+            where T : Component
         {
             components = self.GetComponentsInChildren<T>(includeInactive);
             return !components.IsNullOrEmpty();
@@ -119,6 +127,7 @@ namespace Common.Extensions
         }
 
         public static bool TryGetComponentsInParent<T>(this Component self, out T[] components, bool includeInactive = false)
+            where T : Component
         {
             components = self.GetComponentsInParent<T>(includeInactive);
             return !components.IsNullOrEmpty();
