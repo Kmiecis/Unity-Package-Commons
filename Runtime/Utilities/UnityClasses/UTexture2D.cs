@@ -6,6 +6,51 @@ namespace Common
 {
     public static class UTexture2D
     {
+        public static void ScaleToFit(Color32[] pixels, int width, int height)
+        {
+            var clear = (Color32)Color.clear;
+
+            var min = new Vector2Int(width, height);
+            var max = new Vector2Int(0, 0);
+            for (int i = 0; i < pixels.Length; ++i)
+            {
+                Mathx.FromIndex(i, width, out var x, out var y);
+                var pixel = pixels[i];
+
+                if (!Mathx.IsEqual(pixel, clear))
+                {
+                    min.x = Mathf.Min(min.x, x);
+                    min.y = Mathf.Min(min.y, y);
+
+                    max.x = Mathf.Max(max.x, x);
+                    max.y = Mathf.Max(max.y, y);
+                }
+            }
+
+            var tempWidth = max.x - min.x + 1;
+            var tempHeight = max.y - min.y + 1;
+            var tempSize = Mathf.Max(tempWidth, tempHeight);
+
+            var tempPixels = new Color32[tempSize * tempSize];
+            for (int i = 0; i < pixels.Length; ++i)
+            {
+                Mathx.FromIndex(i, width, out var x, out var y);
+                var pixel = pixels[i];
+
+                if (min.x <= x && x <= max.x &&
+                    min.y <= y && y <= max.y)
+                {
+                    var dx = (tempSize - tempWidth) / 2;
+                    var dy = (tempSize - tempHeight) / 2;
+                    var ti = Mathx.ToIndex(x - min.x + dx, y - min.y + dy, tempSize);
+
+                    tempPixels[ti] = pixel;
+                }
+            }
+
+            ResampleAndCrop(tempPixels, pixels, tempSize, tempSize, width, height);
+        }
+
         public static void Replace(Color32[] pixels, Color32 refColor, Color32 color)
         {
             for (int i = 0; i < pixels.Length; ++i)
@@ -159,6 +204,15 @@ namespace Common
 
         public static Color32[] ResampleAndCrop(Color32[] sourcePixels, int sourceWidth, int sourceHeight, int targetWidth, int targetHeight)
         {
+            var targetPixels = new Color32[targetWidth * targetHeight];
+
+            ResampleAndCrop(sourcePixels, targetPixels, sourceWidth, sourceHeight, targetWidth, targetHeight);
+
+            return targetPixels;
+        }
+
+        public static void ResampleAndCrop(Color32[] sourcePixels, Color32[] targetPixels, int sourceWidth, int sourceHeight, int targetWidth, int targetHeight)
+        {
             float sourceAspect = (float)sourceWidth / sourceHeight;
             float targetAspect = (float)targetWidth / targetHeight;
 
@@ -176,8 +230,6 @@ namespace Common
                 factor = (float)targetWidth / sourceWidth;
                 yOffset = (int)((sourceHeight - sourceWidth / targetAspect) * 0.5f);
             }
-
-            var targetPixels = new Color32[targetWidth * targetHeight];
 
             for (int y = 0; y < targetHeight; y++)
             {
@@ -238,11 +290,18 @@ namespace Common
                     targetPixels[index].a = (byte)a;
                 }
             }
+        }
+
+        public static Color32[] ResampleAndLetterbox(Color32[] sourcePixels, int sourceWidth, int sourceHeight, int targetWidth, int targetHeight, Color background)
+        {
+            var targetPixels = new Color32[targetWidth * targetHeight];
+
+            ResampleAndLetterbox(sourcePixels, targetPixels, sourceWidth, sourceHeight, targetWidth, targetHeight, background);
 
             return targetPixels;
         }
 
-        public static Color32[] ResampleAndLetterbox(Color32[] sourcePixels, int sourceWidth, int sourceHeight, int targetWidth, int targetHeight, Color background)
+        public static void ResampleAndLetterbox(Color32[] sourcePixels, Color32[] targetPixels, int sourceWidth, int sourceHeight, int targetWidth, int targetHeight, Color background)
         {
             float sourceAspect = (float)sourceWidth / sourceHeight;
             float targetAspect = (float)targetWidth / targetHeight;
@@ -261,8 +320,6 @@ namespace Common
                 factor = (float)targetHeight / sourceHeight;
                 xOffset = ((sourceWidth - sourceHeight * targetAspect) * 0.5f);
             }
-
-            var targetPixels = new Color32[targetWidth * targetHeight];
 
             for (int y = 0; y < targetHeight; y++)
             {
@@ -325,8 +382,6 @@ namespace Common
                     targetPixels[index].a = (byte)a;
                 }
             }
-
-            return targetPixels;
         }
     }
 }
