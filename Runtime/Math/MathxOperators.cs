@@ -277,6 +277,36 @@ namespace Common.Mathematics
             return v;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Color32 Add(Color32 a, Color32 b)
+        {
+            a.r = ClampByte(a.r + b.r);
+            a.g = ClampByte(a.g + b.g);
+            a.b = ClampByte(a.b + b.b);
+            a.a = ClampByte(a.a + b.a);
+            return a;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Color32 Add(Color32 c, byte b)
+        {
+            c.r = ClampByte(c.r + b);
+            c.g = ClampByte(c.g + b);
+            c.b = ClampByte(c.b + b);
+            c.a = ClampByte(c.a + b);
+            return c;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Color32 Add(byte b, Color32 c)
+        {
+            c.r = ClampByte(b + c.r);
+            c.g = ClampByte(b + c.g);
+            c.b = ClampByte(b + c.b);
+            c.a = ClampByte(b + c.a);
+            return c;
+        }
+
         public static Matrix4x4 Add(Matrix4x4 a, Matrix4x4 b)
         {
             var column0 = a.GetColumn(0) + b.GetColumn(0);
@@ -636,6 +666,36 @@ namespace Common.Mathematics
             v.z -= i;
             v.w -= i;
             return v;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Color32 Sub(Color32 a, Color32 b)
+        {
+            a.r = ClampByte(a.r - b.r);
+            a.g = ClampByte(a.g - b.g);
+            a.b = ClampByte(a.b - b.b);
+            a.a = ClampByte(a.a - b.a);
+            return a;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Color32 Sub(Color32 c, byte b)
+        {
+            c.r = ClampByte(c.r - b);
+            c.g = ClampByte(c.g - b);
+            c.b = ClampByte(c.b - b);
+            c.a = ClampByte(c.a - b);
+            return c;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Color32 Sub(byte b, Color32 c)
+        {
+            c.r = ClampByte(b - c.r);
+            c.g = ClampByte(b - c.g);
+            c.b = ClampByte(b - c.b);
+            c.a = ClampByte(b - c.a);
+            return c;
         }
 
         public static Matrix4x4 Sub(Matrix4x4 a, Matrix4x4 b)

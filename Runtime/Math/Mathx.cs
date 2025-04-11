@@ -80,6 +80,13 @@ namespace Common.Mathematics
         }
 
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static byte ClampByte(int value)
+        {
+            return (byte)Mathf.Clamp(value, 0, byte.MaxValue);
+        }
+
+
         public static float ClampLerped(float f, float min, float max, float t)
         {
             t = Mathf.Clamp(t, 0.0f, 1.0f);
