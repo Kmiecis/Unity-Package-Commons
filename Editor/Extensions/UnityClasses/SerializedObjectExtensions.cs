@@ -1,3 +1,4 @@
+using Common;
 using System;
 using System.Collections.Generic;
 using UnityEditor;
@@ -31,6 +32,12 @@ namespace CommonEditor.Extensions
                 return single.GetType();
             }
             return self.targetObject.GetType();
+        }
+
+        public static void SetFieldValue(this SerializedObject self, SerializedProperty property)
+        {
+            var field = self.targetObject.GetType().GetField(property.name, UBinding.AnyInstance);
+            field.SetValue(self.targetObject, property.GetTypeValue());
         }
     }
 }
