@@ -44,12 +44,8 @@ namespace CommonEditor
 
         public static void UnfoldedLabelField(ref Rect position, GUIContent label, GUIStyle style)
         {
-            position.x -= UEditorGUIUtility.IndentWidth;
-            position.width += UEditorGUIUtility.IndentWidth;
             position.height = EditorGUIUtility.singleLineHeight;
-
             EditorGUI.LabelField(position, label, style);
-
             position.y += position.height + UEditorGUIUtility.SpaceHeight;
         }
 
@@ -75,7 +71,7 @@ namespace CommonEditor
 
         public static float GetUnfoldedLabelHeight(GUIContent label)
         {
-            return EditorGUIUtility.singleLineHeight + UEditorGUIUtility.SpaceHeight;
+            return UEditorGUIUtility.LineHeight;
         }
 
         public static float GetUnfoldedPropertyHeight(SerializedProperty property)
