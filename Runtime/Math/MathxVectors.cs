@@ -669,6 +669,25 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2Int Sign(Vector2 v)
+        {
+            return new Vector2Int(
+                Sign(v.x),
+                Sign(v.y)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int Sign(Vector3 v)
+        {
+            return new Vector3Int(
+                Sign(v.x),
+                Sign(v.y),
+                Sign(v.z)
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Wrap(Vector2 v, Vector2 min, Vector2 max)
         {
             v.x = Wrap(v.x, min.x, max.x);
