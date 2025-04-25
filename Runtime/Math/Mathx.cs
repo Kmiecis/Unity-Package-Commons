@@ -302,22 +302,39 @@ namespace Common.Mathematics
             return (float)Math.Round(f, d);
         }
 
+        
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static byte FloorToByte(float f)
+        public static int CeilToIntSafe(float f, int d)
         {
-            return (byte)Mathf.FloorToInt(f);
+            int s = (int)Math.Pow(10, d);
+            return Mathf.CeilToInt(f * s) / s;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static byte CeilToByte(float f)
+        public static int FloorToIntSafe(float f, int d)
         {
-            return (byte)Mathf.CeilToInt(f);
+            int s = (int)Math.Pow(10, d);
+            return Mathf.FloorToInt(f * s) / s;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static byte RoundToByte(float f)
+        public static int RoundToIntSafe(float f, int d)
         {
-            return (byte)Mathf.RoundToInt(f);
+            int s = (int)Math.Pow(10, d);
+            return Mathf.RoundToInt(f * s) / s;
+        }
+
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float CeilTo(float f, float s)
+        {
+            return Mathf.Ceil(f / s) * s;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float FloorTo(float f, float s)
+        {
+            return Mathf.Floor(f / s) * s;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

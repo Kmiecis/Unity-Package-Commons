@@ -1,5 +1,4 @@
-﻿using Common.Mathematics;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Common.Extensions
@@ -9,9 +8,9 @@ namespace Common.Extensions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string Hex(this Color self)
         {
-            var r = Mathx.RoundToByte(self.r * 255.0f);
-            var g = Mathx.RoundToByte(self.g * 255.0f);
-            var b = Mathx.RoundToByte(self.b * 255.0f);
+            var r = (byte)Mathf.RoundToInt(self.r * 255.0f);
+            var g = (byte)Mathf.RoundToInt(self.g * 255.0f);
+            var b = (byte)Mathf.RoundToInt(self.b * 255.0f);
             return string.Format("{0:X2}{1:X2}{2:X2}", r, g, b);
         }
 
