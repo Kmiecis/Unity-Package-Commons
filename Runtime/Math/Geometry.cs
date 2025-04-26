@@ -5,6 +5,14 @@ namespace Common.Mathematics
 {
     public static class Geometry
     {
+        public static IEnumerable<Vector2Int> GetPositions(Vector2Int position, Vector2Int direction, int size)
+        {
+            foreach (var offset in GetOffsets(direction, size))
+            {
+                yield return position + offset;
+            }
+        }
+
         public static IEnumerable<Vector2Int> GetOffsets(Vector2Int direction, int size)
         {
             var offset = Vector2Int.zero;
