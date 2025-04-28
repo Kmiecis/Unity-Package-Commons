@@ -3,9 +3,9 @@ using UnityEngine;
 namespace Common
 {
     [ExecuteAlways]
-    public class OnTransformChangedSender : MonoBehaviour
+    public class OnLocalTransformChangedSender : MonoBehaviour
     {
-        private const string MethodName = "OnTransformChanged";
+        private const string MethodName = "OnLocalTransformChanged";
 
         private int _lastFrame;
 
@@ -13,7 +13,7 @@ namespace Common
         private Vector3 _lastScale;
         private Quaternion _lastRotation;
 
-        public void CheckChanged()
+        public void CheckDirty()
         {
             if (HasFrameChanged() && HasChanged())
             {
@@ -72,7 +72,7 @@ namespace Common
         #region Unity
         private void Update()
         {
-            CheckChanged();
+            CheckDirty();
         }
         #endregion
     }
