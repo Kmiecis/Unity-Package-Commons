@@ -48,10 +48,36 @@ namespace CommonEditor
             return AssetDatabase.DeleteAsset(path);
         }
 
-        public static bool DeleteAssets(Object[] assetObjects, List<string> outFailedPaths)
+        public static bool DeleteAssets(Object[] assetObjects, List<Object> outFailed)
         {
-            var paths = assetObjects.Select(o => AssetDatabase.GetAssetPath(o)).ToArray();
-            return AssetDatabase.DeleteAssets(paths, outFailedPaths);
+            outFailed.Clear();
+            foreach (var assetObject in assetObjects)
+            {
+                if (!DeleteAsset(assetObject))
+                {
+                    outFailed.Add(assetObject);
+                }
+            }
+            return outFailed.Count == 0;
+        }
+
+        public static Object[] LoadAssets(string filter, params string[] folders)
+        {
+            var guids = AssetDatabase.FindAssets(filter, folders);
+
+            var result = new Object[guids.Length];
+            for (int i = 0; i < guids.Length; ++i)
+            {
+                var path = AssetDatabase.GUIDToAssetPath(guids[i]);
+                result[i] = AssetDatabase.LoadMainAssetAtPath(path);
+            }
+            return result;
+        }
+
+        public static Object LoadAnyAsset(string filter, params string[] folders)
+        {
+            var assets = LoadAssets(filter, folders);
+            return assets.Length > 0 ? assets[0] : null;
         }
 
         public static T[] LoadAssets<T>(params string[] folders)
