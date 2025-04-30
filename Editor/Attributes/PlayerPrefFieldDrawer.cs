@@ -1,5 +1,6 @@
 using Common;
 using Common.Mathematics;
+using CommonEditor.Extensions;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,14 +15,37 @@ namespace CommonEditor
         {
             var attribute = (PlayerPrefFieldAttribute)this.attribute;
 
-            _value ??= ReadValue(property, attribute.key);
+            if (_value == null)
+            {
+                _value = ReadValue(property, attribute.key);
+
+                WriteValue(property, attribute.key, _value);
+            }
 
             EditorGUI.BeginChangeCheck();
 
             _value = DrawValue(position, label, property, _value);
 
             if (EditorGUI.EndChangeCheck())
+            {
                 WriteValue(property, attribute.key, _value);
+
+                TriggerOnValidate(property.serializedObject.targetObject);
+            }
+        }
+
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            return EditorGUI.GetPropertyHeight(property, label, true);
+        }
+
+        private void TriggerOnValidate(Object target)
+        {
+            var method = target.GetType().GetMethod("OnValidate", UBinding.AnyInstance);
+            if (method != null)
+            {
+                method.Invoke(target, null);
+            }
         }
 
         private object ReadValue(SerializedProperty property, string key)
@@ -103,6 +127,8 @@ namespace CommonEditor
                     UPlayerPrefs.SetVector4(key, (Vector4)value);
                     break;
             }
+
+            property.SetValue(_value);
         }
 
         private object DrawValue(Rect position, GUIContent label, SerializedProperty property, object value)
@@ -139,11 +165,6 @@ namespace CommonEditor
 
             EditorGUI.PropertyField(position, property, label);
             return null;
-        }
-
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-        {
-            return EditorGUI.GetPropertyHeight(property, label, true);
         }
     }
 }
