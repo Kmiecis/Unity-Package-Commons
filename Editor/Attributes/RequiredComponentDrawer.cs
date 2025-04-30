@@ -14,7 +14,7 @@ namespace CommonEditor
             if (property.propertyType == SerializedPropertyType.ObjectReference &&
                 property.objectReferenceValue == null)
             {
-                var target = (Component)property.serializedObject.targetObject;
+                var target = (Component)property.GetTargetObject();
                 var type = fieldInfo.FieldType;
 
                 if (!TryGetComponent(target, type, out var value))

@@ -1,4 +1,5 @@
 using Common;
+using CommonEditor.Extensions;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
@@ -18,7 +19,7 @@ namespace CommonEditor
         {
             MarkHeightBegin(position.y);
 
-            Button(ref position, property.serializedObject.targetObject);
+            Button(ref position, property.GetTargetObject());
 
             UEditorGUI.LabelField(ref position, label);
             UEditorGUI.PropertyField(ref position, property, true);

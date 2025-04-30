@@ -1,13 +1,25 @@
 using Common;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace CommonEditor.Extensions
 {
     public static class SerializedPropertyExtensions
     {
+        public static Object GetTargetObject(this SerializedProperty self)
+        {
+            return self.serializedObject.targetObject;
+        }
+
+        public static Type GetTargetType(this SerializedProperty self)
+        {
+            return self.serializedObject.GetTargetType();
+        }
+
         public static bool IsInArray(this SerializedProperty self)
         {
             return self.propertyPath.EndsWith("]");
@@ -221,7 +233,7 @@ namespace CommonEditor.Extensions
         public static object GetValue(this SerializedProperty self)
         {
             var sanitizedPath = self.propertyPath.Replace(".Array.data[", "[");
-            object result = self.serializedObject.targetObject;
+            object result = self.GetTargetObject();
 
             var elements = sanitizedPath.Split('.');
             foreach (var element in elements)
@@ -241,7 +253,7 @@ namespace CommonEditor.Extensions
         public static void SetValue(this SerializedProperty self, object value)
         {
             var sanitizedPath = self.propertyPath.Replace(".Array.data[", "[");
-            object target = self.serializedObject.targetObject;
+            object target = self.GetTargetObject();
 
             var element = (string)null;
             var elements = sanitizedPath.Split('.');

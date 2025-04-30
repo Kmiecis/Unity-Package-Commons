@@ -26,8 +26,8 @@ namespace CommonEditor
 
             if (EditorGUI.EndChangeCheck())
             {
-                var target = property.serializedObject.targetObject;
-                var targetType = target.GetType();
+                var target = property.GetTargetObject();
+                var targetType = property.GetTargetType();
                 var method = targetType.GetMethod(attribute.callback, BINDING_FLAGS);
 
                 if (method != null)

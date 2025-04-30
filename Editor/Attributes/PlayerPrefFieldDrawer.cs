@@ -14,12 +14,13 @@ namespace CommonEditor
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             var attribute = (PlayerPrefFieldAttribute)this.attribute;
+            var key = attribute.key ?? $"{property.GetTargetType().Name}.{property.propertyPath}";
 
             if (_value == null)
             {
-                _value = ReadValue(property, attribute.key);
+                _value = ReadValue(property, key);
 
-                WriteValue(property, attribute.key, _value);
+                WriteValue(property, key, _value);
             }
 
             EditorGUI.BeginChangeCheck();
@@ -28,9 +29,9 @@ namespace CommonEditor
 
             if (EditorGUI.EndChangeCheck())
             {
-                WriteValue(property, attribute.key, _value);
+                WriteValue(property, key, _value);
 
-                TriggerOnValidate(property.serializedObject.targetObject);
+                TriggerOnValidate(property.GetTargetObject());
             }
         }
 
