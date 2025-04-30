@@ -16,171 +16,27 @@ namespace Common
         private const string B_SUFFIX = "-b";
         private const string A_SUFFIX = "-a";
 
-        #region Vector2
-        public static Vector2 GetVector2(string key, Vector2 defaultValue = default)
+        private const string WIDTH_SUFFIX = "-width";
+        private const string HEIGHT_SUFFIX = "-height";
+
+        #region Bool
+        public static bool GetBool(string key, bool defaultValue = false)
         {
-            return new Vector2(
-                PlayerPrefs.GetFloat(key + X_SUFFIX, defaultValue.x),
-                PlayerPrefs.GetFloat(key + Y_SUFFIX, defaultValue.y)
-            );
+            var intValue = Convert.ToInt32(defaultValue);
+            intValue = PlayerPrefs.GetInt(key, intValue);
+            return Convert.ToBoolean(intValue);
         }
 
-        public static void SetVector2(string key, Vector2 value)
+        public static void SetBool(string key, bool value)
         {
-            PlayerPrefs.SetFloat(key + X_SUFFIX, value.x);
-            PlayerPrefs.SetFloat(key + Y_SUFFIX, value.y);
+            var intValue = Convert.ToInt32(value);
+            PlayerPrefs.SetInt(key, intValue);
         }
 
-        public static bool TryGetVector2(string key, out Vector2 value)
+        public static bool TryGetBool(string key, out bool value)
         {
-            value = GetVector2(key);
-            return (
-                PlayerPrefs.HasKey(key + X_SUFFIX) ||
-                PlayerPrefs.HasKey(key + Y_SUFFIX)
-            );
-        }
-        #endregion
-
-        #region Vector3
-        public static Vector3 GetVector3(string key, Vector3 defaultValue = default)
-        {
-            return new Vector3(
-                PlayerPrefs.GetFloat(key + X_SUFFIX, defaultValue.x),
-                PlayerPrefs.GetFloat(key + Y_SUFFIX, defaultValue.y),
-                PlayerPrefs.GetFloat(key + Z_SUFFIX, defaultValue.z)
-            );
-        }
-
-        public static void SetVector3(string key, Vector3 value)
-        {
-            PlayerPrefs.SetFloat(key + X_SUFFIX, value.x);
-            PlayerPrefs.SetFloat(key + Y_SUFFIX, value.y);
-            PlayerPrefs.SetFloat(key + Z_SUFFIX, value.z);
-        }
-
-        public static bool TryGetVector3(string key, out Vector3 value)
-        {
-            value = GetVector3(key);
-            return (
-                PlayerPrefs.HasKey(key + X_SUFFIX) ||
-                PlayerPrefs.HasKey(key + Y_SUFFIX) ||
-                PlayerPrefs.HasKey(key + Z_SUFFIX)
-            );
-        }
-        #endregion
-
-        #region Vector4
-        public static Vector4 GetVector4(string key, Vector4 defaultValue = default)
-        {
-            return new Vector4(
-                PlayerPrefs.GetFloat(key + X_SUFFIX, defaultValue.x),
-                PlayerPrefs.GetFloat(key + Y_SUFFIX, defaultValue.y),
-                PlayerPrefs.GetFloat(key + Z_SUFFIX, defaultValue.z),
-                PlayerPrefs.GetFloat(key + W_SUFFIX, defaultValue.w)
-            );
-        }
-
-        public static void SetVector4(string key, Vector4 value)
-        {
-            PlayerPrefs.SetFloat(key + X_SUFFIX, value.x);
-            PlayerPrefs.SetFloat(key + Y_SUFFIX, value.y);
-            PlayerPrefs.SetFloat(key + Z_SUFFIX, value.z);
-            PlayerPrefs.SetFloat(key + W_SUFFIX, value.w);
-        }
-
-        public static bool TryGetVector4(string key, out Vector4 value)
-        {
-            value = GetVector4(key);
-            return (
-                PlayerPrefs.HasKey(key + X_SUFFIX) ||
-                PlayerPrefs.HasKey(key + Y_SUFFIX) ||
-                PlayerPrefs.HasKey(key + Z_SUFFIX) ||
-                PlayerPrefs.HasKey(key + W_SUFFIX)
-            );
-        }
-        #endregion
-
-        #region Quaternion
-        public static Quaternion GetQuaternion(string key, Quaternion defaultValue = default)
-        {
-            return new Quaternion(
-                PlayerPrefs.GetFloat(key + X_SUFFIX, defaultValue.x),
-                PlayerPrefs.GetFloat(key + Y_SUFFIX, defaultValue.y),
-                PlayerPrefs.GetFloat(key + Z_SUFFIX, defaultValue.z),
-                PlayerPrefs.GetFloat(key + W_SUFFIX, defaultValue.w)
-            );
-        }
-
-        public static void SetQuaternion(string key, Quaternion value)
-        {
-            PlayerPrefs.SetFloat(key + X_SUFFIX, value.x);
-            PlayerPrefs.SetFloat(key + Y_SUFFIX, value.y);
-            PlayerPrefs.SetFloat(key + Z_SUFFIX, value.z);
-            PlayerPrefs.SetFloat(key + W_SUFFIX, value.w);
-        }
-
-        public static bool TryGetQuaternion(string key, out Quaternion value)
-        {
-            value = GetQuaternion(key);
-            return (
-                PlayerPrefs.HasKey(key + X_SUFFIX) ||
-                PlayerPrefs.HasKey(key + Y_SUFFIX) ||
-                PlayerPrefs.HasKey(key + Z_SUFFIX) ||
-                PlayerPrefs.HasKey(key + W_SUFFIX)
-            );
-        }
-        #endregion
-
-        #region Vector2Int
-        public static Vector2Int GetVector2Int(string key, Vector2Int defaultValue = default)
-        {
-            return new Vector2Int(
-                PlayerPrefs.GetInt(key + X_SUFFIX, defaultValue.x),
-                PlayerPrefs.GetInt(key + Y_SUFFIX, defaultValue.y)
-            );
-        }
-
-        public static void SetVector2Int(string key, Vector2Int value)
-        {
-            PlayerPrefs.SetInt(key + X_SUFFIX, value.x);
-            PlayerPrefs.SetInt(key + Y_SUFFIX, value.y);
-        }
-
-        public static bool TryGetVector2Int(string key, out Vector2Int value)
-        {
-            value = GetVector2Int(key);
-            return (
-                PlayerPrefs.HasKey(key + X_SUFFIX) ||
-                PlayerPrefs.HasKey(key + Y_SUFFIX)
-            );
-        }
-        #endregion
-
-        #region Vector3Int
-        public static Vector3Int GetVector3Int(string key, Vector3Int defaultValue = default)
-        {
-            return new Vector3Int(
-                PlayerPrefs.GetInt(key + X_SUFFIX, defaultValue.x),
-                PlayerPrefs.GetInt(key + Y_SUFFIX, defaultValue.y),
-                PlayerPrefs.GetInt(key + Z_SUFFIX, defaultValue.z)
-            );
-        }
-
-        public static void SetVector3Int(string key, Vector3Int value)
-        {
-            PlayerPrefs.SetInt(key + X_SUFFIX, value.x);
-            PlayerPrefs.SetInt(key + Y_SUFFIX, value.y);
-            PlayerPrefs.SetInt(key + Z_SUFFIX, value.z);
-        }
-
-        public static bool TryGetVector3Int(string key, out Vector3Int value)
-        {
-            value = GetVector3Int(key);
-            return (
-                PlayerPrefs.HasKey(key + X_SUFFIX) ||
-                PlayerPrefs.HasKey(key + Y_SUFFIX) ||
-                PlayerPrefs.HasKey(key + Z_SUFFIX)
-            );
+            value = GetBool(key);
+            return PlayerPrefs.HasKey(key);
         }
         #endregion
 
@@ -246,24 +102,96 @@ namespace Common
         }
         #endregion
 
-        #region Bool
-        public static bool GetBool(string key, bool defaultValue = false)
+        #region Quaternion
+        public static Quaternion GetQuaternion(string key, Quaternion defaultValue = default)
         {
-            var intValue = Convert.ToInt32(defaultValue);
-            intValue = PlayerPrefs.GetInt(key, intValue);
-            return Convert.ToBoolean(intValue);
+            return new Quaternion(
+                PlayerPrefs.GetFloat(key + X_SUFFIX, defaultValue.x),
+                PlayerPrefs.GetFloat(key + Y_SUFFIX, defaultValue.y),
+                PlayerPrefs.GetFloat(key + Z_SUFFIX, defaultValue.z),
+                PlayerPrefs.GetFloat(key + W_SUFFIX, defaultValue.w)
+            );
         }
 
-        public static void SetBool(string key, bool value)
+        public static void SetQuaternion(string key, Quaternion value)
         {
-            var intValue = Convert.ToInt32(value);
-            PlayerPrefs.SetInt(key, intValue);
+            PlayerPrefs.SetFloat(key + X_SUFFIX, value.x);
+            PlayerPrefs.SetFloat(key + Y_SUFFIX, value.y);
+            PlayerPrefs.SetFloat(key + Z_SUFFIX, value.z);
+            PlayerPrefs.SetFloat(key + W_SUFFIX, value.w);
         }
 
-        public static bool TryGetBool(string key, out bool value)
+        public static bool TryGetQuaternion(string key, out Quaternion value)
         {
-            value = GetBool(key);
-            return PlayerPrefs.HasKey(key);
+            value = GetQuaternion(key);
+            return (
+                PlayerPrefs.HasKey(key + X_SUFFIX) ||
+                PlayerPrefs.HasKey(key + Y_SUFFIX) ||
+                PlayerPrefs.HasKey(key + Z_SUFFIX) ||
+                PlayerPrefs.HasKey(key + W_SUFFIX)
+            );
+        }
+        #endregion
+
+        #region Rect
+        public static Rect GetRect(string key, Rect defaultValue = default)
+        {
+            return new Rect(
+                PlayerPrefs.GetFloat(key + X_SUFFIX, defaultValue.x),
+                PlayerPrefs.GetFloat(key + Y_SUFFIX, defaultValue.y),
+                PlayerPrefs.GetFloat(key + WIDTH_SUFFIX, defaultValue.width),
+                PlayerPrefs.GetFloat(key + HEIGHT_SUFFIX, defaultValue.height)
+            );
+        }
+
+        public static void SetRect(string key, Rect value)
+        {
+            PlayerPrefs.SetFloat(key + X_SUFFIX, value.x);
+            PlayerPrefs.SetFloat(key + Y_SUFFIX, value.y);
+            PlayerPrefs.SetFloat(key + WIDTH_SUFFIX, value.width);
+            PlayerPrefs.SetFloat(key + HEIGHT_SUFFIX, value.height);
+        }
+
+        public static bool TryGetRect(string key, out Rect value)
+        {
+            value = GetRect(key);
+            return (
+                PlayerPrefs.HasKey(key + X_SUFFIX) ||
+                PlayerPrefs.HasKey(key + Y_SUFFIX) ||
+                PlayerPrefs.HasKey(key + WIDTH_SUFFIX) ||
+                PlayerPrefs.HasKey(key + HEIGHT_SUFFIX)
+            );
+        }
+        #endregion
+
+        #region RectInt
+        public static RectInt GetRectInt(string key, RectInt defaultValue = default)
+        {
+            return new RectInt(
+                PlayerPrefs.GetInt(key + X_SUFFIX, defaultValue.x),
+                PlayerPrefs.GetInt(key + Y_SUFFIX, defaultValue.y),
+                PlayerPrefs.GetInt(key + WIDTH_SUFFIX, defaultValue.width),
+                PlayerPrefs.GetInt(key + HEIGHT_SUFFIX, defaultValue.height)
+            );
+        }
+
+        public static void SetRectInt(string key, RectInt value)
+        {
+            PlayerPrefs.SetInt(key + X_SUFFIX, value.x);
+            PlayerPrefs.SetInt(key + Y_SUFFIX, value.y);
+            PlayerPrefs.SetInt(key + WIDTH_SUFFIX, value.width);
+            PlayerPrefs.SetInt(key + HEIGHT_SUFFIX, value.height);
+        }
+
+        public static bool TryGetRectInt(string key, out RectInt value)
+        {
+            value = GetRectInt(key);
+            return (
+                PlayerPrefs.HasKey(key + X_SUFFIX) ||
+                PlayerPrefs.HasKey(key + Y_SUFFIX) ||
+                PlayerPrefs.HasKey(key + WIDTH_SUFFIX) ||
+                PlayerPrefs.HasKey(key + HEIGHT_SUFFIX)
+            );
         }
         #endregion
 
@@ -286,6 +214,143 @@ namespace Common
         {
             values = GetStrings(key);
             return values != null;
+        }
+        #endregion
+
+        #region Vector2
+        public static Vector2 GetVector2(string key, Vector2 defaultValue = default)
+        {
+            return new Vector2(
+                PlayerPrefs.GetFloat(key + X_SUFFIX, defaultValue.x),
+                PlayerPrefs.GetFloat(key + Y_SUFFIX, defaultValue.y)
+            );
+        }
+
+        public static void SetVector2(string key, Vector2 value)
+        {
+            PlayerPrefs.SetFloat(key + X_SUFFIX, value.x);
+            PlayerPrefs.SetFloat(key + Y_SUFFIX, value.y);
+        }
+
+        public static bool TryGetVector2(string key, out Vector2 value)
+        {
+            value = GetVector2(key);
+            return (
+                PlayerPrefs.HasKey(key + X_SUFFIX) ||
+                PlayerPrefs.HasKey(key + Y_SUFFIX)
+            );
+        }
+        #endregion
+
+        #region Vector2Int
+        public static Vector2Int GetVector2Int(string key, Vector2Int defaultValue = default)
+        {
+            return new Vector2Int(
+                PlayerPrefs.GetInt(key + X_SUFFIX, defaultValue.x),
+                PlayerPrefs.GetInt(key + Y_SUFFIX, defaultValue.y)
+            );
+        }
+
+        public static void SetVector2Int(string key, Vector2Int value)
+        {
+            PlayerPrefs.SetInt(key + X_SUFFIX, value.x);
+            PlayerPrefs.SetInt(key + Y_SUFFIX, value.y);
+        }
+
+        public static bool TryGetVector2Int(string key, out Vector2Int value)
+        {
+            value = GetVector2Int(key);
+            return (
+                PlayerPrefs.HasKey(key + X_SUFFIX) ||
+                PlayerPrefs.HasKey(key + Y_SUFFIX)
+            );
+        }
+        #endregion
+
+        #region Vector3
+        public static Vector3 GetVector3(string key, Vector3 defaultValue = default)
+        {
+            return new Vector3(
+                PlayerPrefs.GetFloat(key + X_SUFFIX, defaultValue.x),
+                PlayerPrefs.GetFloat(key + Y_SUFFIX, defaultValue.y),
+                PlayerPrefs.GetFloat(key + Z_SUFFIX, defaultValue.z)
+            );
+        }
+
+        public static void SetVector3(string key, Vector3 value)
+        {
+            PlayerPrefs.SetFloat(key + X_SUFFIX, value.x);
+            PlayerPrefs.SetFloat(key + Y_SUFFIX, value.y);
+            PlayerPrefs.SetFloat(key + Z_SUFFIX, value.z);
+        }
+
+        public static bool TryGetVector3(string key, out Vector3 value)
+        {
+            value = GetVector3(key);
+            return (
+                PlayerPrefs.HasKey(key + X_SUFFIX) ||
+                PlayerPrefs.HasKey(key + Y_SUFFIX) ||
+                PlayerPrefs.HasKey(key + Z_SUFFIX)
+            );
+        }
+        #endregion
+
+        #region Vector3Int
+        public static Vector3Int GetVector3Int(string key, Vector3Int defaultValue = default)
+        {
+            return new Vector3Int(
+                PlayerPrefs.GetInt(key + X_SUFFIX, defaultValue.x),
+                PlayerPrefs.GetInt(key + Y_SUFFIX, defaultValue.y),
+                PlayerPrefs.GetInt(key + Z_SUFFIX, defaultValue.z)
+            );
+        }
+
+        public static void SetVector3Int(string key, Vector3Int value)
+        {
+            PlayerPrefs.SetInt(key + X_SUFFIX, value.x);
+            PlayerPrefs.SetInt(key + Y_SUFFIX, value.y);
+            PlayerPrefs.SetInt(key + Z_SUFFIX, value.z);
+        }
+
+        public static bool TryGetVector3Int(string key, out Vector3Int value)
+        {
+            value = GetVector3Int(key);
+            return (
+                PlayerPrefs.HasKey(key + X_SUFFIX) ||
+                PlayerPrefs.HasKey(key + Y_SUFFIX) ||
+                PlayerPrefs.HasKey(key + Z_SUFFIX)
+            );
+        }
+        #endregion
+
+        #region Vector4
+        public static Vector4 GetVector4(string key, Vector4 defaultValue = default)
+        {
+            return new Vector4(
+                PlayerPrefs.GetFloat(key + X_SUFFIX, defaultValue.x),
+                PlayerPrefs.GetFloat(key + Y_SUFFIX, defaultValue.y),
+                PlayerPrefs.GetFloat(key + Z_SUFFIX, defaultValue.z),
+                PlayerPrefs.GetFloat(key + W_SUFFIX, defaultValue.w)
+            );
+        }
+
+        public static void SetVector4(string key, Vector4 value)
+        {
+            PlayerPrefs.SetFloat(key + X_SUFFIX, value.x);
+            PlayerPrefs.SetFloat(key + Y_SUFFIX, value.y);
+            PlayerPrefs.SetFloat(key + Z_SUFFIX, value.z);
+            PlayerPrefs.SetFloat(key + W_SUFFIX, value.w);
+        }
+
+        public static bool TryGetVector4(string key, out Vector4 value)
+        {
+            value = GetVector4(key);
+            return (
+                PlayerPrefs.HasKey(key + X_SUFFIX) ||
+                PlayerPrefs.HasKey(key + Y_SUFFIX) ||
+                PlayerPrefs.HasKey(key + Z_SUFFIX) ||
+                PlayerPrefs.HasKey(key + W_SUFFIX)
+            );
         }
         #endregion
 
