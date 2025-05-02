@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace Common.Mathematics
@@ -1954,6 +1955,23 @@ namespace Common.Mathematics
             v.y = Mathf.Max(i, v.y);
             v.z = Mathf.Max(i, v.z);
             return v;
+        }
+
+        /// <summary> Returns a normalized Vector2 value based on radial angle a </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 ToUnitVector(float a)
+        {
+            Vector2 r;
+            r.x = (float)Math.Sin(a);
+            r.y = (float)Math.Cos(a);
+            return r;
+        }
+
+        /// <summary> Returns a radial angle from normalized Vector2 v </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float ToAngle(Vector2 v)
+        {
+            return (float)Math.Atan2(v.x, v.y);
         }
 
         /// <summary> Returns projection of vector 'v' onto normal vector 'n' </summary>
