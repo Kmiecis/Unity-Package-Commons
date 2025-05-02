@@ -20,7 +20,7 @@ namespace Common.Extensions
             return self.IsNull() || self.IsEmpty();
         }
 
-        public static bool ContainsKeys<TKey, TValue>(this IDictionary<TKey, TValue> self, IEnumerable<TKey> keys)
+        public static bool ContainsAllKeys<TKey, TValue>(this IDictionary<TKey, TValue> self, IEnumerable<TKey> keys)
         {
             foreach (var key in keys)
             {
@@ -32,11 +32,35 @@ namespace Common.Extensions
             return true;
         }
 
-        public static bool ContainsValues<TKey, TValue>(this Dictionary<TKey, TValue> self, IEnumerable<TValue> values)
+        public static bool ContainsAllKeys<TKey, TValue>(this Dictionary<TKey, TValue> self, params TKey[] keys)
+        {
+            for (int i = 0; i < keys.Length; ++i)
+            {
+                if (!self.ContainsKey(keys[i]))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool ContainsAllValues<TKey, TValue>(this Dictionary<TKey, TValue> self, IEnumerable<TValue> values)
         {
             foreach (var value in values)
             {
                 if (!self.ContainsValue(value))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool ContainsAllValues<TKey, TValue>(this Dictionary<TKey, TValue> self, params TValue[] values)
+        {
+            for (int i = 0; i < values.Length; ++i)
+            {
+                if (!self.ContainsValue(values[i]))
                 {
                     return false;
                 }
@@ -64,11 +88,13 @@ namespace Common.Extensions
             return default;
         }
 
-        public static KeyValuePair<TKey, TValue> First<TKey, TValue>(this IDictionary<TKey, TValue> self)
+        public static TKey FirstOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> self, TKey value = default)
         {
-            foreach (var pairs in self)
-                return pairs;
-            return default;
+            foreach (var entry in self)
+            {
+                return entry.Key;
+            }
+            return value;
         }
 
         public static TValue GetOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> self, TKey key, TValue value = default)
@@ -79,7 +105,9 @@ namespace Common.Extensions
         public static TValue GetOrCompute<TKey, TValue>(this IDictionary<TKey, TValue> self, TKey key, Func<TValue> computor)
         {
             if (!self.TryGetValue(key, out var result))
+            {
                 self[key] = result = computor();
+            }
             return result;
         }
     }
