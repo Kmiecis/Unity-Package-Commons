@@ -5,13 +5,13 @@ namespace Common
     [ExecuteAlways]
     public class OnTransformChangedSender : MonoBehaviour
     {
-        private const string MethodName = "OnTransformChanged";
+        public const string MethodName = "OnTransformChanged";
 
         private int _lastFrame;
 
-        private Vector3 _lastPosition;
-        private Vector3 _lastScale;
-        private Quaternion _lastRotation;
+        private Vector3 _lastPosition = UVector3.NaN;
+        private Vector3 _lastScale = UVector3.NaN;
+        private Quaternion _lastRotation = UQuaternion.NaN;
 
         public void CheckDirty()
         {
@@ -66,7 +66,15 @@ namespace Common
 
         private void SendChangedMessage()
         {
-            SendMessage(MethodName, SendMessageOptions.DontRequireReceiver);
+            var components = GetComponents<Component>();
+            foreach (var component in components)
+            {
+                var method = component.GetType().GetMethod(MethodName, UBinding.AnyInstance);
+                if (method != null)
+                {
+                    method.Invoke(component, null);
+                }
+            }
         }
 
         #region Unity
