@@ -307,21 +307,21 @@ namespace Common.Mathematics
         public static int CeilToIntSafe(float f, int d)
         {
             int s = (int)Math.Pow(10, d);
-            return Mathf.CeilToInt(f * s) / s;
+            return Mathf.CeilToInt(Mathf.Round(f * s) / s);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int FloorToIntSafe(float f, int d)
         {
             int s = (int)Math.Pow(10, d);
-            return Mathf.FloorToInt(f * s) / s;
+            return Mathf.FloorToInt(Mathf.Round(f * s) / s);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static int RoundToIntSafe(float f, int d)
         {
             int s = (int)Math.Pow(10, d);
-            return Mathf.RoundToInt(f * s) / s;
+            return Mathf.RoundToInt(Mathf.Round(f * s) / s);
         }
 
 

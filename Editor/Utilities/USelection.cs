@@ -34,7 +34,7 @@ namespace CommonEditor
             return active != null;
         }
 
-        public static IEnumerable<Object> GetSelected(bool warnings = false)
+        public static IEnumerable<Object> GetSelected(bool silent = false)
         {
             var selections = Selection.objects;
             if (selections != null)
@@ -44,22 +44,22 @@ namespace CommonEditor
                     yield return selected;
                 }
             }
-            else if (warnings)
+            else if (!silent)
             {
                 Debug.LogWarning("No objects selected");
             }
         }
 
-        public static IEnumerable<T> GetSelected<T>(bool warnings = false)
+        public static IEnumerable<T> GetSelected<T>(bool silent = false)
             where T : Object
         {
-            foreach (var selected in GetSelected(warnings))
+            foreach (var selected in GetSelected(silent))
             {
                 if (selected is T casted)
                 {
                     yield return casted;
                 }
-                else if (warnings)
+                else if (!silent)
                 {
                     Debug.LogWarning($"Selected object {selected.name} is not of type {typeof(T)}");
                 }

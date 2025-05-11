@@ -38,6 +38,16 @@ namespace Common.Extensions
             return new Vector2(x, y);
         }
 
+        public static Vector2 GetNearFrustumSize(this Camera self)
+        {
+            return self.GetFrustumSize(self.nearClipPlane);
+        }
+
+        public static Vector2 GetFarFrustumSize(this Camera self)
+        {
+            return self.GetFrustumSize(self.farClipPlane);
+        }
+
         public static Ray ScreenCenterToRay(this Camera self)
         {
             var pos = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);

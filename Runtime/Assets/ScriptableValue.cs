@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Common
@@ -21,6 +22,8 @@ namespace Common
     {
         [SerializeField] protected T _value;
 
+        protected event Action<T> _callback;
+
         public T Value
         {
             get => GetValue();
@@ -34,7 +37,39 @@ namespace Common
 
         public virtual void SetValue(T value)
         {
+            Invoke(value);
+
             _value = value;
+        }
+
+        public void AddListener(Action<T> callback)
+        {
+            _callback += callback;
+        }
+
+        public void RemoveListener(Action<T> callback)
+        {
+            _callback -= callback;
+        }
+
+        public void RemoveAllListeners()
+        {
+            _callback = null;
+        }
+
+        public void Invoke()
+        {
+            Invoke(_value);
+        }
+
+        protected void Invoke(T value)
+        {
+            _callback?.Invoke(value);
+        }
+
+        private bool Equals(ScriptableValue<T> other)
+        {
+            return Equals(this.Value, other.Value);
         }
 
         public static implicit operator T(ScriptableValue<T> value)
@@ -69,11 +104,6 @@ namespace Common
         public override string ToString()
         {
             return _value.ToString();
-        }
-
-        private bool Equals(ScriptableValue<T> other)
-        {
-            return Equals(this.Value, other.Value);
         }
     }
 }
