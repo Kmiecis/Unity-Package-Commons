@@ -143,7 +143,13 @@ namespace Common.Mathematics
             other.max = Mathx.Min(max, other.max);
             return other;
         }
-        
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Validate()
+        {
+            min = Mathx.Min(min, max);
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Range2 other)
         {

@@ -102,6 +102,12 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Validate()
+        {
+            min = Math.Min(min, max);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(RangeInt other)
         {
             return (
