@@ -120,9 +120,11 @@ namespace Common.Extensions
         {
             var builder = new StringBuilder();
             builder.Append(self.name);
-            var parent = self.parent;
-            while (parent != null)
-                builder.Insert(0, delimiter).Insert(0, parent.name);
+            while (self.parent != null)
+            {
+                self = self.parent;
+                builder.Insert(0, delimiter).Insert(0, self.name);
+            }
             return builder.ToString();
         }
 
