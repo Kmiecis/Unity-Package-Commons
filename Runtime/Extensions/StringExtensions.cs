@@ -307,5 +307,25 @@ namespace Common.Extensions
         {
             return string.Join(separator, self, startIndex, count);
         }
+
+        public static string RichBold(this string self)
+        {
+            return string.Concat("<b>", self, "</b>");
+        }
+
+        public static string RichItalic(this string self)
+        {
+            return string.Concat("<i>", self, "</i>");
+        }
+
+        public static string RichSize(this string self, int size)
+        {
+            return string.Concat("<size=", size, '>', self, "</size>");
+        }
+
+        public static string RichColor(this string self, string color)
+        {
+            return string.Concat("<color=", color, '>', self, "</color>");
+        }
     }
 }
