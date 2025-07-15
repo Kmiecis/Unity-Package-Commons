@@ -2,7 +2,7 @@
 
 namespace Common
 {
-    public sealed class LogAttribute : PropertyAttribute
+    public class LogAttribute : PropertyAttribute
     {
     }
 }

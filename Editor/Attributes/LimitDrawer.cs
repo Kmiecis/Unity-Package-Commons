@@ -23,7 +23,7 @@ namespace CommonEditor
                     break;
 
                 default:
-                    EditorGUI.LabelField(position, label.text, $"Use {nameof(LimitAttribute)} with float or int.");
+                    EditorGUI.LabelField(position, label.text, $"Use {nameof(LimitAttribute)} with a float or int.");
                     break;
             }
         }
