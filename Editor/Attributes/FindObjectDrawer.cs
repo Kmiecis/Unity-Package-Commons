@@ -28,7 +28,11 @@ namespace CommonEditor
         {
             var attribute = (FindObjectOfTypeAttribute)this.attribute;
             var type = attribute.type ?? fieldInfo.FieldType;
+#if UNITY_6000_0_OR_NEWER
+            return Object.FindFirstObjectByType(type);
+#else
             return Object.FindObjectOfType(type);
+#endif
         }
     }
 
