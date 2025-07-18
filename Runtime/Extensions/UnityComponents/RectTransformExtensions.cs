@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Common.Extensions
+namespace Common
 {
     public static class RectTransformExtensions
     {
@@ -11,7 +11,9 @@ namespace Common.Extensions
         {
             var root = self;
             while (root.parent is RectTransform parent)
+            {
                 root = parent;
+            }
             return root;
         }
 

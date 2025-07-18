@@ -1,6 +1,4 @@
-﻿using Common.Extensions;
-
-namespace Common
+﻿namespace Common
 {
     public static class Arrays
     {

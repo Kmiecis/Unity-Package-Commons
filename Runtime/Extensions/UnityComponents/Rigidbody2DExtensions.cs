@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Common.Extensions
+namespace Common
 {
     public static class Rigidbody2DExtensions
     {

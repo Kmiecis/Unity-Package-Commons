@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Common.Extensions
+namespace Common
 {
     public static class RendererExtensions
     {

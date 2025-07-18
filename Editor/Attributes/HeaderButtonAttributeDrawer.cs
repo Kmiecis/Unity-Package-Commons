@@ -1,6 +1,4 @@
 using Common;
-using CommonEditor.Extensions;
-using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,12 +7,6 @@ namespace CommonEditor
     [CustomPropertyDrawer(typeof(HeaderButtonAttribute))]
     public class HeaderButtonAttributeDrawer : ResizeablePropertyDrawer
     {
-        private const BindingFlags BINDING_FLAGS =
-            BindingFlags.Instance |
-            BindingFlags.Static |
-            BindingFlags.Public |
-            BindingFlags.NonPublic;
-
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             MarkHeightBegin(position.y);
@@ -34,7 +26,7 @@ namespace CommonEditor
             {
                 var type = target.GetType();
 
-                var method = type.GetMethod(attribute.callback, BINDING_FLAGS);
+                var method = type.GetMethod(attribute.callback, UBinding.Anything);
                 if (method != null)
                 {
                     method.Invoke(target, null);

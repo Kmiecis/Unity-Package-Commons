@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Animations;
 
-namespace Common.Extensions
+namespace Common
 {
     public static class ConstraintExtensions
     {

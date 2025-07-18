@@ -1,5 +1,4 @@
-﻿using Common.Extensions;
-using System.IO;
+﻿using System.IO;
 
 namespace Common
 {

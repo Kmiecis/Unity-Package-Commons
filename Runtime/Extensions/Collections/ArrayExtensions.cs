@@ -1,15 +1,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace Common.Extensions
+namespace Common
 {
     public static class ArrayExtensions
     {
-        public static bool IsNull<T>(this T[] self)
-        {
-            return self == null;
-        }
-
         public static bool IsEmpty<T>(this T[] self)
         {
             return self.Length == 0;
@@ -17,7 +12,7 @@ namespace Common.Extensions
 
         public static bool IsNullOrEmpty<T>(this T[] self)
         {
-            return self.IsNull() || self.IsEmpty();
+            return self == null || self.IsEmpty();
         }
 
         public static T At<T>(this T[] self, int index)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Common.Extensions
+namespace Common
 {
     public static class FieldInfoExtensions
     {

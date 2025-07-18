@@ -1,29 +1,13 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 
-namespace Common.Extensions
+namespace Common
 {
     public static class ListExtensions
     {
-        public static bool IsNull<T>(this List<T> self)
-        {
-            return self == null;
-        }
-
-        public static bool IsEmpty<T>(this List<T> self)
-        {
-            return self.Count == 0;
-        }
-
-        public static bool IsNullOrEmpty<T>(this List<T> self)
-        {
-            return self.IsNull() || self.IsEmpty();
-        }
-
         public static int GetCountSafely<T>(this List<T> self)
         {
-            return self.IsNull() ? 0 : self.Count;
+            return self == null ? 0 : self.Count;
         }
 
         public static T At<T>(this List<T> self, int index)
@@ -49,30 +33,6 @@ namespace Common.Extensions
         public static T LastOrDefault<T>(this List<T> self, T value = default)
         {
             return self.IsEmpty() ? value : self.Last();
-        }
-
-        public static bool ContainsAll<T>(this List<T> self, IEnumerable<T> items)
-        {
-            foreach (var item in items)
-            {
-                if (!self.Contains(item))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        public static bool ContainsAny<T>(this List<T> self, IEnumerable<T> items)
-        {
-            foreach (var item in items)
-            {
-                if (self.Contains(item))
-                {
-                    return true;
-                }
-            }
-            return false;
         }
 
         public static List<TOut> ConvertAll<TIn, TOut>(this List<TIn> self, Converter<TIn, TOut> converter)

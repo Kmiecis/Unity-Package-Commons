@@ -1,6 +1,5 @@
 using Common;
 using Common.Mathematics;
-using CommonEditor.Extensions;
 using UnityEditor;
 using UnityEngine;
 

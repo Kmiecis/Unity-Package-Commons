@@ -1,5 +1,4 @@
 ﻿using Common;
-using CommonEditor.Extensions;
 using System;
 using UnityEditor;
 using UnityEngine;

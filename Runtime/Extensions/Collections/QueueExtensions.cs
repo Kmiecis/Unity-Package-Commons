@@ -1,14 +1,9 @@
 using System.Collections.Generic;
 
-namespace Common.Extensions
+namespace Common
 {
     public static class QueueExtensions
     {
-        public static bool IsNull<T>(this Queue<T> self)
-        {
-            return self == null;
-        }
-
         public static bool IsEmpty<T>(this Queue<T> self)
         {
             return self.Count == 0;
@@ -16,7 +11,7 @@ namespace Common.Extensions
 
         public static bool IsNullOrEmpty<T>(this Queue<T> self)
         {
-            return self.IsNull() || self.IsEmpty();
+            return self == null || self.IsEmpty();
         }
 
         public static bool Contains<T>(this Queue<T> self, IEnumerable<T> items)

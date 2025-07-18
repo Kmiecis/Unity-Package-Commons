@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Common.Extensions
+namespace Common
 {
     public static class AppDomainExtensions
     {

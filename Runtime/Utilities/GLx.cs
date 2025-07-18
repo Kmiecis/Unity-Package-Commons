@@ -1,4 +1,3 @@
-using Common.Extensions;
 using UnityEngine;
 using UnityEngine.Rendering;
 

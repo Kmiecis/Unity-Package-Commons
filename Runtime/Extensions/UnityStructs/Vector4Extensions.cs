@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common.Extensions
+namespace Common
 {
     public static class Vector4Extensions
     {

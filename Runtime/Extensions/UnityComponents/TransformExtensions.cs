@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace Common.Extensions
+namespace Common
 {
     public static class TransformExtensions
     {

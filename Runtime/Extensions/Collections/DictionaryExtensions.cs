@@ -1,15 +1,10 @@
 using System;
 using System.Collections.Generic;
 
-namespace Common.Extensions
+namespace Common
 {
     public static class DictionaryExtensions
     {
-        public static bool IsNull<TKey, TValue>(this IDictionary<TKey, TValue> self)
-        {
-            return self == null;
-        }
-
         public static bool IsEmpty<TKey, TValue>(this IDictionary<TKey, TValue> self)
         {
             return self.Count == 0;
@@ -17,7 +12,7 @@ namespace Common.Extensions
 
         public static bool IsNullOrEmpty<TKey, TValue>(this IDictionary<TKey, TValue> self)
         {
-            return self.IsNull() || self.IsEmpty();
+            return self == null || self.IsEmpty();
         }
 
         public static bool ContainsAllKeys<TKey, TValue>(this IDictionary<TKey, TValue> self, IEnumerable<TKey> keys)

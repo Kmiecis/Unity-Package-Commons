@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace CommonEditor.Extensions
+namespace CommonEditor
 {
     public static class ScriptableObjectExtensions
     {

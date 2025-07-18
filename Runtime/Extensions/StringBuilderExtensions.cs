@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Common.Extensions
+namespace Common
 {
     public static class StringBuilderExtensions
     {

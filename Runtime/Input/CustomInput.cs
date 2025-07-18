@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Common.Mathematics;
+using System.Collections.Generic;
 using UnityEngine;
-using Common.Extensions;
-using Common.Mathematics;
 
 namespace Common.Inputs
 {

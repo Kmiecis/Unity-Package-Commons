@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace CommonEditor.Extensions
+namespace CommonEditor
 {
     public static class SerializedPropertyExtensions
     {

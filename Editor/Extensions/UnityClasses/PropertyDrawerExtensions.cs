@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 
-namespace CommonEditor.Extensions
+namespace CommonEditor
 {
     public static class PropertyDrawerExtensions
     {

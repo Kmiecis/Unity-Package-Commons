@@ -1,14 +1,9 @@
 using System.Collections.Generic;
 
-namespace Common.Extensions
+namespace Common
 {
     public static class StackExtensions
     {
-        public static bool IsNull<T>(this Stack<T> self)
-        {
-            return self == null;
-        }
-
         public static bool IsEmpty<T>(this Stack<T> self)
         {
             return self.Count == 0;
@@ -16,7 +11,7 @@ namespace Common.Extensions
 
         public static bool IsNullOrEmpty<T>(this Stack<T> self)
         {
-            return self.IsNull() || self.IsEmpty();
+            return self == null || self.IsEmpty();
         }
 
         public static bool Contains<T>(this Stack<T> self, IEnumerable<T> items)
@@ -34,8 +29,12 @@ namespace Common.Extensions
         public static bool TryPop<T>(this Stack<T> self, out T item)
         {
             if (self.Count > 0)
-                return self.Pop().OutWithTrue(out item);
-            return default(T).OutWithFalse(out item);
+            {
+                item = self.Pop();
+                return true;
+            }
+            item = default;
+            return false;
         }
     }
 }

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Common.Extensions
+namespace Common
 {
     public static class AssemblyExtensions
     {

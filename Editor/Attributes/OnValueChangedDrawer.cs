@@ -1,7 +1,4 @@
 ﻿using Common;
-using Common.Extensions;
-using CommonEditor.Extensions;
-using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,12 +7,6 @@ namespace CommonEditor
     [CustomPropertyDrawer(typeof(OnValueChangedAttribute))]
     public class OnValueChangedDrawer : PropertyDrawer
     {
-        private const BindingFlags BINDING_FLAGS =
-            BindingFlags.Instance |
-            BindingFlags.Static |
-            BindingFlags.Public |
-            BindingFlags.NonPublic;
-
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             var attribute = (OnValueChangedAttribute)this.attribute;
@@ -28,7 +19,7 @@ namespace CommonEditor
             {
                 var target = property.GetTargetObject();
                 var targetType = property.GetTargetType();
-                var method = targetType.GetMethod(attribute.callback, BINDING_FLAGS);
+                var method = targetType.GetMethod(attribute.callback, UBinding.Anything);
 
                 if (method != null)
                 {

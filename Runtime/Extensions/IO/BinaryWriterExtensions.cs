@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using UnityEngine;
 
-namespace Common.Extensions
+namespace Common
 {
     public static class BinaryWriterExtensions
     {

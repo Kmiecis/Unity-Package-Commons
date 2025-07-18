@@ -1,5 +1,4 @@
-﻿using Common.Extensions;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Common
 {
