@@ -63,6 +63,40 @@ namespace Common
             return true;
         }
 
+        public static Dictionary<TNewKey, TValue> ConvertKeys<TOldKey, TNewKey, TValue>(this Dictionary<TOldKey, TValue> self, Converter<TOldKey, TNewKey> converter)
+        {
+            var result = new Dictionary<TNewKey, TValue>(self.Count);
+            foreach (var entry in self)
+            {
+                var newKey = converter(entry.Key);
+                result[newKey] = entry.Value;
+            }
+            return result;
+        }
+
+        public static Dictionary<TKey, TNewValue> ConvertValues<TKey, TOldValue, TNewValue>(this Dictionary<TKey, TOldValue> self, Converter<TOldValue, TNewValue> converter)
+        {
+            var result = new Dictionary<TKey, TNewValue>(self.Count);
+            foreach (var entry in self)
+            {
+                var newValue = converter(entry.Value);
+                result[entry.Key] = newValue;
+            }
+            return result;
+        }
+
+        public static Dictionary<TNewKey, TNewValue> ConvertAll<TOldKey, TNewKey, TOldValue, TNewValue>(this Dictionary<TOldKey, TOldValue> self, Converter<TOldKey, TNewKey> keyConverter, Converter<TOldValue, TNewValue> valueConverter)
+        {
+            var result = new Dictionary<TNewKey, TNewValue>(self.Count);
+            foreach (var entry in self)
+            {
+                var newKey = keyConverter(entry.Key);
+                var newValue = valueConverter(entry.Value);
+                result[newKey] = newValue;
+            }
+            return result;
+        }
+
         public static bool Remove<TKey, TValue>(this IDictionary<TKey, TValue> self, IEnumerable<TKey> keys)
         {
             var result = true;
