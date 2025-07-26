@@ -308,8 +308,7 @@ namespace Common
 
         public static T[] GetArray<T>(this List<T> self)
         {
-            var type = self.GetType();
-            var field = type.GetField("_items", UBinding.NonPublicInstance);
+            var field = self.GetType().GetField("_items", UBinding.NonPublicInstance);
             return (T[])field.GetValue(self);
         }
     }

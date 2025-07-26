@@ -69,7 +69,7 @@ namespace Common
             return false;
         }
 
-        public static bool ContainsIndex<T>(this T[] self, int index)
+        public static bool Contains<T>(this T[] self, int index)
         {
             return -1 < index && index < self.Length;
         }
@@ -105,7 +105,7 @@ namespace Common
 
         public static bool TryGetAt<T>(this T[] self, int index, out T item)
         {
-            if (self.ContainsIndex(index))
+            if (self.Contains(index))
             {
                 item = self[index];
                 return true;
@@ -259,6 +259,31 @@ namespace Common
         {
             index = Array.FindLastIndex(self, startIndex, count, match);
             return index != -1;
+        }
+
+        public static void Sort<T>(this T[] self)
+        {
+            Array.Sort(self);
+        }
+
+        public static void Sort<T>(this T[] self, Comparison<T> comparison)
+        {
+            Array.Sort(self, comparison);
+        }
+
+        public static void Sort<T>(this T[] self, IComparer<T> comparer)
+        {
+            Array.Sort(self, comparer);
+        }
+
+        public static void Sort<T>(this T[] self, int index, int length)
+        {
+            Array.Sort(self, index, length);
+        }
+
+        public static void Sort<T>(this T[] self, int index, int length, IComparer<T> comparer)
+        {
+            Array.Sort(self, index, length, comparer);
         }
 
         public static void Swap<T>(this T[] self, int a, int b)
