@@ -16,7 +16,9 @@ namespace CommonEditor
                 var type = fieldInfo.FieldType;
 
                 var value = GetComponent(target, type);
+                property.serializedObject.Update();
                 property.objectReferenceValue = value;
+                property.serializedObject.ApplyModifiedProperties();
             }
 
             EditorGUI.PropertyField(position, property, label, true);
