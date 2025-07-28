@@ -146,6 +146,14 @@ namespace Common
             return index != -1;
         }
 
+        public static List<U> Cast<T, U>(this List<T> self) where U : T
+        {
+            var result = new List<U>(self.Count);
+            for (int i = 0; i < self.Count; ++i)
+                result[i] = (U)self[i];
+            return result;
+        }
+
         public static void Swap<T>(this IList<T> self, int a, int b)
         {
             var t = self[a];

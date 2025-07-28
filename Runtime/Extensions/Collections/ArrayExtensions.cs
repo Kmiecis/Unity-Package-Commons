@@ -286,6 +286,14 @@ namespace Common
             Array.Sort(self, index, length, comparer);
         }
 
+        public static U[] Cast<T, U>(this T[] self) where U : T
+        {
+            var result = new U[self.Length];
+            for (int i = 0; i < self.Length; ++i)
+                result[i] = (U)self[i];
+            return result;
+        }
+
         public static void Swap<T>(this T[] self, int a, int b)
         {
             var t = self[a];
