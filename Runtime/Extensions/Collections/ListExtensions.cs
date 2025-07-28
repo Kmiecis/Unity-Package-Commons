@@ -146,7 +146,7 @@ namespace Common
             return index != -1;
         }
 
-        public static List<U> Cast<T, U>(this List<T> self) where U : T
+        public static List<U> Cast<T, U>(this List<T> self) where T : U
         {
             var result = new List<U>(self.Count);
             for (int i = 0; i < self.Count; ++i)

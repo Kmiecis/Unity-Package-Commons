@@ -286,7 +286,7 @@ namespace Common
             Array.Sort(self, index, length, comparer);
         }
 
-        public static U[] Cast<T, U>(this T[] self) where U : T
+        public static U[] Cast<T, U>(this T[] self) where T : U
         {
             var result = new U[self.Length];
             for (int i = 0; i < self.Length; ++i)
