@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 
 namespace Common
 {
@@ -40,9 +41,17 @@ namespace Common
             return path;
         }
 
-        public static string[] Split(string path)
+        public static IEnumerable<string> Split(string path)
         {
-            return path.Split(Path.DirectorySeparatorChar);
+            var subpaths = path.Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar, Path.VolumeSeparatorChar);
+
+            foreach (var subpath in subpaths)
+            {
+                if (!subpath.IsNullOrEmpty())
+                {
+                    yield return subpath;
+                }
+            }
         }
     }
 }
