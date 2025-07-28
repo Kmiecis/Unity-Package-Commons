@@ -105,15 +105,22 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float InverseLerp(float a, float b, float t)
+        public static float Unlerp(float a, float b, float t)
         {
             return (t - a) / (b - a);
         }
 
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Remap(float fromMin, float fromMax, float toMin, float toMax, float v)
         {
-            return Lerp(toMin, toMax, InverseLerp(fromMin, fromMax, v));
+            return Lerp(toMin, toMax, Unlerp(fromMin, fromMax, v));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Remap01(float min, float max, float v)
+        {
+            return Unlerp(min, max, v);
         }
 
 

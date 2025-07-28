@@ -413,7 +413,7 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float InverseLerp(Vector2 a, Vector2 b, Vector2 v)
+        public static float Unlerp(Vector2 a, Vector2 b, Vector2 v)
         {
             var ab = b - a;
             var av = v - a;
@@ -421,15 +421,15 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 InverseLerp(Vector2 a, Vector2 b, float t)
+        public static Vector2 Unlerp(Vector2 a, Vector2 b, float t)
         {
-            a.x = InverseLerp(a.x, b.x, t);
-            a.y = InverseLerp(a.y, b.y, t);
+            a.x = Unlerp(a.x, b.x, t);
+            a.y = Unlerp(a.y, b.y, t);
             return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float InverseLerp(Vector3 a, Vector3 b, Vector3 v)
+        public static float Unlerp(Vector3 a, Vector3 b, Vector3 v)
         {
             var ab = b - a;
             var av = v - a;
@@ -437,16 +437,16 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 InverseLerp(Vector3 a, Vector3 b, float t)
+        public static Vector3 Unlerp(Vector3 a, Vector3 b, float t)
         {
-            a.x = InverseLerp(a.x, b.x, t);
-            a.y = InverseLerp(a.y, b.y, t);
-            a.z = InverseLerp(a.z, b.z, t);
+            a.x = Unlerp(a.x, b.x, t);
+            a.y = Unlerp(a.y, b.y, t);
+            a.z = Unlerp(a.z, b.z, t);
             return a;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float InverseLerp(Vector4 a, Vector4 b, Vector4 v)
+        public static float Unlerp(Vector4 a, Vector4 b, Vector4 v)
         {
             var ab = b - a;
             var av = v - a;
@@ -454,12 +454,12 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 InverseLerp(Vector4 a, Vector4 b, float t)
+        public static Vector4 Unlerp(Vector4 a, Vector4 b, float t)
         {
-            a.x = InverseLerp(a.x, b.x, t);
-            a.y = InverseLerp(a.y, b.y, t);
-            a.z = InverseLerp(a.z, b.z, t);
-            a.w = InverseLerp(a.w, b.w, t);
+            a.x = Unlerp(a.x, b.x, t);
+            a.y = Unlerp(a.y, b.y, t);
+            a.z = Unlerp(a.z, b.z, t);
+            a.w = Unlerp(a.w, b.w, t);
             return a;
         }
 
@@ -989,19 +989,19 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Remap(Vector2 fromMin, Vector2 fromMax, Vector2 toMin, Vector2 toMax, Vector2 v)
         {
-            return Lerp(toMin, toMax, InverseLerp(fromMin, fromMax, v));
+            return Lerp(toMin, toMax, Unlerp(fromMin, fromMax, v));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Remap(Vector3 fromMin, Vector3 fromMax, Vector3 toMin, Vector3 toMax, Vector3 v)
         {
-            return Lerp(toMin, toMax, InverseLerp(fromMin, fromMax, v));
+            return Lerp(toMin, toMax, Unlerp(fromMin, fromMax, v));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Remap(Vector4 fromMin, Vector4 fromMax, Vector4 toMin, Vector4 toMax, Vector4 v)
         {
-            return Lerp(toMin, toMax, InverseLerp(fromMin, fromMax, v));
+            return Lerp(toMin, toMax, Unlerp(fromMin, fromMax, v));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
