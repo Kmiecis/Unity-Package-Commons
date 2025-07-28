@@ -17,7 +17,7 @@ namespace Common
                 Mathx.FromIndex(i, width, out var x, out var y);
                 var pixel = pixels[i];
 
-                if (!Mathx.IsEqual(pixel, clear))
+                if (pixel.a != 0)
                 {
                     min.x = Mathf.Min(min.x, x);
                     min.y = Mathf.Min(min.y, y);
