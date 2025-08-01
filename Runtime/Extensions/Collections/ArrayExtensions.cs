@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Common
@@ -15,7 +16,7 @@ namespace Common
             return self == null || self.IsEmpty();
         }
 
-        public static T At<T>(this T[] self, int index)
+        public static T GetAt<T>(this T[] self, int index)
         {
             return self[index];
         }
@@ -286,14 +287,6 @@ namespace Common
             Array.Sort(self, index, length, comparer);
         }
 
-        public static U[] Cast<T, U>(this T[] self) where T : U
-        {
-            var result = new U[self.Length];
-            for (int i = 0; i < self.Length; ++i)
-                result[i] = (U)self[i];
-            return result;
-        }
-
         public static void Swap<T>(this T[] self, int a, int b)
         {
             var t = self[a];
@@ -379,6 +372,20 @@ namespace Common
         public static int GetDepth<T>(this T[,,] self)
         {
             return self.GetLength(2);
+        }
+
+        public static IEnumerable<T> SafeEnumerator<T>(this T[] self)
+        {
+            if (self != null)
+            {
+                foreach (var item in self)
+                {
+                    if (item != null)
+                    {
+                        yield return item;
+                    }
+                }
+            }
         }
     }
 }

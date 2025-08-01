@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace Common
@@ -10,7 +11,7 @@ namespace Common
             return self == null ? 0 : self.Count;
         }
 
-        public static T At<T>(this List<T> self, int index)
+        public static T GetAt<T>(this List<T> self, int index)
         {
             return self[index];
         }
@@ -51,6 +52,36 @@ namespace Common
                 target.Add(item);
             }
             return target;
+        }
+
+        public static bool HasAnyOfType<T>(this IList self)
+        {
+            if (self != null)
+            {
+                foreach (var item in self)
+                {
+                    if (item is T)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static T FindAnyOfType<T>(this IList self)
+        {
+            if (self != null)
+            {
+                foreach (var item in self)
+                {
+                    if (item is T casted)
+                    {
+                        return casted;
+                    }
+                }
+            }
+            return default;
         }
 
         public static bool TryGetAt<T>(this List<T> self, int index, out T item)
@@ -144,14 +175,6 @@ namespace Common
         {
             index = self.FindLastIndex(startIndex, count, match);
             return index != -1;
-        }
-
-        public static List<U> Cast<T, U>(this List<T> self) where T : U
-        {
-            var result = new List<U>(self.Count);
-            for (int i = 0; i < self.Count; ++i)
-                result[i] = (U)self[i];
-            return result;
         }
 
         public static void Swap<T>(this IList<T> self, int a, int b)
@@ -312,6 +335,34 @@ namespace Common
         public static T RevokeLast<T>(this List<T> self)
         {
             return self.RevokeAt(self.Count - 1);
+        }
+
+        public static IEnumerable SafeEnumerable(this IList self)
+        {
+            if (self != null)
+            {
+                foreach (var item in self)
+                {
+                    if (item != null)
+                    {
+                        yield return item;
+                    }
+                }
+            }
+        }
+
+        public static IEnumerable<T> SafeEnumerable<T>(this List<T> self)
+        {
+            if (self != null)
+            {
+                foreach (var item in self)
+                {
+                    if (item != null)
+                    {
+                        yield return item;
+                    }
+                }
+            }
         }
 
         public static T[] GetArray<T>(this List<T> self)
