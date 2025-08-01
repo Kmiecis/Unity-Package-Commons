@@ -84,6 +84,20 @@ namespace Common
             return default;
         }
 
+        public static IEnumerable<T> FindAllOfType<T>(this IList self)
+        {
+            if (self != null)
+            {
+                foreach (var item in self)
+                {
+                    if (item is T casted)
+                    {
+                        yield return casted;
+                    }
+                }
+            }
+        }
+
         public static bool TryGetAt<T>(this List<T> self, int index, out T item)
         {
             if (-1 < index && index < self.Count)
@@ -289,22 +303,19 @@ namespace Common
             return result;
         }
 
+        public static void RemoveFirst<T>(this List<T> self)
+        {
+            self.RemoveAt(0);
+        }
+
+        public static void RemoveFirst<T>(this List<T> self, int count)
+        {
+            self.RemoveRange(0, count);
+        }
+
         public static bool RemoveFirst<T>(this List<T> self, Predicate<T> match)
         {
             for (int i = 0; i < self.Count; ++i)
-            {
-                if (match(self[i]))
-                {
-                    self.RemoveAt(i);
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public static bool RemoveLast<T>(this List<T> self, Predicate<T> match)
-        {
-            for (int i = self.Count - 1; i > -1; --i)
             {
                 if (match(self[i]))
                 {
@@ -325,6 +336,35 @@ namespace Common
             self.RemoveRange(self.Count - 1 - count, count);
         }
 
+        public static bool RemoveLast<T>(this List<T> self, Predicate<T> match)
+        {
+            for (int i = self.Count - 1; i > -1; --i)
+            {
+                var item = self[i];
+                if (match(item))
+                {
+                    self.RemoveAt(i);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static bool RemoveAll<T>(this List<T> self, Predicate<T> match)
+        {
+            var result = false;
+            for (int i = self.Count - 1; i > -1; --i)
+            {
+                var item = self[i];
+                if (match(item))
+                {
+                    self.RemoveAt(i);
+                    result = true;
+                }
+            }
+            return result;
+        }
+
         public static T RevokeAt<T>(this List<T> self, int index)
         {
             var result = self[index];
@@ -332,12 +372,58 @@ namespace Common
             return result;
         }
 
+        public static T RevokeFirst<T>(this List<T> self)
+        {
+            return self.RevokeAt(0);
+        }
+
+        public static T RevokeFirst<T>(this List<T> self, Predicate<T> match)
+        {
+            for (int i = 0; i < self.Count; ++i)
+            {
+                var item = self[i];
+                if (match(item))
+                {
+                    self.RemoveAt(i);
+                    return item;
+                }
+            }
+            return default;
+        }
+
         public static T RevokeLast<T>(this List<T> self)
         {
             return self.RevokeAt(self.Count - 1);
         }
 
-        public static IEnumerable SafeEnumerable(this IList self)
+        public static T RevokeLast<T>(this List<T> self, Predicate<T> match)
+        {
+            for (int i = self.Count - 1; i > -1; --i)
+            {
+                var item = self[i];
+                if (match(item))
+                {
+                    self.RemoveAt(i);
+                    return item;
+                }
+            }
+            return default;
+        }
+
+        public static IEnumerable<T> RevokeAll<T>(this List<T> self, Predicate<T> match)
+        {
+            for (int i = self.Count - 1; i > -1; --i)
+            {
+                var item = self[i];
+                if (match(item))
+                {
+                    self.RemoveAt(i);
+                    yield return item;
+                }
+            }
+        }
+
+        public static IEnumerable EnumerateSafely(this IList self)
         {
             if (self != null)
             {
@@ -351,7 +437,7 @@ namespace Common
             }
         }
 
-        public static IEnumerable<T> SafeEnumerable<T>(this List<T> self)
+        public static IEnumerable<T> EnumerateSafely<T>(this List<T> self)
         {
             if (self != null)
             {
