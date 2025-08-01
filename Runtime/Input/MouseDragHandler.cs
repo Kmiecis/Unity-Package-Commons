@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace Common.Inputs
 {
-    [AddComponentMenu(nameof(Common) + "/" + nameof(Inputs) + "/" + nameof(MouseDragHandler))]
+    [AddComponentMenu(nameof(Common) + "/" + nameof(Inputs) + "/Mouse Drag Handler")]
     public class MouseDragHandler : MonoBehaviour
     {
         [SerializeField] protected UnityEvent<MouseEventData> _onDragBegan = new UnityEvent<MouseEventData>();

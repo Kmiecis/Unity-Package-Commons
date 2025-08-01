@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace Common.Inputs
 {
-    [AddComponentMenu(nameof(Common) + "/" + nameof(Inputs) + "/" + nameof(MouseToggleHandler))]
+    [AddComponentMenu(nameof(Common) + "/" + nameof(Inputs) + "/Mouse Toggle Handler")]
     public class MouseToggleHandler : MouseClickHandler
     {
         [SerializeField] private UnityEvent<bool> _onValueChanged = new UnityEvent<bool>();

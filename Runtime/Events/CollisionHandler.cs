@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace Common
 {
-    [AddComponentMenu(nameof(Common) + "/" + nameof(CollisionHandler))]
+    [AddComponentMenu(nameof(Common) + "/Collision Handler")]
     public class CollisionHandler : MonoBehaviour
     {
         [SerializeField] protected UnityEvent<Collision> _onCollisionEnter = new UnityEvent<Collision>();

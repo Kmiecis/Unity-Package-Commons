@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace Common.Inputs
 {
-    [AddComponentMenu(nameof(Common) + "/" + nameof(Inputs) + "/" + nameof(MouseClickHandler))]
+    [AddComponentMenu(nameof(Common) + "/" + nameof(Inputs) + "/Mouse Click Handler")]
     public class MouseClickHandler : MonoBehaviour
     {
         [SerializeField] protected UnityEvent<MouseEventData> _onClicked = new UnityEvent<MouseEventData>();
