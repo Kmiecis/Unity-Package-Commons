@@ -1,5 +1,6 @@
 using Common;
 using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -46,15 +47,11 @@ namespace CommonEditor
 
                 var menu = new GenericMenu();
 
-                var subtypes = TypeCache.GetTypesDerivedFrom(fieldType);
-                foreach (var subtype in subtypes)
+                foreach (var subtype in GetSubTypes(fieldType))
                 {
-                    if (IsTypeValid(subtype))
-                    {
-                        var path = GetTypePath(subtype);
+                    var path = GetTypePath(subtype);
 
-                        menu.AddItem(new GUIContent(path), false, OnMenuAdd, subtype);
-                    }
+                    menu.AddItem(new GUIContent(path), false, OnMenuAdd, subtype);
                 }
 
                 menu.ShowAsContext();
@@ -74,37 +71,6 @@ namespace CommonEditor
             EditorGUI.PropertyField(position, property, label, true);
         }
 
-        private bool IsTypeValid(Type type)
-        {
-            return (
-                !type.IsInterface &&
-                !type.IsAbstract &&
-                !type.HasCustomAttribute<ObsoleteAttribute>()
-            );
-        }
-
-        private string GetTypeName(Type type)
-        {
-            if (type.TryGetCustomAttribute<NamedReferenceAttribute>(out var attribute))
-            {
-                return attribute.name;
-            }
-            return type.Name;
-        }
-
-        private string GetTypePath(Type type)
-        {
-            if (type.TryGetCustomAttribute<NamedReferenceAttribute>(out var attribute))
-            {
-                if (attribute.path != null)
-                {
-                    return attribute.path + '/' + attribute.name;
-                }
-                return attribute.name;
-            }
-            return type.Name;
-        }
-
         private bool IsDrawerValid()
         {
             var fieldType = UEditorUtility.GetFieldType(fieldInfo);
@@ -116,6 +82,55 @@ namespace CommonEditor
                 return false;
 
             return true;
+        }
+
+        private static IEnumerable<Type> GetSubTypes(Type fieldType)
+        {
+            var result = new List<Type>();
+
+            var subtypes = TypeCache.GetTypesDerivedFrom(fieldType);
+            foreach (var subtype in subtypes)
+            {
+                if (IsTypeValid(subtype))
+                {
+                    result.Add(subtype);
+                }
+            }
+
+            result.Sort((l, r) => string.Compare(GetTypeName(l), GetTypeName(r)));
+
+            return result;
+        }
+
+        private static bool IsTypeValid(Type type)
+        {
+            return (
+                !type.IsInterface &&
+                !type.IsAbstract &&
+                !type.HasCustomAttribute<ObsoleteAttribute>()
+            );
+        }
+
+        private static string GetTypeName(Type type)
+        {
+            if (type.TryGetCustomAttribute<NamedReferenceAttribute>(out var attribute))
+            {
+                return attribute.name;
+            }
+            return type.Name;
+        }
+
+        private static string GetTypePath(Type type)
+        {
+            if (type.TryGetCustomAttribute<NamedReferenceAttribute>(out var attribute))
+            {
+                if (attribute.path != null)
+                {
+                    return attribute.path + '/' + attribute.name;
+                }
+                return attribute.name;
+            }
+            return type.Name;
         }
     }
 }
