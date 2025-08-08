@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Common
@@ -41,6 +40,27 @@ namespace Common
             return self.IsEmpty() ? value : self.Last();
         }
 
+        public static bool TryGetAt<T>(this T[] self, int index, out T item)
+        {
+            if (-1 < index && index < self.Length)
+            {
+                item = self[index];
+                return true;
+            }
+            item = default;
+            return false;
+        }
+
+        public static bool TryGetFirst<T>(this T[] self, out T item)
+        {
+            return self.TryGetAt(0, out item);
+        }
+
+        public static bool TryGetLast<T>(this T[] self, out T item)
+        {
+            return self.TryGetAt(self.Length - 1, out item);
+        }
+
         public static bool Contains<T>(this T[] self, T value)
         {
             return Array.IndexOf(self, value) != -1;
@@ -68,11 +88,6 @@ namespace Common
                 }
             }
             return false;
-        }
-
-        public static bool Contains<T>(this T[] self, int index)
-        {
-            return -1 < index && index < self.Length;
         }
 
         public static TOut[] ConvertAll<T, TOut>(this T[] self, Converter<T, TOut> converter)
@@ -104,25 +119,19 @@ namespace Common
             return target;
         }
 
-        public static bool TryGetAt<T>(this T[] self, int index, out T item)
+        public static void Clear<T>(this T[] self, int index, int length)
         {
-            if (self.Contains(index))
-            {
-                item = self[index];
-                return true;
-            }
-            item = default;
-            return false;
+            Array.Clear(self, index, length);
         }
 
-        public static bool TryGetFirst<T>(this T[] self, out T item)
+        public static void Clear<T>(this T[] self, int index)
         {
-            return self.TryGetAt(0, out item);
+            Array.Clear(self, index, self.Length - index);
         }
 
-        public static bool TryGetLast<T>(this T[] self, out T item)
+        public static void Clear<T>(this T[] self)
         {
-            return self.TryGetAt(self.Length - 1, out item);
+            Array.Clear(self, 0, self.Length);
         }
 
         public static int IndexOf<T>(this T[] self, T value)
@@ -192,74 +201,62 @@ namespace Common
 
         public static bool TryIndexOf<T>(this T[] self, T value, out int index)
         {
-            index = Array.IndexOf(self, value);
-            return index != -1;
+            return (index = Array.IndexOf(self, value)) != -1;
         }
 
         public static bool TryIndexOf<T>(this T[] self, T value, int startIndex, out int index)
         {
-            index = Array.IndexOf(self, value, startIndex);
-            return index != -1;
+            return (index = Array.IndexOf(self, value, startIndex)) != -1;
         }
 
         public static bool TryIndexOf<T>(this T[] self, T value, int startIndex, int count, out int index)
         {
-            index = Array.IndexOf(self, value, startIndex, count);
-            return index != -1;
+            return (index = Array.IndexOf(self, value, startIndex, count)) != -1;
         }
 
         public static bool TryFind<T>(this T[] self, Predicate<T> match, out T value)
         {
-            value = Array.Find(self, match);
-            return !Equals(value, default);
+            return !Equals(value = Array.Find(self, match), default);
         }
 
         public static bool TryFindLast<T>(this T[] self, Predicate<T> match, out T value)
         {
-            value = Array.FindLast(self, match);
-            return !Equals(value, default);
+            return !Equals(value = Array.FindLast(self, match), default);
         }
 
         public static bool TryFindAll<T>(this T[] self, Predicate<T> match, out T[] value)
         {
-            value = Array.FindAll(self, match);
-            return !value.IsNullOrEmpty();
+            return !(value = Array.FindAll(self, match)).IsNullOrEmpty();
         }
 
         public static bool TryFindIndex<T>(this T[] self, Predicate<T> match, out int index)
         {
-            index = Array.FindIndex(self, match);
-            return index != -1;
+            return (index = Array.FindIndex(self, match)) != -1;
         }
 
         public static bool TryFindIndex<T>(this T[] self, int startIndex, Predicate<T> match, out int index)
         {
-            index = Array.FindIndex(self, startIndex, match);
-            return index != -1;
+            return (index = Array.FindIndex(self, startIndex, match)) != -1;
         }
 
         public static bool TryFindIndex<T>(this T[] self, int startIndex, int count, Predicate<T> match, out int index)
         {
-            index = Array.FindIndex(self, startIndex, count, match);
-            return index != -1;
+            return (index = Array.FindIndex(self, startIndex, count, match)) != -1;
         }
 
         public static bool TryFindLastIndex<T>(this T[] self, Predicate<T> match, out int index)
         {
-            index = Array.FindLastIndex(self, match);
-            return index != -1;
+            return (index = Array.FindLastIndex(self, match)) != -1;
         }
 
         public static bool TryFindLastIndex<T>(this T[] self, int startIndex, Predicate<T> match, out int index)
         {
-            index = Array.FindLastIndex(self, startIndex, match);
-            return index != -1;
+            return (index = Array.FindLastIndex(self, startIndex, match)) != -1;
         }
 
         public static bool TryFindLastIndex<T>(this T[] self, int startIndex, int count, Predicate<T> match, out int index)
         {
-            index = Array.FindLastIndex(self, startIndex, count, match);
-            return index != -1;
+            return (index = Array.FindLastIndex(self, startIndex, count, match)) != -1;
         }
 
         public static void Sort<T>(this T[] self)

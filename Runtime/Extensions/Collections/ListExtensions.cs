@@ -121,74 +121,62 @@ namespace Common
 
         public static bool TryIndexOf<T>(this List<T> self, T item, out int index)
         {
-            index = self.IndexOf(item);
-            return index != -1;
+            return (index = self.IndexOf(item)) != -1;
         }
 
         public static bool TryIndexOf<T>(this List<T> self, T item, int startIndex, out int index)
         {
-            index = self.IndexOf(item, startIndex);
-            return index != -1;
+            return (index = self.IndexOf(item, startIndex)) != -1;
         }
 
         public static bool TryIndexOf<T>(this List<T> self, T item, int startIndex, int count, out int index)
         {
-            index = self.IndexOf(item, startIndex, count);
-            return index != -1;
+            return (index = self.IndexOf(item, startIndex, count)) != -1;
         }
 
         public static bool TryFind<T>(this List<T> self, Predicate<T> match, out T value)
         {
-            value = self.Find(match);
-            return !Equals(value, default);
+            return !Equals(value = self.Find(match), default);
         }
 
         public static bool TryFindLast<T>(this List<T> self, Predicate<T> match, out T value)
         {
-            value = self.FindLast(match);
-            return !Equals(value, default);
+            return !Equals(value = self.FindLast(match), default);
         }
 
         public static bool TryFindAll<T>(this List<T> self, Predicate<T> match, out List<T> value)
         {
-            value = self.FindAll(match);
-            return !value.IsNullOrEmpty();
+            return !(value = self.FindAll(match)).IsNullOrEmpty();
         }
 
         public static bool TryFindIndex<T>(this List<T> self, Predicate<T> match, out int index)
         {
-            index = self.FindIndex(match);
-            return index != -1;
+            return (index = self.FindIndex(match)) != -1;
         }
 
         public static bool TryFindIndex<T>(this List<T> self, int startIndex, Predicate<T> match, out int index)
         {
-            index = self.FindIndex(startIndex, match);
-            return index != -1;
+            return (index = self.FindIndex(startIndex, match)) != -1;
         }
 
         public static bool TryFindIndex<T>(this List<T> self, int startIndex, int count, Predicate<T> match, out int index)
         {
-            index = self.FindIndex(startIndex, count, match);
-            return index != -1;
+            return (index = self.FindIndex(startIndex, count, match)) != -1;
         }
 
         public static bool TryFindLastIndex<T>(this List<T> self, Predicate<T> match, out int index)
         {
-            index = self.FindLastIndex(match);
-            return index != -1;
+            return (index = self.FindLastIndex(match)) != -1;
         }
 
         public static bool TryFindLastIndex<T>(this List<T> self, int startIndex, Predicate<T> match, out int index)
         {
-            index = self.FindLastIndex(startIndex, match);
-            return index != -1;
+            return (index = self.FindLastIndex(startIndex, match)) != -1;
         }
 
         public static bool TryFindLastIndex<T>(this List<T> self, int startIndex, int count, Predicate<T> match, out int index)
         {
-            index = self.FindLastIndex(startIndex, count, match);
-            return index != -1;
+            return (index = self.FindLastIndex(startIndex, count, match)) != -1;
         }
 
         public static void Swap<T>(this IList<T> self, int a, int b)
