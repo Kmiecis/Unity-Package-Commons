@@ -11,7 +11,10 @@ namespace Common
 
         public virtual bool SetActive(bool value)
         {
-            gameObject.SetActive(value);
+            if (this)
+            {
+                gameObject.SetActive(value);
+            }
             return value;
         }
 
@@ -43,12 +46,18 @@ namespace Common
 
         public virtual void Remove()
         {
-            UObject.Destroy(this);
+            if (this)
+            {
+                UObject.Destroy(this);
+            }
         }
 
         public virtual void Destroy()
         {
-            UObject.Destroy(gameObject);
+            if (this)
+            {
+                UObject.Destroy(gameObject);
+            }
         }
     }
 }
