@@ -29,15 +29,9 @@ namespace CommonEditor
 
         private void DrawDropdown(Rect position, SerializedProperty property, GUIContent label)
         {
-            var systemTypeName = UEditorUtility.ConvertToSystemTypeName(property.managedReferenceFullTypename);
-            if (systemTypeName != null)
-            {
-                var type = Type.GetType(systemTypeName);
-                var name = GetTypeName(type);
+            var labelName = GetLabelTypeName(property);
+            label.text += $" ({labelName})";
 
-                label.text += $" ({name})";
-            }
-            
             position.height = EditorGUIUtility.singleLineHeight;
 
             if (EditorGUI.DropdownButton(position, label, FocusType.Keyboard))
@@ -109,6 +103,17 @@ namespace CommonEditor
                 !type.IsAbstract &&
                 !type.HasCustomAttribute<ObsoleteAttribute>()
             );
+        }
+
+        private static string GetLabelTypeName(SerializedProperty property)
+        {
+            var systemTypeName = UEditorUtility.ConvertToSystemTypeName(property.managedReferenceFullTypename);
+            if (systemTypeName != null)
+            {
+                var type = Type.GetType(systemTypeName);
+                return GetTypeName(type);
+            }
+            return "null";
         }
 
         private static string GetTypeName(Type type)
