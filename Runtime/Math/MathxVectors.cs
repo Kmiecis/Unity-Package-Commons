@@ -366,6 +366,23 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float SqrDistance(Vector2 a, Vector2 b)
+        {
+            var f0 = b.x - a.x;
+            var f1 = b.y - a.y;
+            return f0 * f0 + f1 * f1;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float SqrDistance(Vector3 a, Vector3 b)
+        {
+            var f0 = b.x - a.x;
+            var f1 = b.y - a.y;
+            var f2 = b.z - a.z;
+            return f0 * f0 + f1 * f1 + f2 * f2;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Lerp(Vector2 a, Vector2 b, Vector2 t)
         {
             return a + Mul(t, b - a);
@@ -1572,14 +1589,23 @@ namespace Common.Mathematics
             return a;
         }
 
-        /// <summary> Returns the componentwise minimum of an Vector2 array </summary>
+        /// <summary> Returns the componentwise minimum of three Vector2 vectors </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Min(Vector2 a, Vector2 b, Vector2 c)
+        {
+            a.x = Mathf.Min(a.x, Mathf.Min(b.x, c.x));
+            a.y = Mathf.Min(a.y, Mathf.Min(b.y, c.y));
+            return a;
+        }
+
+        /// <summary> Returns the componentwise minimum of a Vector2 array </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Min(params Vector2[] vs)
         {
-            var min = vs[0];
+            var r = vs[0];
             for (int i = 1; i < vs.Length; ++i)
-                min = Min(min, vs[i]);
-            return min;
+                r = Min(r, vs[i]);
+            return r;
         }
 
         /// <summary> Returns the componentwise minimum of a Vector2 vector and a float value </summary>
@@ -1610,14 +1636,24 @@ namespace Common.Mathematics
             return a;
         }
 
+        /// <summary> Returns the componentwise minimum of three Vector3 vectors </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Min(Vector3 a, Vector3 b, Vector3 c)
+        {
+            a.x = Mathf.Min(a.x, Mathf.Min(b.x, c.x));
+            a.y = Mathf.Min(a.y, Mathf.Min(b.y, c.y));
+            a.z = Mathf.Min(a.z, Mathf.Min(b.z, c.z));
+            return a;
+        }
+
         /// <summary> Returns the componentwise minimum of an Vector3 array </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Min(params Vector3[] vs)
         {
-            var min = vs[0];
+            var r = vs[0];
             for (int i = 1; i < vs.Length; ++i)
-                min = Min(min, vs[i]);
-            return min;
+                r = Min(r, vs[i]);
+            return r;
         }
 
         /// <summary> Returns the componentwise minimum of a Vector3 vector and a float value </summary>
@@ -1651,14 +1687,25 @@ namespace Common.Mathematics
             return a;
         }
 
+        /// <summary> Returns the componentwise minimum of three Vector4 vectors </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Min(Vector4 a, Vector4 b, Vector4 c)
+        {
+            a.x = Mathf.Min(a.x, Mathf.Min(b.x, c.x));
+            a.y = Mathf.Min(a.y, Mathf.Min(b.y, c.y));
+            a.z = Mathf.Min(a.z, Mathf.Min(b.z, c.z));
+            a.w = Mathf.Min(a.w, Mathf.Min(b.w, c.w));
+            return a;
+        }
+
         /// <summary> Returns the componentwise minimum of an Vector4 array </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Min(params Vector4[] vs)
         {
-            var min = vs[0];
+            var r = vs[0];
             for (int i = 1; i < vs.Length; ++i)
-                min = Min(min, vs[i]);
-            return min;
+                r = Min(r, vs[i]);
+            return r;
         }
 
         /// <summary> Returns the componentwise minimum of a Vector4 vector and a float value </summary>
@@ -1692,14 +1739,23 @@ namespace Common.Mathematics
             return a;
         }
 
+        /// <summary> Returns the componentwise minimum of three Vector2Int vectors </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2Int Min(Vector2Int a, Vector2Int b, Vector2Int c)
+        {
+            a.x = Mathf.Min(a.x, Mathf.Min(b.x, c.x));
+            a.y = Mathf.Min(a.y, Mathf.Min(b.y, c.y));
+            return a;
+        }
+
         /// <summary> Returns the componentwise minimum of an Vector2Int array </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Min(params Vector2Int[] vs)
         {
-            var min = vs[0];
+            var r = vs[0];
             for (int i = 1; i < vs.Length; ++i)
-                min = Min(min, vs[i]);
-            return min;
+                r = Min(r, vs[i]);
+            return r;
         }
 
         /// <summary> Returns the componentwise minimum of a Vector2Int vector and an int value </summary>
@@ -1730,14 +1786,24 @@ namespace Common.Mathematics
             return a;
         }
 
+        /// <summary> Returns the componentwise minimum of three Vector3Int vectors </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int Min(Vector3Int a, Vector3Int b, Vector3Int c)
+        {
+            a.x = Mathf.Min(a.x, Mathf.Min(b.x, c.x));
+            a.y = Mathf.Min(a.y, Mathf.Min(b.y, c.y));
+            a.z = Mathf.Min(a.z, Mathf.Min(b.z, c.z));
+            return a;
+        }
+
         /// <summary> Returns the componentwise minimum of an Vector3Int array </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Min(params Vector3Int[] vs)
         {
-            var min = vs[0];
+            var r = vs[0];
             for (int i = 1; i < vs.Length; ++i)
-                min = Min(min, vs[i]);
-            return min;
+                r = Min(r, vs[i]);
+            return r;
         }
 
         /// <summary> Returns the componentwise minimum of a Vector3Int vector and an int value </summary>
@@ -1769,14 +1835,23 @@ namespace Common.Mathematics
             return a;
         }
 
+        /// <summary> Returns the componentwise maximum of three Vector2 vectors </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Max(Vector2 a, Vector2 b, Vector2 c)
+        {
+            a.x = Mathf.Max(a.x, Mathf.Max(b.x, c.x));
+            a.y = Mathf.Max(a.y, Mathf.Max(b.y, c.y));
+            return a;
+        }
+
         /// <summary> Returns the componentwise maximum of an Vector2 array </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Max(params Vector2[] vs)
         {
-            var min = vs[0];
+            var r = vs[0];
             for (int i = 1; i < vs.Length; ++i)
-                min = Max(min, vs[i]);
-            return min;
+                r = Max(r, vs[i]);
+            return r;
         }
 
         /// <summary> Returns the componentwise maximum of a Vector2 vector and a float value </summary>
@@ -1807,14 +1882,24 @@ namespace Common.Mathematics
             return a;
         }
 
+        /// <summary> Returns the componentwise maximum of three Vector3 vectors </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Max(Vector3 a, Vector3 b, Vector3 c)
+        {
+            a.x = Mathf.Max(a.x, Mathf.Max(b.x, c.x));
+            a.y = Mathf.Max(a.y, Mathf.Max(b.y, c.y));
+            a.z = Mathf.Max(a.z, Mathf.Max(b.z, c.z));
+            return a;
+        }
+
         /// <summary> Returns the componentwise maximum of an Vector3 array </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Max(params Vector3[] vs)
         {
-            var min = vs[0];
+            var r = vs[0];
             for (int i = 1; i < vs.Length; ++i)
-                min = Max(min, vs[i]);
-            return min;
+                r = Max(r, vs[i]);
+            return r;
         }
 
         /// <summary> Returns the componentwise maximum of a Vector3 vector and a float value </summary>
@@ -1848,14 +1933,25 @@ namespace Common.Mathematics
             return a;
         }
 
+        /// <summary> Returns the componentwise maximum of three Vector4 vectors </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Max(Vector4 a, Vector4 b, Vector4 c)
+        {
+            a.x = Mathf.Max(a.x, Mathf.Max(b.x, c.x));
+            a.y = Mathf.Max(a.y, Mathf.Max(b.y, c.y));
+            a.z = Mathf.Max(a.z, Mathf.Max(b.z, c.z));
+            a.w = Mathf.Max(a.w, Mathf.Max(b.w, c.w));
+            return a;
+        }
+
         /// <summary> Returns the componentwise maximum of an Vector4 array </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Max(params Vector4[] vs)
         {
-            var min = vs[0];
+            var r = vs[0];
             for (int i = 1; i < vs.Length; ++i)
-                min = Max(min, vs[i]);
-            return min;
+                r = Max(r, vs[i]);
+            return r;
         }
 
         /// <summary> Returns the componentwise maximum of a Vector4 vector and a float value </summary>
@@ -1889,14 +1985,23 @@ namespace Common.Mathematics
             return a;
         }
 
+        /// <summary> Returns the componentwise maximum of three Vector2Int vectors </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2Int Max(Vector2Int a, Vector2Int b, Vector2Int c)
+        {
+            a.x = Mathf.Max(a.x, Mathf.Max(b.x, c.x));
+            a.y = Mathf.Max(a.y, Mathf.Max(b.y, c.y));
+            return a;
+        }
+
         /// <summary> Returns the componentwise maximum of an Vector2Int array </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Max(params Vector2Int[] vs)
         {
-            var min = vs[0];
+            var r = vs[0];
             for (int i = 1; i < vs.Length; ++i)
-                min = Max(min, vs[i]);
-            return min;
+                r = Max(r, vs[i]);
+            return r;
         }
 
         /// <summary> Returns the componentwise maximum of a Vector2Int vector and an int value </summary>
@@ -1927,14 +2032,24 @@ namespace Common.Mathematics
             return a;
         }
 
+        /// <summary> Returns the componentwise maximum of three Vector3Int vectors </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int Max(Vector3Int a, Vector3Int b, Vector3Int c)
+        {
+            a.x = Mathf.Max(a.x, Mathf.Max(b.x, c.x));
+            a.y = Mathf.Max(a.y, Mathf.Max(b.y, c.y));
+            a.z = Mathf.Max(a.z, Mathf.Max(b.z, c.z));
+            return a;
+        }
+
         /// <summary> Returns the componentwise maximum of an Vector3Int array </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Max(params Vector3Int[] vs)
         {
-            var min = vs[0];
+            var r = vs[0];
             for (int i = 1; i < vs.Length; ++i)
-                min = Max(min, vs[i]);
-            return min;
+                r = Max(r, vs[i]);
+            return r;
         }
 
         /// <summary> Returns the componentwise maximum of a Vector3Int vector and an int value </summary>
