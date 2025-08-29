@@ -1215,6 +1215,25 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2Int CastToInt(Vector2 v)
+        {
+            Vector2Int r = Vector2Int.zero;
+            r.x = (int)v.x;
+            r.y = (int)v.y;
+            return r;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int CastToInt(Vector3 v)
+        {
+            Vector3Int r = Vector3Int.zero;
+            r.x = (int)v.x;
+            r.y = (int)v.y;
+            r.z = (int)v.z;
+            return r;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int RoundToInt(Vector2 v)
         {
             Vector2Int r = Vector2Int.zero;
