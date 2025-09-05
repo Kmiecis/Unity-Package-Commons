@@ -6,6 +6,7 @@ namespace Common
     public class OnLocalTransformChangedSender : MonoBehaviour
     {
         public const string MethodName = "OnLocalTransformChanged";
+        public const string ParentMethodName = "OnChildTransformChanged";
 
         private int _lastFrame;
 
@@ -66,10 +67,20 @@ namespace Common
 
         private void SendChangedMessage()
         {
-            var components = GetComponents<Component>();
+            SendChangedMessage(transform, MethodName);
+
+            if (transform.parent != null)
+            {
+                SendChangedMessage(transform.parent, ParentMethodName);
+            }
+        }
+
+        private static void SendChangedMessage(Transform target, string methodName)
+        {
+            var components = target.GetComponents<Component>();
             foreach (var component in components)
             {
-                var method = component.GetType().GetMethod(MethodName, UBinding.AnyInstance);
+                var method = component.GetType().GetMethod(methodName, UBinding.AnyInstance);
                 if (method != null)
                 {
                     method.Invoke(component, null);
