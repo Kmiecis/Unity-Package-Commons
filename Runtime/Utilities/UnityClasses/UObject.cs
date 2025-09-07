@@ -17,7 +17,7 @@ namespace Common
         public static T Create<T>()
             where T : Component
         {
-            string name = $"{typeof(T).Name}(New)";
+            string name = $"{typeof(T).Name} (New)";
             return Create<T>(name);
         }
 
@@ -48,54 +48,56 @@ namespace Common
 #endif
         }
 
-        public static void Destroy<T>(T obj)
+        public static void Destroy<T>(T target)
             where T : Object
         {
             if (Application.isPlaying)
             {
-                Object.Destroy(obj);
+                Object.Destroy(target);
             }
             else
             {
-                Object.DestroyImmediate(obj);
+                Object.DestroyImmediate(target);
             }
         }
 
-        public static void Destroy<T>(ref T obj)
+        public static void Destroy<T>(ref T target)
             where T : Object
         {
-            if (obj != null)
+            if (target != null)
             {
-                Destroy(obj);
-                obj = null;
+                Destroy(target);
+
+                target = null;
             }
         }
 
-        public static void Destroy<T>(IEnumerable<T> objs)
+        public static void Destroy<T>(IEnumerable<T> targets)
             where T : Object
         {
-            foreach (var obj in objs)
+            foreach (var target in targets)
             {
-                Destroy(obj);
+                Destroy(target);
             }
         }
 
-        public static void DestroyObject<T>(ref T comp)
+        public static void DestroyObject<T>(ref T component)
             where T : Component
         {
-            if (comp != null)
+            if (component != null)
             {
-                Destroy(comp.gameObject);
-                comp = null;
+                Destroy(component.gameObject);
+
+                component = null;
             }
         }
 
-        public static void DestroyObject<T>(IEnumerable<T> comps)
+        public static void DestroyObject<T>(IEnumerable<T> components)
             where T : Component
         {
-            foreach (var comp in comps)
+            foreach (var component in components)
             {
-                Destroy(comp.gameObject);
+                Destroy(component.gameObject);
             }
         }
 
