@@ -11,14 +11,14 @@ namespace CommonEditor
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (IsDrawerValid())
+            if (IsDrawerValid(out var error))
             {
                 DrawDropdown(position, property, label);
                 DrawProperty(position, property, GUIContent.none);
             }
             else
             {
-                DrawProperty(position, property, label);
+                EditorGUI.HelpBox(position, $"Error. {error}", MessageType.Error);
             }
         }
 
@@ -65,16 +65,23 @@ namespace CommonEditor
             EditorGUI.PropertyField(position, property, label, true);
         }
 
-        private bool IsDrawerValid()
+        private bool IsDrawerValid(out string error)
         {
             var fieldType = UEditorUtility.GetFieldType(fieldInfo);
             if (fieldType.IsValueType)
+            {
+                error = "Field has to be of reference type.";
                 return false;
+            }
 
             var attribute = Attribute.GetCustomAttribute(fieldInfo, typeof(SerializeReference));
             if (attribute == null)
+            {
+                error = $"Field has to contain {nameof(SerializeReference)} attribute.";
                 return false;
+            }
 
+            error = default;
             return true;
         }
 
