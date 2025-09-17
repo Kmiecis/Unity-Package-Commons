@@ -10,6 +10,7 @@ namespace Common
         public int Order
         {
             get => _order;
+            set => SetOrder(value);
         }
 
         public void SetOrder(int order)
@@ -24,7 +25,7 @@ namespace Common
             var parent = transform.parent;
             if (parent != null)
             {
-                int i = 0;
+                int i = 1;
                 for (; i < parent.childCount; ++i)
                 {
                     var child = parent.GetChild(i);
@@ -34,7 +35,8 @@ namespace Common
                         break;
                     }
                 }
-                transform.SetSiblingIndex(i);
+
+                transform.SetSiblingIndex(i - 1);
             }
         }
 
@@ -49,9 +51,14 @@ namespace Common
             Reorder();
         }
 
+#if UNITY_EDITOR
         private void OnValidate()
         {
-            StartCoroutine(ReorderNextFrame());
+            if (isActiveAndEnabled)
+            {
+                StartCoroutine(ReorderNextFrame());
+            }
         }
+#endif
     }
 }
