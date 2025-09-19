@@ -274,6 +274,11 @@ namespace Common
             return self;
         }
 
+        public static string Replace(this string self, string oldValue, object newValue)
+        {
+            return self.Replace(oldValue, newValue.ToString());
+        }
+
         public static string[] Split(this string self, int count)
         {
             int length = self.Length / count;
