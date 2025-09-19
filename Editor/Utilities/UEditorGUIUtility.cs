@@ -1,5 +1,7 @@
+using Common;
 using System;
 using UnityEditor;
+using UnityEngine;
 
 namespace CommonEditor
 {
@@ -8,31 +10,23 @@ namespace CommonEditor
         public const float SpaceHeight = 2.0f;
         public const float IndentWidth = 15.0f;
 
-        public static float LineHeight => EditorGUIUtility.singleLineHeight + SpaceHeight;
+        public static Func<MessageType, Texture2D> GetHelpIcon;
 
-        public class LabelWidthScope : IDisposable
+        static UEditorGUIUtility()
         {
-            private readonly float _labelWidth;
+            GetHelpIcon = ReflectGetHelpIcon();
+        }
 
-            public float LabelWidth
-            {
-                set => EditorGUIUtility.labelWidth = value;
-            }
+        public static float LineHeight
+        {
+            get => EditorGUIUtility.singleLineHeight + SpaceHeight;
+        }
 
-            public LabelWidthScope()
-            {
-                _labelWidth = EditorGUIUtility.labelWidth;
-            }
-
-            public LabelWidthScope(float labelWidth) : this()
-            {
-                LabelWidth = labelWidth;
-            }
-
-            public void Dispose()
-            {
-                EditorGUIUtility.labelWidth = _labelWidth;
-            }
+        private static Func<MessageType, Texture2D> ReflectGetHelpIcon()
+        {
+            return typeof(EditorGUIUtility)
+                .GetMethod(nameof(GetHelpIcon), UBinding.NonPublicStatic)
+                .AsFunc<MessageType, Texture2D>();
         }
     }
 }
