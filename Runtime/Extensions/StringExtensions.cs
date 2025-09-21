@@ -315,22 +315,37 @@ namespace Common
 
         public static string RichBold(this string self)
         {
-            return string.Concat("<b>", self, "</b>");
-        }
-
-        public static string RichItalic(this string self)
-        {
-            return string.Concat("<i>", self, "</i>");
-        }
-
-        public static string RichSize(this string self, int size)
-        {
-            return string.Concat("<size=", size, '>', self, "</size>");
+            return $"<b>{self}</b>";
         }
 
         public static string RichColor(this string self, string color)
         {
-            return string.Concat("<color=", color, '>', self, "</color>");
+            return $"<color={color}>{self}</color>";
+        }
+
+        public static string RichItalic(this string self)
+        {
+            return $"<i>{self}</i>";
+        }
+
+        public static string RichLink(this string self, string id)
+        {
+            return $"<link={id}>{self}</link>";
+        }
+
+        public static string RichSize(this string self, int size)
+        {
+            return $"<size={size}>{self}</size>";
+        }
+
+        public static string RichStrikethrough(this string self)
+        {
+            return $"<s>{self}</s>";
+        }
+
+        public static string RichUnderline(this string self)
+        {
+            return $"<u>{self}</u>";
         }
     }
 }
