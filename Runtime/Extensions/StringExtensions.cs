@@ -330,7 +330,7 @@ namespace Common
 
         public static string RichLink(this string self, string id)
         {
-            return $"<link={id}>{self}</link>";
+            return $"<link=\"{id}\">{self}</link>";
         }
 
         public static string RichSize(this string self, int size)
