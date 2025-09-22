@@ -6,12 +6,9 @@ namespace Common
     public static class ColorExtensions
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string Hex(this Color self)
+        public static string ToHex(this Color self)
         {
-            var r = (byte)Mathf.RoundToInt(self.r * 255.0f);
-            var g = (byte)Mathf.RoundToInt(self.g * 255.0f);
-            var b = (byte)Mathf.RoundToInt(self.b * 255.0f);
-            return string.Format("{0:X2}{1:X2}{2:X2}", r, g, b);
+            return ((Color32)self).ToHex();
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
