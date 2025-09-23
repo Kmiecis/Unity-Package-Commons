@@ -109,12 +109,16 @@ namespace Common
 
         public static TValue Revoke<TKey, TValue>(this IDictionary<TKey, TValue> self, TKey key)
         {
-            if (self.TryGetValue(key, out var result))
-            {
-                self.Remove(key);
-                return result;
-            }
-            return default;
+            self.TryGetValue(key, out var result);
+            self.Remove(key);
+            return result;
+        }
+
+        public static bool TryRevoke<TKey, TValue>(this IDictionary<TKey, TValue> self, TKey key, out TValue value)
+        {
+            var result = self.TryGetValue(key, out value);
+            self.Remove(key);
+            return result;
         }
 
         public static TKey FirstOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> self, TKey value = default)
