@@ -281,7 +281,7 @@ namespace Common
             return false;
         }
 
-        public static bool Remove<T>(this List<T> self, IEnumerable<T> items)
+        public static bool RemoveRange<T>(this List<T> self, IEnumerable<T> items)
         {
             var result = true;
             foreach (var item in items)
