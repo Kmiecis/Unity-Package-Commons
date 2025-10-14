@@ -33,14 +33,6 @@ namespace Common
             return size;
         }
 
-        public static Rect GetWorldRect(this RectTransform self)
-        {
-            self.GetWorldCorners(_WorldCorners);
-            var position = _WorldCorners[0];
-            var size = _WorldCorners[2] - position;
-            return new Rect(position, size);
-        }
-
         public static Vector2 GetParentRealSize(this RectTransform self)
         {
             var parent = self.parent as RectTransform;
@@ -53,6 +45,21 @@ namespace Common
             var parent = self.parent as RectTransform;
             if (parent != null) return parent.rect.size;
             return new Vector2(Screen.width, Screen.height);
+        }
+
+        public static Rect GetWorldRect(this RectTransform self)
+        {
+            self.GetWorldCorners(_WorldCorners);
+            var position = _WorldCorners[0];
+            var size = _WorldCorners[2] - position;
+            return new Rect(position, size);
+        }
+
+        public static Vector2 GetWorldRectOffset(this RectTransform self, RectTransform other)
+        {
+            var selfRect = self.GetWorldRect();
+            var otherRect = other.GetWorldRect();
+            return otherRect.GetOffset(selfRect);
         }
 
         /// <summary> Get <see cref="RectTransform"/> enumerator enclosing a 'screenPoint', including self </summary>
