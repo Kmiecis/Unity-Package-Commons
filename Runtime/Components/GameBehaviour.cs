@@ -4,6 +4,16 @@ namespace Common
 {
     public class GameBehaviour : MonoBehaviour
     {
+        public Transform parent
+        {
+            get => transform.parent;
+        }
+
+        public Transform root
+        {
+            get => transform.root;
+        }
+
         public virtual bool IsActive
         {
             get => gameObject.activeSelf;
@@ -11,7 +21,7 @@ namespace Common
 
         public virtual bool SetActive(bool value)
         {
-            if (this)
+            if (gameObject != null)
             {
                 gameObject.SetActive(value);
             }
@@ -46,7 +56,7 @@ namespace Common
 
         public virtual void Remove()
         {
-            if (this)
+            if (this != null)
             {
                 UObject.Destroy(this);
             }
@@ -54,7 +64,7 @@ namespace Common
 
         public virtual void Destroy()
         {
-            if (this)
+            if (this != null && gameObject != null)
             {
                 UObject.Destroy(gameObject);
             }
