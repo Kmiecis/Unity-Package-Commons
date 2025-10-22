@@ -7,6 +7,39 @@ namespace CommonEditor
 {
     public static class SearchDependencies
     {
+        private const string ANIMATION = ".anim";
+        private const string ANIMATOR = ".controller";
+        private const string ASSET = ".asset";
+        private const string FBX = ".fbx";
+        private const string JPG = ".jpg";
+        private const string MATERIAL = ".mat";
+        private const string MESH = ".mesh";
+        private const string PNG = ".png";
+        private const string PREFAB = ".prefab";
+        private const string SCENE = ".unity";
+        private const string SCRIPT = ".cs";
+        private const string SHADER = ".shader";
+        private const string SHADERGRAPH = ".shadergraph";
+        private const string SHADERSUBGRAPH = ".shadersubgraph";
+        private const string SPRITEATLAS = ".spriteatlas";
+
+        private static readonly Dictionary<string, string[]> Extensions = new Dictionary<string, string[]>()
+        {
+            { ANIMATION, new string[] { ASSET, ANIMATOR, PREFAB } },
+            { ANIMATOR, new string[] { ASSET, PREFAB } },
+            { ASSET, new string[] { ASSET, PREFAB } },
+            { FBX, new string[] { ASSET, PREFAB } },
+            { JPG, new string[] { ASSET, MATERIAL, PREFAB, SPRITEATLAS } },
+            { MESH, new string[] { ASSET, PREFAB } },
+            { MATERIAL, new string[] { ASSET, PREFAB } },
+            { PNG, new string[] { ASSET, MATERIAL, PREFAB, SPRITEATLAS } },
+            { PREFAB, new string[] { ASSET, PREFAB, SCENE } },
+            { SCRIPT, new string[] { ASSET, PREFAB } },
+            { SHADER, new string[] { MATERIAL } },
+            { SHADERGRAPH, new string[] { MATERIAL } },
+            { SHADERSUBGRAPH, new string[] { SHADERGRAPH } },
+        };
+
         [MenuItem("Assets/Commons/Search Dependencies")]
         private static void Search()
         {
@@ -20,7 +53,7 @@ namespace CommonEditor
             var assetPath = AssetDatabase.GetAssetPath(selection);
             var assetExtension = Path.GetExtension(assetPath);
 
-            var searchExtensions = SearchExtensionByExtension(assetExtension);
+            var searchExtensions = Extensions[assetExtension];
             if (searchExtensions == null)
             {
                 Debug.LogError($"No search extension found for given selection extension '{assetExtension}'");
@@ -86,62 +119,15 @@ namespace CommonEditor
 
         private static Object GetSelection(string file, string search)
         {
-            using (var reader = new StreamReader(file))
+            using var reader = new StreamReader(file);
+
+            string line;
+            while ((line = reader.ReadLine()) != null)
             {
-                string line;
-                while ((line = reader.ReadLine()) != null)
+                if (line.Contains(search))
                 {
-                    if (line.Contains(search))
-                    {
-                        return AssetDatabase.LoadAssetAtPath<Object>(file);
-                    }
+                    return AssetDatabase.LoadAssetAtPath<Object>(file);
                 }
-            }
-
-            return null;
-        }
-
-        private static string[] SearchExtensionByExtension(string extension)
-        {
-            const string SHADER = ".shader";
-            const string SHADERGRAPH = ".shadergraph";
-            const string SHADERSUBGRAPH = ".shadersubgraph";
-            const string MATERIAL = ".mat";
-            const string ASSET = ".asset";
-            const string PREFAB = ".prefab";
-            const string SCENE = ".unity";
-            const string ANIMATION = ".anim";
-            const string ANIMATOR = ".controller";
-            const string MESH = ".mesh";
-            const string SPRITEATLAS = ".spriteatlas";
-            const string JPG = ".jpg";
-            const string PNG = ".png";
-            const string SCRIPT = ".cs";
-
-            switch (extension)
-            {
-                case SHADER:
-                case SHADERGRAPH:
-                    return new string[] { MATERIAL };
-                case MATERIAL:
-                    return new string[] { ASSET, PREFAB };
-                case PNG:
-                case JPG:
-                    return new string[] { ASSET, MATERIAL, PREFAB, SPRITEATLAS };
-                case PREFAB:
-                    return new string[] { ASSET, PREFAB, SCENE };
-                case ANIMATOR:
-                    return new string[] { ASSET, PREFAB };
-                case ANIMATION:
-                    return new string[] { ASSET, ANIMATOR, PREFAB };
-                case SCRIPT:
-                    return new string[] { ASSET, PREFAB };
-                case ASSET:
-                    return new string[] { ASSET, PREFAB };
-                case MESH:
-                    return new string[] { ASSET, PREFAB };
-                case SHADERSUBGRAPH:
-                    return new string[] { SHADERGRAPH };
             }
 
             return null;
