@@ -383,19 +383,13 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector2 Lerp(Vector2 a, Vector2 b, Vector2 t)
-        {
-            return a + Mul(t, b - a);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Lerp(Vector2 a, Vector2 b, float t)
         {
             return a + Mul(t, b - a);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Lerp(Vector3 a, Vector3 b, Vector3 t)
+        public static Vector2 Lerp(Vector2 a, Vector2 b, Vector2 t)
         {
             return a + Mul(t, b - a);
         }
@@ -407,7 +401,7 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector4 Lerp(Vector4 a, Vector4 b, Vector4 t)
+        public static Vector3 Lerp(Vector3 a, Vector3 b, Vector3 t)
         {
             return a + Mul(t, b - a);
         }
@@ -419,14 +413,116 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Lerp(Vector4 a, Vector4 b, Vector4 t)
+        {
+            return a + Mul(t, b - a);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Rect Lerp(Rect a, Rect b, float t)
         {
             return new Rect(
-                Mathf.Lerp(a.x, b.x, t),
-                Mathf.Lerp(a.y, b.y, t),
-                Mathf.Lerp(a.width, b.width, t),
-                Mathf.Lerp(a.height, b.height, t)
+                Lerp(a.x, b.x, t),
+                Lerp(a.y, b.y, t),
+                Lerp(a.width, b.width, t),
+                Lerp(a.height, b.height, t)
             );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 QLerp(Vector2 a, Vector2 b, Vector2 c, float t)
+        {
+            var l = Lerp(a, b, t);
+            var r = Lerp(b, c, t);
+            return Lerp(l, r, t);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 QLerp(Vector2 a, Vector2 b, Vector2 c, Vector2 t)
+        {
+            var l = Lerp(a, b, t);
+            var r = Lerp(b, c, t);
+            return Lerp(l, r, t);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 QLerp(Vector3 a, Vector3 b, Vector3 c, float t)
+        {
+            var l = Lerp(a, b, t);
+            var r = Lerp(b, c, t);
+            return Lerp(l, r, t);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 QLerp(Vector3 a, Vector3 b, Vector3 c, Vector3 t)
+        {
+            var l = Lerp(a, b, t);
+            var r = Lerp(b, c, t);
+            return Lerp(l, r, t);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 QLerp(Vector4 a, Vector4 b, Vector4 c, float t)
+        {
+            var l = Lerp(a, b, t);
+            var r = Lerp(b, c, t);
+            return Lerp(l, r, t);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 QLerp(Vector4 a, Vector4 b, Vector4 c, Vector4 t)
+        {
+            var l = Lerp(a, b, t);
+            var r = Lerp(b, c, t);
+            return Lerp(l, r, t);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 CLerp(Vector2 a, Vector2 b, Vector2 c, Vector2 d, float t)
+        {
+            var l = QLerp(a, b, c, t);
+            var r = QLerp(b, c, d, t);
+            return Lerp(l, r, t);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 CLerp(Vector2 a, Vector2 b, Vector2 c, Vector2 d, Vector2 t)
+        {
+            var l = QLerp(a, b, c, t);
+            var r = QLerp(b, c, d, t);
+            return Lerp(l, r, t);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 CLerp(Vector3 a, Vector3 b, Vector3 c, Vector3 d, float t)
+        {
+            var l = QLerp(a, b, c, t);
+            var r = QLerp(b, c, d, t);
+            return Lerp(l, r, t);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 CLerp(Vector3 a, Vector3 b, Vector3 c, Vector3 d, Vector3 t)
+        {
+            var l = QLerp(a, b, c, t);
+            var r = QLerp(b, c, d, t);
+            return Lerp(l, r, t);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 CLerp(Vector4 a, Vector4 b, Vector4 c, Vector4 d, float t)
+        {
+            var l = QLerp(a, b, c, t);
+            var r = QLerp(b, c, d, t);
+            return Lerp(l, r, t);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 CLerp(Vector4 a, Vector4 b, Vector4 c, Vector4 d, Vector4 t)
+        {
+            var l = QLerp(a, b, c, t);
+            var r = QLerp(b, c, d, t);
+            return Lerp(l, r, t);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

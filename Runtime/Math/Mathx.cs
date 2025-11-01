@@ -105,6 +105,18 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float QLerp(float a, float b, float c, float t)
+        {
+            return (1 - t) * (1 - t) * a + 2 * (1 - t) * t * b + t * t * c;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float CLerp(float a, float b, float c, float d, float t)
+        {
+            return (1 - t) * (1 - t) * (1 - t) * a + 3 * (1 - t) * (1 - t) * t * b + 3 * (1 - t) * t * t * c + t * t * t * d;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Unlerp(float a, float b, float t)
         {
             return (t - a) / (b - a);
