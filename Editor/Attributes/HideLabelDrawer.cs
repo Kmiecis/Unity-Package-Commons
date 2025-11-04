@@ -11,5 +11,10 @@ namespace CommonEditor
         {
             EditorGUI.PropertyField(position, property, GUIContent.none, true);
         }
+
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            return EditorGUI.GetPropertyHeight(property, true);
+        }
     }
 }
