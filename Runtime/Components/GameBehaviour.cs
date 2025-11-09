@@ -58,7 +58,7 @@ namespace Common
         {
             if (this != null)
             {
-                UObject.Destroy(this);
+                UComponent.Remove(this);
             }
         }
 
@@ -66,7 +66,7 @@ namespace Common
         {
             if (this != null && gameObject != null)
             {
-                UObject.Destroy(gameObject);
+                UComponent.Destroy(this);
             }
         }
     }

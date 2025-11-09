@@ -81,26 +81,6 @@ namespace Common
             }
         }
 
-        public static void DestroyObject<T>(ref T component)
-            where T : Component
-        {
-            if (component != null)
-            {
-                Destroy(component.gameObject);
-
-                component = null;
-            }
-        }
-
-        public static void DestroyObject<T>(IEnumerable<T> components)
-            where T : Component
-        {
-            foreach (var component in components)
-            {
-                Destroy(component.gameObject);
-            }
-        }
-
         public static IEnumerable<T> FindOfType<T>(bool includeInactive = false)
         {
             foreach (var found in FindOfType(typeof(T), includeInactive))
