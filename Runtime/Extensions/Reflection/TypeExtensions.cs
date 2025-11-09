@@ -90,34 +90,6 @@ namespace Common
             return self.IsGenericTypeOf(typeof(T));
         }
 
-        public static IEnumerable<FieldInfo> GetAllFields(this Type self, BindingFlags bindingAttr)
-        {
-            while (self != null)
-            {
-                var fields = self.GetFields(bindingAttr);
-                for (int i = 0; i < fields.Length; ++i)
-                {
-                    yield return fields[i];
-                }
-
-                self = self.BaseType;
-            }
-        }
-
-        public static IEnumerable<PropertyInfo> GetAllProperties(this Type self, BindingFlags bindingAttr)
-        {
-            while (self != null)
-            {
-                var properties = self.GetProperties(bindingAttr);
-                for (int i = 0; i < properties.Length; ++i)
-                {
-                    yield return properties[i];
-                }
-
-                self = self.BaseType;
-            }
-        }
-
         public static FieldInfo FindField(this Type self, string name)
         {
             const BindingFlags Flags = BindingFlags.FlattenHierarchy | UBinding.AnyInstance;
@@ -133,6 +105,28 @@ namespace Common
                 if (field != null)
                 {
                     return field;
+                }
+
+                self = self.BaseType;
+            }
+            return null;
+        }
+
+        public static MethodInfo FindMethod(this Type self, string name)
+        {
+            const BindingFlags Flags = BindingFlags.FlattenHierarchy | UBinding.AnyInstance;
+
+            return self.FindMethod(name, Flags);
+        }
+
+        public static MethodInfo FindMethod(this Type self, string name, BindingFlags bindingAttr)
+        {
+            while (self != null)
+            {
+                var method = self.GetMethod(name, bindingAttr);
+                if (method != null)
+                {
+                    return method;
                 }
 
                 self = self.BaseType;
@@ -160,6 +154,48 @@ namespace Common
                 self = self.BaseType;
             }
             return null;
+        }
+
+        public static IEnumerable<FieldInfo> FindAllFields(this Type self, BindingFlags bindingAttr)
+        {
+            while (self != null)
+            {
+                var fields = self.GetFields(bindingAttr);
+                for (int i = 0; i < fields.Length; ++i)
+                {
+                    yield return fields[i];
+                }
+
+                self = self.BaseType;
+            }
+        }
+
+        public static IEnumerable<MethodInfo> FindAllMethods(this Type self, BindingFlags bindingAttr)
+        {
+            while (self != null)
+            {
+                var methods = self.GetMethods(bindingAttr);
+                for (int i = 0; i < methods.Length; ++i)
+                {
+                    yield return methods[i];
+                }
+
+                self = self.BaseType;
+            }
+        }
+
+        public static IEnumerable<PropertyInfo> FindAllProperties(this Type self, BindingFlags bindingAttr)
+        {
+            while (self != null)
+            {
+                var properties = self.GetProperties(bindingAttr);
+                for (int i = 0; i < properties.Length; ++i)
+                {
+                    yield return properties[i];
+                }
+
+                self = self.BaseType;
+            }
         }
     }
 }
