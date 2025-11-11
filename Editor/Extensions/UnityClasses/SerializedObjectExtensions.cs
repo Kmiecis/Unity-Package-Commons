@@ -1,12 +1,26 @@
 using Common;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEditor;
 
 namespace CommonEditor
 {
     public static class SerializedObjectExtensions
     {
+        private static readonly FieldInfo NativeObjectPtrField;
+
+        static SerializedObjectExtensions()
+        {
+            NativeObjectPtrField = ReflectNativeObjectPtrField();
+        }
+
+        public static bool IsValid(this SerializedObject self)
+        {
+            var pointer = (IntPtr)NativeObjectPtrField.GetValue(self);
+            return pointer != (IntPtr)0;
+        }
+
         public static SerializedProperty FindPropertyField(this SerializedObject self, string name)
         {
             return self.FindProperty($"<{name}>k__BackingField");
@@ -38,6 +52,11 @@ namespace CommonEditor
         {
             var field = self.targetObject.GetType().GetField(property.name, UBinding.AnyInstance);
             field.SetValue(self.targetObject, property.GetTypeValue());
+        }
+
+        private static FieldInfo ReflectNativeObjectPtrField()
+        {
+            return typeof(SerializedObject).GetField("m_NativeObjectPtr", UBinding.NonPublicInstance);
         }
     }
 }

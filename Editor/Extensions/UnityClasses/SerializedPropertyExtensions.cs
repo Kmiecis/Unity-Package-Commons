@@ -10,6 +10,19 @@ namespace CommonEditor
 {
     public static class SerializedPropertyExtensions
     {
+        private static readonly FieldInfo NativePropertyPtrField;
+
+        static SerializedPropertyExtensions()
+        {
+            NativePropertyPtrField = ReflectNativePropertyPtrField();
+        }
+
+        public static bool IsValid(this SerializedProperty self)
+        {
+            var pointer = (IntPtr)NativePropertyPtrField.GetValue(self);
+            return pointer != (IntPtr)0;
+        }
+
         public static Object GetTargetObject(this SerializedProperty self)
         {
             return self.serializedObject.targetObject;
@@ -361,6 +374,11 @@ namespace CommonEditor
 
                 type = type.BaseType;
             }
+        }
+
+        private static FieldInfo ReflectNativePropertyPtrField()
+        {
+            return typeof(SerializedProperty).GetField("m_NativePropertyPtr", UBinding.NonPublicInstance);
         }
     }
 }
