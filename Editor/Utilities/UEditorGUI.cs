@@ -178,6 +178,13 @@ namespace CommonEditor
             return result;
         }
 
+        public static void TextureField(ref Rect position, Texture value, float size)
+        {
+            position.height = size;
+            EditorGUI.LabelField(position, new GUIContent(value));
+            position.y += position.height + UEditorGUIUtility.SpaceHeight;
+        }
+
         public static float GetPropertyHeight(SerializedProperty property, bool includeChildren = true)
         {
             return EditorGUI.GetPropertyHeight(property, includeChildren) + UEditorGUIUtility.SpaceHeight;
