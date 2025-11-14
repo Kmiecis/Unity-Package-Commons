@@ -139,14 +139,24 @@ namespace Common
             return !components.IsNullOrEmpty();
         }
 
-        public static void DestroyObject(this Component self)
+        public static void Remove(this Component self)
         {
-            self.gameObject.Destroy();
+            UObject.Destroy(self);
+        }
+
+        public static void Remove(this Component self, float t)
+        {
+            Object.Destroy(self, t);
+        }
+
+        public static void Destroy(this Component self)
+        {
+            UObject.Destroy(self.gameObject);
         }
 
         public static void Destroy(this Component self, float t)
         {
-            self.Destroy(t);
+            Object.Destroy(self.gameObject, t);
         }
     }
 }
