@@ -72,11 +72,11 @@ namespace Common
             if (_uvs.Count > 0)
                 mesh.SetUVs(0, _uvs);
 
-            if (Mathx.HasBit((int)_options, (int)EMeshBuildingOptions.RECALCULATE_BOUNDS))
+            if (Mathx.HasFlags((int)_options, (int)EMeshBuildingOptions.RECALCULATE_BOUNDS))
                 mesh.RecalculateBounds();
-            if (Mathx.HasBit((int)_options, (int)EMeshBuildingOptions.RECALCULATE_NORMALS))
+            if (Mathx.HasFlags((int)_options, (int)EMeshBuildingOptions.RECALCULATE_NORMALS))
                 mesh.RecalculateNormals();
-            if (Mathx.HasBit((int)_options, (int)EMeshBuildingOptions.RECALCULATE_TANGENTS))
+            if (Mathx.HasFlags((int)_options, (int)EMeshBuildingOptions.RECALCULATE_TANGENTS))
                 mesh.RecalculateTangents();
         }
 

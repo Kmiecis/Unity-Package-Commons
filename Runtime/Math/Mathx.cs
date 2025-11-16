@@ -56,27 +56,27 @@ namespace Common.Mathematics
 
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsBit(int value, int bit)
+        public static bool IsFlag(int value, int flag)
         {
-            return (value & bit) == bit;
+            return (value & flag) == flag;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool HasBit(int value, int bit)
+        public static bool HasFlags(int value, int flags)
         {
-            return (value & bit) != 0;
+            return (value & flags) != 0;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int SetBit(int value, int bit)
+        public static int SetFlags(int value, int flags)
         {
-            return value |= bit;
+            return value |= flags;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static int ClearBit(int value, int bit)
+        public static int ClearFlags(int value, int flags)
         {
-            return value &= ~bit;
+            return value &= ~flags;
         }
 
 

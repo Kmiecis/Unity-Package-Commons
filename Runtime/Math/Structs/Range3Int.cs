@@ -167,7 +167,7 @@ namespace Common.Mathematics
 
         public override bool Equals(object obj)
         {
-            return obj is Range3Int && Equals((Range3Int)obj);
+            return obj is Range3Int other && Equals(other);
         }
 
         public override int GetHashCode()

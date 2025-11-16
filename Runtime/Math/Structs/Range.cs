@@ -119,7 +119,7 @@ namespace Common.Mathematics
 
         public override bool Equals(object obj)
         {
-            return obj is Range && Equals((Range)obj);
+            return obj is Range other && Equals(other);
         }
 
         public override int GetHashCode()

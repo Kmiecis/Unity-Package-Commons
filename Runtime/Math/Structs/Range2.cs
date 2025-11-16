@@ -160,7 +160,7 @@ namespace Common.Mathematics
 
         public override bool Equals(object obj)
         {
-            return obj is Range2 && Equals((Range2)obj);
+            return obj is Range2 other && Equals(other);
         }
 
         public override int GetHashCode()
