@@ -5,7 +5,7 @@ using UnityEngine;
 namespace CommonEditor
 {
     [CustomPropertyDrawer(typeof(HeaderButtonAttribute))]
-    public class HeaderButtonAttributeDrawer : ResizeablePropertyDrawer
+    public class HeaderButtonDrawer : ResizeablePropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
