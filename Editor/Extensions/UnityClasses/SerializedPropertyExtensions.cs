@@ -38,6 +38,20 @@ namespace CommonEditor
             return self.propertyPath.EndsWith("]");
         }
 
+        public static int GetArrayIndex(this SerializedProperty self)
+        {
+            var path = self.propertyPath;
+            for (int i = path.Length - 2; i > -1; --i)
+            {
+                if (path[i].Equals('['))
+                {
+                    var subpath = path.Substring(i + 1, path.Length - 2 - i);
+                    return int.Parse(subpath);
+                }
+            }
+            return -1;
+        }
+
         public static SerializedProperty FindPropertyRelativeField(this SerializedProperty self, string name)
         {
             return self.FindPropertyRelative($"<{name}>k__BackingField");
