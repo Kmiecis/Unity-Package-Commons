@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -42,23 +40,30 @@ namespace CommonEditor
             return existingAsset;
         }
 
+        public static T LoadOrCreateAssetAtPath<T>(string path, T original)
+            where T : Object
+        {
+            var result = AssetDatabase.LoadAssetAtPath<T>(path);
+            if (result == null)
+            {
+                result = Object.Instantiate(original);
+                AssetDatabase.CreateAsset(result, path);
+            }
+            return result;
+        }
+
         public static bool DeleteAsset(Object assetObject)
         {
             var path = AssetDatabase.GetAssetPath(assetObject);
             return AssetDatabase.DeleteAsset(path);
         }
 
-        public static bool DeleteAssets(Object[] assetObjects, List<Object> outFailed)
+        public static void DeleteAssets(params Object[] assetObjects)
         {
-            outFailed.Clear();
-            foreach (var assetObject in assetObjects)
+            for (int i = 0; i < assetObjects.Length; ++i)
             {
-                if (!DeleteAsset(assetObject))
-                {
-                    outFailed.Add(assetObject);
-                }
+                DeleteAsset(assetObjects[i]);
             }
-            return outFailed.Count == 0;
         }
 
         public static Object[] LoadAssets(string filter, params string[] folders)
