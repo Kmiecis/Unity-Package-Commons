@@ -27,7 +27,7 @@ namespace CommonEditor
         {
             { ANIMATION, new string[] { ASSET, ANIMATOR, PREFAB } },
             { ANIMATOR, new string[] { ASSET, PREFAB } },
-            { ASSET, new string[] { ASSET, PREFAB } },
+            { ASSET, new string[] { ASSET, MATERIAL, PREFAB } },
             { FBX, new string[] { ASSET, PREFAB } },
             { JPG, new string[] { ASSET, MATERIAL, PREFAB, SPRITEATLAS } },
             { MESH, new string[] { ASSET, PREFAB } },
