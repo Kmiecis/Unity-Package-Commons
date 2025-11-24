@@ -1,4 +1,6 @@
 using Common;
+using System.Linq;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -27,9 +29,26 @@ namespace CommonEditor
         private bool CheckCondition(SerializedProperty property)
         {
             var attribute = (ConditionalAttribute)this.attribute;
-            var target = property.serializedObject.targetObject;
-            var method = target.GetType().FindMethod(attribute.conditional, UBinding.AnyInstance);
-            return (bool)method.Invoke(target);
+            var field = fieldInfo.Name.Extract('<', '>');
+            var conditional = attribute.conditional ?? $"Display{field}Field";
+
+            var values = property.GetValueChain().ToArray();
+            var parent = values[^2];
+
+            var method = parent.GetType().FindMethod(conditional, UBinding.AnyInstance | BindingFlags.IgnoreCase);
+            if (method == null)
+            {
+                Debug.LogWarning($"{nameof(ConditionalAttribute)}: Unable to find method '{conditional}' in '{parent.GetType().Name}'");
+                return true;
+            }
+
+            if (method.ReturnType != typeof(bool))
+            {
+                Debug.LogWarning($"{nameof(ConditionalAttribute)}: Return type of method '{conditional}' should be of 'bool' in '{parent.GetType().Name}'");
+                return true;
+            }
+
+            return (bool)method.Invoke(parent);
         }
     }
 }
