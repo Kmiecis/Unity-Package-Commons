@@ -313,6 +313,19 @@ namespace Common
             return string.Join(separator, self, startIndex, count);
         }
 
+        public static string Extract(this string self, char left, char right)
+        {
+            var startIndex = self.IndexOf(left);
+            var endIndex = self.IndexOf(right);
+            if (endIndex == -1) endIndex = self.Length;
+            return self.Substring(startIndex + 1, endIndex - startIndex - 1);
+        }
+
+        public static string AsBackingField(this string self)
+        {
+            return $"<{self}>k__BackingField";
+        }
+
         public static string RichAlign(this string self, string alignment)
         {
             return $"<align=\"{alignment}\">{self}</align>";

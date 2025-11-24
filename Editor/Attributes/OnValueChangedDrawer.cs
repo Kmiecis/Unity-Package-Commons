@@ -1,4 +1,6 @@
 ﻿using Common;
+using System.Linq;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,41 +11,47 @@ namespace CommonEditor
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            var attribute = (OnValueChangedAttribute)this.attribute;
-
             EditorGUI.BeginChangeCheck();
             
             EditorGUI.PropertyField(position, property, label, true);
 
             if (EditorGUI.EndChangeCheck())
             {
-                var target = property.GetTargetObject();
-                var targetType = property.GetTargetType();
-                var method = targetType.GetMethod(attribute.callback, UBinding.Anything);
+                property.serializedObject.ApplyModifiedProperties();
 
-                if (method != null)
-                {
-                    var value = this.GetValue(property);
-
-                    if (method.HasMatchingParameters(value.GetType()))
-                    {
-                        method.Invoke(target, value);
-                    }
-                    else
-                    {
-                        Debug.LogWarning($"{nameof(OnValueChangedAttribute)}: Unable to match parameters of method '{attribute.callback}' and field '{fieldInfo.Name}'");
-                    }
-                }
-                else
-                {
-                    Debug.LogWarning($"{nameof(OnValueChangedAttribute)}: Unable to find method '{attribute.callback}' in '{targetType.Name}'");
-                }
+                CallbackAttempt(property);
             }
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             return EditorGUI.GetPropertyHeight(property, label, true);
+        }
+
+        private void CallbackAttempt(SerializedProperty property)
+        {
+            var attribute = (OnValueChangedAttribute)this.attribute;
+            var field = fieldInfo.Name.Extract('<', '>');
+            var callback = attribute.callback ?? $"On{field}Changed";
+
+            var values = property.GetValueChain().ToArray();
+            var value = values[^1];
+            var parent = values[^2];
+
+            var method = parent.GetType().GetMethod(callback, UBinding.AnyInstance | BindingFlags.IgnoreCase);
+            if (method == null)
+            {
+                Debug.LogWarning($"{nameof(OnValueChangedAttribute)}: Unable to find method '{callback}' in '{parent.GetType().Name}'");
+                return;
+            }
+
+            if (!method.HasMatchingParameters(value.GetType()))
+            {
+                Debug.LogWarning($"{nameof(OnValueChangedAttribute)}: Unable to match parameters of method '{callback}' in '{parent.GetType().Name}'");
+                return;
+            }
+
+            method.Invoke(parent, value);
         }
     }
 }

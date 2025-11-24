@@ -6,94 +6,10 @@ namespace Common
 {
     public static class TypeExtensions
     {
-        public static object GetDefaultValue(this Type type)
-        {
-            if (type.IsValueType)
-            {
-                return Activator.CreateInstance(type);
-            }
-            return null;
-        }
-
-        public static bool TryGetCustomAttribute(this Type self, Type type, bool inherit, out Attribute attribute)
-        {
-            attribute = self.GetCustomAttribute(type, inherit);
-            return attribute != null;
-        }
-
-        public static bool TryGetCustomAttribute(this Type self, Type type, out Attribute attribute)
-        {
-            return self.TryGetCustomAttribute(type, false, out attribute);
-        }
-
-        public static bool TryGetCustomAttribute<T>(this Type self, bool inherit, out T attribute)
-            where T : Attribute
-        {
-            attribute = self.GetCustomAttribute<T>(inherit);
-            return attribute != null;
-        }
-
-        public static bool TryGetCustomAttribute<T>(this Type self, out T attribute)
-            where T : Attribute
-        {
-            return self.TryGetCustomAttribute<T>(false, out attribute);
-        }
-
-        public static bool HasCustomAttribute(this Type self, Type type, bool inherit = false)
-        {
-            var attribute = self.GetCustomAttribute(type, inherit);
-            return attribute != null;
-        }
-
-        public static bool HasCustomAttribute<T>(this Type self, bool inherit = false)
-            where T : Attribute
-        {
-            var attribute = self.GetCustomAttribute<T>(inherit);
-            return attribute != null;
-        }
-
-        public static bool HasInterface(this Type self, Type type)
-        {
-            var interfaces = self.GetInterfaces();
-            foreach (var item in interfaces)
-            {
-                if (Equals(item, type))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public static bool HasInterface<T>(this Type self)
-        {
-            return self.HasInterface(typeof(T));
-        }
-
-        public static bool IsGenericTypeOf(this Type self, Type type)
-        {
-            while (self != null)
-            {
-                if (self.IsGenericType &&
-                    self.GetGenericTypeDefinition() == type)
-                {
-                    return true;
-                }
-
-                self = self.BaseType;
-            }
-            return false;
-        }
-
-        public static bool IsGenericTypeOf<T>(this Type self)
-        {
-            return self.IsGenericTypeOf(typeof(T));
-        }
-
         public static FieldInfo FindField(this Type self, string name)
         {
-            const BindingFlags Flags = BindingFlags.FlattenHierarchy | UBinding.AnyInstance;
-            
+            const BindingFlags Flags = UBinding.AnyInstance | BindingFlags.FlattenHierarchy;
+
             return self.FindField(name, Flags);
         }
 
@@ -114,7 +30,7 @@ namespace Common
 
         public static MethodInfo FindMethod(this Type self, string name)
         {
-            const BindingFlags Flags = BindingFlags.FlattenHierarchy | UBinding.AnyInstance;
+            const BindingFlags Flags = UBinding.AnyInstance | BindingFlags.FlattenHierarchy;
 
             return self.FindMethod(name, Flags);
         }
@@ -136,8 +52,8 @@ namespace Common
 
         public static PropertyInfo FindProperty(this Type self, string name)
         {
-            const BindingFlags Flags = BindingFlags.FlattenHierarchy | BindingFlags.IgnoreCase | UBinding.AnyInstance;
-            
+            const BindingFlags Flags = UBinding.AnyInstance | BindingFlags.FlattenHierarchy | BindingFlags.IgnoreCase;
+
             return self.FindProperty(name, Flags);
         }
 
@@ -196,6 +112,126 @@ namespace Common
 
                 self = self.BaseType;
             }
+        }
+
+        public static object GetDefaultValue(this Type type)
+        {
+            if (type.IsValueType)
+            {
+                return Activator.CreateInstance(type);
+            }
+            return null;
+        }
+
+        public static bool HasCustomAttribute(this Type self, Type type, bool inherit = false)
+        {
+            var attribute = self.GetCustomAttribute(type, inherit);
+            return attribute != null;
+        }
+
+        public static bool HasCustomAttribute<T>(this Type self, bool inherit = false)
+            where T : Attribute
+        {
+            var attribute = self.GetCustomAttribute<T>(inherit);
+            return attribute != null;
+        }
+
+        public static bool HasInterface(this Type self, Type type)
+        {
+            var interfaces = self.GetInterfaces();
+            foreach (var item in interfaces)
+            {
+                if (Equals(item, type))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static bool HasInterface<T>(this Type self)
+        {
+            return self.HasInterface(typeof(T));
+        }
+
+        public static bool IsGenericTypeOf(this Type self, Type type)
+        {
+            while (self != null)
+            {
+                if (self.IsGenericType &&
+                    self.GetGenericTypeDefinition() == type)
+                {
+                    return true;
+                }
+
+                self = self.BaseType;
+            }
+            return false;
+        }
+
+        public static bool IsGenericTypeOf<T>(this Type self)
+        {
+            return self.IsGenericTypeOf(typeof(T));
+        }
+
+        public static bool TryFindField(this Type self, string name, BindingFlags bindingAttr, out FieldInfo field)
+        {
+            field = self.FindField(name, bindingAttr);
+            return field != null;
+        }
+
+        public static bool TryFindMethod(this Type self, string name, BindingFlags bindingAttr, out MethodInfo method)
+        {
+            method = self.FindMethod(name, bindingAttr);
+            return method != null;
+        }
+
+        public static bool TryFindProperty(this Type self, string name, BindingFlags bindingAttr, out PropertyInfo property)
+        {
+            property = self.FindProperty(name, bindingAttr);
+            return property != null;
+        }
+
+        public static bool TryGetCustomAttribute(this Type self, Type type, bool inherit, out Attribute attribute)
+        {
+            attribute = self.GetCustomAttribute(type, inherit);
+            return attribute != null;
+        }
+
+        public static bool TryGetCustomAttribute(this Type self, Type type, out Attribute attribute)
+        {
+            return self.TryGetCustomAttribute(type, false, out attribute);
+        }
+
+        public static bool TryGetCustomAttribute<T>(this Type self, bool inherit, out T attribute)
+            where T : Attribute
+        {
+            attribute = self.GetCustomAttribute<T>(inherit);
+            return attribute != null;
+        }
+
+        public static bool TryGetCustomAttribute<T>(this Type self, out T attribute)
+            where T : Attribute
+        {
+            return self.TryGetCustomAttribute<T>(false, out attribute);
+        }
+
+        public static bool TryGetField(this Type self, string name, BindingFlags bindingAttr, out FieldInfo field)
+        {
+            field = self.GetField(name, bindingAttr);
+            return field != null;
+        }
+
+        public static bool TryGetMethod(this Type self, string name, BindingFlags bindingAttr, out MethodInfo method)
+        {
+            method = self.GetMethod(name, bindingAttr);
+            return method != null;
+        }
+
+        public static bool TryGetProperty(this Type self, string name, BindingFlags bindingAttr, out PropertyInfo property)
+        {
+            property = self.GetProperty(name, bindingAttr);
+            return property != null;
         }
     }
 }

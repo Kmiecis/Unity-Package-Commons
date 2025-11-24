@@ -52,11 +52,6 @@ namespace CommonEditor
             return -1;
         }
 
-        public static SerializedProperty FindPropertyRelativeField(this SerializedProperty self, string name)
-        {
-            return self.FindPropertyRelative($"<{name}>k__BackingField");
-        }
-
         public static IEnumerable<SerializedProperty> GetChildren(this SerializedProperty self)
         {
             var iterator = self.Copy();
@@ -254,6 +249,29 @@ namespace CommonEditor
                 default:
                     self.SetValue(value);
                     break;
+            }
+        }
+
+        public static IEnumerable<object> GetValueChain(this SerializedProperty self)
+        {
+            var sanitizedPath = self.propertyPath.Replace(".Array.data[", "[");
+            object result = self.GetTargetObject();
+
+            yield return result;
+
+            var elements = sanitizedPath.Split('.');
+            foreach (var element in elements)
+            {
+                if (element.Contains("["))
+                {
+                    result = GetValueFromList(result, element);
+                }
+                else
+                {
+                    result = GetValueFromType(result, element);
+                }
+
+                yield return result;
             }
         }
 
