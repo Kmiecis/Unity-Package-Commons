@@ -28,7 +28,7 @@ namespace CommonEditor
 
         private bool CheckCondition(SerializedProperty property)
         {
-            var conditional = attribute.conditional ?? GetFallback(fieldInfo);
+            var conditional = attribute.conditional ?? $"Display{property.displayName}Field";
 
             var values = property.GetValueChain().ToArray();
             var parent = values[^2];
@@ -37,12 +37,6 @@ namespace CommonEditor
                 TryGetMethod(parent, conditional, out var method) &&
                 (bool)method.Invoke(parent)
             );
-        }
-
-        private static string GetFallback(FieldInfo fieldInfo)
-        {
-            var fieldName = fieldInfo.GetRealName();
-            return $"Display{fieldName}Field";
         }
 
         private static bool TryGetMethod(object parent, string conditional, out MethodInfo method)

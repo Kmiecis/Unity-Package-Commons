@@ -29,7 +29,7 @@ namespace CommonEditor
 
         private void CallbackAttempt(SerializedProperty property)
         {
-            var callback = attribute.callback ?? GetFallback(fieldInfo);
+            var callback = attribute.callback ?? $"On{property.displayName}Changed";
 
             var values = property.GetValueChain().ToArray();
             var value = values[^1];
@@ -39,12 +39,6 @@ namespace CommonEditor
             {
                 method.Invoke(parent, value);
             }
-        }
-
-        private static string GetFallback(FieldInfo fieldInfo)
-        {
-            var fieldName = fieldInfo.GetRealName();
-            return $"On{fieldName}Changed";
         }
 
         private static bool TryGetMethod(object value, object parent, string callback, out MethodInfo method)
