@@ -5,23 +5,30 @@ using UnityEngine;
 namespace CommonEditor
 {
     [CustomPropertyDrawer(typeof(ShiftAttribute))]
-    public class ShiftFieldDrawer : PropertyDrawer
+    public class ShiftFieldDrawer : BasePropertyDrawer<ShiftAttribute>
     {
-        const float ARROW_WIDTH = 20.0f;
+        private const float ARROW_WIDTH = 20.0f;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             if (property.propertyType == SerializedPropertyType.Integer)
             {
                 EditorGUI.PropertyField(position.WithWidth(position.width - 2 * ARROW_WIDTH), property, label);
+
                 if (GUI.Button(position.WithX(position.x + position.width - 2 * ARROW_WIDTH).WithWidth(ARROW_WIDTH), "<"))
+                {
                     property.intValue = ShiftLeft(property.intValue);
+                }
                 if (GUI.Button(position.WithX(position.x + position.width - ARROW_WIDTH).WithWidth(ARROW_WIDTH), ">"))
+                {
                     property.intValue = ShiftRight(property.intValue);
+                }
             }
             else
             {
-                EditorGUI.LabelField(position, label.text, "Use ShiftField with int.");
+                base.OnGUI(position, property, label);
+
+                Debug.LogWarning(this.Format($"Requires int type field"));
             }
         }
         

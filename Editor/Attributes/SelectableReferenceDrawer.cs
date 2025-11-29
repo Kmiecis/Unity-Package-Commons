@@ -7,24 +7,20 @@ using UnityEngine;
 namespace CommonEditor
 {
     [CustomPropertyDrawer(typeof(SelectableReferenceAttribute))]
-    public class SelectableReferenceDrawer : PropertyDrawer
+    public class SelectableReferenceDrawer : BasePropertyDrawer<SelectableReferenceAttribute>
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (IsDrawerValid(property, out var error))
+            if (IsDrawerValid(property))
             {
                 DrawDropdown(position, property, label);
-                DrawProperty(position, property, GUIContent.none);
+
+                base.OnGUI(position, property, GUIContent.none);
             }
             else
             {
-                EditorGUI.HelpBox(position, $"Error. {error}", MessageType.Error);
+                base.OnGUI(position, property, label);
             }
-        }
-
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-        {
-            return EditorGUI.GetPropertyHeight(property, label, true);
         }
 
         private void DrawDropdown(Rect position, SerializedProperty property, GUIContent label)
@@ -60,28 +56,22 @@ namespace CommonEditor
             }
         }
 
-        private void DrawProperty(Rect position, SerializedProperty property, GUIContent label)
-        {
-            EditorGUI.PropertyField(position, property, label, true);
-        }
-
-        private bool IsDrawerValid(SerializedProperty property, out string error)
+        private bool IsDrawerValid(SerializedProperty property)
         {
             var fieldType = UEditorUtility.GetFieldType(fieldInfo);
             if (fieldType.IsValueType)
             {
-                error = $"Field [{property.name}] has to be of reference type.";
+                Debug.LogWarning(this.Format("Requires reference type field"));
                 return false;
             }
 
             var attribute = Attribute.GetCustomAttribute(fieldInfo, typeof(SerializeReference));
             if (attribute == null)
             {
-                error = $"Field [{property.name}] has to contain {nameof(SerializeReference)} attribute.";
+                Debug.LogWarning(this.Format($"Requires {nameof(SerializeReference)} attribute"));
                 return false;
             }
 
-            error = default;
             return true;
         }
 

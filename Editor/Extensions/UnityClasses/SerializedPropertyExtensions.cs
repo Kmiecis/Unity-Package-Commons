@@ -33,6 +33,11 @@ namespace CommonEditor
             return self.serializedObject.GetTargetType();
         }
 
+        public static string MakeKey(this SerializedProperty self)
+        {
+            return $"{self.serializedObject.targetObject.GetType().Name}.{self.propertyPath}";
+        }
+
         public static bool IsInArray(this SerializedProperty self)
         {
             return self.propertyPath.EndsWith("]");

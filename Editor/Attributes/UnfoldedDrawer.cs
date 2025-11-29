@@ -13,13 +13,17 @@ namespace CommonEditor
             if (property.hasChildren)
             {
                 if (attribute.labeled)
+                {
                     UEditorGUI.UnfoldedLabelField(ref position, label);
+                }
                 UEditorGUI.UnfoldedPropertyField(ref position, property);
             }
             else
             {
                 if (!attribute.labeled)
+                {
                     label = GUIContent.none;
+                }
                 EditorGUI.PropertyField(position, property, label);
             }
         }
@@ -31,7 +35,9 @@ namespace CommonEditor
             {
                 var result = UEditorGUI.GetUnfoldedPropertyHeight(property);
                 if (attribute.labeled)
+                {
                     result += UEditorGUI.GetUnfoldedLabelHeight(label);
+                }
                 return result;
             }
             else

@@ -1,4 +1,5 @@
 using Common;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,26 +15,28 @@ namespace CommonEditor
             UEditorGUI.LabelField(ref position, label);
             UEditorGUI.PropertyField(ref position, property, true);
 
-            Button(ref position, property.GetTargetObject());
+            Button(ref position, property);
 
             MarkHeightEnd(position.y);
         }
 
-        private void Button(ref Rect position, Object target)
+        private void Button(ref Rect position, SerializedProperty property)
         {
             var attribute = (FooterButtonAttribute)this.attribute;
             if (UGUI.Button(ref position, attribute.name))
             {
-                var type = target.GetType();
+                var values = property.GetValueChain().ToArray();
+                var parent = values[^2];
+                var parentType = parent.GetType();
 
-                var method = type.GetMethod(attribute.callback, UBinding.Anything);
+                var method = parentType.GetMethod(attribute.callback, UBinding.Anything);
                 if (method != null)
                 {
-                    method.Invoke(target, null);
+                    method.Invoke(parent);
                 }
                 else
                 {
-                    Debug.LogWarning($"{nameof(FooterButtonAttribute)}: Unable to find method '{attribute.callback}' in '{type.Name}'");
+                    Debug.LogWarning($"{nameof(FooterButtonAttribute)}: Unable to find method '{attribute.callback}' in '{parentType.Name}'");
                 }
             }
         }

@@ -12,6 +12,11 @@ namespace Common
             return attribute != null;
         }
 
+        public static string GetRealName(this FieldInfo self)
+        {   // Removes <self.Name>k__BackingField encapsulation
+            return self.Name.Extract('<', '>');
+        }
+
         public static T GetValue<T>(this FieldInfo self, object target)
         {
             return (T)self.GetValue(target);

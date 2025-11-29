@@ -1,51 +1,54 @@
 using Common;
 using Common.Mathematics;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
 namespace CommonEditor
 {
     [CustomPropertyDrawer(typeof(PlayerPrefFieldAttribute))]
-    public class PlayerPrefFieldDrawer : PropertyDrawer
+    public class PlayerPrefFieldDrawer : BasePropertyDrawer<PlayerPrefFieldAttribute>
     {
-        private object _value;
+        private static Dictionary<string, object> _values;
+
+        static PlayerPrefFieldDrawer()
+        {
+            _values = new Dictionary<string, object>();
+        }
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            var attribute = (PlayerPrefFieldAttribute)this.attribute;
-            var key = attribute.key ?? $"{property.GetTargetType().Name}.{property.propertyPath}";
+            var key = attribute.key ?? property.MakeKey();
 
-            if (_value == null)
+            if (!_values.TryGetValue(key, out var previous))
             {
-                _value = ReadValue(property, key);
+                previous = ReadValue(property, key);
 
-                WriteValue(property, key, _value);
+                WriteValue(property, key, previous);
+
+                _values[key] = previous;
             }
 
-            EditorGUI.BeginChangeCheck();
+            var current = DrawValue(position, label, property, previous);
 
-            _value = DrawValue(position, label, property, _value);
-
-            if (EditorGUI.EndChangeCheck())
+            if (!Equals(previous, current))
             {
-                WriteValue(property, key, _value);
+                WriteValue(property, key, current);
 
-                TriggerOnValidate(property.GetTargetObject());
+                _values[key] = current;
+
+                TriggerOnValidate(property);
             }
         }
 
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        private void TriggerOnValidate(SerializedProperty property)
         {
-            return EditorGUI.GetPropertyHeight(property, label, true);
-        }
+            var values = property.GetValueChain().ToArray();
+            var parent = values[^2];
 
-        private void TriggerOnValidate(Object target)
-        {
-            var method = target.GetType().GetMethod("OnValidate", UBinding.AnyInstance);
-            if (method != null)
-            {
-                method.Invoke(target, null);
-            }
+            var method = parent.GetType().GetMethod("OnValidate", UBinding.AnyInstance);
+            method?.Invoke(parent);
         }
 
         private object ReadValue(SerializedProperty property, string key)
@@ -128,7 +131,7 @@ namespace CommonEditor
                     break;
             }
 
-            property.SetValue(_value);
+            property.SetValue(value);
         }
 
         private object DrawValue(Rect position, GUIContent label, SerializedProperty property, object value)

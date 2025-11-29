@@ -7,13 +7,13 @@ using UnityEngine;
 namespace CommonEditor
 {
     [CustomPropertyDrawer(typeof(ConditionalAttribute))]
-    public class ConditionalDrawer : PropertyDrawer
+    public class ConditionalDrawer : BasePropertyDrawer<ConditionalAttribute>
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             if (CheckCondition(property))
             {
-                EditorGUI.PropertyField(position, property, label, true);
+                base.OnGUI(position, property, label);
             }
         }
 
@@ -21,34 +21,48 @@ namespace CommonEditor
         {
             if (CheckCondition(property))
             {
-                return EditorGUI.GetPropertyHeight(property, label, true);
+                return base.GetPropertyHeight(property, label);
             }
             return 0.0f;
         }
 
         private bool CheckCondition(SerializedProperty property)
         {
-            var attribute = (ConditionalAttribute)this.attribute;
-            var field = fieldInfo.Name.Extract('<', '>');
-            var conditional = attribute.conditional ?? $"Display{field}Field";
+            var conditional = attribute.conditional ?? GetFallback(fieldInfo);
 
             var values = property.GetValueChain().ToArray();
             var parent = values[^2];
 
-            var method = parent.GetType().FindMethod(conditional, UBinding.AnyInstance | BindingFlags.IgnoreCase);
+            return (
+                TryGetMethod(parent, conditional, out var method) &&
+                (bool)method.Invoke(parent)
+            );
+        }
+
+        private static string GetFallback(FieldInfo fieldInfo)
+        {
+            var fieldName = fieldInfo.GetRealName();
+            return $"Display{fieldName}Field";
+        }
+
+        private static bool TryGetMethod(object parent, string conditional, out MethodInfo method)
+        {
+            var parentType = parent.GetType();
+
+            method = parentType.FindMethod(conditional, UBinding.AnyInstance | BindingFlags.IgnoreCase);
             if (method == null)
             {
-                Debug.LogWarning($"{nameof(ConditionalAttribute)}: Unable to find method '{conditional}' in '{parent.GetType().Name}'");
-                return true;
+                Debug.LogWarning($"{nameof(ConditionalDrawer)}: Unable to find method '{conditional}' in '{parentType.Name}'");
+                return false;
             }
 
             if (method.ReturnType != typeof(bool))
             {
-                Debug.LogWarning($"{nameof(ConditionalAttribute)}: Return type of method '{conditional}' should be of 'bool' in '{parent.GetType().Name}'");
-                return true;
+                Debug.LogWarning($"{nameof(ConditionalDrawer)}: Return type of method '{conditional}' should be of 'bool' in '{parentType.Name}'");
+                return false;
             }
 
-            return (bool)method.Invoke(parent);
+            return true;
         }
     }
 }

@@ -1,11 +1,9 @@
-using Common;
 using UnityEditor;
 using UnityEngine;
 
 namespace CommonEditor
 {
-    [CustomPropertyDrawer(typeof(FoldedAttribute))]
-    public class FoldedDrawer : PropertyDrawer
+    public class BasePropertyDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -16,5 +14,12 @@ namespace CommonEditor
         {
             return EditorGUI.GetPropertyHeight(property, label, true);
         }
+    }
+
+    public class BasePropertyDrawer<T> : BasePropertyDrawer
+        where T : PropertyAttribute
+    {
+        public new T attribute
+            => (T)base.attribute;
     }
 }

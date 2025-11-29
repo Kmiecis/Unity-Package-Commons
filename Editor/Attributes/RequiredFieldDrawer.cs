@@ -5,7 +5,7 @@ using UnityEngine;
 namespace CommonEditor
 {
     [CustomPropertyDrawer(typeof(RequiredFieldAttribute))]
-    public class RequiredFieldDrawer : PropertyDrawer
+    public class RequiredFieldDrawer : BasePropertyDrawer<RequiredFieldAttribute>
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -14,13 +14,8 @@ namespace CommonEditor
             {
                 label.image = UEditorGUIUtility.GetHelpIcon(MessageType.Error);
             }
-            
-            EditorGUI.PropertyField(position, property, label, true);
-        }
 
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-        {
-            return EditorGUI.GetPropertyHeight(property, label, true);
+            base.OnGUI(position, property, label);
         }
     }
 }

@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace CommonEditor
 {
-    [CustomPropertyDrawer(typeof(RuntimeOnlyAttribute))]
-    public class RuntimeOnlyDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(RuntimeFieldAttribute))]
+    public class RuntimeFieldDrawer : BasePropertyDrawer<RuntimeFieldAttribute>
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             if (Application.isPlaying)
             {
-                EditorGUI.PropertyField(position, property, label, true);
+                base.OnGUI(position, property, label);
             }
         }
 
@@ -19,7 +19,7 @@ namespace CommonEditor
         {
             if (Application.isPlaying)
             {
-                return EditorGUI.GetPropertyHeight(property, label, true);
+                return base.GetPropertyHeight(property, label);
             }
             return 0.0f;
         }

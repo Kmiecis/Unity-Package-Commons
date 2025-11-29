@@ -9,7 +9,7 @@ namespace CommonEditor
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (IsDrawerValid(property, out var error))
+            if (property.propertyType == SerializedPropertyType.Enum)
             {
                 EditorGUI.BeginChangeCheck();
 
@@ -22,25 +22,8 @@ namespace CommonEditor
             }
             else
             {
-                EditorGUI.HelpBox(position, $"Error. {error}", MessageType.Error);
+                Debug.LogWarning(this.Format("Requires enum type field"));
             }
-        }
-
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-        {
-            return EditorGUI.GetPropertyHeight(property, label, true);
-        }
-
-        private bool IsDrawerValid(SerializedProperty property, out string error)
-        {
-            if (property.propertyType != SerializedPropertyType.Enum)
-            {
-                error = $"Field [{property.name}] has to be of enum type.";
-                return false;
-            }
-
-            error = default;
-            return true;
         }
     }
 }

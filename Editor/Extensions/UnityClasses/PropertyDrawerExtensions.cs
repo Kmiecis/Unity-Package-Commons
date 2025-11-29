@@ -13,5 +13,10 @@ namespace CommonEditor
         {
             self.fieldInfo.SetValue(property.GetTargetObject(), value);
         }
+
+        public static string Format(this PropertyDrawer self, string message)
+        {
+            return $"{self.attribute.ToString()}({self.fieldInfo.Name}): {message}";
+        }
     }
 }

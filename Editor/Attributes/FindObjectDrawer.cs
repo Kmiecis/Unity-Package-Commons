@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CommonEditor
 {
-    public abstract class AFindObjectDrawer : PropertyDrawer
+    public abstract class AFindObjectDrawer : BasePropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -15,7 +15,7 @@ namespace CommonEditor
                 property.objectReferenceValue = value;
             }
 
-            EditorGUI.PropertyField(position, property, label, true);
+            this.OnGUI(position, property, label);
         }
 
         protected abstract Object FindObject();

@@ -9,13 +9,16 @@ namespace CommonEditor
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (property.propertyType != SerializedPropertyType.Float)
+            if (property.propertyType == SerializedPropertyType.Float)
             {
-                EditorGUI.LabelField(position, label.text, $"Use {nameof(ProgressBarAttribute)} with a float.");
+                if (property.floatValue >= 0.0f && property.floatValue < 1.0f)
+                {
+                    EditorGUI.ProgressBar(position, property.floatValue, property.displayName);
+                }
             }
-            else if (property.floatValue >= 0.0f && property.floatValue < 1.0f)
+            else
             {
-                EditorGUI.ProgressBar(position, property.floatValue, property.displayName);
+                Debug.LogWarning(this.Format("Requires float type field"));
             }
         }
 
