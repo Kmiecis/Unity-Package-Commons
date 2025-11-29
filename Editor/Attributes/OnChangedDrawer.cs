@@ -29,7 +29,7 @@ namespace CommonEditor
 
         private void CallbackAttempt(SerializedProperty property)
         {
-            var callback = attribute.callback ?? $"On{property.displayName}Changed";
+            var callback = attribute.callback ?? $"On{property.displayName.Remove(" ")}Changed";
 
             var values = property.GetValueChain().ToArray();
             var value = values[^1];
