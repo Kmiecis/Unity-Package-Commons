@@ -19,6 +19,8 @@ namespace CommonEditor
                 var change = Mathf.Sign(-current.delta.y) * attribute.delta;
 
                 AdjustValue(property, change);
+
+                current.Use();
             }
         }
 
