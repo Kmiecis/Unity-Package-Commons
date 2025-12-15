@@ -5,16 +5,11 @@ using UnityEngine;
 namespace CommonEditor
 {
     [CustomPropertyDrawer(typeof(HideLabelAttribute))]
-    public class HideLabelDrawer : PropertyDrawer
+    public class HideLabelDrawer : BasePropertyDrawer<HideLabelAttribute>
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            EditorGUI.PropertyField(position, property, GUIContent.none, true);
-        }
-
-        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-        {
-            return EditorGUI.GetPropertyHeight(property, true);
+            base.OnGUI(position, property, GUIContent.none);
         }
     }
 }

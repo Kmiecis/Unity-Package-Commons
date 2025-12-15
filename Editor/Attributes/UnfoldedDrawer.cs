@@ -5,45 +5,47 @@ using UnityEngine;
 namespace CommonEditor
 {
     [CustomPropertyDrawer(typeof(UnfoldedAttribute))]
-    public class UnfoldedDrawer : PropertyDrawer
+    public class UnfoldedDrawer : BasePropertyDrawer<UnfoldedAttribute>
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            var attribute = (UnfoldedAttribute)this.attribute;
             if (property.hasChildren)
             {
                 if (attribute.labeled)
                 {
-                    UEditorGUI.UnfoldedLabelField(ref position, label);
+                    UEditorGUI.PropertyField(ref position, property, label, false);
                 }
-                UEditorGUI.UnfoldedPropertyField(ref position, property);
+                else
+                {
+                    var local = position;
+                    local.x += local.width; // Hide Foldout Arrow
+                    local.height = EditorGUIUtility.singleLineHeight;
+                    EditorGUI.PropertyField(local, property, GUIContent.none, false);
+                }
+
+                UEditorGUI.PropertyFieldChildren(ref position, property, true);
             }
             else
             {
-                if (!attribute.labeled)
-                {
-                    label = GUIContent.none;
-                }
-                EditorGUI.PropertyField(position, property, label);
+                Debug.LogWarning(this.Format("Works only on properties with children"));
+
+                base.OnGUI(position, property, label);
             }
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            var attribute = (UnfoldedAttribute)this.attribute;
             if (property.hasChildren)
             {
-                var result = UEditorGUI.GetUnfoldedPropertyHeight(property);
+                var result = UEditorGUI.GetPropertyChildrenHeight(property, true);
                 if (attribute.labeled)
                 {
-                    result += UEditorGUI.GetUnfoldedLabelHeight(label);
+                    result += EditorGUI.GetPropertyHeight(property, label, false) + UEditorGUIUtility.SpaceHeight;
                 }
                 return result;
             }
-            else
-            {
-                return EditorGUI.GetPropertyHeight(property);
-            }
+
+            return base.GetPropertyHeight(property, label);
         }
     }
 }
