@@ -1,4 +1,5 @@
 using Common;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -11,16 +12,15 @@ namespace CommonEditor
         {
             if (property.hasChildren)
             {
-                if (attribute.labeled)
+                if (!attribute.labeled)
+                {
+                    label.text = string.Empty;
+                    position.y -= EditorGUIUtility.singleLineHeight;
+                }
+
+                using (var hider = new HideFoldoutScope())
                 {
                     UEditorGUI.PropertyField(ref position, property, label, false);
-                }
-                else
-                {
-                    var local = position;
-                    local.x += local.width; // Hide Foldout Arrow
-                    local.height = EditorGUIUtility.singleLineHeight;
-                    EditorGUI.PropertyField(local, property, GUIContent.none, false);
                 }
 
                 UEditorGUI.PropertyFieldChildren(ref position, property, true);
@@ -46,6 +46,25 @@ namespace CommonEditor
             }
 
             return base.GetPropertyHeight(property, label);
+        }
+
+        private class HideFoldoutScope : GUI.Scope
+        {
+            private FieldInfo _onDrawField;
+            private object _onDrawValue;
+
+            public HideFoldoutScope()
+            {
+                _onDrawField = typeof(GUIStyle).GetField("onDraw", UBinding.NonPublicStatic);
+                _onDrawValue = _onDrawField.GetValue(null);
+
+                _onDrawField.SetValue(null, null);
+            }
+
+            protected override void CloseScope()
+            {
+                _onDrawField.SetValue(null, _onDrawValue);
+            }
         }
     }
 }
