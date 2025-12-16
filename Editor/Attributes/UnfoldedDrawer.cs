@@ -13,8 +13,7 @@ namespace CommonEditor
             {
                 if (attribute.labeled)
                 {
-                    UEditorGUI.LabelField(ref position, label);
-                    position.y += position.height + UEditorGUIUtility.SpaceHeight;
+                    UEditorGUI.HeaderField(ref position, label);
                 }
 
                 UEditorGUI.PropertyFieldChildren(ref position, property, true);

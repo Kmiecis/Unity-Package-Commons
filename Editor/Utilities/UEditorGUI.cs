@@ -61,6 +61,13 @@ namespace CommonEditor
             return result;
         }
 
+        public static void HeaderField(ref Rect position, GUIContent label)
+        {
+            position.height = EditorGUIUtility.singleLineHeight;
+            EditorGUI.LabelField(position, label);
+            position.y += position.height + UEditorGUIUtility.SpaceHeight;
+        }
+
         public static int IntField(ref Rect position, int value, GUIContent label = null)
         {
             position.height = EditorGUI.GetPropertyHeight(SerializedPropertyType.Integer, label);
@@ -116,16 +123,18 @@ namespace CommonEditor
 
         public static bool PropertyField(ref Rect position, SerializedProperty property, GUIContent label)
         {
-            position.height = EditorGUI.GetPropertyHeight(property, label);
-            var result = EditorGUI.PropertyField(position, property, label);
+            var temp = new GUIContent(label);
+            position.height = EditorGUI.GetPropertyHeight(property, label); // Clears 'label' contents
+            var result = EditorGUI.PropertyField(position, property, label.FillWith(temp));
             position.y += position.height + UEditorGUIUtility.SpaceHeight;
             return result;
         }
 
         public static bool PropertyField(ref Rect position, SerializedProperty property, GUIContent label, bool includeChildren)
         {
-            position.height = EditorGUI.GetPropertyHeight(property, label, includeChildren);
-            var result = EditorGUI.PropertyField(position, property, label, includeChildren);
+            var temp = new GUIContent(label);
+            position.height = EditorGUI.GetPropertyHeight(property, label, includeChildren); // Clears 'label' contents
+            var result = EditorGUI.PropertyField(position, property, label.FillWith(temp), includeChildren);
             position.y += position.height + UEditorGUIUtility.SpaceHeight;
             return result;
         }
@@ -201,21 +210,11 @@ namespace CommonEditor
             position.y += position.height + UEditorGUIUtility.SpaceHeight;
         }
 
-        public static float GetPropertyHeight(SerializedProperty property, bool includeChildren)
-        {
-            return EditorGUI.GetPropertyHeight(property, includeChildren) + UEditorGUIUtility.SpaceHeight;
-        }
-
-        public static float GetPropertyHeight(SerializedProperty property)
-        {
-            return EditorGUI.GetPropertyHeight(property) + UEditorGUIUtility.SpaceHeight;
-        }
-
         public static float GetPropertiesHeight(params SerializedProperty[] properties)
         {
             var result = 0.0f;
             foreach (var property in properties)
-                result += GetPropertyHeight(property);
+                result += EditorGUI.GetPropertyHeight(property) + UEditorGUIUtility.SpaceHeight;
             return result;
         }
 

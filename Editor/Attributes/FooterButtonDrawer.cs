@@ -6,23 +6,25 @@ using UnityEngine;
 namespace CommonEditor
 {
     [CustomPropertyDrawer(typeof(FooterButtonAttribute))]
-    public class FooterButtonDrawer : ResizeablePropertyDrawer
+    public class FooterButtonDrawer : BasePropertyDrawer<FooterButtonAttribute>
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            MarkHeightBegin(position.y);
-
-            UEditorGUI.LabelField(ref position, label);
-            UEditorGUI.PropertyField(ref position, property, true);
+            UEditorGUI.PropertyField(ref position, property, label, true);
 
             Button(ref position, property);
+        }
 
-            MarkHeightEnd(position.y);
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            return (
+                base.GetPropertyHeight(property, label) +
+                UEditorGUIUtility.LineHeight
+            );
         }
 
         private void Button(ref Rect position, SerializedProperty property)
         {
-            var attribute = (FooterButtonAttribute)this.attribute;
             if (UGUI.Button(ref position, attribute.name))
             {
                 var values = property.GetValueChain().ToArray();

@@ -6,8 +6,6 @@ namespace CommonEditor
 {
     public static class UGUI
     {
-        public const float SpaceHeight = 2.0f;
-
         public class BackgroundColorScope : IDisposable
         {
             private readonly Color _color;
@@ -80,7 +78,7 @@ namespace CommonEditor
         {
             position.height = EditorGUIUtility.singleLineHeight;
             var result = GUI.Button(position, text);
-            position.y += position.height + SpaceHeight;
+            position.y += position.height + UEditorGUIUtility.SpaceHeight;
             return result;
         }
     }
