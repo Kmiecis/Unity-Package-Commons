@@ -1,5 +1,4 @@
 using Common;
-using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,15 +11,10 @@ namespace CommonEditor
         {
             if (property.hasChildren)
             {
-                if (!attribute.labeled)
+                if (attribute.labeled)
                 {
-                    label.text = string.Empty;
-                    position.y -= EditorGUIUtility.singleLineHeight;
-                }
-
-                using (var hider = new HideFoldoutScope())
-                {
-                    UEditorGUI.PropertyField(ref position, property, label, false);
+                    UEditorGUI.LabelField(ref position, label);
+                    position.y += position.height + UEditorGUIUtility.SpaceHeight;
                 }
 
                 UEditorGUI.PropertyFieldChildren(ref position, property, true);
@@ -40,30 +34,13 @@ namespace CommonEditor
                 var result = UEditorGUI.GetPropertyChildrenHeight(property, true);
                 if (attribute.labeled)
                 {
-                    result += EditorGUI.GetPropertyHeight(property, label, false) + UEditorGUIUtility.SpaceHeight;
+                    result += EditorGUIUtility.singleLineHeight;
                 }
                 return result;
             }
-
-            return base.GetPropertyHeight(property, label);
-        }
-
-        private class HideFoldoutScope : GUI.Scope
-        {
-            private FieldInfo _onDrawField;
-            private object _onDrawValue;
-
-            public HideFoldoutScope()
+            else
             {
-                _onDrawField = typeof(GUIStyle).GetField("onDraw", UBinding.NonPublicStatic);
-                _onDrawValue = _onDrawField.GetValue(null);
-
-                _onDrawField.SetValue(null, null);
-            }
-
-            protected override void CloseScope()
-            {
-                _onDrawField.SetValue(null, _onDrawValue);
+                return base.GetPropertyHeight(property, label);
             }
         }
     }

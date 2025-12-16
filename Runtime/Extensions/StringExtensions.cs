@@ -175,6 +175,11 @@ namespace Common
             return index != -1;
         }
 
+        public static int Count(this string self, string needle)
+        {
+            return (self.Length - self.Replace(needle, string.Empty).Length) / needle.Length;
+        }
+
         public static string[] GetLines(this string self)
         {
             return self.Split(new []{ "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
