@@ -159,7 +159,7 @@ namespace CommonEditor
         {
             var style = new GUIStyle(EditorStyles.label) { wordWrap = true };
             position.height = GetTextAreaHeight(label, position.width, style);
-            EditorGUI.LabelField(position, label);
+            EditorGUI.LabelField(position, label, style);
             position.y += position.height + UEditorGUIUtility.SpaceHeight;
         }
 
