@@ -1,4 +1,5 @@
 using Common;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace CommonEditor
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (property.hasChildren)
+            if (property.GetChildren().Count() > 0)
             {
                 if (attribute.labeled)
                 {
@@ -20,7 +21,10 @@ namespace CommonEditor
             }
             else
             {
-                Debug.LogWarning(this.Format("Works only on properties with children"));
+                if (!attribute.labeled)
+                {
+                    label = GUIContent.none;
+                }
 
                 base.OnGUI(position, property, label);
             }
@@ -28,7 +32,7 @@ namespace CommonEditor
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            if (property.hasChildren)
+            if (property.GetChildren().Count() > 0)
             {
                 var result = UEditorGUI.GetPropertyChildrenHeight(property, true);
                 if (attribute.labeled)
