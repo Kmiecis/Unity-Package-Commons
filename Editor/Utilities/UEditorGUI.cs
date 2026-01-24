@@ -35,6 +35,11 @@ namespace CommonEditor
             return EditorGUI.GetPropertyHeight(SerializedPropertyType.Float, label ?? GUIContent.none);
         }
 
+        public static float GetFoldoutHeight()
+        {
+            return EditorGUIUtility.singleLineHeight;
+        }
+
         public static float GetGradientHeight(GUIContent label = null)
         {
             return EditorGUI.GetPropertyHeight(SerializedPropertyType.Gradient, label ?? GUIContent.none);
@@ -68,6 +73,30 @@ namespace CommonEditor
         public static float GetObjectHeight(GUIContent label = null)
         {
             return EditorGUI.GetPropertyHeight(SerializedPropertyType.ObjectReference, label ?? GUIContent.none);
+        }
+
+        public static float GetPropertiesHeight(params SerializedProperty[] properties)
+        {
+            var result = 0.0f;
+            foreach (var property in properties)
+                result += EditorGUI.GetPropertyHeight(property) + UEditorGUIUtility.SpaceHeight;
+            return result;
+        }
+
+        public static float GetPropertyChildrenHeight(SerializedProperty property)
+        {
+            var result = 0.0f;
+            foreach (var child in property.GetChildren())
+                result += EditorGUI.GetPropertyHeight(child) + UEditorGUIUtility.SpaceHeight;
+            return result;
+        }
+
+        public static float GetPropertyChildrenHeight(SerializedProperty property, bool includeChildren)
+        {
+            var result = 0.0f;
+            foreach (var child in property.GetChildren())
+                result += EditorGUI.GetPropertyHeight(child, includeChildren) + UEditorGUIUtility.SpaceHeight;
+            return result;
         }
 
         public static float GetRectHeight(GUIContent label = null)
@@ -336,11 +365,11 @@ namespace CommonEditor
             position.y += position.height + UEditorGUIUtility.SpaceHeight;
         }
 
-        public static float GetPropertiesHeight(params SerializedProperty[] properties)
+        public static bool Foldout(ref Rect position, bool foldout, GUIContent content)
         {
-            var result = 0.0f;
-            foreach (var property in properties)
-                result += EditorGUI.GetPropertyHeight(property) + UEditorGUIUtility.SpaceHeight;
+            position.height = GetFoldoutHeight();
+            var result = EditorGUI.Foldout(position, foldout, content);
+            position.y += position.height + UEditorGUIUtility.SpaceHeight;
             return result;
         }
 
@@ -358,22 +387,6 @@ namespace CommonEditor
             {
                 PropertyField(ref position, child, includeChildren);
             }
-        }
-
-        public static float GetPropertyChildrenHeight(SerializedProperty property)
-        {
-            var result = 0.0f;
-            foreach (var child in property.GetChildren())
-                result += EditorGUI.GetPropertyHeight(child) + UEditorGUIUtility.SpaceHeight;
-            return result;
-        }
-
-        public static float GetPropertyChildrenHeight(SerializedProperty property, bool includeChildren)
-        {
-            var result = 0.0f;
-            foreach (var child in property.GetChildren())
-                result += EditorGUI.GetPropertyHeight(child, includeChildren) + UEditorGUIUtility.SpaceHeight;
-            return result;
         }
     }
 }
