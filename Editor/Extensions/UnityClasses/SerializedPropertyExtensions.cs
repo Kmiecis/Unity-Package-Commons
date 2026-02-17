@@ -11,10 +11,12 @@ namespace CommonEditor
     public static class SerializedPropertyExtensions
     {
         private static readonly FieldInfo NativePropertyPtrField;
+        private static readonly MethodInfo GetHashCodeForPropertyPathInternalMethod;
 
         static SerializedPropertyExtensions()
         {
             NativePropertyPtrField = ReflectNativePropertyPtrField();
+            GetHashCodeForPropertyPathInternalMethod = ReflectGetHashCodeForPropertyPathInternal();
         }
 
         public static bool IsValid(this SerializedProperty self)
@@ -112,6 +114,11 @@ namespace CommonEditor
         {
             int index = self.arraySize - 1;
             self.DeleteArrayElementAtIndex(index);
+        }
+
+        public static int GetHashCodeForPropertyPath(this SerializedProperty self)
+        {
+            return (int)GetHashCodeForPropertyPathInternalMethod.Invoke(self);
         }
 
         public static object GetTypeValue(this SerializedProperty self)
@@ -416,6 +423,11 @@ namespace CommonEditor
         private static FieldInfo ReflectNativePropertyPtrField()
         {
             return typeof(SerializedProperty).GetField("m_NativePropertyPtr", UBinding.NonPublicInstance);
+        }
+
+        private static MethodInfo ReflectGetHashCodeForPropertyPathInternal()
+        {
+            return typeof(SerializedProperty).GetMethod("GetHashCodeForPropertyPathInternal", UBinding.NonPublicInstance);
         }
     }
 }
