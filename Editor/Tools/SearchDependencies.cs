@@ -1,5 +1,7 @@
+using Common;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEditor;
 using UnityEngine;
 
@@ -63,17 +65,35 @@ namespace CommonEditor
             var searchFiles = GetFiles(searchExtensions);
             if (searchFiles.Length == 0)
             {
-                ShowNotFoundPopup(searchExtensions);
+                ShowNoFilesFoundPopup(searchExtensions);
                 return;
             }
 
             var assetGuid = AssetDatabase.GUIDFromAssetPath(assetPath);
-            var selections = GetSelections(searchFiles, assetGuid.ToString());
-            if (selections.Length == 0)
+            var filteredFiles = FilterFiles(searchFiles, assetGuid.ToString());
+            if (filteredFiles.Length == 0)
             {
-                ShowNotFoundPopup(searchExtensions);
+                ShowNoDependenciesFoundPopup(searchFiles.Length, searchExtensions);
                 return;
             }
+
+            var assetName = Path.GetFileName(assetPath);
+            var resultLog = new StringBuilder("Found ")
+                .Append(filteredFiles.Length)
+                .Append(" dependencies of ")
+                .Append(assetName)
+                .Append(" at the following paths:\n");
+
+            var selections = new Object[filteredFiles.Length];
+            for (int i = 0; i < filteredFiles.Length; ++i)
+            {
+                var filepath = filteredFiles[i];
+                selections[i] = AssetDatabase.LoadAssetAtPath<Object>(filepath);
+
+                resultLog.Append(filepath);
+            }
+
+            Debug.LogWarning(resultLog);
 
             Selection.objects = selections;
             foreach (var select in selections)
@@ -95,20 +115,20 @@ namespace CommonEditor
             return result.ToArray();
         }
 
-        private static Object[] GetSelections(string[] files, string search)
+        private static string[] FilterFiles(string[] files, string search)
         {
-            var result = new List<Object>();
+            var result = new List<string>();
 
-            var divisor = 1.0f / files.Length;
             for (int i = 0; i < files.Length; ++i)
             {
-                UpdateProgressBar(i * divisor);
-
                 var file = files[i];
-                var found = GetSelection(file, search);
-                if (found != null)
+                var filename = Path.GetFileName(file);
+
+                UpdateProgressBar(filename, i, files.Length);
+
+                if (HasText(file, search))
                 {
-                    result.Add(found);
+                    result.Add(file);
                 }
             }
 
@@ -117,28 +137,30 @@ namespace CommonEditor
             return result.ToArray();
         }
 
-        private static Object GetSelection(string file, string search)
+        private static bool HasText(string filepath, string search)
         {
-            using var reader = new StreamReader(file);
+            using var reader = new StreamReader(filepath);
 
             string line;
             while ((line = reader.ReadLine()) != null)
             {
                 if (line.Contains(search))
                 {
-                    return AssetDatabase.LoadAssetAtPath<Object>(file);
+                    return true;
                 }
             }
 
-            return null;
+            return false;
         }
 
-        private static void UpdateProgressBar(float progress)
+        private static void UpdateProgressBar(string filename, int current, int count)
         {
             const string PROGRESS_TITLE = "Dependency searcher";
-            const string PROGRESS_INFO = "Searching...";
+            const string PROGRESS_INFO_FORMAT = "Checking {0} ({1}/{2})";
 
-            EditorUtility.DisplayProgressBar(PROGRESS_TITLE, PROGRESS_INFO, progress);
+            var progress = current * 1.0f / count;
+            var progressInfo = string.Format(PROGRESS_INFO_FORMAT, filename, current, count);
+            EditorUtility.DisplayProgressBar(PROGRESS_TITLE, progressInfo, progress);
         }
 
         private static void HideProgressBar()
@@ -146,12 +168,22 @@ namespace CommonEditor
             EditorUtility.ClearProgressBar();
         }
 
-        private static void ShowNotFoundPopup(string[] extensions)
+        private static void ShowNoFilesFoundPopup(string[] extensions)
         {
             const string DIALOG_TITLE = "Dependency searcher";
             const string DIALOG_OK = "Ok";
 
-            var dialogMessage = $"No dependency found in files with extensions '{string.Join(", ", extensions)}'";
+            var dialogMessage = $"No files found with extensions '{extensions.Join(", ")}'";
+
+            EditorUtility.DisplayDialog(DIALOG_TITLE, dialogMessage, DIALOG_OK);
+        }
+
+        private static void ShowNoDependenciesFoundPopup(int count, string[] extensions)
+        {
+            const string DIALOG_TITLE = "Dependency searcher";
+            const string DIALOG_OK = "Ok";
+
+            var dialogMessage = $"No dependencies found in {count} files with extensions '{extensions.Join(", ")}'";
 
             EditorUtility.DisplayDialog(DIALOG_TITLE, dialogMessage, DIALOG_OK);
         }

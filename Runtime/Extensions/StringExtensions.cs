@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace Common
@@ -298,22 +297,22 @@ namespace Common
             return Regex.Split(self, @"(?<!^)(?=[A-Z])");
         }
 
-        public static string Join(this IList<string> self, char separator)
+        public static string Join(this string[] self, char separator)
         {
             return string.Join(separator, self);
         }
 
-        public static string Join(this IList<string> self, char separator, int startIndex, int count)
+        public static string Join(this string[] self, char separator, int startIndex, int count)
         {
             return string.Join(separator, self, startIndex, count);
         }
 
-        public static string Join(this IList<string> self, string separator)
+        public static string Join(this string[] self, string separator)
         {
             return string.Join(separator, self);
         }
 
-        public static string Join(this IList<string> self, string separator, int startIndex, int count)
+        public static string Join(this string[] self, string separator, int startIndex, int count)
         {
             return string.Join(separator, self, startIndex, count);
         }
