@@ -40,6 +40,27 @@ namespace Common
             return position;
         }
 
+        public static int GetActiveSiblingIndex(this Transform self)
+        {
+            var parent = self.parent;
+            var childCount = parent.childCount;
+            for (int i = 0, result = 0; i < childCount; ++i)
+            {
+                var child = parent.GetChild(i);
+
+                if (child == self)
+                {
+                    return result;
+                }
+
+                if (child.gameObject.activeSelf)
+                {
+                    ++result;
+                }
+            }
+            return -1;
+        }
+
         /// <summary> Get <see cref="Transform"/> enumerator going down in hierarchy, including self </summary>
         public static IEnumerable<Transform> GetDownwardEnumerator(this Transform self)
         {
