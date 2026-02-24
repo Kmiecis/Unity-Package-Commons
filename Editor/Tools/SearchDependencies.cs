@@ -90,7 +90,7 @@ namespace CommonEditor
                 var filepath = filteredFiles[i];
                 selections[i] = AssetDatabase.LoadAssetAtPath<Object>(filepath);
 
-                resultLog.Append(filepath);
+                resultLog.Append(filepath).Append('\n');
             }
 
             Debug.LogWarning(resultLog);
