@@ -1,7 +1,9 @@
 ﻿using Common;
 using System;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace CommonEditor
 {
@@ -9,22 +11,48 @@ namespace CommonEditor
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (property.propertyType == SerializedPropertyType.ObjectReference &&
-                property.objectReferenceValue == null)
+            var target = (Component)property.serializedObject.targetObject;
+
+            var chain = property.GetValueChain().ToArray();
+            var parent = chain[^2];
+
+            var type = fieldInfo.FieldType;
+            if (type.IsArray)
             {
-                var target = (Component)property.GetTargetObject();
-                var type = fieldInfo.FieldType;
+                var array = (Array)fieldInfo.GetValue(parent);
+                if (array.Length == 1)
+                {
+                    var current = (Object)array.GetValue(0);
+                    if (current == null)
+                    {
+                        type = type.GetElementType();
 
-                var value = GetComponent(target, type);
-                property.serializedObject.Update();
-                property.objectReferenceValue = value;
-                property.serializedObject.ApplyModifiedProperties();
+                        var components = GetComponents(target, type);
+                        var instances = Array.CreateInstance(type, components.Length);
+                        Array.Copy(components, instances, instances.Length);
+
+                        fieldInfo.SetValue(parent, instances);
+                    }
+                }
+                
             }
+            else
+            {
+                var current = (Object)fieldInfo.GetValue(parent);
+                if (current == null)
+                {
+                    var component = GetComponent(target, type);
 
+                    fieldInfo.SetValue(parent, component);
+                }
+            }
+            
             EditorGUI.PropertyField(position, property, label, true);
         }
 
         protected abstract Component GetComponent(Component target, Type type);
+
+        protected abstract Component[] GetComponents(Component target, Type type);
     }
 
     [CustomPropertyDrawer(typeof(SearchComponentAttribute))]
@@ -34,23 +62,44 @@ namespace CommonEditor
         {
             return target.GetComponent(type);
         }
+
+        protected override Component[] GetComponents(Component target, Type type)
+        {
+            return target.GetComponents(type);
+        }
     }
 
     [CustomPropertyDrawer(typeof(SearchComponentInChildrenAttribute))]
     public class SearchComponentInChildrenDrawer : ASearchComponentDrawer
     {
+        protected new SearchComponentInChildrenAttribute attribute
+            => (SearchComponentInChildrenAttribute)base.attribute;
+
         protected override Component GetComponent(Component target, Type type)
         {
-            return target.GetComponentInChildren(type);
+            return target.GetComponentInChildren(type, attribute.includeInactive);
+        }
+
+        protected override Component[] GetComponents(Component target, Type type)
+        {
+            return target.GetComponentsInChildren(type, attribute.includeInactive);
         }
     }
 
     [CustomPropertyDrawer(typeof(SearchComponentInParentAttribute))]
     public class SearchComponentInParentDrawer : ASearchComponentDrawer
     {
+        protected new SearchComponentInParentAttribute attribute
+            => (SearchComponentInParentAttribute)base.attribute;
+
         protected override Component GetComponent(Component target, Type type)
         {
-            return target.GetComponentInParent(type);
+            return target.GetComponentInParent(type, attribute.includeInactive);
+        }
+
+        protected override Component[] GetComponents(Component target, Type type)
+        {
+            return target.GetComponentsInParent(type, attribute.includeInactive);
         }
     }
 }
