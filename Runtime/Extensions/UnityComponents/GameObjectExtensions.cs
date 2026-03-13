@@ -145,5 +145,12 @@ namespace Common
                 child.gameObject.layer = layer;
             }
         }
+
+        public static bool ToggleActive(this GameObject self)
+        {
+            var toggle = !self.activeSelf;
+            self.SetActive(toggle);
+            return toggle;
+        }
     }
 }

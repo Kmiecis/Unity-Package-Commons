@@ -32,6 +32,8 @@ namespace CommonEditor
                         Array.Copy(components, instances, instances.Length);
 
                         fieldInfo.SetValue(parent, instances);
+
+                        property.serializedObject.ApplyModifiedProperties();
                     }
                 }
                 
@@ -44,6 +46,8 @@ namespace CommonEditor
                     var component = GetComponent(target, type);
 
                     fieldInfo.SetValue(parent, component);
+
+                    property.serializedObject.ApplyModifiedProperties();
                 }
             }
             
