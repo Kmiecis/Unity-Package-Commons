@@ -2,7 +2,7 @@ using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common.Mathematics
+namespace Common
 {
     [Serializable]
     public struct Range3Int : IEquatable<Range3Int>
@@ -35,34 +35,34 @@ namespace Common.Mathematics
             return new Range3(r.min, r.max);
         }
 
-        public Vector3 Center
+        public readonly Vector3 Center
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return max.Add(min).Mul(0.5f); }
+            get => max.Add(min).Mul(0.5f);
         }
 
-        public Vector3Int Extents
+        public readonly Vector3Int Extents
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return max.Sub(min); }
+            get => max.Sub(min);
         }
 
-        public int Width
+        public readonly int Width
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return max.x - min.x; }
+            get => max.x - min.x;
         }
 
-        public int Height
+        public readonly int Height
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return max.y - min.y; }
+            get => max.y - min.y;
         }
 
-        public int Depth
+        public readonly int Depth
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return max.z - min.z; }
+            get => max.z - min.z;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -97,7 +97,7 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Contains(int x, int y, int z)
+        public readonly bool Contains(int x, int y, int z)
         {
             return (
                 min.x <= x && x <= max.x &&
@@ -107,13 +107,13 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Contains(Vector3Int v)
+        public readonly bool Contains(Vector3Int v)
         {
             return Contains(v.x, v.y, v.z);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Contains(Vector3Int otherMin, Vector3Int otherMax)
+        public readonly bool Contains(Vector3Int otherMin, Vector3Int otherMax)
         {
             return (
                 Mathx.IsLesserOrEqual(min, otherMin) &&
@@ -122,13 +122,13 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Contains(Range3Int other)
+        public readonly bool Contains(Range3Int other)
         {
             return Contains(other.min, other.max);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Overlaps(Vector3Int otherMin, Vector3Int otherMax)
+        public readonly bool Overlaps(Vector3Int otherMin, Vector3Int otherMax)
         {
             return (
                 Mathx.IsLesserOrEqual(min, otherMax) &&
@@ -137,13 +137,13 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Overlaps(Range3Int other)
+        public readonly bool Overlaps(Range3Int other)
         {
             return Overlaps(other.min, other.max);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Range3Int Intersection(Range3Int other)
+        public readonly Range3Int Intersection(Range3Int other)
         {
             other.min = Mathx.Max(min, other.min);
             other.max = Mathx.Min(max, other.max);
@@ -157,7 +157,22 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(Range3Int other)
+        public static bool operator ==(Range3Int l, Range3Int r)
+        {
+            return (
+                l.min == r.min &&
+                l.max == r.max
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(Range3Int l, Range3Int r)
+        {
+            return !(l == r);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public readonly bool Equals(Range3Int other)
         {
             return (
                 Mathx.IsEqual(min, other.min) &&
@@ -165,12 +180,12 @@ namespace Common.Mathematics
             );
         }
 
-        public override bool Equals(object obj)
+        public override readonly bool Equals(object obj)
         {
             return obj is Range3Int other && Equals(other);
         }
 
-        public override int GetHashCode()
+        public override readonly int GetHashCode()
         {
             return (
                 min.GetHashCode() ^
@@ -178,7 +193,7 @@ namespace Common.Mathematics
             );
         }
 
-        public override string ToString()
+        public override readonly string ToString()
         {
             return string.Format("({0}, {1})", min, max);
         }

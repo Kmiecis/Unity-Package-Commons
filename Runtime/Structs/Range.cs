@@ -2,7 +2,7 @@ using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common.Mathematics
+namespace Common
 {
     [Serializable]
     public struct Range : IEquatable<Range>
@@ -31,16 +31,16 @@ namespace Common.Mathematics
             return ri;
         }
 
-        public float Center
+        public readonly float Center
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return (max + min) * 0.5f; }
+            get => (max + min) * 0.5f;
         }
 
-        public float Length
+        public readonly float Length
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return max - min; }
+            get => max - min;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -64,37 +64,37 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Contains(float f)
+        public readonly bool Contains(float f)
         {
             return min <= f && f <= max;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Contains(float otherMin, float otherMax)
+        public readonly bool Contains(float otherMin, float otherMax)
         {
             return min <= otherMin && otherMax <= max;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Contains(Range other)
+        public readonly bool Contains(Range other)
         {
             return Contains(other.min, other.max);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Overlaps(float otherMin, float otherMax)
+        public readonly bool Overlaps(float otherMin, float otherMax)
         {
             return min <= otherMax && otherMin <= max;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Overlaps(Range other)
+        public readonly bool Overlaps(Range other)
         {
             return Overlaps(other.min, other.max);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Range Intersection(Range other)
+        public readonly Range Intersection(Range other)
         {
             Range r;
             r.min = Math.Max(min, other.min);
@@ -109,20 +109,35 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(Range other)
+        public static bool operator ==(Range l, Range r)
         {
             return (
-                Mathx.IsEqual(min, other.min) &&
-                Mathx.IsEqual(max, other.max)
+                l.min == r.min &&
+                l.max == r.max
             );
         }
 
-        public override bool Equals(object obj)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(Range l, Range r)
+        {
+            return !(l == r);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public readonly bool Equals(Range other)
+        {
+            return (
+                Mathf.Approximately(min, other.min) &&
+                Mathf.Approximately(max, other.max)
+            );
+        }
+
+        public override readonly bool Equals(object obj)
         {
             return obj is Range other && Equals(other);
         }
 
-        public override int GetHashCode()
+        public override readonly int GetHashCode()
         {
             return (
                 min.GetHashCode() ^
@@ -130,12 +145,12 @@ namespace Common.Mathematics
             );
         }
 
-        public override string ToString()
+        public override readonly string ToString()
         {
             return ToString("F2");
         }
 
-        public string ToString(string format)
+        public readonly string ToString(string format)
         {
             return string.Format("({0}, {1})", min.ToString(format), max.ToString(format));
         }

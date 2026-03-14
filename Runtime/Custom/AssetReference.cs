@@ -37,10 +37,7 @@ namespace Common
 
         public string FullPath
         {
-            get
-            {
-                return string.Concat(Path, Extension);
-            }
+            get => string.Concat(Path, Extension);
         }
 
         public string Path
@@ -67,34 +64,22 @@ namespace Common
 
         public string Name
         {
-            get
-            {
-                return System.IO.Path.GetFileName(Path);
-            }
+            get => System.IO.Path.GetFileName(Path);
         }
 
         public bool IsInResources
         {
-            get
-            {
-                return Path.Contains(RESOURCES);
-            }
+            get => Path.Contains(RESOURCES);
         }
 
         public string FullResourcePath
         {
-            get
-            {
-                return string.Concat(ResourcePath, Extension);
-            }
+            get => string.Concat(ResourcePath, Extension);
         }
 
         public string ResourcePath
         {
-            get
-            {
-                return UPath.GetPathFrom(Path, RESOURCES);
-            }
+            get => UPath.GetPathFrom(Path, RESOURCES);
         }
 
 #if UNITY_EDITOR

@@ -1,7 +1,7 @@
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common.Mathematics
+namespace Common
 {
     public static partial class Mathx
     {

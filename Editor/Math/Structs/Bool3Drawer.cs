@@ -1,7 +1,7 @@
-﻿using Common.Mathematics;
+﻿using Common;
 using UnityEditor;
 
-namespace CommonEditor.Mathematics
+namespace CommonEditor
 {
     [CustomPropertyDrawer(typeof(Bool3))]
     public class Bool3Drawer : AHorizontalPropertyDrawer

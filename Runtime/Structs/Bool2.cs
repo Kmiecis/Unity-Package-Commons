@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.CompilerServices;
 
-namespace Common.Mathematics
+namespace Common
 {
     [Serializable]
     public struct Bool2 : IEquatable<Bool2>
@@ -131,7 +131,7 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Any()
+        public readonly bool Any()
         {
             return (
                 this.x ||
@@ -140,7 +140,7 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool All()
+        public readonly bool All()
         {
             return (
                 this.x &&
@@ -149,7 +149,7 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(Bool2 other)
+        public readonly bool Equals(Bool2 other)
         {
             return (
                 this.x == other.x &&
@@ -158,13 +158,13 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override bool Equals(object obj)
+        public override readonly bool Equals(object obj)
         {
             return obj is Bool2 && Equals((Bool2)obj);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override int GetHashCode()
+        public override readonly int GetHashCode()
         {
             return (
                 x.GetHashCode() |
@@ -173,7 +173,7 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override string ToString()
+        public override readonly string ToString()
         {
             return string.Format("({0}, {1})", x, y);
         }

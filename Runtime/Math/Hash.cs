@@ -1,8 +1,8 @@
-namespace Common.Mathematics
+namespace Common
 {
-    public static class Hashes
+    public static class Hash
     {
-        public static int ToHashCode(params object[] objects)
+        public static int Compute(params object[] objects)
         {
             unchecked
             {

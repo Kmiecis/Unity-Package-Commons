@@ -2,7 +2,6 @@ using UnityEngine;
 
 namespace Common.Inputs
 {
-    [RequireComponent(typeof(Camera))]
     [AddComponentMenu(nameof(Common) + "/" + nameof(Inputs) + "/Mouse System")]
     public abstract class MouseSystem : MonoBehaviour
     {

@@ -2,119 +2,109 @@ using System;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-namespace Common.Mathematics
+namespace Common
 {
     [Serializable]
-    public struct Range3 : IEquatable<Range3>
+    public struct Range2Int : IEquatable<Range2Int>
     {
-        public Vector3 min;
-        public Vector3 max;
+        public Vector2Int min;
+        public Vector2Int max;
 
-        public static readonly Range3 Zero;
-        public static readonly Range3 One = new Range3(Vector3.zero, Vector3.one);
-        public static readonly Range3 Max = new Range3(Vector3.one * float.MinValue, Vector3.one * float.MaxValue);
-        public static readonly Range3 Empty = new Range3(Vector3.one * float.MaxValue, Vector3.one * float.MinValue);
-        
+        public static readonly Range2Int Zero;
+        public static readonly Range2Int One = new Range2Int(Vector2Int.zero, Vector2Int.one);
+        public static readonly Range2Int Max = new Range2Int(Vector2Int.one * int.MinValue, Vector2Int.one * int.MaxValue);
+        public static readonly Range2Int Empty = new Range2Int(Vector2Int.one * int.MaxValue, Vector2Int.one * int.MinValue);
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Range3(Vector3 min, Vector3 max)
+        public Range2Int(Vector2Int min, Vector2Int max)
         {
             this.min = min;
             this.max = max;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Range3(float minX, float minY, float minZ, float maxX, float maxY, float maxZ) :
-            this(new Vector3(minX, minY, minZ), new Vector3(maxX, maxY, maxZ))
+        public Range2Int(int minX, int minY, int maxX, int maxY)
         {
+            this.min = new Vector2Int(minX, minY);
+            this.max = new Vector2Int(maxX, maxY);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static explicit operator Range3Int(Range3 r)
+        public static implicit operator Range2(Range2Int r)
         {
-            Range3Int ri;
-            ri.min = Mathx.RoundToInt(r.min);
-            ri.max = Mathx.RoundToInt(r.max);
-            return ri;
+            return new Range2(r.min, r.max);
         }
 
-        public Vector3 Center
+        public readonly Vector2 Center
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return max.Add(min).Mul(0.5f); }
+            get => max.Add(min).Mul(0.5f);
         }
 
-        public Vector3 Extents
+        public readonly Vector2Int Size
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return max.Sub(min); }
+            get => max.Sub(min);
         }
 
-        public float Width
+        public readonly int Width
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return max.x - min.x; }
+            get => max.x - min.x;
         }
 
-        public float Height
+        public readonly int Height
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return max.y - min.y; }
-        }
-
-        public float Depth
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get { return max.z - min.z; }
+            get => max.y - min.y;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Include(float x, float y, float z)
+        public void Include(int x, int y)
         {
             min.x = Math.Min(min.x, x);
             min.y = Math.Min(min.y, y);
-            min.z = Math.Min(min.z, z);
 
             max.x = Math.Max(max.x, x);
             max.y = Math.Max(max.y, y);
-            max.z = Math.Max(max.z, z);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Include(Vector3 v)
+        public void Include(Vector2Int v)
         {
-            Include(v.x, v.y, v.z);
+            Include(v.x, v.y);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Include(Vector3 otherMin, Vector3 otherMax)
+        public void Include(Vector2Int otherMin, Vector2Int otherMax)
         {
             min = Mathx.Min(min, otherMin);
             max = Mathx.Max(max, otherMax);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Include(Range3 other)
+        public void Include(Range2Int other)
         {
             Include(other.min, other.max);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Contains(float x, float y, float z)
+        public readonly bool Contains(int x, int y)
         {
             return (
                 min.x <= x && x <= max.x &&
-                min.y <= y && y <= max.y &&
-                min.z <= z && z <= max.z
+                min.y <= y && y <= max.y
             );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Contains(Vector3 v)
+        public readonly bool Contains(Vector2Int v)
         {
-            return Contains(v.x, v.y, v.z);
+            return Contains(v.x, v.y);
         }
 
-        public bool Contains(Vector3 otherMin, Vector3 otherMax)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public readonly bool Contains(Vector2Int otherMin, Vector2Int otherMax)
         {
             return (
                 Mathx.IsLesserOrEqual(min, otherMin) &&
@@ -123,13 +113,13 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Contains(Range3 other)
+        public readonly bool Contains(Range2Int other)
         {
             return Contains(other.min, other.max);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Overlaps(Vector3 otherMin, Vector3 otherMax)
+        public readonly bool Overlaps(Vector2Int otherMin, Vector2Int otherMax)
         {
             return (
                 Mathx.IsLesserOrEqual(min, otherMax) &&
@@ -138,13 +128,13 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Overlaps(Range3 other)
+        public readonly bool Overlaps(Range2Int other)
         {
             return Overlaps(other.min, other.max);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Range3 Intersection(Range3 other)
+        public readonly Range2Int Intersection(Range2Int other)
         {
             other.min = Mathx.Max(min, other.min);
             other.max = Mathx.Min(max, other.max);
@@ -158,7 +148,22 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public bool Equals(Range3 other)
+        public static bool operator ==(Range2Int l, Range2Int r)
+        {
+            return (
+                l.min == r.min &&
+                l.max == r.max
+            );
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static bool operator !=(Range2Int l, Range2Int r)
+        {
+            return !(l == r);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public readonly bool Equals(Range2Int other)
         {
             return (
                 Mathx.IsEqual(min, other.min) &&
@@ -166,12 +171,12 @@ namespace Common.Mathematics
             );
         }
 
-        public override bool Equals(object obj)
+        public override readonly bool Equals(object obj)
         {
-            return obj is Range3 other && Equals(other);
+            return obj is Range2Int other && Equals(other);
         }
 
-        public override int GetHashCode()
+        public override readonly int GetHashCode()
         {
             return (
                 min.GetHashCode() ^
@@ -179,7 +184,7 @@ namespace Common.Mathematics
             );
         }
 
-        public override string ToString()
+        public override readonly string ToString()
         {
             return string.Format("({0}, {1})", min, max);
         }
