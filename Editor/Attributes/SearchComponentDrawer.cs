@@ -33,7 +33,8 @@ namespace CommonEditor
 
                         fieldInfo.SetValue(parent, instances);
 
-                        property.serializedObject.ApplyModifiedProperties();
+                        EditorUtility.SetDirty(target);
+                        AssetDatabase.SaveAssetIfDirty(target);
                     }
                 }
                 
@@ -47,7 +48,8 @@ namespace CommonEditor
 
                     fieldInfo.SetValue(parent, component);
 
-                    property.serializedObject.ApplyModifiedProperties();
+                    EditorUtility.SetDirty(target);
+                    AssetDatabase.SaveAssetIfDirty(target);
                 }
             }
             
