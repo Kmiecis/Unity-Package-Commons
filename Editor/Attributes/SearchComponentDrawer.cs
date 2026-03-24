@@ -26,30 +26,37 @@ namespace CommonEditor
                     if (current == null)
                     {
                         type = type.GetElementType();
+                        if (typeof(Component).IsAssignableFrom(type))
+                        {
+                            var components = GetComponents(target, type);
+                            if (components.Length > 0)
+                            {
+                                var instances = Array.CreateInstance(type, components.Length);
+                                Array.Copy(components, instances, instances.Length);
 
-                        var components = GetComponents(target, type);
-                        var instances = Array.CreateInstance(type, components.Length);
-                        Array.Copy(components, instances, instances.Length);
+                                fieldInfo.SetValue(parent, instances);
 
-                        fieldInfo.SetValue(parent, instances);
-
-                        EditorUtility.SetDirty(target);
-                        AssetDatabase.SaveAssetIfDirty(target);
+                                EditorUtility.SetDirty(target);
+                            }
+                        }
                     }
                 }
-                
             }
             else
             {
-                var current = (Object)fieldInfo.GetValue(parent);
-                if (current == null)
+                if (typeof(Component).IsAssignableFrom(type))
                 {
-                    var component = GetComponent(target, type);
+                    var current = (Object)fieldInfo.GetValue(parent);
+                    if (current == null)
+                    {
+                        var component = GetComponent(target, type);
+                        if (component != null)
+                        {
+                            fieldInfo.SetValue(parent, component);
 
-                    fieldInfo.SetValue(parent, component);
-
-                    EditorUtility.SetDirty(target);
-                    AssetDatabase.SaveAssetIfDirty(target);
+                            EditorUtility.SetDirty(target);
+                        }
+                    }
                 }
             }
             
