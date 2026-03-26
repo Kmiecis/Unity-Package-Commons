@@ -18,6 +18,7 @@ namespace CommonEditor
         private const string MESH = ".mesh";
         private const string PNG = ".png";
         private const string PREFAB = ".prefab";
+        private const string RENDER_TEXTURE = ".renderTexture";
         private const string SCENE = ".unity";
         private const string SCRIPT = ".cs";
         private const string SHADER = ".shader";
@@ -36,6 +37,7 @@ namespace CommonEditor
             { MATERIAL, new string[] { ASSET, PREFAB } },
             { PNG, new string[] { ASSET, MATERIAL, PREFAB, SPRITEATLAS } },
             { PREFAB, new string[] { ASSET, PREFAB, SCENE } },
+            { RENDER_TEXTURE, new string[] { ASSET, MATERIAL, PREFAB } },
             { SCRIPT, new string[] { ASSET, PREFAB } },
             { SHADER, new string[] { MATERIAL } },
             { SHADERGRAPH, new string[] { MATERIAL } },
@@ -55,7 +57,7 @@ namespace CommonEditor
             var assetPath = AssetDatabase.GetAssetPath(selection);
             var assetExtension = Path.GetExtension(assetPath);
 
-            var searchExtensions = Extensions[assetExtension];
+            var searchExtensions = Extensions.GetOrDefault(assetExtension);
             if (searchExtensions == null)
             {
                 Debug.LogError($"No search extension found for given selection extension '{assetExtension}'");
