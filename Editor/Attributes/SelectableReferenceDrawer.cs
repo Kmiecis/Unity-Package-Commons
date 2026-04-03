@@ -9,8 +9,17 @@ namespace CommonEditor
     [CustomPropertyDrawer(typeof(SelectableReferenceAttribute))]
     public class SelectableReferenceDrawer : BasePropertyDrawer<SelectableReferenceAttribute>
     {
+        private static readonly Dictionary<int, object> _references;
+
+        static SelectableReferenceDrawer()
+        {
+            _references = new Dictionary<int, object>();
+        }
+
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
+            FixDuplicates(property);
+
             if (IsDrawerValid(property))
             {
                 DrawDropdown(position, property, label);
@@ -133,6 +142,40 @@ namespace CommonEditor
                 return attribute.name;
             }
             return type.Name;
+        }
+
+        private void FixDuplicates(SerializedProperty property)
+        {
+            var current = property.managedReferenceValue;
+            if (current == null)
+                return;
+
+            int hashCode = property.GetHashCodeForPropertyPath();
+            if (_references.ContainsKey(hashCode))
+                return;
+
+            if (HasDuplicate(current))
+            {
+                var recreated = Activator.CreateInstance(current.GetType());
+                EditorUtility.CopySerializedManagedFieldsOnly(current, recreated);
+                current = recreated;
+
+                property.managedReferenceValue = current;
+            }
+
+            _references.Add(hashCode, current);
+        }
+
+        private static bool HasDuplicate(object value)
+        {
+            foreach (var entry in _references)
+            {
+                if (Equals(entry.Value, value))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
