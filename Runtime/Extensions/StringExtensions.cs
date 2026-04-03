@@ -445,6 +445,11 @@ namespace Common
             return $"<noparse>{self}</noparse>";
         }
 
+        public static string RichVerticalOffset(this string self, int offset)
+        {
+            return $"<voffset={offset}>{self}</voffset>";
+        }
+
         public static string RichRotate(this string self, int angle)
         {
             return $"<rotate=\"{angle}\">{self}</rotate>";
@@ -453,6 +458,11 @@ namespace Common
         public static string RichSize(this string self, int size)
         {
             return $"<size={size}>{self}</size>";
+        }
+
+        public static string RichSize(this string self, float percentage)
+        {
+            return $"<size={percentage * 100}%>{self}</size>";
         }
 
         public static string RichSpace(this string self, float space)
