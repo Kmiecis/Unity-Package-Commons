@@ -126,6 +126,10 @@ namespace CommonEditor
         {
             if (type.TryGetCustomAttribute<NamedReferenceAttribute>(out var attribute))
             {
+                if (attribute.path != null)
+                {
+                    return attribute.path + " - " + attribute.name;
+                }
                 return attribute.name;
             }
             return type.Name;
