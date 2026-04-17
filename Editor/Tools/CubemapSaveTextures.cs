@@ -7,8 +7,8 @@ namespace CommonEditor
 {
     public static partial class CubemapTools
     {
-        [MenuItem("Assets/Commons/Cubemap/Save Textures")]
-        public static void CubemapSaveTextures()
+        [MenuItem("Assets/Commons/Cubemap/Extract Textures")]
+        public static void CubemapExtractTextures()
         {
             const int CUBEMAP_FACE_COUNT = 6;
 

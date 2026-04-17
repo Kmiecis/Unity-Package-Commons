@@ -1080,9 +1080,8 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Div(float f, Vector2 v)
         {
-            var e = 1 / f;
-            v.x *= e;
-            v.y *= e;
+            v.x = f / v.x;
+            v.y = f / v.y;
             return v;
         }
 
@@ -1098,9 +1097,8 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Div(int i, Vector2 v)
         {
-            var e = 1.0f / i;
-            v.x *= e;
-            v.y *= e;
+            v.x = i / v.x;
+            v.y = i / v.y;
             return v;
         }
 
@@ -1125,10 +1123,9 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Div(float f, Vector2Int v)
         {
-            var e = 1 / f;
             Vector2 r;
-            r.x = v.x * e;
-            r.y = v.y * e;
+            r.x = f / v.x;
+            r.y = f / v.y;
             return r;
         }
 
@@ -1143,8 +1140,8 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Div(int i, Vector2Int v)
         {
-            v.x /= i;
-            v.y /= i;
+            v.x = i / v.x;
+            v.y = i / v.y;
             return v;
         }
 
@@ -1170,10 +1167,9 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Div(float f, Vector3 v)
         {
-            var e = 1 / f;
-            v.x *= e;
-            v.y *= e;
-            v.z *= e;
+            v.x = f / v.x;
+            v.y = f / v.y;
+            v.z = f / v.z;
             return v;
         }
 
@@ -1190,10 +1186,9 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Div(int i, Vector3 v)
         {
-            var e = 1.0f / i;
-            v.x *= e;
-            v.y *= e;
-            v.z *= e;
+            v.x = i / v.x;
+            v.y = i / v.y;
+            v.z = i / v.z;
             return v;
         }
 
@@ -1220,11 +1215,10 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Div(float f, Vector3Int v)
         {
-            var e = 1 / f;
             Vector3 r;
-            r.x = v.x * e;
-            r.y = v.y * e;
-            r.z = v.z * e;
+            r.x = f / v.x;
+            r.y = f / v.y;
+            r.z = f / v.z;
             return r;
         }
 
@@ -1240,9 +1234,9 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Div(int i, Vector3Int v)
         {
-            v.x /= i;
-            v.y /= i;
-            v.z /= i;
+            v.x = i / v.x;
+            v.y = i / v.y;
+            v.z = i / v.z;
             return v;
         }
 
@@ -1270,11 +1264,10 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Div(float f, Vector4 v)
         {
-            var e = 1 / f;
-            v.x *= e;
-            v.y *= e;
-            v.z *= e;
-            v.w *= e;
+            v.x = f / v.x;
+            v.y = f / v.y;
+            v.z = f / v.z;
+            v.w = f / v.w;
             return v;
         }
 
@@ -1292,11 +1285,10 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Div(int i, Vector4 v)
         {
-            var e = 1.0f / i;
-            v.x *= e;
-            v.y *= e;
-            v.z *= e;
-            v.w *= e;
+            v.x = i / v.x;
+            v.y = i / v.y;
+            v.z = i / v.z;
+            v.w = i / v.w;
             return v;
         }
         #endregion
