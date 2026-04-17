@@ -58,9 +58,26 @@ namespace CommonEditor
 
             void OnMenuAdd(object type)
             {
-                var instance = Activator.CreateInstance((Type)type);
+                var instanceType = (Type)type;
+
                 property.serializedObject.Update();
-                property.managedReferenceValue = instance;
+
+                var previous = property.managedReferenceValue;
+                if (previous != null)
+                {
+                    if (previous.GetType() != instanceType)
+                    {
+                        var instance = Activator.CreateInstance(instanceType);
+                        EditorUtility.CopySerializedManagedFieldsOnly(previous, instance);
+                        property.managedReferenceValue = instance;
+                    }
+                }
+                else
+                {
+                    var instance = Activator.CreateInstance(instanceType);
+                    property.managedReferenceValue = instance;
+                }
+
                 property.serializedObject.ApplyModifiedProperties();
             }
         }
