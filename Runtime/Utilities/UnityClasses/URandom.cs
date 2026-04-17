@@ -104,19 +104,12 @@ namespace Common
             return Item(list, list.Count);
         }
 
-        public static T Item<T>(IReadOnlyList<T> list, int min, int max)
+        public static void Items<T>(IList<T> source, IList<T> target)
         {
-            return list[Random.Range(min, max)];
-        }
-
-        public static T Item<T>(IReadOnlyList<T> list, int max)
-        {
-            return Item(list, 0, max);
-        }
-
-        public static T Item<T>(IReadOnlyList<T> list)
-        {
-            return Item(list, list.Count);
+            for (int i = 0; i < target.Count; ++i)
+            {
+                target[i] = Item(source);
+            }
         }
 
         public static void Uniques<T>(IList<T> source, IList<T> target)
