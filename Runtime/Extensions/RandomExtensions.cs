@@ -207,12 +207,19 @@ namespace Common
             return self.NextItem(list, list.Count);
         }
 
-        public static void NextItems<T>(this Random self, IList<T> source, IList<T> target)
+        public static T NextItem<T>(this Random self, IReadOnlyList<T> list, int min, int max)
         {
-            for (int i = 0; i < target.Count; ++i)
-            {
-                target[i] = self.NextItem(source);
-            }
+            return list[self.Next(min, max)];
+        }
+
+        public static T NextItem<T>(this Random self, IReadOnlyList<T> list, int max)
+        {
+            return self.NextItem(list, 0, max);
+        }
+
+        public static T NextItem<T>(this Random self, IReadOnlyList<T> list)
+        {
+            return self.NextItem(list, list.Count);
         }
 
         public static void NextUniques<T>(this Random self, IList<T> source, IList<T> target)
