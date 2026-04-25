@@ -417,6 +417,92 @@ namespace Common
         }
 
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Min(float a, float b, float c)
+        {
+            return Mathf.Min(a, Mathf.Min(b, c));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Min(float a, float b, float c, float d)
+        {
+            return Mathf.Min(a, Mathf.Min(b, Mathf.Min(c, d)));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Min(params float[] vs)
+        {
+            var r = vs[0];
+            for (int i = 1; i < vs.Length; ++i)
+                r = Mathf.Min(r, vs[i]);
+            return r;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Min(int a, int b, int c)
+        {
+            return Mathf.Min(a, Mathf.Min(b, c));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Min(int a, int b, int c, int d)
+        {
+            return Mathf.Min(a, Mathf.Min(b, Mathf.Min(c, d)));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Min(params int[] vs)
+        {
+            var r = vs[0];
+            for (int i = 1; i < vs.Length; ++i)
+                r = Mathf.Min(r, vs[i]);
+            return r;
+        }
+
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Max(float a, float b, float c)
+        {
+            return Mathf.Max(a, Mathf.Max(b, c));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Max(float a, float b, float c, float d)
+        {
+            return Mathf.Max(a, Mathf.Max(b, Mathf.Max(c, d)));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Max(params float[] vs)
+        {
+            var r = vs[0];
+            for (int i = 1; i < vs.Length; ++i)
+                r = Mathf.Max(r, vs[i]);
+            return r;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Max(int a, int b, int c)
+        {
+            return Mathf.Max(a, Mathf.Max(b, c));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Max(int a, int b, int c, int d)
+        {
+            return Mathf.Max(a, Mathf.Max(b, Mathf.Max(c, d)));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Max(params int[] vs)
+        {
+            var r = vs[0];
+            for (int i = 1; i < vs.Length; ++i)
+                r = Mathf.Max(r, vs[i]);
+            return r;
+        }
+
+
         /// <summary> Returns f raised to power p </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Pow(float f, uint p)

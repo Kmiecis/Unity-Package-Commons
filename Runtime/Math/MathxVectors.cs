@@ -1695,6 +1695,27 @@ namespace Common
             return Mod(Mul(Add(Mul(p, v), 1.0f), v), m);
         }
 
+        /// <summary> Returns the minimum of vector parts </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Min(Vector2 v)
+        {
+            return Mathf.Min(v.x, v.y);
+        }
+
+        /// <summary> Returns the minimum of vector parts </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Min(Vector3 v)
+        {
+            return Min(v.x, v.y, v.z);
+        }
+
+        /// <summary> Returns the minimum of vector parts </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Min(Vector4 v)
+        {
+            return Min(v.x, v.y, v.z, v.w);
+        }
+
         /// <summary> Returns the componentwise minimum of two Vector2 vectors </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Min(Vector2 a, Vector2 b)
@@ -1708,8 +1729,17 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Min(Vector2 a, Vector2 b, Vector2 c)
         {
-            a.x = Mathf.Min(a.x, Mathf.Min(b.x, c.x));
-            a.y = Mathf.Min(a.y, Mathf.Min(b.y, c.y));
+            a.x = Min(a.x, b.x, c.x);
+            a.y = Min(a.y, b.y, c.y);
+            return a;
+        }
+
+        /// <summary> Returns the componentwise minimum of four Vector2 vectors </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Min(Vector2 a, Vector2 b, Vector2 c, Vector2 d)
+        {
+            a.x = Min(a.x, b.x, c.x, d.x);
+            a.y = Min(a.y, b.y, c.y, d.y);
             return a;
         }
 
@@ -1755,9 +1785,19 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Min(Vector3 a, Vector3 b, Vector3 c)
         {
-            a.x = Mathf.Min(a.x, Mathf.Min(b.x, c.x));
-            a.y = Mathf.Min(a.y, Mathf.Min(b.y, c.y));
-            a.z = Mathf.Min(a.z, Mathf.Min(b.z, c.z));
+            a.x = Min(a.x, b.x, c.x);
+            a.y = Min(a.y, b.y, c.y);
+            a.z = Min(a.z, b.z, c.z);
+            return a;
+        }
+
+        /// <summary> Returns the componentwise minimum of four Vector3 vectors </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Min(Vector3 a, Vector3 b, Vector3 c, Vector3 d)
+        {
+            a.x = Min(a.x, b.x, c.x, d.x);
+            a.y = Min(a.y, b.y, c.y, d.y);
+            a.z = Min(a.z, b.z, c.z, d.z);
             return a;
         }
 
@@ -1806,10 +1846,21 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Min(Vector4 a, Vector4 b, Vector4 c)
         {
-            a.x = Mathf.Min(a.x, Mathf.Min(b.x, c.x));
-            a.y = Mathf.Min(a.y, Mathf.Min(b.y, c.y));
-            a.z = Mathf.Min(a.z, Mathf.Min(b.z, c.z));
-            a.w = Mathf.Min(a.w, Mathf.Min(b.w, c.w));
+            a.x = Min(a.x, b.x, c.x);
+            a.y = Min(a.y, b.y, c.y);
+            a.z = Min(a.z, b.z, c.z);
+            a.w = Min(a.w, b.w, c.w);
+            return a;
+        }
+
+        /// <summary> Returns the componentwise minimum of four Vector4 vectors </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Min(Vector4 a, Vector4 b, Vector4 c, Vector4 d)
+        {
+            a.x = Min(a.x, b.x, c.x, d.x);
+            a.y = Min(a.y, b.y, c.y, d.y);
+            a.z = Min(a.z, b.z, c.z, d.z);
+            a.w = Min(a.w, b.w, c.w, d.w);
             return a;
         }
 
@@ -1845,6 +1896,20 @@ namespace Common
             return v;
         }
 
+        /// <summary> Returns the minimum of vector parts </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Min(Vector2Int v)
+        {
+            return Mathf.Min(v.x, v.y);
+        }
+
+        /// <summary> Returns the minimum of vector parts </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Min(Vector3Int v)
+        {
+            return Min(v.x, v.y, v.z);
+        }
+
         /// <summary> Returns the componentwise minimum of two Vector2Int vectors </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Min(Vector2Int a, Vector2Int b)
@@ -1858,8 +1923,17 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Min(Vector2Int a, Vector2Int b, Vector2Int c)
         {
-            a.x = Mathf.Min(a.x, Mathf.Min(b.x, c.x));
-            a.y = Mathf.Min(a.y, Mathf.Min(b.y, c.y));
+            a.x = Min(a.x, b.x, c.x);
+            a.y = Min(a.y, b.y, c.y);
+            return a;
+        }
+
+        /// <summary> Returns the componentwise minimum of four Vector2Int vectors </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2Int Min(Vector2Int a, Vector2Int b, Vector2Int c, Vector2Int d)
+        {
+            a.x = Min(a.x, b.x, c.x, d.x);
+            a.y = Min(a.y, b.y, c.y, d.y);
             return a;
         }
 
@@ -1905,9 +1979,19 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Min(Vector3Int a, Vector3Int b, Vector3Int c)
         {
-            a.x = Mathf.Min(a.x, Mathf.Min(b.x, c.x));
-            a.y = Mathf.Min(a.y, Mathf.Min(b.y, c.y));
-            a.z = Mathf.Min(a.z, Mathf.Min(b.z, c.z));
+            a.x = Min(a.x, b.x, c.x);
+            a.y = Min(a.y, b.y, c.y);
+            a.z = Min(a.z, b.z, c.z);
+            return a;
+        }
+
+        /// <summary> Returns the componentwise minimum of four Vector3Int vectors </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int Min(Vector3Int a, Vector3Int b, Vector3Int c, Vector3Int d)
+        {
+            a.x = Min(a.x, b.x, c.x, d.x);
+            a.y = Min(a.y, b.y, c.y, d.y);
+            a.z = Min(a.z, b.z, c.z, d.z);
             return a;
         }
 
@@ -1941,6 +2025,27 @@ namespace Common
             return v;
         }
 
+        /// <summary> Returns the maximum of vector parts </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Max(Vector2 v)
+        {
+            return Mathf.Max(v.x, v.y);
+        }
+
+        /// <summary> Returns the maximum of vector parts </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Max(Vector3 v)
+        {
+            return Max(v.x, v.y, v.z);
+        }
+
+        /// <summary> Returns the maximum of vector parts </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static float Max(Vector4 v)
+        {
+            return Max(v.x, v.y, v.z, v.w);
+        }
+
         /// <summary> Returns the componentwise maximum of two Vector2 vectors </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Max(Vector2 a, Vector2 b)
@@ -1954,8 +2059,17 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2 Max(Vector2 a, Vector2 b, Vector2 c)
         {
-            a.x = Mathf.Max(a.x, Mathf.Max(b.x, c.x));
-            a.y = Mathf.Max(a.y, Mathf.Max(b.y, c.y));
+            a.x = Max(a.x, b.x, c.x);
+            a.y = Max(a.y, b.y, c.y);
+            return a;
+        }
+
+        /// <summary> Returns the componentwise maximum of four Vector2 vectors </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2 Max(Vector2 a, Vector2 b, Vector2 c, Vector2 d)
+        {
+            a.x = Max(a.x, b.x, c.x, d.x);
+            a.y = Max(a.y, b.y, c.y, d.y);
             return a;
         }
 
@@ -2001,9 +2115,19 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Max(Vector3 a, Vector3 b, Vector3 c)
         {
-            a.x = Mathf.Max(a.x, Mathf.Max(b.x, c.x));
-            a.y = Mathf.Max(a.y, Mathf.Max(b.y, c.y));
-            a.z = Mathf.Max(a.z, Mathf.Max(b.z, c.z));
+            a.x = Max(a.x, b.x, c.x);
+            a.y = Max(a.y, b.y, c.y);
+            a.z = Max(a.z, b.z, c.z);
+            return a;
+        }
+
+        /// <summary> Returns the componentwise maximum of four Vector3 vectors </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 Max(Vector3 a, Vector3 b, Vector3 c, Vector3 d)
+        {
+            a.x = Max(a.x, b.x, c.x, d.x);
+            a.y = Max(a.y, b.y, c.y, d.y);
+            a.z = Max(a.z, b.z, c.z, d.z);
             return a;
         }
 
@@ -2052,10 +2176,21 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector4 Max(Vector4 a, Vector4 b, Vector4 c)
         {
-            a.x = Mathf.Max(a.x, Mathf.Max(b.x, c.x));
-            a.y = Mathf.Max(a.y, Mathf.Max(b.y, c.y));
-            a.z = Mathf.Max(a.z, Mathf.Max(b.z, c.z));
-            a.w = Mathf.Max(a.w, Mathf.Max(b.w, c.w));
+            a.x = Max(a.x, b.x, c.x);
+            a.y = Max(a.y, b.y, c.y);
+            a.z = Max(a.z, b.z, c.z);
+            a.w = Max(a.w, b.w, c.w);
+            return a;
+        }
+
+        /// <summary> Returns the componentwise maximum of four Vector4 vectors </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector4 Max(Vector4 a, Vector4 b, Vector4 c, Vector4 d)
+        {
+            a.x = Max(a.x, b.x, c.x, d.x);
+            a.y = Max(a.y, b.y, c.y, d.y);
+            a.z = Max(a.z, b.z, c.z, d.z);
+            a.w = Max(a.w, b.w, c.w, d.w);
             return a;
         }
 
@@ -2091,6 +2226,20 @@ namespace Common
             return v;
         }
 
+        /// <summary> Returns the maximum of vector parts </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Max(Vector2Int v)
+        {
+            return Mathf.Max(v.x, v.y);
+        }
+
+        /// <summary> Returns the maximum of vector parts </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static int Max(Vector3Int v)
+        {
+            return Max(v.x, v.y, v.z);
+        }
+
         /// <summary> Returns the componentwise maximum of two Vector2Int vectors </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Max(Vector2Int a, Vector2Int b)
@@ -2104,8 +2253,17 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector2Int Max(Vector2Int a, Vector2Int b, Vector2Int c)
         {
-            a.x = Mathf.Max(a.x, Mathf.Max(b.x, c.x));
-            a.y = Mathf.Max(a.y, Mathf.Max(b.y, c.y));
+            a.x = Max(a.x, b.x, c.x);
+            a.y = Max(a.y, b.y, c.y);
+            return a;
+        }
+
+        /// <summary> Returns the componentwise maximum of four Vector2Int vectors </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector2Int Max(Vector2Int a, Vector2Int b, Vector2Int c, Vector2Int d)
+        {
+            a.x = Max(a.x, b.x, c.x, d.x);
+            a.y = Max(a.y, b.y, c.y, d.y);
             return a;
         }
 
@@ -2151,9 +2309,19 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int Max(Vector3Int a, Vector3Int b, Vector3Int c)
         {
-            a.x = Mathf.Max(a.x, Mathf.Max(b.x, c.x));
-            a.y = Mathf.Max(a.y, Mathf.Max(b.y, c.y));
-            a.z = Mathf.Max(a.z, Mathf.Max(b.z, c.z));
+            a.x = Max(a.x, b.x, c.x);
+            a.y = Max(a.y, b.y, c.y);
+            a.z = Max(a.z, b.z, c.z);
+            return a;
+        }
+
+        /// <summary> Returns the componentwise maximum of four Vector3Int vectors </summary>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int Max(Vector3Int a, Vector3Int b, Vector3Int c, Vector3Int d)
+        {
+            a.x = Max(a.x, b.x, c.x, d.x);
+            a.y = Max(a.y, b.y, c.y, d.y);
+            a.z = Max(a.z, b.z, c.z, d.z);
             return a;
         }
 
