@@ -5,13 +5,6 @@ namespace Common.Mathematics
 {
     public static class Circles
     {
-        /// <summary> Calculates area of a circle with radius 'r' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Area(float r)
-        {
-            return Mathf.PI * r * r;
-        }
-
         /// <summary> Calculates whether circle with center in 'ac' and radius 'ar' collides with circle with center in 'bc' and radius 'br' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Collides(Vector2 ac, float ar, Vector2 bc, float br)
@@ -20,28 +13,6 @@ namespace Common.Mathematics
             var dy = bc.y - ac.y;
             var sr = ar + br;
             return dx * dx + dy * dy <= sr * sr;
-        }
-
-        /// <summary> Calculates whether point 'p' is within circle with center in 'c' and radius 'r' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool Contains(Vector2 c, float r, Vector2 p)
-        {
-            var d = p - c;
-            return d.x * d.x + d.y * d.y < r * r;
-        }
-
-        /// <summary> Calculates distance from nearest point of circle with center in 'c' and radius 'r' to point 'p' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Distance(Vector2 c, float r, Vector2 p)
-        {
-            return Vector2.Distance(c, p) - r;
-        }
-
-        /// <summary> Calculates perimeter of a circle with radius 'r' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Perimeter(float r)
-        {
-            return 2.0f * Mathf.PI * r;
         }
 
         /// <summary> Calculates normalized point on circle from an angle 'a' </summary>

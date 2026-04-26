@@ -5,13 +5,6 @@ namespace Common.Mathematics
 {
     public static class Spheres
     {
-        /// <summary> Calculates area of a sphere with radius 'r' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Area(float r)
-        {
-            return 4.0f * Mathf.PI * r * r;
-        }
-
         /// <summary> Calculates whether sphere with center in 'ac' and radius 'ar' collides with sphere with center in 'bc' and radius 'br' </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool Collides(Vector3 ac, float ar, Vector3 bc, float br)
@@ -21,21 +14,6 @@ namespace Common.Mathematics
             var dz = bc.z - ac.z;
             var sumr = ar + br;
             return dx * dx + dy * dy + dz * dz <= sumr * sumr;
-        }
-
-        /// <summary> Calculates whether point 'p' is within sphere with center in 'c' and radius 'r' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool Contains(Vector3 c, float r, Vector3 p)
-        {
-            var d = p - c;
-            return d.x * d.x + d.y * d.y + d.z * d.z < r * r;
-        }
-
-        /// <summary> Calculates distance from nearest point of sphere with center in 'c' and radius 'r' to point 'p' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Distance(Vector3 c, float r, Vector3 p)
-        {
-            return Vector3.Distance(c, p) - r;
         }
 
         /// <summary> Calculates normalized point from two angles 'a' and 'b' </summary>
@@ -116,13 +94,6 @@ namespace Common.Mathematics
             c.z = 0.5f * detM14 / detM11;
             r = Mathf.Sqrt(c.x * c.x + c.y * c.y + c.z * c.z - detM15 / detM11);
             return true;
-        }
-
-        /// <summary> Calculates volume of a sphere with radius 'r' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Volume(float r)
-        {
-            return (4.0f / 3.0f) * Mathf.PI * r * r * r;
         }
     }
 }
