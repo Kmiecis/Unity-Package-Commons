@@ -26,10 +26,9 @@ namespace Common.Mathematics
         }
 
         /// <summary> Attempts to calculate circle with center in 'c' and radius 'r' from three points </summary>
-        public static bool TryCreate(Vector2 v0, Vector2 v1, Vector2 v2, out Vector2 c, out float r)
+        public static bool TryCreate(Vector2 v0, Vector2 v1, Vector2 v2, out Circle circle)
         {
-            c = default;
-            r = default;
+            circle = default;
 
             var c1 = new Vector4(v0.x * v0.x + v0.y * v0.y, v1.x * v1.x + v1.y * v1.y, v2.x * v2.x + v2.y * v2.y, 0.0f);
             var c2 = new Vector4(v0.x, v1.x, v2.x, 0.0f);
@@ -50,9 +49,13 @@ namespace Common.Mathematics
             if (Mathx.IsZero(m11))
                 return false;
 
-            c.x = 0.5f * m12 / m11;
-            c.y = -0.5f * m13 / m11;
-            r = Mathf.Sqrt(c.x * c.x + c.y * c.y + m14 / m11);
+            circle.center.x = 0.5f * m12 / m11;
+            circle.center.y = -0.5f * m13 / m11;
+            circle.radius = Mathf.Sqrt(
+                circle.center.x * circle.center.x +
+                circle.center.y * circle.center.y +
+                m14 / m11
+            );
             return true;
         }
     }

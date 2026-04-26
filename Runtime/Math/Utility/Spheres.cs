@@ -29,10 +29,9 @@ namespace Common.Mathematics
         }
 
         /// <summary> Attempts to calculate a sphere with center in 'c' and radius 'r' from four points </summary>
-        public static bool TryCreate(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3, out Vector3 c, out float r)
+        public static bool TryCreate(Vector3 v0, Vector3 v1, Vector3 v2, Vector3 v3, out Sphere sphere)
         {
-            c = default;
-            r = default;
+            sphere = default;
 
             var p = new float[4, 4]
             {
@@ -89,10 +88,15 @@ namespace Common.Mathematics
             }
             float detM15 = Mathx.Determinant(a);
 
-            c.x = 0.5f * detM12 / detM11;
-            c.y = -0.5f * detM13 / detM11;
-            c.z = 0.5f * detM14 / detM11;
-            r = Mathf.Sqrt(c.x * c.x + c.y * c.y + c.z * c.z - detM15 / detM11);
+            sphere.center.x = 0.5f * detM12 / detM11;
+            sphere.center.y = -0.5f * detM13 / detM11;
+            sphere.center.z = 0.5f * detM14 / detM11;
+            sphere.radius = Mathf.Sqrt(
+                sphere.center.x * sphere.center.x +
+                sphere.center.y * sphere.center.y +
+                sphere.center.z * sphere.center.z -
+                detM15 / detM11
+            );
             return true;
         }
     }

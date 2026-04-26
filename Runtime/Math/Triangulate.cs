@@ -23,7 +23,7 @@ namespace Common.Mathematics
                     {
                         var kPoint = points[k];
 
-                        if (Circles.TryCreate(iPoint, jPoint, kPoint, out var c, out var r))
+                        if (Circles.TryCreate(iPoint, jPoint, kPoint, out var circle))
                         {
                             bool contains = false;
                             for (int l = 0; !contains && l < points.Count; ++l)
@@ -33,7 +33,7 @@ namespace Common.Mathematics
                                     continue;
                                 }
 
-                                contains = Circles.Contains(c, r, points[l]);
+                                contains = circle.Contains(points[l]);
                             }
                             
                             if (!contains)
