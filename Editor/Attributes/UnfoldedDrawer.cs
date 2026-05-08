@@ -10,7 +10,7 @@ namespace CommonEditor
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (property.GetChildren().Count() > 0)
+            if (property.GetChildren().Any())
             {
                 if (attribute.labeled)
                 {

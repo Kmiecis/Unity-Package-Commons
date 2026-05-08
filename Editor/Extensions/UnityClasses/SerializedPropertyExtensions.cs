@@ -19,6 +19,14 @@ namespace CommonEditor
             GetHashCodeForPropertyPathInternalMethod = ReflectGetHashCodeForPropertyPathInternal();
         }
 
+        public static SerializedProperty FindPropertyRelativeAny(this SerializedProperty self, string relativePropertyPath)
+        {
+            return (
+                self.FindPropertyRelative(relativePropertyPath) ??
+                self.FindPropertyRelative(relativePropertyPath.AsBackingField())
+            );
+        }
+
         public static bool IsValid(this SerializedProperty self)
         {
             var pointer = (IntPtr)NativePropertyPtrField.GetValue(self);

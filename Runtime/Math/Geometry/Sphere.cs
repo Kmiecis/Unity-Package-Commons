@@ -40,20 +40,20 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly bool Contains(in Vector3 point)
+        public readonly bool Contains(Vector3 point)
         {
             var delta = point - center;
             return delta.x * delta.x + delta.y * delta.y + delta.z * delta.z < radius * radius;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly float Distance(in Vector3 point)
+        public readonly float Distance(Vector3 point)
         {
             return Vector3.Distance(center, point) - radius;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Encapsulate(in Vector3 point)
+        public void Encapsulate(Vector3 point)
         {
             var delta = point - center;
             var distance = delta.magnitude;
@@ -68,7 +68,7 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void Encapsulate(in Sphere other)
+        public void Encapsulate(Sphere other)
         {
             var delta = other.center - this.center;
             var distance = delta.magnitude;
@@ -87,6 +87,31 @@ namespace Common.Mathematics
             var t = (newRadius - this.radius) / distance;
             this.center = this.center + delta * t;
             this.radius = newRadius;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Include(Vector3 point)
+        {
+            var delta = point - center;
+            var distance = delta.magnitude;
+
+            if (radius < distance)
+            {
+                radius = distance;
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Include(Sphere other)
+        {
+            var delta = other.center - this.center;
+            var distance = delta.magnitude;
+
+            var requiredRadius = distance + other.radius;
+            if (this.radius < requiredRadius)
+            {
+                this.radius = requiredRadius;
+            }
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

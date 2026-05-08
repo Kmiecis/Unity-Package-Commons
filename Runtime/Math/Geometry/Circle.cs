@@ -40,14 +40,14 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly bool Contains(in Vector2 point)
+        public readonly bool Contains(Vector2 point)
         {
             var d = point - center;
             return d.x * d.x + d.y * d.y < radius * radius;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public readonly float Distance(in Vector2 point)
+        public readonly float Distance(Vector2 point)
         {
             return Vector2.Distance(center, point) - radius;
         }
