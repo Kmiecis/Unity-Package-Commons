@@ -1,6 +1,7 @@
 using Common;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -22,14 +23,35 @@ namespace CommonEditor
 
             if (IsDrawerValid(property))
             {
-                DrawDropdown(position, property, label);
+                if (property.CountChildren() == 1)
+                {
+                    DrawDropdown(position.AsLabel(), property, label);
 
-                base.OnGUI(position, property, GUIContent.none);
+                    var child = property.GetChildren().First();
+
+                    base.OnGUI(position.AsField(), child, GUIContent.none);
+                }
+                else
+                {
+                    DrawDropdown(position, property, label);
+
+                    base.OnGUI(position, property, GUIContent.none);
+                }
             }
             else
             {
                 base.OnGUI(position, property, label);
             }
+        }
+
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            if (property.CountChildren() == 1)
+            {
+                property = property.GetChildren().First();
+            }
+
+            return base.GetPropertyHeight(property, label);
         }
 
         private void DrawDropdown(Rect position, SerializedProperty property, GUIContent label)

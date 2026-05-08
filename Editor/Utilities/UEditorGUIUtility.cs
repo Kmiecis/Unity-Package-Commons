@@ -7,6 +7,7 @@ namespace CommonEditor
 {
     public static class UEditorGUIUtility
     {
+        public const float SpaceWidth = 2.0f;
         public const float SpaceHeight = 2.0f;
         public const float IndentWidth = 15.0f;
 
