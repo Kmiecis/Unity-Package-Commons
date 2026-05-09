@@ -4,10 +4,14 @@ namespace CommonEditor
 {
     public static class UGUIContent
     {
+        public static readonly GUIContent Empty;
+
         private static readonly GUIContent _TempContent;
 
         static UGUIContent()
         {
+            Empty = new GUIContent(string.Empty);
+
             _TempContent = new GUIContent();
         }
 
