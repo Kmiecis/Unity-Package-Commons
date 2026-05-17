@@ -143,5 +143,23 @@ namespace Common
             }
             return result;
         }
+
+        public static TKey[] ToKeyArray<TKey, TValue>(this Dictionary<TKey, TValue> self)
+        {
+            var result = new TKey[self.Count];
+            var index = 0;
+            foreach (var entry in self)
+                result[index++] = entry.Key;
+            return result;
+        }
+
+        public static TValue[] ToValueArray<TKey, TValue>(this Dictionary<TKey, TValue> self)
+        {
+            var result = new TValue[self.Count];
+            var index = 0;
+            foreach (var entry in self)
+                result[index++] = entry.Value;
+            return result;
+        }
     }
 }
