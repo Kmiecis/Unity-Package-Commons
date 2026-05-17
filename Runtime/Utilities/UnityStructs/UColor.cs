@@ -20,7 +20,7 @@ namespace Common
         }
 
         /// <summary>Converts a hex <see cref="string"/> to a <see cref="Color"/></summary>
-        public static Color Fromhex(string s)
+        public static Color FromHex(string s)
         {
             var split = s.Split(2);
             return new Color(
