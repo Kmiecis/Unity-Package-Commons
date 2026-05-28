@@ -235,3 +235,51 @@ namespace Common
         }
     }
 }
+
+namespace Common.Reflection
+{
+    public static class TypeExtensions
+    {
+        public static void SetField(this object self, string name, object value)
+        {
+            var type = self.GetType();
+            var field = type.GetField(name);
+            field.SetValue(self, value);
+        }
+
+        public static void SetField(this object self, string name, BindingFlags bindingAttr, object value)
+        {
+            var type = self.GetType();
+            var field = type.GetField(name, bindingAttr | BindingFlags.Instance);
+            field.SetValue(self, value);
+        }
+
+        public static void SetProperty(this object self, string name, object value)
+        {
+            var type = self.GetType();
+            var property = type.GetProperty(name);
+            property.SetValue(self, value);
+        }
+
+        public static void SetProperty(this object self, string name, BindingFlags bindingAttr, object value)
+        {
+            var type = self.GetType();
+            var property = type.GetProperty(name, bindingAttr | BindingFlags.Instance);
+            property.SetValue(self, value);
+        }
+
+        public static void InvokeMethod(this object self, string name, params object[] parameters)
+        {
+            var type = self.GetType();
+            var method = type.GetMethod(name);
+            method.Invoke(self, parameters);
+        }
+
+        public static void InvokeMethod(this object self, string name, BindingFlags bindingAttr, params object[] parameters)
+        {
+            var type = self.GetType();
+            var method = type.GetMethod(name, bindingAttr | BindingFlags.Instance);
+            method.Invoke(self, parameters);
+        }
+    }
+}
