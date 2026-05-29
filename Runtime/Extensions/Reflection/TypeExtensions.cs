@@ -240,6 +240,20 @@ namespace Common.Reflection
 {
     public static class TypeExtensions
     {
+        public static T GetField<T>(this object self, string name)
+        {
+            var type = self.GetType();
+            var field = type.GetField(name);
+            return (T)field.GetValue(self);
+        }
+
+        public static T GetField<T>(this object self, string name, BindingFlags bindingAttr)
+        {
+            var type = self.GetType();
+            var field = type.GetField(name, bindingAttr | BindingFlags.Instance);
+            return (T)field.GetValue(self);
+        }
+
         public static void SetField(this object self, string name, object value)
         {
             var type = self.GetType();
@@ -252,6 +266,20 @@ namespace Common.Reflection
             var type = self.GetType();
             var field = type.GetField(name, bindingAttr | BindingFlags.Instance);
             field.SetValue(self, value);
+        }
+
+        public static T GetProperty<T>(this object self, string name)
+        {
+            var type = self.GetType();
+            var property = type.GetProperty(name);
+            return (T)property.GetValue(self);
+        }
+
+        public static T GetProperty<T>(this object self, string name, BindingFlags bindingAttr)
+        {
+            var type = self.GetType();
+            var property = type.GetProperty(name, bindingAttr | BindingFlags.Instance);
+            return (T)property.GetValue(self);
         }
 
         public static void SetProperty(this object self, string name, object value)
@@ -268,18 +296,28 @@ namespace Common.Reflection
             property.SetValue(self, value);
         }
 
-        public static void InvokeMethod(this object self, string name, params object[] parameters)
+        public static object InvokeMethod(this object self, string name, params object[] parameters)
         {
             var type = self.GetType();
             var method = type.GetMethod(name);
-            method.Invoke(self, parameters);
+            return method.Invoke(self, parameters);
         }
 
-        public static void InvokeMethod(this object self, string name, BindingFlags bindingAttr, params object[] parameters)
+        public static object InvokeMethod(this object self, string name, BindingFlags bindingAttr, params object[] parameters)
         {
             var type = self.GetType();
             var method = type.GetMethod(name, bindingAttr | BindingFlags.Instance);
-            method.Invoke(self, parameters);
+            return method.Invoke(self, parameters);
+        }
+
+        public static T InvokeMethod<T>(this object self, string name, params object[] parameters)
+        {
+            return (T)InvokeMethod(self, name, parameters);
+        }
+
+        public static T InvokeMethod<T>(this object self, string name, BindingFlags bindingAttr, params object[] parameters)
+        {
+            return (T)InvokeMethod(self, name, bindingAttr, parameters);
         }
     }
 }

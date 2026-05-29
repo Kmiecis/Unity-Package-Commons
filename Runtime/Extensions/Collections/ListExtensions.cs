@@ -1,3 +1,4 @@
+using Common.Reflection;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -441,8 +442,7 @@ namespace Common
 
         public static T[] GetArray<T>(this List<T> self)
         {
-            var field = self.GetType().GetField("_items", UBinding.NonPublicInstance);
-            return (T[])field.GetValue(self);
+            return self.GetField<T[]>("_items", UBinding.NonPublicInstance);
         }
     }
 }
