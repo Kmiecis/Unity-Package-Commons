@@ -259,29 +259,44 @@ namespace Common
             return (index = Array.FindLastIndex(self, startIndex, count, match)) != -1;
         }
 
-        public static void Sort<T>(this T[] self)
+        public static T[] Sort<T>(this T[] self)
         {
             Array.Sort(self);
+            return self;
         }
 
-        public static void Sort<T>(this T[] self, Comparison<T> comparison)
+        public static T[] Sort<T>(this T[] self, Comparison<T> comparison)
         {
             Array.Sort(self, comparison);
+            return self;
         }
 
-        public static void Sort<T>(this T[] self, IComparer<T> comparer)
+        public static T[] Sort<T>(this T[] self, IComparer<T> comparer)
         {
             Array.Sort(self, comparer);
+            return self;
         }
 
-        public static void Sort<T>(this T[] self, int index, int length)
+        public static T[] Sort<T>(this T[] self, int index)
+        {
+            return Sort(self, index, self.Length);
+        }
+
+        public static T[] Sort<T>(this T[] self, int index, int length)
         {
             Array.Sort(self, index, length);
+            return self;
         }
 
-        public static void Sort<T>(this T[] self, int index, int length, IComparer<T> comparer)
+        public static T[] Sort<T>(this T[] self, int index, IComparer<T> comparer)
+        {
+            return Sort(self, index, self.Length, comparer);
+        }
+
+        public static T[] Sort<T>(this T[] self, int index, int length, IComparer<T> comparer)
         {
             Array.Sort(self, index, length, comparer);
+            return self;
         }
 
         public static void Swap<T>(this T[] self, int a, int b)
