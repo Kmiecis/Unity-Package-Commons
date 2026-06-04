@@ -21,10 +21,8 @@ namespace Common
 
         public virtual bool SetActive(bool value)
         {
-            if (gameObject != null)
-            {
-                gameObject.SetActive(value);
-            }
+            gameObject.SetActive(value);
+
             return value;
         }
 
@@ -56,18 +54,12 @@ namespace Common
 
         public virtual void Remove()
         {
-            if (this != null)
-            {
-                UComponent.Remove(this);
-            }
+            UComponent.Remove(this);
         }
 
         public virtual void Destroy()
         {
-            if (this != null && gameObject != null)
-            {
-                UComponent.Destroy(this);
-            }
+            UComponent.Destroy(this);
         }
     }
 }

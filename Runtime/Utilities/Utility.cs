@@ -17,22 +17,5 @@ namespace Common
             a = b;
             b = t;
         }
-        
-        public static bool TryUpdate<T>(ref T target, T value)
-        {
-            if (!Equals(target, value))
-            {
-                target = value;
-                return true;
-            }
-            return false;
-        }
-
-        public static bool TryCast<T>(object obj, out T cast)
-            where T : class
-        {   // Useful when unable to use: obj is T cast
-            cast = obj as T;
-            return cast != null;
-        }
     }
 }
