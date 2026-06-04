@@ -114,6 +114,11 @@ namespace Common
             }
         }
 
+        public static MethodInfo GetMethod(this Type self, string name, BindingFlags bindingAttr, params Type[] types)
+        {
+            return self.GetMethod(name, bindingAttr, null, types, null);
+        }
+
         public static object GetDefaultValue(this Type type)
         {
             if (type.IsValueType)
