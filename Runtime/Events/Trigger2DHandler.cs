@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace Common
 {
-    [AddComponentMenu(nameof(Common) + "/Trigger2D Handler")]
+    [AddComponentMenu(nameof(Common) + "/Physics/Trigger2D Handler")]
     public class Trigger2DHandler : MonoBehaviour
     {
         [SerializeField] protected UnityEvent<Collider2D> _onTriggerEnter = new UnityEvent<Collider2D>();
