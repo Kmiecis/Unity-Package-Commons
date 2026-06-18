@@ -52,6 +52,16 @@ namespace Common
             }
         }
 
+        public void Enable()
+        {
+            enabled = true;
+        }
+
+        public void Disable()
+        {
+            enabled = false;
+        }
+
         public virtual void Remove()
         {
             UComponent.Remove(this);
