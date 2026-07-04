@@ -259,6 +259,24 @@ namespace Common.Reflection
             return (T)field.GetValue(self);
         }
 
+        public static IEnumerable<T> GetFields<T>(this object self)
+        {
+            var type = self.GetType();
+            var fields = type.GetFields();
+            foreach (var field in fields)
+                if (field.GetValue(self) is T casted)
+                    yield return casted;
+        }
+
+        public static IEnumerable<T> GetFields<T>(this object self, BindingFlags bindingAttr)
+        {
+            var type = self.GetType();
+            var fields = type.GetFields(bindingAttr | BindingFlags.Instance);
+            foreach (var field in fields)
+                if (field.GetValue(self) is T casted)
+                    yield return casted;
+        }
+
         public static void SetField(this object self, string name, object value)
         {
             var type = self.GetType();
@@ -285,6 +303,24 @@ namespace Common.Reflection
             var type = self.GetType();
             var property = type.GetProperty(name, bindingAttr | BindingFlags.Instance);
             return (T)property.GetValue(self);
+        }
+
+        public static IEnumerable<T> GetProperties<T>(this object self)
+        {
+            var type = self.GetType();
+            var properties = type.GetProperties();
+            foreach (var property in properties)
+                if (property.GetValue(self) is T casted)
+                    yield return casted;
+        }
+
+        public static IEnumerable<T> GetProperties<T>(this object self, BindingFlags bindingAttr)
+        {
+            var type = self.GetType();
+            var properties = type.GetProperties(bindingAttr | BindingFlags.Instance);
+            foreach (var property in properties)
+                if (property.GetValue(self) is T casted)
+                    yield return casted;
         }
 
         public static void SetProperty(this object self, string name, object value)
