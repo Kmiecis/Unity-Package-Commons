@@ -13,14 +13,24 @@ namespace Common
             return (int)(self.Subtract(Epoch)).TotalSeconds;
         }
 
-        public static int ToMidnight(this DateTime self)
+        public static int ToDayStart(this DateTime self)
         {
             return (self.ToTimestamp() / UTime.DaySeconds) * UTime.DaySeconds;
         }
 
-        public static int ToWeekstart(this DateTime self)
+        public static int ToDayEnd(this DateTime self)
+        {
+            return self.ToDayStart() + UTime.DaySeconds;
+        }
+
+        public static int ToWeekStart(this DateTime self)
         {
             return (self.ToWeekIndex() * UTime.WeekDays - EpochWeekDayShift) * UTime.DaySeconds;
+        }
+
+        public static int ToWeekEnd(this DateTime self)
+        {
+            return self.ToWeekStart() + UTime.WeekSeconds;
         }
 
         public static int ToDayIndex(this DateTime self)
