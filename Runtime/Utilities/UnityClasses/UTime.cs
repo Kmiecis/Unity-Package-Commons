@@ -20,6 +20,12 @@ namespace Common
 
         private const int EpochWeekDayShift = 3;
 
+        public static int Now
+            => System.DateTime.Now.ToTimestamp();
+
+        public static int UtcNow
+            => System.DateTime.UtcNow.ToTimestamp();
+
         public static float previousTime
             => Time.time - Time.deltaTime;
 
