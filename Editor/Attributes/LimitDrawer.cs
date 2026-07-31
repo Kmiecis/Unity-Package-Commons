@@ -35,60 +35,68 @@ namespace CommonEditor
 
         private float Clamp(float value)
         {
-            return Mathf.Clamp(value, attribute.min, attribute.max);
+            value = Mathf.Clamp(value, attribute.min, attribute.max);
+            return value;
         }
 
         private int Clamp(int value)
         {
-            return Mathf.Clamp(value, (int)attribute.min, (int)attribute.max);
+            value = (int)Mathf.Clamp(value, attribute.min, attribute.max);
+            return value;
         }
 
         private Range Clamp(Range value)
         {
-            return new Range(
-                Mathf.Clamp(value.min, attribute.min, attribute.max),
-                Mathf.Clamp(value.max, attribute.min, attribute.max)
-            );
+            value.min = Mathf.Clamp(value.min, attribute.min, attribute.max);
+            value.max = Mathf.Clamp(value.max, attribute.min, attribute.max);
+            return value;
         }
 
         private RangeInt Clamp(RangeInt value)
         {
-            return new RangeInt(
-                Mathf.Clamp(value.min, (int)attribute.min, (int)attribute.max),
-                Mathf.Clamp(value.max, (int)attribute.min, (int)attribute.max)
-            );
+            value.min = (int)Mathf.Clamp(value.min, attribute.min, attribute.max);
+            value.max = (int)Mathf.Clamp(value.max, attribute.min, attribute.max);
+            return value;
         }
 
         private Range2 Clamp(Range2 value)
         {
-            return new Range2(
-                Mathx.Clamp(value.min, attribute.min, attribute.max),
-                Mathx.Clamp(value.max, attribute.min, attribute.max)
-            );
+            value.min.x = Mathf.Clamp(value.min.x, attribute.min, attribute.max);
+            value.min.y = Mathf.Clamp(value.min.y, attribute.min, attribute.max);
+            value.max.x = Mathf.Clamp(value.max.x, attribute.min, attribute.max);
+            value.max.y = Mathf.Clamp(value.max.y, attribute.min, attribute.max);
+            return value;
         }
 
         private Range2Int Clamp(Range2Int value)
         {
-            return new Range2Int(
-                Mathx.Clamp(value.min, (int)attribute.min, (int)attribute.max),
-                Mathx.Clamp(value.max, (int)attribute.min, (int)attribute.max)
-            );
+            value.min.x = (int)Mathf.Clamp(value.min.x, attribute.min, attribute.max);
+            value.min.y = (int)Mathf.Clamp(value.min.y, attribute.min, attribute.max);
+            value.max.x = (int)Mathf.Clamp(value.max.x, attribute.min, attribute.max);
+            value.max.y = (int)Mathf.Clamp(value.max.y, attribute.min, attribute.max);
+            return value;
         }
 
         private Range3 Clamp(Range3 value)
         {
-            return new Range3(
-                Mathx.Clamp(value.min, attribute.min, attribute.max),
-                Mathx.Clamp(value.max, attribute.min, attribute.max)
-            );
+            value.min.x = Mathf.Clamp(value.min.x, attribute.min, attribute.max);
+            value.min.y = Mathf.Clamp(value.min.y, attribute.min, attribute.max);
+            value.min.z = Mathf.Clamp(value.min.z, attribute.min, attribute.max);
+            value.max.x = Mathf.Clamp(value.max.x, attribute.min, attribute.max);
+            value.max.y = Mathf.Clamp(value.max.y, attribute.min, attribute.max);
+            value.max.z = Mathf.Clamp(value.max.z, attribute.min, attribute.max);
+            return value;
         }
 
         private Range3Int Clamp(Range3Int value)
         {
-            return new Range3Int(
-                Mathx.Clamp(value.min, (int)attribute.min, (int)attribute.max),
-                Mathx.Clamp(value.max, (int)attribute.min, (int)attribute.max)
-            );
+            value.min.x = (int)Mathf.Clamp(value.min.x, attribute.min, attribute.max);
+            value.min.y = (int)Mathf.Clamp(value.min.y, attribute.min, attribute.max);
+            value.min.z = (int)Mathf.Clamp(value.min.z, attribute.min, attribute.max);
+            value.max.x = (int)Mathf.Clamp(value.max.x, attribute.min, attribute.max);
+            value.max.y = (int)Mathf.Clamp(value.max.y, attribute.min, attribute.max);
+            value.max.z = (int)Mathf.Clamp(value.max.z, attribute.min, attribute.max);
+            return value;
         }
 
         private object Clamp(object value)
