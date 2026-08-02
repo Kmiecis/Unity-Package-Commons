@@ -91,7 +91,8 @@ namespace Common
 
         public static T Item<T>(IList<T> list, int min, int max)
         {
-            return list[Random.Range(min, max)];
+            int index = Random.Range(min, max);
+            return list[index];
         }
 
         public static T Item<T>(IList<T> list, int max)
@@ -104,24 +105,32 @@ namespace Common
             return Item(list, list.Count);
         }
 
-        public static void Items<T>(IList<T> source, IList<T> target)
+        public static TKey Key<TKey, TValue>(IDictionary<TKey, TValue> dictionary)
         {
-            for (int i = 0; i < target.Count; ++i)
+            var index = Random.Range(0, dictionary.Count);
+            foreach (var entry in dictionary)
             {
-                target[i] = Item(source);
+                if (index == 0)
+                {
+                    return entry.Key;
+                }
+                index -= 1;
             }
+            return default;
         }
 
-        public static void Uniques<T>(IList<T> source, IList<T> target)
+        public static TValue Value<TKey, TValue>(IDictionary<TKey, TValue> dictionary)
         {
-            int offset = Random.Range(0, source.Count);
-            float step = source.Count * 1.0f / target.Count;
-            for (int i = 0; i < target.Count; ++i)
+            var index = Random.Range(0, dictionary.Count);
+            foreach (var entry in dictionary)
             {
-                int j = ((int)(i * step) + offset) % source.Count;
-                target[i] = source[j];
+                if (index == 0)
+                {
+                    return entry.Value;
+                }
+                index -= 1;
             }
-            Shuffle(target);
+            return default;
         }
 
         public static void Shuffle<T>(IList<T> list, int begin, int end)
@@ -152,6 +161,18 @@ namespace Common
                 int index = (i + offset) % list.Count;
                 yield return list[index];
             }
+        }
+
+        public static void Uniques<T>(IList<T> source, IList<T> target)
+        {
+            int offset = Random.Range(0, source.Count);
+            float step = source.Count * 1.0f / target.Count;
+            for (int i = 0; i < target.Count; ++i)
+            {
+                int j = ((int)(i * step) + offset) % source.Count;
+                target[i] = source[j];
+            }
+            Shuffle(target);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Common.Mathematics;
-using System.Runtime.CompilerServices;
+﻿using System.Runtime.CompilerServices;
 
 namespace Common.Collections
 {

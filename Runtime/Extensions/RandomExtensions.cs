@@ -207,24 +207,32 @@ namespace Common
             return self.NextItem(list, list.Count);
         }
 
-        public static void NextItems<T>(this Random self, IList<T> source, IList<T> target)
+        public static TKey NextKey<TKey, TValue>(this Random self, IDictionary<TKey, TValue> dictionary)
         {
-            for (int i = 0; i < target.Count; ++i)
+            var index = self.Next(0, dictionary.Count);
+            foreach (var entry in dictionary)
             {
-                target[i] = self.NextItem(source);
+                if (index == 0)
+                {
+                    return entry.Key;
+                }
+                index -= 1;
             }
+            return default;
         }
 
-        public static void NextUniques<T>(this Random self, IList<T> source, IList<T> target)
+        public static TValue NextValue<TKey, TValue>(this Random self, IDictionary<TKey, TValue> dictionary)
         {
-            int offset = self.Next(0, source.Count);
-            float step = source.Count * 1.0f / target.Count;
-            for (int i = 0; i < target.Count; ++i)
+            var index = self.Next(0, dictionary.Count);
+            foreach (var entry in dictionary)
             {
-                int j = ((int)(i * step) + offset) % source.Count;
-                target[i] = source[j];
+                if (index == 0)
+                {
+                    return entry.Value;
+                }
+                index -= 1;
             }
-            self.NextShuffle(target);
+            return default;
         }
 
         public static void NextShuffle<T>(this Random self, IList<T> list, int begin, int end)
@@ -255,6 +263,18 @@ namespace Common
                 int index = (i + offset) % list.Count;
                 yield return list[index];
             }
+        }
+
+        public static void NextUniques<T>(this Random self, IList<T> source, IList<T> target)
+        {
+            int offset = self.Next(0, source.Count);
+            float step = source.Count * 1.0f / target.Count;
+            for (int i = 0; i < target.Count; ++i)
+            {
+                int j = ((int)(i * step) + offset) % source.Count;
+                target[i] = source[j];
+            }
+            self.NextShuffle(target);
         }
     }
 }

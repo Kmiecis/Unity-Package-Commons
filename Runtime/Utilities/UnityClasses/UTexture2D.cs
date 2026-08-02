@@ -1,4 +1,3 @@
-using Common.Mathematics;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,8 +7,6 @@ namespace Common
     {
         public static void ScaleToFit(Color32[] pixels, int width, int height)
         {
-            var clear = (Color32)Color.clear;
-
             var min = new Vector2Int(width, height);
             var max = new Vector2Int(0, 0);
             for (int i = 0; i < pixels.Length; ++i)

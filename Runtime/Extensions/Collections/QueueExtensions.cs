@@ -26,6 +26,11 @@ namespace Common
             return true;
         }
 
+        public static T DequeueOrDefault<T>(this Queue<T> self)
+        {
+            return self.Count > 0 ? self.Dequeue() : default;
+        }
+
         public static bool TryDequeue<T>(this Queue<T> self, out T item)
         {
             if (self.Count > 0)

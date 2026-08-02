@@ -1,5 +1,4 @@
-﻿using Common.Mathematics;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Common
 {
