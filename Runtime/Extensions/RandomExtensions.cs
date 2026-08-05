@@ -34,7 +34,7 @@ namespace Common
 
         public static bool NextBool(this Random self, double p = 0.5)
         {
-            return self.NextDouble() > p;
+            return self.NextDouble() <= p;
         }
 
         public static int NextSign(this Random self, double p = 0.5)

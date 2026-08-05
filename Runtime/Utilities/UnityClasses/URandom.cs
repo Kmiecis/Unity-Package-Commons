@@ -8,7 +8,7 @@ namespace Common
     {
         public static bool Bool(float p = 0.5f)
         {
-            return Random.Range(0.0f, 1.0f) > p;
+            return Random.Range(0.0f, 1.0f) <= p;
         }
 
         public static int Sign(float p = 0.5f)
