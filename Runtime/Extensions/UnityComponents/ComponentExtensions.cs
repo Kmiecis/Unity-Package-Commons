@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -72,6 +73,21 @@ namespace Common
         public static string GetHierarchyPath(this Component self, char delimiter = '/')
         {
             return self.transform.GetHierarchyPath(delimiter);
+        }
+
+        public static T[] GetComponentsInChildren<T>(this Component self, int depth, bool includeInactive = false)
+            where T : Component
+        {
+            var results = new List<T>();
+            self.GetComponentsInChildren(results, depth, includeInactive);
+            return results.ToArray();
+        }
+
+        public static void GetComponentsInChildren<T>(this Component self, List<T> results, int depth, bool includeInactive = false)
+            where T : Component
+        {
+            results.Clear();
+            self.GetComponentsInChildrenInternal(results, new List<T>(), depth, includeInactive);
         }
 
         public static bool TryGetComponentInChildren<T>(this Component self, out T component, bool includeInactive = false)
@@ -157,6 +173,25 @@ namespace Common
         public static void Destroy(this Component self, float t)
         {
             Object.Destroy(self.gameObject, t);
+        }
+
+        private static void GetComponentsInChildrenInternal<T>(this Component self, List<T> results, List<T> buffer, int depth, bool includeInactive)
+        {
+            if (depth < 0)
+                return;
+
+            self.GetComponents(buffer);
+            results.AddRange(buffer);
+
+            var transform = self.transform;
+            for (int i = 0; i < transform.childCount; ++i)
+            {
+                var child = transform.GetChild(i);
+                if (child.gameObject.activeSelf || includeInactive)
+                {
+                    child.GetComponentsInChildrenInternal(results, buffer, depth - 1, includeInactive);
+                }
+            }
         }
     }
 }

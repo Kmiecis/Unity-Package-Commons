@@ -8,5 +8,10 @@ namespace Common
         {
             return self == (self | (1 << layer));
         }
+
+        public static int GetLayer(this LayerMask self)
+        {
+            return (int)Mathf.Log(self.value, 2);
+        }
     }
 }
