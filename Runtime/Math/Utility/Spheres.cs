@@ -16,15 +16,15 @@ namespace Common.Mathematics
             return dx * dx + dy * dy + dz * dz <= sumr * sumr;
         }
 
-        /// <summary> Calculates normalized point from two angles 'a' and 'b' </summary>
+        /// <summary> Calculates a normalized point from an azimuth 'a' in [0, 2π) and an elevation 'e' in [-π/2, π/2]. </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 Point(float a, float b)
+        public static Vector3 Point(float a, float e)
         {
+            var t = Mathf.Cos(e);
             Vector3 r;
-            var t = Mathf.Acos(b * (1.0f / Mathf.PI) - 1.0f);
-            r.x = Mathf.Sin(t) * Mathf.Cos(a);
-            r.y = Mathf.Sin(t) * Mathf.Sin(a);
-            r.z = Mathf.Cos(t);
+            r.x = t * Mathf.Sin(a);
+            r.y = Mathf.Sin(e);
+            r.z = t * Mathf.Cos(a);
             return r;
         }
 

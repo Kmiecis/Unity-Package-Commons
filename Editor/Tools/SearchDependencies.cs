@@ -38,7 +38,7 @@ namespace CommonEditor
             { PNG, new string[] { ASSET, MATERIAL, PREFAB, SPRITEATLAS } },
             { PREFAB, new string[] { ASSET, PREFAB, SCENE } },
             { RENDER_TEXTURE, new string[] { ASSET, MATERIAL, PREFAB } },
-            { SCRIPT, new string[] { ASSET, PREFAB } },
+            { SCRIPT, new string[] { ASSET, PREFAB, SCENE } },
             { SHADER, new string[] { MATERIAL } },
             { SHADERGRAPH, new string[] { MATERIAL } },
             { SHADERSUBGRAPH, new string[] { SHADERGRAPH } },
