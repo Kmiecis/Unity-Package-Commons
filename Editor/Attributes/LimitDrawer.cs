@@ -22,6 +22,11 @@ namespace CommonEditor
             {
                 float floatValue => Clamp(floatValue),
                 int intValue => Clamp(intValue),
+                Vector2 vector2 => Clamp(vector2),
+                Vector2Int vector2Int => Clamp(vector2Int),
+                Vector3 vector3 => Clamp(vector3),
+                Vector3Int vector3Int => Clamp(vector3Int),
+                Vector4 vector4 => Clamp(vector4),
                 Range range => Clamp(range),
                 RangeInt rangeInt => Clamp(rangeInt),
                 Range2 range2 => Clamp(range2),
@@ -42,6 +47,45 @@ namespace CommonEditor
         private int Clamp(int value)
         {
             value = (int)Mathf.Clamp(value, attribute.min, attribute.max);
+            return value;
+        }
+
+        private Vector2 Clamp(Vector2 value)
+        {
+            value.x = Mathf.Clamp(value.x, attribute.min, attribute.max);
+            value.y = Mathf.Clamp(value.y, attribute.min, attribute.max);
+            return value;
+        }
+
+        private Vector2Int Clamp(Vector2Int value)
+        {
+            value.x = (int)Mathf.Clamp(value.x, attribute.min, attribute.max);
+            value.y = (int)Mathf.Clamp(value.y, attribute.min, attribute.max);
+            return value;
+        }
+
+        private Vector3 Clamp(Vector3 value)
+        {
+            value.x = Mathf.Clamp(value.x, attribute.min, attribute.max);
+            value.y = Mathf.Clamp(value.y, attribute.min, attribute.max);
+            value.z = Mathf.Clamp(value.z, attribute.min, attribute.max);
+            return value;
+        }
+
+        private Vector3Int Clamp(Vector3Int value)
+        {
+            value.x = (int)Mathf.Clamp(value.x, attribute.min, attribute.max);
+            value.y = (int)Mathf.Clamp(value.y, attribute.min, attribute.max);
+            value.z = (int)Mathf.Clamp(value.z, attribute.min, attribute.max);
+            return value;
+        }
+
+        private Vector4 Clamp(Vector4 value)
+        {
+            value.x = Mathf.Clamp(value.x, attribute.min, attribute.max);
+            value.y = Mathf.Clamp(value.y, attribute.min, attribute.max);
+            value.z = Mathf.Clamp(value.z, attribute.min, attribute.max);
+            value.w = Mathf.Clamp(value.w, attribute.min, attribute.max);
             return value;
         }
 
