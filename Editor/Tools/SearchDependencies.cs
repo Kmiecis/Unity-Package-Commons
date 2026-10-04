@@ -26,7 +26,10 @@ namespace CommonEditor
         private const string SHADERSUBGRAPH = ".shadersubgraph";
         private const string SPRITEATLAS = ".spriteatlas";
 
-        private static readonly Dictionary<string, string[]> Extensions = new Dictionary<string, string[]>()
+        private const string GUID_KEY = "guid";
+        private const int GUID_LENGTH = 32;
+
+        private static readonly Dictionary<string, string[]> Extensions = new Dictionary<string, string[]>(System.StringComparer.OrdinalIgnoreCase)
         {
             { ANIMATION, new string[] { ASSET, ANIMATOR, PREFAB } },
             { ANIMATOR, new string[] { ASSET, PREFAB } },
@@ -44,58 +47,58 @@ namespace CommonEditor
             { SHADERSUBGRAPH, new string[] { SHADERGRAPH } },
         };
 
+        private class Asset
+        {
+            public string name;
+            public string guid;
+            public string[] searchExtensions;
+            public List<string> dependencies = new List<string>();
+        }
+
         [MenuItem("Assets/Commons/Search Dependencies")]
         private static void Search()
         {
-            var selection = Selection.activeObject;
-            if (selection == null)
+            var selectedObjects = Selection.objects;
+            if (selectedObjects.Length == 0)
             {
                 Debug.LogError("No object selected to search dependencies for");
                 return;
             }
 
-            var assetPath = AssetDatabase.GetAssetPath(selection);
-            var assetExtension = Path.GetExtension(assetPath);
-
-            var searchExtensions = Extensions.GetOrDefault(assetExtension);
-            if (searchExtensions == null)
+            var assets = GetAssets(selectedObjects);
+            if (assets.Count == 0)
             {
-                Debug.LogError($"No search extension found for given selection extension '{assetExtension}'");
                 return;
             }
 
-            var searchFiles = GetFiles(searchExtensions);
-            if (searchFiles.Length == 0)
+            var searchAssets = GetSearchAssets(assets);
+            var searchExtensions = searchAssets.ToKeyArray();
+
+            var searchFiles = GetFiles(searchAssets);
+            if (searchFiles.Count == 0)
             {
                 ShowNoFilesFoundPopup(searchExtensions);
                 return;
             }
 
-            var assetGuid = AssetDatabase.GUIDFromAssetPath(assetPath);
-            var filteredFiles = FilterFiles(searchFiles, assetGuid.ToString());
+            var filteredFiles = FilterFiles(searchFiles);
             if (filteredFiles.Length == 0)
             {
-                ShowNoDependenciesFoundPopup(searchFiles.Length, searchExtensions);
+                ShowNoDependenciesFoundPopup(searchFiles.Count, searchExtensions);
                 return;
             }
 
-            var assetName = Path.GetFileName(assetPath);
-            var resultLog = new StringBuilder("Found ")
-                .Append(filteredFiles.Length)
-                .Append(" dependencies of ")
-                .Append(assetName)
-                .Append(" at the following paths:\n");
+            foreach (var asset in assets)
+            {
+                LogDependencies(asset);
+            }
 
             var selections = new Object[filteredFiles.Length];
             for (int i = 0; i < filteredFiles.Length; ++i)
             {
                 var filepath = filteredFiles[i];
                 selections[i] = AssetDatabase.LoadAssetAtPath<Object>(filepath);
-
-                resultLog.Append(filepath).Append('\n');
             }
-
-            Debug.LogWarning(resultLog);
 
             Selection.objects = selections;
             foreach (var select in selections)
@@ -104,33 +107,95 @@ namespace CommonEditor
             }
         }
 
-        private static string[] GetFiles(string[] extensions)
+        private static List<Asset> GetAssets(Object[] selectedObjects)
         {
-            var result = new List<string>();
+            var result = new List<Asset>();
+            var assetPaths = new HashSet<string>();
 
-            foreach (var extension in extensions)
+            foreach (var selectedObject in selectedObjects)
             {
-                var files = Directory.GetFiles("Assets", $"*{extension}", SearchOption.AllDirectories);
-                result.AddRange(files);
+                var assetPath = AssetDatabase.GetAssetPath(selectedObject);
+                if (!assetPaths.Add(assetPath))
+                {
+                    continue;
+                }
+
+                var assetExtension = Path.GetExtension(assetPath);
+
+                var searchExtensions = Extensions.GetOrDefault(assetExtension);
+                if (searchExtensions == null)
+                {
+                    Debug.LogError($"No search extension found for given selection extension '{assetExtension}'", selectedObject);
+                    continue;
+                }
+
+                var assetName = Path.GetFileName(assetPath);
+                var assetGuid = AssetDatabase.GUIDFromAssetPath(assetPath);
+                var asset = new Asset
+                {
+                    name = assetName,
+                    guid = assetGuid.ToString(),
+                    searchExtensions = searchExtensions
+                };
+                result.Add(asset);
             }
 
-            return result.ToArray();
+            return result;
         }
 
-        private static string[] FilterFiles(string[] files, string search)
+        private static Dictionary<string, Dictionary<string, Asset>> GetSearchAssets(List<Asset> assets)
+        {
+            var result = new Dictionary<string, Dictionary<string, Asset>>();
+
+            foreach (var asset in assets)
+            {
+                foreach (var searchExtension in asset.searchExtensions)
+                {
+                    var searchAssets = result.GetOrCompute(searchExtension, () => new Dictionary<string, Asset>());
+                    searchAssets[asset.guid] = asset;
+                }
+            }
+
+            return result;
+        }
+
+        private static Dictionary<string, Dictionary<string, Asset>> GetFiles(Dictionary<string, Dictionary<string, Asset>> searchAssets)
+        {
+            var result = new Dictionary<string, Dictionary<string, Asset>>();
+
+            foreach (var entry in searchAssets)
+            {
+                var files = Directory.GetFiles("Assets", $"*{entry.Key}", SearchOption.AllDirectories);
+                foreach (var file in files)
+                {
+                    result[file] = entry.Value;
+                }
+            }
+
+            return result;
+        }
+
+        private static string[] FilterFiles(Dictionary<string, Dictionary<string, Asset>> files)
         {
             var result = new List<string>();
 
-            for (int i = 0; i < files.Length; ++i)
+            var current = 0;
+            foreach (var entry in files)
             {
-                var file = files[i];
+                var file = entry.Key;
                 var filename = Path.GetFileName(file);
 
-                UpdateProgressBar(filename, i, files.Length);
+                UpdateProgressBar(filename, current++, files.Count);
 
-                if (HasText(file, search))
+                var referencedAssets = GetReferencedAssets(file, entry.Value);
+                if (referencedAssets.Count > 0)
                 {
                     result.Add(file);
+
+                    foreach (var asset in referencedAssets)
+                    {
+                        asset.dependencies.Add(file);
+                    }
                 }
             }
 
@@ -139,20 +204,60 @@ namespace CommonEditor
             return result.ToArray();
         }
 
-        private static bool HasText(string filepath, string search)
+        private static HashSet<Asset> GetReferencedAssets(string filepath, Dictionary<string, Asset> assets)
         {
+            var result = new HashSet<Asset>();
+
             using var reader = new StreamReader(filepath);
 
             string line;
-            while ((line = reader.ReadLine()) != null)
+            while (result.Count < assets.Count && (line = reader.ReadLine()) != null)
             {
-                if (line.Contains(search))
+                var keyIndex = line.IndexOf(GUID_KEY, System.StringComparison.OrdinalIgnoreCase);
+                while (keyIndex >= 0)
                 {
-                    return true;
+                    var valueIndex = keyIndex + GUID_KEY.Length;
+                    while (valueIndex < line.Length && !char.IsLetterOrDigit(line[valueIndex]))
+                    {
+                        ++valueIndex;
+                    }
+
+                    if (valueIndex + GUID_LENGTH <= line.Length)
+                    {
+                        var guid = line.Substring(valueIndex, GUID_LENGTH);
+                        if (assets.TryGetValue(guid, out var asset))
+                        {
+                            result.Add(asset);
+                        }
+                    }
+
+                    keyIndex = line.IndexOf(GUID_KEY, valueIndex, System.StringComparison.OrdinalIgnoreCase);
                 }
             }
 
-            return false;
+            return result;
+        }
+
+        private static void LogDependencies(Asset asset)
+        {
+            if (asset.dependencies.Count == 0)
+            {
+                Debug.LogWarning($"Found no dependencies of {asset.name}");
+                return;
+            }
+
+            var resultLog = new StringBuilder("Found ")
+                .Append(asset.dependencies.Count)
+                .Append(" dependencies of ")
+                .Append(asset.name)
+                .Append(" at the following paths:\n");
+
+            foreach (var filepath in asset.dependencies)
+            {
+                resultLog.Append(filepath).Append('\n');
+            }
+
+            Debug.LogWarning(resultLog);
         }
 
         private static void UpdateProgressBar(string filename, int current, int count)
