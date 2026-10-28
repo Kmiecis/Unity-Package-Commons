@@ -29,20 +29,6 @@ namespace Common.Mathematics
             new int[] { 7, 6, 5, 7, 5, 4 }  // +z
         };
 
-        /// <summary> Calculates area of a cube defined by extents 'e' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Area(Vector3 e)
-        {
-            return e.x * e.y * 2 + e.y * e.z * 2 + e.z * e.x * 2;
-        }
-
-        /// <summary> Calculates volume of a cube defined by extents 'e' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Volume(Vector3 e)
-        {
-            return e.x * e.y * e.z;
-        }
-
         /// <summary> Converts coordinates defined by 'v' in space of extents 'e' to a position </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 Convert(Vector3Int v, Vector3 e)

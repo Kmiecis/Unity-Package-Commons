@@ -38,7 +38,7 @@ namespace Common.Mathematics
                             
                             if (!contains)
                             {
-                                var triangleNormal = Triangles.Normal(iPoint, jPoint, kPoint);
+                                var triangleNormal = new Triangle(iPoint, jPoint, kPoint).Normal;
 
                                 if (Vector3.Dot(triangleNormal, normal) > 0)
                                 {

@@ -32,6 +32,18 @@ namespace Common.Mathematics
             get => origin.Add(extents.Mul(0.5f));
         }
 
+        public readonly float Area
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => extents.x * extents.y * 2 + extents.y * extents.z * 2 + extents.z * extents.x * 2;
+        }
+
+        public readonly float Volume
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => extents.x * extents.y * extents.z;
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Cube other)
         {

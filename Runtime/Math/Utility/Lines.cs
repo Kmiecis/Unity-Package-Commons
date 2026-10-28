@@ -5,36 +5,6 @@ namespace Common.Mathematics
 {
     public static class Lines
     {
-        /// <summary> Calculates whether point 'p' is within line between points 'v0' and 'v1' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool Contains(Vector3 v0, Vector3 v1, Vector3 p)
-        {
-            float v0v1 = (v1 - v0).sqrMagnitude;
-            float v0p = (p - v0).sqrMagnitude;
-            float pv1 = (v1 - p).sqrMagnitude;
-            return Mathx.IsEqual(v0v1, v0p + pv1);
-        }
-
-        /// <summary> Calculates nearest point in line between points 'v0' and 'v1' to point 'p' </summary>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector3 NearestPoint(Vector3 v0, Vector3 v1, Vector3 p)
-        {
-            var v0v1 = v1 - v0;
-            var v0p = p - v0;
-
-            float f1 = Vector3.Dot(v0p, v0v1);
-            if (f1 <= 0.0f)
-                return v0;
-
-            float f2 = Vector3.Dot(v0v1, v0v1);
-            if (f2 <= f1)
-                return v1;
-
-            float t = f1 / f2;
-
-            return v0 + (t * v0v1);
-        }
-
         /// <summary> Calculates relative positioning of point 'p' to line through points 'v0' and 'v1' </summary>
         /// <returns>
         /// +1 - point lies above the line

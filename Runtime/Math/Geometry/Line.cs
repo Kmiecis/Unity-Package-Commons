@@ -65,6 +65,34 @@ namespace Common.Mathematics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public readonly bool Contains(Vector3 point)
+        {
+            float v0v1 = (v1 - v0).sqrMagnitude;
+            float v0p = (point - v0).sqrMagnitude;
+            float pv1 = (v1 - point).sqrMagnitude;
+            return Mathx.IsEqual(v0v1, v0p + pv1);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public readonly Vector3 NearestPoint(Vector3 point)
+        {
+            var v0v1 = v1 - v0;
+            var v0p = point - v0;
+
+            float f1 = Vector3.Dot(v0p, v0v1);
+            if (f1 <= 0.0f)
+                return v0;
+
+            float f2 = Vector3.Dot(v0v1, v0v1);
+            if (f2 <= f1)
+                return v1;
+
+            float t = f1 / f2;
+
+            return v0 + (t * v0v1);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Line other)
         {
             return (

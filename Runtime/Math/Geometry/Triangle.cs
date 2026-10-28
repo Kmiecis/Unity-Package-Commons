@@ -68,6 +68,62 @@ namespace Common.Mathematics
             }
         }
 
+        public readonly float Area
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get
+            {
+                var a = Vector3.Distance(v0, v1);
+                var b = Vector3.Distance(v1, v2);
+                var c = Vector3.Distance(v2, v0);
+                var s = (a + b + c) * 0.5f;
+                return Mathf.Sqrt(s * (s - a) * (s - b) * (s - c));
+            }
+        }
+
+        public readonly float Perimeter
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => Vector3.Distance(v1, v0) + Vector3.Distance(v2, v1) + Vector3.Distance(v0, v2);
+        }
+
+        public readonly Vector3 Normal
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get => Vector3.Cross(v1 - v0, v2 - v1);
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public readonly Vector3 Barycenter(Vector3 point)
+        {
+            var a = v1 - v0;
+            var b = v2 - v0;
+            var c = point - v0;
+
+            var d00 = Vector3.Dot(a, a);
+            var d01 = Vector3.Dot(a, b);
+            var d11 = Vector3.Dot(b, b);
+            var d20 = Vector3.Dot(c, a);
+            var d21 = Vector3.Dot(c, b);
+            var d = d00 * d11 - d01 * d01;
+
+            Vector3 r;
+            r.x = (d11 * d20 - d01 * d21) / d;
+            r.y = (d00 * d21 - d01 * d20) / d;
+            r.z = 1.0f - r.x - r.y;
+            return r;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public readonly bool Contains(Vector3 point)
+        {
+            var bc = Barycenter(point);
+            return (
+                Mathx.IsEqual(bc.x + bc.y + bc.z, 1.0f) &&
+                Mathx.IsInRange(bc, Vector3.zero, Vector3.one)
+            );
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Triangle other)
         {

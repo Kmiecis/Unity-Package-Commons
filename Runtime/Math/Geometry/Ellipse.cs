@@ -25,6 +25,29 @@ namespace Common.Mathematics
         {
         }
 
+        public readonly float Perimeter
+        {
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get
+            {
+                var w = extents.x * 0.5f;
+                var h = extents.y * 0.5f;
+                var d = w - h;
+                var s = w + h;
+                var g = (d * d) / (s * s);
+                return Mathf.PI * s * (1 + 3 * g / (10 + Mathf.Sqrt(4 - 3 * g)));
+            }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public readonly float Radius(float angle)
+        {
+            var w = extents.x * 0.5f;
+            var h = extents.y * 0.5f;
+            var p = Circles.Point(angle);
+            return (w * h) / Mathf.Sqrt(h * h * p.x * p.x + w * w * p.y * p.y);
+        }
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool Equals(Ellipse other)
         {
