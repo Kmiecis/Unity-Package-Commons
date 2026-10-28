@@ -240,7 +240,7 @@ namespace Common
             int n = end;
             while (--n > begin)
             {
-                int k = self.Next(n);
+                int k = self.Next(begin, n + 1);
                 list.Swap(k, n);
             }
         }

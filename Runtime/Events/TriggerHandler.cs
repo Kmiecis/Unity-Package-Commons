@@ -11,11 +11,13 @@ namespace Common
         [SerializeField] protected UnityEvent<Collider> _onTriggerStay = new UnityEvent<Collider>();
         [SerializeField] protected UnityEvent<Collider> _onTriggerExit = new UnityEvent<Collider>();
 
-        private List<Collider> _colliders;
+        private Dictionary<Collider, int> _colliders;
+        private List<Collider> _invalids;
 
         public TriggerHandler()
         {
-            _colliders = new List<Collider>();
+            _colliders = new Dictionary<Collider, int>();
+            _invalids = new List<Collider>();
         }
 
         public UnityEvent<Collider> OnTriggerEntered
@@ -35,7 +37,11 @@ namespace Common
 
         public bool IsColliding
         {
-            get => _colliders.Count > 0;
+            get
+            {
+                RemoveInvalidColliders();
+                return _colliders.Count > 0;
+            }
         }
 
         public void RemoveAllListeners()
@@ -49,7 +55,7 @@ namespace Common
         {
             _onTriggerEnter.Invoke(collider);
 
-            _colliders.Add(collider);
+            _colliders[collider] = _colliders.GetOrDefault(collider) + 1;
         }
 
         public void OnTriggerStay(Collider collider)
@@ -59,14 +65,50 @@ namespace Common
 
         public void OnTriggerExit(Collider collider)
         {
-            _colliders.Remove(collider);
+            if (_colliders.TryGetValue(collider, out var count) && count > 1)
+            {
+                _colliders[collider] = count - 1;
+            }
+            else
+            {
+                _colliders.Remove(collider);
+            }
 
             _onTriggerExit.Invoke(collider);
         }
 
+        private static bool IsValid(Collider collider)
+        {
+            return (
+                collider != null &&
+                collider.enabled &&
+                collider.gameObject.activeInHierarchy
+            );
+        }
+
+        private void RemoveInvalidColliders()
+        {
+            foreach (var collider in _colliders.Keys)
+            {
+                if (!IsValid(collider))
+                {
+                    _invalids.Add(collider);
+                }
+            }
+
+            foreach (var collider in _invalids)
+            {
+                _colliders.Remove(collider);
+            }
+
+            _invalids.Clear();
+        }
+
         private void OnDisable()
         {
-            foreach (var collider in _colliders)
+            RemoveInvalidColliders();
+
+            foreach (var collider in _colliders.Keys)
             {
                 _onTriggerExit.Invoke(collider);
             }

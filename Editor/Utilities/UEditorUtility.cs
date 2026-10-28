@@ -1,3 +1,4 @@
+using Common;
 using System;
 using System.Reflection;
 
@@ -7,8 +8,7 @@ namespace CommonEditor
     {
         public static Type GetFieldType(FieldInfo fieldInfo)
         {
-            var fieldType = fieldInfo.FieldType;
-            return fieldType.IsArray ? fieldType.GetElementType() : fieldType;
+            return fieldInfo.FieldType.GetSerializedElementType();
         }
 
         public static string ConvertToSystemTypeName(string managedReferenceTypename)

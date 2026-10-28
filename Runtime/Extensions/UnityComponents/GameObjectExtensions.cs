@@ -8,7 +8,7 @@ namespace Common
     {
         public static bool IsPrefab(this GameObject self)
         {
-            return self.scene.IsValid();
+            return !self.scene.IsValid();
         }
 
         public static bool HasComponent<T>(this GameObject self)

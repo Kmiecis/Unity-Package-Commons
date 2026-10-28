@@ -56,8 +56,8 @@ namespace Common.Mathematics
 #else
                 switch (index)
                 {
-                    case 0: v0 = value; break;
-                    case 1: v1 = value; break;
+                    case 0: v0 = value; return;
+                    case 1: v1 = value; return;
                 }
                 throw new IndexOutOfRangeException($"Invalid index {index} out of range [0, 1]");
 #endif

@@ -11,15 +11,15 @@ namespace Common
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Quaternion GetRotationX(this Quaternion self)
-            => new Quaternion(self.x, 0.0f, 0.0f, self.w / Mathf.Sqrt(self.w * self.w + self.x * self.x));
+            => Quaternion.Normalize(new Quaternion(self.x, 0.0f, 0.0f, self.w));
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Quaternion GetRotationY(this Quaternion self)
-            => new Quaternion(0.0f, self.y, 0.0f, self.w / Mathf.Sqrt(self.w * self.w + self.y * self.y));
+            => Quaternion.Normalize(new Quaternion(0.0f, self.y, 0.0f, self.w));
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Quaternion GetRotationZ(this Quaternion self)
-            => new Quaternion(0.0f, 0.0f, self.z, self.w / Mathf.Sqrt(self.w * self.w + self.z * self.z));
+            => Quaternion.Normalize(new Quaternion(0.0f, 0.0f, self.z, self.w));
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Quaternion GetRotationXY(this Quaternion self)

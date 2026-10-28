@@ -138,7 +138,7 @@ namespace Common
             int n = end;
             while (--n > begin)
             {
-                int k = Random.Range(0, n);
+                int k = Random.Range(begin, n + 1);
                 list.Swap(k, n);
             }
         }

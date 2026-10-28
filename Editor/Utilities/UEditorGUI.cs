@@ -245,11 +245,12 @@ namespace CommonEditor
             return result;
         }
 
-        public static void ObjectField(ref Rect position, Object value, System.Type type, bool allowSceneObjects, GUIContent label = null)
+        public static Object ObjectField(ref Rect position, Object value, System.Type type, bool allowSceneObjects, GUIContent label = null)
         {
             position.height = GetObjectHeight(label);
             var result = EditorGUI.ObjectField(position, label ?? GUIContent.none, value, type, allowSceneObjects);
             position.y += position.height + UEditorGUIUtility.SpaceHeight;
+            return result;
         }
 
         public static bool PropertyField(ref Rect position, SerializedProperty property)

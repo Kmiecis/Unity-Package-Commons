@@ -41,6 +41,17 @@ namespace Common.Collections
             return _array[0];
         }
 
+        public bool TryPeek(out T result)
+        {
+            if (_count > 0)
+            {
+                result = _array[0];
+                return true;
+            }
+            result = default;
+            return false;
+        }
+
         public void Clear()
         {
             Array.Clear(_array, 0, _count);
@@ -65,7 +76,7 @@ namespace Common.Collections
         {
             if (_count == _array.Length)
             {
-                Array.Resize(ref _array, _count * 2);
+                Array.Resize(ref _array, Math.Max(_count * 2, DefaultCapacity));
             }
 
             var index = FindIndex(ref value);
@@ -79,6 +90,11 @@ namespace Common.Collections
 
         public T Dequeue()
         {
+            if (_count == 0)
+            {
+                return default;
+            }
+
             var result = _array[0];
 
             RemoveAt(0);
@@ -86,10 +102,21 @@ namespace Common.Collections
             return result;
         }
 
+        public bool TryDequeue(out T result)
+        {
+            if (_count > 0)
+            {
+                result = Dequeue();
+                return true;
+            }
+            result = default;
+            return false;
+        }
+
         public bool Remove(T item)
         {
-            var index = Array.IndexOf(_array, item);
-            if (index > 0)
+            var index = Array.IndexOf(_array, item, 0, _count);
+            if (index > -1)
             {
                 RemoveAt(index);
                 return true;

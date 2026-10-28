@@ -28,7 +28,7 @@ namespace CommonEditor
 
         private bool CheckCondition(SerializedProperty property)
         {
-            var conditional = attribute.conditional ?? $"Display{property.displayName.Remove(" ")}Field";
+            var conditional = attribute.conditional ?? $"Display{property.displayName.RemoveAll(" ")}Field";
 
             var values = property.GetValueChain().ToArray();
             var parent = values[^2];

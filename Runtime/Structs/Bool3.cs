@@ -131,9 +131,9 @@ namespace Common
 #else
                 switch (index)
                 {
-                    case 0: x = value; break;
-                    case 1: y = value; break;
-                    case 2: z = value; break;
+                    case 0: x = value; return;
+                    case 1: y = value; return;
+                    case 2: z = value; return;
                 }
                 throw new IndexOutOfRangeException($"Invalid index {index} out of range [0, 2]");
 #endif

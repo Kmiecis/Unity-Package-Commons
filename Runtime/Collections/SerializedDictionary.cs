@@ -27,10 +27,6 @@ namespace Common.Collections
             {
                 this[entry.key] = entry.value;
             }
-
-#if !UNITY_EDITOR
-            _entries.Clear();
-#endif
         }
     }
 }

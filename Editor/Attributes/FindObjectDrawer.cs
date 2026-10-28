@@ -15,7 +15,7 @@ namespace CommonEditor
                 property.objectReferenceValue = value;
             }
 
-            this.OnGUI(position, property, label);
+            base.OnGUI(position, property, label);
         }
 
         protected abstract Object FindObject();

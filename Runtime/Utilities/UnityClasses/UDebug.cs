@@ -153,20 +153,20 @@ namespace Common
 
             for (int i = 0; i < 4; ++i)
             {
-                var start = m * vs[i];
-                var end = m * vs[(i + 1) % 4];
+                var start = m.MultiplyPoint3x4(vs[i]);
+                var end = m.MultiplyPoint3x4(vs[(i + 1) % 4]);
                 Debug.DrawLine(start, end, color);
             }
             for (int i = 0; i < 4; ++i)
             {
-                var start = m * vs[4 + i];
-                var end = m * vs[4 + ((i + 1) % 4)];
+                var start = m.MultiplyPoint3x4(vs[4 + i]);
+                var end = m.MultiplyPoint3x4(vs[4 + ((i + 1) % 4)]);
                 Debug.DrawLine(start, end, color);
             }
             for (int i = 0; i < 4; ++i)
             {
-                var start = m * vs[i];
-                var end = m * vs[i + 4];
+                var start = m.MultiplyPoint3x4(vs[i]);
+                var end = m.MultiplyPoint3x4(vs[i + 4]);
                 Debug.DrawLine(start, end, color);
             }
         }
@@ -190,8 +190,8 @@ namespace Common
 
             for (int i = 0; i < 4; ++i)
             {
-                var start = m * vs[i];
-                var end = m * vs[(i + 1) % 4];
+                var start = m.MultiplyPoint3x4(vs[i]);
+                var end = m.MultiplyPoint3x4(vs[(i + 1) % 4]);
                 Debug.DrawLine(start, end, color);
             }
         }

@@ -45,7 +45,7 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static LinearEquation FromPoints(Vector2 A, Vector2 B)
         {
-            if (Mathx.IsZero(A.x) && Mathx.IsZero(B.x))
+            if (Mathx.IsZero(B.x - A.x))
             {
                 return invalid;
             }

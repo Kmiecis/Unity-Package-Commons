@@ -27,10 +27,6 @@ namespace Common.Collections
             {
                 this.Add(_entries[i]);
             }
-
-#if !UNITY_EDITOR
-            _entries.Clear();
-#endif
         }
     }
 }

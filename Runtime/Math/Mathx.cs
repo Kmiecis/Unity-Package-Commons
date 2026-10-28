@@ -231,7 +231,7 @@ namespace Common
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsOdd(int i)
         {
-            return (i % 2) == 1;
+            return (i % 2) != 0;
         }
 
 

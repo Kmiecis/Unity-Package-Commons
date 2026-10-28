@@ -1,4 +1,5 @@
 ﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -29,21 +30,21 @@ namespace CommonEditor
 
         private void CallbackAttempt(SerializedProperty property)
         {
-            var callback = attribute.callback ?? $"On{property.displayName.Remove(" ")}Changed";
+            var callback = attribute.callback ?? $"On{property.displayName.RemoveAll(" ")}Changed";
 
             var values = property.GetValueChain().ToArray();
             var value = values[^1];
             var parent = values[^2];
 
-            if (TryGetMethod(value, parent, callback, out var method))
+            var valueType = UEditorUtility.GetFieldType(fieldInfo);
+            if (TryGetMethod(valueType, parent, callback, out var method))
             {
                 method.Invoke(parent, value);
             }
         }
 
-        private static bool TryGetMethod(object value, object parent, string callback, out MethodInfo method)
+        private static bool TryGetMethod(Type valueType, object parent, string callback, out MethodInfo method)
         {
-            var valueType = value.GetType();
             var parentType = parent.GetType();
 
             method = parentType.GetMethod(callback, UBinding.AnyInstance | BindingFlags.IgnoreCase);
@@ -67,7 +68,12 @@ namespace CommonEditor
             var key = property.MakeKey();
 
             var current = property.GetValue();
-            if (!_values.TryGetValue(key, out var previous) || !Equals(previous, current))
+            if (!_values.TryGetValue(key, out var previous))
+            {
+                _values[key] = current;
+                return false;
+            }
+            if (!Equals(previous, current))
             {
                 _values[key] = current;
                 return true;

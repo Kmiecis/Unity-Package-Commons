@@ -37,9 +37,9 @@ namespace Common
 
         public virtual void SetValue(T value)
         {
-            Invoke(value);
-
             _value = value;
+
+            Invoke(value);
         }
 
         public void AddListener(Action<T> callback)

@@ -19,8 +19,8 @@ namespace Common.Inputs
         {
             base.OnClick(data);
 
-            _onValueChanged.Invoke(_checked);
             _checked = !_checked;
+            _onValueChanged.Invoke(_checked);
         }
 
         public override void RemoveAllListeners()

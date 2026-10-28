@@ -25,18 +25,25 @@ namespace Common
             var parent = transform.parent;
             if (parent != null)
             {
-                int i = 1;
-                for (; i < parent.childCount; ++i)
+                int index = 0;
+                for (int i = 0; i < parent.childCount; ++i)
                 {
                     var child = parent.GetChild(i);
+                    if (child == transform)
+                    {
+                        continue;
+                    }
+
                     if (child.TryGetComponent<SortComponent>(out var sort) &&
                         sort._order > _order)
                     {
                         break;
                     }
+
+                    index++;
                 }
 
-                transform.SetSiblingIndex(i - 1);
+                transform.SetSiblingIndex(index);
             }
         }
 

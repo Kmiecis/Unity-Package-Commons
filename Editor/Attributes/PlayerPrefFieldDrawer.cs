@@ -1,5 +1,5 @@
 using Common;
-using Common.Mathematics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -20,6 +20,14 @@ namespace CommonEditor
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             var key = attribute.key ?? property.MakeKey();
+
+            if (!IsSupported(property))
+            {
+                Debug.LogWarning(this.Format($"Unsupported field type '{property.propertyType}', value will not be stored in PlayerPrefs"));
+                
+                base.OnGUI(position, property, label);
+                return;
+            }
 
             if (!_values.TryGetValue(key, out var previous))
             {
@@ -51,12 +59,41 @@ namespace CommonEditor
             method?.Invoke(parent);
         }
 
+        private bool IsSupported(SerializedProperty property)
+        {
+            switch (property.propertyType)
+            {
+                case SerializedPropertyType.Boolean:
+                case SerializedPropertyType.Color:
+                case SerializedPropertyType.Float:
+                case SerializedPropertyType.Integer:
+                case SerializedPropertyType.Quaternion:
+                case SerializedPropertyType.Rect:
+                case SerializedPropertyType.RectInt:
+                case SerializedPropertyType.String:
+                case SerializedPropertyType.Vector2:
+                case SerializedPropertyType.Vector2Int:
+                case SerializedPropertyType.Vector3:
+                case SerializedPropertyType.Vector3Int:
+                case SerializedPropertyType.Vector4:
+                    return true;
+                case SerializedPropertyType.Enum:
+                    return UEditorUtility.GetFieldType(fieldInfo).IsEnum;
+                default:
+                    return false;
+            }
+        }
+
         private object ReadValue(SerializedProperty property, string key)
         {
             switch (property.propertyType)
             {
                 case SerializedPropertyType.Boolean:
                     return PlayerPrefs.GetInt(key, default) > 0;
+                case SerializedPropertyType.Enum:
+                    var enumType = UEditorUtility.GetFieldType(fieldInfo);
+                    var enumValue = PlayerPrefs.GetInt(key, Convert.ToInt32(property.GetValue()));
+                    return Enum.ToObject(enumType, enumValue);
                 case SerializedPropertyType.Color:
                     return UPlayerPrefs.GetColor(key, Color.white);
                 case SerializedPropertyType.Float:
@@ -92,6 +129,9 @@ namespace CommonEditor
             {
                 case SerializedPropertyType.Boolean:
                     PlayerPrefs.SetInt(key, (bool)value ? 1 : 0);
+                    break;
+                case SerializedPropertyType.Enum:
+                    PlayerPrefs.SetInt(key, Convert.ToInt32(value));
                     break;
                 case SerializedPropertyType.Color:
                     UPlayerPrefs.SetColor(key, (Color)value);
@@ -140,6 +180,10 @@ namespace CommonEditor
             {
                 case SerializedPropertyType.Boolean:
                     return EditorGUI.Toggle(position, label, (bool)value);
+                case SerializedPropertyType.Enum:
+                    return UEditorUtility.GetFieldType(fieldInfo).IsDefined(typeof(FlagsAttribute), false) ?
+                        EditorGUI.EnumFlagsField(position, label, (Enum)value) :
+                        EditorGUI.EnumPopup(position, label, (Enum)value);
                 case SerializedPropertyType.Color:
                     return EditorGUI.ColorField(position, label, (Color)value);
                 case SerializedPropertyType.Float:

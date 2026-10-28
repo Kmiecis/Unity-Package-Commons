@@ -1,4 +1,5 @@
 using Common;
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEditor;
@@ -11,18 +12,20 @@ namespace CommonEditor
     {
         private static readonly GUIContent FilterContent;
         private static readonly Dictionary<int, Regex> Filters;
+        private static readonly Dictionary<int, string> Patterns;
 
         static FilterDrawer()
         {
             FilterContent = new GUIContent("Filter");
             Filters = new Dictionary<int, Regex>();
+            Patterns = new Dictionary<int, string>();
         }
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             var filter = FindFilter(property);
 
-            var pattern = filter != null ? filter.ToString() : string.Empty;
+            var pattern = FindPattern(property);
             pattern = UEditorGUI.TextField(ref position, pattern, FilterContent);
 
             UpdateFilter(property, pattern);
@@ -92,16 +95,36 @@ namespace CommonEditor
             return Filters.TryGetValue(hashCode, out var filter) ? filter : null;
         }
 
+        private static string FindPattern(SerializedProperty property)
+        {
+            var hashCode = property.GetHashCodeForPropertyPath();
+            return Patterns.TryGetValue(hashCode, out var pattern) ? pattern : string.Empty;
+        }
+
         private static void UpdateFilter(SerializedProperty property, string pattern)
         {
             var hashCode = property.GetHashCodeForPropertyPath();
             if (pattern.IsNullOrEmpty())
             {
                 Filters.Remove(hashCode);
+                Patterns.Remove(hashCode);
             }
-            else if (!Filters.TryGetValue(hashCode, out var filter) || filter.ToString() != pattern)
+            else if (!Patterns.TryGetValue(hashCode, out var previous) || previous != pattern)
             {
-                Filters[hashCode] = new Regex(pattern, RegexOptions.Compiled);
+                Filters[hashCode] = CreateFilter(pattern);
+                Patterns[hashCode] = pattern;
+            }
+        }
+
+        private static Regex CreateFilter(string pattern)
+        {
+            try
+            {
+                return new Regex(pattern);
+            }
+            catch (ArgumentException)
+            {
+                return new Regex(Regex.Escape(pattern));
             }
         }
     }

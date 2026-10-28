@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -87,7 +86,7 @@ namespace Common
         {
             if (_value != null)
             {
-                var path = AssetDatabase.GetAssetPath(_value);
+                var path = UnityEditor.AssetDatabase.GetAssetPath(_value);
                 _path = UPath.RemoveExtension(path);
                 _extension = System.IO.Path.GetExtension(path);
             }
@@ -112,11 +111,11 @@ namespace Common
 #if UNITY_EDITOR
             void ReadPropertiesOnNextUpdate()
             {
-                EditorApplication.update -= ReadPropertiesOnNextUpdate;
+                UnityEditor.EditorApplication.update -= ReadPropertiesOnNextUpdate;
                 ReadProperties();
             }
 
-            EditorApplication.update += ReadPropertiesOnNextUpdate;
+            UnityEditor.EditorApplication.update += ReadPropertiesOnNextUpdate;
 #endif
         }
         #endregion

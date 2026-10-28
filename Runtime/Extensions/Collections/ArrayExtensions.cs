@@ -216,12 +216,16 @@ namespace Common
 
         public static bool TryFind<T>(this T[] self, Predicate<T> match, out T value)
         {
-            return !Equals(value = Array.Find(self, match), default);
+            var index = Array.FindIndex(self, match);
+            value = index != -1 ? self[index] : default;
+            return index != -1;
         }
 
         public static bool TryFindLast<T>(this T[] self, Predicate<T> match, out T value)
         {
-            return !Equals(value = Array.FindLast(self, match), default);
+            var index = Array.FindLastIndex(self, match);
+            value = index != -1 ? self[index] : default;
+            return index != -1;
         }
 
         public static bool TryFindAll<T>(this T[] self, Predicate<T> match, out T[] value)
@@ -279,7 +283,7 @@ namespace Common
 
         public static T[] Sort<T>(this T[] self, int index)
         {
-            return Sort(self, index, self.Length);
+            return Sort(self, index, self.Length - index);
         }
 
         public static T[] Sort<T>(this T[] self, int index, int length)
@@ -290,7 +294,7 @@ namespace Common
 
         public static T[] Sort<T>(this T[] self, int index, IComparer<T> comparer)
         {
-            return Sort(self, index, self.Length, comparer);
+            return Sort(self, index, self.Length - index, comparer);
         }
 
         public static T[] Sort<T>(this T[] self, int index, int length, IComparer<T> comparer)

@@ -44,17 +44,30 @@ namespace Common
         private static void ProcessData<T>(Func<T> generator, Action<T> callback)
         {
             T data = generator();
-            lock (_dataQueue)
-            {
-                _dataQueue.Enqueue(new ThreadInfo<T>(callback, data));
-            }
+            Enqueue(new ThreadInfo<T>(callback, data));
         }
 
         private void Update()
         {
-            while (_dataQueue.TryDequeue(out var threadInfo))
+            while (TryDequeue(out var threadInfo))
             {
                 threadInfo.OnReady();
+            }
+        }
+
+        private static void Enqueue(IThreadInfo threadInfo)
+        {
+            lock (_dataQueue)
+            {
+                _dataQueue.Enqueue(threadInfo);
+            }
+        }
+
+        private static bool TryDequeue(out IThreadInfo threadInfo)
+        {
+            lock (_dataQueue)
+            {
+                return _dataQueue.TryDequeue(out threadInfo);
             }
         }
     }

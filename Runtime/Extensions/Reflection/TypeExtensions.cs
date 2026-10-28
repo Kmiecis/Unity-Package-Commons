@@ -119,6 +119,19 @@ namespace Common
             return self.GetMethod(name, bindingAttr, null, types, null);
         }
 
+        public static Type GetSerializedElementType(this Type self)
+        {
+            if (self.IsArray)
+            {
+                return self.GetElementType();
+            }
+            if (self.IsGenericType && self.GetGenericTypeDefinition() == typeof(List<>))
+            {
+                return self.GetGenericArguments()[0];
+            }
+            return self;
+        }
+
         public static object GetDefaultValue(this Type type)
         {
             if (type.IsValueType)

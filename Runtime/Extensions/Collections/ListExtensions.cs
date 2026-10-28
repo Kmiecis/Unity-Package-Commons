@@ -137,12 +137,16 @@ namespace Common
 
         public static bool TryFind<T>(this List<T> self, Predicate<T> match, out T value)
         {
-            return !Equals(value = self.Find(match), default);
+            var index = self.FindIndex(match);
+            value = index != -1 ? self[index] : default;
+            return index != -1;
         }
 
         public static bool TryFindLast<T>(this List<T> self, Predicate<T> match, out T value)
         {
-            return !Equals(value = self.FindLast(match), default);
+            var index = self.FindLastIndex(match);
+            value = index != -1 ? self[index] : default;
+            return index != -1;
         }
 
         public static bool TryFindAll<T>(this List<T> self, Predicate<T> match, out List<T> value)
@@ -322,7 +326,7 @@ namespace Common
 
         public static void RemoveLast<T>(this List<T> self, int count)
         {
-            self.RemoveRange(self.Count - 1 - count, count);
+            self.RemoveRange(self.Count - count, count);
         }
 
         public static bool RemoveLast<T>(this List<T> self, Predicate<T> match)

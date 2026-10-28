@@ -48,6 +48,7 @@ namespace Common.Mathematics
                 a[i, 0] = p[i, 0];
                 a[i, 1] = p[i, 1];
                 a[i, 2] = p[i, 2];
+                a[i, 3] = p[i, 3];
             }
             float detM11 = Mathx.Determinant(a);
 

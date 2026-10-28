@@ -12,10 +12,12 @@ namespace Common
         [SerializeField] protected UnityEvent<Collision> _onCollisionExit = new UnityEvent<Collision>();
 
         private Dictionary<Collider, Collision> _collisions;
+        private Dictionary<Collider, int> _contacts;
 
         public CollisionHandler()
         {
             _collisions = new Dictionary<Collider, Collision>();
+            _contacts = new Dictionary<Collider, int>();
         }
 
         public UnityEvent<Collision> OnCollisionEntered
@@ -49,7 +51,9 @@ namespace Common
         {
             _onCollisionEnter.Invoke(collision);
 
-            _collisions.Add(collision.collider, collision);
+            var collider = collision.collider;
+            _collisions[collider] = collision;
+            _contacts[collider] = _contacts.GetOrDefault(collider) + 1;
         }
 
         public void OnCollisionStay(Collision collision)
@@ -59,7 +63,16 @@ namespace Common
 
         public void OnCollisionExit(Collision collision)
         {
-            _collisions.Remove(collision.collider);
+            var collider = collision.collider;
+            if (_contacts.TryGetValue(collider, out var count) && count > 1)
+            {
+                _contacts[collider] = count - 1;
+            }
+            else
+            {
+                _contacts.Remove(collider);
+                _collisions.Remove(collider);
+            }
 
             _onCollisionExit.Invoke(collision);
         }
@@ -72,6 +85,7 @@ namespace Common
             }
 
             _collisions.Clear();
+            _contacts.Clear();
         }
 
         private void OnDestroy()

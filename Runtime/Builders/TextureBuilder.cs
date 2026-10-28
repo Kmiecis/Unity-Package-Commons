@@ -91,12 +91,12 @@ namespace Common
 
         public Color32 GetPixel(int x, int y, int z)
         {
-            return _pixels[x + y * _width + z * _height];
+            return _pixels[x + (y + z * _height) * _width];
         }
 
         public void SetPixel(int x, int y, int z, Color32 c)
         {
-            _pixels[x + y * _width + z * _height] = c;
+            _pixels[x + (y + z * _height) * _width] = c;
         }
 
         public Color32 this[int x, int y, int z]

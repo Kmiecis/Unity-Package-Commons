@@ -13,7 +13,7 @@ namespace Common.Mathematics
             h *= 0.5f;
             float d = w - h;
             float s = w + h;
-            float g = d * d / s * s;
+            float g = (d * d) / (s * s);
             return Mathf.PI * s * (1 + 3 * g / (10 + Mathf.Sqrt(4 - 3 * g)));
         }
 

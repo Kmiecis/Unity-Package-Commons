@@ -117,7 +117,7 @@ namespace Common.Mathematics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void Validate()
         {
-            radius = Mathf.Min(radius, 0.0f);
+            radius = Mathf.Max(radius, 0.0f);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

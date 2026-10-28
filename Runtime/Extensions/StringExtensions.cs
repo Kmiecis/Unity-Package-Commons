@@ -325,7 +325,7 @@ namespace Common
 
         public static string Join(this IEnumerable<string> self, char separator, int startIndex, int count)
         {
-            return string.Join(separator, self, startIndex, count);
+            return string.Join(separator, Slice(self, startIndex, count));
         }
 
         public static string Join(this IEnumerable<string> self, string separator)
@@ -335,7 +335,12 @@ namespace Common
 
         public static string Join(this IEnumerable<string> self, string separator, int startIndex, int count)
         {
-            return string.Join(separator, self, startIndex, count);
+            return string.Join(separator, Slice(self, startIndex, count));
+        }
+
+        private static IEnumerable<string> Slice(IEnumerable<string> self, int startIndex, int count)
+        {
+            return System.Linq.Enumerable.Take(System.Linq.Enumerable.Skip(self, startIndex), count);
         }
 
         public static string Extract(this string self, char left, char right)

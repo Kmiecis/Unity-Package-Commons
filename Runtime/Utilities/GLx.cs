@@ -19,8 +19,8 @@ namespace Common
         public static void ApplyColor(Color color) => _color = color;
         public static void ClearColor() => _color = Color.white;
 
-        public static void ApplyZTest(CompareFunction compare) => GetMaterial().SetInt("_ZWrite", (int)compare);
-        public static void ClearZTest() => GetMaterial().SetInt("_ZWrite", (int)CompareFunction.Always);
+        public static void ApplyZTest(CompareFunction compare) => GetMaterial().SetInt("_ZTest", (int)compare);
+        public static void ClearZTest() => GetMaterial().SetInt("_ZTest", (int)CompareFunction.Always);
 
         public static void DrawLine(Vector3 v0, Vector3 v1)
         {
@@ -184,12 +184,15 @@ namespace Common
                     var v0 = vertices[i + 0];
                     var v1 = vertices[i + 1];
                     var v2 = vertices[i + 2];
-                    var v3 = vertices[i + 0];
 
                     GL.Vertex(v0);
                     GL.Vertex(v1);
+
+                    GL.Vertex(v1);
                     GL.Vertex(v2);
-                    GL.Vertex(v3);
+
+                    GL.Vertex(v2);
+                    GL.Vertex(v0);
                 }
 
                 EndDrawing();
@@ -208,20 +211,21 @@ namespace Common
                     var c1 = _color.RGB_(v1.w);
                     var v2 = vertices[i + 2];
                     var c2 = _color.RGB_(v2.w);
-                    var v3 = vertices[i + 0];
-                    var c3 = _color.RGB_(v3.w);
 
                     GL.Color(c0);
                     GL.Vertex(v0);
-
                     GL.Color(c1);
                     GL.Vertex(v1);
 
+                    GL.Color(c1);
+                    GL.Vertex(v1);
                     GL.Color(c2);
                     GL.Vertex(v2);
 
-                    GL.Color(c3);
-                    GL.Vertex(v3);
+                    GL.Color(c2);
+                    GL.Vertex(v2);
+                    GL.Color(c0);
+                    GL.Vertex(v0);
                 }
 
                 EndDrawing();
@@ -274,7 +278,8 @@ namespace Common
                 // Turn backface culling off
                 _material.SetInt("_Cull", (int)CullMode.Off);
                 // Turn off depth writes
-                _material.SetInt("_ZWrite", (int)CompareFunction.Always);
+                _material.SetInt("_ZWrite", 0);
+                _material.SetInt("_ZTest", (int)CompareFunction.Always);
             }
             return _material;
         }

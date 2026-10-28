@@ -40,7 +40,7 @@ namespace Common
         public static StringBuilder RichBold(this StringBuilder self)
         {
             self.Insert(0, "<b>");
-            self.Append("</b");
+            self.Append("</b>");
             return self;
         }
 
@@ -113,7 +113,7 @@ namespace Common
         public static StringBuilder RichItalic(this StringBuilder self)
         {
             self.Insert(0, "<i>");
-            self.Append("</i");
+            self.Append("</i>");
             return self;
         }
 
@@ -147,7 +147,7 @@ namespace Common
         public static StringBuilder RichLowercase(this StringBuilder self)
         {
             self.Insert(0, "<lowercase>");
-            self.Append("</lowercase");
+            self.Append("</lowercase>");
             return self;
         }
 
@@ -199,14 +199,14 @@ namespace Common
         public static StringBuilder RichNoBreak(this StringBuilder self)
         {
             self.Insert(0, "<nobr>");
-            self.Append("</nobr");
+            self.Append("</nobr>");
             return self;
         }
 
         public static StringBuilder RichNoParse(this StringBuilder self)
         {
             self.Insert(0, "<noparse>");
-            self.Append("</noparse");
+            self.Append("</noparse>");
             return self;
         }
 
@@ -256,7 +256,7 @@ namespace Common
         public static StringBuilder RichStrikethrough(this StringBuilder self)
         {
             self.Insert(0, "<s>");
-            self.Append("</s");
+            self.Append("</s>");
             return self;
         }
 
@@ -272,14 +272,14 @@ namespace Common
         public static StringBuilder RichUnderline(this StringBuilder self)
         {
             self.Insert(0, "<u>");
-            self.Append("</u");
+            self.Append("</u>");
             return self;
         }
 
         public static StringBuilder RichUppercase(this StringBuilder self)
         {
             self.Insert(0, "<uppercase>");
-            self.Append("</uppercase");
+            self.Append("</uppercase>");
             return self;
         }
 

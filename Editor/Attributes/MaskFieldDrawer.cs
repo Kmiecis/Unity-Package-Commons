@@ -1,4 +1,5 @@
 using Common;
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,15 +10,17 @@ namespace CommonEditor
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            if (property.propertyType == SerializedPropertyType.Enum)
+            var enumType = UEditorUtility.GetFieldType(fieldInfo);
+            if (property.propertyType == SerializedPropertyType.Enum && enumType.IsEnum)
             {
                 EditorGUI.BeginChangeCheck();
 
-                var mask = EditorGUI.MaskField(position, label, property.intValue, property.enumNames);
+                var current = (Enum)Enum.ToObject(enumType, property.intValue);
+                var mask = EditorGUI.EnumFlagsField(position, label, current);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    property.intValue = mask;
+                    property.intValue = Convert.ToInt32(mask);
                 }
             }
             else
