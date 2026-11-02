@@ -120,8 +120,13 @@ namespace CommonEditor
                     continue;
                 }
 
-                var assetExtension = Path.GetExtension(assetPath);
+                if (AssetDatabase.IsValidFolder(assetPath))
+                {
+                    AddFolderAssets(selectedObject, assetPath, result, assetPaths);
+                    continue;
+                }
 
+                var assetExtension = Path.GetExtension(assetPath);
                 var searchExtensions = Extensions.GetOrDefault(assetExtension);
                 if (searchExtensions == null)
                 {
@@ -129,18 +134,53 @@ namespace CommonEditor
                     continue;
                 }
 
-                var assetName = Path.GetFileName(assetPath);
-                var assetGuid = AssetDatabase.GUIDFromAssetPath(assetPath);
-                var asset = new Asset
-                {
-                    name = assetName,
-                    guid = assetGuid.ToString(),
-                    searchExtensions = searchExtensions
-                };
+                var asset = CreateAsset(assetPath, searchExtensions);
                 result.Add(asset);
             }
 
             return result;
+        }
+
+        private static void AddFolderAssets(Object folder, string folderPath, List<Asset> assets, HashSet<string> assetPaths)
+        {
+            var count = 0;
+
+            foreach (var guid in AssetDatabase.FindAssets(string.Empty, new string[] { folderPath }))
+            {
+                var assetPath = AssetDatabase.GUIDToAssetPath(guid);
+
+                var assetExtension = Path.GetExtension(assetPath);
+                var searchExtensions = Extensions.GetOrDefault(assetExtension);
+                if (searchExtensions == null)
+                {
+                    continue;
+                }
+
+                ++count;
+
+                if (assetPaths.Add(assetPath))
+                {
+                    var asset = CreateAsset(assetPath, searchExtensions);
+                    assets.Add(asset);
+                }
+            }
+
+            if (count == 0)
+            {
+                Debug.LogError($"No files with a known search extension found in folder '{folderPath}'", folder);
+            }
+        }
+
+        private static Asset CreateAsset(string assetPath, string[] searchExtensions)
+        {
+            var assetName = Path.GetFileName(assetPath);
+            var assetGuid = AssetDatabase.GUIDFromAssetPath(assetPath);
+            return new Asset
+            {
+                name = assetName,
+                guid = assetGuid.ToString(),
+                searchExtensions = searchExtensions
+            };
         }
 
         private static Dictionary<string, Dictionary<string, Asset>> GetSearchAssets(List<Asset> assets)
