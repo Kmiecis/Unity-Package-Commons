@@ -22,9 +22,13 @@ namespace CommonEditor
 
             if (IsDrawerValid(property))
             {
-                DrawDropdown(position, property, label);
+                var hierarchyMode = EditorGUIUtility.hierarchyMode || property.IsInArray();
+                using (new HierarchyModeScope(hierarchyMode))
+                {
+                    DrawDropdown(position, property, label);
 
-                base.OnGUI(position, property, UGUIContent.Empty);
+                    base.OnGUI(position, property, UGUIContent.Empty);
+                }
             }
             else
             {
@@ -38,6 +42,7 @@ namespace CommonEditor
             label.text += $" ({labelName})";
 
             position.height = EditorGUIUtility.singleLineHeight;
+            position.xMin += GetFoldoutInset(property);
 
             if (EditorGUI.DropdownButton(position, label, FocusType.Keyboard))
             {
@@ -163,6 +168,15 @@ namespace CommonEditor
                 return attribute.name;
             }
             return type.Name;
+        }
+
+        private static float GetFoldoutInset(SerializedProperty property)
+        {
+            if (EditorGUIUtility.hierarchyMode || !property.hasVisibleChildren)
+            {
+                return 0.0f;
+            }
+            return EditorStyles.foldout.padding.left - EditorStyles.label.padding.left;
         }
 
         private void FixDuplicates(SerializedProperty property)
