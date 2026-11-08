@@ -21,20 +21,6 @@ namespace Common
             return Random.Range(0, 2);
         }
 
-        /// <summary> Calculates Gaussian number sample using Box-Muller transform with 70% values between -1.0 and 1.0 </summary>
-        public static float Gaussian()
-        {
-            var u1 = 1.0f - Random.Range(0.0f, 1.0f);
-            var u2 = 1.0f - Random.Range(0.0f, 1.0f);
-            return Mathf.Sqrt(-2.0f * Mathf.Log(u1)) * Mathf.Sin(2.0f * Mathf.PI * u2);
-        }
-
-        /// <summary> Calculates Gaussian number sample using Box-Muller transform with 70% values between (mean - stdev) and (mean + stdev) </summary>
-        public static float Gaussian(float mean, float stdev)
-        {
-            return mean + stdev * Gaussian();
-        }
-
         public static byte Range(byte min, byte max)
         {
             return (byte)Random.Range(min, max);
@@ -82,13 +68,6 @@ namespace Common
             );
         }
 
-        public static TEnum Enum<TEnum>()
-        {
-            var values = System.Enum.GetValues(typeof(TEnum));
-            var index = Random.Range(0, values.Length);
-            return (TEnum)values.GetValue(index);
-        }
-
         public static T Item<T>(IList<T> list, int min, int max)
         {
             int index = Random.Range(min, max);
@@ -103,6 +82,37 @@ namespace Common
         public static T Item<T>(IList<T> list)
         {
             return Item(list, list.Count);
+        }
+
+        public static T Draw<T>(IList<T> list)
+            where T : IWeightedItem
+        {
+            var sum = 0.0f;
+            for (int i = 0; i < list.Count; ++i)
+            {
+                sum += list[i].Weight;
+            }
+            return Draw(list, sum);
+        }
+
+        public static T Draw<T>(IList<T> list, float totalWeight)
+            where T : IWeightedItem
+        {
+            var random = Random.Range(0.0f, totalWeight);
+
+            var cumulative = 0.0f;
+            for (int i = 0; i < list.Count; ++i)
+            {
+                var item = list[i];
+                cumulative += item.Weight;
+
+                if (random <= cumulative)
+                {
+                    return item;
+                }
+            }
+
+            return default;
         }
 
         public static TKey Key<TKey, TValue>(IDictionary<TKey, TValue> dictionary)
@@ -131,6 +141,27 @@ namespace Common
                 index -= 1;
             }
             return default;
+        }
+
+        /// <summary> Calculates Gaussian number sample using Box-Muller transform with 70% values between -1.0 and 1.0 </summary>
+        public static float Gaussian()
+        {
+            var u1 = 1.0f - Random.Range(0.0f, 1.0f);
+            var u2 = 1.0f - Random.Range(0.0f, 1.0f);
+            return Mathf.Sqrt(-2.0f * Mathf.Log(u1)) * Mathf.Sin(2.0f * Mathf.PI * u2);
+        }
+
+        /// <summary> Calculates Gaussian number sample using Box-Muller transform with 70% values between (mean - stdev) and (mean + stdev) </summary>
+        public static float Gaussian(float mean, float stdev)
+        {
+            return mean + stdev * Gaussian();
+        }
+
+        public static TEnum Enum<TEnum>()
+        {
+            var values = System.Enum.GetValues(typeof(TEnum));
+            var index = Random.Range(0, values.Length);
+            return (TEnum)values.GetValue(index);
         }
 
         public static void Shuffle<T>(IList<T> list, int begin, int end)

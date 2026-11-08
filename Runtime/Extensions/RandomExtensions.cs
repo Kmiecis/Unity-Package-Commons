@@ -79,20 +79,6 @@ namespace Common
             return self.NextLong(long.MaxValue);
         }
 
-        /// <summary> Calculates Gaussian number sample using Box-Muller transform with 70% values between -1.0 and 1.0 </summary>
-        public static float NextGaussian(this Random self)
-        {
-            var u1 = 1.0f - self.NextFloat();
-            var u2 = 1.0f - self.NextFloat();
-            return Mathf.Sqrt(-2.0f * Mathf.Log(u1)) * Mathf.Sin(2.0f * Mathf.PI * u2);
-        }
-
-        /// <summary> Calculates Gaussian number sample using Box-Muller transform with 70% values between (mean - stdev) and (mean + stdev) </summary>
-        public static float NextGaussian(this Random self, float mean, float stdev)
-        {
-            return mean + stdev * self.NextGaussian();
-        }
-
         public static Vector2 NextUnitVector2(this Random self)
         {
             var angle = self.NextFloat() * 2.0f * Mathf.PI;
@@ -185,13 +171,6 @@ namespace Common
             );
         }
 
-        public static TEnum NextEnum<TEnum>(this Random self)
-        {
-            var values = Enum.GetValues(typeof(TEnum));
-            var index = self.Next(values.Length);
-            return (TEnum)values.GetValue(index);
-        }
-
         public static T NextItem<T>(this Random self, IList<T> list, int min, int max)
         {
             return list[self.Next(min, max)];
@@ -205,6 +184,37 @@ namespace Common
         public static T NextItem<T>(this Random self, IList<T> list)
         {
             return self.NextItem(list, list.Count);
+        }
+
+        public static T NextDraw<T>(this Random self, IList<T> list)
+            where T : IWeightedItem
+        {
+            var sum = 0.0f;
+            for (int i = 0; i < list.Count; ++i)
+            {
+                sum += list[i].Weight;
+            }
+            return self.NextDraw(list, sum);
+        }
+
+        public static T NextDraw<T>(this Random self, IList<T> list, float totalWeight)
+            where T : IWeightedItem
+        {
+            var random = self.NextFloat(0.0f, totalWeight);
+
+            var cumulative = 0.0f;
+            for (int i = 0; i < list.Count; ++i)
+            {
+                var item = list[i];
+                cumulative += item.Weight;
+
+                if (random <= cumulative)
+                {
+                    return item;
+                }
+            }
+
+            return default;
         }
 
         public static TKey NextKey<TKey, TValue>(this Random self, IDictionary<TKey, TValue> dictionary)
@@ -233,6 +243,27 @@ namespace Common
                 index -= 1;
             }
             return default;
+        }
+
+        /// <summary> Calculates Gaussian number sample using Box-Muller transform with 70% values between -1.0 and 1.0 </summary>
+        public static float NextGaussian(this Random self)
+        {
+            var u1 = 1.0f - self.NextFloat();
+            var u2 = 1.0f - self.NextFloat();
+            return Mathf.Sqrt(-2.0f * Mathf.Log(u1)) * Mathf.Sin(2.0f * Mathf.PI * u2);
+        }
+
+        /// <summary> Calculates Gaussian number sample using Box-Muller transform with 70% values between (mean - stdev) and (mean + stdev) </summary>
+        public static float NextGaussian(this Random self, float mean, float stdev)
+        {
+            return mean + stdev * self.NextGaussian();
+        }
+
+        public static TEnum NextEnum<TEnum>(this Random self)
+        {
+            var values = Enum.GetValues(typeof(TEnum));
+            var index = self.Next(values.Length);
+            return (TEnum)values.GetValue(index);
         }
 
         public static void NextShuffle<T>(this Random self, IList<T> list, int begin, int end)
