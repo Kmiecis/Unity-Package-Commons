@@ -33,6 +33,84 @@ namespace Common
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int X__(this Vector3Int self, int y = 0, int z = 0)
+        {
+            self.y = y;
+            self.z = z;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int _X_(this Vector3Int self, int x = 0, int z = 0)
+        {
+            self.y = self.x;
+            self.x = x;
+            self.z = z;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3 __X(this Vector3Int self, int x = 0, int y = 0)
+        {
+            self.z = self.x;
+            self.x = x;
+            self.y = y;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int Y__(this Vector3Int self, int y = 0, int z = 0)
+        {
+            self.x = self.y;
+            self.y = y;
+            self.z = z;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int _Y_(this Vector3Int self, int x = 0, int z = 0)
+        {
+            self.x = x;
+            self.z = z;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int __Y(this Vector3Int self, int x = 0, int y = 0)
+        {
+            self.z = self.y;
+            self.x = x;
+            self.y = y;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int Z__(this Vector3Int self, int y = 0, int z = 0)
+        {
+            self.x = self.z;
+            self.y = y;
+            self.z = z;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int _Z_(this Vector3Int self, int x = 0, int z = 0)
+        {
+            self.x = x;
+            self.y = self.z;
+            self.z = z;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Vector3Int __Z(this Vector3Int self, int x = 0, int y = 0)
+        {
+            self.x = x;
+            self.y = y;
+            return self;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3Int XY_(this Vector3Int self, int z = 0)
         {
             self.z = z;
